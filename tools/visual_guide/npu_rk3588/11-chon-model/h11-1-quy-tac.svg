@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1791" width="900" height="1791" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1791" fill="white"/>
+<rect x="808" y="8" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="833.5" y="19.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<text x="10" y="22" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Quy tắc chọn model chốt trước khi có số, và trạng thái các đầu vào</text>
+<text x="10" y="46" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A. Quy tắc (REPO tmp/02_decisions/2026-10-11_model-selection-rule.md, mục 1)</text>
+<rect x="10" y="60" width="400" height="89" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="77" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">1. Đo mAP50-95 INT8 trên board cho từng ứng viên</text>
+<text x="22" y="100" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Ứng viên: YOLOv8n SiLU, YOLOv8n ReLU, YOLO26n. Lệnh: make</text>
+<text x="22" y="117" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">phase3 (tập test sfchd, calibration 300 ảnh seed 42,</text>
+<text x="22" y="134" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">evaluator protocol v1).</text>
+<rect x="470" y="60" width="420" height="89" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="482" y="77" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giao thức chung cho ba ứng viên</text>
+<text x="482" y="100" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Cùng dataset sfchd_5class, 100 epoch, seed 42, tham số train</text>
+<text x="482" y="117" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">của baseline.</text>
+<text x="482" y="134" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8s có trong leaderboard nhưng không phải ứng viên.</text>
+<path d="M210 149 L210 183" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="10" y="183" width="400" height="92" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="200" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">2. mAP50-95 INT8 của ứng viên có thấp hơn YOLOv8n</text>
+<text x="22" y="220" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">SiLU INT8 không quá 1.0 điểm?</text>
+<text x="22" y="243" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không thấp hơn quá 1.0 điểm, tuyệt đối: ví dụ 0.560 so với</text>
+<text x="22" y="260" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">0.570.</text>
+<rect x="470" y="183" width="420" height="92" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="482" y="200" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Không: loại khỏi danh sách</text>
+<text x="482" y="223" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Suy ra của bộ hình: ứng viên bị loại không được xét ở bước 3;</text>
+<text x="482" y="240" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n SiLU luôn qua bước này vì hiệu của nó với chính nó bằng</text>
+<text x="482" y="257" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">0.</text>
+<path d="M410 205 L470 205" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="416" y="193" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Không</text>
+<path d="M210 275 L210 309" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="218.0" y="292" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Có</text>
+<rect x="10" y="309" width="400" height="109" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="326" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">3. Trong số còn lại, chọn model có trung vị độ trễ</text>
+<text x="22" y="346" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">tier 1 thấp nhất ở core_mask AUTO</text>
+<text x="22" y="369" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Tier 1 là eval_perf: mỗi phiên 5 lần lặp, lấy trung vị.</text>
+<text x="22" y="386" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Lệnh: make phase4; YOLO26n và ReLU qua target riêng (Hình</text>
+<text x="22" y="403" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">7.2).</text>
+<rect x="470" y="309" width="420" height="109" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="482" y="326" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Độ trễ nào được dùng</text>
+<text x="482" y="349" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Chỉ số tốc độ của quy tắc là tier 1. Tier 2 (Hình 7.2) có trong</text>
+<text x="482" y="366" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">bảng kết quả của todo nhưng quy tắc không dùng.</text>
+<path d="M410 363.5 L470 363.5" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M210 418 L210 452" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="10" y="452" width="400" height="70" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="469" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">4. Model đó nhanh hơn YOLOv8n SiLU một cách rõ ràng,</text>
+<text x="22" y="489" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">tức chênh lệch nằm ngoài độ trải giữa các phiên đo?</text>
+<rect x="470" y="452" width="420" height="70" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="482" y="469" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Có: chọn model nhanh nhất đó</text>
+<text x="482" y="492" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Quyết định tạm, vì chỉ có seed 42.</text>
+<path d="M410 487 L470 487" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="416" y="477.0" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Có</text>
+<path d="M210 522 L210 556" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="218.0" y="539" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">Không</text>
+<rect x="10" y="556" width="400" height="55" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="573" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Không: giữ YOLOv8n SiLU</text>
+<text x="22" y="596" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Quyết định tạm, vì chỉ có seed 42.</text>
+<rect x="440" y="556" width="380" height="89" rx="6" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="452" y="573" font-size="14" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Chưa định nghĩa độ trải</text>
+<text x="452" y="596" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Cách tính &#x27;độ trải giữa các phiên&#x27; và mức coi là &#x27;rõ</text>
+<text x="452" y="613" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ràng&#x27; chưa được chốt; todo mục 3.4 ghi &#x27;Cần quyết khi</text>
+<text x="452" y="630" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tới bước này&#x27;.</text>
+<path d="M210 611 L210 679" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M860 522 L860 679" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="10" y="679" width="880" height="55" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="696" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">5. Cả hai nhánh đều là quyết định tạm: chỉ có seed 42</text>
+<text x="22" y="719" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Phase 10 thêm seed 43 và 44 cho model được chọn: make phase10 DATASET=sfchd_5class MODELS=&lt;model&gt; (todo mục 4; pipeline.py:21).</text>
+<text x="10" y="756" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều kiện đi kèm quy tắc</text>
+<rect x="10" y="770" width="435" height="72" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="787" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ngưỡng chốt trước khi có số</text>
+<text x="22" y="810" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Nếu chọn ngưỡng sau khi thấy số, ngưỡng dễ bị kéo theo kết quả;</text>
+<text x="22" y="827" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">vì vậy quy tắc được chốt trước (Hình 10.8).</text>
+<rect x="455" y="770" width="435" height="72" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="467" y="787" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Số trọng số ngẫu nhiên không dùng để chọn</text>
+<text x="467" y="810" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Hình 10.1 và 10.4 là phép đo cấu trúc và độ trễ, không có</text>
+<text x="467" y="827" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">accuracy; quy tắc không dùng chúng để chọn.</text>
+<rect x="10" y="852" width="435" height="89" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="869" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">AP từng lớp không nằm trong quy tắc</text>
+<text x="22" y="892" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Nếu một lớp vi phạm PPE sụt mạnh sau INT8 thì cần xem riêng trước</text>
+<text x="22" y="909" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">khi triển khai; chưa có số từng lớp (Hình 10.7).</text>
+<rect x="455" y="852" width="435" height="89" rx="6" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="467" y="869" font-size="14" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">ReLU khởi tạo từ trọng số SiLU</text>
+<text x="467" y="892" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Decision log gọi AP của ReLU là cận dưới thực tế; bộ hình ghi đây</text>
+<text x="467" y="909" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">là nhận định chưa kiểm bằng huấn luyện từ đầu. Log train:</text>
+<text x="467" y="926" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Transferred 322/355 items ở cả baseline và ReLU (Hình 10.5).</text>
+<text x="10" y="967" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">B. Trạng thái các đầu vào của quy tắc</text>
+<rect x="10" y="981" width="880" height="27.5" fill="#E8E8E8"/>
+<text x="17" y="994.75" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đầu vào</text>
+<text x="232" y="994.75" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Trạng thái</text>
+<text x="322" y="994.75" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">File hoặc lệnh</text>
+<text x="687" y="994.75" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Dùng để chọn? Hình</text>
+<rect x="225" y="1008.5" width="90" height="74.0" fill="#EAF6EA"/>
+<path d="M10 1008.5 L890 1008.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1022.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">mAP50-95 FP32 test của 4 model:</text>
+<text x="17" y="1037.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n 0.5908, YOLOv8s 0.6152,</text>
+<text x="17" y="1053.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLO26n 0.5883, YOLOv8n ReLU</text>
+<text x="17" y="1068.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">0.5835</text>
+<text x="232" y="1045.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có</text>
+<text x="322" y="1037.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ai/automation/leaderboards/sfchd_5class.csv, cột map50_95</text>
+<text x="322" y="1053.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(protocol v1, seed 42)</text>
+<text x="687" y="1030.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không dùng để chọn (quy tắc dùng</text>
+<text x="687" y="1045.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">INT8 trên board). Hình 10.5,</text>
+<text x="687" y="1061.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">10.7</text>
+<rect x="225" y="1082.5" width="90" height="58.5" fill="#EAF6EA"/>
+<path d="M10 1082.5 L890 1082.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1096.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Độ trễ cấu trúc trên trọng số</text>
+<text x="17" y="1111.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ngẫu nhiên (YOLOv8n, YOLO26n;</text>
+<text x="17" y="1127.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">SiLU, ReLU)</text>
+<text x="232" y="1111.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có</text>
+<text x="322" y="1104.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tmp/04_debug-logs/2026-10-10_yolo-phaseA/out/stats_latency.txt;</text>
+<text x="322" y="1119.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tmp/04_debug-logs/2026-10-10_t3-board-silu-resize/raw/summary2.json</text>
+<text x="687" y="1104.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không dùng để chọn. Hình 10.1,</text>
+<text x="687" y="1119.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">10.4</text>
+<rect x="225" y="1141.0" width="90" height="58.5" fill="#FFF3F3"/>
+<path d="M10 1141.0 L890 1141.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1162.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">mAP50-95 INT8 và FP16 chạy trên</text>
+<text x="17" y="1178.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">board, ba ứng viên</text>
+<text x="232" y="1170.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chờ</text>
+<text x="322" y="1154.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">make phase3 DATASET=sfchd_5class. Xong khi mỗi run có</text>
+<text x="322" y="1170.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">export_int8.json và eval/rknn_int8_sfchd_test.json (hiện</text>
+<text x="322" y="1185.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chưa run nào có)</text>
+<text x="687" y="1162.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Dùng ở bước 1, 2. Hình 10.7,</text>
+<text x="687" y="1178.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">10.8</text>
+<rect x="225" y="1199.5" width="90" height="74.0" fill="#FFF3F3"/>
+<path d="M10 1199.5 L890 1199.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1228.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Độ trễ tier 1 và tier 2 của model</text>
+<text x="17" y="1244.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đã huấn luyện</text>
+<text x="232" y="1236.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chờ</text>
+<text x="322" y="1213.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">make phase4 DATASET=sfchd_5class chỉ chạy YOLOv8n và</text>
+<text x="322" y="1228.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8s (pipeline.py:19); YOLO26n và ReLU cần target riêng</text>
+<text x="322" y="1244.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(todo mục 3.3). Xong khi có bench/tier1_int8_AUTO.json</text>
+<text x="322" y="1259.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(hiện chưa run nào có)</text>
+<text x="687" y="1228.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Tier 1 dùng ở bước 3, 4; tier 2</text>
+<text x="687" y="1244.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không dùng. Hình 10.8, 7.2</text>
+<rect x="225" y="1273.5" width="90" height="58.5" fill="#FFF3F3"/>
+<path d="M10 1273.5 L890 1273.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1302.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Độ trải giữa các phiên đo</text>
+<text x="232" y="1295.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chờ, chưa</text>
+<text x="232" y="1310.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">quyết</text>
+<text x="322" y="1287.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Đề xuất, chưa quyết: sau pipeline chạy thêm 3 phiên xen kẽ</text>
+<text x="322" y="1302.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">thứ tự model trên đúng file .rknn INT8, log riêng, không</text>
+<text x="322" y="1318.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ghi đè bench/ (todo mục 3.4)</text>
+<text x="687" y="1302.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Dùng ở bước 4. Hình 10.4, 10.8</text>
+<rect x="225" y="1332.0" width="90" height="43.0" fill="#FFF3F3"/>
+<path d="M10 1332.0 L890 1332.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1353.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">AP từng lớp sau INT8</text>
+<text x="232" y="1353.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chờ</text>
+<text x="322" y="1353.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Cùng make phase3; chưa có số từng lớp INT8</text>
+<text x="687" y="1345.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không nằm trong quy tắc, xem</text>
+<text x="687" y="1361.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">riêng. Hình 10.7</text>
+<rect x="225" y="1375.0" width="90" height="43.0" fill="#FFF3F3"/>
+<path d="M10 1375.0 L890 1375.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="1396.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Seed 43 và 44</text>
+<text x="232" y="1396.5" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chờ</text>
+<text x="322" y="1388.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">make phase10 DATASET=sfchd_5class MODELS=&lt;model&gt;, chỉ cho</text>
+<text x="322" y="1404.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">model được chọn (todo mục 4)</text>
+<text x="687" y="1388.75" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không dùng cho quyết định tạm.</text>
+<text x="687" y="1404.25" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Hình 10.5</text>
+<rect x="10" y="981" width="880" height="437.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M225 981 L225 1418.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M315 981 L315 1418.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M680 981 L680 1418.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1430.0" width="880" height="72" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="1447.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều kiện để đo</text>
+<text x="22" y="1470.0" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Cần board bật (todo ghi board offline lúc viết, 2026-10-11), người dùng nhập mật khẩu sudo cho start_rknn_server.sh và lock_freq.sh</text>
+<text x="22" y="1487.0" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trước khi chạy make phase3, phase4 (todo mục 2).</text>
+<rect x="10" y="1522.0" width="880" height="89" rx="6" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="22" y="1539.0" font-size="14" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Khuyến nghị chọn model: chưa có khuyến nghị</text>
+<text x="22" y="1562.0" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Thiếu mAP50-95 INT8 trên board, trung vị tier 1 của model đã huấn luyện và độ trải giữa các phiên (ba hàng chờ ở trên). Số FP32 và số</text>
+<text x="22" y="1579.0" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trên trọng số ngẫu nhiên không dùng để chọn.</text>
+<text x="22" y="1596.0" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Mọi lựa chọn về sau chỉ là tạm vì chỉ có seed 42; phase 10 thêm seed 43 và 44 cho model được chọn.</text>
+<rect x="10" y="1629.0" width="880" height="122" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1646.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<path d="M26 1669 L66 1669" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="78" y="1669.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thứ tự xét; ô viền xanh là bước quyết định</tspan></text>
+<rect x="26" y="1683.0" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="1691.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>suy ra hoặc kết quả của quy tắc (bộ hình vẽ lại, không phải câu của vendor)</tspan></text>
+<rect x="26" y="1705.0" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1713.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>đầu vào đã có (file có trên đĩa)</tspan></text>
+<rect x="26" y="1727.0" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="1735.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>đầu vào còn chờ, hoặc điều chưa quyết, hoặc nhận định chưa kiểm</tspan></text>
+<text x="10" y="1777.0" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: model-selection-rule.md mục 1; todo-npu-model-selection.md mục 2, 3, 4; pipeline.py:19, 21; benchmark.py:23; sfchd_5class.csv.</text>
+</svg>

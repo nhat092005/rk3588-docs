@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 874" width="900" height="874" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="874" fill="white"/>
+<rect x="808" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="848.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="10" y="22" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">10 chỗ bộ tài liệu 2.3.2 không nhất quán, và guide theo phía nào</text>
+<rect x="10" y="40" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="54.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">#</text>
+<text x="48" y="54.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nội dung</text>
+<text x="182" y="54.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phía A</text>
+<text x="470" y="54.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phía B</text>
+<text x="758" y="54.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Guide theo</text>
+<path d="M10 68 L890 68" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="95.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="48" y="87.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>quantized_dtype</tspan></text>
+<text x="48" y="102.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>mặc định</tspan></text>
+<text x="182" y="87.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.7: mặc định &quot;w8a8&quot;; rknn.py:56 khớp:</tspan></text>
+<text x="182" y="102.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>quantized_dtype=&#x27;w8a8&#x27;</tspan></text>
+<text x="470" y="80.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.22 và tr.122: mặc định</tspan></text>
+<text x="470" y="95.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>&#x27;asymmetric_quantized-8&#x27;; tr.122: chỉ hỗ trợ</tspan></text>
+<text x="470" y="110.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>linear asymmetric INT8</tspan></text>
+<text x="758" y="80.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>A. T3 PC: config() vẫn</tspan></text>
+<text x="758" y="95.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhận tên cũ, quant_tab</tspan></text>
+<text x="758" y="110.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>giống w8a8</tspan></text>
+<path d="M10 122 L890 122" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="141.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="48" y="141.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Thuật toán</tspan></text>
+<text x="182" y="134.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.8: normal, mmse, kl_divergence, gdq;</tspan></text>
+<text x="182" y="149.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>rknn.py:85 khớp</tspan></text>
+<text x="470" y="134.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.22, 122, 159: chỉ normal, mmse,</tspan></text>
+<text x="470" y="149.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>kl_divergence</tspan></text>
+<text x="758" y="134.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>A. gdq không dùng cho</tspan></text>
+<text x="758" y="149.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RK3588 (Hình 4.1)</tspan></text>
+<path d="M10 161 L890 161" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="180.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="48" y="173.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>do_quantization</tspan></text>
+<text x="48" y="188.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>mặc định</tspan></text>
+<text x="182" y="173.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.14: True; rknn.py:188:</tspan></text>
+<text x="182" y="188.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>do_quantization=True</tspan></text>
+<text x="470" y="180.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.122: &quot;the default value being &#x27;False&#x27;&quot;</tspan></text>
+<text x="758" y="180.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>A. Code xác nhận</tspan></text>
+<path d="M10 200 L890 200" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="227.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<text x="48" y="219.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số ảnh</tspan></text>
+<text x="48" y="234.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>calibration</tspan></text>
+<text x="182" y="212.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.8: normal và kl_divergence 20-100, mmse</tspan></text>
+<text x="182" y="227.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>20-50, gdq hơn 200; UG232 tr.28 khớp ba thuật</tspan></text>
+<text x="182" y="242.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>toán đầu</tspan></text>
+<text x="470" y="219.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.122, 133, 134: 20-200 ảnh; tr.159:</tspan></text>
+<text x="470" y="234.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>normal và kl_divergence 20-200, mmse 20-50</tspan></text>
+<text x="758" y="212.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>A theo từng thuật toán;</tspan></text>
+<text x="758" y="227.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 chỉ là khoảng rộng,</tspan></text>
+<text x="758" y="242.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chưa phân xử</tspan></text>
+<rect x="10" y="254" width="880" height="39" fill="#FFF3F3"/>
+<path d="M10 254 L890 254" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="273.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>5</tspan></text>
+<text x="48" y="266.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kiểu trong</tspan></text>
+<text x="48" y="281.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>custom_quantize_layers</tspan></text>
+<text x="182" y="273.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.124: kiểu hiện có chỉ &quot;float16&quot;</tspan></text>
+<text x="470" y="273.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>step1.py:47: &#x27;int8&#x27;, &#x27;int16&#x27;, &#x27;float16&#x27;</tspan></text>
+<text x="758" y="266.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chưa phân xử; int8, int16</tspan></text>
+<text x="758" y="281.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>trên RK3588: unknown</tspan></text>
+<rect x="10" y="293" width="880" height="54" fill="#FFF3F3"/>
+<path d="M10 293 L890 293" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="320.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>6</tspan></text>
+<text x="48" y="305.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hướng so sánh</tspan></text>
+<text x="48" y="320.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>euclidean của</tspan></text>
+<text x="48" y="335.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>auto_hybrid</tspan></text>
+<text x="182" y="312.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.14: chuyển FP16 khi cosine và euclidean</tspan></text>
+<text x="182" y="327.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>distance &quot;below the specified thresholds&quot;</tspan></text>
+<text x="470" y="305.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.125: &quot;lesser than the cosine distance</tspan></text>
+<text x="470" y="320.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>threshold or the greater than euclidean distance</tspan></text>
+<text x="470" y="335.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>threshold&quot;</tspan></text>
+<text x="758" y="320.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chưa phân xử: unknown</tspan></text>
+<path d="M10 347 L890 347" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="374.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>7</tspan></text>
+<text x="48" y="366.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tên cột</tspan></text>
+<text x="48" y="381.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>error_analysis.txt</tspan></text>
+<text x="182" y="374.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.22: entire_error, single_error</tspan></text>
+<text x="470" y="366.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.31: simulator_error (entire, single),</tspan></text>
+<text x="470" y="381.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>runtime_error (entire, single_sim)</tspan></text>
+<text x="758" y="359.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>B (ngoại lệ của quy tắc ưu</tspan></text>
+<text x="758" y="374.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tiên): khớp README ví dụ</tspan></text>
+<text x="758" y="389.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>và Hình 3-2</tspan></text>
+<rect x="10" y="401" width="880" height="39" fill="#FFF3F3"/>
+<path d="M10 401 L890 401" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="420.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="48" y="413.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Golden tính</tspan></text>
+<text x="48" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>bằng FP32 hay FP16</tspan></text>
+<text x="182" y="420.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>API232 tr.22: dump &quot;fp32 &amp; quant&quot;</tspan></text>
+<text x="470" y="413.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.131: &quot;RKNPU currently does not support</tspan></text>
+<text x="470" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FP32 calculations&quot;</tspan></text>
+<text x="758" y="420.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chưa phân xử: unknown</tspan></text>
+<path d="M10 440 L890 440" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="467.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>9</tspan></text>
+<text x="48" y="467.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>quant_img_RGB2BGR</tspan></text>
+<text x="182" y="452.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.22, Note: thứ tự inference là RGB2BGR</tspan></text>
+<text x="182" y="467.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>trước rồi mới mean, std (cùng trang, câu trước đó</tspan></text>
+<text x="182" y="482.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>lại nói không có tác dụng ở bước inference)</tspan></text>
+<text x="470" y="452.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.158: chỉ ảnh hưởng việc đọc ảnh ở bước</tspan></text>
+<text x="470" y="467.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>lượng tử; API232 tr.7: không ghi vào model RKNN</tspan></text>
+<text x="470" y="482.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cuối</tspan></text>
+<text x="758" y="467.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>B (hai nguồn khớp nhau)</tspan></text>
+<rect x="10" y="494" width="880" height="54" fill="#EAF2FF"/>
+<path d="M10 494 L890 494" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="521.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>10</tspan></text>
+<text x="48" y="513.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số ảnh trong ví dụ</tspan></text>
+<text x="48" y="528.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>so với khuyến nghị</tspan></text>
+<text x="182" y="521.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.122: khuyến nghị 20-200 ảnh</tspan></text>
+<text x="470" y="506.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dataset.txt của ví dụ onnx/yolov5, hybrid_quant,</tspan></text>
+<text x="470" y="521.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>accuracy_analysis, quantize_algorithm_mmse: mỗi</tspan></text>
+<text x="470" y="536.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>file 1 dòng</tspan></text>
+<text x="758" y="506.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>A. Ví dụ không phải căn</tspan></text>
+<text x="758" y="521.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cứ; lý do ví dụ dùng 1</tspan></text>
+<text x="758" y="536.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ảnh: unknown</tspan></text>
+<rect x="10" y="40" width="880" height="508" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M40 40 L40 548" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M174 40 L174 548" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M462 40 L462 548" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M750 40 L750 548" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="566" width="880" height="90" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="582.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Quy tắc ưu tiên: </tspan><tspan>API232 và rknn.py khớp nhau về mặc định và danh sách giá trị (hàng 1 đến 3), nên guide theo hai nguồn này.</tspan></text>
+<text x="22" y="601.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.22, 122 mô tả khác code ở hàng 1 đến 3; UG232 ghi ngày phát hành 2025-04-03, sau API232 (2025-4-1).</tspan></text>
+<text x="22" y="620.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hàng 5, 6, 8 không có code hay nguồn thứ ba phân xử nên để unknown. Hàng 7 theo UG232 vì khớp ví dụ chính thức.</tspan></text>
+<text x="22" y="639.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hàng 10 là ví dụ so với khuyến nghị, không phải hai trang tài liệu mâu thuẫn nhau.</tspan></text>
+<rect x="10" y="668" width="880" height="52" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="684.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Cảnh báo phạm vi (không phải mâu thuẫn): </tspan><tspan>trong 24 dòng target_platform= của examples/, 18 là rk3566, 5 là rk3588 và 1 là rk3562;</tspan></text>
+<text x="22" y="703.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>khi dùng mẫu của vendor cho RK3588 phải đổi target_platform. Ví dụ: README của accuracy_analysis ghi mặc định &#x27;rk3566&#x27;.</tspan></text>
+<rect x="10" y="734" width="880" height="100" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="751" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="766" width="38" height="16" rx="2" fill="#FFFFFF" stroke="#BBBBBB"/>
+<text x="78" y="774" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>guide chọn được một phía theo nguồn (cột cuối ghi phía nào)</tspan></text>
+<rect x="26" y="788" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="796" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chưa phân xử: unknown</tspan></text>
+<rect x="26" y="810" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="818" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>so ví dụ với khuyến nghị, không phải hai trang tài liệu</tspan></text>
+<text x="10" y="860" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: API232 tr.7, 8, 14, 22; UG232 tr.22, 28, 31, 122, 124, 125, 131, 133, 134, 158, 159; RKNNPY rknn.py:56, 85, 188; step1.py:47; LOG t3-calibration-pc.</text>
+</svg>

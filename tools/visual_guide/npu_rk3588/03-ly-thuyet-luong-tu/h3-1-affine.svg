@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1090" width="900" height="1090" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1090" fill="white"/>
+<rect x="808" y="8" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="844.6" y="19.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="20" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A. Ánh xạ affine: trục thực sang lưới số nguyên (ký hiệu NAGEL, bit-width b)</text>
+<rect x="60" y="76" width="90" height="52" fill="#FFF3F3" stroke="none"/>
+<rect x="750" y="76" width="90" height="52" fill="#FFF3F3" stroke="none"/>
+<text x="105" y="90" font-size="12" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">x &lt; q_min</text>
+<text x="795" y="90" font-size="12" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">x &gt; q_max</text>
+<text x="105" y="118" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">bị cắt</text>
+<text x="795" y="118" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">bị cắt</text>
+<path d="M60 112 L846 112" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="10" y="112" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">x thực</text>
+<path d="M150 107 L150 117" stroke="#888888" stroke-width="1"/>
+<path d="M170 107 L170 117" stroke="#888888" stroke-width="1"/>
+<path d="M190 107 L190 117" stroke="#888888" stroke-width="1"/>
+<path d="M210 107 L210 117" stroke="#888888" stroke-width="1"/>
+<path d="M230 107 L230 117" stroke="#888888" stroke-width="1"/>
+<path d="M250 107 L250 117" stroke="#888888" stroke-width="1"/>
+<path d="M270 107 L270 117" stroke="#888888" stroke-width="1"/>
+<path d="M290 107 L290 117" stroke="#888888" stroke-width="1"/>
+<path d="M310 107 L310 117" stroke="#888888" stroke-width="1"/>
+<path d="M330 107 L330 117" stroke="#888888" stroke-width="1"/>
+<path d="M350 107 L350 117" stroke="#888888" stroke-width="1"/>
+<path d="M370 107 L370 117" stroke="#888888" stroke-width="1"/>
+<path d="M390 107 L390 117" stroke="#888888" stroke-width="1"/>
+<path d="M410 107 L410 117" stroke="#888888" stroke-width="1"/>
+<path d="M430 107 L430 117" stroke="#888888" stroke-width="1"/>
+<path d="M450 107 L450 117" stroke="#888888" stroke-width="1"/>
+<path d="M470 107 L470 117" stroke="#888888" stroke-width="1"/>
+<path d="M490 107 L490 117" stroke="#888888" stroke-width="1"/>
+<path d="M510 107 L510 117" stroke="#888888" stroke-width="1"/>
+<path d="M530 107 L530 117" stroke="#888888" stroke-width="1"/>
+<path d="M550 107 L550 117" stroke="#888888" stroke-width="1"/>
+<path d="M570 107 L570 117" stroke="#888888" stroke-width="1"/>
+<path d="M590 107 L590 117" stroke="#888888" stroke-width="1"/>
+<path d="M610 107 L610 117" stroke="#888888" stroke-width="1"/>
+<path d="M630 107 L630 117" stroke="#888888" stroke-width="1"/>
+<path d="M650 107 L650 117" stroke="#888888" stroke-width="1"/>
+<path d="M670 107 L670 117" stroke="#888888" stroke-width="1"/>
+<path d="M690 107 L690 117" stroke="#888888" stroke-width="1"/>
+<path d="M710 107 L710 117" stroke="#888888" stroke-width="1"/>
+<path d="M730 107 L730 117" stroke="#888888" stroke-width="1"/>
+<path d="M750 107 L750 117" stroke="#888888" stroke-width="1"/>
+<path d="M330 100 L330 124" stroke="#1E5BB8" stroke-width="2"/>
+<path d="M150 100 L150 124" stroke="#222222" stroke-width="2"/>
+<path d="M750 100 L750 124" stroke="#222222" stroke-width="2"/>
+<text x="150" y="56" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">q_min = -s z</text>
+<text x="330" y="56" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">số 0 thực</text>
+<text x="750" y="56" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">q_max = s (2^b - 1 - z)</text>
+<path d="M450 136 L450 142 L470 142 L470 136" fill="none" stroke="#444444" stroke-width="1"/>
+<text x="460" y="156" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">bước s (step size)</text>
+<path d="M60 252 L846 252" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="10" y="252" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">x_int</text>
+<path d="M150 247 L150 257" stroke="#888888" stroke-width="1"/>
+<path d="M170 247 L170 257" stroke="#888888" stroke-width="1"/>
+<path d="M190 247 L190 257" stroke="#888888" stroke-width="1"/>
+<path d="M210 247 L210 257" stroke="#888888" stroke-width="1"/>
+<path d="M230 247 L230 257" stroke="#888888" stroke-width="1"/>
+<path d="M250 247 L250 257" stroke="#888888" stroke-width="1"/>
+<path d="M270 247 L270 257" stroke="#888888" stroke-width="1"/>
+<path d="M290 247 L290 257" stroke="#888888" stroke-width="1"/>
+<path d="M310 247 L310 257" stroke="#888888" stroke-width="1"/>
+<path d="M330 247 L330 257" stroke="#888888" stroke-width="1"/>
+<path d="M350 247 L350 257" stroke="#888888" stroke-width="1"/>
+<path d="M370 247 L370 257" stroke="#888888" stroke-width="1"/>
+<path d="M390 247 L390 257" stroke="#888888" stroke-width="1"/>
+<path d="M410 247 L410 257" stroke="#888888" stroke-width="1"/>
+<path d="M430 247 L430 257" stroke="#888888" stroke-width="1"/>
+<path d="M450 247 L450 257" stroke="#888888" stroke-width="1"/>
+<path d="M470 247 L470 257" stroke="#888888" stroke-width="1"/>
+<path d="M490 247 L490 257" stroke="#888888" stroke-width="1"/>
+<path d="M510 247 L510 257" stroke="#888888" stroke-width="1"/>
+<path d="M530 247 L530 257" stroke="#888888" stroke-width="1"/>
+<path d="M550 247 L550 257" stroke="#888888" stroke-width="1"/>
+<path d="M570 247 L570 257" stroke="#888888" stroke-width="1"/>
+<path d="M590 247 L590 257" stroke="#888888" stroke-width="1"/>
+<path d="M610 247 L610 257" stroke="#888888" stroke-width="1"/>
+<path d="M630 247 L630 257" stroke="#888888" stroke-width="1"/>
+<path d="M650 247 L650 257" stroke="#888888" stroke-width="1"/>
+<path d="M670 247 L670 257" stroke="#888888" stroke-width="1"/>
+<path d="M690 247 L690 257" stroke="#888888" stroke-width="1"/>
+<path d="M710 247 L710 257" stroke="#888888" stroke-width="1"/>
+<path d="M730 247 L730 257" stroke="#888888" stroke-width="1"/>
+<path d="M750 247 L750 257" stroke="#888888" stroke-width="1"/>
+<path d="M330 240 L330 264" stroke="#1E5BB8" stroke-width="2"/>
+<path d="M150 240 L150 264" stroke="#222222" stroke-width="2"/>
+<path d="M750 240 L750 264" stroke="#222222" stroke-width="2"/>
+<text x="150" y="278" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="330" y="278" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">z (zero-point, số nguyên)</text>
+<text x="750" y="278" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2^b - 1</text>
+<path d="M150 126 L150 238" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M330 126 L330 238" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M750 126 L750 238" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M105 132 L146 246" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<path d="M795 132 L754 246" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<text x="20" y="215" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">clamp về 0</text>
+<text x="890" y="215" font-size="12" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">clamp về 2^b - 1</text>
+<path d="M550 128 L550 236" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="540" y="176" font-size="12.5" fill="#222222" text-anchor="end" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke" xml:space="preserve"><tspan>x_int = clamp(round(x/s) + z; 0, 2^b - 1)   (Eq. 4)</tspan></text>
+<path d="M630 236 L630 128" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<text x="640" y="172" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke" xml:space="preserve"><tspan>x^ = s (x_int - z)</tspan></text>
+<text x="640" y="190" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke" xml:space="preserve"><tspan>(Eq. 6)</tspan></text>
+<rect x="10" y="296" width="880" height="52" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="313.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>z là số nguyên nên số 0 thực rơi đúng vào một điểm lưới: padding bằng 0 và ReLU không gây sai số lượng tử hóa (NAGEL tr.4).</tspan></text>
+<text x="22" y="331.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Sai số làm tròn nằm trong [-s/2, s/2]; mở rộng range bằng cách tăng s thì sai số làm tròn tăng (NAGEL tr.4), xem Hình 3.3.</tspan></text>
+<text x="10" y="370" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">B. Dấu của zero-point: hai quy ước ngược nhau; bộ hình dùng NAGEL làm chuẩn</text>
+<rect x="10" y="384" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="398.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nguồn</text>
+<text x="168" y="398.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Lượng tử hóa</text>
+<text x="453" y="398.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giải lượng tử hóa</text>
+<text x="668" y="398.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Dấu zero-point</text>
+<path d="M10 412 L890 412" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="425.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL Eq. 4, 6 (tr.4)</tspan></text>
+<text x="168" y="425.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x_int = clamp(round(x/s) + z; 0, 2^b - 1)</tspan></text>
+<text x="453" y="425.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x^ = s (x_int - z)</tspan></text>
+<text x="668" y="425.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">+z khi lượng tử hóa (chuẩn)</tspan></text>
+<path d="M10 438 L890 438" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="451.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>GHOLAMI Eq. 2, 3 (tr.5)</tspan></text>
+<text x="168" y="451.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Q(r) = Int(r/S) - Z</tspan></text>
+<text x="453" y="451.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>r~ = S (Q(r) + Z)</tspan></text>
+<text x="668" y="451.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>-Z khi lượng tử hóa</tspan></text>
+<path d="M10 464 L890 464" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="477.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>QYOLO Eq. 3, 5 (tr.6)</tspan></text>
+<text x="168" y="477.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Q = clip(round(x/s_x) + zp_x, 0, 2^b - 1)</tspan></text>
+<text x="453" y="477.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x~ = (x^ - zp_x) s_x</tspan></text>
+<text x="668" y="477.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cùng dấu NAGEL</tspan></text>
+<rect x="10" y="384" width="880" height="106" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M160 384 L160 490" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M445 384 L445 490" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M660 384 L660 490" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="518" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C. Symmetric và asymmetric: ba lưới (NAGEL Figure 3, Eq. 4, 8)</text>
+<rect x="10" y="532" width="286" height="276" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="153" y="550" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Symmetric signed</text>
+<text x="153" y="572" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">z = 0</text>
+<text x="153" y="592" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">lưới -2^(b-1) ... 2^(b-1) - 1 (Eq. 8c)</text>
+<path d="M30 632 L280 632" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M30 688 L280 688" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="256" y="616" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x thực</text>
+<text x="256" y="704" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x_int</text>
+<rect x="74.28" y="624" width="157.44" height="16" fill="#C9D9F2" stroke="#1E5BB8" stroke-width="1"/>
+<path d="M153.0 618 L153.0 646" stroke="#C62828" stroke-width="2"/>
+<text x="157.0" y="654" font-size="11" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">0 thực</text>
+<path d="M74.28 680 L74.28 696" stroke="#222222" stroke-width="2"/>
+<path d="M231.72 680 L231.72 696" stroke="#222222" stroke-width="2"/>
+<path d="M74.28 640 L74.28 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M231.72 640 L231.72 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<text x="74.28" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">-2^(b-1)</text>
+<text x="231.72" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2^(b-1) - 1</text>
+<path d="M153.0 680 L153.0 696" stroke="#C62828" stroke-width="2"/>
+<text x="153.0" y="718" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="24" y="750" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">hợp với phân bố gần đối xứng quanh 0 (NAGEL tr.5)</text>
+<text x="24" y="767" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">8 bit: restricted range [-127, 127],</text>
+<text x="24" y="784" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">full range [-128, 127] (GHOLAMI tr.5)</text>
+<rect x="307" y="532" width="286" height="276" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="450" y="550" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Symmetric unsigned</text>
+<text x="450" y="572" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">z = 0</text>
+<text x="450" y="592" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">lưới 0 ... 2^b - 1 (Eq. 8b)</text>
+<path d="M327 632 L577 632" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M327 688 L577 688" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="553" y="616" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x thực</text>
+<text x="553" y="704" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x_int</text>
+<rect x="327" y="624" width="191.88" height="16" fill="#C9D9F2" stroke="#1E5BB8" stroke-width="1"/>
+<path d="M327.0 618 L327.0 646" stroke="#C62828" stroke-width="2"/>
+<text x="331.0" y="654" font-size="11" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">0 thực</text>
+<path d="M327.0 680 L327.0 696" stroke="#222222" stroke-width="2"/>
+<path d="M518.88 680 L518.88 696" stroke="#222222" stroke-width="2"/>
+<path d="M327.0 640 L327.0 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M518.88 640 L518.88 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<text x="327.0" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="518.88" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2^b - 1</text>
+<text x="321" y="750" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">hợp với phân bố một phía, ví dụ</text>
+<text x="321" y="767" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">activation ReLU (NAGEL tr.5)</text>
+<text x="321" y="784" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central"></text>
+<rect x="604" y="532" width="286" height="276" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="747" y="550" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Asymmetric</text>
+<text x="747" y="572" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">z là số nguyên tùy ý</text>
+<text x="747" y="592" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">lưới 0 ... 2^b - 1 (Eq. 4)</text>
+<path d="M624 632 L874 632" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M624 688 L874 688" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="850" y="616" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x thực</text>
+<text x="850" y="704" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">x_int</text>
+<rect x="648.6" y="624" width="196.8" height="16" fill="#C9D9F2" stroke="#1E5BB8" stroke-width="1"/>
+<path d="M707.64 618 L707.64 646" stroke="#C62828" stroke-width="2"/>
+<text x="711.64" y="654" font-size="11" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">0 thực</text>
+<path d="M648.6 680 L648.6 696" stroke="#222222" stroke-width="2"/>
+<path d="M845.4 680 L845.4 696" stroke="#222222" stroke-width="2"/>
+<path d="M648.6 640 L648.6 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M845.4 640 L845.4 680" stroke="#999999" stroke-width="1" stroke-dasharray="2 3"/>
+<text x="648.6" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="845.4" y="718" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2^b - 1</text>
+<path d="M707.64 680 L707.64 696" stroke="#C62828" stroke-width="2"/>
+<path d="M707.64 646 L707.64 680" stroke="#C62828" stroke-width="1" stroke-dasharray="2 3"/>
+<text x="707.64" y="718" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">z</text>
+<text x="618" y="750" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">range cắt chặt hơn symmetric (GHOLAMI tr.5)</text>
+<text x="618" y="767" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">thêm tham số offset z, có thể tốn tính toán</text>
+<text x="618" y="784" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">khi suy luận (NAGEL tr.8)</text>
+<text x="10" y="826" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Hình minh họa khái niệm, không vẽ theo số đo; thanh xanh là range [q_min, q_max] của dữ liệu.</text>
+<text x="10" y="850" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">D. Chọn kiểu nào cho weight và activation</text>
+<rect x="10" y="864" width="480" height="142" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="881.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cách chọn thường gặp: weight symmetric, activation asymmetric (NAGEL tr.8);</tspan></text>
+<text x="22" y="899.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>khuyến nghị này cũng nằm trong pipeline PTQ chuẩn của NAGEL (tr.16).</tspan></text>
+<text x="22" y="917.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Lý do (NAGEL tr.8): weight asymmetric nhân activation asymmetric sinh thêm</tspan></text>
+<text x="22" y="935.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>một số hạng phụ thuộc dữ liệu x_int, phải tính cho mỗi batch (tốn độ trễ và</tspan></text>
+<text x="22" y="953.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>điện năng); weight symmetric tránh số hạng này.</tspan></text>
+<text x="22" y="971.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đo trên YOLOv5s (bảng phải): activation asymmetric tốt hơn symmetric,</tspan></text>
+<text x="22" y="989.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chênh lệch lớn hơn ở 4 bit.</tspan></text>
+<text x="510" y="872" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Q-YOLO Table 2 (tr.9): AP, YOLOv5s, activation</text>
+<text x="510" y="890" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(real-valued 37.4; điều kiện Q-YOLO, COCO val2017)</text>
+<rect x="510" y="904" width="380" height="28" fill="#E8E8E8"/>
+<text x="518" y="918.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bit (W-A)</text>
+<text x="608" y="918.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Asymmetric</text>
+<text x="748" y="918.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Symmetric</text>
+<path d="M510 932 L890 932" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="945.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>6-6</tspan></text>
+<text x="608" y="945.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>35.9</tspan></text>
+<text x="748" y="945.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>34.4</tspan></text>
+<path d="M510 958 L890 958" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="971.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4-4</tspan></text>
+<text x="608" y="971.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>14.0</tspan></text>
+<text x="748" y="971.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2.7</tspan></text>
+<rect x="510" y="904" width="380" height="80" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M600 904 L600 984" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M740 904 L740 984" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="510" y="996" width="380" height="52" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1"/>
+<text x="522" y="1013.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Liên hệ RKNN (T1):</tspan><tspan> UG232 tr.120 mô tả linear symmetric</tspan></text>
+<text x="522" y="1031.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(zero point của INT8 là 0) và linear asymmetric. Xem Hình 4.1.</tspan></text>
+<text x="10" y="1076" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: NAGEL tr.4, 5, 8, 16; GHOLAMI tr.5; QYOLO tr.6, 9; UG232 tr.120. Ký hiệu NAGEL là chuẩn; GHOLAMI đổi dấu z.</text>
+</svg>

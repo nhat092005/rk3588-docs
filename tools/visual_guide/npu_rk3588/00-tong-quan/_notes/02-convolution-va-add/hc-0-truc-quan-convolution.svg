@@ -1,0 +1,290 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1056" width="900" height="1056" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1056" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bản chất trực quan của Convolution: Chiếc kính lúp dò tìm đặc trưng</text>
+<rect x="10" y="66" width="880" height="95" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Ẩn dụ đời thường: Tấm bìa mẫu dò tìm trên bức ảnh</text>
+<text x="24" y="102" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">Convolution là gì? </tspan><tspan>Là hành động cầm một </tspan><tspan font-weight="700">tấm bìa khoét lỗ nhỏ (Filter/Kernel)</tspan><tspan>, trên đó vẽ sẵn mẫu cần tìm.</tspan></text>
+<text x="24" y="120" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Trượt tấm bìa khắp bức ảnh: </tspan><tspan>Tại mỗi vị trí, so sánh xem ảnh bên dưới có khớp với mẫu không.</tspan></text>
+<text x="24" y="138" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trùng khớp cao -&gt; Cho điểm dương lớn (sáng rực). </tspan><tspan>Không khớp -&gt; Ra điểm âm hoặc 0 (qua ReLU thành 0).</tspan></text>
+<rect x="10" y="177" width="880" height="270" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="194" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Phép tính tại 1 vị trí: Vì sao gọi là &quot;TÍCH CHẬP&quot;? (Ví dụ số cụ thể)</text>
+<text x="30" y="217" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Vùng ảnh 3×3 (Nét dọc giữa):</text>
+<rect x="30" y="229" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="64" y="229" width="34" height="34" rx="3" fill="#FFE082" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="246.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="98" y="229" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="30" y="263" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="64" y="263" width="34" height="34" rx="3" fill="#FFE082" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="280.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="98" y="263" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="30" y="297" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="64" y="297" width="34" height="34" rx="3" fill="#FFE082" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="314.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="98" y="297" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="81.0" y="347" font-size="11" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">Cột giữa = 10</text>
+<text x="160" y="281" font-size="24" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">×</text>
+<text x="160" y="299" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">TÍCH</text>
+<text x="190" y="217" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Bộ lọc Filter 3×3 (Dò nét dọc):</text>
+<rect x="190" y="229" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="207.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<rect x="224" y="229" width="34" height="34" rx="3" fill="#E8F5E9" stroke="#555555" stroke-width="1.2"/>
+<text x="241.0" y="246.0" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="258" y="229" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="275.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<rect x="190" y="263" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="207.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<rect x="224" y="263" width="34" height="34" rx="3" fill="#E8F5E9" stroke="#555555" stroke-width="1.2"/>
+<text x="241.0" y="280.0" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="258" y="263" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="275.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<rect x="190" y="297" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="207.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<rect x="224" y="297" width="34" height="34" rx="3" fill="#E8F5E9" stroke="#555555" stroke-width="1.2"/>
+<text x="241.0" y="314.0" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="258" y="297" width="34" height="34" rx="3" fill="#FAFAFA" stroke="#555555" stroke-width="1.2"/>
+<text x="275.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-1</text>
+<text x="241.0" y="347" font-size="11" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Trọng số giữa = +2</text>
+<text x="320" y="281" font-size="24" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">=</text>
+<text x="350" y="217" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Nhân từng ô tương ứng:</text>
+<rect x="350" y="229" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="367.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="384" y="229" width="34" height="34" rx="3" fill="#FFF9C4" stroke="#555555" stroke-width="1"/>
+<text x="401.0" y="246.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">20</text>
+<rect x="418" y="229" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="435.0" y="246.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="350" y="263" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="367.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="384" y="263" width="34" height="34" rx="3" fill="#FFF9C4" stroke="#555555" stroke-width="1"/>
+<text x="401.0" y="280.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">20</text>
+<rect x="418" y="263" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="435.0" y="280.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="350" y="297" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="367.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="384" y="297" width="34" height="34" rx="3" fill="#FFF9C4" stroke="#555555" stroke-width="1"/>
+<text x="401.0" y="314.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">20</text>
+<rect x="418" y="297" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="435.0" y="314.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="401.0" y="347" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">10 × 2 = 20 mỗi hàng</text>
+<path d="M475 281 L509 281" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="495" y="265" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">CHẬP</text>
+<text x="495" y="297" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(Cộng dồn)</text>
+<text x="535" y="217" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1 Điểm đầu ra (Output):</text>
+<rect x="555" y="245" width="62" height="62" rx="4" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+<text x="586" y="276" font-size="24" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<text x="586" y="321" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 + 20 + 0 +</text>
+<text x="586" y="337" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 + 20 + 0 +</text>
+<text x="586" y="353" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">0 + 20 + 0 = 60</text>
+<rect x="660" y="213" width="215" height="215" rx="4" fill="#F0F8FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="672" y="233" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Ý nghĩa của con số 60:</text>
+<text x="682" y="253" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Điểm số +60 rất lớn!</tspan><tspan> Báo hiệu:</tspan></text>
+<text x="682" y="270" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  &quot;Nét dọc xuất hiện tại đây!&quot;</tspan></text>
+<text x="682" y="287" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Nếu vùng ảnh toàn số 0:</tspan></text>
+<text x="682" y="304" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5">  Tổng tính ra = 0.</tspan></text>
+<text x="682" y="321" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Nếu vùng bị lệch (xem mục 3):</tspan></text>
+<text x="682" y="338" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5">  Tổng ra số âm (-30).</tspan></text>
+<text x="682" y="355" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  Qua hàm kích hoạt ReLU:</tspan></text>
+<text x="682" y="372" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5">  max(0, -30) -&gt; triệt tiêu về 0!</tspan></text>
+<rect x="10" y="463" width="880" height="330" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="480" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">3. Quá trình trượt (Sliding Window) qua ảnh 5×5 &amp; Tác dụng của hàm ReLU</text>
+<text x="25" y="501" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Vị trí A (Lệch tâm, col 0..2):</text>
+<rect x="25" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="39.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="53" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="67.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="81" y="515" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="95.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="109" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="123.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="137" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="151.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="25" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="39.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="53" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="67.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="81" y="543" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="95.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="109" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="123.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="137" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="151.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="25" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="39.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="53" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="67.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="81" y="571" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="95.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="109" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="123.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="137" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="151.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="25" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="39.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="53" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="67.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="81" y="599" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="95.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="109" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="123.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="137" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="151.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="25" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="39.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="53" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="67.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="81" y="627" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="95.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="109" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="123.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="137" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="151.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="25" y="515" width="84" height="84" fill="none" stroke="#C62828" stroke-width="2.2" stroke-dasharray="4 2"/>
+<text x="25" y="670" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Patch chạm mép nét dọc:</tspan><tspan> [0, 0, 10]</tspan></text>
+<text x="25" y="685" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Nhân filter: 10 × (-1) × 3 = </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">-30</tspan></text>
+<text x="25" y="700" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>-&gt; Kết quả phép Conv = </tspan><tspan font-weight="700">-30</tspan><tspan> (Số âm)</tspan></text>
+<text x="210" y="501" font-size="11.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Vị trí B (Trúng tâm, col 1..3):</text>
+<rect x="210" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="224.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="252.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="266" y="515" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="280.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="294" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="308.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="322" y="515" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="336.0" y="529.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="210" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="224.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="252.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="266" y="543" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="280.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="294" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="308.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="322" y="543" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="336.0" y="557.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="210" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="224.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="252.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="266" y="571" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="280.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="294" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="308.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="322" y="571" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="336.0" y="585.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="210" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="224.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="252.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="266" y="599" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="280.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="294" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="308.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="322" y="599" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="336.0" y="613.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="210" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="224.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="252.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="266" y="627" width="28" height="28" rx="3" fill="#FFE082" stroke="#666666" stroke-width="1"/>
+<text x="280.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="294" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="308.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="322" y="627" width="28" height="28" rx="3" fill="white" stroke="#666666" stroke-width="1"/>
+<text x="336.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="238" y="515" width="84" height="84" fill="none" stroke="#2E7D32" stroke-width="2.4"/>
+<text x="210" y="670" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Patch trúng nét dọc:</tspan><tspan> [0, 10, 0]</tspan></text>
+<text x="210" y="685" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Nhân filter: 10 × (+2) × 3 = </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">+60</tspan></text>
+<text x="210" y="700" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>-&gt; Kết quả phép Conv = </tspan><tspan font-weight="700">+60</tspan><tspan> (Cực đại)</tspan></text>
+<path d="M370 583 L404 583" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="390" y="568" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trượt hết ảnh</text>
+<text x="420" y="501" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Feature Map (Trước ReLU):</text>
+<rect x="425" y="528" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="439.0" y="542.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<rect x="453" y="528" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="467.0" y="542.0" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="481" y="528" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="495.0" y="542.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<rect x="425" y="556" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="439.0" y="570.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<rect x="453" y="556" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="467.0" y="570.0" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="481" y="556" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="495.0" y="570.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<rect x="425" y="584" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="439.0" y="598.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<rect x="453" y="584" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="467.0" y="598.0" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="481" y="584" width="28" height="28" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="495.0" y="598.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-30</text>
+<text x="467.0" y="628" font-size="11" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Còn số âm -30</text>
+<path d="M530 583 L569 583" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<text x="552" y="568" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">ReLU</text>
+<text x="552" y="598" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">max(0, x)</text>
+<text x="585" y="501" font-size="11.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Feature Map (Sau ReLU):</text>
+<rect x="590" y="528" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="604.0" y="542.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="618" y="528" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.4"/>
+<text x="632.0" y="542.0" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="646" y="528" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="660.0" y="542.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="590" y="556" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="604.0" y="570.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="618" y="556" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.4"/>
+<text x="632.0" y="570.0" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="646" y="556" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="660.0" y="570.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="590" y="584" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="604.0" y="598.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="618" y="584" width="28" height="28" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.4"/>
+<text x="632.0" y="598.0" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">60</text>
+<rect x="646" y="584" width="28" height="28" rx="3" fill="white" stroke="#888888" stroke-width="1"/>
+<text x="660.0" y="598.0" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="632.0" y="628" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Cột 60 sáng rực!</text>
+<rect x="705" y="513" width="170" height="235" rx="4" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="715" y="531" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Quy luật cốt lõi:</text>
+<text x="715" y="551" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">1. Kích thước thu gọn:</tspan></text>
+<text x="715" y="567" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Ảnh 5×5 trượt filter</tspan></text>
+<text x="715" y="583" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   3×3 ra output 3×3.</tspan></text>
+<text x="715" y="599" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">2. Vai trò của ReLU:</tspan></text>
+<text x="715" y="615" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Gọt bỏ hoàn toàn các</tspan></text>
+<text x="715" y="631" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   giá trị âm (-30 -&gt; 0),</tspan></text>
+<text x="715" y="647" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   chỉ giữ lại nét khớp.</tspan></text>
+<text x="715" y="663" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">3. Nhiều Channels:</tspan></text>
+<text x="715" y="679" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Nếu dùng 16 filter</tspan></text>
+<text x="715" y="695" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   khác nhau sẽ ra 16</tspan></text>
+<text x="715" y="711" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Feature Map (kênh).</tspan></text>
+<rect x="10" y="809" width="880" height="205" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="826" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">4. Vì sao Mạng nơ-ron (CNN / YOLO) xếp chồng nhiều lớp Convolution liên tiếp?</text>
+<rect x="24" y="845" width="270" height="150" rx="5" fill="#EAF2FF" stroke="#333333" stroke-width="1.2"/>
+<text x="159.0" y="862" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Cấp 1: Lớp Conv Nông (Đầu)</text>
+<text x="34" y="875" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Bộ lọc tìm nét cơ bản:</tspan></text>
+<text x="34" y="892" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Cạnh ngang, cạnh dọc, góc nhọn,</tspan></text>
+<text x="34" y="909" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  độ tương phản sáng/tối.</tspan></text>
+<text x="34" y="926" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Receptive field nhỏ (3×3 pixel).</tspan></text>
+<text x="34" y="943" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Đặc trưng vật lý cục bộ.</tspan></text>
+<path d="M298 919 L312 919" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="318" y="845" width="270" height="150" rx="5" fill="#FFF8E1" stroke="#333333" stroke-width="1.2"/>
+<text x="453.0" y="862" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Cấp 2: Lớp Conv Giữa (Thân)</text>
+<text x="328" y="875" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Ghép các nét thành hình:</tspan></text>
+<text x="328" y="892" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Đường cong, vân họa tiết,</tspan></text>
+<text x="328" y="909" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  bộ phận nhỏ (mắt, mũi, vành xe).</tspan></text>
+<text x="328" y="926" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Receptive field mở rộng hơn.</tspan></text>
+<text x="328" y="943" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Kết hợp từ các Feature Map cấp 1.</tspan></text>
+<path d="M592 919 L606 919" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="612" y="845" width="270" height="150" rx="5" fill="#E8F5E9" stroke="#333333" stroke-width="1.2"/>
+<text x="747.0" y="862" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Cấp 3: Lớp Conv Sâu (Đuôi)</text>
+<text x="622" y="875" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nhận diện vật thể hoàn chỉnh:</tspan></text>
+<text x="622" y="892" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Khuôn mặt người, con mèo, ô tô.</tspan></text>
+<text x="622" y="909" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Receptive field bao trùm toàn ảnh.</tspan></text>
+<text x="622" y="926" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Ra quyết định phân loại &amp;</tspan></text>
+<text x="622" y="943" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  đóng khung vật thể (YOLO detect).</tspan></text>
+<text x="10" y="1042" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Giáo trình Deep Learning &amp; Computer Vision nền tảng; LeCun et al. (CNNs); Eyeriss (2016).</text>
+</svg>

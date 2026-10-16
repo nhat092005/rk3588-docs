@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1045" width="900" height="1045" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1045" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh kiến trúc Depthwise Convolution (DWConv) và Pointwise Convolution (1x1)</text>
+<rect x="10" y="66" width="880" height="175" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Standard Convolution 2D: Lọc không gian &amp; Trộn kênh đồng thời trong 1 bước</text>
+<text x="24" y="102" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cấu trúc bộ lọc: </tspan><tspan>Gồm </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cout</tspan><tspan> bộ lọc kích thước </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">K × K × Cin</tspan><tspan>. Quét đồng thời trên mọi kênh đầu vào.</tspan></text>
+<text x="24" y="120" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Số phép tính MAC: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Hout × Wout × Cout × (K² · Cin)</tspan><tspan> (Chi phí tính toán cao nhất).</tspan></text>
+<text x="24" y="138" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Đặc tính: </tspan><tspan>Trộn không gian và kênh hoàn hảo, nhưng số lượng tham số lớn: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cout × Cin × K²</tspan><tspan> trọng số.</tspan></text>
+<rect x="24" y="161" width="120" height="64" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="84" y="186" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Input Feature Map</text>
+<text x="84" y="204" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">[H, W, Cin]</text>
+<path d="M150 193 L194 193" fill="none" stroke="#444444" stroke-width="3.0" marker-end="url(#m444444t)"/>
+<rect x="206" y="161" width="210" height="64" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1.2"/>
+<text x="311" y="181" font-size="11.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Cout Filter 3D Chuẩn</text>
+<text x="311" y="198" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Kích thước K × K × Cin</text>
+<text x="311" y="214" font-size="10" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(Mỗi filter phủ trọn Cin kênh)</text>
+<path d="M422 193 L466 193" fill="none" stroke="#444444" stroke-width="3.0" marker-end="url(#m444444t)"/>
+<rect x="478" y="161" width="130" height="64" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="543" y="186" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Output Map</text>
+<text x="543" y="204" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">[Hout, Wout, Cout]</text>
+<rect x="630" y="161" width="245" height="64" rx="4" fill="#F5F5F5" stroke="#777777" stroke-width="1"/>
+<text x="752" y="180" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ưu điểm: Tái sử dụng dữ liệu cao</text>
+<text x="752" y="198" font-size="10.5" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Nhược điểm: Rất nặng FLOPs và RAM</text>
+<text x="752" y="214" font-size="10" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">MOBONE tr.4, EYE tr.4</text>
+<rect x="10" y="257" width="880" height="400" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="274" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Depthwise Separable Convolution: Tách rời Không gian và Trộn kênh (MobileNet / YOLO)</text>
+<rect x="24" y="293" width="410" height="348" rx="5" fill="#FAFAFA" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="229" y="313" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Bước 1: Depthwise Convolution (DWConv)</text>
+<text x="229" y="329" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Chỉ lọc không gian từng kênh riêng lẻ (Spatial Filtering)</text>
+<rect x="36" y="352" width="75" height="42" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="73.5" y="376" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh In 0</text>
+<path d="M118 373 L150 373" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="154" y="352" width="100" height="42" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1"/>
+<text x="204" y="370" font-size="10.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Filter 0 (2D)</text>
+<text x="204" y="384" font-size="10" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">K × K × 1</text>
+<path d="M260 373 L292 373" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="296" y="352" width="75" height="42" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="333.5" y="376" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh Out 0</text>
+<rect x="36" y="402" width="75" height="42" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="73.5" y="426" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh In 1</text>
+<path d="M118 423 L150 423" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="154" y="402" width="100" height="42" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1"/>
+<text x="204" y="420" font-size="10.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Filter 1 (2D)</text>
+<text x="204" y="434" font-size="10" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">K × K × 1</text>
+<path d="M260 423 L292 423" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="296" y="402" width="75" height="42" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="333.5" y="426" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh Out 1</text>
+<rect x="36" y="452" width="75" height="42" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="73.5" y="476" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh In 2</text>
+<path d="M118 473 L150 473" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="154" y="452" width="100" height="42" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1"/>
+<text x="204" y="470" font-size="10.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Filter 2 (2D)</text>
+<text x="204" y="484" font-size="10" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">K × K × 1</text>
+<path d="M260 473 L292 473" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="296" y="452" width="75" height="42" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="333.5" y="476" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Kênh Out 2</text>
+<text x="73.5" y="509" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">⋮ (Cin kênh)</text>
+<text x="204" y="509" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">⋮ (Cin bộ lọc 2D)</text>
+<text x="333.5" y="509" font-size="11" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">⋮ (Cin kênh)</text>
+<text x="36" y="533" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Không trộn kênh: </tspan><tspan>Mỗi kênh chỉ nhân với filter của chính nó.</tspan></text>
+<text x="36" y="549" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Số phép MAC: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Hout × Wout × Cin × K²</tspan><tspan> (Giảm Cout lần).</tspan></text>
+<text x="36" y="565" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Điểm yếu trên NPU: </tspan><tspan>Arithmetic Intensity rất thấp (ít tính,</tspan></text>
+<text x="36" y="581" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  nạp nhiều). Dễ bị </tspan><tspan font-weight="700">memory-bound</tspan><tspan> trên RK3588 (SURV tr.19).</tspan></text>
+<rect x="450" y="293" width="420" height="348" rx="5" fill="#FAFAFA" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="660" y="313" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Bước 2: Pointwise Convolution (PWConv 1×1)</text>
+<text x="660" y="329" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Chỉ trộn đặc trưng xuyên kênh (Cross-Channel Mixing)</text>
+<rect x="465" y="367" width="100" height="110" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="515" y="412" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Feature Map</text>
+<text x="515" y="429" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">[H, W, Cin]</text>
+<path d="M572 422 L606 422" fill="none" stroke="#444444" stroke-width="3.0" marker-end="url(#m444444t)"/>
+<rect x="620" y="357" width="120" height="130" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1.2"/>
+<text x="680" y="387" font-size="11.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Cout Bộ lọc</text>
+<text x="680" y="405" font-size="12" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">1 × 1 × Cin</text>
+<text x="680" y="425" font-size="10" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Không quét không gian</text>
+<text x="680" y="441" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">K = 1</text>
+<path d="M748 422 L782 422" fill="none" stroke="#444444" stroke-width="3.0" marker-end="url(#m444444t)"/>
+<rect x="795" y="367" width="65" height="110" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="827" y="412" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Output</text>
+<text x="827" y="429" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">[Cout]</text>
+<text x="465" y="533" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trộn thông tin: </tspan><tspan>Tổng hợp tuyến tính các kênh tại mỗi điểm ảnh.</tspan></text>
+<text x="465" y="549" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Số phép MAC: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Hout × Wout × Cin × Cout</tspan><tspan> (K = 1).</tspan></text>
+<text x="465" y="565" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Ưu thế trên NPU: </tspan><tspan>Tương đương phép nhân ma trận thuần túy GEMM,</tspan></text>
+<text x="465" y="581" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  tận dụng tối đa mảng MAC array 32×32 của RK3588 (TRM1 tr.2001).</tspan></text>
+<text x="10" y="677" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh định lượng giữa Standard Conv và Depthwise Separable Conv (K=3, Cin=64, Cout=128)</text>
+<rect x="10" y="691" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="705.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đặc tính</text>
+<text x="198" y="705.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Standard Conv (3×3)</text>
+<text x="418" y="705.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">DWConv + Pointwise (3×3)</text>
+<text x="638" y="705.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mức giảm / Nhận xét phần cứng</text>
+<path d="M10 719 L890 719" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="738.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số tham số (Weights)</tspan></text>
+<text x="198" y="738.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>128 × 64 × 9 = 73,728</tspan></text>
+<text x="418" y="738.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(64 × 9) + (64 × 128) = 8,768</tspan></text>
+<text x="638" y="731.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Giảm 8.41 lần tham số</tspan></text>
+<text x="638" y="746.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(Tương đương giảm ~88% bộ nhớ)</tspan></text>
+<path d="M10 758 L890 758" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="777.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Phép tính MAC mỗi pixel</tspan></text>
+<text x="198" y="777.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>64 × 128 × 9 = 73,728</tspan></text>
+<text x="418" y="777.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(64 × 9) + (64 × 128) = 8,768</tspan></text>
+<text x="638" y="770.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tỷ lệ: 1/Cout + 1/K² ≈ 1/128 + 1/9</tspan></text>
+<text x="638" y="785.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tiết kiệm 8.41 lần FLOPs tính toán</tspan></text>
+<path d="M10 797 L890 797" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="816.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Khả năng tái sử dụng dữ liệu</tspan></text>
+<text x="198" y="816.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cao (Spatial + Channel reuse)</tspan></text>
+<text x="418" y="809.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DWConv: Thấp (Spatial chỉ 1 kênh)</tspan></text>
+<text x="418" y="824.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>PWConv: Cao (GEMM đa kênh)</tspan></text>
+<text x="638" y="809.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DWConv dễ rơi vào memory-bound</tspan></text>
+<text x="638" y="824.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>PWConv đạt thông lượng MAC cao</tspan></text>
+<path d="M10 836 L890 836" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="855.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Độ phù hợp mảng MAC NPU</tspan></text>
+<text x="198" y="855.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Rất tốt (Lấp đầy mảng 32×32)</tspan></text>
+<text x="418" y="848.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DWConv: MAC usage thấp (0.3 - 1.2%)</tspan></text>
+<text x="418" y="863.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>PWConv: MAC usage cao (&gt;80%)</tspan></text>
+<text x="638" y="848.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>YOLO26n kết hợp DWConv trong block</tspan></text>
+<text x="638" y="863.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>để cân bằng latency và accuracy</tspan></text>
+<rect x="10" y="691" width="880" height="184" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M190 691 L190 875" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M410 691 L410 875" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M630 691 L630 875" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="889" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="897" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="908.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="908" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="933" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">MOBONE tr.4 &amp; SURV tr.19: </tspan><tspan>Khối cơ bản của MobileNet gồm 3x3 depthwise convolution theo sau là 1x1 pointwise.</tspan></text>
+<text x="24" y="952" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">EYE tr.4: </tspan><tspan>psums được gom tụ tại cuối cửa sổ; DWConv có lượng psum ít hơn nhiều so với Standard Conv.</tspan></text>
+<text x="24" y="971" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Số đo thực tế trên RK3588 (LOG yolo-phaseA): </tspan><tspan>Các lớp depthwise 3x3 trong YOLO26n có MacUsage chỉ từ 0.30% đến 1.24%.</tspan></text>
+<text x="24" y="990" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: cơ chế nạp trọng số chuyên biệt (nếu có) của CNA Controller cho depthwise convolution.</tspan></text>
+<text x="10" y="1031" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: MOBONE tr.4 (MobileOne 2023); SURV tr.19; EYE tr.4 (Eyeriss 2016); TRM1 tr.2001; LOG 2026-10-10_yolo-phaseA.</text>
+</svg>

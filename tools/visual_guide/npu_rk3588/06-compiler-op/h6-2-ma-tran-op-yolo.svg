@@ -1,0 +1,254 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1535" width="1000" height="1535" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1000" height="1535" fill="white"/>
+<rect x="908" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="948.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="10" y="22" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Op của detector kiểu YOLOv8 trên NPU RK3588: OPL (T1) đặt cạnh bảng lớp đo được (T3)</text>
+<rect x="10" y="44" width="980" height="72" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="22" y="61" font-size="14" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">T3: lớp nào nằm trên NPU, lớp nào trên CPU</text>
+<text x="22" y="84" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n INT8, 119 lớp, core_mask CORE_0_1_2: Target = CPU chỉ ở Transpose (1 lớp) cùng InputOperator và OutputOperator; 116 lớp còn lại Target = NPU. Cột T3 đếm</text>
+<text x="22" y="101" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">từ bảng lớp: &#x27;chia 3 core&#x27; là lớp có tải ở ít nhất hai core, &#x27;chỉ core 0&#x27; là 100%/0%/0%. Cột T3 là một model, trọng số ngẫu nhiên.</text>
+<rect x="10" y="130" width="980" height="43.0" fill="#E8E8E8"/>
+<text x="17" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Op (tên OPL)</tspan></text>
+<text x="145" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">OPL mục; PDF</tspan></text>
+<text x="145" y="159.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">(trang in)</tspan></text>
+<text x="257" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Trên NPU</tspan></text>
+<text x="349" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Ràng buộc chính (OPL)</tspan></text>
+<text x="649" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">多核联合 (đa</tspan></text>
+<text x="649" y="159.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">core)</tspan></text>
+<text x="761" y="143.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">T3: lớp trong bảng lớp</tspan></text>
+<rect x="754" y="173.0" width="236" height="58.5" fill="#EAF6EA"/>
+<path d="M10 173.0 L990 173.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="202.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Conv</tspan></text>
+<text x="145" y="194.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.5; 58-59</tspan></text>
+<text x="145" y="210.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(52-53)</tspan></text>
+<text x="257" y="202.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="186.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>kernel_h, kernel_w ∈ [1,31]; stride ∈ [1,7]; pads</tspan></text>
+<text x="349" y="202.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>∈ [0,15]; dilations ∈ [1,31]; int8, float16;</tspan></text>
+<text x="349" y="217.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>weight per-layer và per-channel</tspan></text>
+<text x="649" y="202.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>支持</tspan></text>
+<text x="761" y="202.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>7 lớp NPU; 6 chia 3 core, 1 chỉ core 0</tspan></text>
+<rect x="754" y="231.5" width="236" height="58.5" fill="#EAF6EA"/>
+<path d="M10 231.5 L990 231.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="253.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">ConvolutionSwish</tspan></text>
+<text x="17" y="268.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">(SiLU)</tspan></text>
+<text x="145" y="260.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.17; 63 (57)</tspan></text>
+<text x="257" y="260.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="253.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>&#x27;说明及规格限制同Convolution&#x27;: ràng buộc như</tspan></text>
+<text x="349" y="268.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Convolution</tspan></text>
+<text x="649" y="260.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>暂不支持</tspan></text>
+<text x="761" y="245.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvExSwish: 57 lớp NPU; cả 57 chỉ core</tspan></text>
+<text x="761" y="260.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0. Tên khác ConvolutionSwish: chưa</tspan></text>
+<text x="761" y="276.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chứng minh cùng một op</tspan></text>
+<rect x="754" y="290.0" width="236" height="27.5" fill="#EAF6EA"/>
+<path d="M10 290.0 L990 290.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">exSwish (SiLU rời)</tspan></text>
+<text x="145" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.69; 98 (92)</tspan></text>
+<text x="257" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16; &#x27;Swish 函数也称为 SiLU 函数&#x27;</tspan></text>
+<text x="649" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>尚不支持</tspan></text>
+<text x="761" y="303.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có lớp tên exSwish</tspan></text>
+<rect x="754" y="317.5" width="236" height="27.5" fill="#EAF6EA"/>
+<path d="M10 317.5 L990 317.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sigmoid</tspan></text>
+<text x="145" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.63; 95 (89)</tspan></text>
+<text x="257" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16</tspan></text>
+<text x="649" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>尚不支持</tspan></text>
+<text x="761" y="331.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 lớp NPU; cả 1 chỉ core 0</tspan></text>
+<rect x="250" y="345.0" width="92" height="58.5" fill="#F2F2F2"/>
+<rect x="754" y="345.0" width="236" height="58.5" fill="#EAF6EA"/>
+<path d="M10 345.0 L990 345.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="374.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Resize</tspan></text>
+<text x="145" y="366.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.54; 86-87</tspan></text>
+<text x="145" y="382.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(80-81)</tspan></text>
+<text x="257" y="374.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>một phần</tspan></text>
+<text x="349" y="358.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chỉ nhân nguyên 2 đến 8 theo H, W; mode chỉ</tspan></text>
+<text x="349" y="374.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nearest, linear; coordinate_transformation_mode</tspan></text>
+<text x="349" y="389.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chỉ half_pixel, pytorch_half_pixel, align_corners</tspan></text>
+<text x="649" y="374.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>不支持</tspan></text>
+<text x="761" y="358.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2 lớp NPU; cả 2 chỉ core 0 (INT8,</tspan></text>
+<text x="761" y="374.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Target = NPU ở optimization_level 1, 2,</tspan></text>
+<text x="761" y="389.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3)</tspan></text>
+<rect x="250" y="403.5" width="92" height="58.5" fill="#FFF3F3"/>
+<rect x="642" y="403.5" width="112" height="58.5" fill="#F2F2F2"/>
+<rect x="754" y="403.5" width="236" height="58.5" fill="#EAF6EA"/>
+<path d="M10 403.5 L990 403.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="432.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Upsample</tspan></text>
+<text x="145" y="417.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có trong</tspan></text>
+<text x="145" y="432.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2; CPU 4.67:</tspan></text>
+<text x="145" y="448.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>329</tspan></text>
+<text x="257" y="425.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không thấy</tspan></text>
+<text x="257" y="440.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>trong mục NPU</tspan></text>
+<text x="349" y="432.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>mục CPU: bilinear, nearest2d</tspan></text>
+<text x="649" y="432.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có</tspan></text>
+<text x="761" y="432.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có lớp tên Upsample</tspan></text>
+<rect x="642" y="462.0" width="112" height="43.0" fill="#F2F2F2"/>
+<rect x="754" y="462.0" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 462.0 L990 462.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="483.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Concat</tspan></text>
+<text x="145" y="483.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.4; 58 (52)</tspan></text>
+<text x="257" y="483.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="483.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>axis ∈ {0,1,2,3}; int8, float16</tspan></text>
+<text x="649" y="483.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có dòng</tspan></text>
+<text x="761" y="475.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>17 lớp NPU; 15 chia 3 core, 2 chỉ core</tspan></text>
+<text x="761" y="491.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<rect x="642" y="505.0" width="112" height="27.5" fill="#F2F2F2"/>
+<rect x="754" y="505.0" width="236" height="27.5" fill="#EAF6EA"/>
+<path d="M10 505.0 L990 505.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Split</tspan></text>
+<text x="145" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.59; 91 (85)</tspan></text>
+<text x="257" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>axis ∈ {0,1,2,3}; int8, float16</tspan></text>
+<text x="649" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có dòng</tspan></text>
+<text x="761" y="518.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>9 lớp NPU; cả 9 chỉ core 0</tspan></text>
+<rect x="642" y="532.5" width="112" height="43.0" fill="#F2F2F2"/>
+<rect x="754" y="532.5" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 532.5 L990 532.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="554.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">MaxPool</tspan></text>
+<text x="145" y="546.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.44; 79-80</tspan></text>
+<text x="145" y="561.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(73-74)</tspan></text>
+<text x="257" y="554.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="546.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>kernel ∈ (0,7]; strides ∈ (0,8]; pad ∈ [0,7];</tspan></text>
+<text x="349" y="561.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>auto_pad chỉ NOTSET; ceil_mode không hỗ trợ</tspan></text>
+<text x="649" y="554.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có dòng</tspan></text>
+<text x="761" y="554.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3 lớp NPU; cả 3 chỉ core 0</tspan></text>
+<rect x="754" y="575.5" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 575.5 L990 575.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="597.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Add</tspan></text>
+<text x="145" y="597.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.1; 56 (50)</tspan></text>
+<text x="257" y="597.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="589.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16; broadcast theo luật Expand (3.2.34,</tspan></text>
+<text x="349" y="604.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>PDF 68: h, w ∈ [1,8192])</tspan></text>
+<text x="649" y="597.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>支持</tspan></text>
+<text x="761" y="589.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>silu: 8 lớp NPU; cả 8 chia 3 core.</tspan></text>
+<text x="761" y="604.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>relu: 2 lớp NPU; cả 2 chia 3 core</tspan></text>
+<rect x="754" y="618.5" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 618.5 L990 618.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="640.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Mul</tspan></text>
+<text x="145" y="640.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.41; 77 (71)</tspan></text>
+<text x="257" y="640.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="640.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16; broadcast theo luật Expand</tspan></text>
+<text x="649" y="640.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>支持</tspan></text>
+<text x="761" y="632.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2 lớp NPU; cả 2 chỉ core 0 (OPL ghi</tspan></text>
+<text x="761" y="647.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>支持)</tspan></text>
+<rect x="754" y="661.5" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 661.5 L990 661.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="683.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sub</tspan></text>
+<text x="145" y="675.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.60; 91-92</tspan></text>
+<text x="145" y="690.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(85-86)</tspan></text>
+<text x="257" y="683.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="683.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16; broadcast [b,c,1,1] hoặc [scalar]</tspan></text>
+<text x="649" y="683.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>不支持</tspan></text>
+<text x="761" y="683.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2 lớp NPU; cả 2 chỉ core 0</tspan></text>
+<rect x="754" y="704.5" width="236" height="27.5" fill="#EAF6EA"/>
+<path d="M10 704.5 L990 704.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Reshape</tspan></text>
+<text x="145" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.53; 86 (80)</tspan></text>
+<text x="257" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có</tspan></text>
+<text x="349" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>int8, float16</tspan></text>
+<text x="649" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>尚不支持</tspan></text>
+<text x="761" y="718.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>7 lớp NPU; 4 chỉ core 0, 3 lớp 0%/0%/0%</tspan></text>
+<rect x="250" y="732.0" width="92" height="43.0" fill="#F2F2F2"/>
+<rect x="754" y="732.0" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 732.0 L990 732.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="753.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Transpose</tspan></text>
+<text x="145" y="745.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.62; 93-95</tspan></text>
+<text x="145" y="761.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(87-89)</tspan></text>
+<text x="257" y="753.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có điều kiện</tspan></text>
+<text x="349" y="745.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>giới hạn riêng cho từng perm, với p=8192, q=2048;</tspan></text>
+<text x="349" y="761.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T1 int8, T2 int16 hoặc float16</tspan></text>
+<text x="649" y="753.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>暂不支持</tspan></text>
+<text x="761" y="745.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 lớp INT8, Target = CPU (cùng</tspan></text>
+<text x="761" y="761.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>InputOperator, OutputOperator)</tspan></text>
+<rect x="250" y="775.0" width="92" height="43.0" fill="#F2F2F2"/>
+<rect x="754" y="775.0" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 775.0 L990 775.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="788.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Softmax /</tspan></text>
+<text x="17" y="804.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">exSoftmax13</tspan></text>
+<text x="145" y="788.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.56, 3.2.57;</tspan></text>
+<text x="145" y="804.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>88-89 (82-83)</tspan></text>
+<text x="257" y="796.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có điều kiện</tspan></text>
+<text x="349" y="796.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>axis chỉ 1 hoặc 3; &#x27;受限于 tranpose 的规格限制&#x27;</tspan></text>
+<text x="649" y="788.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>尚不支持 (cả</tspan></text>
+<text x="649" y="804.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>hai)</tspan></text>
+<text x="761" y="796.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>exSoftmax13: 1 lớp NPU; cả 1 chỉ core 0</tspan></text>
+<rect x="250" y="818.0" width="92" height="43.0" fill="#F2F2F2"/>
+<rect x="642" y="818.0" width="112" height="43.0" fill="#F2F2F2"/>
+<rect x="754" y="818.0" width="236" height="43.0" fill="#EAF6EA"/>
+<path d="M10 818.0 L990 818.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="17" y="839.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Slice</tspan></text>
+<text x="145" y="839.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.2.55; 88 (82)</tspan></text>
+<text x="257" y="839.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>có điều kiện</tspan></text>
+<text x="349" y="831.75" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>steps khác 1 chỉ khi thỏa điều kiện chứa subc (OPL</tspan></text>
+<text x="349" y="847.25" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không định nghĩa subc)</tspan></text>
+<text x="649" y="839.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có dòng</tspan></text>
+<text x="761" y="839.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có lớp tên Slice</tspan></text>
+<rect x="10" y="130" width="980" height="731.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M138 130 L138 861.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M250 130 L250 861.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M342 130 L342 861.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M642 130 L642 861.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M754 130 L754 861.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="875.0" width="320" height="140" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="892.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phép đếm của bộ hình</text>
+<text x="22" y="915.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Mục 3.2 (PDF 56 đến 107) có 79 mục, 59 mục có dòng</text>
+<text x="22" y="932.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">多核联合: 11 支持, 18 暂不支持, 23 尚不支持, 7</text>
+<text x="22" y="949.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">不支持; 20 mục không có dòng (phép đếm của bộ hình,</text>
+<text x="22" y="966.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">khớp với bản đếm trong 00_index mục 7.1).</text>
+<text x="22" y="983.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL không định nghĩa 暂不支持, 尚不支持, 不支持:</text>
+<text x="22" y="1000.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chưa phân biệt được nghĩa.</text>
+<rect x="340" y="875.0" width="320" height="140" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="352" y="892.0" font-size="14" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">T3 so với cột 多核联合</text>
+<text x="352" y="915.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">T3 phù hợp với cột OPL ở ConvolutionSwish</text>
+<text x="352" y="932.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(暂不支持, ConvExSwish chỉ core 0), ConvRelu và</text>
+<text x="352" y="949.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvReluAdd (cùng họ ConvolutionRelu 支持, chia 3</text>
+<text x="352" y="966.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">core; Hình 6.3), Resize, Split, Sub.</text>
+<text x="352" y="983.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không khớp hoặc chưa rõ: Mul (OPL 支持, T3 core 0).</text>
+<rect x="670" y="875.0" width="320" height="140" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="682" y="892.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Vì sao Transpose rơi về CPU?</text>
+<text x="682" y="915.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Phép tính của bộ hình: Transpose duy nhất trên CPU</text>
+<text x="682" y="932.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có input (4,1,1,8400) và output (1,4,1,8400); nếu</text>
+<text x="682" y="949.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">perm là [1,0,2,3], mục OPL ghi &#x27;h1*w1&lt;p&#x27; với p=8192,</text>
+<text x="682" y="966.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">còn h1*w1 = 8400. Phù hợp với lý do &#x27;size exceeds</text>
+<text x="682" y="983.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">the limit&#x27;, nhưng không có nguồn xác nhận (perm và</text>
+<text x="682" y="1000.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">lý do đều là suy ra).</text>
+<text x="10" y="1033.0" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mâu thuẫn số 3: op nào chạy đa core?</text>
+<rect x="10" y="1049.0" width="290" height="123" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="1066.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Danh sách của UG232</text>
+<text x="22" y="1089.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">UG232 tr.75: &#x27;The existing operators that</text>
+<text x="22" y="1106.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">support multi-core task segmentation include:</text>
+<text x="22" y="1123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv, DepthwiseConvolution, Add, Concat, Relu,</text>
+<text x="22" y="1140.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Clip, Relu6, ThresholdedRelu, PRelu, and</text>
+<text x="22" y="1157.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">LeakyRelu.&#x27; UG152 tr.27 có danh sách tương tự.</text>
+<rect x="310" y="1049.0" width="290" height="123" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="322" y="1066.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">OPL mục 3.2</text>
+<text x="322" y="1089.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Relu, Clip/ReLU6, PRelu, LeakyRelu đều ghi</text>
+<text x="322" y="1106.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">暂不支持 (3.2.49 đến 3.2.52, PDF 83 đến 86);</text>
+<text x="322" y="1123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Concat không có dòng 多核联合; ThresholdedRelu</text>
+<text x="322" y="1140.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có trong OPL; Mul ghi 支持 nhưng không</text>
+<text x="322" y="1157.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có trong danh sách UG232.</text>
+<rect x="610" y="1049.0" width="380" height="123" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="622" y="1066.0" font-size="14" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">T3</text>
+<text x="622" y="1089.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Bảng lớp không có lớp Relu đứng riêng; ConvRelu (51) và</text>
+<text x="622" y="1106.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvReluAdd (6) đều chia 3 core; Concat 15 trong 17 chia 3</text>
+<text x="622" y="1123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">core. Một model, nên không phân xử được.</text>
+<rect x="10" y="1186.0" width="980" height="89" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="1203.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Resize: hai tài liệu T1 chưa thống nhất</text>
+<text x="22" y="1226.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL PDF 86-87 liệt kê Resize (int8, float16) cho RK3588; UG232 tr.176 nói NPU &#x27;does not currently support hardware-level Resize&#x27; và toolkit đổi Resize thành</text>
+<text x="22" y="1243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvTranspose.</text>
+<text x="22" y="1260.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">T3: hai lớp Resize INT8 đều Target = NPU ở optimization_level 1, 2, 3. Bilinear và FP16 chưa thử, nên không kết luận UG232 sai.</text>
+<rect x="10" y="1287.0" width="980" height="72" rx="6" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="22" y="1304.0" font-size="14" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Chưa biết</text>
+<text x="22" y="1327.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish (tên trong bảng lớp) và ConvolutionSwish (tên trong OPL) có phải một op không; &#x27;subc&#x27; trong điều kiện Slice; nghĩa chính xác của 多核联合 và ba cách viết</text>
+<text x="22" y="1344.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">&#x27;không hỗ trợ&#x27;; danh sách &#x27;YOLOv8 cần op nào&#x27; không có nguồn T1 hay T2 (bảng chỉ là op thường gặp, mỗi dòng có giá trị nhờ mục OPL của nó).</text>
+<rect x="10" y="1373.0" width="980" height="122" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1390.0" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="1405.0" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1413.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3 đo, có file log (một model, không phải kết luận chung)</tspan></text>
+<rect x="26" y="1427.0" width="38" height="16" rx="2" fill="#F2F2F2" stroke="#BBBBBB"/>
+<text x="78" y="1435.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>OPL không có mục hoặc không có dòng; hoặc có điều kiện</tspan></text>
+<rect x="26" y="1449.0" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="1457.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không thấy trong mục NPU</tspan></text>
+<rect x="26" y="1471.0" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="1479.0" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>phép tính, suy ra của bộ hình</tspan></text>
+<text x="10" y="1521.0" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: OPL PDF 56 đến 107, 329 (trang in = PDF trừ 6); UG232 tr.75, 139, 176; UG152 tr.27; LOG t3-board-silu-resize/raw (silu_opt1, 2, 3 và CORE_0_1_2).</text>
+</svg>

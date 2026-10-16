@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1208.0" width="900" height="1208.0" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1208.0" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Toán tử Element-wise Add và Khối Residual Block: Từ bản chất toán học đến mạch ghép NPU</text>
+<rect x="10" y="66" width="880" height="215" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Bản chất toán học của phép cộng Element-wise Add: C(h, w, c) = A(h, w, c) + B(h, w, c)</text>
+<text x="81.0" y="112" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ma trận A (Nhánh Conv F(x))</text>
+<rect x="30" y="128" width="34" height="34" rx="3" fill="#FFE082" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">12</text>
+<rect x="64" y="128" width="34" height="34" rx="3" fill="#DCE8FA" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">-4</text>
+<rect x="98" y="128" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="145.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">8</text>
+<rect x="30" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="64" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">7</text>
+<rect x="98" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-2</text>
+<rect x="30" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="47.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">15</text>
+<rect x="64" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="81.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="98" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="115.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="155" y="179.0" font-size="24" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">+</text>
+<text x="231.0" y="112" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ma trận B (Nhánh Shortcut x)</text>
+<rect x="180" y="128" width="34" height="34" rx="3" fill="#FFE082" stroke="#555555" stroke-width="1.2"/>
+<text x="197.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="214" y="128" width="34" height="34" rx="3" fill="#DCE8FA" stroke="#555555" stroke-width="1.2"/>
+<text x="231.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">6</text>
+<rect x="248" y="128" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="265.0" y="145.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-3</text>
+<rect x="180" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="197.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">9</text>
+<rect x="214" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="231.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-2</text>
+<rect x="248" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="265.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="180" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="197.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="214" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="231.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">8</text>
+<rect x="248" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="265.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">-5</text>
+<text x="305" y="179.0" font-size="24" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">=</text>
+<text x="381.0" y="112" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ma trận C = A + B</text>
+<rect x="330" y="128" width="34" height="34" rx="3" fill="#C8E6C9" stroke="#555555" stroke-width="1.2"/>
+<text x="347.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">17</text>
+<rect x="364" y="128" width="34" height="34" rx="3" fill="#C8E6C9" stroke="#555555" stroke-width="1.2"/>
+<text x="381.0" y="145.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="398" y="128" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="415.0" y="145.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="330" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="347.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">12</text>
+<rect x="364" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="381.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="398" y="162" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="415.0" y="179.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="330" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="347.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">16</text>
+<rect x="364" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="381.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">8</text>
+<rect x="398" y="196" width="34" height="34" rx="3" fill="white" stroke="#555555" stroke-width="1.2"/>
+<text x="415.0" y="213.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="30" y="246" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tọa độ [0,0]: </tspan><tspan>12 + 5 = 17 (ô vàng)</tspan><tspan>  |  </tspan><tspan font-weight="700">• Tọa độ [0,1]: </tspan><tspan>(-4) + 6 = 2 (ô lam -&gt; ô lục)</tspan></text>
+<text x="30" y="263" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nguyên lý: </tspan><tspan>Cộng trực tiếp từng phần tử có cùng chỉ số [r, c, k]. Không nhân ma trận, không trượt cửa sổ.</tspan></text>
+<rect x="460" y="102" width="415" height="165" rx="4" fill="#FFF8E1" stroke="#FFA000" stroke-width="1.2"/>
+<text x="667" y="119" font-size="12" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">ĐIỀU KIỆN BẮT BUỘC: SHAPE MATCHING</text>
+<text x="474" y="140" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">1. Hai tensor BẮT BUỘC cùng kích thước: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Shape(A) == Shape(B) == [H, W, C]</tspan></text>
+<text x="474" y="156" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">2. Khi nào lệch kích thước? </tspan></text>
+<text x="474" y="172" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   • Khi khối Conv có stride = 2 (kích thước H, W giảm đi một nửa).</tspan></text>
+<text x="474" y="188" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   • Khi số kênh đầu ra Cout khác số kênh đầu vào Cin.</tspan></text>
+<text x="474" y="204" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">3. Giải pháp: Projection Shortcut (Conv 1×1):</tspan></text>
+<text x="474" y="220" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Nhánh shortcut phải chèn thêm lớp </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Conv 1×1 (stride=s, Cout)</tspan><tspan> để đưa</tspan></text>
+<text x="474" y="236" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   tensor x về đúng kích thước với F(x) trước khi thực hiện phép ADD.</tspan></text>
+<rect x="10" y="297" width="880" height="275" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="314" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Cấu trúc khối Residual Block kinh điển và Đạo hàm chống triệt tiêu Gradient</text>
+<rect x="90" y="331" width="180" height="26" rx="3" fill="#E3F2FD" stroke="#333333" stroke-width="1.2"/>
+<text x="180.0" y="344.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Đầu vào: Tensor x [H, W, C]</text>
+<path d="M180 357 L180 369" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<circle cx="180" cy="369" r="3.5" fill="#444444"/>
+<path d="M180 369 L180 383" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="90" y="383" width="180" height="25" rx="3" fill="#FFF8E1" stroke="#333333" stroke-width="1.2"/>
+<text x="180.0" y="395.5" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3 + BatchNorm</text>
+<path d="M180 408 L180 420" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="120" y="420" width="120" height="22" rx="3" fill="#F3E5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="180.0" y="431.0" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU</text>
+<path d="M180 442 L180 454" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="90" y="454" width="180" height="25" rx="3" fill="#FFF8E1" stroke="#333333" stroke-width="1.2"/>
+<text x="180.0" y="466.5" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3 + BatchNorm</text>
+<path d="M180 479 L180 497" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<text x="188" y="490" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">F(x)</text>
+<path d="M180 369 L320 369 L320 512 L211 512" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="328" y="432" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Nhánh tắt Identity: x</text>
+<text x="328" y="448" font-size="10" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(Không qua tính toán,</text>
+<text x="328" y="462" font-size="10" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central"> bảo toàn 100% tín hiệu)</text>
+<circle cx="180" cy="512" r="15" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="180" y="512" font-size="20" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">+</text>
+<text x="152" y="512" font-size="10.5" font-weight="700" fill="#1B5E20" text-anchor="end" dominant-baseline="central">ADD</text>
+<path d="M180 527 L180 539" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<rect x="90" y="539" width="180" height="24" rx="3" fill="#E8F5E9" stroke="#333333" stroke-width="1.2"/>
+<text x="180.0" y="551.0" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU (Kích hoạt sau cộng)</text>
+<rect x="460" y="331" width="415" height="230" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="667" y="348" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">VÌ SAO CẦN PHÉP CỘNG SHORTCUT? (GRADIENT HIGHWAY)</text>
+<rect x="475" y="364" width="385" height="34" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="667" y="381" font-size="12" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">Đầu ra: y = F(x) + x   ===&gt;   Đạo hàm: ∂y/∂x = ∂F(x)/∂x + 1</text>
+<text x="474" y="412.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Vấn đề mạng thuần (Plain Net không shortcut):</tspan></text>
+<text x="474" y="427.5" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Khi lan truyền ngược, gradient nhân liên tiếp qua hàng chục ma trận trọng số.</tspan></text>
+<text x="474" y="443.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Nếu các giá trị đạo hàm &lt; 1, gradient nhanh chóng triệt tiêu về 0 (Vanishing).</tspan></text>
+<text x="474" y="458.5" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Hằng số &quot;+1&quot; thần kỳ (Gradient Highway):</tspan></text>
+<text x="474" y="474.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Ngay cả khi các lớp tích chập F(x) có </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.8">∂F(x)/∂x ≈ 0</tspan><tspan>, đạo hàm tổng vẫn giữ</tspan></text>
+<text x="474" y="489.5" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  nguyên giá trị </tspan><tspan font-weight="700">ít nhất là 1</tspan><tspan>. Tín hiệu lỗi truyền thẳng về các tầng đầu tiên!</tspan></text>
+<text x="474" y="505.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Dễ tối ưu hơn: </tspan><tspan>Mạng chỉ cần học phần sai số thặng dư </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.8">F(x) = H(x) - x</tspan><tspan>.</tspan></text>
+<text x="474" y="520.5" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Nếu lớp không mang lại lợi ích, mạng chỉ cần ép F(x) -&gt; 0 (ánh xạ đồng nhất).</tspan></text>
+<rect x="10" y="588" width="880" height="250" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="605" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">3. Cơ chế phần cứng NPU RK3588: Add rời (Disjoint) vs Add ghép on-chip (Fused)</text>
+<rect x="24" y="622" width="415" height="204" rx="4" fill="#FFF5F5" stroke="#E53935" stroke-width="1.2"/>
+<text x="231" y="640" font-size="12" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Add Rời (Disjoint Add) - Nghẽn Băng Thông DDR</text>
+<text x="36" y="660.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Luồng thực thi:</tspan></text>
+<text x="36" y="674.8" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  1. Lớp Conv tính xong F(x) -&gt; </tspan><tspan font-weight="700">Ghi ra RAM DDR</tspan><tspan> (DMA Write 1).</tspan></text>
+<text x="36" y="689.6" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  2. Nhánh shortcut x cũng nằm tại </tspan><tspan font-weight="700">RAM DDR</tspan><tspan>.</tspan></text>
+<text x="36" y="704.4" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  3. Lớp Add riêng: NPU DMA đọc F(x) và x từ DDR (</tspan><tspan font-weight="700">DMA Read 2 lần</tspan><tspan>).</tspan></text>
+<text x="36" y="719.2" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  4. Thực hiện phép cộng -&gt; </tspan><tspan font-weight="700">Ghi kết quả y ra DDR</tspan><tspan> (DMA Write 2).</tspan></text>
+<text x="36" y="734.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Hậu quả phần cứng:</tspan></text>
+<text x="36" y="748.8" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • Tốn </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.8">2 lần ghi + 2 lần đọc RAM DDR</tspan><tspan> cho mỗi khối residual.</tspan></text>
+<text x="36" y="763.6" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • Đẩy NPU vào trạng thái </tspan><tspan font-weight="700">Memory-Bound</tspan><tspan> (nghẽn bus AXI).</tspan></text>
+<text x="36" y="778.4" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • Các đơn vị MAC phải dừng chờ (stall), làm tụt FPS thực tế.</tspan></text>
+<rect x="460" y="622" width="415" height="204" rx="4" fill="#F1F8E9" stroke="#43A047" stroke-width="1.2"/>
+<text x="667" y="640" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Add Ghép On-Chip (Fused ConvolutionAdd / ConvAddRelu)</text>
+<text x="472" y="660.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Luồng thực thi phần cứng RK3588 (OPL tr.61, 63):</tspan></text>
+<text x="472" y="674.8" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  1. Khối Conv tính toán psums trong </tspan><tspan font-weight="700">Mảng MAC INT8 32×32</tspan><tspan>.</tspan></text>
+<text x="472" y="689.6" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  2. Nhánh Shortcut (Input1) nạp từ CBUF trực tiếp vào </tspan><tspan font-weight="700">Accumulator INT32</tspan><tspan>!</tspan></text>
+<text x="472" y="704.4" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  3. Phép cộng F(x) + x hoàn tất </tspan><tspan font-weight="700">ngay trên thanh ghi on-chip</tspan><tspan>.</tspan></text>
+<text x="472" y="719.2" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  4. Chuyển thẳng sang </tspan><tspan font-weight="700">DPU để kích hoạt ReLU</tspan><tspan> mà không qua DDR.</tspan></text>
+<text x="472" y="734.0" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Lợi ích vượt trội:</tspan></text>
+<text x="472" y="748.8" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • </tspan><tspan font-weight="700">0 lần truy cập DDR ngoài</tspan><tspan> giữa Conv và Add (Tiết kiệm 100% I/O phụ).</tspan></text>
+<text x="472" y="763.6" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • RKNN Compiler phân bổ song song trên </tspan><tspan font-weight="700">cả 3 lõi NPU (Core 0, 1, 2)</tspan><tspan>.</tspan></text>
+<text x="472" y="778.4" font-size="10.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  • Đạt thông lượng cực đại, triệt tiêu hoàn toàn Memory Wall.</tspan></text>
+<text x="10" y="858" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh chi tiết Add rời và Add ghép on-chip trên NPU RK3588</text>
+<rect x="10" y="872" width="870" height="28" fill="#E8E8E8"/>
+<text x="18" y="886.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chỉ số so sánh</text>
+<text x="178" y="886.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Add rời (Disjoint Add)</text>
+<text x="528" y="886.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Add ghép on-chip (ConvolutionAdd)</text>
+<path d="M10 900 L880 900" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="912.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Vị trí thực hiện phép cộng</tspan></text>
+<text x="178" y="912.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Khối ALU / Vector Unit độc lập</tspan></text>
+<text x="528" y="912.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Thanh ghi tích lũy Accumulator (trong CNA)</tspan></text>
+<path d="M10 924.5 L880 924.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="944.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Truy cập RAM DDR</tspan></text>
+<text x="178" y="936.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Ghi Conv ra DDR, sau đó nạp lại</tspan></text>
+<text x="178" y="952.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cả 2 tensor vào để cộng (2 Read + 2 Write)</tspan></text>
+<text x="528" y="944.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0 lần truy cập DDR (Khép kín 100% on-chip)</tspan></text>
+<path d="M10 964.5 L880 964.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="976.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Băng thông bộ nhớ</tspan></text>
+<text x="178" y="976.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tốn gấp đôi băng thông, dễ nghẽn bus AXI</tspan></text>
+<text x="528" y="976.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tiết kiệm tối đa băng thông, loại bỏ Memory Wall</tspan></text>
+<path d="M10 989.0 L880 989.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1001.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hỗ trợ đa lõi RK3588</tspan></text>
+<text x="178" y="1001.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Phụ thuộc vào kernel Add độc lập</tspan></text>
+<text x="528" y="1001.25" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hỗ trợ chia đều trên cả 3 Core 0, 1, 2 (OPL tr.61, 63)</tspan></text>
+<path d="M10 1013.5 L880 1013.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1025.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Toán tử RKNN đại diện</tspan></text>
+<text x="178" y="1025.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Toán tử Add riêng lẻ (kém tối ưu)</tspan></text>
+<text x="528" y="1025.75" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvolutionAdd, ConvolutionAddRelu (Tối ưu cao nhất)</tspan></text>
+<rect x="10" y="872" width="870" height="166.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M170 872 L170 1038.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M520 872 L520 1038.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1052.0" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="1060.0" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="1071.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="1071.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="1096.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">OPL tr.61: </tspan><tspan>Toán tử ConvolutionAdd: &quot;Convolution 与 Add 融合计算, Output = Add(Conv(Input0), Input1)&quot;, hỗ trợ đa lõi RK3588.</tspan></text>
+<text x="24" y="1115.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">OPL tr.63: </tspan><tspan>Toán tử ConvolutionAddRelu: &quot;Convolution 与 Add 及 Relu 融合计算, Output = Relu(Add(Conv(Input0), Input1))&quot;, hỗ trợ đa lõi RK3588.</tspan></text>
+<text x="24" y="1134.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">TRM1 tr.1985: </tspan><tspan>Khối CNA gồm mac array và accumulator INT32, nối trực tiếp sang DPU (relu, leaky_relu).</tspan></text>
+<text x="24" y="1153.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">MOBONE tr.4: </tspan><tspan>Khối cơ bản với &quot;reparameterizable skip connection [13] with batchnorm along&quot; trong kiến trúc di động hiện đại.</tspan></text>
+<text x="10" y="1194.0" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: OPL tr.61, 63 (RKNN Compiler Operator List); TRM1 tr.1985 (RK3588 TRM); MOBONE tr.4.</text>
+</svg>

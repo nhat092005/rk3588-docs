@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1196" width="900" height="1196" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1196" fill="white"/>
+<text x="10" y="20" font-size="16" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bản đồ đường học: mỗi ô là một phần, mũi tên là cần biết trước</text>
+<rect x="10" y="50" width="260" height="142" rx="6" fill="#EAF6EA" stroke="#333333" stroke-width="1.4"/>
+<text x="20" y="66" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 1: NPU cơ bản</text>
+<text x="20" y="88" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tính convolution bằng những đơn vị nào;</text>
+<text x="20" y="103" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">vì sao cách giữ và di chuyển dữ liệu</text>
+<text x="20" y="118" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">quan trọng hơn số phép nhân</text>
+<text x="20" y="152" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: không</text>
+<text x="20" y="172" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 1.1 đến 1.5</text>
+<rect x="188.8" y="161" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="225.4" y="172.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<rect x="320" y="50" width="260" height="142" rx="6" fill="#EAF6EA" stroke="#333333" stroke-width="1.4"/>
+<text x="330" y="66" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 3: Lý thuyết lượng tử</text>
+<text x="330" y="88" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">biến thành số nguyên INT8 như thế nào,</text>
+<text x="330" y="103" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">sai số đến từ đâu</text>
+<text x="330" y="152" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: không</text>
+<text x="330" y="172" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 3.1 đến 3.5</text>
+<rect x="498.8" y="161" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="535.4" y="172.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<rect x="630" y="50" width="260" height="142" rx="6" fill="#EAF6EA" stroke="#333333" stroke-width="1.4"/>
+<path d="M760.0 51 H884 Q890 50 890 56 V186 Q890 192 884 191 H760.0 Z" fill="#EAF2FF"/>
+<rect x="630" y="50" width="260" height="142" rx="6" fill="none" stroke="#333333" stroke-width="1.4"/>
+<text x="640" y="66" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 8: Thiết kế model</text>
+<text x="640" y="88" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tiêu chí nào đã có nguồn T1 (vendor),</text>
+<text x="640" y="103" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">T2 (paper) hoặc T3;</text>
+<text x="640" y="118" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">điều gì vẫn là unknown trên RK3588</text>
+<text x="640" y="152" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 3 (Hình 3.5), 6 (Hình 6.3)</text>
+<text x="640" y="172" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 8.1, 8.2</text>
+<rect x="730" y="161" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="172.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<rect x="806" y="161" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="846.3" y="172.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="10" y="232" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="20" y="248" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 2: Phần cứng RK3588</text>
+<text x="20" y="270" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">gồm những khối nào, nối với SoC bằng</text>
+<text x="20" y="285" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đường nào</text>
+<text x="20" y="334" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 1</text>
+<text x="20" y="354" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 2.1 đến 2.5</text>
+<rect x="181.39999999999998" y="343" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="221.7" y="354.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="320" y="232" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="330" y="248" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 4: Lượng tử RKNN</text>
+<text x="330" y="270" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">cho chọn những kiểu, thuật toán, phương</text>
+<text x="330" y="285" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">pháp lượng tử nào, làm sao tìm lớp gây</text>
+<text x="330" y="300" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">sai số</text>
+<text x="330" y="334" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 3</text>
+<text x="330" y="354" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 4.1 đến 4.4</text>
+<rect x="491.4" y="343" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="531.6999999999999" y="354.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="630" y="232" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="640" y="248" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 5: Toolchain</text>
+<text x="640" y="270" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">phải gọi những hàm nào ở đâu;</text>
+<text x="640" y="285" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">phần mềm trên board xếp thành những</text>
+<text x="640" y="300" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">tầng nào</text>
+<text x="640" y="334" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 4</text>
+<text x="640" y="354" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 5.1 đến 5.3</text>
+<rect x="801.4" y="343" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="841.6999999999999" y="354.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="10" y="414" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="20" y="430" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 7: Bộ nhớ và hiệu năng</text>
+<text x="20" y="452" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nằm ở những bộ nhớ nào, một con số độ</text>
+<text x="20" y="467" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trễ đo đoạn nào của một frame</text>
+<text x="20" y="516" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 2</text>
+<text x="20" y="536" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 7.1 đến 7.3</text>
+<rect x="181.39999999999998" y="525" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="221.7" y="536.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="320" y="414" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="330" y="430" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 6: Compiler và op</text>
+<text x="330" y="452" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chạy trên NPU RK3588 hay rơi sang CPU,</text>
+<text x="330" y="467" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có được ghép với op đứng trước và chia</text>
+<text x="330" y="482" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">cho ba core không</text>
+<text x="330" y="516" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 2</text>
+<text x="330" y="536" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 6.1 đến 6.4</text>
+<rect x="491.4" y="525" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="531.6999999999999" y="536.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="630" y="414" width="260" height="142" rx="6" fill="#EAF2FF" stroke="#333333" stroke-width="1.4"/>
+<text x="640" y="430" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 9: YOLO</text>
+<text x="640" y="452" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n và YOLO26n khác nhau ở khối</text>
+<text x="640" y="467" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nào, mỗi khối đi qua đường xuất RKNN</text>
+<text x="640" y="482" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">thành lớp nào trên NPU RK3588</text>
+<text x="640" y="516" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: 4, 5, 6</text>
+<text x="640" y="536" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 9.1 đến 9.4</text>
+<rect x="801.4" y="525" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="841.6999999999999" y="536.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<path d="M140 192 L140 232" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M450 192 L450 232" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M580 120 L630 120" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M580 302 L630 302" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M140 374 L140 414" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M270 337 L320 454" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M580 347 L630 444" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M760 374 L760 414" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M580 499 L630 499" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="10" y="592" width="880" height="140" rx="6" fill="#FDECEC" stroke="#C62828" stroke-width="1.8"/>
+<text x="20" y="608" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 10: Số đo thực tế</text>
+<text x="20" y="630" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có thấy được những điều ở phần cứng và API (phần 2) trong số đo thật trên board RK3588S không, và số đo nào đủ chắc để kết luận. Mỗi hình có</text>
+<text x="20" y="645" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">câu dự đoán trước khi xem và nối ngược về hình khái niệm.</text>
+<text x="20" y="672" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: Phần 1 đến 9 (mũi tên từ 7 và 9; các phần còn lại cung cấp khái niệm cho từng hình)</text>
+<text x="20" y="712" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 10.1 đến 10.8</text>
+<rect x="831.0" y="701" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="856.5" y="712.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<path d="M140 556 L140 592" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M760 556 L760 592" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M450 732 L450 764" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="10" y="770" width="880" height="170" rx="6" fill="#EEEEEE" stroke="#222222" stroke-width="2.4"/>
+<text x="20" y="787" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phần 11: Chọn model (câu hỏi của dự án)</text>
+<text x="20" y="812" font-size="16" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chọn YOLOv8n SiLU, YOLOv8n ReLU hay YOLO26n cho NPU RK3588?</text>
+<text x="20" y="838" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Quy tắc chốt trước khi có số: chọn model nhanh nhất có mAP50-95 INT8 không thấp hơn YOLOv8n SiLU INT8 quá 1.0 điểm; nếu không model</text>
+<text x="20" y="854" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nào nhanh hơn rõ ràng thì giữ YOLOv8n SiLU (tmp/02_decisions/2026-10-11_model-selection-rule.md).</text>
+<text x="20" y="882" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hình 11.1, 11.2 (phần này chưa có chu-thich.md)</text>
+<text x="20" y="920" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cần biết trước: Phần 10 (và qua nó Phần 1 đến 9)</text>
+<text x="20" y="902" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">loại: quyết định (không phải khái niệm hay số đo)</text>
+<rect x="10" y="954" width="430" height="144" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="971" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<path d="M26 994 L66 994" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="78" y="994" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>mũi tên: cần biết trước (suy ra của bộ hình)</tspan></text>
+<rect x="26" y="1008" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1016" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T2 chung: paper, không riêng RK3588</tspan></text>
+<rect x="26" y="1030" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="1038" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T1 RK3588: vendor, mã nguồn chính thức</tspan></text>
+<rect x="26" y="1052" width="38" height="16" rx="2" fill="#FDECEC" stroke="#BBBBBB"/>
+<text x="78" y="1060" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3 đo: log của chúng ta</tspan></text>
+<rect x="26" y="1074" width="38" height="16" rx="2" fill="#EEEEEE" stroke="#BBBBBB"/>
+<text x="78" y="1082" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>quyết định: quy tắc chọn model</tspan></text>
+<rect x="460" y="954" width="430" height="144" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="474" y="976" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cách học</tspan></text>
+<text x="474" y="996" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1. Đi theo mũi tên: học phần có mũi tên tới trước.</tspan></text>
+<text x="474" y="1016" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2. Mỗi hình có huy hiệu tier (T1, T2, T3).</tspan></text>
+<text x="474" y="1036" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3. Khung nét đứt đỏ là unknown: nguồn không cho.</tspan></text>
+<text x="474" y="1056" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4. Phần 10: dự đoán trước khi xem hình.</tspan></text>
+<text x="474" y="1076" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>5. Tích ô &quot;đã học&quot; trong trang HTML (index.html).</tspan></text>
+<rect x="10" y="1110" width="880" height="46" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="1124.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>mAP50-95 INT8 của cả ba model: chưa có (chờ pipeline phase3, phase4), nên</tspan></text>
+<text x="20" y="1141.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>chưa có câu trả lời cho Phần 11; Hình 10.7 và 10.8 chờ số.</tspan></text>
+<text x="10" y="1182" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: câu hỏi mở đầu trong REPO docs/visual_guide/npu_rk3588/NN-*/chu-thich.md; tmp/02_decisions/2026-10-11_model-selection-rule.md; 2026-10-11_hoc-theo-hinh.md.</text>
+</svg>

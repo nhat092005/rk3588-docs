@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 907" width="900" height="907" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="907" fill="white"/>
+<rect x="808" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="848.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="10" y="50" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">MAC mỗi chu kỳ (TRM1 tr.1984)</text>
+<rect x="10" y="64" width="450" height="28" fill="#E8E8E8"/>
+<text x="18" y="78.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Kiểu số</text>
+<text x="88" y="78.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nguyên văn TRM</text>
+<text x="378" y="78.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tổng (x3)</text>
+<path d="M10 92 L460 92" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="105.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT8</tspan></text>
+<text x="88" y="105.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1024x3 integer 8 MAC operations per cycle</tspan></text>
+<text x="378" y="105.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3072</tspan></text>
+<path d="M10 118 L460 118" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="131.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT16</tspan></text>
+<text x="88" y="131.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512x3 integer 16 MAC operations per cycle</tspan></text>
+<text x="378" y="131.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1536</tspan></text>
+<path d="M10 144 L460 144" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="157.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FP16</tspan></text>
+<text x="88" y="157.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512x3 float 16 MAC operations per cycle</tspan></text>
+<text x="378" y="157.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1536</tspan></text>
+<path d="M10 170 L460 170" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="183.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>BF16</tspan></text>
+<text x="88" y="183.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512x3 bfloat 16 MAC operations per cycle</tspan></text>
+<text x="378" y="183.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1536</tspan></text>
+<path d="M10 196 L460 196" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="209.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>TF32</tspan></text>
+<text x="88" y="209.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>256x3 tf32 MAC operation per cycle</tspan></text>
+<text x="378" y="209.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>768</tspan></text>
+<path d="M10 222 L460 222" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="235.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT4</tspan></text>
+<text x="88" y="235.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2048x3 integer 4 MAC operation per cycle</tspan></text>
+<text x="378" y="235.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>6144</tspan></text>
+<rect x="10" y="64" width="450" height="184" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M80 64 L80 248" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M370 64 L370 248" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="262" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">x3 khớp với 3 core (TRM không viết &#x27;per core&#x27;). Cột Tổng là phép nhân của bộ hình.</text>
+<text x="10" y="296" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Trong SDK: rknn.config, quantized_dtype (API232 tr.7)</text>
+<rect x="10" y="310" width="450" height="28" fill="#E8E8E8"/>
+<text x="18" y="324.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">quantized_dtype</text>
+<text x="148" y="324.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giới hạn chip ghi trong tài liệu</text>
+<path d="M10 338 L460 338" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="351.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w8a8</tspan></text>
+<text x="148" y="351.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>mặc định; RK2118 không hỗ trợ</tspan></text>
+<path d="M10 364 L460 364" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="377.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w4a16</tspan></text>
+<text x="148" y="377.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Only RK3576/RV1126B</tspan></text>
+<path d="M10 390 L460 390" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="403.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w8a16</tspan></text>
+<text x="148" y="403.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Only RK3562</tspan></text>
+<path d="M10 416 L460 416" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="429.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w4a8</tspan></text>
+<text x="148" y="429.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Not supported yet</tspan></text>
+<path d="M10 442 L460 442" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="455.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w16a16i</tspan></text>
+<text x="148" y="455.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Only RV1103/RV1106</tspan></text>
+<path d="M10 468 L460 468" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="481.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">w16a16i_dfp</tspan></text>
+<text x="148" y="481.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Only RV1103/RV1106</tspan></text>
+<rect x="10" y="310" width="450" height="184" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M140 310 L140 494" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="512" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Với RK3588 chỉ w8a8 không bị giới hạn sang chip khác: INT4, BF16, TF32 có trong TRM</text>
+<text x="10" y="530" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhưng không có đường qua rknn.config (suy ra của bộ hình từ danh sách trên).</text>
+<text x="10" y="550" font-size="12.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Ngoại lệ: Matmul C API hỗ trợ int4, int8, float16 (UG232 tr.41).</text>
+<text x="480" y="50" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Cấu trúc theo số</text>
+<rect x="480" y="64" width="410" height="28" fill="#E8E8E8"/>
+<text x="488" y="78.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mục</text>
+<text x="678" y="78.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giá trị</text>
+<path d="M480 92 L890 92" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="105.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT8: MAC array</tspan></text>
+<text x="678" y="105.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32x32 (nn_mode = 3&#x27;d0), TRM1 tr.2001</tspan></text>
+<path d="M480 118 L890 118" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="131.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT8: kernel group</tspan></text>
+<text x="678" y="131.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32 kernel / group, TRM1 tr.2000</tspan></text>
+<path d="M480 144 L890 144" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="157.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT16, FP16: kernel group</tspan></text>
+<text x="678" y="157.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>16 kernel / group, TRM1 tr.2000</tspan></text>
+<path d="M480 170 L890 170" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="183.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Buffer trong core</tspan></text>
+<text x="678" y="183.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>384KB x3, TRM1 tr.1984</tspan></text>
+<path d="M480 196 L890 196" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="209.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>System SRAM cho NPU</tspan></text>
+<text x="678" y="209.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tối đa 956KB, 4K align</tspan></text>
+<rect x="480" y="64" width="410" height="158" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M670 64 L670 222" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="480" y="244" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tần số và 6 TOPS</text>
+<rect x="480" y="258" width="410" height="28" fill="#E8E8E8"/>
+<text x="488" y="272.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mục</text>
+<text x="678" y="272.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giá trị</text>
+<path d="M480 286 L890 286" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="299.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Datasheet: Max NPU frequency</tspan></text>
+<text x="678" y="299.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>TBD (DS tr.31)</tspan></text>
+<path d="M480 312 L890 312" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="325.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Datasheet: tốc độ tính</tspan></text>
+<text x="678" y="325.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>up to 6TOPs (DS tr.7)</tspan></text>
+<path d="M480 338 L890 338" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="351.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DTS OPP &quot;RK3588 npu&quot;</tspan></text>
+<text x="678" y="351.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>300, 400 ... 1000 MHz</tspan></text>
+<path d="M480 364 L890 364" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="488" y="377.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DTS OPP &quot;RK3588J/M&quot;</tspan></text>
+<text x="678" y="377.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tối đa 950 MHz</tspan></text>
+<rect x="480" y="258" width="410" height="132" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M670 258 L670 390" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="480" y="402" width="410" height="109" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="492" y="418" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Phép tính của bộ hình, không phải câu của vendor:</tspan></text>
+<text x="492" y="437" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1024 x 3 x 2 x 1 GHz = 6.144 TOPS (INT8, 3 core)</tspan></text>
+<text x="492" y="456" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2 phép/MAC: quy ước của T2 BAMB tr.1 (NXP),</tspan></text>
+<text x="492" y="475" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không phải tài liệu vendor.</tspan></text>
+<text x="492" y="494" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 GHz: OPP cao nhất trong DTS; Datasheet ghi TBD.</tspan></text>
+<rect x="480" y="527" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="505.5" y="538.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<rect x="480" y="557" width="410" height="90" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="492" y="573" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Board RK3588S: eval_perf báo NPU Current Frequency</tspan></text>
+<text x="492" y="592" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>List là 1000000000 khi đo (fix_freq=True).</tspan></text>
+<text x="492" y="611" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chỉ giá trị có trong file log; các quan sát khác</tspan></text>
+<text x="492" y="630" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>qua ssh chưa lưu log nên không đưa vào.</tspan></text>
+<rect x="10" y="670" width="880" height="122" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="687" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="702" width="38" height="16" rx="2" fill="#FFFFFF" stroke="#BBBBBB"/>
+<text x="78" y="710" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nguyên văn hoặc số lấy từ tài liệu T1</tspan></text>
+<rect x="26" y="724" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="732" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>phép tính của bộ hình (không phải câu của vendor)</tspan></text>
+<rect x="26" y="746" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="754" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3: đo trên board, có file log</tspan></text>
+<rect x="26" y="768" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="776" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: nguồn không cho</tspan></text>
+<rect x="10" y="804" width="880" height="63" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="818.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>quy ước đếm phép tính của vendor cho 6 TOPS;</tspan></text>
+<text x="20" y="835.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>bố cục MAC array cho INT16, FP16, INT4;</tspan></text>
+<text x="20" y="852.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>kích thước một bank của buffer 384KB.</tspan></text>
+<text x="10" y="893" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: TRM1 tr.1984, 2000, 2001; DS tr.7, 31; API232 tr.7; UG232 tr.41; DTS dòng 3534-3655, 3658-3709; BAMB tr.1; LOG 2026-10-10.</text>
+</svg>

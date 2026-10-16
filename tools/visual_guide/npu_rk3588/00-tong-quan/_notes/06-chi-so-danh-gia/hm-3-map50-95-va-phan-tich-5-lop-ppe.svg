@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 572" width="900" height="572" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="572" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="24" font-size="16" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Bản chất Khắt khe của mAP50-95, Biểu đồ 5 Lớp PPE và Độ nhạy IoU của Vật thể nhỏ</text>
+<text x="10" y="56" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">A. Tại sao mAP50-95 lại khắt khe hơn nhiều so với mAP50? (Sự co rút diện tích AP qua 10 mốc IoU)</text>
+<line x1="50" y1="215" x2="300" y2="215" stroke="#444444" stroke-width="1.5"/>
+<line x1="50" y1="85" x2="50" y2="215" stroke="#444444" stroke-width="1.5"/>
+<path d="M 50 90 C 210 95, 260 115, 290 215 L 290 215 L 50 215 Z" fill="#C8E6C9" opacity="0.6"/>
+<path d="M 50 90 C 210 95, 260 115, 290 215" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+<text x="175.0" y="75" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Mốc IoU = 0.50 (Dễ dãi)</text>
+<text x="162.5" y="156.5" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">AP@0.50 = 0.8924</text>
+<text x="175.0" y="230" font-size="10" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">Box chỉ cần chạm 50% diện tích nhãn</text>
+<polygon points="325,150 345,150 340,145 350,150 340,155 345,150" fill="#444444" stroke="#444444" stroke-width="2"/>
+<text x="338" y="135" font-size="10" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Siết IoU</text>
+<text x="338" y="167" font-size="9.5" font-weight="400" fill="#666666" text-anchor="middle" dominant-baseline="central">0.50 -&gt; 0.95</text>
+<line x1="370" y1="215" x2="620" y2="215" stroke="#444444" stroke-width="1.5"/>
+<line x1="370" y1="85" x2="370" y2="215" stroke="#444444" stroke-width="1.5"/>
+<path d="M 370 125 C 420 155, 450 190, 480 215 L 480 215 L 370 215 Z" fill="#FFCDD2" opacity="0.6"/>
+<path d="M 370 125 C 420 155, 450 190, 480 215" fill="none" stroke="#C62828" stroke-width="2.5"/>
+<text x="495.0" y="75" font-size="11" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Mốc IoU = 0.95 (Khắt khe)</text>
+<text x="530" y="140" font-size="12" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">AP@0.95 &lt; 0.15</text>
+<text x="495.0" y="230" font-size="10" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">Lệch nhẹ 1 vài pixel lập tức bị coi là FP</text>
+<rect x="645" y="85" width="245" height="130" rx="5" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.2"/>
+<text x="657" y="103" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Chuẩn COCO mAP50-95:</text>
+<text x="657" y="121" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Lấy trung bình cộng tại 10 mốc:</tspan></text>
+<text x="657" y="137" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  0.50, 0.55, 0.60, 0.65, 0.70,</tspan></text>
+<text x="657" y="153" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  0.75, 0.80, 0.85, 0.90, 0.95</tspan></text>
+<text x="657" y="169" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• mAP50: </tspan><tspan>0.8924 (Rất cao)</tspan></text>
+<text x="657" y="185" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• mAP50-95: </tspan><tspan font-weight="700">0.5908 (Thực tế)</tspan></text>
+<text x="10" y="253" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">B. Biểu đồ mAP50-95 của 5 lớp đồ bảo hộ lao động (YOLOv8n baseline trên sfchd_5class)</text>
+<text x="190" y="279" font-size="11" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">person (người)</text>
+<rect x="200" y="267" width="460" height="18" rx="3" fill="#F0F0F0" stroke="none" stroke-width="1.2"/>
+<rect x="200" y="267" width="330.556" height="18" rx="3" fill="#1E5BB8" stroke="none" stroke-width="1.2"/>
+<text x="535.556" y="277" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.7186 (71.86%)</text>
+<text x="190" y="305" font-size="11" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">safety_clothes (áo phản quang)</text>
+<rect x="200" y="293" width="460" height="18" rx="3" fill="#F0F0F0" stroke="none" stroke-width="1.2"/>
+<rect x="200" y="293" width="298.724" height="18" rx="3" fill="#00796B" stroke="none" stroke-width="1.2"/>
+<text x="503.724" y="303" font-size="10.5" font-weight="700" fill="#00796B" text-anchor="start" dominant-baseline="central">0.6494 (64.94%)</text>
+<text x="190" y="331" font-size="11" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">helmet (mũ bảo hộ)</text>
+<rect x="200" y="319" width="460" height="18" rx="3" fill="#F0F0F0" stroke="none" stroke-width="1.2"/>
+<rect x="200" y="319" width="285.66" height="18" rx="3" fill="#2E7D32" stroke="none" stroke-width="1.2"/>
+<text x="490.66" y="329" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">0.6210 (62.10%)</text>
+<text x="190" y="357" font-size="11" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">self_clothes (quần áo thường)</text>
+<rect x="200" y="345" width="460" height="18" rx="3" fill="#F0F0F0" stroke="none" stroke-width="1.2"/>
+<rect x="200" y="345" width="265.144" height="18" rx="3" fill="#7B1FA2" stroke="none" stroke-width="1.2"/>
+<text x="470.144" y="355" font-size="10.5" font-weight="700" fill="#7B1FA2" text-anchor="start" dominant-baseline="central">0.5764 (57.64%)</text>
+<text x="190" y="383" font-size="11" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">head (đầu trần / không mũ)</text>
+<rect x="200" y="371" width="460" height="18" rx="3" fill="#F0F0F0" stroke="none" stroke-width="1.2"/>
+<rect x="200" y="371" width="178.66400000000002" height="18" rx="3" fill="#C62828" stroke="none" stroke-width="1.2"/>
+<text x="383.664" y="381" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">0.3884 (38.84%)</text>
+<line x1="471.768" y1="263" x2="471.768" y2="397" stroke="#444444" stroke-width="1.8" stroke-dasharray="4 3"/>
+<text x="471.768" y="409" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Trung bình mAP = 0.5908</text>
+<text x="10" y="425" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">C. Lý giải hình học: Tại sao vật thể nhỏ (head) lại có điểm mAP50-95 thấp nhất?</text>
+<rect x="10" y="437" width="430" height="95" rx="5" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="20" y="453" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">1. Vật thể lớn: person (Ví dụ hộp 200 x 400 px)</text>
+<text x="20" y="471" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Khi mô hình dự đoán bị lệch 10 pixel: </tspan></text>
+<text x="20" y="487" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Diện tích hộp rất lớn (80,000 px), độ lệch 10 px chỉ làm mất ~5% diện tích giao.</tspan></text>
+<text x="20" y="503" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kết quả: </tspan><tspan font-weight="700">IoU vẫn đạt &gt; 0.90</tspan><tspan> -&gt; Vượt qua cả các mốc khắt khe (0.80 - 0.90)!</tspan></text>
+<rect x="460" y="437" width="430" height="95" rx="5" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="470" y="453" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">2. Vật thể nhỏ: head (Ví dụ hộp 30 x 30 px)</text>
+<text x="470" y="471" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Khi mô hình dự đoán bị lệch 10 pixel: </tspan></text>
+<text x="470" y="487" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Diện tích hộp rất nhỏ (900 px), độ lệch 10 px làm mất hơn 1/3 diện tích giao.</tspan></text>
+<text x="470" y="503" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kết quả: </tspan><tspan font-weight="700">IoU tụt xuống dưới 0.50</tspan><tspan> -&gt; Bị loại khỏi hầu hết 10 mốc tính điểm!</tspan></text>
+<text x="10" y="558" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv:2; Y6 tr.8; QYOLO tr.2.</text>
+</svg>

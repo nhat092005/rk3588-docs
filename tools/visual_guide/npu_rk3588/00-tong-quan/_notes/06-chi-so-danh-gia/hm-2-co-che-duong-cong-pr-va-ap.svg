@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="560" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="24" font-size="16" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế Đường cong Precision-Recall (P-R Curve), Average Precision và mAP</text>
+<text x="10" y="56" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">A. Sự đánh đổi giữa Precision và Recall khi trượt ngưỡng tin cậy (Confidence Threshold)</text>
+<rect x="10" y="72" width="275" height="100" rx="5" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="147.5" y="88" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Ngưỡng cao: Confidence ≥ 0.90</text>
+<text x="20" y="108" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Chỉ giữ lại các hộp cực kỳ chắc chắn</tspan></text>
+<text x="20" y="126" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Precision rất cao (~0.98): </tspan><tspan>Hầu như không báo nhầm</tspan></text>
+<text x="20" y="144" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Recall rất thấp (~0.30): </tspan><tspan>Bỏ sót hầu hết vật thể che khuất</tspan></text>
+<rect x="310" y="72" width="275" height="100" rx="5" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="447.5" y="88" font-size="11.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Ngưỡng chuẩn: Confidence ≈ 0.50</text>
+<text x="320" y="108" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Cân bằng tối ưu giữa phát hiện và báo nhầm</tspan></text>
+<text x="320" y="126" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Precision cao (~0.90): </tspan><tspan>Báo sai dưới 10%</tspan></text>
+<text x="320" y="144" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Recall cao (~0.84): </tspan><tspan>Bắt được 84% vật thể thực tế</tspan></text>
+<rect x="610" y="72" width="275" height="100" rx="5" fill="#FFF8E1" stroke="#E65100" stroke-width="1.5"/>
+<text x="747.5" y="88" font-size="11.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Ngưỡng thấp: Confidence ≤ 0.10</text>
+<text x="620" y="108" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Giữ lại toàn bộ các vết nghi ngờ</tspan></text>
+<text x="620" y="126" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Recall tối đa (~0.95): </tspan><tspan>Bắt gần như toàn bộ vật thể</tspan></text>
+<text x="620" y="144" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Precision sụt dốc (~0.35): </tspan><tspan>Rất nhiều báo động giả (FP)</tspan></text>
+<text x="10" y="190" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">B. Đồ thị P-R Curve và Diện tích dưới đường cong (Area Under Curve - AUC = AP)</text>
+<line x1="50" y1="420" x2="470" y2="420" stroke="#444444" stroke-width="1.8"/>
+<line x1="50" y1="220" x2="50" y2="420" stroke="#444444" stroke-width="1.8"/>
+<line x1="155.0" y1="220" x2="155.0" y2="420" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<line x1="50" y1="370.0" x2="470" y2="370.0" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<text x="155.0" y="434" font-size="10" font-weight="400" fill="#666666" text-anchor="middle" dominant-baseline="central">0.25</text>
+<text x="42" y="370.0" font-size="10" font-weight="400" fill="#666666" text-anchor="end" dominant-baseline="central">0.25</text>
+<line x1="260.0" y1="220" x2="260.0" y2="420" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<line x1="50" y1="320.0" x2="470" y2="320.0" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<text x="260.0" y="434" font-size="10" font-weight="400" fill="#666666" text-anchor="middle" dominant-baseline="central">0.50</text>
+<text x="42" y="320.0" font-size="10" font-weight="400" fill="#666666" text-anchor="end" dominant-baseline="central">0.50</text>
+<line x1="365.0" y1="220" x2="365.0" y2="420" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<line x1="50" y1="270.0" x2="470" y2="270.0" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<text x="365.0" y="434" font-size="10" font-weight="400" fill="#666666" text-anchor="middle" dominant-baseline="central">0.75</text>
+<text x="42" y="270.0" font-size="10" font-weight="400" fill="#666666" text-anchor="end" dominant-baseline="central">0.75</text>
+<line x1="470.0" y1="220" x2="470.0" y2="420" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<line x1="50" y1="220.0" x2="470" y2="220.0" stroke="#E0E0E0" stroke-width="1.0" stroke-dasharray="3 3"/>
+<text x="470.0" y="434" font-size="10" font-weight="400" fill="#666666" text-anchor="middle" dominant-baseline="central">1.00</text>
+<text x="42" y="220.0" font-size="10" font-weight="400" fill="#666666" text-anchor="end" dominant-baseline="central">1.00</text>
+<text x="42" y="420" font-size="10" font-weight="400" fill="#666666" text-anchor="end" dominant-baseline="central">0</text>
+<text x="480" y="424" font-size="11.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Recall (R)</text>
+<text x="42" y="208" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Precision (P)</text>
+<path d="M 50.0 224.0 L 50.0 224.0 L 134.0 226.0 L 218.0 228.0 L 302.0 232.0 L 365.0 236.0 L 402.8 242.0 L 428.0 280.0 L 444.79999999999995 350.0 L 457.4 400.0 L 457.4 420 L 50.0 420 Z" fill="#C8E6C9" opacity="0.6"/>
+<path d="M 50.0 224.0 L 50.0 224.0 L 134.0 226.0 L 218.0 228.0 L 302.0 232.0 L 365.0 236.0 L 402.8 242.0 L 428.0 280.0 L 444.79999999999995 350.0 L 457.4 400.0" fill="none" stroke="#1E5BB8" stroke-width="3.0"/>
+<circle cx="134.0" cy="226.0" r="4.5" fill="#1E5BB8" stroke="white" stroke-width="1.5"/>
+<text x="140.0" y="240.0" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Conf=0.9</text>
+<circle cx="402.8" cy="242.0" r="4.5" fill="#2E7D32" stroke="white" stroke-width="1.5"/>
+<text x="408.8" y="234.0" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Conf=0.5 (Tối ưu)</text>
+<circle cx="444.79999999999995" cy="350.0" r="4.5" fill="#E65100" stroke="white" stroke-width="1.5"/>
+<text x="450.79999999999995" y="342.0" font-size="10" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">Conf=0.1</text>
+<text x="239.0" y="330.0" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Diện tích AP = ∫ P(R) dR</text>
+<text x="239.0" y="348.0" font-size="10.5" font-weight="600" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">(Chất lượng toàn diện của 1 lớp đối tượng)</text>
+<rect x="520" y="220" width="370" height="200" rx="5" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.2"/>
+<text x="535" y="240" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ý nghĩa của Average Precision (AP):</text>
+<text x="535" y="262" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Đường cong P-R càng phồng về góc trên bên phải,</tspan></text>
+<text x="535" y="280" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  mô hình càng đạt cả Precision cao lẫn Recall cao.</tspan></text>
+<text x="535" y="298" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Diện tích AP nhận giá trị từ 0.0 đến 1.0 (hoàn hảo).</tspan></text>
+<text x="535" y="316" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Nếu chỉ nhìn Precision hoặc Recall đơn lẻ ở một</tspan></text>
+<text x="535" y="334" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  ngưỡng, ta sẽ bị đánh lừa bởi hành vi thiên lệch.</tspan></text>
+<text x="535" y="352" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• AP là thước đo tích phân bao quát toàn bộ dải</tspan></text>
+<text x="535" y="370" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  ngưỡng tin cậy từ khắt khe đến lỏng lẻo.</tspan></text>
+<text x="10" y="446" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">C. Từ AP từng lớp đối tượng đến mAP (Mean Average Precision)</text>
+<rect x="10" y="460" width="115" height="50" rx="4" fill="#FFFFFF" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="67.5" y="476" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">person</text>
+<text x="67.5" y="494" font-size="10" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">AP_1 = 0.7186</text>
+<rect x="135" y="460" width="115" height="50" rx="4" fill="#FFFFFF" stroke="#00796B" stroke-width="1.5"/>
+<text x="192.5" y="476" font-size="11" font-weight="700" fill="#00796B" text-anchor="middle" dominant-baseline="central">safety_clothes</text>
+<text x="192.5" y="494" font-size="10" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">AP_2 = 0.6494</text>
+<rect x="260" y="460" width="115" height="50" rx="4" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="317.5" y="476" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">helmet</text>
+<text x="317.5" y="494" font-size="10" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">AP_3 = 0.6210</text>
+<rect x="385" y="460" width="115" height="50" rx="4" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="1.5"/>
+<text x="442.5" y="476" font-size="11" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">self_clothes</text>
+<text x="442.5" y="494" font-size="10" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">AP_4 = 0.5764</text>
+<rect x="510" y="460" width="115" height="50" rx="4" fill="#FFFFFF" stroke="#C62828" stroke-width="1.5"/>
+<text x="567.5" y="476" font-size="11" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">head</text>
+<text x="567.5" y="494" font-size="10" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">AP_5 = 0.3884</text>
+<polygon points="635,485 650,485 646,480 655,485 646,490 650,485" fill="#444444" stroke="#444444" stroke-width="2"/>
+<rect x="665" y="455" width="225" height="60" rx="5" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.5"/>
+<text x="777.5" y="476" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">mAP (Mean AP)</text>
+<text x="777.5" y="496" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">mAP = (1/C) * Σ AP_c = 0.5908</text>
+<text x="10" y="546" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Y6 tr.8.</text>
+</svg>

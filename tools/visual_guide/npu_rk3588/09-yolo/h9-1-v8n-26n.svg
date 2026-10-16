@@ -1,0 +1,428 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1610" width="1000" height="1610" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1000" height="1610" fill="white"/>
+<rect x="900.0" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="940.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="10" y="20" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n và YOLO26n: nc=5, đầu vào 640x640, đã fuse, đường RKNN (end2end tắt)</text>
+<text x="247" y="50" font-size="19" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">YOLOv8n</text>
+<text x="247" y="72" font-size="12.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">yolov8.yaml, scale n: [0.33, 0.25, 1024]</text>
+<text x="757" y="50" font-size="19" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">YOLO26n</text>
+<text x="757" y="72" font-size="12.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">yolo26.yaml, scale n: [0.50, 0.25, 1024]</text>
+<text x="70" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">i</text>
+<text x="98" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">khối</text>
+<text x="212" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">đầu ra CxHxW</text>
+<text x="360" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">tham số</text>
+<text x="422" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">GFLOPs</text>
+<rect x="62" y="108" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="123.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="98" y="123.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">16x320x320</text>
+<text x="360" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">448</text>
+<text x="422" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.088</text>
+<path d="M247 138 L247 148" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="148" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="163.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">1</text>
+<text x="98" y="163.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">32x160x160</text>
+<text x="360" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">4,640</text>
+<text x="422" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M247 178 L247 188" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="188" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="203.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">2</text>
+<text x="98" y="203.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">32x160x160</text>
+<text x="360" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">7,264</text>
+<text x="422" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.367</text>
+<path d="M247 218 L247 228" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="228" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="243.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">3</text>
+<text x="98" y="243.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x80x80</text>
+<text x="360" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">18,496</text>
+<text x="422" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M247 258 L247 268" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="268" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="283.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">4</text>
+<text x="98" y="283.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x80x80</text>
+<text x="360" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">49,408</text>
+<text x="422" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.629</text>
+<path d="M247 298 L247 308" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="308" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="323.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">5</text>
+<text x="98" y="323.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="360" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">73,856</text>
+<text x="422" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M247 338 L247 348" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="348" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="363.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">6</text>
+<text x="98" y="363.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="360" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">197,120</text>
+<text x="422" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.629</text>
+<path d="M247 378 L247 388" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="388" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="403.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">7</text>
+<text x="98" y="403.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="360" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">295,168</text>
+<text x="422" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M247 418 L247 428" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="428" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="443.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">8</text>
+<text x="98" y="443.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="360" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">459,520</text>
+<text x="422" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.367</text>
+<path d="M247 458 L247 468" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="468" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="483.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">9</text>
+<text x="98" y="483.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">SPPF</text>
+<text x="212" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="360" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">164,224</text>
+<text x="422" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.131</text>
+<path d="M247 498 L247 508" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="508" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="523.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">10</text>
+<text x="98" y="523.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample</text>
+<text x="212" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x40x40</text>
+<text x="360" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 538 L247 548" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="548" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="563.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">11</text>
+<text x="98" y="563.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,6]</text>
+<text x="212" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384x40x40</text>
+<text x="360" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 578 L247 588" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="588" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="603.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">12</text>
+<text x="98" y="603.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="360" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">147,840</text>
+<text x="422" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.472</text>
+<path d="M247 618 L247 628" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="628" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="643.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">13</text>
+<text x="98" y="643.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample</text>
+<text x="212" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x80x80</text>
+<text x="360" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 658 L247 668" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="668" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="683.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">14</text>
+<text x="98" y="683.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,4]</text>
+<text x="212" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">192x80x80</text>
+<text x="360" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 698 L247 708" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="708" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="723.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">15</text>
+<text x="98" y="723.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x80x80</text>
+<text x="360" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">37,056</text>
+<text x="422" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.472</text>
+<path d="M247 738 L247 748" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="748" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="763.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">16</text>
+<text x="98" y="763.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x40x40</text>
+<text x="360" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">36,928</text>
+<text x="422" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.118</text>
+<path d="M247 778 L247 788" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="788" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="803.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">17</text>
+<text x="98" y="803.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,12]</text>
+<text x="212" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">192x40x40</text>
+<text x="360" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 818 L247 828" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="828" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="843.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">18</text>
+<text x="98" y="843.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="360" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">123,264</text>
+<text x="422" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.393</text>
+<path d="M247 858 L247 868" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="868" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="883.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">19</text>
+<text x="98" y="883.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="212" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x20x20</text>
+<text x="360" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">147,584</text>
+<text x="422" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.118</text>
+<path d="M247 898 L247 908" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="908" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="923.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">20</text>
+<text x="98" y="923.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,9]</text>
+<text x="212" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384x20x20</text>
+<text x="360" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="422" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M247 938 L247 948" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="62" y="948" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="963.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">21</text>
+<text x="98" y="963.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f</text>
+<text x="212" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="360" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">492,288</text>
+<text x="422" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.393</text>
+<rect x="62" y="988" width="370" height="30" rx="4" fill="#E8E8E8" stroke="#333333" stroke-width="1.2"/>
+<text x="70" y="1003.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">22</text>
+<text x="98" y="1003.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Detect [15,18,21]</text>
+<text x="212" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">9x8400</text>
+<text x="360" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">751,519</text>
+<text x="422" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">2.965</text>
+<path d="M432 363 L444 363 L444 563 L433 563" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M432 603 L444 603 L444 803 L433 803" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M432 283 L458 283 L458 683 L433 683" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M432 483 L472 483 L472 923 L433 923" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M62 723.0 L48 723.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M62 843.0 L48 843.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M62 963.0 L48 963.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M48 723 L48 1003 L61 1003" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="24" y="108" width="8" height="390" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(16 303.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">BACKBONE</text>
+<rect x="24" y="508" width="8" height="470" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(16 743.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">NECK</text>
+<rect x="24" y="988" width="8" height="30" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(16 1003.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">HEAD</text>
+<text x="580" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">i</text>
+<text x="608" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">khối</text>
+<text x="722" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">đầu ra CxHxW</text>
+<text x="870" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">tham số</text>
+<text x="932" y="94" font-size="12" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">GFLOPs</text>
+<rect x="572" y="108" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="123.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="608" y="123.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">16x320x320</text>
+<text x="870" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">448</text>
+<text x="932" y="123.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.088</text>
+<path d="M757 138 L757 148" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="148" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="163.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">1</text>
+<text x="608" y="163.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">32x160x160</text>
+<text x="870" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">4,640</text>
+<text x="932" y="163.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M757 178 L757 188" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="188" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="203.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">2</text>
+<text x="608" y="203.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x160x160</text>
+<text x="870" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">6,520</text>
+<text x="932" y="203.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.328</text>
+<path d="M757 218 L757 228" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="228" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="243.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">3</text>
+<text x="608" y="243.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x80x80</text>
+<text x="870" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">36,928</text>
+<text x="932" y="243.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.472</text>
+<path d="M757 258 L757 268" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="268" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="283.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">4</text>
+<text x="608" y="283.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x80x80</text>
+<text x="870" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">25,840</text>
+<text x="932" y="283.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.328</text>
+<path d="M757 298 L757 308" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="308" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="323.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">5</text>
+<text x="608" y="323.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="870" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">147,584</text>
+<text x="932" y="323.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.472</text>
+<path d="M757 338 L757 348" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="348" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="363.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">6</text>
+<text x="608" y="363.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="870" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">86,528</text>
+<text x="932" y="363.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.275</text>
+<path d="M757 378 L757 388" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="388" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="403.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">7</text>
+<text x="608" y="403.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="870" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">295,168</text>
+<text x="932" y="403.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.236</text>
+<path d="M757 418 L757 428" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="428" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="443.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">8</text>
+<text x="608" y="443.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="870" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">345,088</text>
+<text x="932" y="443.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.275</text>
+<path d="M757 458 L757 468" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="468" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="483.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">9</text>
+<text x="608" y="483.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">SPPF</text>
+<text x="722" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="870" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">164,224</text>
+<text x="932" y="483.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.131</text>
+<path d="M757 498 L757 508" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="508" width="370" height="30" rx="4" fill="white" stroke="#1E5BB8" stroke-width="2.6"/>
+<text x="580" y="523.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">10</text>
+<text x="608" y="523.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2PSA</text>
+<text x="722" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="870" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">248,320</text>
+<text x="932" y="523.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.259</text>
+<path d="M757 538 L757 548" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="548" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="563.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">11</text>
+<text x="608" y="563.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample</text>
+<text x="722" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x40x40</text>
+<text x="870" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="563.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 578 L757 588" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="588" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="603.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">12</text>
+<text x="608" y="603.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,6]</text>
+<text x="722" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384x40x40</text>
+<text x="870" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="603.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 618 L757 628" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="628" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="643.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">13</text>
+<text x="608" y="643.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="870" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">119,296</text>
+<text x="932" y="643.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.380</text>
+<path d="M757 658 L757 668" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="668" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="683.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">14</text>
+<text x="608" y="683.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample</text>
+<text x="722" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x80x80</text>
+<text x="870" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="683.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 698 L757 708" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="708" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="723.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">15</text>
+<text x="608" y="723.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,4]</text>
+<text x="722" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x80x80</text>
+<text x="870" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="723.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 738 L757 748" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="748" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="763.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">16</text>
+<text x="608" y="763.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x80x80</text>
+<text x="870" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">34,048</text>
+<text x="932" y="763.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.432</text>
+<path d="M757 778 L757 788" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="788" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="803.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">17</text>
+<text x="608" y="803.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64x40x40</text>
+<text x="870" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">36,928</text>
+<text x="932" y="803.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.118</text>
+<path d="M757 818 L757 828" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="828" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="843.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">18</text>
+<text x="608" y="843.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,13]</text>
+<text x="722" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">192x40x40</text>
+<text x="870" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="843.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 858 L757 868" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="868" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="883.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">19</text>
+<text x="608" y="883.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x40x40</text>
+<text x="870" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">94,720</text>
+<text x="932" y="883.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.301</text>
+<path d="M757 898 L757 908" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="908" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="923.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">20</text>
+<text x="608" y="923.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="722" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128x20x20</text>
+<text x="870" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">147,584</text>
+<text x="932" y="923.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.118</text>
+<path d="M757 938 L757 948" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="948" width="370" height="30" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="963.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">21</text>
+<text x="608" y="963.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat [-1,10]</text>
+<text x="722" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384x20x20</text>
+<text x="870" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<text x="932" y="963.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.000</text>
+<path d="M757 978 L757 988" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="572" y="988" width="370" height="30" rx="4" fill="#F5F5F5" stroke="#1E5BB8" stroke-width="2.6"/>
+<text x="580" y="1003.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">22</text>
+<text x="608" y="1003.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2</text>
+<text x="722" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256x20x20</text>
+<text x="870" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">461,504</text>
+<text x="932" y="1003.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.429</text>
+<rect x="572" y="1028" width="370" height="30" rx="4" fill="#E8E8E8" stroke="#333333" stroke-width="1.2"/>
+<text x="580" y="1043.0" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">23</text>
+<text x="608" y="1043.0" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Detect [16,19,22]</text>
+<text x="722" y="1043.0" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">9x8400</text>
+<text x="870" y="1043.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">120,443</text>
+<text x="932" y="1043.0" font-size="12" font-weight="400" fill="#222222" text-anchor="end" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.435</text>
+<path d="M942 363 L954 363 L954 603 L943 603" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M942 643 L954 643 L954 843 L943 843" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M942 283 L968 283 L968 723 L943 723" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M942 523 L982 523 L982 963 L943 963" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M572 763.0 L558 763.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M572 883.0 L558 883.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M572 1003.0 L558 1003.0" stroke="#1E5BB8" stroke-width="1.6" fill="none"/>
+<path d="M558 763 L558 1043 L571 1043" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="534" y="108" width="8" height="430" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(526 323.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">BACKBONE</text>
+<rect x="534" y="548" width="8" height="470" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(526 783.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">NECK</text>
+<rect x="534" y="1028" width="8" height="30" fill="#DDDDDD" stroke="#888888"/>
+<text transform="translate(526 1043.0) rotate(-90)" font-size="12.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">HEAD</text>
+<text x="62" y="1040" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tổng: 3,006,623 tham số, 8.087 GFLOPs</text>
+<text x="572" y="1080" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tổng: 2,375,811 tham số, 5.314 GFLOPs</text>
+<text x="10" y="1108" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh</text>
+<rect x="10" y="1122" width="980" height="28" fill="#E8E8E8"/>
+<text x="18" y="1136.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Hạng mục</text>
+<text x="308" y="1136.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">YOLOv8n</text>
+<text x="628" y="1136.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">YOLO26n</text>
+<path d="M10 1150 L990 1150" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1163.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Khối backbone</tspan></text>
+<text x="308" y="1163.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv, C2f, SPPF</tspan></text>
+<text x="628" y="1163.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv, C3k2, SPPF, C2PSA</tspan></text>
+<path d="M10 1176 L990 1176" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1189.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Khối neck</tspan></text>
+<text x="308" y="1189.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Upsample, Concat, C2f, Conv</tspan></text>
+<text x="628" y="1189.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Upsample, Concat, C3k2, Conv (lớp 22: attn=True)</tspan></text>
+<path d="M10 1202 L990 1202" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1215.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đầu Detect (yaml)</tspan></text>
+<text x="308" y="1215.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>reg_max 16 (có DFL; mặc định của tasks.py)</tspan></text>
+<text x="628" y="1215.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>reg_max 1 (không DFL), end2end: True</tspan></text>
+<path d="M10 1228 L990 1228" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1241.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đầu ra khi end2end tắt</tspan></text>
+<text x="308" y="1241.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[1, 9, 8400] = 4 hộp + 5 lớp</tspan></text>
+<text x="628" y="1241.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[1, 9, 8400] = 4 hộp + 5 lớp</tspan></text>
+<path d="M10 1254 L990 1254" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1267.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tham số của lớp Detect</tspan></text>
+<text x="308" y="1267.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>751,519 (25.0% tổng)</tspan></text>
+<text x="628" y="1267.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>120,443 (5.1% tổng)</tspan></text>
+<path d="M10 1280 L990 1280" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1293.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>GFLOPs của lớp Detect</tspan></text>
+<text x="308" y="1293.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2.965 (36.7% tổng)</tspan></text>
+<text x="628" y="1293.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.435 (8.2% tổng)</tspan></text>
+<path d="M10 1306 L990 1306" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1319.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv trong ONNX: 1x1 / 3x3 s1 /</tspan></text>
+<text x="18" y="1336.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3x3 s2 / depthwise 3x3</tspan></text>
+<text x="308" y="1327.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>25/32/7/0</tspan></text>
+<text x="628" y="1327.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>55/32/7/8</tspan></text>
+<path d="M10 1349 L990 1349" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1362.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Khối có attention (MatMul, Softmax)</tspan></text>
+<text x="308" y="1362.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không</tspan></text>
+<text x="628" y="1362.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>lớp 10 (C2PSA) và lớp 22 (C3k2, attn=True)</tspan></text>
+<rect x="10" y="1122" width="980" height="253" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M300 1122 L300 1375" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M620 1122 L620 1375" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1387" width="980" height="71" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="1403.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Phép tính của bộ hình</tspan><tspan>: phần trăm của Detect = Detect / tổng, từ hai cột của bảng lớp.</tspan></text>
+<text x="22" y="1422.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tham số và GFLOPs: layer_table.py (FlopCounterMode, 2 FLOP mỗi MAC), model dựng từ yaml, trọng số ngẫu nhiên.</tspan></text>
+<text x="22" y="1441.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Ranh giới BACKBONE / NECK / HEAD theo hai danh sách backbone: và head: của yaml; Detect là hàng cuối của head:.</tspan></text>
+<rect x="10" y="1470" width="980" height="100" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1487" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<path d="M26 1510 L66 1510" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="78" y="1510" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dòng dữ liệu theo thứ tự lớp (from = -1)</tspan></text>
+<path d="M26 1532 L66 1532" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="78" y="1532" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>đường nối ngoài thứ tự: cột from của yaml (Concat lấy lớp sớm hơn; Detect lấy ba lớp neck)</tspan></text>
+<rect x="26" y="1546" width="38" height="16" rx="2" fill="#F5F5F5" stroke="#BBBBBB"/>
+<text x="78" y="1554" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>khối CSP (C2f hoặc C3k2); khung xanh đậm: khối có attention</tspan></text>
+<text x="10" y="1596" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: ULT cfg/models/v8/yolov8.yaml, cfg/models/26/yolo26.yaml; LOG 2026-10-10_yolo-arch (table_v8n.md, table_26n.md); data/rknn_path_onnx.json.</text>
+</svg>

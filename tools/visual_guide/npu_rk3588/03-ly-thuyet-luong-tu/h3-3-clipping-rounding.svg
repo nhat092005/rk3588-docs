@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1141" width="900" height="1141" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1141" fill="white"/>
+<rect x="808" y="8" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="844.6" y="19.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="20" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A. Hai loại sai số của một quantizer và vì sao range quyết định đánh đổi</text>
+<text x="10" y="48" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(a) Sai số theo độ rộng range [q_min, q_max]</text>
+<path d="M70 250 L430 250" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M70 250 L70 70" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="76" y="68" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">sai số</text>
+<text x="240.0" y="270" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">độ rộng range (bước s tăng theo range)</text>
+<path d="M78.0 88.5 L82.2 99.3 L86.3 109.3 L90.5 118.7 L94.6 127.5 L98.8 135.7 L102.9 143.3 L107.0 150.4 L111.2 157.1 L115.3 163.3 L119.5 169.1 L123.7 174.5 L127.8 179.6 L131.9 184.3 L136.1 188.7 L140.2 192.8 L144.4 196.7 L148.6 200.3 L152.7 203.6 L156.8 206.7 L161.0 209.7 L165.2 212.4 L169.3 214.9 L173.4 217.3 L177.6 219.5 L181.8 221.6 L185.9 223.5 L190.1 225.3 L194.2 227.0 L198.3 228.6 L202.5 230.0 L206.7 231.4 L210.8 232.7 L214.9 233.9 L219.1 235.0 L223.2 236.0 L227.4 237.0 L231.6 237.9 L235.7 238.8 L239.8 239.6 L244.0 240.3 L248.1 241.0 L252.3 241.6 L256.4 242.2 L260.6 242.8 L264.8 243.3 L268.9 243.8 L273.1 244.3 L277.2 244.7 L281.4 245.1 L285.5 245.5 L289.6 245.8 L293.8 246.1 L297.9 246.4 L302.1 246.7 L306.2 247.0 L310.4 247.2 L314.6 247.4 L318.7 247.7 L322.9 247.9 L327.0 248.0 L331.1 248.2 L335.3 248.4 L339.4 248.5 L343.6 248.7 L347.8 248.8 L351.9 248.9 L356.1 249.0 L360.2 249.2 L364.4 249.3 L368.5 249.3 L372.6 249.4 L376.8 249.5 L380.9 249.6 L385.1 249.7 L389.2 249.7 L393.4 249.8 L397.6 249.8 L401.7 249.9 L405.9 250.0 L410.0 250.0" fill="none" stroke="#C62828" stroke-width="2.4"/>
+<path d="M78.0 250.0 L82.2 248.3 L86.3 246.6 L90.5 244.9 L94.6 243.2 L98.8 241.5 L102.9 239.8 L107.0 238.1 L111.2 236.4 L115.3 234.7 L119.5 233.0 L123.7 231.3 L127.8 229.6 L131.9 227.9 L136.1 226.2 L140.2 224.5 L144.4 222.8 L148.6 221.1 L152.7 219.4 L156.8 217.7 L161.0 216.0 L165.2 214.3 L169.3 212.6 L173.4 210.9 L177.6 209.2 L181.8 207.5 L185.9 205.8 L190.1 204.1 L194.2 202.4 L198.3 200.7 L202.5 199.0 L206.7 197.3 L210.8 195.6 L214.9 193.9 L219.1 192.2 L223.2 190.5 L227.4 188.8 L231.6 187.1 L235.7 185.4 L239.8 183.7 L244.0 182.0 L248.1 180.3 L252.3 178.6 L256.4 176.9 L260.6 175.2 L264.8 173.5 L268.9 171.8 L273.1 170.1 L277.2 168.4 L281.4 166.7 L285.5 165.0 L289.6 163.3 L293.8 161.6 L297.9 159.9 L302.1 158.2 L306.2 156.5 L310.4 154.8 L314.6 153.1 L318.7 151.4 L322.9 149.7 L327.0 148.0 L331.1 146.3 L335.3 144.6 L339.4 142.9 L343.6 141.2 L347.8 139.5 L351.9 137.8 L356.1 136.1 L360.2 134.4 L364.4 132.7 L368.5 131.0 L372.6 129.3 L376.8 127.6 L380.9 125.9 L385.1 124.2 L389.2 122.5 L393.4 120.8 L397.6 119.1 L401.7 117.4 L405.9 115.7 L410.0 114.0" fill="none" stroke="#1E5BB8" stroke-width="2.4"/>
+<path d="M78.0 88.5 L82.2 97.6 L86.3 105.9 L90.5 113.6 L94.6 120.7 L98.8 127.2 L102.9 133.1 L107.0 138.5 L111.2 143.5 L115.3 148.0 L119.5 152.1 L123.7 155.8 L127.8 159.2 L131.9 162.2 L136.1 164.9 L140.2 167.3 L144.4 169.5 L148.6 171.4 L152.7 173.0 L156.8 174.4 L161.0 175.7 L165.2 176.7 L169.3 177.5 L173.4 178.2 L177.6 178.7 L181.8 179.1 L185.9 179.3 L190.1 179.4 L194.2 179.4 L198.3 179.3 L202.5 179.0 L206.7 178.7 L210.8 178.3 L214.9 177.8 L219.1 177.2 L223.2 176.5 L227.4 175.8 L231.6 175.0 L235.7 174.2 L239.8 173.3 L244.0 172.3 L248.1 171.3 L252.3 170.2 L256.4 169.1 L260.6 168.0 L264.8 166.8 L268.9 165.6 L273.1 164.4 L277.2 163.1 L281.4 161.8 L285.5 160.5 L289.6 159.1 L293.8 157.7 L297.9 156.3 L302.1 154.9 L306.2 153.5 L310.4 152.0 L314.6 150.5 L318.7 149.1 L322.9 147.6 L327.0 146.0 L331.1 144.5 L335.3 143.0 L339.4 141.4 L343.6 139.9 L347.8 138.3 L351.9 136.7 L356.1 135.1 L360.2 133.6 L364.4 132.0 L368.5 130.3 L372.6 128.7 L376.8 127.1 L380.9 125.5 L385.1 123.9 L389.2 122.2 L393.4 120.6 L397.6 118.9 L401.7 117.3 L405.9 115.7 L410.0 114.0" fill="none" stroke="#222222" stroke-width="1.6" stroke-dasharray="6 4"/>
+<path d="M191.7 250 L191.7 74" stroke="#2E7D32" stroke-width="1.4" stroke-dasharray="3 3"/>
+<path d="M410.0 250 L410.0 74" stroke="#777777" stroke-width="1.4" stroke-dasharray="3 3"/>
+<text x="197.71" y="78" font-size="11.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">MSE chọn range ở đây</text>
+<text x="404.0" y="78" font-size="11.5" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">min-max</text>
+<text x="90" y="100" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">sai số clipping giảm</text>
+<text x="268" y="205" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">sai số làm tròn tăng (theo s)</text>
+<text x="190" y="205" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">tổng (suy ra)</text>
+<text x="10" y="296" font-size="12" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central" font-style="italic">dữ liệu minh họa, không phải số đo</text>
+<text x="460" y="48" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(b) Phân bố có outlier: cùng số mức, range khác nhau</text>
+<path d="M465 190 L890 190" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M483.7 189.9 L486.4 189.9 L489.1 189.8 L491.9 189.8 L494.6 189.7 L497.3 189.6 L500.1 189.5 L502.8 189.3 L505.5 189.1 L508.3 188.9 L511.0 188.6 L513.7 188.2 L516.5 187.7 L519.2 187.1 L521.9 186.4 L524.7 185.6 L527.4 184.6 L530.1 183.4 L532.9 182.0 L535.6 180.4 L538.3 178.6 L541.1 176.5 L543.8 174.1 L546.5 171.4 L549.3 168.4 L552.0 165.1 L554.7 161.4 L557.5 157.5 L560.2 153.3 L562.9 148.9 L565.7 144.2 L568.4 139.4 L571.1 134.4 L573.9 129.3 L576.6 124.3 L579.3 119.3 L582.1 114.5 L584.8 109.9 L587.5 105.6 L590.3 101.8 L593.0 98.3 L595.7 95.4 L598.5 93.1 L601.2 91.4 L603.9 90.3 L606.7 90.0 L609.4 90.3 L612.1 91.4 L614.9 93.1 L617.6 95.4 L620.3 98.3 L623.1 101.8 L625.8 105.6 L628.5 109.9 L631.3 114.5 L634.0 119.3 L636.7 124.3 L639.5 129.3 L642.2 134.4 L644.9 139.4 L647.7 144.2 L650.4 148.9 L653.1 153.3 L655.9 157.5 L658.6 161.4 L661.3 165.1 L664.1 168.4 L666.8 171.4 L669.5 174.1 L672.3 176.5 L675.0 178.6 L677.7 180.4 L680.5 182.0 L683.2 183.4 L685.9 184.6 L688.7 185.6 L691.4 186.4 L694.1 187.1 L696.9 187.7 L699.6 188.2 L702.3 188.6 L705.1 188.9 L707.8 189.1 L710.5 189.3 L713.3 189.5 L716.0 189.6 L718.7 189.7 L721.5 189.8 L724.2 189.8 L726.9 189.9 L729.7 189.9 L729.7 190 L483.7 190 Z" fill="#C9D9F2" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="850.7" y="164" width="4" height="26" fill="#1E5BB8"/>
+<text x="852.6666666666667" y="152" font-size="12" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">outlier</text>
+<text x="606.6666666666666" y="82" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">đa số giá trị</text>
+<path d="M508.3 216 L852.7 216" stroke="#777777" stroke-width="1.6"/>
+<path d="M508.26666666666665 210 L508.26666666666665 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M529.7916666666666 210 L529.7916666666666 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M551.3166666666666 210 L551.3166666666666 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M572.8416666666667 210 L572.8416666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M594.3666666666667 210 L594.3666666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M615.8916666666667 210 L615.8916666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M637.4166666666667 210 L637.4166666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M658.9416666666667 210 L658.9416666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M680.4666666666667 210 L680.4666666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M701.9916666666667 210 L701.9916666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M723.5166666666667 210 L723.5166666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M745.0416666666667 210 L745.0416666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M766.5666666666667 210 L766.5666666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M788.0916666666667 210 L788.0916666666667 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M809.6166666666668 210 L809.6166666666668 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M831.1416666666668 210 L831.1416666666668 222" stroke="#777777" stroke-width="1.4"/>
+<path d="M852.6666666666667 210 L852.6666666666667 222" stroke="#777777" stroke-width="1.4"/>
+<text x="470" y="238" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">min-max: range phủ cả outlier, bước s lớn</text>
+<path d="M508.3 258 L710.5 258" stroke="#2E7D32" stroke-width="1.6"/>
+<path d="M508.26666666666665 252 L508.26666666666665 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M520.9083333333333 252 L520.9083333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M533.55 252 L533.55 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M546.1916666666666 252 L546.1916666666666 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M558.8333333333333 252 L558.8333333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M571.475 252 L571.475 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M584.1166666666667 252 L584.1166666666667 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M596.7583333333333 252 L596.7583333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M609.4 252 L609.4 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M622.0416666666666 252 L622.0416666666666 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M634.6833333333333 252 L634.6833333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M647.325 252 L647.325 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M659.9666666666667 252 L659.9666666666667 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M672.6083333333333 252 L672.6083333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M685.25 252 L685.25 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M697.8916666666667 252 L697.8916666666667 264" stroke="#2E7D32" stroke-width="1.4"/>
+<path d="M710.5333333333333 252 L710.5333333333333 264" stroke="#2E7D32" stroke-width="1.4"/>
+<text x="470" y="280" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">MSE: range hẹp hơn, outlier bị clip, bước s nhỏ</text>
+<text x="460" y="298" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central" font-style="italic">dữ liệu minh họa, không phải số đo; số mức bằng nhau vì cùng bit-width (suy ra của bộ hình)</text>
+<rect x="10" y="312" width="880" height="52" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="329.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Hình dạng hai đường cong (a) theo NAGEL tr.4: mở rộng range bằng cách tăng s giảm sai số clipping nhưng tăng sai số làm tròn (nằm trong [-s/2, s/2]).</tspan></text>
+<text x="22" y="347.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Min-max: không clipping error, nhưng outlier mạnh gây sai số làm tròn quá mức (NAGEL tr.9). MSE (Eq. 16) tối thiểu hóa sai số giữa tensor gốc và đã lượng tử hóa.</tspan></text>
+<text x="10" y="386" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">B. Các cách chọn range, theo tên trong từng nguồn</text>
+<rect x="10" y="400" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="414.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phương pháp</text>
+<text x="130" y="414.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Công thức hoặc ý chính</text>
+<text x="460" y="414.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nguồn</text>
+<text x="610" y="414.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều nguồn nói</text>
+<path d="M10 428 L890 428" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="449.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Min-max</tspan></text>
+<text x="130" y="449.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>q_min = min V; q_max = max V (Eq. 14, 15)</tspan></text>
+<text x="460" y="449.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL tr.9; QYOLO tr.6</tspan></text>
+<text x="610" y="441.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không có clipping error;</tspan></text>
+<text x="610" y="458.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhạy với outlier</tspan></text>
+<path d="M10 471 L890 471" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="492.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MSE</tspan></text>
+<text x="130" y="484.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>argmin ||V - V^(q_min, q_max)||_F^2 (Eq. 16)</tspan></text>
+<text x="130" y="501.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>grid search, golden section hoặc giải tích</tspan></text>
+<text x="460" y="492.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL tr.9; QYOLO tr.6</tspan></text>
+<text x="610" y="484.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>giảm ảnh hưởng của outlier lớn</tspan></text>
+<text x="610" y="501.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(QYOLO Eq. 7 cùng ý)</tspan></text>
+<path d="M10 514 L890 514" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="535.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cross-entropy</tspan></text>
+<text x="130" y="527.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>argmin H(ψ(v), ψ(v^)) (Eq. 17)</tspan></text>
+<text x="130" y="544.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ψ = softmax, v = logits lớp cuối</tspan></text>
+<text x="460" y="535.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL tr.10</tspan></text>
+<text x="610" y="527.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>giữ thứ tự giá trị lớn nhất;</tspan></text>
+<text x="610" y="544.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MSE coi mọi giá trị như nhau</tspan></text>
+<path d="M10 557 L890 557" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="578.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>BN-based</tspan></text>
+<text x="130" y="570.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>q_min = min(β - α γ),</tspan></text>
+<text x="130" y="587.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>q_max = max(β + α γ), α = 6 (Eq. 18, 19)</tspan></text>
+<text x="460" y="578.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL tr.10, 16</tspan></text>
+<text x="610" y="570.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dùng tham số BN; pipeline</tspan></text>
+<text x="610" y="587.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>data-free (tr.16)</tspan></text>
+<path d="M10 600 L890 600" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="621.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Percentile</tspan></text>
+<text x="130" y="613.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dùng phân vị thay cho min/max</tspan></text>
+<text x="130" y="630.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(giá trị lớn/nhỏ thứ i làm β/α)</tspan></text>
+<text x="460" y="621.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>GHOLAMI tr.6</tspan></text>
+<text x="610" y="613.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tránh outlier làm tăng range</tspan></text>
+<text x="610" y="630.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>và giảm độ phân giải</tspan></text>
+<path d="M10 643 L890 643" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="664.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>KL divergence</tspan></text>
+<text x="130" y="656.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chọn α, β để cực tiểu KL divergence</tspan></text>
+<text x="130" y="673.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>giữa giá trị thực và đã lượng tử hóa</tspan></text>
+<text x="460" y="664.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>GHOLAMI tr.6</tspan></text>
+<text x="610" y="656.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nguồn gọi là &quot;information loss&quot;;</tspan></text>
+<text x="610" y="673.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NAGEL không nêu KL (unknown)</tspan></text>
+<path d="M10 686 L890 686" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="707.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UH (Q-YOLO)</tspan></text>
+<text x="130" y="699.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>l_x = -0.2785 cố định; u_x = argmin MSE(x, Q)</tspan></text>
+<text x="130" y="716.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>histogram 2048 bin, asymmetric</tspan></text>
+<text x="460" y="707.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>QYOLO tr.7</tspan></text>
+<text x="610" y="699.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cho activation của YOLO trong bài</tspan></text>
+<text x="610" y="716.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(YOLOv5, YOLOv7)</tspan></text>
+<rect x="10" y="400" width="880" height="329" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M122 400 L122 729" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M452 400 L452 729" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M602 400 L602 729" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="753" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C. Số đo của NAGEL: min-max so với MSE (ImageNet top-1 %, trung bình 5 lần, phân loại ảnh, không phải detection)</text>
+<text x="10" y="777" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Table 1: weight symmetric, per-tensor, activation FP32</text>
+<text x="10" y="794" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(FP32: ResNet18 69.68, MobileNetV2 71.72; R18 = ResNet18)</text>
+<rect x="10" y="805" width="386" height="28" fill="#E8E8E8"/>
+<text x="18" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Weight</text>
+<text x="118" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">R18 W8</text>
+<text x="180" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">R18 W4</text>
+<text x="242" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">MobileNetV2 W8</text>
+<text x="342" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">W4</text>
+<path d="M10 833 L396 833" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Min-Max</tspan></text>
+<text x="118" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.57</tspan></text>
+<text x="180" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.12</tspan></text>
+<text x="242" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>71.16</tspan></text>
+<text x="342" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.59</tspan></text>
+<path d="M10 859 L396 859" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MSE</tspan></text>
+<text x="118" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.45</tspan></text>
+<text x="180" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>18.82</tspan></text>
+<text x="242" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>71.15</tspan></text>
+<text x="342" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>13.77</tspan></text>
+<rect x="10" y="805" width="386" height="80" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M110 805 L110 885" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M172 805 L172 885" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M234 805 L234 885" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M334 805 L334 885" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="450" y="777" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Table 2: activation asymmetric, weight FP32</text>
+<text x="450" y="794" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(MSE + Xent: cross-entropy cho lớp cuối)</text>
+<rect x="450" y="805" width="398" height="28" fill="#E8E8E8"/>
+<text x="458" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Activation</text>
+<text x="570" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">R18 A8</text>
+<text x="632" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">R18 A4</text>
+<text x="694" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">MobileNetV2 A8</text>
+<text x="794" y="819.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A4</text>
+<path d="M450 833 L848 833" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="458" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Min-Max</tspan></text>
+<text x="570" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.60</tspan></text>
+<text x="632" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>18.82</tspan></text>
+<text x="694" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>70.96</tspan></text>
+<text x="794" y="846.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.53</tspan></text>
+<path d="M450 859 L848 859" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="458" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MSE</tspan></text>
+<text x="570" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.59</tspan></text>
+<text x="632" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>31.40</tspan></text>
+<text x="694" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>71.35</tspan></text>
+<text x="794" y="872.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>13.57</tspan></text>
+<path d="M450 885 L848 885" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="458" y="898.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MSE + Xent</tspan></text>
+<text x="570" y="898.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.60</tspan></text>
+<text x="632" y="898.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>59.07</tspan></text>
+<text x="694" y="898.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>71.36</tspan></text>
+<text x="794" y="898.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>30.94</tspan></text>
+<path d="M450 911 L848 911" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="458" y="924.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>BN (α = 6)</tspan></text>
+<text x="570" y="924.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>69.54</tspan></text>
+<text x="632" y="924.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>23.83</tspan></text>
+<text x="694" y="924.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>71.32</tspan></text>
+<text x="794" y="924.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.66</tspan></text>
+<rect x="450" y="805" width="398" height="132" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M562 805 L562 937" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M624 805 L624 937" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M686 805 L686 937" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M786 805 L786 937" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="899" font-size="11" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">per-tensor: hai hàng bài không ghi (Per-channel); suy ra của bộ hình.</text>
+<text x="10" y="961" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">D. Dữ liệu calibration và liên hệ RKNN</text>
+<rect x="10" y="975" width="430" height="124" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="992.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Dữ liệu (T2)</tspan></text>
+<text x="22" y="1010.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Weight thường không cần dữ liệu calibration; activation thường</tspan></text>
+<text x="22" y="1028.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cần vài batch (NAGEL tr.9). AdaRound dùng dữ liệu cho weight (tr.16).</tspan></text>
+<text x="22" y="1046.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>500 đến 1000 ảnh không nhãn: khuyến nghị của NAGEL tr.16;</tspan></text>
+<text x="22" y="1064.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Q-YOLO dùng 1500 ảnh COCO train2017 (tr.8). Đều là điều kiện</tspan></text>
+<text x="22" y="1082.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thí nghiệm, không phải quy tắc chung.</tspan></text>
+<rect x="460" y="975" width="430" height="106" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1"/>
+<text x="472" y="992.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Liên hệ RKNN (T1)</tspan></text>
+<text x="472" y="1010.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232 tr.120, 121 có ba algorithm: Normal, KL-Divergence, MMSE.</tspan></text>
+<text x="472" y="1028.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Normal &quot;does not introduce truncation error&quot; nhưng nhạy outlier</tspan></text>
+<text x="472" y="1046.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(cùng ý min-max); MMSE giảm ảnh hưởng outlier (cùng ý MSE).</tspan></text>
+<text x="472" y="1064.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tương ứng tên là suy ra của bộ hình. Xem Hình 4.1.</tspan></text>
+<text x="10" y="1127" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: NAGEL tr.4, 9, 10, 16; GHOLAMI tr.6; QYOLO tr.4, 6, 7, 8; UG232 tr.120, 121. Đường cong (a) và phân bố (b) là minh họa.</text>
+</svg>

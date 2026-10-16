@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 526" width="900" height="526" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="526" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="24" font-size="16" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Chỉ số IoU và Phân loại Kết quả Dự đoán (TP, FP, FN)</text>
+<text x="10" y="56" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">A. Bản chất hình học của IoU (Intersection over Union)</text>
+<line x1="20" y1="80" x2="45" y2="80" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<text x="52" y="80" font-size="11.5" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Nhãn thực tế (Ground Truth B_gt)</text>
+<line x1="280" y1="80" x2="305" y2="80" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="312" y="80" font-size="11.5" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Dự đoán mô hình (Prediction B_p)</text>
+<rect x="540" y="72" width="18" height="16" rx="3" fill="#C8E6C9" stroke="none" stroke-width="1.2"/>
+<text x="566" y="80" font-size="11.5" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Phần giao nhau (Intersection ∩)</text>
+<rect x="10" y="96" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="147.5" y="112" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">1. Trùng khít cao (Rất tốt)</text>
+<rect x="56" y="138" width="89" height="69" fill="#C8E6C9" opacity="0.85"/>
+<rect x="50" y="132" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="56" y="138" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="147.5" y="243" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.88</text>
+<text x="147.5" y="259" font-size="11" font-weight="600" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Đạt chuẩn mọi mốc IoU</text>
+<rect x="310" y="96" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="447.5" y="112" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">2. Trùng khớp vừa (Ngưỡng cơ bản)</text>
+<rect x="378" y="156" width="67" height="51" fill="#C8E6C9" opacity="0.85"/>
+<rect x="350" y="132" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="378" y="156" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="447.5" y="243" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.52</text>
+<text x="447.5" y="259" font-size="11" font-weight="600" fill="#E65100" text-anchor="middle" dominant-baseline="central">Đạt mAP50, trượt mAP75 trở lên</text>
+<rect x="610" y="96" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="747.5" y="112" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3. Lệch vị trí (Trượt ngưỡng)</text>
+<rect x="705" y="156" width="40" height="51" fill="#C8E6C9" opacity="0.85"/>
+<rect x="650" y="132" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="705" y="156" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="747.5" y="243" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.16</text>
+<text x="747.5" y="259" font-size="11" font-weight="600" fill="#C62828" text-anchor="middle" dominant-baseline="central">Phán đoán sai vị trí (FP)</text>
+<rect x="10" y="280" width="880" height="36" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.2"/>
+<text x="20" y="291" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Công thức tính IoU: </tspan><tspan font-weight="700">IoU = Diện tích vùng giao (B_p ∩ B_gt) / Diện tích vùng hợp (B_p ∪ B_gt)</tspan><tspan>  |  Miền giá trị: [0.0 (không chạm) đến 1.0 (trùng khít hoàn toàn)]</tspan></text>
+<text x="10" y="328" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">B. Phân loại kết quả dự đoán (TP, FP, FN) trong bài toán đồ bảo hộ lao động</text>
+<rect x="10" y="340" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="354.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ký hiệu</text>
+<text x="148" y="354.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tên gọi</text>
+<text x="308" y="354.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tình huống thực tế trên ảnh</text>
+<text x="598" y="354.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ý nghĩa trong giám sát an toàn</text>
+<path d="M10 368 L890 368" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="380.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>True Positive (TP)</tspan></text>
+<text x="148" y="380.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Dương tính thật (Đúng)</tspan></text>
+<text x="308" y="380.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Dự đoán có mũ bảo hộ và IoU ≥ ngưỡng quy định</tspan></text>
+<text x="598" y="380.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Phát hiện chính xác trang bị bảo hộ.</tspan></text>
+<path d="M10 392 L890 392" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="404.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>False Positive (FP)</tspan></text>
+<text x="148" y="404.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Báo động giả (Đoán nhầm)</tspan></text>
+<text x="308" y="404.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Dự đoán có mũ nhưng thực tế không có, hoặc IoU &lt; ngưỡng</tspan></text>
+<text x="598" y="404.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Gây phiền toái vì báo sai người không vi phạm.</tspan></text>
+<path d="M10 416 L890 416" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>False Negative (FN)</tspan></text>
+<text x="148" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Bỏ sót vi phạm</tspan></text>
+<text x="308" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Thực tế có người/mũ nhưng mô hình không tạo ra hộp nào</tspan></text>
+<text x="598" y="428.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cực kỳ nguy hiểm: để lọt vi phạm an toàn công trường.</tspan></text>
+<rect x="10" y="340" width="880" height="100" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M140 340 L140 440" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M300 340 L300 440" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M590 340 L590 440" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="452" width="880" height="36" rx="4" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.2"/>
+<text x="20" y="463" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Precision (Độ chuẩn xác): </tspan><tspan font-weight="700">P = TP / (TP + FP)</tspan><tspan> (Trong các hộp báo có mũ, bao nhiêu % là đúng?)</tspan><tspan>  |  </tspan><tspan font-weight="700">Recall (Độ bao phủ): </tspan><tspan font-weight="700">R = TP / (TP + FN)</tspan><tspan> (Bắt được bao nhiêu % tổng số mũ ngoài thực tế?)</tspan></text>
+<text x="10" y="512" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; tmp/02_decisions/2026-10-11_model-selection-rule.md.</text>
+</svg>

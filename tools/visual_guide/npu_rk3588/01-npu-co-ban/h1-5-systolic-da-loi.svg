@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1510" width="900" height="1510" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1510" fill="white"/>
+<rect x="808" y="8" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="844.6" y="19.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="50" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A. Systolic: dữ liệu chảy qua mảng (TPU Fig. 4)</text>
+<rect x="10" y="66" width="430" height="440" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/>
+<rect x="100" y="132" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="126.0" y="151.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="174" y="132" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="200.0" y="151.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="248" y="132" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="274.0" y="151.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="322" y="132" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="348.0" y="151.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<path d="M60 151 L98 151" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M153 151 L173 151" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M227 151 L247 151" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M301 151 L321 151" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="100" y="192" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="126.0" y="211.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="174" y="192" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="200.0" y="211.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="248" y="192" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="274.0" y="211.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="322" y="192" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="348.0" y="211.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<path d="M60 211 L98 211" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M153 211 L173 211" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M227 211 L247 211" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M301 211 L321 211" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="100" y="252" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="126.0" y="271.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="174" y="252" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="200.0" y="271.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="248" y="252" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="274.0" y="271.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="322" y="252" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="348.0" y="271.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<path d="M60 271 L98 271" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M153 271 L173 271" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M227 271 L247 271" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M301 271 L321 271" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="100" y="312" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="126.0" y="331.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="174" y="312" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="200.0" y="331.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="248" y="312" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="274.0" y="331.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="322" y="312" width="52" height="38" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="348.0" y="331.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<path d="M60 331 L98 331" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M153 331 L173 331" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M227 331 L247 331" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M301 331 L321 331" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M126 104 L126 130" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<path d="M126 171 L126 191" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M126 231 L126 251" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M126 291 L126 311" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M126 351 L126 374" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="98.0" y="376" width="56" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="126.0" y="389.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Acc +</text>
+<path d="M200 104 L200 130" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<path d="M200 171 L200 191" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M200 231 L200 251" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M200 291 L200 311" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M200 351 L200 374" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="172.0" y="376" width="56" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="200.0" y="389.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Acc +</text>
+<path d="M274 104 L274 130" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<path d="M274 171 L274 191" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M274 231 L274 251" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M274 291 L274 311" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M274 351 L274 374" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="246.0" y="376" width="56" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="274.0" y="389.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Acc +</text>
+<path d="M348 104 L348 130" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<path d="M348 171 L348 191" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M348 231 L348 251" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M348 291 L348 311" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M348 351 L348 374" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="320.0" y="376" width="56" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="348.0" y="389.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Acc +</text>
+<text x="16" y="137.0" font-size="11" font-weight="400" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">dữ liệu vào</text>
+<text x="382" y="92" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">weight nạp từ trên (preload)</text>
+<text x="382" y="412" font-size="11.5" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">partial sum chảy xuống accumulator</text>
+<path d="M376 128 L92 352" stroke="#C62828" stroke-width="1.4" stroke-dasharray="6 4" fill="none"/>
+<text x="16" y="322" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">wavefront</text>
+<text x="16" y="338" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">chéo</text>
+<text x="24" y="486" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Hình vẽ lại: thu gọn còn 4x4 ô (TPU: 256x256).</text>
+<text x="24" y="468" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Chiều mũi tên theo Fig. 4: dữ liệu từ trái, weight từ trên, partial sum đi xuống.</text>
+<rect x="455" y="66" width="435" height="184" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="469" y="88" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Mục đích (TPU tr.4)</tspan></text>
+<text x="469" y="108" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dùng systolic execution để tiết kiệm năng lượng bằng</tspan></text>
+<text x="469" y="128" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cách giảm đọc và ghi Unified Buffer.</tspan></text>
+<text x="469" y="148" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Dữ liệu từ nhiều hướng đến các ô đều đặn, rồi được kết hợp;</tspan></text>
+<text x="469" y="168" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>một phép nhân-cộng 256 phần tử đi qua ma trận như</tspan></text>
+<text x="469" y="188" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>một diagonal wavefront.</tspan></text>
+<text x="469" y="208" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Weight nạp trước; matrix unit giữ một tile weight 64 KiB</tspan></text>
+<text x="469" y="228" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cộng một tile cho double-buffering (tr.3).</tspan></text>
+<text x="455" y="268" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Systolic và stationary: hai khái niệm khác nhau</text>
+<rect x="455" y="280" width="435" height="28" fill="#E8E8E8"/>
+<text x="463" y="294.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bài</text>
+<text x="523" y="294.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều bài nói</text>
+<path d="M455 308 L890 308" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="327.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>EYE</tspan></text>
+<text x="523" y="320.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.7: WS, &quot;the PE array operates as a systolic array&quot;</tspan></text>
+<text x="523" y="335.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>với rất ít điều khiển cục bộ.</tspan></text>
+<path d="M455 347 L890 347" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="366.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>LP</tspan></text>
+<text x="523" y="359.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.2: mảng systolic, dataflow chọn là output</tspan></text>
+<text x="523" y="374.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>stationary.</tspan></text>
+<path d="M455 386 L890 386" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="405.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>TPU</tspan></text>
+<text x="523" y="398.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không dùng chữ &quot;stationary&quot; (đã tìm toàn bài);</tspan></text>
+<text x="523" y="413.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>systolic mô tả cách dữ liệu chảy.</tspan></text>
+<rect x="455" y="280" width="435" height="145" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M515 280 L515 425" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="455" y="435" width="435" height="64" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="469" y="457" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Suy ra của bộ hình: </tspan><tspan>systolic là cách truyền dữ liệu,</tspan></text>
+<text x="469" y="477" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>stationary là thứ PE giữ lại; hai thứ dùng chung được.</tspan></text>
+<text x="10" y="536" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">B. Chia một lớp cho hai core (JUNG Fig. 5, Table 1)</text>
+<rect x="10" y="550" width="880" height="296" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/>
+<text x="24" y="572" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Spatial partitioning</text>
+<rect x="30" y="590" width="42.0" height="50" rx="0" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<rect x="72.0" y="590" width="42.0" height="50" rx="0" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="51.0" y="615.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0</text>
+<text x="93.0" y="615.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P1</text>
+<text x="72.0" y="654" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">input</text>
+<text x="72.0" y="670" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">chia đôi</text>
+<rect x="130" y="590" width="84" height="50" rx="0" fill="white" stroke="#333333" stroke-width="1.2"/>
+<rect x="136" y="596" width="72" height="38" rx="0" fill="white" stroke="#777777" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="172.0" y="615.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0 và P1</text>
+<text x="172.0" y="654" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">kernel</text>
+<text x="172.0" y="670" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">nhân bản</text>
+<rect x="230" y="590" width="42.0" height="50" rx="0" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<rect x="272.0" y="590" width="42.0" height="50" rx="0" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="251.0" y="615.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0</text>
+<text x="293.0" y="615.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P1</text>
+<text x="272.0" y="654" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">output</text>
+<text x="272.0" y="670" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">chia đôi</text>
+<text x="24" y="700" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Channel partitioning</text>
+<rect x="30" y="722" width="84" height="50" rx="0" fill="white" stroke="#333333" stroke-width="1.2"/>
+<rect x="36" y="728" width="72" height="38" rx="0" fill="white" stroke="#777777" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="72.0" y="747.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0 và P1</text>
+<text x="72.0" y="786" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">input</text>
+<text x="72.0" y="802" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">nhân bản</text>
+<rect x="130" y="722" width="42.0" height="50" rx="0" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<rect x="172.0" y="722" width="42.0" height="50" rx="0" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="151.0" y="747.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0</text>
+<text x="193.0" y="747.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P1</text>
+<text x="172.0" y="786" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">kernel</text>
+<text x="172.0" y="802" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">chia đôi</text>
+<rect x="230" y="722" width="42.0" height="50" rx="0" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<rect x="272.0" y="722" width="42.0" height="50" rx="0" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="251.0" y="747.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P0</text>
+<text x="293.0" y="747.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">P1</text>
+<text x="272.0" y="786" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">output</text>
+<text x="272.0" y="802" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">chia đôi</text>
+<text x="340" y="572" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Spatial (Table 1, hàng 1)</tspan></text>
+<text x="340" y="589" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>input và output chia theo chiều cao hoặc rộng; kernel</tspan></text>
+<text x="340" y="606" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhân bản ở cả hai core. Không cần cộng thêm.</tspan></text>
+<text x="340" y="650" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Channel (hàng 3)</tspan></text>
+<text x="340" y="667" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>kernel và output chia theo kênh; input nhân bản ở cả hai</tspan></text>
+<text x="340" y="684" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>core. Không cần cộng thêm.</tspan></text>
+<text x="340" y="730" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Hai hàng có dấu * (hàng 2 và 4)</tspan><tspan> cần partial sum reduction,</tspan></text>
+<text x="340" y="747" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tức thêm giao tiếp và tính toán: JUNG không ưa dùng.</tspan></text>
+<text x="340" y="764" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">tr.9: </tspan><tspan>hướng chia ảnh hưởng cân bằng tải vì ràng buộc alignment;</tspan></text>
+<text x="340" y="781" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>hướng kênh đòi alignment lớn hơn hướng không gian.</tspan></text>
+<text x="24" y="832" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">JUNG: Samsung, SoC mobile ba core; không phải Rockchip.</text>
+<text x="10" y="876" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C. Tiling trong một core và lập lịch giữa các lớp</text>
+<rect x="10" y="890" width="430" height="258" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/>
+<text x="24" y="910" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tiling: chia một lớp thành tile, chạy kiểu pipeline</text>
+<text x="24" y="956" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">load</text>
+<rect x="88" y="942" width="51" height="28" rx="3" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<text x="113.5" y="956.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 0</text>
+<rect x="142" y="942" width="51" height="28" rx="3" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="167.5" y="956.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 1</text>
+<rect x="196" y="942" width="51" height="28" rx="3" fill="#FFF1CC" stroke="#333333" stroke-width="1.2"/>
+<text x="221.5" y="956.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 2</text>
+<text x="24" y="994" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">compute</text>
+<rect x="142" y="980" width="51" height="28" rx="3" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<text x="167.5" y="994.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 0</text>
+<rect x="196" y="980" width="51" height="28" rx="3" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="221.5" y="994.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 1</text>
+<rect x="250" y="980" width="51" height="28" rx="3" fill="#FFF1CC" stroke="#333333" stroke-width="1.2"/>
+<text x="275.5" y="994.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 2</text>
+<text x="24" y="1032" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">store</text>
+<rect x="196" y="1018" width="51" height="28" rx="3" fill="#DCE8FA" stroke="#333333" stroke-width="1.2"/>
+<text x="221.5" y="1032.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 0</text>
+<rect x="250" y="1018" width="51" height="28" rx="3" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="275.5" y="1032.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 1</text>
+<rect x="304" y="1018" width="51" height="28" rx="3" fill="#FFF1CC" stroke="#333333" stroke-width="1.2"/>
+<text x="329.5" y="1032.0" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">tile 2</text>
+<path d="M88 1058 L358 1058" stroke="#777777" stroke-width="1.4"/>
+<path d="M304 1058 L364 1058" fill="none" stroke="#777777" stroke-width="1.6" marker-end="url(#m777777n)"/>
+<text x="366" y="1058" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">thời gian</text>
+<text x="24" y="1080" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Minh họa của bộ hình theo JUNG tr.4: DMA tới global memory</tspan></text>
+<text x="24" y="1095" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chồng lên tính toán nhờ double buffering và pipeline load,</tspan></text>
+<text x="24" y="1110" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>compute, store. FLEX tr.2: tiling = chia tính toán một lớp</tspan></text>
+<text x="24" y="1125" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thành các phép trên tile nhỏ hơn.</tspan></text>
+<text x="455" y="902" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Lập lịch: ba bài, ba quyết định khác nhau</text>
+<rect x="455" y="914" width="435" height="28" fill="#E8E8E8"/>
+<text x="463" y="928.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bài</text>
+<text x="523" y="928.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Quyết định</text>
+<text x="653" y="928.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều bài nói</text>
+<path d="M455 942 L890 942" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="967.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>JUNG</tspan></text>
+<text x="523" y="960.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thứ tự lớp: depth-first</tspan></text>
+<text x="523" y="974.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>so với breadth-first</tspan></text>
+<text x="653" y="953.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.5: depth-first &quot;increases chances</tspan></text>
+<text x="653" y="967.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>of data reuse&quot;; breadth-first loại bớt</tspan></text>
+<text x="653" y="981.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>phụ thuộc giữa các lớp kế tiếp.</tspan></text>
+<path d="M455 993 L890 993" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="1011.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FLEX</tspan></text>
+<text x="523" y="1004.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thứ tự tile: out-of-order</tspan></text>
+<text x="523" y="1018.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>list scheduling</tspan></text>
+<text x="653" y="1004.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.1: lập lịch động workload đã tile</tspan></text>
+<text x="653" y="1018.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cho mọi NPU (list scheduling).</tspan></text>
+<path d="M455 1030 L890 1030" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="463" y="1055.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>LP</tspan></text>
+<text x="523" y="1041.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhiều DNN: temporal-</tspan></text>
+<text x="523" y="1055.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>sharing hay spatial-</tspan></text>
+<text x="523" y="1069.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>sharing</tspan></text>
+<text x="653" y="1041.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.1: temporal: DNN chiếm toàn bộ</tspan></text>
+<text x="653" y="1055.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>phần cứng theo lớp; spatial: mỗi DNN</tspan></text>
+<text x="653" y="1069.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>được cấp tài nguyên cố định.</tspan></text>
+<rect x="455" y="914" width="435" height="167" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M515 914 L515 1081" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M645 914 L645 1081" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="1174" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ba mô hình bộ nhớ đa core khác nhau</text>
+<rect x="10" y="1188" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="1202.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bài</text>
+<text x="78" y="1202.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Bộ nhớ và kết nối (trích nguồn)</text>
+<path d="M10 1216 L890 1216" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1228.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>JUNG</tspan></text>
+<text x="78" y="1228.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.2: &quot;distributed, isolated local memory per core&quot;; local memory quản lý tường minh bằng load và store tới global memory.</tspan></text>
+<path d="M10 1240 L890 1240" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1252.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FLEX</tspan></text>
+<text x="78" y="1252.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.2: &quot;A shared on-chip scratchpad memory, labeled Global Buffer&quot; dùng chung giữa các core.</tspan></text>
+<path d="M10 1264 L890 1264" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="1276.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>LP</tspan></text>
+<text x="78" y="1276.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tr.2: nhiều NPU đồng nhất nối với router, dữ liệu mỗi NPU đi qua NoC; tắc nghẽn NoC và DRAM ảnh hưởng hiệu năng hệ thống.</tspan></text>
+<rect x="10" y="1188" width="880" height="100" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M70 1188 L70 1288" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1298" width="880" height="44" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1320" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Không có một kiến trúc &quot;NPU đa core&quot; duy nhất. </tspan><tspan>Cách chia (không gian hay kênh) và lập lịch phụ thuộc mô hình bộ nhớ của từng bài.</tspan></text>
+<rect x="10" y="1354" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="1362" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="1373.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="1373" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="1398" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">T1 biết: </tspan><tspan>TRM1 tr.1984 &quot;Support triple core co-work, dual core co-work, and work independently&quot;; UG152 tr.26 có</tspan></text>
+<text x="24" y="1417" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>core mask AUTO, CORE_0, CORE_0_1, CORE_0_1_2...; UG152 tr.27: op không nằm trong danh sách &quot;will fallback to Core0&quot;. Xem Hình 2.4.</tspan></text>
+<text x="24" y="1436" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>cách RK3588 chia một lớp cho nhiều core (không gian, kênh hay batch); có dùng systolic hay tiling như</tspan></text>
+<text x="24" y="1455" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>trên không (TRM không có các từ khóa này, 02_ mục 2.11). Không suy ra từ JUNG, FLEX, LP. Số đo: Hình 10.3.</tspan></text>
+<text x="10" y="1496" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: TPU tr.3, 4; LP tr.1, 2; EYE tr.7; JUNG tr.1, 2, 4, 5, 9; FLEX tr.1, 2; TRM1 tr.1984; UG152 tr.26, 27.</text>
+</svg>

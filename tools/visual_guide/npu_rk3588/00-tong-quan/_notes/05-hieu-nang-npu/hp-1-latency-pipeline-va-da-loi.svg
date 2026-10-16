@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="520" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="24" font-size="16" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Pipeline Độ trễ, FPS Đơn luồng so với Đa luồng và Kiến trúc 3-Core NPU</text>
+<text x="10" y="56" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">A. Pipeline độ trễ đầu-cuối (End-to-End Latency) của một khung hình</text>
+<rect x="10" y="72" width="265" height="95" rx="5" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="142.5" y="90" font-size="12" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">1. Pre-processing (T_pre)</text>
+<text x="142.5" y="106" font-size="10.5" font-weight="600" fill="#555555" text-anchor="middle" dominant-baseline="central">Phần cứng: CPU (ARM Cortex) / RGA</text>
+<text x="20" y="124" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Decode frame, Letterbox về 640x640</tspan></text>
+<text x="20" y="140" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Đổi màu BGR -&gt; RGB, scale 1/255, int8</tspan></text>
+<polygon points="282,119 292,119 289,114 297,119 289,124 292,119" fill="#444444" stroke="#444444" stroke-width="2"/>
+<rect x="305" y="72" width="265" height="95" rx="5" fill="#F1F8E9" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="437.5" y="90" font-size="12" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">2. NPU Inference (T_npu)</text>
+<text x="437.5" y="106" font-size="10.5" font-weight="600" fill="#555555" text-anchor="middle" dominant-baseline="central">Phần cứng: RK3588 NPU (3 Cores)</text>
+<text x="315" y="124" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• DMA đưa tensor vào SRAM nội bộ NPU</tspan></text>
+<text x="315" y="140" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Mảng MAC tính chập Conv, kích hoạt</tspan></text>
+<polygon points="577,119 587,119 584,114 592,119 584,124 587,119" fill="#444444" stroke="#444444" stroke-width="2"/>
+<rect x="600" y="72" width="290" height="95" rx="5" fill="#FFF8E1" stroke="#E65100" stroke-width="1.5"/>
+<text x="745.0" y="90" font-size="12" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">3. Post-processing (T_post)</text>
+<text x="745.0" y="106" font-size="10.5" font-weight="600" fill="#555555" text-anchor="middle" dominant-baseline="central">Phần cứng: CPU (ARM Cortex)</text>
+<text x="610" y="124" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Giải mã hộp DFL, khôi phục toạ độ box</tspan></text>
+<text x="610" y="140" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Lọc ngưỡng tin cậy, thuật toán NMS</tspan></text>
+<rect x="10" y="177" width="880" height="48" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.2"/>
+<text x="20" y="191" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Tổng độ trễ chu trình: </tspan><tspan font-weight="700">T_E2E = T_pre + T_npu + T_post</tspan><tspan>  |  </tspan><tspan font-weight="700">FPS độ trễ (1 camera đơn luồng): </tspan><tspan>FPS_latency = 1000 / T_E2E_mean</tspan><tspan> [ai/automation/tables.py:288]</tspan></text>
+<text x="20" y="208" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Lưu ý: </tspan><tspan>Đo riêng lẻ NPU chỉ phản ánh T_npu. Trải nghiệm hệ thống video thời gian thực phụ thuộc toàn bộ T_E2E.</tspan></text>
+<text x="10" y="241" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">B. Cấu trúc 3 lõi NPU RK3588 và hành vi lập lịch core_mask</text>
+<rect x="10" y="255" width="270" height="95" rx="5" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="145.0" y="271" font-size="12" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">NPU Core 0 (0x1)</text>
+<text x="145.0" y="286" font-size="10" font-weight="600" fill="#666666" text-anchor="middle" dominant-baseline="central">Mặc định ở core_mask=AUTO</text>
+<text x="22" y="303" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Gánh toàn bộ lớp nếu model có op</tspan></text>
+<text x="22" y="319" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  không chia lõi (như ConvExSwish)</tspan></text>
+<rect x="305" y="255" width="270" height="95" rx="5" fill="#EDE7F6" stroke="#7B1FA2" stroke-width="1.5"/>
+<text x="440.0" y="271" font-size="12" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">NPU Core 1 (0x2)</text>
+<text x="440.0" y="286" font-size="10" font-weight="600" fill="#666666" text-anchor="middle" dominant-baseline="central">Lõi mở rộng 1</text>
+<text x="317" y="303" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Hoạt động khi đặt CORE_0_1_2 trên</tspan></text>
+<text x="317" y="319" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  model ReLU hoặc chạy context riêng</tspan></text>
+<rect x="600" y="255" width="270" height="95" rx="5" fill="#E0F2F1" stroke="#00796B" stroke-width="1.5"/>
+<text x="735.0" y="271" font-size="12" font-weight="700" fill="#00796B" text-anchor="middle" dominant-baseline="central">NPU Core 2 (0x4)</text>
+<text x="735.0" y="286" font-size="10" font-weight="600" fill="#666666" text-anchor="middle" dominant-baseline="central">Lõi mở rộng 2</text>
+<text x="612" y="303" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Hoạt động khi đặt CORE_0_1_2 trên</tspan></text>
+<text x="612" y="319" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  model ReLU hoặc chạy context riêng</tspan></text>
+<text x="10" y="368" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">C. So sánh chế độ thực thi: Đơn luồng tuần tự vs Đa luồng Throughput (3 Contexts)</text>
+<rect x="10" y="380" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="394.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chế độ triển khai</text>
+<text x="193" y="394.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Thiết lập core_mask</text>
+<text x="338" y="394.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Số NPU Core dùng</text>
+<text x="488" y="394.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đặc tính hiệu năng &amp; Ứng dụng</text>
+<path d="M10 408 L890 408" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="420.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đơn luồng tuần tự (SiLU)</tspan></text>
+<text x="193" y="420.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>AUTO (0x1)</tspan></text>
+<text x="338" y="420.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chỉ Core 0 (100%)</tspan></text>
+<text x="488" y="420.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Xử lý 1 camera, T_npu ~21 ms; 2 lõi còn lại nghỉ (ConvExSwish không chia lõi)</tspan></text>
+<path d="M10 432 L890 432" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="444.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đơn luồng đa lõi (ReLU)</tspan></text>
+<text x="193" y="444.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CORE_0_1_2 (0x7)</tspan></text>
+<text x="338" y="444.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cả 3 Core (~35/34/32%)</tspan></text>
+<text x="488" y="444.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Toán tử ConvRelu chia đều 3 lõi; T_npu giảm ~35% xuống ~13.9 ms</tspan></text>
+<path d="M10 456 L890 456" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="468.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đa luồng song song (3 Luồng)</tspan></text>
+<text x="193" y="468.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3 Contexts riêng biệt</tspan></text>
+<text x="338" y="468.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Core 0, Core 1, Core 2</tspan></text>
+<text x="488" y="468.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3 camera song song; Thông lượng tăng xấp xỉ gấp 3 (Throughput FPS)</tspan></text>
+<rect x="10" y="380" width="880" height="100" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M185 380 L185 480" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M330 380 L330 480" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M480 380 L480 480" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="506" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/tables.py:288, 325; LOG 2026-10-10_yolo-phaseA/README.md:22; LOG 2026-10-10_t3-board-silu-resize/README.md:74.</text>
+</svg>

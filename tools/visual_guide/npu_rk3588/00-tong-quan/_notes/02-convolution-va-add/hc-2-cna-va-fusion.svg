@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1165" width="900" height="1165" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1165" fill="white"/>
+<rect x="770" y="10" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="810.3" y="21.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Cấu trúc khối CNA trong lõi NPU RK3588, Residual Add và BatchNorm Folding</text>
+<rect x="10" y="66" width="880" height="260" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Cơ chế ghép toán tử (Operator Fusion) &amp; Gộp Batch Normalization (BN Folding)</text>
+<rect x="24" y="102" width="380" height="205" rx="5" fill="#FAFAFA" stroke="#999999" stroke-width="1"/>
+<text x="36" y="120" font-size="12.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đồ thị ban đầu (PyTorch / ONNX xuất khẩu):</text>
+<rect x="40" y="138" width="85" height="48" rx="4" fill="#EAF2FF" stroke="#333333" stroke-width="1.2"/>
+<text x="82.5" y="154.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 2D</text>
+<text x="82.5" y="169.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">[W, B]</text>
+<path d="M125 162 L155 162" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="155" y="138" width="105" height="48" rx="4" fill="#FFF8E1" stroke="#333333" stroke-width="1.2"/>
+<text x="207.5" y="154.75" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">BatchNorm</text>
+<text x="207.5" y="169.25" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">[μ, σ², γ, β]</text>
+<path d="M260 162 L290 162" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="290" y="138" width="100" height="48" rx="4" fill="#E8F5E9" stroke="#333333" stroke-width="1.2"/>
+<text x="340.0" y="154.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Activation</text>
+<text x="340.0" y="169.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU / SiLU</text>
+<path d="M100 186 L100 211 L340 211 L340 186" fill="none" stroke="#C62828" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<text x="220" y="224" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Không ghép: Phải ghi &amp; đọc tensor trung gian ra RAM DDR</text>
+<text x="40" y="244" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Tốn băng thông bộ nhớ ngoài (Memory Wall)</tspan></text>
+<text x="40" y="260" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Tăng độ trễ khung hình và công suất tiêu thụ</tspan></text>
+<path d="M415 196 L459 196" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="440" y="181" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">rknn.build()</text>
+<text x="440" y="214" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Compiler</text>
+<rect x="475" y="102" width="400" height="205" rx="5" fill="#F0F8FF" stroke="#1E5BB8" stroke-width="1.4"/>
+<text x="488" y="120" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Đồ thị sau ghép trên NPU RK3588 (Khép kín trong lõi):</text>
+<rect x="490" y="136" width="250" height="56" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="615.0" y="150.0" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ConvRelu / ConvExSwish</text>
+<text x="615.0" y="164.0" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">W_fused = γ·W / √(σ² + ε)</text>
+<text x="615.0" y="178.0" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">B_fused = β + γ·(B - μ) / √(σ² + ε)</text>
+<circle cx="755" cy="164" r="10" fill="#2E7D32" stroke="white" stroke-width="1.5"/>
+<text x="755" y="164.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">✓</text>
+<text x="490" y="206" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">1. Gộp toán học BN vào Conv (Offline BN Folding, NAGEL tr.6):</tspan></text>
+<text x="490" y="224" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Trọng số W và Bias B được gộp trước, loại bỏ hoàn toàn lớp BN.</tspan></text>
+<text x="490" y="242" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">2. Nối trực tiếp Activation trong phần cứng DPU:</tspan></text>
+<text x="490" y="260" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>   Kết quả từ accumulator đi thẳng vào DPU, 0 lần ra RAM DDR.</tspan></text>
+<rect x="10" y="342" width="880" height="435" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="359" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Đường dẫn dữ liệu phần cứng khối CNA, Mảng MAC và Nhánh tắt Residual Add (TRM1 Ch.36)</text>
+<rect x="20" y="378" width="860" height="385" rx="6" fill="#FAFAFA" stroke="#666666" stroke-width="1.2"/>
+<text x="32" y="396" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">NPU CORE (Lõi 0 / Lõi 1 / Lõi 2)</text>
+<rect x="40" y="412" width="200" height="42" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="140.0" y="433.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Memory Interface (AXI)</text>
+<path d="M140 454 L140 476" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="148" y="470" font-size="10.5" font-weight="400" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">nạp ngoài</text>
+<rect x="40" y="482" width="200" height="80" rx="4" fill="#FFF1CC" stroke="#333333" stroke-width="1.2"/>
+<text x="140.0" y="506.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">384KB Buffer (CBUF)</text>
+<text x="140.0" y="522.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Internal Buffer</text>
+<text x="140.0" y="538.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">8 banks (0..7)</text>
+<circle cx="48" cy="490" r="10" fill="#1E5BB8" stroke="white" stroke-width="1.5"/>
+<text x="48" y="490.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="48" y="577" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Bank 0-6: feature data</tspan></text>
+<text x="48" y="592" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Bank 7-1: weight data</tspan></text>
+<path d="M240 522 L274 522" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="280" y="412" width="190" height="240" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="375" y="432" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">CNA Controller</text>
+<text x="375" y="448" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(Convolution Pre-process)</text>
+<circle cx="290" cy="422" r="10" fill="#1E5BB8" stroke="white" stroke-width="1.5"/>
+<text x="290" y="422.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="295" y="460" width="160" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="375.0" y="478.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Feature Data Load</text>
+<rect x="295" y="502" width="160" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="375.0" y="520.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Weight Data Load</text>
+<rect x="295" y="544" width="160" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="375.0" y="562.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Zero-Skipping</text>
+<rect x="295" y="586" width="160" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="375.0" y="604.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Weight Decompress</text>
+<path d="M470 522 L504 522" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="510" y="412" width="180" height="255" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="600" y="432" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Tính toán Tích chập</text>
+<circle cx="520" cy="422" r="10" fill="#1E5BB8" stroke="white" stroke-width="1.5"/>
+<text x="520" y="422.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="525" y="457" width="150" height="40" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="600.0" y="477.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Sequence Controller</text>
+<rect x="525" y="507" width="150" height="65" rx="4" fill="#DDF0DE" stroke="#333333" stroke-width="1.2"/>
+<text x="600.0" y="524.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">INT8 MAC Array</text>
+<text x="600.0" y="539.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">32×32 mode</text>
+<text x="600.0" y="554.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">(1024 MACs/cycle)</text>
+<rect x="525" y="584" width="150" height="48" rx="4" fill="#FFF9C4" stroke="#333333" stroke-width="1.2"/>
+<text x="600.0" y="600.75" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Accumulator INT32</text>
+<text x="600.0" y="615.25" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">psums + Residual Add</text>
+<path d="M240 502 L255 502 L255 398 L490 398 L490 608 L519 608" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<circle cx="255" cy="398" r="10" fill="#2E7D32" stroke="white" stroke-width="1.5"/>
+<text x="255" y="398.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">+</text>
+<text x="272" y="394" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Residual Shortcut (CBUF/Input1) → Nối vào Accumulator (OPL tr.61, 63)</text>
+<path d="M690 608 L724 608" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="730" y="412" width="135" height="255" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="797" y="432" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Hậu xử lý (Post)</text>
+<circle cx="740" cy="422" r="10" fill="#1E5BB8" stroke="white" stroke-width="1.5"/>
+<text x="740" y="422.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="742" y="457" width="110" height="75" rx="4" fill="#FCE4EC" stroke="#333333" stroke-width="1.2"/>
+<text x="797.0" y="473.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">DPU Unit</text>
+<text x="797.0" y="487.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU, SiLU,</text>
+<text x="797.0" y="501.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Leaky ReLU,</text>
+<text x="797.0" y="515.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Sigmoid, Tanh</text>
+<path d="M797 532 L797 557" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="742" y="557" width="110" height="75" rx="4" fill="#F3E5F5" stroke="#333333" stroke-width="1.2"/>
+<text x="797.0" y="573.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PPU Unit</text>
+<text x="797.0" y="587.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Planar Process:</text>
+<text x="797.0" y="601.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">MaxPool,</text>
+<text x="797.0" y="615.5" font-size="11" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">AvgPool</text>
+<path d="M797 632 L797 687 L32 687 L32 522 L38 522" fill="none" stroke="#1E5BB8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m1E5BB8n)"/>
+<text x="430" y="680" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Ghi ngược Feature Map đầu ra vào CBUF (chuẩn bị cho layer tiếp theo) hoặc qua AXI ra DDR</text>
+<rect x="24" y="702" width="850" height="50" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="36" y="720" font-size="12" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Lưu ý quan trọng khi chạy Đa lõi trên RK3588 (T1 &amp; T3):</text>
+<text x="36" y="736" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">ConvRelu &amp; ConvolutionAddRelu:</tspan><tspan> hỗ trợ chia 3 lõi mượt mà (OPL tr.60, 63). </tspan><tspan>• </tspan><tspan font-weight="700">ConvolutionSwish (SiLU):</tspan><tspan> OPL ghi </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5">多核联合: 暂不支持</tspan><tspan> (chưa hỗ trợ đa lõi); trên board dồn 100% về Core 0.</tspan></text>
+<text x="10" y="797" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh các toán tử kết hợp Convolution và Residual Add trên RK3588</text>
+<rect x="10" y="811" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="825.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Toán tử ghép</text>
+<text x="148" y="825.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Op sau khi Fusion</text>
+<text x="308" y="825.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Khối phần cứng</text>
+<text x="458" y="825.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Hỗ trợ Đa lõi (3 core)</text>
+<text x="638" y="825.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đặc điểm hiệu năng</text>
+<path d="M10 839 L890 839" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="858.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + ReLU</tspan></text>
+<text x="148" y="858.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvRelu</tspan></text>
+<text x="308" y="858.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CNA + DPU</tspan></text>
+<text x="458" y="858.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Có (hỗ trợ đầy đủ)</tspan></text>
+<text x="638" y="851.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tối ưu nhất cho phần cứng RK3588,</tspan></text>
+<text x="638" y="866.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chia đều tải tính toán cho cả 3 core</tspan></text>
+<path d="M10 878 L890 878" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="897.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + Add + ReLU</tspan></text>
+<text x="148" y="897.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvolutionAddRelu</tspan></text>
+<text x="308" y="897.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Accumulator + DPU</tspan></text>
+<text x="458" y="897.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Có (hỗ trợ đầy đủ)</tspan></text>
+<text x="638" y="890.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Residual Add nối on-chip vào accumulator,</tspan></text>
+<text x="638" y="905.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>không tốn băng thông RAM DDR ngoài</tspan></text>
+<path d="M10 917 L890 917" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="936.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + SiLU (Swish)</tspan></text>
+<text x="148" y="936.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvExSwish</tspan></text>
+<text x="308" y="936.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CNA + DPU</tspan></text>
+<text x="458" y="929.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chưa hỗ trợ</tspan></text>
+<text x="458" y="944.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(toàn bộ về Core 0)</tspan></text>
+<text x="638" y="929.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Chính xác cao cho YOLO,</tspan></text>
+<text x="638" y="944.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhưng không tăng tốc khi chạy 3 core</tspan></text>
+<path d="M10 956 L890 956" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="975.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + Add (trần)</tspan></text>
+<text x="148" y="975.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ConvolutionAdd</tspan></text>
+<text x="308" y="975.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CNA Accumulator</tspan></text>
+<text x="458" y="975.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Có (hỗ trợ đầy đủ)</tspan></text>
+<text x="638" y="968.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cộng dồn shortcut trực tiếp trên thanh ghi,</tspan></text>
+<text x="638" y="983.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>kết quả chuyển tiếp sang PPU/RAM</tspan></text>
+<rect x="10" y="811" width="880" height="184" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M140 811 L140 995" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M300 811 L300 995" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M450 811 L450 995" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M630 811 L630 995" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1009" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="1017" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="1028.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="1028" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="1053" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">TRM1 tr.1984-1985, 2001: </tspan><tspan>Mỗi core NPU chứa riêng biệt 384KB CBUF, mảng MAC INT8 32x32 và DPU/PPU.</tspan></text>
+<text x="24" y="1072" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">OPL tr.61, 63: </tspan><tspan>Toán tử ConvolutionAdd và ConvolutionAddRelu hỗ trợ đa lõi; ConvolutionSwish tạm chưa hỗ trợ.</tspan></text>
+<text x="24" y="1091" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">UG232 tr.142 &amp; NAGEL tr.6: </tspan><tspan>Quy tắc ghép Conv+Activation+Add và gộp toán học Batch Normalization (BN folding).</tspan></text>
+<text x="24" y="1110" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: bảng tra cứu (LUT) chi tiết của DPU khi tính toán hàm phi tuyến Swish/Sigmoid.</tspan></text>
+<text x="10" y="1151" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: TRM1 tr.1984-1985, 2001; OPL tr.61, 63; UG232 tr.142; NAGEL tr.6; LOG 2026-10-10_t3-board-silu-resize.</text>
+</svg>

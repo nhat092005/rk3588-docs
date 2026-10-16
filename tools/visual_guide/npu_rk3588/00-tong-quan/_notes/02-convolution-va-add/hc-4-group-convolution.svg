@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 969" width="900" height="969" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="969" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Group Convolution (Tích chập nhóm) và phổ liên tục giữa các biến thể</text>
+<rect x="10" y="66" width="880" height="260" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Cơ chế chia nhóm độc lập trong Group Convolution (G = 2)</text>
+<text x="24" y="102" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nguyên lý: </tspan><tspan>Chia </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cin</tspan><tspan> kênh vào và </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cout</tspan><tspan> kênh ra thành </tspan><tspan font-weight="700">G nhóm độc lập</tspan><tspan> (không giao nhau).</tspan></text>
+<text x="24" y="120" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Mỗi nhóm tính chập riêng: </tspan><tspan>Nhóm g chỉ lấy </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cin/G</tspan><tspan> kênh vào để tính với </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Cout/G</tspan><tspan> bộ lọc kích thước </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">K × K × (Cin/G)</tspan><tspan>.</tspan></text>
+<text x="24" y="138" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Mức giảm tham số và FLOPs: </tspan><tspan>Giảm chính xác đúng </tspan><tspan font-weight="700">G lần</tspan><tspan> so với Standard Convolution: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">(Hout · Wout · Cout · K² · Cin) / G</tspan><tspan>.</tspan></text>
+<rect x="40" y="171" width="140" height="56" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="110" y="193" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Nhóm 0: Input Channels</text>
+<text x="110" y="211" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Kênh 0 .. Cin/2 - 1</text>
+<path d="M180 199 L234 199" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="240" y="171" width="180" height="56" rx="3" fill="#FFF8E1" stroke="#E65100" stroke-width="1.2"/>
+<text x="330" y="193" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Filters Nhóm 0 (Cout/2)</text>
+<text x="330" y="211" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">K × K × (Cin/2)</text>
+<path d="M420 199 L474 199" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="480" y="171" width="150" height="56" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="555" y="193" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Nhóm 0: Output</text>
+<text x="555" y="211" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Kênh 0 .. Cout/2 - 1</text>
+<rect x="40" y="241" width="140" height="56" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="110" y="263" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Nhóm 1: Input Channels</text>
+<text x="110" y="281" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Kênh Cin/2 .. Cin - 1</text>
+<path d="M180 269 L234 269" fill="none" stroke="#6A1B9A" stroke-width="3.0" marker-end="url(#m6A1B9At)"/>
+<rect x="240" y="241" width="180" height="56" rx="3" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.2"/>
+<text x="330" y="263" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle" dominant-baseline="central">Filters Nhóm 1 (Cout/2)</text>
+<text x="330" y="281" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">K × K × (Cin/2)</text>
+<path d="M420 269 L474 269" fill="none" stroke="#6A1B9A" stroke-width="3.0" marker-end="url(#m6A1B9At)"/>
+<rect x="480" y="241" width="150" height="56" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="555" y="263" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Nhóm 1: Output</text>
+<text x="555" y="281" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Kênh Cout/2 .. Cout - 1</text>
+<rect x="660" y="171" width="210" height="126" rx="4" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/>
+<text x="765" y="191" font-size="11.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Tính chất cô lập:</text>
+<text x="672" y="209" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Không có đường nối chéo</tspan></text>
+<text x="672" y="223" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  giữa Nhóm 0 và Nhóm 1.</tspan></text>
+<text x="672" y="237" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Kênh vào nhóm nào chỉ</tspan></text>
+<text x="672" y="251" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  sinh kênh ra nhóm đó.</tspan></text>
+<text x="672" y="265" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Muốn trộn lại: Cần thêm</tspan></text>
+<text x="672" y="279" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  lớp Channel Shuffle hoặc</tspan></text>
+<text x="672" y="293" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">  Pointwise Conv 1×1 phía sau.</tspan></text>
+<rect x="10" y="342" width="880" height="260" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="359" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Phổ liên tục giữa các biến thể Convolution qua tham số nhóm G</text>
+<rect x="24" y="378" width="270" height="205" rx="5" fill="#EAF2FF" stroke="#333333" stroke-width="1.2"/>
+<text x="159.0" y="395" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Cực đại kết nối: G = 1</text>
+<text x="34" y="408" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tên gọi: </tspan><tspan>Standard Convolution 2D</tspan></text>
+<text x="34" y="425" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cấu trúc: </tspan><tspan>Mọi kênh vào kết nối với mọi</tspan></text>
+<text x="34" y="442" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  bộ lọc đầu ra (Fully Connected).</tspan></text>
+<text x="34" y="459" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• FLOPs: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">100% (Chuẩn gốc)</tspan></text>
+<text x="34" y="476" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Giao tiếp kênh: </tspan><tspan>Tối đa (Cin × Cout)</tspan></text>
+<text x="34" y="493" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Hiệu năng NPU: </tspan><tspan>Tận dụng mảng</tspan></text>
+<text x="34" y="510" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  MAC tối đa (32×32 mode dễ lấp đầy).</tspan></text>
+<rect x="318" y="378" width="270" height="205" rx="5" fill="#FFF8E1" stroke="#333333" stroke-width="1.2"/>
+<text x="453.0" y="395" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Phân nhóm song song: 1 &lt; G &lt; Cin</text>
+<text x="328" y="408" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tên gọi: </tspan><tspan>Group Convolution</tspan></text>
+<text x="328" y="425" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cấu trúc: </tspan><tspan>Chia thành G cụm độc lập</tspan></text>
+<text x="328" y="442" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  (ResNeXt, ShuffleNet, OPL group).</tspan></text>
+<text x="328" y="459" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• FLOPs: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Giảm 1/G lần</tspan></text>
+<text x="328" y="476" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Giao tiếp kênh: </tspan><tspan>Chỉ trong nội bộ nhóm</tspan></text>
+<text x="328" y="493" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Hiệu năng NPU: </tspan><tspan>Nếu Cin/G &lt; 32,</tspan></text>
+<text x="328" y="510" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  dễ bị lãng phí MAC trống (underuse).</tspan></text>
+<rect x="612" y="378" width="270" height="205" rx="5" fill="#E8F5E9" stroke="#333333" stroke-width="1.2"/>
+<text x="747.0" y="395" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Cực đại phân tách: G = Cin</text>
+<text x="622" y="408" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tên gọi: </tspan><tspan>Depthwise Convolution (DW)</tspan></text>
+<text x="622" y="425" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cấu trúc: </tspan><tspan>Mỗi kênh là 1 nhóm riêng biệt</tspan></text>
+<text x="622" y="442" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  (Cin nhóm, mỗi nhóm 1 kênh vào/ra).</tspan></text>
+<text x="622" y="459" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• FLOPs: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">Giảm Cin lần (Cực tiểu)</tspan></text>
+<text x="622" y="476" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Giao tiếp kênh: </tspan><tspan>0% (Không trộn kênh)</tspan></text>
+<text x="622" y="493" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Hiệu năng NPU: </tspan><tspan>Arithmetic Intensity</tspan></text>
+<text x="622" y="510" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  rất thấp, dễ memory-bound (SURV).</tspan></text>
+<text x="10" y="622" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh định lượng các chế độ Group Convolution trên NPU RK3588 (Cin=64, Cout=64, K=3)</text>
+<rect x="10" y="636" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="650.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chỉ số</text>
+<text x="168" y="650.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">G = 1 (Standard)</text>
+<text x="348" y="650.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">G = 2</text>
+<text x="528" y="650.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">G = 4</text>
+<text x="708" y="650.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">G = 64 (Depthwise)</text>
+<path d="M10 664 L890 664" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="676.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kênh vào mỗi nhóm</tspan></text>
+<text x="168" y="676.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>64 kênh</tspan></text>
+<text x="348" y="676.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32 kênh</tspan></text>
+<text x="528" y="676.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>16 kênh</tspan></text>
+<text x="708" y="676.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 kênh</tspan></text>
+<path d="M10 688 L890 688" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="700.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số trọng số (Weights)</tspan></text>
+<text x="168" y="700.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>64 × 64 × 9 = 36,864</tspan></text>
+<text x="348" y="700.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>18,432 (giảm 2×)</tspan></text>
+<text x="528" y="700.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>9,216 (giảm 4×)</tspan></text>
+<text x="708" y="700.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>576 (giảm 64×)</tspan></text>
+<path d="M10 712 L890 712" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="724.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FLOPs lý thuyết</tspan></text>
+<text x="168" y="724.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100%</tspan></text>
+<text x="348" y="724.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>50%</tspan></text>
+<text x="528" y="724.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>25%</tspan></text>
+<text x="708" y="724.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.56%</tspan></text>
+<path d="M10 736 L890 736" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="755.5" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Lấp đầy MAC 32×32 RK3588</tspan></text>
+<text x="168" y="748.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100% (Hoàn hảo,</tspan></text>
+<text x="168" y="763.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chia hết cho 32)</tspan></text>
+<text x="348" y="748.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100% (Vừa vặn,</tspan></text>
+<text x="348" y="763.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32 kênh/nhóm)</tspan></text>
+<text x="528" y="748.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>50% (Bị hổng,</tspan></text>
+<text x="528" y="763.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chỉ 16 kênh/nhóm)</tspan></text>
+<text x="708" y="748.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>&lt; 5% (Rất thấp,</tspan></text>
+<text x="708" y="763.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chỉ 1 kênh/nhóm)</tspan></text>
+<path d="M10 775 L890 775" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="787.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Độ trễ thực tế</tspan></text>
+<text x="168" y="787.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Nhanh trên MAC</tspan></text>
+<text x="348" y="787.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Giảm đáng kể</tspan></text>
+<text x="528" y="787.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Giảm ít hơn kỳ vọng</tspan></text>
+<text x="708" y="787.0" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Memory-bound nghẽn nạp</tspan></text>
+<rect x="10" y="636" width="880" height="163" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M160 636 L160 799" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M340 636 L340 799" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M520 636 L520 799" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M700 636 L700 799" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="813" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="821" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="832.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="832" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="857" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">TRM1 tr.2001: </tspan><tspan>Mảng MAC của RK3588 vận hành ở chế độ INT8 32x32 mode (1024 MACs/cycle mỗi lõi).</tspan></text>
+<text x="24" y="876" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">OPL tr.60: </tspan><tspan>Toán tử Convolution hỗ trợ thuộc tính &quot;• group: int&quot; trên phần cứng RK3588.</tspan></text>
+<text x="24" y="895" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Quy tắc thiết kế mạng: </tspan><tspan>Nên chọn số kênh mỗi nhóm (Cin/G) là bội số của 32 để tận dụng tối đa chiều rộng phần cứng.</tspan></text>
+<text x="24" y="914" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: cơ chế phân bổ cụ thể của CNA Controller khi group không chia hết cho 32.</tspan></text>
+<text x="10" y="955" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: OPL tr.60 (RKNN Compiler Operator List); TRM1 tr.2001 (RK3588 TRM); MOBONE tr.4; SURV tr.19.</text>
+</svg>

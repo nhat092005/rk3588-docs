@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1165" width="1000" height="1165" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1000" height="1165" fill="white"/>
+<rect x="900.0" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="940.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="753.4" y="8" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="778.9" y="19.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<text x="10" y="20" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">YOLO(pt).export(format=&quot;rknn&quot;, quantize=8): từ lớp PyTorch đến lớp RKNN</text>
+<rect x="10" y="38" width="310" height="214" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="54" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">1. PyTorch: chuẩn bị model</text>
+<text x="22" y="76" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">end2end = (nms is False): mặc định False;</text>
+<text x="22" y="92" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">với rknn còn tắt lại nếu nms=False.</text>
+<text x="22" y="108" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:683-688)</text>
+<text x="22" y="130" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">C2f.forward = forward_split; C3k2 kế thừa</text>
+<text x="22" y="146" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">C2f nên cũng đổi: split thay chunk.</text>
+<text x="22" y="162" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:908-910)</text>
+<text x="22" y="184" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Bọc _NormalizeCoords khi rknn, quantize=8,</text>
+<text x="22" y="200" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">detect, end2end tắt: chia 4 tọa độ hộp</text>
+<text x="22" y="216" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">cho [w, h, w, h], rồi slice và concat.</text>
+<text x="22" y="232" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:1100-1117)</text>
+<rect x="345" y="38" width="310" height="214" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="357" y="54" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">2. ONNX</text>
+<text x="357" y="76" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">opset = min(opset or 19, 19)</text>
+<text x="357" y="92" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:1538)</text>
+<text x="357" y="114" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">torch2onnx: input images, output output0</text>
+<text x="357" y="130" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:1120-1128)</text>
+<text x="357" y="152" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">onnxslim.slim khi simplify; mặc định True</text>
+<text x="357" y="168" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(default.yaml:90, exporter.py:1139)</text>
+<text x="357" y="190" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">INT8: file ONNX bị xóa sau khi build</text>
+<text x="357" y="206" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(exporter.py:1564-1566)</text>
+<rect x="680" y="38" width="310" height="214" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="692" y="54" font-size="14.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">3. RKNN (toolkit trên PC)</text>
+<text x="692" y="76" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">config(mean_values 0, std_values 255,</text>
+<text x="692" y="92" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">target_platform); load_onnx</text>
+<text x="692" y="108" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(rknn.py:74-76)</text>
+<text x="692" y="130" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">build(do_quantization=True, dataset,</text>
+<text x="692" y="146" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">rknn_batch_size); dataset.txt là danh sách</text>
+<text x="692" y="162" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ảnh calibration (rknn.py:77-80;</text>
+<text x="692" y="178" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exporter.py:1543-1552)</text>
+<text x="692" y="200" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">export_rknn ghi file .rknn</text>
+<text x="692" y="216" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">(rknn.py:81)</text>
+<path d="M320 150 L338 150" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M655 150 L673 150" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="10" y="270" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Op trong ONNX (YOLO(...).export, nc=5, 640x640, trọng số ngẫu nhiên)</text>
+<rect x="10" y="284" width="480" height="28" fill="#E8E8E8"/>
+<text x="18" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Op</text>
+<text x="118" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">v8n onnx</text>
+<text x="213" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">v8n rknn</text>
+<text x="308" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">26n onnx</text>
+<text x="403" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">26n rknn</text>
+<path d="M10 312 L490 312" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Conv</tspan></text>
+<text x="118" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>64</tspan></text>
+<text x="213" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>64</tspan></text>
+<text x="308" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>102</tspan></text>
+<text x="403" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>102</tspan></text>
+<path d="M10 336 L490 336" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Mul</tspan></text>
+<text x="118" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>58</tspan></text>
+<text x="213" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>58</tspan></text>
+<text x="308" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>90</tspan></text>
+<text x="403" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>90</tspan></text>
+<path d="M10 360 L490 360" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sigmoid</tspan></text>
+<text x="118" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>58</tspan></text>
+<text x="213" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>58</tspan></text>
+<text x="308" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>88</tspan></text>
+<text x="403" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>88</tspan></text>
+<rect x="10" y="384" width="480" height="24" fill="#EAF2FF"/>
+<path d="M10 384 L490 384" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Concat</tspan></text>
+<text x="118" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>17</tspan></text>
+<text x="213" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>18</tspan></text>
+<text x="308" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>23</tspan></text>
+<text x="403" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>24</tspan></text>
+<path d="M10 408 L490 408" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Add</tspan></text>
+<text x="118" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="213" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="308" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>22</tspan></text>
+<text x="403" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>22</tspan></text>
+<path d="M10 432 L490 432" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Reshape</tspan></text>
+<text x="118" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="213" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="308" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>12</tspan></text>
+<text x="403" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>12</tspan></text>
+<path d="M10 456 L490 456" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Split</tspan></text>
+<text x="118" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="213" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="308" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>11</tspan></text>
+<text x="403" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>11</tspan></text>
+<path d="M10 480 L490 480" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Transpose</tspan></text>
+<text x="118" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="213" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="308" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<text x="403" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<path d="M10 504 L490 504" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">MatMul</tspan></text>
+<text x="118" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="213" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="308" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<text x="403" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<rect x="10" y="528" width="480" height="24" fill="#EAF2FF"/>
+<path d="M10 528 L490 528" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Slice</tspan></text>
+<text x="118" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="213" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<text x="308" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="403" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<path d="M10 552 L490 552" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">MaxPool</tspan></text>
+<text x="118" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="213" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="308" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="403" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<path d="M10 576 L490 576" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Softmax</tspan></text>
+<text x="118" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="213" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="308" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="403" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<path d="M10 600 L490 600" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Resize</tspan></text>
+<text x="118" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="213" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="308" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="403" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<path d="M10 624 L490 624" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sub</tspan></text>
+<text x="118" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="213" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="308" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="403" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<rect x="10" y="648" width="480" height="24" fill="#EAF2FF"/>
+<path d="M10 648 L490 648" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Div</tspan></text>
+<text x="118" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="213" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="308" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="403" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<path d="M10 672 L490 672" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Tổng nút</tspan></text>
+<text x="118" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>233</tspan></text>
+<text x="213" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>237</tspan></text>
+<text x="308" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>368</tspan></text>
+<text x="403" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>372</tspan></text>
+<rect x="10" y="284" width="480" height="412" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M110 284 L110 696" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M205 284 L205 696" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M300 284 L300 696" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M395 284 L395 696" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="710" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">onnx: format=onnx (opset 19, onnxslim). rknn: ONNX thật đưa vào onnx2rknn.</text>
+<text x="10" y="726" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nền xanh: hàng khác nhau, do _NormalizeCoords (Concat, Slice, Div).</text>
+<text x="510" y="270" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Lớp RKNN (T3, INT8, eval_perf 2.3.2, NPU 1 GHz)</text>
+<rect x="510" y="284" width="480" height="28" fill="#E8E8E8"/>
+<text x="518" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Lớp</text>
+<text x="638" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">v8n</text>
+<text x="690" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">26n</text>
+<text x="742" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đích</text>
+<text x="794" y="298.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ứng với op ONNX (suy ra)</text>
+<path d="M510 312 L990 312" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">ConvExSwish</tspan></text>
+<text x="638" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>57</tspan></text>
+<text x="690" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>87</tspan></text>
+<text x="742" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="324.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + Sigmoid + Mul</tspan></text>
+<path d="M510 336 L990 336" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Conv</tspan></text>
+<text x="638" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>7</tspan></text>
+<text x="690" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>11</tspan></text>
+<text x="742" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="348.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv không có SiLU</tspan></text>
+<path d="M510 360 L990 360" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">ConvAdd</tspan></text>
+<text x="638" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="690" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>4</tspan></text>
+<text x="742" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="372.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv + Add</tspan></text>
+<path d="M510 384 L990 384" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Add</tspan></text>
+<text x="638" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8</tspan></text>
+<text x="690" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>18</tspan></text>
+<text x="742" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="396.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Add</tspan></text>
+<path d="M510 408 L990 408" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Concat</tspan></text>
+<text x="638" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>17</tspan></text>
+<text x="690" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>23</tspan></text>
+<text x="742" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="420.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Concat</tspan></text>
+<path d="M510 432 L990 432" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Split</tspan></text>
+<text x="638" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>9</tspan></text>
+<text x="690" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>12</tspan></text>
+<text x="742" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="444.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Split, Slice</tspan></text>
+<path d="M510 456 L990 456" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Reshape</tspan></text>
+<text x="638" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>7</tspan></text>
+<text x="690" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>13</tspan></text>
+<text x="742" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="468.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Reshape</tspan></text>
+<path d="M510 480 L990 480" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">MaxPool</tspan></text>
+<text x="638" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="690" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3</tspan></text>
+<text x="742" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="492.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MaxPool</tspan></text>
+<path d="M510 504 L990 504" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Resize</tspan></text>
+<text x="638" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="690" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="742" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="516.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Resize</tspan></text>
+<path d="M510 528 L990 528" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Mul</tspan></text>
+<text x="638" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="690" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="742" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="540.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Mul</tspan></text>
+<path d="M510 552 L990 552" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sub</tspan></text>
+<text x="638" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="690" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="742" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="564.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Sub</tspan></text>
+<path d="M510 576 L990 576" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Sigmoid</tspan></text>
+<text x="638" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="690" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="742" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="588.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Sigmoid</tspan></text>
+<path d="M510 600 L990 600" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">exSoftmax13</tspan></text>
+<text x="638" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="690" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="742" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="612.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Softmax của DFL</tspan></text>
+<path d="M510 624 L990 624" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">Transpose</tspan></text>
+<text x="638" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="690" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="742" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CPU</tspan></text>
+<text x="794" y="636.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Transpose của DFL</tspan></text>
+<path d="M510 648 L990 648" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">exSDPAttention</tspan></text>
+<text x="638" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0</tspan></text>
+<text x="690" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2</tspan></text>
+<text x="742" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU</tspan></text>
+<text x="794" y="660.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MatMul, Softmax (attention)</tspan></text>
+<path d="M510 672 L990 672" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">InputOperator</tspan></text>
+<text x="638" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="690" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="742" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CPU</tspan></text>
+<text x="794" y="684.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan></tspan></text>
+<path d="M510 696 L990 696" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="708.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11">OutputOperator</tspan></text>
+<text x="638" y="708.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="690" y="708.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<text x="742" y="708.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>CPU</tspan></text>
+<text x="794" y="708.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan></tspan></text>
+<rect x="510" y="720" width="480" height="24" fill="#F5F5F5"/>
+<path d="M510 720 L990 720" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="518" y="732.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Tổng lớp</tspan></text>
+<text x="638" y="732.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>119</tspan></text>
+<text x="690" y="732.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>182</tspan></text>
+<text x="742" y="732.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan></tspan></text>
+<text x="794" y="732.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan></tspan></text>
+<rect x="510" y="284" width="480" height="460" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M630 284 L630 744" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M682 284 L682 744" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M734 284 L734 744" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M786 284 L786 744" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="510" y="758" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Lớp CPU ngoài Input, Output: YOLOv8n 1 (Transpose), YOLO26n 0.</text>
+<rect x="10" y="774" width="980" height="90" rx="6" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="22" y="790.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Phép tính của bộ hình</tspan><tspan> (suy ra từ hai bảng, không phải câu của vendor):</tspan></text>
+<text x="22" y="809.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Conv trong ONNX = ConvExSwish + Conv + ConvAdd:  YOLOv8n 64 = 57 + 7 + 0;  YOLO26n 102 = 87 + 11 + 4.</tspan></text>
+<text x="22" y="828.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Add trong ONNX của YOLO26n = Add + ConvAdd:  22 = 18 + 4;  YOLOv8n: 8 = 8 (không có ConvAdd).</tspan></text>
+<text x="22" y="847.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Attention: ONNX có MatMul 4, Softmax 2, Transpose 4; bảng lớp RKNN không có lớp MatMul, Softmax, Transpose, chỉ có 2 exSDPAttention.</tspan></text>
+<rect x="10" y="874" width="980" height="52" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="22" y="890.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">T3 (cấu trúc, trọng số ngẫu nhiên): </tspan><tspan>YOLO26n: 180 lớp trên NPU, ngoài InputOperator và OutputOperator không có lớp CPU; </tspan><tspan>YOLOv8n: 1 lớp CPU (Transpose).</tspan></text>
+<text x="22" y="909.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Điều kiện: nc=5, INT8, 40 ảnh calibration, ba core_mask (AUTO, CORE_0, CORE_0_1_2) cho cùng số lớp theo từng loại.</tspan></text>
+<rect x="10" y="936" width="980" height="63" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="950.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>ghép Conv + Sigmoid + Mul thành ConvExSwish: UG232 tr.142 chỉ liệt kê Conv+Sigmoid(Tanh/Elu/Silu...); tên ConvExSwish không có trong tài liệu T1;</tspan></text>
+<text x="20" y="967.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>quy tắc nhận chuỗi MatMul, Softmax, MatMul thành exSDPAttention (UG232 tr.148 chỉ có GLU và LayerNorm);</tspan></text>
+<text x="20" y="984.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>cách gộp hay tách Concat, Slice, Div, Reshape: số lớp RKNN lệch số nút ONNX (ví dụ Div 2 ở ONNX, không có lớp Div) và nguồn không giải thích.</tspan></text>
+<rect x="10" y="1009" width="980" height="100" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1026" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="1041" width="38" height="16" rx="2" fill="#EAF2FF" stroke="#BBBBBB"/>
+<text x="78" y="1049" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>phép tính hoặc nhận xét của bộ hình</tspan></text>
+<rect x="26" y="1063" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1071" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3: đo trên board, có file log</tspan></text>
+<rect x="26" y="1085" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="1093" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: nguồn không cho</tspan></text>
+<text x="10" y="1135" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: ULT engine/exporter.py:683-688, 908-910, 1100-1128, 1139, 1538, 1543-1566; utils/export/rknn.py:74-81; utils/export/engine.py:17-48;</text>
+<text x="10" y="1152" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">cfg/default.yaml:90; data/ops_via_exporter.json, data/rknn_path_onnx.json; LOG 2026-10-10_yolo-phaseA/raw/layers_*.txt; UG232 tr.142, 148.</text>
+</svg>

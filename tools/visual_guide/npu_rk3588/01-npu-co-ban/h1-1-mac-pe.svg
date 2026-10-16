@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1013" width="900" height="1013" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1013" fill="white"/>
+<rect x="808" y="8" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="844.6" y="19.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="50" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ba đơn vị khác nhau trong nguồn T2</text>
+<rect x="10" y="66" width="290" height="318" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="155.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<text x="155" y="102" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">multiply-and-accumulate (nhân rồi cộng dồn)</text>
+<rect x="24" y="128" width="92" height="28" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70.0" y="142.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">weight</text>
+<rect x="24" y="172" width="92" height="28" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="70.0" y="186.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">ifmap pixel</text>
+<circle cx="156" cy="164" r="13" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="156" y="165" font-size="17" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">x</text>
+<circle cx="204" cy="164" r="13" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="204" y="165" font-size="17" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">+</text>
+<path d="M116 142 L146 156" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M116 186 L146 172" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M169 164 L189 164" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="224" y="150" width="62" height="28" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="255.0" y="164.0" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">psum</text>
+<path d="M217 164 L222 164" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M255 178 L255 212 L204 212 L204 179" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#m777777n)"/>
+<text x="150" y="226" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">cộng dồn vào psum</text>
+<text x="22" y="254" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>EYE tr.4: C·R² psum được cộng lại</tspan></text>
+<text x="22" y="271" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>thành một pixel ofmap.</tspan></text>
+<text x="22" y="288" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>EYE tr.2: ALU trong PE làm được</tspan></text>
+<text x="22" y="305" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MAC và phép cộng.</tspan></text>
+<rect x="315" y="66" width="290" height="318" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="460.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE (processing engine), EYE</text>
+<text x="460" y="102" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Fig. 1 (zoom-in): ba thành phần</text>
+<rect x="326" y="128" width="64" height="92" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="358.0" y="174.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">pFIFO</text>
+<rect x="412" y="128" width="88" height="92" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="456.0" y="159.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ALU</text>
+<text x="456.0" y="174.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">datapath</text>
+<text x="456.0" y="189.0" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC, cộng</text>
+<rect x="522" y="128" width="72" height="92" rx="3" fill="#FFF1CC" stroke="#333333" stroke-width="1.2"/>
+<text x="558.0" y="174.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M392 166 L410 166" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M410 182 L392 182" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M502 174 L520 174" fill="none" stroke="#777777" stroke-width="1.6"/>
+<text x="326" y="238" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>pFIFO: điều khiển lưu lượng vào và ra ALU</tspan></text>
+<text x="326" y="255" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RF: local scratchpad (bộ nhớ cục bộ)</tspan></text>
+<text x="326" y="272" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ALU: làm được MAC và cộng</tspan></text>
+<text x="326" y="298" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">MAC chỉ là một phần của PE.</text>
+<rect x="620" y="66" width="270" height="318" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="755.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Matrix Multiply Unit, TPU</text>
+<text x="755" y="102" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">256x256 MACs, 8-bit (tr.3)</text>
+<rect x="648" y="122" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="663.0" y="137.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="686" y="122" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="701.0" y="137.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="724" y="122" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="739.0" y="137.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="762" y="122" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="777.0" y="137.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="648" y="160" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="663.0" y="175.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="686" y="160" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="701.0" y="175.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="724" y="160" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="739.0" y="175.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="762" y="160" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="777.0" y="175.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="648" y="198" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="663.0" y="213.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="686" y="198" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="701.0" y="213.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="724" y="198" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="739.0" y="213.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="762" y="198" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="777.0" y="213.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="648" y="236" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="663.0" y="251.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="686" y="236" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="701.0" y="251.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="724" y="236" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="739.0" y="251.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<rect x="762" y="236" width="30" height="30" rx="3" fill="white" stroke="#555555" stroke-width="1"/>
+<text x="777.0" y="251.0" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MAC</text>
+<text x="802" y="182" font-size="16" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">...</text>
+<text x="802" y="232" font-size="16" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">...</text>
+<path d="M724 272 L724 294" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="648" y="296" width="144" height="24" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="720.0" y="308.0" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Accumulators 32-bit</text>
+<text x="632" y="334" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tích 16-bit gom vào 4 MiB</tspan></text>
+<text x="632" y="349" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>accumulator 32-bit (tr.3).</tspan></text>
+<text x="632" y="364" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Bài không dùng chữ PE.</tspan></text>
+<text x="10" y="406" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">PE array trong Eyeriss: bốn cấp lưu trữ</text>
+<rect x="10" y="418" width="575" height="232" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/>
+<rect x="24" y="498" width="76" height="56" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="62.0" y="518.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">DRAM</text>
+<text x="62.0" y="533.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ngoài chip</text>
+<rect x="140" y="498" width="92" height="56" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="186.0" y="518.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Global</text>
+<text x="186.0" y="533.5" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">buffer</text>
+<path d="M102 516 L138 516" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M138 536 L102 536" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M234 516 L326 516" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M326 536 L234 536" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="120" y="568" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">iFIFO / oFIFO</text>
+<text x="285" y="568" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">iFIFO / oFIFO</text>
+<rect x="330" y="454" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="358" y="466" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="338" y="475" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="358" y="482" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M386 474 L406 474" stroke="#777777" stroke-width="1.4"/>
+<path d="M358 494 L358 510" stroke="#777777" stroke-width="1.4"/>
+<rect x="406" y="454" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="434" y="466" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="414" y="475" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="434" y="482" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M462 474 L482 474" stroke="#777777" stroke-width="1.4"/>
+<path d="M434 494 L434 510" stroke="#777777" stroke-width="1.4"/>
+<rect x="482" y="454" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="510" y="466" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="490" y="475" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="510" y="482" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M510 494 L510 510" stroke="#777777" stroke-width="1.4"/>
+<rect x="330" y="510" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="358" y="522" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="338" y="531" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="358" y="538" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M386 530 L406 530" stroke="#777777" stroke-width="1.4"/>
+<path d="M358 550 L358 566" stroke="#777777" stroke-width="1.4"/>
+<rect x="406" y="510" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="434" y="522" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="414" y="531" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="434" y="538" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M462 530 L482 530" stroke="#777777" stroke-width="1.4"/>
+<path d="M434 550 L434 566" stroke="#777777" stroke-width="1.4"/>
+<rect x="482" y="510" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="510" y="522" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="490" y="531" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="510" y="538" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M510 550 L510 566" stroke="#777777" stroke-width="1.4"/>
+<rect x="330" y="566" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="358" y="578" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="338" y="587" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="358" y="594" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M386 586 L406 586" stroke="#777777" stroke-width="1.4"/>
+<rect x="406" y="566" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="434" y="578" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="414" y="587" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="434" y="594" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<path d="M462 586 L482 586" stroke="#777777" stroke-width="1.4"/>
+<rect x="482" y="566" width="56" height="40" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="510" y="578" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">PE</text>
+<rect x="490" y="587" width="40" height="14" rx="2" fill="#FFF1CC" stroke="#555555" stroke-width="0.8"/>
+<text x="510" y="594" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RF</text>
+<text x="424" y="440" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">PE array, nối bằng NoC</text>
+<text x="24" y="612" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Bốn cấp: DRAM, global buffer, array (liên PE), RF (EYE tr.2).</text>
+<text x="24" y="630" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Global buffer thường cỡ 100-300kB; RF thường dưới 1kB mỗi PE.</text>
+<text x="600" y="416" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chip Eyeriss (EYE tr.5, Fig. 4)</text>
+<rect x="600" y="430" width="290" height="28" fill="#E8E8E8"/>
+<text x="608" y="444.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mục</text>
+<text x="758" y="444.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giá trị</text>
+<path d="M600 458 L890 458" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="470.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Process</tspan></text>
+<text x="758" y="470.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>65nm CMOS</tspan></text>
+<path d="M600 482 L890 482" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="494.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan># of PEs</tspan></text>
+<text x="758" y="494.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>168</tspan></text>
+<path d="M600 506 L890 506" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="518.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RF Size/PE</tspan></text>
+<text x="758" y="518.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.5 kB</tspan></text>
+<path d="M600 530 L890 530" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="542.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Buffer Size</tspan></text>
+<text x="758" y="542.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>108 kB</tspan></text>
+<path d="M600 554 L890 554" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="566.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Clock Rate</tspan></text>
+<text x="758" y="566.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>200 MHz</tspan></text>
+<path d="M600 578 L890 578" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="608" y="590.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Precision</tspan></text>
+<text x="758" y="590.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>16-bit Fixed-Point</tspan></text>
+<rect x="600" y="430" width="290" height="172" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M750 430 L750 602" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="10" y="670" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">So sánh hai cách gọi</text>
+<rect x="10" y="684" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="698.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mục</text>
+<text x="148" y="698.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">EYE (Eyeriss)</text>
+<text x="528" y="698.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">TPU</text>
+<path d="M10 712 L890 712" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="725.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tên đơn vị</tspan></text>
+<text x="148" y="725.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>PE (processing engine)</tspan></text>
+<text x="528" y="725.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MAC; chữ PE không có trong bài</tspan></text>
+<path d="M10 738 L890 738" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="751.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Bên trong</tspan></text>
+<text x="148" y="751.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>ALU datapath (MAC, cộng), RF, pFIFO</tspan></text>
+<text x="528" y="751.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Matrix Multiply Unit gồm 256x256 MAC</tspan></text>
+<path d="M10 764 L890 764" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="777.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số lượng</tspan></text>
+<text x="148" y="777.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>168 PE trên chip Eyeriss</tspan></text>
+<text x="528" y="777.0" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>65,536 MAC</tspan></text>
+<rect x="10" y="684" width="880" height="106" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M140 684 L140 790" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M520 684 L520 790" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="800" width="880" height="64" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="822" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Không đồng nhất </tspan><tspan>một PE với một MAC: PE của EYE có thêm RF và pFIFO; TPU đếm theo MAC.</tspan></text>
+<text x="24" y="842" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Số PE, số MAC, 65 nm và 28 nm là của paper, không phải của RK3588.</tspan></text>
+<rect x="10" y="876" width="880" height="97" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="884" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="895.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="895" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="920" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">TRM1 tr.1984: </tspan><tspan>&quot;1024x3 integer 8 MAC operations per cycle&quot;; TRM1 tr.2001: &quot;Int8 mac array 32x32 mode&quot;.</tspan></text>
+<text x="24" y="939" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32 x 32 = 1024 là phép tính của bộ hình (khớp với số trên); TRM không nói một ô 32x32 là một PE.</tspan></text>
+<text x="24" y="958" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: một &quot;PE&quot; của RK3588 là gì; bố cục MAC array cho INT16, FP16, INT4. Xem Hình 2.2, Hình 2.3.</tspan></text>
+<text x="10" y="999" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: EYE tr.2, 3, 4, 5; TPU tr.1, 3; TRM1 tr.1984, 2001.</text>
+</svg>

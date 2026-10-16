@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 916" width="900" height="916" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="916" fill="white"/>
+<rect x="808" y="8" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="833.5" y="19.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<text x="10" y="44" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Model thử: </tspan><tspan>ONNX một Conv 1x1 đồng nhất, input NCHW [1,3,64,64]; toolkit 2.3.2, PC, không board; đọc min và max của tensor x từ quant_tab trong file .rknn.</tspan></text>
+<text x="10" y="64" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Ảnh dùng là gradient 150 đến 250; mean=250, std=1, nên dải kỳ vọng sau chuẩn hóa là [-100, 0].</tspan></text>
+<text x="152.5" y="90" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Ta đưa vào</text>
+<text x="462.5" y="90" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Đọc được (min / max)</text>
+<text x="765.0" y="90" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Suy ra</text>
+<text x="10" y="114" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1. Ảnh khác kích thước model</text>
+<rect x="10" y="128" width="285" height="100" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="20" y="143" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">jpg và png 128x64 (rộng);</text>
+<text x="20" y="160" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">jpg 64x128 (cao); mean=250,</text>
+<text x="20" y="177" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">std=1</text>
+<rect x="335" y="128" width="255" height="100" rx="4" fill="#E8F4EA" stroke="#333333" stroke-width="1.2"/>
+<text x="345" y="143" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ảnh rộng: -99 / 0</text>
+<text x="345" y="160" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ảnh cao: -99 / 0</text>
+<text x="345" y="177" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đối chứng 64x64: -100 / 0</text>
+<rect x="640" y="128" width="250" height="100" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="650" y="143" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Toàn ảnh được dùng, không cắt, không</text>
+<text x="650" y="160" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đệm</text>
+<path d="M295 178 L335 178" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M590 178 L640 178" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="215" y="136" width="64" height="32" fill="#DDE8F8" stroke="#333333"/>
+<path d="M247 170 L247 182" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="231" y="184" width="32" height="32" fill="#DDE8F8" stroke="#333333"/>
+<text x="224" y="200" font-size="11" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central" font-style="italic">(minh họa)</text>
+<text x="10" y="252" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. Nội suy khi đổi kích thước</text>
+<rect x="10" y="266" width="285" height="100" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="20" y="281" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">png 128x64, cột xen kẽ 150</text>
+<text x="20" y="298" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">và 250</text>
+<rect x="335" y="266" width="255" height="100" rx="4" fill="#E8F4EA" stroke="#333333" stroke-width="1.2"/>
+<text x="345" y="281" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">-50 / -50</text>
+<rect x="640" y="266" width="250" height="100" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="650" y="281" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Hai cột kề nhau được lấy trung bình:</text>
+<text x="650" y="298" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(150 + 250) / 2 = 200, trừ mean 250 ra</text>
+<text x="650" y="315" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">-50; nearest sẽ cho -100 hoặc 0</text>
+<path d="M295 316 L335 316" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M590 316 L640 316" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="215" y="274" width="8" height="30" fill="#999999" stroke="#666666" stroke-width="0.5"/>
+<rect x="223" y="274" width="8" height="30" fill="#EEEEEE" stroke="#666666" stroke-width="0.5"/>
+<rect x="231" y="274" width="8" height="30" fill="#999999" stroke="#666666" stroke-width="0.5"/>
+<rect x="239" y="274" width="8" height="30" fill="#EEEEEE" stroke="#666666" stroke-width="0.5"/>
+<rect x="247" y="274" width="8" height="30" fill="#999999" stroke="#666666" stroke-width="0.5"/>
+<rect x="255" y="274" width="8" height="30" fill="#EEEEEE" stroke="#666666" stroke-width="0.5"/>
+<rect x="263" y="274" width="8" height="30" fill="#999999" stroke="#666666" stroke-width="0.5"/>
+<rect x="271" y="274" width="8" height="30" fill="#EEEEEE" stroke="#666666" stroke-width="0.5"/>
+<path d="M247 308 L247 320" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="231" y="322" width="32" height="30" fill="#C8C8C8" stroke="#666666"/>
+<text x="10" y="390" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">3. npy: layout và kích thước</text>
+<rect x="10" y="404" width="285" height="82" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="20" y="419" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">npy NCHW float32 và uint8 [1,3,64,64]</text>
+<text x="20" y="436" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">npy [3,64,64]</text>
+<text x="20" y="453" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">npy NHWC [1,64,64,3]</text>
+<text x="20" y="470" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">npy [1,3,32,32]</text>
+<rect x="335" y="404" width="255" height="82" rx="4" fill="#E8F4EA" stroke="#333333" stroke-width="1.2"/>
+<text x="345" y="419" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">-100 / 0</text>
+<text x="345" y="436" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">-100 / 0</text>
+<text x="345" y="453" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ValueError: shape wrong, expect nchw</text>
+<text x="345" y="470" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ValueError: cùng dạng thông báo</text>
+<rect x="640" y="404" width="250" height="82" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="650" y="419" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Chấp nhận</text>
+<text x="650" y="436" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Chấp nhận (không có chiều batch)</text>
+<text x="650" y="453" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Từ chối</text>
+<text x="650" y="470" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Không tự resize npy</text>
+<path d="M295 445 L335 445" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M590 445 L640 445" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="10" y="510" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">4. mean và std với npy</text>
+<rect x="10" y="524" width="285" height="48" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="20" y="539" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">npy giá trị 150 đến 250, mean=250 std=2; đối</text>
+<text x="20" y="556" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chứng: cùng npy, mean=0 std=1</text>
+<rect x="335" y="524" width="255" height="48" rx="4" fill="#E8F4EA" stroke="#333333" stroke-width="1.2"/>
+<text x="345" y="539" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">mean=250 std=2: -50 / 0</text>
+<text x="345" y="556" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">mean=0 std=1: 150 / 250</text>
+<rect x="640" y="524" width="250" height="48" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="650" y="539" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">mean và std được áp dụng lên npy; Xác</text>
+<text x="650" y="556" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhận đọc đúng</text>
+<path d="M295 548 L335 548" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M590 548 L640 548" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="10" y="596" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">5. Tên quantized_dtype cũ</text>
+<rect x="10" y="610" width="285" height="82" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="20" y="625" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">w8a8 so với asymmetric_quantized-8</text>
+<rect x="335" y="610" width="255" height="82" rx="4" fill="#E8F4EA" stroke="#333333" stroke-width="1.2"/>
+<text x="345" y="625" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">cùng quant_tab (-99 / 0, asym, layer)</text>
+<rect x="640" y="610" width="250" height="82" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="650" y="625" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">config() chấp nhận tên cũ; kết quả</text>
+<text x="650" y="642" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">giống w8a8 trên model này. Chấp nhận ở</text>
+<text x="650" y="659" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">config() chưa chứng minh phần cứng hỗ</text>
+<text x="650" y="676" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trợ.</text>
+<path d="M295 651 L335 651" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M590 651 L640 651" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="10" y="708" width="880" height="80" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="722.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>Thuật toán nội suy chính xác (bilinear, area, antialias) (chỉ loại được nearest);</tspan></text>
+<text x="20" y="739.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>Cách xử lý ảnh RGB/BGR, ảnh xám, ảnh có alpha;</tspan></text>
+<text x="20" y="756.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>Model NHWC (tflite) có chấp nhận npy NHWC không; Ảnh calibration và npy có cho cùng kết quả trên model thật;</tspan></text>
+<text x="20" y="773.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>Ảnh hưởng lên độ chính xác sau lượng tử; Hành vi trên toolkit phiên bản khác.</tspan></text>
+<rect x="10" y="798" width="880" height="78" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="815" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="830" width="38" height="16" rx="2" fill="#E8F4EA" stroke="#BBBBBB"/>
+<text x="78" y="838" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>số đo T3 có file log (min và max đọc từ quant_tab của file .rknn)</tspan></text>
+<path d="M26 860 L66 860" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="78" y="860" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>đưa vào, đọc được, suy ra (suy ra là của log, không phải câu của vendor)</tspan></text>
+<text x="10" y="902" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: tmp/04_debug-logs/2026-10-10_t3-calibration-pc/README.md, probe.py (toolkit 2.3.2, một model thử).</text>
+</svg>

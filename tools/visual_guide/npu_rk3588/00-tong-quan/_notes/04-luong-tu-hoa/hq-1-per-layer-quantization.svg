@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 945" width="900" height="945" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="945" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="48" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nguyên lý Lượng tử hóa Per-Layer (Per-Tensor) và Vấn đề Outlier kênh</text>
+<rect x="10" y="66" width="880" height="215" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="83" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Bản chất toán học: Ánh xạ Affine giữa Trục số thực và Lưới số nguyên INT8</text>
+<rect x="24" y="102" width="420" height="162" rx="4" fill="#FAFAFA" stroke="#999999" stroke-width="1"/>
+<text x="36" y="120" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Công thức lượng tử hóa Affine (NAGEL Eq. 4 &amp; 6):</text>
+<text x="36" y="140" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Lượng tử hóa (Quantize): </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">q = clamp(round(x / s) + z, -128, 127)</tspan></text>
+<text x="36" y="157" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Phục hồi (Dequantize): </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">x ≈ s · (q - z)</tspan></text>
+<text x="36" y="174" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Scale factor (s): </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">s = (x_max - x_min) / (q_max - q_min)</tspan></text>
+<text x="36" y="191" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  (Bước nhảy giữa 2 nấc nguyên liên tiếp; s là số thực dương float)</tspan></text>
+<text x="36" y="208" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Zero-point (z): </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="10">z = round(-x_min / s) + q_min</tspan></text>
+<text x="36" y="225" font-size="11" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  (Số nguyên dịch chuyển để đảm bảo số 0 thực không bị sai số)</tspan></text>
+<rect x="460" y="102" width="410" height="162" rx="4" fill="#F0F8FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="472" y="120" font-size="12" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Trực quan hóa lưới lượng tử 256 mức (INT8):</text>
+<text x="472" y="144" font-size="11" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Trục số thực x (FP32):</text>
+<path d="M472 162 L850 162" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<text x="472" y="176" font-size="10" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">x_min (-10.0)</text>
+<text x="640" y="176" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.0 (Zero)</text>
+<text x="820" y="176" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">x_max (+10.0)</text>
+<path d="M660 182 L660 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="675" y="191" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">s = 20/255 ≈ 0.078</text>
+<text x="472" y="210" font-size="11" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Lưới số nguyên q (INT8):</text>
+<path d="M472 226 L850 226" fill="none" stroke="#444444" stroke-width="1.6" marker-end="url(#m444444n)"/>
+<path d="M480 222 L480 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M504 222 L504 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M528 222 L528 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M552 222 L552 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M576 222 L576 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M600 222 L600 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M624 222 L624 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M648 222 L648 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M672 222 L672 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M696 222 L696 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M720 222 L720 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M744 222 L744 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M768 222 L768 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M792 222 L792 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M816 222 L816 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M840 222 L840 230" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="472" y="241" font-size="10" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">q_min (-128)</text>
+<text x="640" y="241" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">z = 0 (Zero-point)</text>
+<text x="820" y="241" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">q_max (+127)</text>
+<rect x="10" y="297" width="880" height="260" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="314" font-size="14" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Cơ chế Per-Layer (Per-Tensor): Một bộ (s, z) duy nhất cho toàn bộ các kênh</text>
+<text x="24" y="333" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Phạm vi áp dụng: </tspan><tspan>Dùng </tspan><tspan font-weight="700">1 giá trị Scale s và 1 giá trị Zero-point z</tspan><tspan> chung cho toàn bộ tensor [H, W, C].</tspan></text>
+<text x="24" y="351" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Quy tắc xác định: </tspan><tspan>x_min và x_max được lấy từ cực trị của </tspan><tspan font-weight="700">toàn bộ tất cả các kênh gộp lại</tspan><tspan> (UG232 tr.120).</tspan></text>
+<rect x="24" y="377" width="260" height="150" rx="3" fill="#FAFAFA" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="154" y="397" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Kênh 0: Phân bố hẹp</text>
+<text x="154" y="413" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dải giá trị thực: [-1.2, +1.1]</text>
+<rect x="44" y="425" width="220" height="24" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="154" y="441" font-size="10.5" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Biên độ dao động nhỏ</text>
+<text x="34" y="465" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Dải mong muốn: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.5">[-1.2, +1.1]</tspan></text>
+<text x="34" y="481" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nếu dùng scale chung s=0.196:</tspan></text>
+<text x="34" y="497" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Chỉ chiếm </tspan><tspan font-weight="700">~12 mức INT8!</tspan><tspan> (Mất độ phân giải)</tspan></text>
+<rect x="320" y="377" width="260" height="150" rx="3" fill="#FFF8E1" stroke="#C62828" stroke-width="1.4"/>
+<text x="450" y="397" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Kênh 1: Có Outlier cực lớn</text>
+<text x="450" y="413" font-size="11" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Dải giá trị thực: [-25.0, +25.0]</text>
+<rect x="340" y="425" width="220" height="24" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="450" y="441" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Outlier kéo giãn toàn bộ dải</text>
+<text x="330" y="465" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Quyết định min-max của Layer:</tspan></text>
+<text x="330" y="481" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.5">  x_min = -25.0, x_max = +25.0</tspan></text>
+<text x="330" y="497" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Scale Layer: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.5">s = 50 / 255 = 0.196</tspan></text>
+<text x="330" y="513" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Kênh 1 chiếm trọn 256 mức INT8</tspan></text>
+<rect x="616" y="377" width="260" height="150" rx="3" fill="#FAFAFA" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="746" y="397" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Kênh 2: Phân bố hẹp</text>
+<text x="746" y="413" font-size="11" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dải giá trị thực: [-0.8, +0.9]</text>
+<rect x="636" y="425" width="220" height="24" rx="3" fill="#EAF2FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="746" y="441" font-size="10.5" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Biên độ dao động nhỏ</text>
+<text x="626" y="465" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Dải mong muốn: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.5">[-0.8, +0.9]</tspan></text>
+<text x="626" y="481" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nếu dùng scale chung s=0.196:</tspan></text>
+<text x="626" y="497" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  Chỉ chiếm </tspan><tspan font-weight="700">~9 mức INT8!</tspan><tspan> (Co cụm nghiêm trọng)</tspan></text>
+<text x="10" y="577" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Hậu quả của Per-Layer khi gặp Outlier: Phân bổ 256 mức lượng tử INT8</text>
+<rect x="10" y="591" width="880" height="28" fill="#E8E8E8"/>
+<text x="18" y="605.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Kênh trong Layer</text>
+<text x="158" y="605.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Dải số thực gốc</text>
+<text x="358" y="605.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Số mức INT8 thực tế sử dụng</text>
+<text x="578" y="605.0" font-size="11.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Hậu quả độ chính xác (GHOLAMI tr.6)</text>
+<path d="M10 619 L890 619" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="638.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kênh 0</tspan></text>
+<text x="158" y="638.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[-1.2, +1.1]</tspan></text>
+<text x="358" y="638.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>12 / 256 mức (chỉ dùng ~4.7%)</tspan></text>
+<text x="578" y="631.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Mất sạch chi tiết đặc trưng nhỏ;</tspan></text>
+<text x="578" y="646.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>làm tròn thô gây nhiễu lớn</tspan></text>
+<path d="M10 658 L890 658" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="677.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kênh 1 (Outlier)</tspan></text>
+<text x="158" y="677.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[-25.0, +25.0]</tspan></text>
+<text x="358" y="677.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>256 / 256 mức (dùng 100%)</tspan></text>
+<text x="578" y="670.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Biểu diễn tốt kênh outlier,</tspan></text>
+<text x="578" y="685.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhưng &#x27;bắt cóc&#x27; toàn bộ độ phân giải</tspan></text>
+<path d="M10 697 L890 697" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="716.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kênh 2</tspan></text>
+<text x="158" y="716.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[-0.8, +0.9]</tspan></text>
+<text x="358" y="716.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>9 / 256 mức (chỉ dùng ~3.5%)</tspan></text>
+<text x="578" y="709.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Gần như bị làm tròn thành hằng số;</tspan></text>
+<text x="578" y="724.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>triệt tiêu tín hiệu gradient</tspan></text>
+<path d="M10 736 L890 736" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="18" y="755.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tổng kết Layer</tspan></text>
+<text x="158" y="755.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>[-25.0, +25.0]</tspan></text>
+<text x="358" y="755.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Trung bình tận dụng rất thấp</tspan></text>
+<text x="578" y="748.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Bad quantization resolution;</tspan></text>
+<text x="578" y="763.0" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>đây là nguyên nhân sụt mAP mô hình</tspan></text>
+<rect x="10" y="591" width="880" height="184" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M150 591 L150 775" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M350 591 L350 775" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M570 591 L570 775" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="789" width="880" height="116" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<rect x="20" y="797" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="60.300000000000004" y="808.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="122" y="808" font-size="13.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Liên hệ RK3588: điều nguồn T1 nói và điều chưa biết</text>
+<text x="24" y="833" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">NAGEL tr.4, 5: </tspan><tspan>Lưới lượng tử đều 2^b mức; Per-tensor quantization dùng chung 1 quantizer cho cả tensor.</tspan></text>
+<text x="24" y="852" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">GHOLAMI tr.6: </tspan><tspan>Layerwise quantization áp chung 1 range cho mọi filter, gây bad quantization resolution cho kênh hẹp.</tspan></text>
+<text x="24" y="871" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">UG232 tr.120: </tspan><tspan>RKNN-Toolkit2 áp dụng Per-Layer cho activation và các giá trị trung gian trên NPU RK3588.</tspan></text>
+<text x="24" y="890" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: ngưỡng outlier cụ thể mà RKNN thresholding tự động cắt (clip) trong thuật toán KL-Divergence.</tspan></text>
+<text x="10" y="931" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: NAGEL tr.4, 5 (Qualcomm Whitepaper); GHOLAMI tr.6 (Survey 2021); UG232 tr.120 (RKNN SDK User Guide).</text>
+</svg>

@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1848" width="900" height="1848" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="1848" fill="white"/>
+<rect x="808" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="848.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="10" y="40" width="880" height="346" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/>
+<text x="24" y="59" font-size="15" font-weight="700" fill="#333333" text-anchor="start" dominant-baseline="central">Hai bộ nhớ của SoC và buffer trong core NPU</text>
+<rect x="30" y="76" width="250" height="112" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="155.0" y="93" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">DDR</text>
+<text x="155.0" y="114" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">bộ điều khiển: LPDDR4, LPDDR4X, LPDDR5</text>
+<text x="155.0" y="130" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">4 kênh x16 bit, tối đa 2 rank mỗi kênh</text>
+<text x="155.0" y="146" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">4 scheduler nối DDRCTL0 đến 3</text>
+<rect x="30" y="198" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="55.5" y="209.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<rect x="30" y="224" width="250" height="50" rx="6" fill="#EAF6EA" stroke="#2E7D32" stroke-width="1"/>
+<text x="42" y="240.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>eval_perf in DDR Current Frequency</tspan></text>
+<text x="42" y="258.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>List: 2112000000 (đơn vị Hz).</tspan></text>
+<rect x="30" y="276" width="250" height="46" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="40" y="290.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>loại DRAM, số kênh và băng thông</tspan></text>
+<text x="40" y="307.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>đỉnh của board RK3588S.</tspan></text>
+<rect x="296" y="158" width="250" height="146" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="421.0" y="175" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">System SRAM</text>
+<text x="421.0" y="196" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">SoC có 1MB SRAM,</text>
+<text x="421.0" y="212" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">956KB cấp được cho các IP</text>
+<text x="421.0" y="228" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">NPU: tối đa 956KB, căn 4K</text>
+<text x="421.0" y="244" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">loại bộ nhớ NPU đặt vào được:</text>
+<text x="421.0" y="260" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Internal và Weight</text>
+<rect x="620" y="76" width="250" height="232" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="745" y="93" font-size="15" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">NPU (3 core)</text>
+<rect x="630" y="112" width="72" height="66" rx="3" fill="#F5F5F5" stroke="#555555"/>
+<text x="666" y="128" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">core 0</text>
+<text x="666" y="148" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">buffer</text>
+<text x="666" y="164" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">384KB</text>
+<rect x="708" y="112" width="72" height="66" rx="3" fill="#F5F5F5" stroke="#555555"/>
+<text x="744" y="128" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">core 1</text>
+<text x="744" y="148" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">buffer</text>
+<text x="744" y="164" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">384KB</text>
+<rect x="786" y="112" width="72" height="66" rx="3" fill="#F5F5F5" stroke="#555555"/>
+<text x="822" y="128" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">core 2</text>
+<text x="822" y="148" font-size="11.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">buffer</text>
+<text x="822" y="164" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">384KB</text>
+<text x="745" y="200" font-size="12" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">384KB x3: buffer bên trong core</text>
+<text x="745" y="217" font-size="12" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">(Hình 2.2, Hình 2.3)</text>
+<text x="745" y="244" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">khác với 956KB của SRAM SoC</text>
+<text x="745" y="261" font-size="12" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(không cùng một bộ nhớ)</text>
+<path d="M280 128 L618 128" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<path d="M618 146 L282 146" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="450" y="98" font-size="12" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">AXI master: NPU lấy dữ liệu từ bộ nhớ</text>
+<text x="450" y="113" font-size="12" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">nối vào SoC AXI interconnect (Hình 2.1)</text>
+<path d="M546 232 L618 232" fill="none" stroke="#C62828" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="582" y="218" font-size="11.5" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">unknown</text>
+<rect x="30" y="332" width="840" height="44" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="44" y="354" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đường nối NPU tới SRAM (đường đỏ đứt) nguồn không cho; </tspan><tspan>NPU chỉ được tài liệu nói là lấy dữ liệu qua AXI master.</tspan></text>
+<rect x="10" y="402" width="880" height="376" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/><text x="24" y="421" font-size="15" font-weight="700" fill="#333333" dominant-baseline="central">Bật SRAM cho NPU: ba lớp điều kiện (kernel, DTS, runtime)</text>
+<rect x="20" y="432" width="860" height="28" fill="#E8E8E8"/>
+<text x="28" y="446" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Lớp</text>
+<text x="102" y="446" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều kiện (T1)</text>
+<text x="568" y="446" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Trên board RK3588S</text>
+<text x="28" y="472.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Kernel</tspan></text>
+<text x="102" y="472.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>driver RKNPU &gt;= 0.8.0 và CONFIG_ROCKCHIP_RKNPU_SRAM=y.</tspan></text>
+<rect x="560" y="460" width="320" height="85" fill="#EAF6EA" stroke="none"/>
+<text x="568" y="472.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Board: CONFIG_ROCKCHIP_RKNPU_SRAM not set, driver</tspan></text>
+<text x="568" y="487.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.9.8. Trong driver, SRAM chỉ được cấp khi</tspan></text>
+<text x="568" y="502.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>IS_ENABLED(CONFIG_ROCKCHIP_RKNPU_SRAM)</tspan></text>
+<text x="568" y="517.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(rknpu_gem.c:720); rknpu_mem.c không có mã SRAM;</tspan></text>
+<text x="568" y="532.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>rknpu/mm không có (suy ra).</tspan></text>
+<path d="M20 460 L880 460" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="557.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DTS</tspan></text>
+<text x="102" y="557.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cấp SRAM từ system SRAM cho node rknpu: tối đa 956KB, căn 4K, thêm</tspan></text>
+<text x="102" y="572.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>rockchip,sram = &lt;&amp;rknpu_sram&gt;; vùng của IP khác (ví dụ codec) không được</tspan></text>
+<text x="102" y="587.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>chồng lấn.</tspan></text>
+<text x="568" y="557.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>DTS trong repo (không phải DTB đọc từ board):</tspan></text>
+<text x="568" y="572.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>syssram 0xef000 chia cho rkvdec0_sram 0x78000 và</tspan></text>
+<text x="568" y="587.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>rkvdec1_sram 0x77000; node rknpu không có</tspan></text>
+<text x="568" y="602.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>rockchip,sram.</tspan></text>
+<path d="M20 545 L880 545" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="627.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Runtime</tspan></text>
+<text x="102" y="627.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>librknnrt &gt;= 1.3.4b14 (SRAM md) hoặc &gt;= 1.6.0 (UG232): mâu thuẫn. Bật</tspan></text>
+<text x="102" y="642.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>bằng biến môi trường RKNN_INTERNAL_MEM_TYPE=sram,</tspan></text>
+<text x="102" y="657.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RKNN_WEIGHT_MEM_TYPE=sram (Internal và Weight) hoặc cờ</tspan></text>
+<text x="102" y="672.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RKNN_FLAG_ENABLE_SRAM (chỉ Internal Tensor): hai cách mâu thuẫn.</tspan></text>
+<rect x="560" y="615" width="320" height="70" fill="#FFF3F3" stroke="#C62828" stroke-dasharray="5 3"/>
+<text x="568" y="627.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: hiệu lực các cờ SRAM của C API trên</tspan></text>
+<text x="568" y="642.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>board này; A/B có và không SRAM chưa đo.</tspan></text>
+<path d="M20 615 L880 615" stroke="#BBBBBB" stroke-width="0.8"/>
+<rect x="20" y="432" width="860" height="253" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M94 432 L94 685" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M560 432 L560 685" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="20" y="697" width="860" height="71" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="32" y="713.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Chưa rõ trong tài liệu: </tspan><tspan>RKNN_FLAG_SHARE_SRAM có trong header (HDR dòng 72) và RT232 mô tả như dùng được, nhưng UG232 nói</tspan></text>
+<text x="32" y="732.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>&quot;has not yet been implemented&quot;; RKNN_FLAG_MEMORY_TRY_ALLOC_SRAM chỉ có ở header (HDR dòng 385).</tspan></text>
+<text x="32" y="751.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232: SRAM giúp giảm áp lực băng thông DDR nhưng có thể ảnh hưởng thời gian suy luận: một đánh đổi cần đo, không phải lợi ích chắc chắn.</tspan></text>
+<rect x="10" y="796" width="880" height="588" rx="8" fill="#F5F5F5" stroke="#666666" stroke-width="1.2"/><text x="24" y="815" font-size="15" font-weight="700" fill="#333333" dominant-baseline="central">Copy hay zero-copy: dữ liệu vào và ra khỏi NPU</text>
+<text x="30" y="840" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">General API (UG232 Figure 5-5)</text>
+<text x="470" y="840" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Zero-copy API (UG232 Figure 5-6), chỉ C API</text>
+<rect x="30" y="854" width="400" height="50" rx="4" fill="#FDECEA" stroke="#333333" stroke-width="1.2"/>
+<text x="230.0" y="872.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Input từ bộ nhớ ngoài</text>
+<text x="230.0" y="890.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">copy vào input memory của NPU mỗi frame (CPU)</text>
+<rect x="30" y="928" width="400" height="50" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="230.0" y="946.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Normalize, Quantize, NHWC =&gt; NC1HWC2</text>
+<text x="230.0" y="964.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">CPU; hoặc NPU khi thỏa căn lề zero-copy (input vẫn do CPU copy)</text>
+<path d="M230 904 L230 928" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="30" y="1002" width="400" height="50" rx="4" fill="#EAF2FF" stroke="#333333" stroke-width="1.2"/>
+<text x="230.0" y="1020.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Model Inference</text>
+<text x="230.0" y="1038.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">NPU</text>
+<path d="M230 978 L230 1002" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="30" y="1076" width="400" height="50" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="230.0" y="1094.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">NC1HWC2 =&gt; NCHW/NHWC, Dequantize</text>
+<text x="230.0" y="1112.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">CPU</text>
+<path d="M230 1052 L230 1076" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="470" y="854" width="400" height="50" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="670.0" y="872.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Input: bộ nhớ cấp trước</text>
+<text x="670.0" y="890.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">NPU hay nguồn khác (ví dụ DRM) dùng trực tiếp, không copy</text>
+<rect x="470" y="928" width="400" height="50" rx="4" fill="#EAF2FF" stroke="#333333" stroke-width="1.2"/>
+<text x="670.0" y="946.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Normalize, Quantize, Model Inference</text>
+<text x="670.0" y="964.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">tất cả chạy trên NPU</text>
+<path d="M670 904 L670 928" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="470" y="1002" width="400" height="50" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="670.0" y="1020.0" font-size="13" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">NC1HWC2 =&gt; NCHW, Dequantize</text>
+<text x="670.0" y="1038.0" font-size="11.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">CPU, hoặc NPU (hình gốc vẽ hai nhánh)</text>
+<path d="M670 978 L670 1002" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="470" y="1068" width="400" height="68" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="482" y="1084.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>UG232: zero-copy giảm chi phí copy bộ nhớ,</tspan></text>
+<text x="482" y="1102.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>hiệu năng tốt hơn và ít băng thông hơn;</tspan></text>
+<text x="482" y="1120.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>general API và zero-copy không gọi chung.</tspan></text>
+<rect x="20" y="1144" width="860" height="28" fill="#E8E8E8"/>
+<text x="28" y="1158" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều kiện và cờ</text>
+<text x="218" y="1158" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nội dung (T1)</text>
+<text x="28" y="1184.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Căn lề input zero-copy</tspan></text>
+<text x="218" y="1184.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RK3588: input 4 chiều có 1, 3 hoặc 4 kênh cần Width 16-byte aligned; input không phải 4 chiều cần Total</tspan></text>
+<text x="218" y="1199.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>size 16-byte aligned (Table 5-2). Lý do quy tắc 16 byte: unknown.</tspan></text>
+<path d="M20 1172 L880 1172" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="1224.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Query layout input</tspan></text>
+<text x="218" y="1224.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dùng RKNN_QUERY_NATIVE_INPUT_ATTR, không phải RKNN_QUERY_INPUT_ATTR (UG232); ví dụ rknn_create_mem_demo.cpp</tspan></text>
+<text x="218" y="1239.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>dòng 205 dùng RKNN_QUERY_INPUT_ATTR: mâu thuẫn.</tspan></text>
+<path d="M20 1212 L880 1212" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="1264.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cờ cấp phát (header)</tspan></text>
+<text x="218" y="1264.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RKNN_FLAG_MEMORY_CACHEABLE = 1 &lt;&lt; 0 (mặc định), RKNN_FLAG_MEMORY_NON_CACHEABLE = 1 &lt;&lt; 1,</tspan></text>
+<text x="218" y="1279.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RKNN_FLAG_MEMORY_TRY_ALLOC_SRAM = 1 &lt;&lt; 2.</tspan></text>
+<path d="M20 1252 L880 1252" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="1304.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Đồng bộ cache</tspan></text>
+<text x="218" y="1304.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>bộ nhớ cacheable cần rknn_mem_sync: TO_DEVICE sau khi CPU ghi, trước khi NPU truy cập; FROM_DEVICE sau khi</tspan></text>
+<text x="218" y="1319.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU ghi.</tspan></text>
+<path d="M20 1292 L880 1292" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="28" y="1344.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Python</tspan></text>
+<text x="218" y="1344.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>RKNN-Toolkit-Lite2 2.3.2 (rknn_lite.py) không có hàm cấp phát bộ nhớ, zero-copy hay đồng bộ cache: script</tspan></text>
+<text x="218" y="1359.5" font-size="11.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>tier 2 của repo (RKNNLite) dùng general API (suy ra).</tspan></text>
+<path d="M20 1332 L880 1332" stroke="#BBBBBB" stroke-width="0.8"/>
+<rect x="20" y="1144" width="860" height="228" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M210 1144 L210 1372" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1400" width="880" height="63" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="1414.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>băng thông đỉnh DDR của board (không nguồn nào nêu GB/s); số kênh DDR của RK3588S;</tspan></text>
+<text x="20" y="1431.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>độ trễ và băng thông của SRAM nhìn từ NPU, và NPU nối cổng AXI slave nào;</tspan></text>
+<text x="20" y="1448.5" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>          </tspan><tspan>hiệu lực của các cờ SRAM trong C API trên board này.</tspan></text>
+<rect x="10" y="1475" width="880" height="52" rx="6" fill="#F5F5F5" stroke="#999999" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="22" y="1491.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Chưa đo (UG232 và tài liệu có, T3 chưa làm): </tspan><tspan>băng thông DDR đạt được; A/B có và không SRAM; zero-copy so với general API;</tspan></text>
+<text x="22" y="1510.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>cacheable so với non-cacheable; NC1HWC2 so với NHWC; tranh chấp DDR khi CPU, GPU, RGA cùng chạy.</tspan></text>
+<rect x="10" y="1541" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="46.6" y="1552.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<rect x="10" y="1567" width="880" height="71" rx="6" fill="white" stroke="#2E7D32" stroke-width="1"/>
+<text x="22" y="1583.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>MCUNet (vi điều khiển, không có DRAM): &quot;SRAM constrains the activation size (read&amp;write); Flash constrains the model size</tspan></text>
+<text x="22" y="1602.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>(read-only).&quot; PhiNets tách computational cost, working memory, parameter memory. Chỉ là ngữ cảnh thiết kế mạng có</tspan></text>
+<text x="22" y="1621.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nhận biết bộ nhớ: không đo băng thông DDR hay NPU, không dùng làm bằng chứng cho RK3588.</tspan></text>
+<rect x="10" y="1652" width="880" height="122" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1669" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<path d="M26 1692 L66 1692" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="78" y="1692" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>AXI master: NPU lấy dữ liệu từ bộ nhớ</tspan></text>
+<rect x="26" y="1706" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1714" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3: số đo hoặc đọc trên board, có file log</tspan></text>
+<rect x="26" y="1728" width="38" height="16" rx="2" fill="#FDECEA" stroke="#BBBBBB"/>
+<text x="78" y="1736" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>bước copy dữ liệu giữa bộ nhớ ngoài và NPU</tspan></text>
+<rect x="26" y="1750" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="1758" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown: nguồn không cho</tspan></text>
+<text x="10" y="1800" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: TRM1 tr.1984, 1985; TRM2 tr.16; DS tr.8; UG232 tr.64, 65, 69, 106, 107, 108, 112; RT232 tr.19, 34, 38;</text>
+<text x="10" y="1817" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">SRAM dòng 3, 4, 10, 11, 21, 22, 48, 54, 61, 68; HDR dòng 69, 72, 381-386; DRV rknpu_gem.c:720; DTS dòng 6868-6882;</text>
+<text x="10" y="1834" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">REPO 3rdparty/rknpu-driver-0.9.8/SOURCE.txt:7; LOG t3-board-silu-resize; MCU tr.1, 3; PHI tr.1.</text>
+</svg>

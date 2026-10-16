@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1259" width="1100" height="1259" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1100" height="1259" fill="white"/>
+<rect x="1000.0" y="8" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="1040.3" y="19.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="853.4" y="8" width="51" height="22" rx="11" fill="white" stroke="#C62828" stroke-width="1.8"/>
+<text x="878.9" y="19.5" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">T3 đo</text>
+<text x="10" y="20" font-size="15" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Khối kiến trúc so với tiêu chí NPU của RK3588</text>
+<rect x="0" y="38" width="1100" height="30" fill="#E8E8E8"/>
+<text x="8" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Khối kiến trúc</text>
+<text x="136" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Mục NPU trong OPL</text>
+<text x="336" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Điều kiện OPL so với đồ thị</text>
+<text x="568" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Đa lõi (OPL; UG232 tr.75)</text>
+<text x="728" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Ghép (UG232 tr.142)</text>
+<text x="878" y="53.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">T3: lớp RKNN, INT8</text>
+<text x="8" y="81.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv 1x1, 3x3</text>
+<text x="8" y="96.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(mọi khối)</text>
+<text x="136" y="81.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.5 Convolution, int8, float16</text>
+<text x="336" y="81.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">kernel 1 và 3 ∈ [1, 31], stride 1 và 2</text>
+<text x="336" y="96.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">∈ [1, 7]; ONNX: Conv 1x1, 3x3 s1, 3x3</text>
+<text x="336" y="111.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">s2</text>
+<text x="568" y="81.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL 支持; UG232 liệt kê</text>
+<text x="568" y="96.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv</text>
+<text x="728" y="81.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv+Sigmoid(Silu),</text>
+<text x="728" y="96.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv+Add có trong danh</text>
+<text x="728" y="111.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">sách đã hỗ trợ</text>
+<rect x="870" y="68" width="230" height="57" fill="#EAF6EA"/>
+<text x="878" y="81.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv trơn: 26n: cấu trúc, trọng số ngẫu</text>
+<text x="878" y="96.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhiên: 11/11 lớp chia 3 lõi; v8n: ngẫu</text>
+<text x="878" y="111.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhiên và đã huấn luyện: 6/7</text>
+<path d="M0 68 L1100 68" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="138.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Conv depthwise</text>
+<text x="8" y="153.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">3x3 (chỉ</text>
+<text x="8" y="168.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">YOLO26n: 8)</text>
+<text x="136" y="138.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.6 Depthwise Convolution</text>
+<text x="336" y="138.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">kernel 3 ∈ [1, 8]; UG232 Table 8-2:</text>
+<text x="336" y="153.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">kênh INT8 căn 64 cho depthwise</text>
+<text x="568" y="138.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL 支持; UG232 liệt kê</text>
+<text x="568" y="153.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">DepthwiseConvolution</text>
+<text x="728" y="138.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">6 lớp nhánh lớp thành</text>
+<text x="728" y="153.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish; 2 lớp pe</text>
+<text x="728" y="168.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">của attention là Conv</text>
+<rect x="870" y="125" width="230" height="57" fill="#EAF6EA"/>
+<text x="878" y="138.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">26n: cấu trúc, trọng số ngẫu nhiên: 8</text>
+<text x="878" y="153.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">lớp trên NPU, MacUsage 0.30 đến 1.24%</text>
+<text x="878" y="168.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(core_mask AUTO)</text>
+<path d="M0 125 L1100 125" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="195.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2f (YOLOv8n)</text>
+<text x="136" y="195.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv 3.2.5, Split 3.2.59, Add</text>
+<text x="136" y="210.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.1, Concat 3.2.4: đều có mục</text>
+<text x="136" y="225.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">NPU</text>
+<text x="336" y="195.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Split và Concat dùng axis 1, nằm trong</text>
+<text x="336" y="210.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">{0, 1, 2, 3}</text>
+<text x="568" y="195.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv, Add 支持; Concat:</text>
+<text x="568" y="210.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL không có dòng, UG232</text>
+<text x="568" y="225.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có; Split: không dòng</text>
+<text x="728" y="195.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv+Activation+Add có</text>
+<text x="728" y="210.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trong UG232; T3 với SiLU</text>
+<text x="728" y="225.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không ghép Add</text>
+<rect x="870" y="182" width="230" height="57" fill="#EAF6EA"/>
+<text x="878" y="195.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">v8n: ngẫu nhiên và đã huấn luyện: 57</text>
+<text x="878" y="210.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish, 8 Add, 17 Concat, 9 Split</text>
+<text x="878" y="225.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đều NPU; Add đứng riêng</text>
+<path d="M0 182 L1100 182" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="252.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C3k2, C3k</text>
+<text x="8" y="267.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(YOLO26n)</text>
+<text x="136" y="252.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">như C2f (Conv, Split, Add,</text>
+<text x="136" y="267.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Concat)</text>
+<text x="336" y="252.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">như C2f; C3k thêm Conv 1x1 và Concat</text>
+<text x="568" y="252.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">như C2f</text>
+<text x="728" y="252.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Add đứng riêng; ConvAdd</text>
+<text x="728" y="267.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">là của khối attention</text>
+<text x="728" y="282.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(proj, ffn.1)</text>
+<rect x="870" y="239" width="230" height="57" fill="#EAF6EA"/>
+<text x="878" y="252.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">26n: cấu trúc, trọng số ngẫu nhiên: 87</text>
+<text x="878" y="267.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish, 18 Add, 23 Concat, 12</text>
+<text x="878" y="282.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Split đều NPU</text>
+<path d="M0 239 L1100 239" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="309.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">SPPF (cả hai)</text>
+<text x="136" y="309.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">MaxPool 3.2.44 (int8, float16)</text>
+<text x="336" y="309.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">kernel 5 ∈ (0, 7], stride 1 ∈ (0, 8],</text>
+<text x="336" y="324.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">pad 2 ∈ [0, 7]; OPL ghi ceil_mode:</text>
+<text x="336" y="339.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">不支持, ONNX ceil_mode = 0</text>
+<text x="568" y="309.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL không có dòng cho</text>
+<text x="568" y="324.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">MaxPool</text>
+<text x="728" y="309.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">UG232 không có quy tắc</text>
+<text x="728" y="324.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ghép MaxPool</text>
+<rect x="870" y="296" width="230" height="87" fill="#EAF6EA"/>
+<text x="878" y="309.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3 MaxPool NPU, lõi 0 ở cả hai (26n: cấu</text>
+<text x="878" y="324.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trúc, trọng số ngẫu nhiên; v8n: ngẫu</text>
+<text x="878" y="339.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhiên và đã huấn luyện); cv1 của</text>
+<text x="878" y="354.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">YOLO26n là Conv trơn, của YOLOv8n là</text>
+<text x="878" y="369.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish</text>
+<path d="M0 296 L1100 296" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="396.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C2PSA, Attention</text>
+<text x="8" y="411.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(chỉ YOLO26n)</text>
+<text x="136" y="396.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">MatMul chỉ có mục CPU 4.33; NPU</text>
+<text x="136" y="411.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có exMatMul 3.2.76,</text>
+<text x="136" y="426.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSDPAttention 3.2.78; Softmax</text>
+<text x="136" y="441.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.56; Transpose 3.2.62</text>
+<rect x="328" y="383" width="232" height="117" fill="#FFF3F3"/>
+<text x="336" y="396.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSDPAttention: channel ∈ (0, 8192];</text>
+<text x="336" y="411.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Softmax: axis 1 hoặc 3 (ONNX axis -1);</text>
+<text x="336" y="426.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Transpose: điều kiện theo perm, không</text>
+<text x="336" y="441.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">dự đoán được hành vi biên dịch</text>
+<text x="568" y="396.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSDPAttention 不支持;</text>
+<text x="568" y="411.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Softmax 尚不支持;</text>
+<text x="568" y="426.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Transpose 暂不支持</text>
+<text x="728" y="396.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">UG232 không có quy tắc</text>
+<text x="728" y="411.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ghép</text>
+<text x="728" y="426.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">MatMul-Softmax-MatMul;</text>
+<text x="728" y="441.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">API232 tr.10:</text>
+<text x="728" y="456.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">enable_flash_attention</text>
+<text x="728" y="471.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(mặc định False) nhắc</text>
+<text x="728" y="486.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSDPAttention</text>
+<rect x="870" y="383" width="230" height="117" fill="#EAF6EA"/>
+<text x="878" y="396.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">26n: cấu trúc, trọng số ngẫu nhiên: 2</text>
+<text x="878" y="411.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSDPAttention INT8 NPU, lõi 0 ở</text>
+<text x="878" y="426.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">CORE_0_1_2; không còn lớp MatMul,</text>
+<text x="878" y="441.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Softmax, Transpose</text>
+<path d="M0 383 L1100 383" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="513.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Detect YOLOv8n</text>
+<text x="8" y="528.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(DFL)</text>
+<text x="136" y="513.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Softmax 3.2.56, exSoftmax13</text>
+<text x="136" y="528.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.57, Sub 3.2.60, Transpose</text>
+<text x="136" y="543.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.62, Sigmoid 3.2.63, Mul</text>
+<text x="136" y="558.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.41</text>
+<text x="336" y="513.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Sub: broadcast chỉ [b, c, 1, 1] hoặc</text>
+<text x="336" y="528.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">scalar; Div (từ _NormalizeCoords): OPL</text>
+<text x="336" y="543.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">T1 chỉ float16</text>
+<rect x="560" y="500" width="160" height="72" fill="#FFF3F3"/>
+<text x="568" y="513.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Sub 不支持; exSoftmax13</text>
+<text x="568" y="528.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">尚不支持; Transpose</text>
+<text x="568" y="543.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">暂不支持; Mul OPL 支持</text>
+<text x="568" y="558.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(UG232 không liệt kê)</text>
+<text x="728" y="513.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có quy tắc</text>
+<rect x="870" y="500" width="230" height="72" fill="#EAF6EA"/>
+<text x="878" y="513.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">v8n: ngẫu nhiên và đã huấn luyện:</text>
+<text x="878" y="528.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">exSoftmax13 NPU, 1 Transpose CPU (tên</text>
+<text x="878" y="543.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">lớp thuộc dfl), Sub 2, Mul 2 lõi 0;</text>
+<text x="878" y="558.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có lớp Div</text>
+<path d="M0 500 L1100 500" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="585.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Detect YOLO26n,</text>
+<text x="8" y="600.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">end2end tắt</text>
+<text x="8" y="615.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(đường RKNN)</text>
+<text x="136" y="585.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv 3.2.5, Depthwise 3.2.6;</text>
+<text x="136" y="600.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có DFL nên không có</text>
+<text x="136" y="615.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Softmax, Transpose</text>
+<text x="336" y="585.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhánh hộp 4 kênh; nhánh lớp DWConv 3x3</text>
+<text x="336" y="600.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">+ Conv 1x1 hai lần</text>
+<text x="568" y="585.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">như Conv và Depthwise</text>
+<text x="728" y="585.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">DWConv + SiLU ghép thành</text>
+<text x="728" y="600.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish (6 lớp)</text>
+<rect x="870" y="572" width="230" height="72" fill="#EAF6EA"/>
+<text x="878" y="585.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">26n: cấu trúc, trọng số ngẫu nhiên:</text>
+<text x="878" y="600.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có exSoftmax13, không có</text>
+<text x="878" y="615.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Transpose CPU; 180 lớp NPU, 0 lớp CPU</text>
+<text x="878" y="630.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ngoài Input, Output</text>
+<path d="M0 572 L1100 572" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="657.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Detect YOLO26n,</text>
+<text x="8" y="672.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">end2end bật</text>
+<text x="8" y="687.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(nms=False)</text>
+<text x="136" y="657.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">TopK, GatherElements, ReduceMax,</text>
+<text x="136" y="672.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Mod, Cast, Flatten: chỉ có mục</text>
+<text x="136" y="687.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">CPU (chương 4); OPSUP: TopK Not</text>
+<text x="136" y="702.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Supported</text>
+<text x="336" y="657.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ONNX có TopK 2, GatherElements 3,</text>
+<text x="336" y="672.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ReduceMax 1, Mod 1, Cast 1, Flatten 1</text>
+<text x="568" y="657.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không áp dụng</text>
+<text x="728" y="657.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không áp dụng</text>
+<rect x="870" y="644" width="230" height="72" fill="#FFF3F3"/>
+<text x="878" y="657.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không chạy: exporter tắt end2end với</text>
+<text x="878" y="672.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">rknn (exporter.py:684-688); chưa đo,</text>
+<text x="878" y="687.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">unknown</text>
+<path d="M0 644 L1100 644" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="729.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample (Resize</text>
+<text x="8" y="744.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">nearest, 2x)</text>
+<text x="136" y="729.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Resize 3.2.54 (int8, float16);</text>
+<text x="136" y="744.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Upsample chỉ có mục CPU 4.67</text>
+<rect x="328" y="716" width="232" height="102" fill="#FFF3F3"/>
+<text x="336" y="729.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ONNX: nearest, scale 2 (OPL: nguyên lần</text>
+<text x="336" y="744.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">2 đến 8) đúng;</text>
+<text x="336" y="759.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">coordinate_transformation_mode</text>
+<text x="336" y="774.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">asymmetric không nằm trong 3 giá trị</text>
+<text x="336" y="789.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">của OPL; nearest_mode floor: OPL</text>
+<text x="336" y="804.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">目前不支持设置</text>
+<text x="568" y="729.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Resize 不支持</text>
+<rect x="720" y="716" width="150" height="102" fill="#FFF3F3"/>
+<text x="728" y="729.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">UG232 tr.176: toolkit</text>
+<text x="728" y="744.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đổi Resize thành</text>
+<text x="728" y="759.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvTranspose;</text>
+<text x="728" y="774.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">optimization_level=2 đưa</text>
+<text x="728" y="789.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">về CPU</text>
+<rect x="870" y="716" width="230" height="102" fill="#EAF6EA"/>
+<text x="878" y="729.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">2 Resize INT8 NPU, lõi 0 (26n: cấu</text>
+<text x="878" y="744.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trúc, trọng số ngẫu nhiên; v8n: ngẫu</text>
+<text x="878" y="759.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhiên và đã huấn luyện); YOLOv8n ở</text>
+<text x="878" y="774.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">optimization_level 1, 2, 3 đều NPU</text>
+<path d="M0 716 L1100 716" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="831.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Concat</text>
+<text x="136" y="831.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.4 Concat (int8, float16)</text>
+<rect x="328" y="818" width="232" height="72" fill="#FFF3F3"/>
+<text x="336" y="831.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">axis ∈ {0, 1, 2, 3}: axis 1 ở 16 nút</text>
+<text x="336" y="846.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(v8n), 22 (26n); 2 nút axis -1 ở Detect</text>
+<text x="336" y="861.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trên tensor 3 chiều: OPL ghi shape 4</text>
+<text x="336" y="876.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chiều, unknown</text>
+<text x="568" y="831.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL không có dòng; UG232</text>
+<text x="568" y="846.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">liệt kê Concat</text>
+<text x="728" y="831.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có quy tắc</text>
+<rect x="870" y="818" width="230" height="72" fill="#EAF6EA"/>
+<text x="878" y="831.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">26n: cấu trúc, trọng số ngẫu nhiên:</text>
+<text x="878" y="846.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">21/23 chia 3 lõi, 2 lõi 0; v8n: ngẫu</text>
+<text x="878" y="861.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nhiên và đã huấn luyện: 15/17, 2 lõi 0</text>
+<path d="M0 818 L1100 818" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="903.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Split, Slice</text>
+<text x="136" y="903.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Split 3.2.59; Slice 3.2.55 (NPU</text>
+<text x="136" y="918.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">khi steps == [1, 1, 1, 1], có</text>
+<text x="136" y="933.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ngoại lệ với subc)</text>
+<rect x="328" y="890" width="232" height="72" fill="#FFF3F3"/>
+<text x="336" y="903.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Split axis 1, và axis 2 ở attention;</text>
+<text x="336" y="918.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ONNX có Slice 4 nút (từ</text>
+<text x="336" y="933.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">_NormalizeCoords): chưa kiểm được điều</text>
+<text x="336" y="948.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">kiện steps</text>
+<text x="568" y="903.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">OPL không có dòng; UG232</text>
+<text x="568" y="918.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không liệt kê</text>
+<text x="728" y="903.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có quy tắc</text>
+<rect x="870" y="890" width="230" height="72" fill="#EAF6EA"/>
+<text x="878" y="903.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có lớp Slice; Split 9 (v8n) và 12</text>
+<text x="878" y="918.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">(26n) NPU, tất cả lõi 0</text>
+<path d="M0 890 L1100 890" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="8" y="975.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Activation SiLU</text>
+<text x="8" y="990.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">(Conv + Sigmoid</text>
+<text x="8" y="1005.5" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">+ Mul)</text>
+<text x="136" y="975.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvolutionSwish 3.2.17; exSwish</text>
+<text x="136" y="990.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.69 (rời); Sigmoid 3.2.63; Mul</text>
+<text x="136" y="1005.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">3.2.41</text>
+<text x="336" y="975.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ONNX: Conv, Sigmoid, Mul rời nhau</text>
+<text x="568" y="975.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvolutionSwish</text>
+<text x="568" y="990.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">暂不支持; Sigmoid</text>
+<text x="568" y="1005.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">尚不支持</text>
+<text x="728" y="975.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">Conv+Sigmoid(Tanh/Elu/Silu...)</text>
+<text x="728" y="990.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">có trong danh sách đã hỗ</text>
+<text x="728" y="1005.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">trợ</text>
+<rect x="870" y="962" width="230" height="87" fill="#EAF6EA"/>
+<text x="878" y="975.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ConvExSwish NPU, chỉ lõi 0 ở</text>
+<text x="878" y="990.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">CORE_0_1_2: 87/87 (26n: cấu trúc, trọng</text>
+<text x="878" y="1005.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">số ngẫu nhiên), 57/57 (v8n: ngẫu nhiên</text>
+<text x="878" y="1020.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">và đã huấn luyện); tên ConvExSwish</text>
+<text x="878" y="1035.5" font-size="11.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">không có trong OPL</text>
+<path d="M0 962 L1100 962" stroke="#BBBBBB" stroke-width="0.8"/>
+<rect x="0" y="38" width="1100" height="1011" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M128 38 L128 1049" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M328 38 L328 1049" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M560 38 L560 1049" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M720 38 L720 1049" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M870 38 L870 1049" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="10" y="1063" width="1080" height="78" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="24" y="1080" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Chú thích</text>
+<rect x="26" y="1095" width="38" height="16" rx="2" fill="#EAF6EA" stroke="#BBBBBB"/>
+<text x="78" y="1103" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>T3: lớp chạy trên NPU, có file log (điều kiện nêu trong ô)</tspan></text>
+<rect x="26" y="1117" width="38" height="16" rx="2" fill="#FFF3F3" stroke="#BBBBBB"/>
+<text x="78" y="1125" font-size="13" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>unknown, hoặc điều kiện của OPL không khớp với đồ thị ONNX, hoặc hai tài liệu nói khác nhau</tspan></text>
+<rect x="10" y="1151" width="1080" height="52" rx="6" fill="white" stroke="#999999" stroke-width="1"/>
+<text x="22" y="1167.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Đọc ô cuối: </tspan><tspan>T3 cho biết lớp chạy NPU với cấu trúc này; không cho biết độ chính xác INT8 và không cho biết vì sao chậm hơn. Độ trễ: Số đo: Hình 10.2, 10.4.</tspan></text>
+<text x="22" y="1186.0" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Training-only: </tspan><tspan>bỏ DFL (reg_max 1) và đầu một-một làm đổi đồ thị (xem Hình 9.2); ProgLoss, STAL, MuSGD không đổi đồ thị theo YOFF, Y26A.</tspan></text>
+<text x="10" y="1229" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: OPL 3.2.1-3.2.78 (tr.56-105), chương 4 (tr.320-333); UG232 tr.75, 142, 145, 148, 176; API232 tr.10; OPSUP dòng 189;</text>
+<text x="10" y="1246" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">data/rknn_path_onnx.json, data/ops_via_exporter.json; LOG 2026-10-10_yolo-phaseA/raw/layers_*_CORE_0_1_2.txt, 2026-10-10_t3-board-silu-resize.</text>
+</svg>
