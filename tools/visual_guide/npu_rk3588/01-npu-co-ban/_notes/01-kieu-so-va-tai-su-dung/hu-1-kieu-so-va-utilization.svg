@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 794" width="900" height="794" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="794" fill="white"/>
+<rect x="808" y="8" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="844.6" y="19.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="20" font-size="17" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Cùng một mảng MAC, vì sao không chạy ở đỉnh: kiểu số và shape của lớp</text>
+<text x="10" y="52" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">A. TPU: tốc độ Matrix Unit theo độ rộng weight và activation (TPU tr.3)</text>
+<rect x="10" y="66" width="450" height="178" rx="6" fill="white" stroke="#999999" stroke-width="1.2"/>
+<text x="24" y="84" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">8-bit weight, 8-bit activation</text>
+<rect x="24" y="94" width="260" height="20" rx="2" fill="#F2F2F2" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="24" y="94" width="260.0" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="294" y="104" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">x1  đầy đủ (256x256 MAC)</text>
+<text x="24" y="134" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">8-bit và 16-bit trộn (một chiều 16)</text>
+<rect x="24" y="144" width="260" height="20" rx="2" fill="#F2F2F2" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="24" y="144" width="130.0" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="294" y="154" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">x0.5  half-speed</text>
+<text x="24" y="184" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">cả hai 16-bit</text>
+<rect x="24" y="194" width="260" height="20" rx="2" fill="#F2F2F2" stroke="#CCCCCC" stroke-width="0.8"/>
+<rect x="24" y="194" width="65.0" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="294" y="204" font-size="12.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">x0.25  quarter-speed</text>
+<text x="24" y="232" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Cùng phần cứng, đổi kiểu số là đổi số phép MAC mỗi chu kỳ.</tspan></text>
+<rect x="475" y="66" width="415" height="178" rx="6" fill="white" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="487" y="74" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="527.3" y="85.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="600" y="85" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Số MAC mỗi chu kỳ (TRM1 tr.1984)</text>
+<rect x="487" y="104" width="390" height="28" fill="#E8E8E8"/>
+<text x="495" y="118.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Kiểu</text>
+<text x="605" y="118.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">MAC/chu kỳ</text>
+<text x="745" y="118.0" font-size="12" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">so với INT8</text>
+<path d="M487 132 L877 132" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="495" y="143.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT8</tspan></text>
+<text x="605" y="143.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1024 x 3 core</tspan></text>
+<text x="745" y="143.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1</tspan></text>
+<path d="M487 155 L877 155" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="495" y="166.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>INT16</tspan></text>
+<text x="605" y="166.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512 x 3 core</tspan></text>
+<text x="745" y="166.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1/2</tspan></text>
+<path d="M487 178 L877 178" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="495" y="189.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>FP16</tspan></text>
+<text x="605" y="189.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512 x 3 core</tspan></text>
+<text x="745" y="189.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1/2</tspan></text>
+<path d="M487 201 L877 201" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="495" y="212.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>BF16</tspan></text>
+<text x="605" y="212.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512 x 3 core</tspan></text>
+<text x="745" y="212.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1/2</tspan></text>
+<rect x="487" y="104" width="390" height="120" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M597 104 L597 224" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M737 104 L737 224" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="487" y="236" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Cột cuối là phép tính của bộ hình: 512 / 1024.</text>
+<rect x="10" y="254" width="880" height="29" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="268.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>RK3588 chạy weight 8-bit với activation 16-bit (trộn) ở tốc độ nào; TRM chỉ liệt kê từng kiểu.</tspan></text>
+<text x="10" y="302" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">B. TPU Table 3: phần trăm chu kỳ của Matrix Unit (TPU tr.7), đỉnh 92 TOPS</text>
+<text x="710" y="322" font-size="12.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">TOPS đạt</text>
+<text x="20" y="348" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">MLP0</text>
+<rect x="80" y="334" width="75.0" height="28" rx="0" fill="#2E7D32" stroke="white" stroke-width="0.8"/>
+<text x="117.5" y="348" font-size="11.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">12.5%</text>
+<rect x="155.0" y="334" width="1.8" height="28" rx="0" fill="#A5D6A7" stroke="white" stroke-width="0.8"/>
+<rect x="156.8" y="334" width="323.4" height="28" rx="0" fill="#C62828" stroke="white" stroke-width="0.8"/>
+<text x="318.5" y="348" font-size="11.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">53.9%</text>
+<rect x="480.2" y="334" width="95.4" height="28" rx="0" fill="#EF9A9A" stroke="white" stroke-width="0.8"/>
+<text x="527.9" y="348" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">15.9%</text>
+<rect x="575.6" y="334" width="105.0" height="28" rx="0" fill="#BDBDBD" stroke="white" stroke-width="0.8"/>
+<text x="628.1" y="348" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">17.5%</text>
+<text x="710" y="348" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">12.3</text>
+<text x="20" y="392" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">CNN0</text>
+<rect x="80" y="378" width="469.2" height="28" rx="0" fill="#2E7D32" stroke="white" stroke-width="0.8"/>
+<text x="314.6" y="392" font-size="11.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">78.2%</text>
+<rect x="549.2" y="378" width="130.8" height="28" rx="0" fill="#BDBDBD" stroke="white" stroke-width="0.8"/>
+<text x="614.6" y="392" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">21.8%</text>
+<text x="710" y="392" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">86.0</text>
+<text x="20" y="436" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">CNN1</text>
+<rect x="80" y="422" width="135.0" height="28" rx="0" fill="#2E7D32" stroke="white" stroke-width="0.8"/>
+<text x="147.5" y="436" font-size="11.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">22.5%</text>
+<rect x="215.0" y="422" width="142.2" height="28" rx="0" fill="#A5D6A7" stroke="white" stroke-width="0.8"/>
+<text x="286.1" y="436" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">23.7%</text>
+<rect x="357.2" y="422" width="168.6" height="28" rx="0" fill="#C62828" stroke="white" stroke-width="0.8"/>
+<text x="441.5" y="436" font-size="11.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">28.1%</text>
+<rect x="525.8" y="422" width="42.0" height="28" rx="0" fill="#EF9A9A" stroke="white" stroke-width="0.8"/>
+<text x="546.8" y="436" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">7%</text>
+<rect x="567.8" y="422" width="112.2" height="28" rx="0" fill="#BDBDBD" stroke="white" stroke-width="0.8"/>
+<text x="623.9" y="436" font-size="11.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">18.7%</text>
+<text x="710" y="436" font-size="13" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">14.1</text>
+<rect x="20" y="467" width="22" height="14" rx="1" fill="#2E7D32" stroke="#999999" stroke-width="0.6"/>
+<text x="50" y="474" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">useful MACs (MAC giữ weight có ích)</text>
+<rect x="460" y="467" width="22" height="14" rx="1" fill="#A5D6A7" stroke="#999999" stroke-width="0.6"/>
+<text x="490" y="474" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">unused MACs (chu kỳ chạy nhưng MAC trống)</text>
+<rect x="20" y="487" width="22" height="14" rx="1" fill="#C62828" stroke="#999999" stroke-width="0.6"/>
+<text x="50" y="494" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">weight stall (chờ nạp weight)</text>
+<rect x="460" y="487" width="22" height="14" rx="1" fill="#EF9A9A" stroke="#999999" stroke-width="0.6"/>
+<text x="490" y="494" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">weight shift (dịch tile weight vào)</text>
+<rect x="20" y="507" width="22" height="14" rx="1" fill="#BDBDBD" stroke="#999999" stroke-width="0.6"/>
+<text x="50" y="514" font-size="12" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">non-matrix (không làm phép ma trận)</text>
+<text x="20" y="540" font-size="11.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Hai phần xanh lá cộng lại là array active cycles (hàng 1 = hàng 2 + hàng 3 của Table 3).</text>
+<rect x="10" y="554" width="880" height="70" rx="5" fill="#F7FBF7" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="22" y="570" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">CNN1 (TPU tr.6): </tspan><tspan>&quot;only about half of the 65,536 MACs hold useful weights because some layers in CNN1</tspan></text>
+<text x="22" y="588" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>have shallow feature depths&quot;. </tspan><tspan>Lớp có ít kênh không lấp đầy mảng 256x256: chu kỳ vẫn chạy nhưng</tspan></text>
+<text x="22" y="606" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>nửa số MAC trống. MLP0 thì khác: 53.9% chu kỳ là chờ nạp weight (giới hạn bộ nhớ, Hình 1.4).</tspan></text>
+<text x="10" y="648" font-size="14" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">C. Liên hệ RK3588</text>
+<rect x="165" y="637" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="205.3" y="648.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="10" y="662" width="880" height="58" rx="5" fill="white" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="22" y="678" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>eval_perf có cột </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">MacUsage(%)</tspan><tspan> = &quot;MAC usage&quot; của từng lớp (UG232 tr.32; công cụ đo ở Hình 7.3).</tspan></text>
+<text x="22" y="698" font-size="12.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>NPU load </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5">/sys/kernel/debug/rknpu/load</tspan><tspan> không phải MAC utilization: &quot;does not directly represent&quot; (UG232 tr.137).</tspan></text>
+<rect x="10" y="728" width="880" height="29" rx="4" fill="#FFF3F3" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="20" y="742.5" font-size="12" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">unknown: </tspan><tspan>RK3588 lấp mảng MAC thế nào khi lớp có ít kênh; TRM không mô tả. Căn kênh theo bội: xem Hình 6.4.</tspan></text>
+<text x="10" y="780" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: TPU tr.3, tr.6, tr.7 (Table 3); TRM1 tr.1984; UG232 tr.32, tr.137.</text>
+</svg>

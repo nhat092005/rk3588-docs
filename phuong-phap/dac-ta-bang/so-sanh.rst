@@ -6,12 +6,12 @@ So sánh
 
 .. admonition:: Tóm tắt
 
-   - Mọi phép so sánh đo theo protocol v1, chỉ khác mốc 1 yếu tố; không so mAP trực tiếp với paper SFCHD vì split gốc không được phát hành.
-   - Model comparison gồm YOLOv8n, YOLOv8s và sau đó YOLO11n, YOLO11s; không dùng YOLOv5n vì qua Ultralytics nó là YOLOv5nu với head không anchor.
+   - Mọi phép so sánh đo theo protocol v1, chỉ khác mốc 1 yếu tố. Không so mAP trực tiếp với paper SFCHD vì split gốc không được phát hành.
+   - Model comparison gồm YOLOv8n, YOLOv8s và sau đó YOLO11n, YOLO11s. Không dùng YOLOv5n vì qua Ultralytics nó là YOLOv5nu với head không anchor.
    - YOLOv8s là model duy nhất có số FPS trên RK3588 trong kho tài liệu (INT8 70.9 FPS, FP16 32.9 FPS ở 720P), chỉ dùng để kiểm độ hợp lý.
    - Optimization comparison chia 3 nhóm: nén model, cấu hình triển khai (`core_mask`, nhiều luồng) và hardware-aware (ReLU / LeakyReLU, model đề xuất).
-   - Chưa có bằng chứng structured pruning tăng tốc trên RK3588, phải đo; `autosparsity` của Rockchip ghi "Only supports RK3576 target platform".
-   - Hardware comparison bắt buộc gồm CPU board và NPU FP16, INT8; GPU RTX 3050 Laptop chỉ tham chiếu, code structured pruning chưa có.
+   - Chưa có bằng chứng structured pruning tăng tốc trên RK3588 nên phải đo. Mục `autosparsity` của Rockchip ghi "Only supports RK3576 target platform".
+   - Hardware comparison bắt buộc gồm CPU board và NPU FP16, INT8. GPU RTX 3050 Laptop chỉ tham chiếu, code structured pruning chưa có.
 
 .. contents:: Trong trang này
    :local:
@@ -115,7 +115,7 @@ Hardware comparison
      - Chỉ tham chiếu, không phải thiết bị triển khai
      - PyTorch FP32
 
-Nguồn: CPU theo :download:`01_HYY_Rockchip_RK3588_Datasheet.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/01_datasheet/01_HYY_Rockchip_RK3588_Datasheet.pdf>` (*"quad-core Cortex-A76 and quad-core Cortex-A55"*); GPU theo log train ``tmp/05_training-logs/`` (``CUDA:0 (NVIDIA GeForce RTX 3050 Laptop GPU, 3762MiB)``). GPU Mali trên board nằm ngoài phạm vi, vì repo chưa có pipeline chạy model trên Mali.
+Nguồn: CPU theo :download:`01_HYY_Rockchip_RK3588_Datasheet.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/01_datasheet/01_HYY_Rockchip_RK3588_Datasheet.pdf>` (*"quad-core Cortex-A76 and quad-core Cortex-A55"*). GPU theo log train ``tmp/05_training-logs/`` (``CUDA:0 (NVIDIA GeForce RTX 3050 Laptop GPU, 3762MiB)``). GPU Mali trên board nằm ngoài phạm vi, vì repo chưa có pipeline chạy model trên Mali.
 
 **Code cho các phép so sánh:**
 

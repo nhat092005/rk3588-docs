@@ -15,7 +15,7 @@ DDR và SRAM
    - Băng thông đỉnh GB/s, loại DRAM và số kênh thực của board RK3588S đều là `unknown`, không tính từ speed grade.
    - RK3588 có 1MB SRAM, trong đó 956KB có thể dùng cho các IP và hỗ trợ cấp phát riêng cho RKNPU [T1 UG232 tr.106].
    - SRAM giúp giảm áp lực băng thông DDR nhưng có thể ảnh hưởng thời gian suy luận, nên là trade-off cần đo [T1 UG232 tr.106].
-   - `RKNN_FLAG_SHARE_SRAM` có trong header nhưng chưa implement [T1 UG232 tr.108]; `CONFIG_ROCKCHIP_RKNPU_SRAM` không đặt trên kernel board nên `rknpu/mm` không tồn tại, hiệu lực cờ SRAM trong C API trên board vẫn `unknown`.
+   - `RKNN_FLAG_SHARE_SRAM` có trong header nhưng chưa implement [T1 UG232 tr.108].`CONFIG_ROCKCHIP_RKNPU_SRAM` không đặt trên kernel board nên `rknpu/mm` không tồn tại, hiệu lực cờ SRAM trong C API trên board vẫn `unknown`.
    - Hai tài liệu mâu thuẫn về runtime tối thiểu cho SRAM: ">=1.3.4b14" ở SRAM dòng 54 và ">=1.6.0" ở UG232 tr.107.
 
 .. _71-ddr:
@@ -57,14 +57,14 @@ Từ khái niệm (file ``01_``): "fetching data from off-chip DRAMs costs order
 
 **Ý chính**
 
-- Bộ điều khiển hỗ trợ 4 kênh x16 bit (bus 64 bit khi interleave 4 kênh) và 2 kênh (bus 32 bit), LPDDR4, LPDDR4X, LPDDR5 (DS tr.7, 8; TRM2 tr.55).
+- Bộ điều khiển hỗ trợ 4 kênh x16 bit (bus 64 bit khi interleave 4 kênh) và 2 kênh (bus 32 bit), LPDDR4, LPDDR4X, LPDDR5 (DS tr.7, 8. TRM2 tr.55).
 - Đây là khả năng của bộ điều khiển, không phải cấu hình của board. TRM nêu trần speed grade (LPDDR4-4267, LPDDR5-5500), không nêu tốc độ board dùng.
 - Interconnect có probe phần cứng để đo lưu lượng DDR (TRM2 tr.20). Linux có lộ ra các probe này hay không là ``unknown``.
 
 **Giới hạn**
 
-- Băng thông đỉnh GB/s, loại DRAM và số kênh thực của board RK3588S: ``unknown``. Không tính từ speed grade, vì nguồn không cho cấu hình thực. EDGE tr.3 có một số đo ``mbw`` 8807 MiB/s cho một board RK3588 không nêu tên (không phải số đỉnh, không phải RK3588S); EDGE tr.8 (Fig. 6) đo độ trễ dưới tải CPU và bộ nhớ bằng ``stress-ng``.
-- Tần số DDR chỉ có trong ví dụ lệnh (UG232 tr.31 liệt kê một danh sách tần số của firmware mẫu; UG152 tr.72 ví dụ cố định ở 1560MHz), không phải tần số mặc định của board.
+- Băng thông đỉnh GB/s, loại DRAM và số kênh thực của board RK3588S: ``unknown``. Không tính từ speed grade, vì nguồn không cho cấu hình thực. EDGE tr.3 có một số đo ``mbw`` 8807 MiB/s cho một board RK3588 không nêu tên (không phải số đỉnh, không phải RK3588S). EDGE tr.8 (Fig. 6) đo độ trễ dưới tải CPU và bộ nhớ bằng ``stress-ng``.
+- Tần số DDR chỉ có trong ví dụ lệnh (UG232 tr.31 liệt kê một danh sách tần số của firmware mẫu. UG152 tr.72 ví dụ cố định ở 1560MHz), không phải tần số mặc định của board.
 
 --------------
 
@@ -103,7 +103,7 @@ Các dòng của file SRAM (tiếng Trung, kèm tạm dịch):
 
    "export RKNN_INTERNAL_MEM_TYPE=sram" [T1 SRAM dòng 61] (Tự động: thử cấp đủ SRAM còn lại cho Internal. Dạng ``sram#256`` chỉ định 256KB.)
 
-   "export RKNN_WEIGHT_MEM_TYPE=sram" [T1 SRAM dòng 68] (Kèm ``export RKNN_SEPARATE_WEIGHT_MEM=1``: cấp SRAM cho Weight; dạng ``sram#128`` chỉ định 128KB.)
+   "export RKNN_WEIGHT_MEM_TYPE=sram" [T1 SRAM dòng 68] (Kèm ``export RKNN_SEPARATE_WEIGHT_MEM=1``: cấp SRAM cho Weight, dạng ``sram#128`` chỉ định 128KB.)
 
 ..
 
@@ -113,7 +113,7 @@ Mã nguồn: ``#define RKNN_FLAG_ENABLE_SRAM 0x00000800`` [T1 HDR dòng 69] và 
 
 **Ý chính**
 
-- 956KB là mức tối đa có thể cấp cho NPU, không phải mặc định (UG232 tr.106; SRAM dòng 3, 21, 22). SRAM dùng chung với các IP khác như codec, các vùng không được chồng lấn (SRAM dòng 22).
+- 956KB là mức tối đa có thể cấp cho NPU, không phải mặc định (UG232 tr.106. SRAM dòng 3, 21, 22). SRAM dùng chung với các IP khác như codec, các vùng không được chồng lấn (SRAM dòng 22).
 - SRAM giúp giảm áp lực băng thông DDR nhưng có thể ảnh hưởng thời gian suy luận (UG232 tr.106). Tổng hợp của file này: đây là một trade-off cần đo, không phải lợi ích chắc chắn.
 - Có hai cách bật: biến môi trường (SRAM dòng 59 đến 71, gồm cả Weight) và cờ ``RKNN_FLAG_ENABLE_SRAM`` trong ``rknn_init`` (UG232 tr.107, chỉ nói Internal Tensor).
 - "Predict SRAM Hit RW Amount" là số dự đoán, không phải số đo.
@@ -122,7 +122,7 @@ Mã nguồn: ``#define RKNN_FLAG_ENABLE_SRAM 0x00000800`` [T1 HDR dòng 69] và 
 
 - Hai tài liệu mâu thuẫn: SRAM dòng 54 yêu cầu runtime ">=1.3.4b14", UG232 tr.107 yêu cầu ">=1.6.0". Không có ghi chú giải thích. Runtime đi kèm repo là 2.3.2 nên thỏa cả hai.
 - ``RKNN_FLAG_SHARE_SRAM``: có trong header (HDR dòng 72) nhưng UG232 tr.108 nói chưa implement.
-- Độ trễ và băng thông của SRAM so với DDR, và NPU nối vào cổng AXI nào: ``unknown``. Weight SRAM bằng cờ C API cũng ``unknown`` (chỉ có biến môi trường ở SRAM md). Đóng một phần (T1 DRV, T3; DRV xem mục Nguồn cuối trang): ``CONFIG_ROCKCHIP_RKNPU_SRAM`` không đặt trên kernel board (T3, đọc 2026-10-10); ``rknpu_mm.o`` chỉ biên dịch khi bật cấu hình đó (``Makefile:14``; ``Kconfig:32-36``) và node ``rknpu/mm`` chỉ có khi bật (``rknpu_debugger.c:313-315``), nên node ``rknpu/mm`` không tồn tại trên board; hiệu lực của các cờ SRAM trong C API trên board này vẫn ``unknown``.
+- Độ trễ và băng thông của SRAM so với DDR, và NPU nối vào cổng AXI nào: ``unknown``. Weight SRAM bằng cờ C API cũng ``unknown`` (chỉ có biến môi trường ở SRAM md). Đóng một phần (T1 DRV, T3. DRV xem mục Nguồn cuối trang): ``CONFIG_ROCKCHIP_RKNPU_SRAM`` không đặt trên kernel board (T3, đọc 2026-10-10).``rknpu_mm.o`` chỉ biên dịch khi bật cấu hình đó (``Makefile:14``.``Kconfig:32-36``) và node ``rknpu/mm`` chỉ có khi bật (``rknpu_debugger.c:313-315``), nên node ``rknpu/mm`` không tồn tại trên board, hiệu lực của các cờ SRAM trong C API trên board này vẫn ``unknown``.
 - Phần 1MB trừ 956KB là 68KB, tài liệu không giải thích.
 
 Nguồn

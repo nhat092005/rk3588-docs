@@ -134,7 +134,7 @@ Hai kiểu chia sẻ tài nguyên khi nhiều DNN cùng chạy [T2 LP tr.1]: tem
 
 |JUNG Figure 5| *Hình 1.8b. Hai cách chia một lớp convolution cho hai core: (a) spatial partitioning, (b) channel partitioning. Nguồn: [T2 JUNG tr.4, Figure 5]*
 
-|LP Figure 2| *Hình 1.8c. (a) NPU có systolic array, Unified Buffer và Weight Buffer; (b) nhiều NPU nối qua router (R). Nguồn: [T2 LP tr.2, Figure 2]*
+|LP Figure 2| *Hình 1.8c. (a) NPU có systolic array, Unified Buffer và Weight Buffer, (b) nhiều NPU nối qua router (R). Nguồn: [T2 LP tr.2, Figure 2]*
 
 **Ý chính**
 

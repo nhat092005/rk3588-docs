@@ -67,7 +67,7 @@ Nguồn phụ:
 
    "we adopt the commonly used output stationary as the dataflow for this paper." [T2 LP tr.2]
 
-|Eyeriss Figure 3| *Hình 1.3a. Ba biến thể output stationary (OS); vùng đỏ là vùng ofmap được xử lý cùng lúc. Nguồn: [T2 EYE tr.5, Figure 3]*
+|Eyeriss Figure 3| *Hình 1.3a. Ba biến thể output stationary (OS), vùng đỏ là vùng ofmap được xử lý cùng lúc. Nguồn: [T2 EYE tr.5, Figure 3]*
 
 |Eyeriss Figure 5| *Hình 1.3b. Xử lý một 1D convolution primitive trong PE (R = 3, H = 5), phần tử cơ sở của row stationary. Nguồn: [T2 EYE tr.6, Figure 5]*
 
@@ -157,7 +157,7 @@ Roofline
 - Roofline chia hai vùng: chạm giới hạn tính toán hoặc chạm giới hạn băng thông, và khi operational intensity thấp thì chương trình bị giới hạn bởi băng thông (TPU tr.5).
 - TPU định nghĩa lại operational intensity theo "integer operations per byte of weights read" (TPU tr.6). Đây không phải FLOP trên byte DRAM theo nghĩa thông thường.
 
-**Giới hạn.** Kết luận "MLP và LSTM bị giới hạn bộ nhớ, CNN bị giới hạn tính toán" chỉ đúng cho 6 ứng dụng NN của TPU (TPU tr.2: "Four of the six NN apps are memory-bandwidth limited"; TPU tr.6). Ngoại lệ ngay trong đoạn đó: CNN1 có operational intensity rất cao nhưng chỉ đạt 14.1 TOPS (TPU tr.6, Figure 5). Không suy ra cho mọi NPU hay cho YOLO. TPU tr.5 nói nó "adapt the Roofline Performance model from high-performance computing (HPC) [Wil09]". Bài roofline gốc không có trong corpus: xem truy vấn cuối file.
+**Giới hạn.** Kết luận "MLP và LSTM bị giới hạn bộ nhớ, CNN bị giới hạn tính toán" chỉ đúng cho 6 ứng dụng NN của TPU (TPU tr.2: "Four of the six NN apps are memory-bandwidth limited". TPU tr.6). Ngoại lệ ngay trong đoạn đó: CNN1 có operational intensity rất cao nhưng chỉ đạt 14.1 TOPS (TPU tr.6, Figure 5). Không suy ra cho mọi NPU hay cho YOLO. TPU tr.5 nói nó "adapt the Roofline Performance model from high-performance computing (HPC) [Wil09]". Bài roofline gốc không có trong corpus: xem truy vấn cuối file.
 
 --------------
 

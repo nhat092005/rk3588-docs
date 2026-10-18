@@ -13,11 +13,11 @@ Fusion, layout và tiling
 .. admonition:: Tóm tắt
 
    - Toolkit có tự tối ưu đồ thị nhưng "not omnipotent and perfect" [T1 UG232 tr.141], nên người dùng có thể đổi thứ tự op để tạo cặp fusion mà phần cứng hỗ trợ.
-   - Thứ tự pass, quy tắc fusion thực tế và thuật toán chọn fuse là unknown; T1 chỉ có tên pass trong log lỗi và tên hàm trong traceback [T1 UG232 tr.168].
+   - Thứ tự pass, quy tắc fusion thực tế và thuật toán chọn fuse là unknown. T1 chỉ có tên pass trong log lỗi và tên hàm trong traceback [T1 UG232 tr.168].
    - OPL 3.2.19 viết Relu(Add(Conv(...))) còn UG232 tr.142 liệt kê Conv+Activation+Add, và OPL coi AddRelu, MulRelu là hỗ trợ trong khi UG232 tr.142 xếp Add(Mul)+Activation vào kế hoạch tương lai.
-   - Layout NC1HWC2 có C1 là giá trị làm tròn lên của C/C2; với RK3588 cột chung RK3576/RK3588/RV1126B ghi C2 là 16 cho int8 và 8 cho float16 [T1 UG232 tr.61].
-   - Có nhiều khái niệm alignment khác nhau, căn lề kênh là "not mandatory" [T1 UG232 tr.144]; cách chọn C2 và C1 cho từng tensor là unknown.
-   - Các bài T2 về fusion và tiling không nói về compiler của Rockchip; số "1.2x đến 2x" của TVM đo trên GPU Titan X, không áp dụng cho NPU RK3588.
+   - Layout NC1HWC2 có C1 là giá trị làm tròn lên của C/C2, với RK3588 cột chung RK3576/RK3588/RV1126B ghi C2 là 16 cho int8 và 8 cho float16 [T1 UG232 tr.61].
+   - Có nhiều khái niệm alignment khác nhau, căn lề kênh là "not mandatory" [T1 UG232 tr.144], cách chọn C2 và C1 cho từng tensor là unknown.
+   - Các bài T2 về fusion và tiling không nói về compiler của Rockchip, số "1.2x đến 2x" của TVM đo trên GPU Titan X, không áp dụng cho NPU RK3588.
 
 .. contents:: Trong trang này
    :local:
@@ -137,19 +137,19 @@ Table 8-2 (UG232 tr.145), RK3588/RK3576/RV1126B, độ chia hết kênh để th
      - 32
      - 8
 
-Operator List mục 5.2.2 (PDF 339), alignment output của RK3588 (tiếng Trung): ``int8``, layout NHWC: channel căn 16; ``int8``, NC1HWC2: "最后一层卷积类算子，32 对齐，最后一层非卷积类算子 16 对齐" (nếu lớp cuối là op họ Conv thì căn 32, nếu không phải op họ Conv thì căn 16; "卷积类" dịch là "họ Conv", danh sách op thuộc họ này nguồn không nêu ở chỗ này), và ``H*W`` căn 4. Với ``float16``, NHWC căn 8; NC1HWC2 lớp cuối là Conv căn 16, không phải Conv căn 8.
+Operator List mục 5.2.2 (PDF 339), alignment output của RK3588 (tiếng Trung): ``int8``, layout NHWC: channel căn 16.``int8``, NC1HWC2: "最后一层卷积类算子，32 对齐，最后一层非卷积类算子 16 对齐" (nếu lớp cuối là op họ Conv thì căn 32, nếu không phải op họ Conv thì căn 16."卷积类" dịch là "họ Conv", danh sách op thuộc họ này nguồn không nêu ở chỗ này), và ``H*W`` căn 4. Với ``float16``, NHWC căn 8. NC1HWC2 lớp cuối là Conv căn 16, không phải Conv căn 8.
 
 |UG232 Figure 5-1| *Hình 6.4. Định dạng NC1HWC2: C2 là khối kênh nằm liền nhau trong bộ nhớ, C1 là số khối. Table 5-1 liệt kê C2 theo chip. Nguồn: [T1 UG232 tr.61, Figure 5-1 và Table 5-1]*
 
 **Ý chính**
 
-- Có ít nhất bốn khái niệm "alignment" khác nhau, không gộp: C2 của layout (UG232 tr.61); căn lề width của input chỉ cho zero-copy API (OPL tr.335, và Table 5-2 của UG232 tr.65 cho RK3588 ghi "Width 16-byte aligned" khi số kênh là 1, 3 hoặc 4; xem ``07_``); căn lề output của lớp cuối (OPL tr.339, ghi chú 1: căn lề của output NHWC chỉ áp dụng khi phần chuyển đổi output do NPU thực hiện, "输出转换是 NPU 实现的"; ``float16`` NC1HWC2 còn yêu cầu ``H*W`` căn 4); và căn lề kênh để chạy hiệu quả, "not mandatory" (UG232 tr.144, 145). ``07_`` còn nêu căn lề SRAM 4K. Tổng hợp của file này: số 16 ở C2 của int8 trùng với số 16 của "Other OP" trong Table 8-2 và của lớp cuối không phải Conv ở OPL, nhưng nguồn không nói chúng là một đại lượng.
+- Có ít nhất bốn khái niệm "alignment" khác nhau, không gộp: C2 của layout (UG232 tr.61), căn lề width của input chỉ cho zero-copy API (OPL tr.335, và Table 5-2 của UG232 tr.65 cho RK3588 ghi "Width 16-byte aligned" khi số kênh là 1, 3 hoặc 4, xem ``07_``), căn lề output của lớp cuối (OPL tr.339, ghi chú 1: căn lề của output NHWC chỉ áp dụng khi phần chuyển đổi output do NPU thực hiện, "输出转换是 NPU 实现的".``float16`` NC1HWC2 còn yêu cầu ``H*W`` căn 4), và căn lề kênh để chạy hiệu quả, "not mandatory" (UG232 tr.144, 145). ``07_`` còn nêu căn lề SRAM 4K. Tổng hợp của file này: số 16 ở C2 của int8 trùng với số 16 của "Other OP" trong Table 8-2 và của lớp cuối không phải Conv ở OPL, nhưng nguồn không nói chúng là một đại lượng.
 - Với RK3588 các số lấy từ cột chung RK3576/RK3588/RV1126B (UG232 tr.61, 145), không phải bảng riêng của RK3588.
 
 **Giới hạn**
 
 - Bảng input của RK3588 trong OPL mục 5.1.2 (PDF 336) là ảnh nhúng, không có văn bản. File này chưa trích bảng đó.
-- Log mẫu trên RK3588 trong ``04_RK3588_NPU_SRAM_usage.md`` có ``NativeShape`` không khớp công thức ``C1 = ceil(C/C2)`` (ví dụ ``(1,512,7,7) -> (1,33,7,7,16)``). Không nguồn nào giải thích; có thể là log từ cấu hình khác. ``unknown``.
+- Log mẫu trên RK3588 trong ``04_RK3588_NPU_SRAM_usage.md`` có ``NativeShape`` không khớp công thức ``C1 = ceil(C/C2)`` (ví dụ ``(1,512,7,7) -> (1,33,7,7,16)``). Không nguồn nào giải thích, có thể là log từ cấu hình khác. ``unknown``.
 - Cách chọn C2 và C1 cho từng tensor: ``unknown``.
 
 --------------
@@ -193,8 +193,8 @@ Tiling và scheduling trong các bài T2 (chỉ ngữ cảnh chung)
 
 **Ý chính**
 
-- Fusion nhằm giảm truy cập bộ nhớ ngoài; tiling vì buffer trên chip nhỏ hơn DRAM; layout phải đổi khi producer và consumer cần layout khác nhau (TVM tr.3, 4; LEE24 tr.1, 2).
-- Số "1.2x đến 2x" của TVM đo trên GPU Titan X (chú thích Figure 4, TVM tr.4; cột depthwise-conv+bn+relu trong hình khoảng 2.3, lệch với "up to 2x" trong văn bản), không áp dụng cho NPU RK3588.
+- Fusion nhằm giảm truy cập bộ nhớ ngoài, tiling vì buffer trên chip nhỏ hơn DRAM, layout phải đổi khi producer và consumer cần layout khác nhau (TVM tr.3, 4. LEE24 tr.1, 2).
+- Số "1.2x đến 2x" của TVM đo trên GPU Titan X (chú thích Figure 4, TVM tr.4, cột depthwise-conv+bn+relu trong hình khoảng 2.3, lệch với "up to 2x" trong văn bản), không áp dụng cho NPU RK3588.
 
 **Giới hạn.** Các bài này không nói gì về compiler của Rockchip. BAMB là compiler của NXP eIQ Neutron. LENS nói rằng compiler của NPU thương mại tối ưu theo cách khó đoán, nhưng là bài về dự đoán độ trễ LLM trên Inferentia2 và TPU.
 

@@ -27,13 +27,13 @@ Còn thiếu nguồn (unknown) và truy vấn
      - Truy vấn đề xuất (chưa thực hiện)
    * - Một nguồn T2 dành riêng một đoạn phân tích lý do cần NPU
      - Chỉ có 3 lập luận rời trong khối này, cộng hai câu của BAMB tr.1
-     - "efficient processing of deep neural networks: a tutorial and survey"; "domain-specific architectures for deep learning survey"
+     - "efficient processing of deep neural networks: a tutorial and survey"."domain-specific architectures for deep learning survey"
    * - Roofline nguyên bản
      - TPU chỉ "adapt" (TPU trích là [Wil09])
      - "Roofline: an insightful visual performance model for multicore architectures"
    * - Cơ chế zero-skipping và nén
      - Chi tiết ở tài liệu ngoài corpus
-     - "Cnvlutin ineffectual neuron free deep neural network computing"; "Efficient Inference Engine EIE compressed deep neural network"; "Eyeriss ISSCC 2016 energy-efficient reconfigurable accelerator"
+     - "Cnvlutin ineffectual neuron free deep neural network computing"."Efficient Inference Engine EIE compressed deep neural network"."Eyeriss ISSCC 2016 energy-efficient reconfigurable accelerator"
    * - Liên hệ giữa khái niệm ở đây và RK3588
      - Không nguồn T2 nào nói về Rockchip
      - xem ``02_rk3588_npu_hardware.md`` (T1)
@@ -81,19 +81,19 @@ Các từ khóa đã tìm trong TRM1 Ch.36, TRM2, Datasheet, UG152, API232, SRAM
      - Bank 0 đến 7 trong thanh ghi, không có kích thước
      - unknown
    * - Tần số tối đa, bảng OPP, quy ước 1 MAC = 2 phép tính trong tài liệu vendor
-     - DS tr.11 "up to 6 TOPS"; DS tr.31 "Max NPU frequency ... TBD"; tần số 1 GHz chỉ là ví dụ (UG232 tr.31, UG152 tr.73). Đóng một phần (T1 DTS, T3): OPP tối đa 1000 MHz ("RK3588 npu", DTS dòng 3534-3655), board ``max_freq`` 1000000000; Datasheet vẫn ``TBD``; chi tiết ở :ref:`Clock, DVFS và reset <28-clock-dvfs-và-reset>`
+     - DS tr.11 "up to 6 TOPS". DS tr.31 "Max NPU frequency ... TBD", tần số 1 GHz chỉ là ví dụ (UG232 tr.31, UG152 tr.73). Đóng một phần (T1 DTS, T3): OPP tối đa 1000 MHz ("RK3588 npu", DTS dòng 3534-3655), board ``max_freq`` 1000000000. Datasheet vẫn ``TBD``, chi tiết ở :ref:`Clock, DVFS và reset <28-clock-dvfs-và-reset>`
      - một phần: tối đa và OPP ``unknown``, ví dụ 1 GHz có
    * - Vai trò MCU NPU_M0
-     - Ngắt ``C0_RKNN``..\ ``C2_RKNN`` và mailbox nối vào NPU_M0 (TRM1 tr.1298); chức năng firmware không được mô tả
+     - Ngắt ``C0_RKNN``..\ ``C2_RKNN`` và mailbox nối vào NPU_M0 (TRM1 tr.1298), chức năng firmware không được mô tả
      - unknown
    * - NPU có qua IOMMU không
-     - Chương 36 không nói; UG232 tr.45 có ``iommu_domain_id`` 4GB ở mức SDK. Đóng một phần (T1 DRV, DTS; T3): ``iommus = <&rknpu_mmu>`` (DTS dòng 3478), board dùng iommu mode, hằng "4GB" không tìm thấy trong DRV; chi tiết ở :ref:`Vị trí của NPU trong SoC <21-vị-trí-của-npu-trong-soc>`
+     - Chương 36 không nói. UG232 tr.45 có ``iommu_domain_id`` 4GB ở mức SDK. Đóng một phần (T1 DRV, DTS. T3): ``iommus = <&rknpu_mmu>`` (DTS dòng 3478), board dùng iommu mode, hằng "4GB" không tìm thấy trong DRV, chi tiết ở :ref:`Vị trí của NPU trong SoC <21-vị-trí-của-npu-trong-soc>`
      - một phần
    * - Hai cửa sổ ``SYSTEM_SRAM``
-     - ``FF000000`` khớp TRM1 Ch.34 (tr.1965); ``FD600000`` không được giải thích
+     - ``FF000000`` khớp TRM1 Ch.34 (tr.1965).``FD600000`` không được giải thích
      - một phần
 
-**Truy vấn đề xuất** (chưa thực hiện; kết quả phải được mở và trích đúng trang trước khi dùng)
+**Truy vấn đề xuất** (chưa thực hiện, kết quả phải được mở và trích đúng trang trước khi dùng)
 
 .. list-table::
    :header-rows: 1
@@ -101,16 +101,16 @@ Các từ khóa đã tìm trong TRM1 Ch.36, TRM2, Datasheet, UG152, API232, SRAM
    * - Câu hỏi
      - Truy vấn
    * - Dataflow, tiling, bố cục PE
-     - "Rockchip RKNPU hardware architecture white paper"; "RK3588 RKNN MAC array 32x32 int8 microarchitecture"
-   * - Ý nghĩa CBUF, CSC, CMAC, CNA, DDMA, SDMA, BS, BN, EW; kích thước bank
+     - "Rockchip RKNPU hardware architecture white paper"."RK3588 RKNN MAC array 32x32 int8 microarchitecture"
+   * - Ý nghĩa CBUF, CSC, CMAC, CNA, DDMA, SDMA, BS, BN, EW, kích thước bank
      - mã nguồn driver ``rknpu`` chính thức của Rockchip
-   * - Dual và triple co-work chia việc thế nào. Đóng một phần (T1 DRV): task theo lõi lấy từ ``subcore_task[]`` do userspace gửi; lập lịch trong driver (``todo_list`` mỗi lõi, AUTO chọn lõi ít task nhất) đã đọc; vì sao op khác về lõi 0 vẫn ``unknown``; chi tiết ở :ref:`Chế độ nhiều core <25-chế-độ-nhiều-core>`
+   * - Dual và triple co-work chia việc thế nào. Đóng một phần (T1 DRV): task theo lõi lấy từ ``subcore_task[]`` do userspace gửi, lập lịch trong driver (``todo_list`` mỗi lõi, AUTO chọn lõi ít task nhất) đã đọc, vì sao op khác về lõi 0 vẫn ``unknown``, chi tiết ở :ref:`Chế độ nhiều core <25-chế-độ-nhiều-core>`
      - "Rockchip rknpu driver multi-core scheduling source"
-   * - Bảng OPP, tần số tối đa. Đóng một phần (T1 DTS, T3): OPP tối đa 1000 MHz (DTS dòng 3534-3655), board ``max_freq`` 1000000000; chi tiết ở :ref:`Clock, DVFS và reset <28-clock-dvfs-và-reset>`
-     - "RK3588 Datasheet V1.0 NPU maximum frequency"; ``rk3588s.dtsi`` npu opp-table trong kernel Rockchip
+   * - Bảng OPP, tần số tối đa. Đóng một phần (T1 DTS, T3): OPP tối đa 1000 MHz (DTS dòng 3534-3655), board ``max_freq`` 1000000000, chi tiết ở :ref:`Clock, DVFS và reset <28-clock-dvfs-và-reset>`
+     - "RK3588 Datasheet V1.0 NPU maximum frequency".``rk3588s.dtsi`` npu opp-table trong kernel Rockchip
    * - Quy ước đếm phép tính cho 6 TOPS
      - "Rockchip RK3588 NPU 6 TOPS int8 calculation frequency"
-   * - IOMMU. Đóng một phần (T1 DRV, DTS; T3): ``iommus = <&rknpu_mmu>`` (DTS dòng 3478), board dùng iommu mode; chi tiết ở :ref:`Vị trí của NPU trong SoC <21-vị-trí-của-npu-trong-soc>`
+   * - IOMMU. Đóng một phần (T1 DRV, DTS. T3): ``iommus = <&rknpu_mmu>`` (DTS dòng 3478), board dùng iommu mode, chi tiết ở :ref:`Vị trí của NPU trong SoC <21-vị-trí-của-npu-trong-soc>`
      - "RK3588 RKNPU IOMMU" (kiểm tra driver rknpu chính thức)
 
 Không được viết

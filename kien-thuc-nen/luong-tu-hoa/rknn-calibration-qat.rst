@@ -81,7 +81,7 @@ Số ảnh theo thuật toán (API232 tr.8):
 
 **Ý chính**
 
-- Mỗi dòng của ``dataset.txt`` là một mẫu; model nhiều input thì các file cùng dòng cách nhau bằng dấu cách (UG232 tr.158).
+- Mỗi dòng của ``dataset.txt`` là một mẫu, model nhiều input thì các file cùng dòng cách nhau bằng dấu cách (UG232 tr.158).
 - Ảnh được resize tự động nếu khác kích thước input, nhưng resize có thể ảnh hưởng độ chính xác. Nên dùng ảnh đúng kích thước (UG232 tr.165).
 - Với model không phải ảnh RGB hoặc BGR, nên dùng ``.npy`` (UG232 tr.158).
 - Dữ liệu calibration không cần chuẩn bị theo batch dù dùng ``rknn_batch_size`` (UG232 tr.165).
@@ -89,8 +89,8 @@ Số ảnh theo thuật toán (API232 tr.8):
 
 **Giới hạn**
 
-- Số ảnh: API232 tr.8 và UG232 tr.28 nêu 20-100 cho ``normal`` và ``kl_divergence``; UG232 tr.122, 133, 134 và 159 nêu 20-200. UG232 tự mâu thuẫn; file này giữ cả hai khoảng, không chọn một.
-- Cách resize (stretch hay letterbox, interpolation), layout và dtype của ``.npy``, và việc mean/std có áp dụng lên ``.npy`` hay không: UG232 tr.132 chỉ nói "the quantization correction dataset will undergo normalization first". Đóng một phần (T3): Đo T3 trên PC (toolkit 2.3.2, ``target_platform='rk3588'``, một model ONNX NCHW đồng nhất, đọc ``quant_tab`` trong file ``.rknn``; log và script: ``tmp/04_debug-logs/2026-10-10_t3-calibration-pc/README.md``): ảnh calibration khác kích thước model được resize cả ảnh về kích thước model (không cắt, không đệm letterbox: ảnh rộng 128x64 và cao 64x128 đều giữ nguyên dải giá trị), và nội suy có lấy trung bình điểm ảnh (loại được nearest, chưa phân biệt bilinear, area, antialias); ``.npy`` nhận float32 hoặc uint8, dạng ``[1,C,H,W]`` hoặc ``[C,H,W]`` theo layout NCHW; ``[1,H,W,C]`` và sai kích thước bị từ chối (``ValueError``, không tự resize); ``mean`` và ``std`` được áp dụng lên ``.npy`` (npy 150 đến 250 với ``mean=250 std=2`` ra dải -50 đến 0). Chưa thử: model NHWC (tflite), ảnh xám hoặc có alpha, RGB/BGR, model thật, ảnh hưởng lên accuracy. Suy luận (không đo): nếu inference dùng letterbox thì ảnh calibration nên được letterbox trước, vì toolkit không đệm.
+- Số ảnh: API232 tr.8 và UG232 tr.28 nêu 20-100 cho ``normal`` và ``kl_divergence``. UG232 tr.122, 133, 134 và 159 nêu 20-200. UG232 tự mâu thuẫn, file này giữ cả hai khoảng, không chọn một.
+- Cách resize (stretch hay letterbox, interpolation), layout và dtype của ``.npy``, và việc mean/std có áp dụng lên ``.npy`` hay không: UG232 tr.132 chỉ nói "the quantization correction dataset will undergo normalization first". Đóng một phần (T3): Đo T3 trên PC (toolkit 2.3.2, ``target_platform='rk3588'``, một model ONNX NCHW đồng nhất, đọc ``quant_tab`` trong file ``.rknn``, log và script: ``tmp/04_debug-logs/2026-10-10_t3-calibration-pc/README.md``): ảnh calibration khác kích thước model được resize cả ảnh về kích thước model (không cắt, không đệm letterbox: ảnh rộng 128x64 và cao 64x128 đều giữ nguyên dải giá trị), và nội suy có lấy trung bình điểm ảnh (loại được nearest, chưa phân biệt bilinear, area, antialias).``.npy`` nhận float32 hoặc uint8, dạng ``[1,C,H,W]`` hoặc ``[C,H,W]`` theo layout NCHW.``[1,H,W,C]`` và sai kích thước bị từ chối (``ValueError``, không tự resize).``mean`` và ``std`` được áp dụng lên ``.npy`` (npy 150 đến 250 với ``mean=250 std=2`` ra dải -50 đến 0). Chưa thử: model NHWC (tflite), ảnh xám hoặc có alpha, RGB/BGR, model thật, ảnh hưởng lên accuracy. Suy luận (không đo): nếu inference dùng letterbox thì ảnh calibration nên được letterbox trước, vì toolkit không đệm.
 - Chọn calibration set cho domain hẹp như PPE: ``unknown`` (cũng là một mục chưa có nguồn ở file ``03_``).
 
 --------------

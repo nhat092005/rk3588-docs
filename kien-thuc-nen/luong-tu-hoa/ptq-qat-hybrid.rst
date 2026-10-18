@@ -13,9 +13,9 @@ PTQ, QAT và hybrid
 .. admonition:: Tóm tắt
 
    - Weight thường không cần calibration data còn activation thường cần vài batch, nhưng AdaRound là ngoại lệ dùng dữ liệu để tối ưu weight [T2 NAGEL tr.9] [T2 NAGEL tr.16].
-   - Các cách chọn range gồm min-max, MSE, percentile và KL divergence; min-max nhạy với outlier [T2 NAGEL tr.9] [T2 GHOLAMI tr.6].
-   - NAGEL khuyến nghị kinh nghiệm 500 đến 1000 ảnh calibration, QYOLO dùng 1500 ảnh COCO train2017; hai số này không phải quy tắc chung cho mọi model.
-   - QAT cần train lại, cần dữ liệu có nhãn và thêm siêu tham số [T2 NAGEL tr.19]; STE xử lý việc đạo hàm của làm tròn bằng 0 hoặc không xác định.
+   - Các cách chọn range gồm min-max, MSE, percentile và KL divergence, min-max nhạy với outlier [T2 NAGEL tr.9] [T2 GHOLAMI tr.6].
+   - NAGEL khuyến nghị kinh nghiệm 500 đến 1000 ảnh calibration, QYOLO dùng 1500 ảnh COCO train2017, hai số này không phải quy tắc chung cho mọi model.
+   - QAT cần train lại, cần dữ liệu có nhãn và thêm siêu tham số [T2 NAGEL tr.19]. STE xử lý việc đạo hàm của làm tròn bằng 0 hoặc không xác định.
    - Mixed-precision giữ lớp nhạy cảm ở độ chính xác cao hơn, nhưng QAREP là phản ví dụ: đặt hai lớp về float cho 51.3% so với 50.3% INT8 của RepVGG-A0 tái hiện.
    - Không PDF nào đo cấu hình mixed-precision trên mô hình detection, nên mục này là `unknown`.
 
@@ -66,8 +66,8 @@ PTQ và calibration (chọn range)
 
 **Ý chính**
 
-- Weight "usually" không cần dữ liệu calibration; activation "often requires a few batches of calibration data" (NAGEL tr.9). Ngoại lệ trong cùng nguồn: AdaRound dùng dữ liệu để tối ưu weight (NAGEL tr.16, Figure 8: "Use Data? Yes: AdaRound, No: Bias Correction"). Tổng hợp của file này: không viết "chỉ activation cần dữ liệu calibration" một cách tuyệt đối.
-- Một số cách chọn range trong nguồn: min-max, MSE, percentile, KL divergence (NAGEL tr.9; GHOLAMI tr.6). NAGEL còn nêu cross-entropy và BN-based range setting (tr.10). Min-max nhạy với outlier.
+- Weight "usually" không cần dữ liệu calibration, activation "often requires a few batches of calibration data" (NAGEL tr.9). Ngoại lệ trong cùng nguồn: AdaRound dùng dữ liệu để tối ưu weight (NAGEL tr.16, Figure 8: "Use Data? Yes: AdaRound, No: Bias Correction"). Tổng hợp của file này: không viết "chỉ activation cần dữ liệu calibration" một cách tuyệt đối.
+- Một số cách chọn range trong nguồn: min-max, MSE, percentile, KL divergence (NAGEL tr.9. GHOLAMI tr.6). NAGEL còn nêu cross-entropy và BN-based range setting (tr.10). Min-max nhạy với outlier.
 
 **Giới hạn**
 
@@ -105,7 +105,7 @@ QAT, simulated quantization và STE
 
    "Despite the coarse approximation of STE, it often works well in practice, except for ultra low-precision quantization such as binary quantization" [T2 GHOLAMI tr.9]
 
-|NAGEL Figure 4| *Hình 3.4a. (a) suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8; (b) mô phỏng bằng phép tính float với các khối Quantizer. Nguồn: [T2 NAGEL tr.6, Figure 4]*
+|NAGEL Figure 4| *Hình 3.4a. (a) suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8, (b) mô phỏng bằng phép tính float với các khối Quantizer. Nguồn: [T2 NAGEL tr.6, Figure 4]*
 
 |GHOLAMI Figure 5| *Hình 3.4b. Quy trình QAT: forward qua bộ lượng tử hóa, backward dùng STE như hàm đồng nhất. Nguồn: [T2 GHOLAMI tr.9, Figure 5]*
 
@@ -143,7 +143,7 @@ Mixed và hybrid precision
 
 |GHOLAMI Figure 8| *Hình 3.5. Mixed-precision: mỗi lớp chọn 4 hoặc 8 bit, cân bằng giữa độ trễ và độ nhạy. Nguồn: [T2 GHOLAMI tr.13, Figure 8]*
 
-**Ý chính.** Ý tưởng chung là giữ lớp nhạy cảm ở độ chính xác cao hơn (GHOLAMI tr.14). QYOLO giữ lớp đầu và cuối ở độ chính xác gốc, chỉ như một quy ước, không có thí nghiệm riêng (QYOLO tr.9). QAREP là một phản ví dụ: đặt hai lớp về float chưa cứu được độ chính xác của RepVGG (51.3% so với 50.3% INT8 của bản RepVGG-A0 tái hiện, QAREP Table 2 tr.4; bản RepVGG-A0 chính thức là 52.2%, Table 5 tr.6).
+**Ý chính.** Ý tưởng chung là giữ lớp nhạy cảm ở độ chính xác cao hơn (GHOLAMI tr.14). QYOLO giữ lớp đầu và cuối ở độ chính xác gốc, chỉ như một quy ước, không có thí nghiệm riêng (QYOLO tr.9). QAREP là một phản ví dụ: đặt hai lớp về float chưa cứu được độ chính xác của RepVGG (51.3% so với 50.3% INT8 của bản RepVGG-A0 tái hiện, QAREP Table 2 tr.4, bản RepVGG-A0 chính thức là 52.2%, Table 5 tr.6).
 
 **Giới hạn.** Không PDF nào đo cấu hình mixed-precision trên mô hình detection. ``unknown``. Cách RKNN-Toolkit2 thực hiện hybrid quantization xem file ``04_``.
 

@@ -6,10 +6,10 @@ Xử lý lỗi
 
 .. admonition:: Tóm tắt
 
-   - `adb cannot reach the board` hoặc `rknn_server is not running` xảy ra khi board vừa khởi động lại hoặc `adbd` tự thoát; nguyên nhân ngày 2026-09-27 là chưa rõ.
-   - Lỗi adb sửa bằng `sudo bash ai/board/start_rknn_server.sh` rồi chạy lại phase; `frequencies not locked` sửa bằng `sudo bash ai/board/lock_freq.sh lock`.
-   - `... already exists; move it away` do run bị ngắt giữa lúc train; xoá thư mục run đó rồi chạy lại `make phase2`.
-   - `STOPPED at step i` nghĩa là lệnh make của bước i lỗi; đọc log mới nhất trong `runs/<run_id>/logs/` rồi chạy lại phase.
+   - `adb cannot reach the board` hoặc `rknn_server is not running` xảy ra khi board vừa khởi động lại hoặc `adbd` tự thoát, trong đó nguyên nhân ngày 2026-09-27 là chưa rõ.
+   - Lỗi adb sửa bằng `sudo bash ai/board/start_rknn_server.sh` rồi chạy lại phase. Lỗi `frequencies not locked` sửa bằng `sudo bash ai/board/lock_freq.sh lock`.
+   - Lỗi `... already exists; move it away` do run bị ngắt giữa lúc train. Xoá thư mục run đó rồi chạy lại `make phase2`.
+   - `STOPPED at step i` nghĩa là lệnh make của bước i lỗi. Cần đọc log mới nhất trong `runs/<run_id>/logs/` rồi chạy lại phase.
    - Không chạy lệnh `adb` nào khác khi `benchmark-npu` đang chạy, vì đo thử ngày 2026-09-26 cho thấy phiên đo bị treo sau khi `adb connect` chen vào.
 
 .. _83-khi-có-lỗi:

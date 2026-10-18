@@ -6,9 +6,9 @@ Phase 5-8: tối ưu
 
 .. admonition:: Tóm tắt
 
-   - Phase 5 thêm YOLO11n/s bằng model, config và sửa `MODELS` trong `ai/automation/pipeline.py`; tiêu chí xong là có dòng YOLO11 ở D–L hoặc ghi rõ lý do loại.
-   - Phase 6 tìm bottleneck bằng số đo từ `table_K_layers.md`; `Transpose` chạy CPU (590 µs / 20,663 µs) chỉ thấy trên model nháp, cần kiểm lại trên model thật.
-   - Phase 7 có các candidate: structured pruning, SiLU sang ReLU / LeakyReLU, `op_target`, mixed precision, lighter head và input resolution; `op_target` hiện là `NotImplementedError`.
+   - Phase 5 thêm YOLO11n/s bằng model, config và sửa `MODELS` trong `ai/automation/pipeline.py`. Tiêu chí xong là có dòng YOLO11 ở D–L hoặc ghi rõ lý do loại.
+   - Phase 6 tìm bottleneck bằng số đo từ `table_K_layers.md`. Hiện tượng `Transpose` chạy CPU (590 µs / 20,663 µs) chỉ thấy trên model nháp, cần kiểm lại trên model thật.
+   - Phase 7 có các candidate: structured pruning, SiLU sang ReLU / LeakyReLU, `op_target`, mixed precision, lighter head và input resolution. Mục `op_target` hiện là `NotImplementedError`.
    - Phase 7 train 1 seed (42), kết luận ghi rõ "1 seed", và chênh lệch phải được xác nhận lớn hơn std ở Phase 10.
    - Phase 8 chạy các dòng Baseline, A, B, C, D của Table M, vẽ Figure 3 (Pareto) và Figure 5, và trả lời 4 câu hỏi dưới Table M.
 
@@ -52,13 +52,13 @@ Sau đó chạy lại ``make phase2/3/4 DATASET=<ds>`` (các bước YOLOv8 đã
 Phase 6. Bottleneck analysis
 ============================
 
-**Mục tiêu:** tìm bottleneck thật bằng số đo; phase quyết định research gap (:ref:`Đúng cách <42-đúng-cách>`).
+**Mục tiêu:** tìm bottleneck thật bằng số đo. Đây là phase quyết định research gap (:ref:`Đúng cách <42-đúng-cách>`).
 
 **Dữ liệu:** ``results/<ds>/table_K_layers.md`` (theo loại op và 20 layer lâu nhất, CPU/NPU, DDR/NPU cycles), ``tier1_int8_<mask>_layers.json``, Table E, G.
 
 - ☐ Trả lời 5 câu hỏi dưới Table K (Guide mục 7)
-- ☐ So ``tier1_int8_CORE_0_layers.json`` với ``tier1_int8_CORE_0_1_2_layers.json`` theo từng layer: op nào không nhanh lên khi thêm core; đối chiếu ``ConvExSwish`` với ``ConvolutionSwish`` (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`)
-- ☐ Op chạy trên CPU: đo thử với model nháp ngày 2026-09-26 thấy ``Transpose`` chạy CPU (590 µs / 20,663 µs); kiểm lại trên model thật
+- ☐ So ``tier1_int8_CORE_0_layers.json`` với ``tier1_int8_CORE_0_1_2_layers.json`` theo từng layer: op nào không nhanh lên khi thêm core, đồng thời đối chiếu ``ConvExSwish`` với ``ConvolutionSwish`` (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`)
+- ☐ Op chạy trên CPU: đo thử với model nháp ngày 2026-09-26 thấy ``Transpose`` chạy CPU (590 µs / 20,663 µs), cần kiểm lại trên model thật
 - ☐ So FLOPs (Table E) với latency (Table G) giữa các model (Case C)
 - ☐ Ghi research gap và hướng tối ưu vào ``tmp/02_decisions/``, có số đo làm căn cứ
 
@@ -98,10 +98,10 @@ Phase 7. Proposed optimization
 Candidate cần train lại: thêm model + config như Phase 5 rồi chạy ``make phase2/3/4``. Candidate không train lại: thêm bước export mới vào ``pipeline.py`` phase3.
 
 - ☐ Viết code cho candidate được chọn
-- ☐ Train 1 seed (42), chạy đủ phase 3–4; kết luận ghi rõ "1 seed" (quy tắc seed, mục 7)
+- ☐ Train 1 seed (42), chạy đủ phase 3–4. Phần kết luận ghi rõ "1 seed" (quy tắc seed, mục 7)
 - ☐ Table J
 
-**Tiêu chí xong:** có model đề xuất tốt hơn baseline trên RK3588S (1 seed); xác nhận chênh lệch lớn hơn std ở Phase 10.
+**Tiêu chí xong:** có model đề xuất tốt hơn baseline trên RK3588S (1 seed), và xác nhận chênh lệch lớn hơn std ở Phase 10.
 
 --------------
 

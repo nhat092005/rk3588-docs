@@ -6,11 +6,11 @@ Bốn dataset
 
 .. admonition:: Tóm tắt
 
-   - Lựa chọn 1 (SFCHD đơn lẻ, 5 lớp) đang được chọn; baseline cũ train 7 lớp nên cần train lại 5 lớp.
-   - Lựa chọn 2 (gộp SHEL5K + SFCHD + CHV đã lọc) đang cân nhắc, vẫn 5 lớp; `sfchd_shel5k` chưa từng train hoặc eval lần nào (xác nhận 2026-09-29).
-   - Số instance đếm trực tiếp: SHEL5K 75.570, SFCHD 50.552, CHV 9.209, CHVG 11.604, SH17 75.994; CHV chỉ dùng 474/1.330 ảnh sau lọc.
-   - CHVG chưa nằm trong Option 1/2; nguồn, license, paper chưa rõ, và 1.328/1.330 ảnh CHV có trong CHVG theo dHash.
-   - `data/sh17/classes.txt` liệt kê sai tên và thứ tự class so với nhãn thật, cần sửa nhưng chưa sửa; SH17 quyết định không dùng.
+   - Lựa chọn 1 (SFCHD đơn lẻ, 5 lớp) đang được chọn. Baseline cũ train 7 lớp nên cần train lại 5 lớp.
+   - Lựa chọn 2 (gộp SHEL5K + SFCHD + CHV đã lọc) đang cân nhắc, vẫn 5 lớp. Bộ dữ liệu `sfchd_shel5k` chưa từng train hoặc eval lần nào (xác nhận 2026-09-29).
+   - Số instance đếm trực tiếp: SHEL5K 75.570, SFCHD 50.552, CHV 9.209, CHVG 11.604, SH17 75.994. CHV chỉ dùng 474/1.330 ảnh sau lọc.
+   - CHVG chưa nằm trong Option 1/2 vì nguồn, license, paper chưa rõ, và 1.328/1.330 ảnh CHV có trong CHVG theo dHash.
+   - `data/sh17/classes.txt` liệt kê sai tên và thứ tự class so với nhãn thật, cần sửa nhưng chưa sửa. SH17 quyết định không dùng.
    - Tỷ lệ Person 27,2% và Hardhat 15,6% trong DATA_CARD của SH17 lệch số đếm trực tiếp, nguyên nhân chưa rõ `[unverified]`.
 
 .. _02-dataset:
@@ -34,8 +34,8 @@ Dataset
    * - 2. Gộp SHEL5K + SFCHD + CHV (đã lọc)
      - Cân nhắc
      - 5 lớp, mapping đề xuất bên dưới
-     - ``person``, ``helmet``, ``head``, ``safety_clothes``, ``self_clothes`` (giống hệt Option 1; CHV chỉ đóng góp thêm instance cho ``person``/``helmet``/``safety_clothes``, không thêm class mới)
-     - Xem trích dẫn nguồn bên dưới. **Cập nhật 2026-09-29**: bản trước của mục này (Option 2 = chỉ SHEL5K+SFCHD, loại hẳn CHV) dựa trên rủi ro dedup bị phóng đại — xem đính chính ở 0.2.2
+     - ``person``, ``helmet``, ``head``, ``safety_clothes``, ``self_clothes`` (giống hệt Option 1, trong đó CHV chỉ đóng góp thêm instance cho ``person``/``helmet``/``safety_clothes``, không thêm class mới)
+     - Xem trích dẫn nguồn bên dưới. **Cập nhật 2026-09-29**: bản trước của mục này (Option 2 = chỉ SHEL5K+SFCHD, loại hẳn CHV) dựa trên rủi ro dedup bị phóng đại, xem đính chính ở 0.2.2
 
 **Việc cần làm cho lựa chọn 1:**
 
@@ -46,27 +46,27 @@ Dataset
 
 **Việc cần làm cho lựa chọn 2:** (chi tiết lý do/số liệu từng dòng xem 0.2.1, 0.2.2)
 
-- ☒ ``data/CLASS_MAPPING.md`` (bản SHEL5K+SFCHD) — **cần cập nhật thêm phần CHV**, chưa làm
-- ☒ Script gộp ``scripts/data/prepare_sfchd_shel5k.py`` → ``data/sfchd_shel5k/processed/`` — **cần sửa để thêm CHV đã lọc**, chưa làm
+- ☒ ``data/CLASS_MAPPING.md`` (bản SHEL5K+SFCHD): **cần cập nhật thêm phần CHV**, chưa làm
+- ☒ Script gộp ``scripts/data/prepare_sfchd_shel5k.py`` → ``data/sfchd_shel5k/processed/``: **cần sửa để thêm CHV đã lọc**, chưa làm
 - ☒ Thêm config ``ai/automation/configs/sfchd_shel5k_yolov8n_baseline.yaml`` + ``sfchd_shel5k_yolov8s_baseline.yaml``
 - ☒ Danh sách ảnh test riêng của SHEL5K ``data/sfchd_shel5k/processed/test_shel5k.txt`` (500 ảnh, eval set ``shel5k_test``), do ``prepare_sfchd_shel5k.py`` sinh ra
-- ☐ Danh sách ảnh test riêng của CHV ``test_chv.txt`` (44 ảnh, eval set ``chv_test``) — mới, chưa làm
-- ☐ Quyết định tên identifier dataset: giữ ``sfchd_shel5k`` dù có thêm CHV, hay đổi tên (ví dụ ``sfchd_shel5k_chv``) cho đúng thành phần thật — chưa chốt
+- ☐ Danh sách ảnh test riêng của CHV ``test_chv.txt`` (44 ảnh, eval set ``chv_test``): mới, chưa làm
+- ☐ Quyết định tên identifier dataset: giữ ``sfchd_shel5k`` dù có thêm CHV, hay đổi tên (ví dụ ``sfchd_shel5k_chv``) cho đúng thành phần thật (chưa chốt)
 - ☐ Leaderboard ``ai/automation/leaderboards/sfchd_shel5k.csv``: ``ai/automation/run.py`` tự tạo khi train run đầu tiên
-- ☐ Train lại baseline (yolov8n + yolov8s) trên ``sfchd_shel5k`` (mục 8, Phase 2) — **xác nhận thật (2026-09-29): chưa từng train/eval lần nào**, không có run/leaderboard nào tồn tại cho dataset này
+- ☐ Train lại baseline (yolov8n + yolov8s) trên ``sfchd_shel5k`` (mục 8, Phase 2): **xác nhận thật (2026-09-29): chưa từng train/eval lần nào**, không có run/leaderboard nào tồn tại cho dataset này
 
 **Nguồn cho lựa chọn 2:** :download:`_assets/pdf/papers/07_ppe_detection/shel5k_helmet_2022otgonbold.pdf <../../_assets/pdf/papers/07_ppe_detection/shel5k_helmet_2022otgonbold.pdf>`, Table 2, tr.9 (:ref:`Ví dụ gap có thể xuất hiện sau benchmark <43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark>` "Three-Class Results"):
 
    So sánh cùng tập ảnh, model YOLOv5x train trên nhãn thiếu sót (SHD) vs nhãn đầy đủ (SHEL5K), lớp Person: Precision 0.0345 → 0.9203, Recall 0.0052 → 0.8409, mAP@0.5 **0.03% → 83.11%**. mAP@0.5 trung bình 3 lớp (Helmet/Head/Person): 59.50% → 85.28%.
 
-Kết luận của paper (:ref:`Ví dụ gap có thể xuất hiện sau benchmark <43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark>`): nhãn Person bị bỏ sót nghiêm trọng trong SHD khiến YOLOv5x gần như không phát hiện được người; bổ sung nhãn đầy đủ trên SHEL5K khắc phục hoàn toàn vấn đề này.
+Kết luận của paper (:ref:`Ví dụ gap có thể xuất hiện sau benchmark <43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark>`): nhãn Person bị bỏ sót nghiêm trọng trong SHD khiến YOLOv5x gần như không phát hiện được người, và việc bổ sung nhãn đầy đủ trên SHEL5K khắc phục hoàn toàn vấn đề này.
 
 .. _021-class-gốc-của-từng-dataset:
 
 Class gốc của từng dataset
 --------------------------
 
-Số lượng instance đếm trực tiếp từ file nhãn (toàn bộ train+val+test), không phải số paper báo cáo. SHEL5K, CHV, SFCHD, SH17 đếm từ ``data/<name>/processed/labels/*.txt`` (SH17 đếm trên nhãn thật, xem cảnh báo ở 0.2.1.5); CHVG đếm từ ``data/chvg/CHVG-Dataset/*.xml``. Cùng phương pháp với 0.2.2.
+Số lượng instance đếm trực tiếp từ file nhãn (toàn bộ train+val+test), không phải số paper báo cáo. SHEL5K, CHV, SFCHD, SH17 đếm từ ``data/<name>/processed/labels/*.txt`` (SH17 đếm trên nhãn thật, xem cảnh báo ở 0.2.1.5). CHVG đếm từ ``data/chvg/CHVG-Dataset/*.xml``. Cùng phương pháp với 0.2.2.
 
 **Tổng quan:**
 

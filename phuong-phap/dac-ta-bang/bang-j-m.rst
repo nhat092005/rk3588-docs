@@ -6,11 +6,11 @@ Bảng J đến M
 
 .. admonition:: Tóm tắt
 
-   - Table J là bảng trọng tâm nên có trong paper, so YOLOv8n FP16, INT8 PTQ, structured pruning, ReLU / LeakyReLU + INT8 và Proposed HW-aware; mọi ô còn [TBD].
+   - Table J là bảng trọng tâm nên có trong paper, so YOLOv8n FP16, INT8 PTQ, structured pruning, ReLU / LeakyReLU + INT8 và Proposed HW-aware. Hiện mọi ô còn [TBD].
    - `AP head` và `AP self_clothes` là 2 tín hiệu vi phạm, ít mẫu nhất và dễ bị ảnh hưởng nhất khi nén model.
    - Table K ghi hỗ trợ đa nhân theo tài liệu Rockchip: `ConvExSwish` "暂不支持" (nếu cùng op với ConvolutionSwish), Resize "不支持", Conv không activation "支持".
-   - Table L ghi Peak RAM (VmRSS), NPU memory, Avg CPU và nhiệt độ; Power và Energy/frame nằm ngoài v1 vì chưa có cách đo đã kiểm chứng.
-   - Table M có dòng Baseline, A (INT8), B (pruning), C (ReLU), D (cả 3); ✗ ở cột INT8 nghĩa là model chạy FP16 trên NPU; ô số còn [TBD].
+   - Table L ghi Peak RAM (VmRSS), NPU memory, Avg CPU và nhiệt độ. Riêng Power và Energy/frame nằm ngoài v1 vì chưa có cách đo đã kiểm chứng.
+   - Table M có dòng Baseline, A (INT8), B (pruning), C (ReLU), D (cả 3). Dấu ✗ ở cột INT8 nghĩa là model chạy FP16 trên NPU, và các ô số còn [TBD].
 
 .. contents:: Trong trang này
    :local:
@@ -120,7 +120,7 @@ Table J. Main Accuracy–Efficiency Comparison
 Table K. Operator / Layer Bottleneck Profile
 ============================================
 
-**Mục đích:** rất quan trọng nếu muốn claim hardware-aware contribution. Thời gian từng layer và DDR/NPU cycles lấy từ bảng layer của ``eval_perf`` khi ``perf_debug=True`` (tầng 1, phiên 2); bảng này sinh tự động ở ``results/<dataset>/table_K_layers.md``. Build log ``RKNN_LOG_LEVEL=3`` (``runs/<run_id>/logs/export_int8_*.log``) có cycles ước tính lúc build, dùng để đối chiếu.
+**Mục đích:** rất quan trọng nếu muốn claim hardware-aware contribution. Thời gian từng layer và DDR/NPU cycles lấy từ bảng layer của ``eval_perf`` khi ``perf_debug=True`` (tầng 1, phiên 2). Bảng này sinh tự động ở ``results/<dataset>/table_K_layers.md``. Build log ``RKNN_LOG_LEVEL=3`` (``runs/<run_id>/logs/export_int8_*.log``) có cycles ước tính lúc build, dùng để đối chiếu.
 
 .. list-table::
    :header-rows: 1
@@ -300,7 +300,7 @@ Table M. Ablation Study
 - **✗** = không áp dụng. Riêng ✗ ở cột INT8 nghĩa là model chạy FP16 trên NPU (giống dòng đầu của Table J).
 - **A, B, C so với Baseline** = biết riêng mỗi thay đổi đóng góp bao nhiêu.
 - **D so với A, B, C** = biết kết hợp cả 3 có tốt hơn từng cái riêng lẻ không.
-- **Tổ hợp 2 thay đổi** (vd INT8 + pruning, đã có ở Table J) chưa có trong bảng; chỉ thêm nếu D khác xa tổng đóng góp của A, B, C.
+- **Tổ hợp 2 thay đổi** (vd INT8 + pruning, đã có ở Table J) chưa có trong bảng, và chỉ thêm nếu D khác xa tổng đóng góp của A, B, C.
 
 Ablation phải giúp trả lời:
 

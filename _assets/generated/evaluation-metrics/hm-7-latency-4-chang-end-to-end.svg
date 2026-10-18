@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 356" width="900" height="356" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="356" fill="white"/>
+<rect x="770" y="10" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="810.3" y="21.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="20" y="20" font-size="13" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">CẤU TRÚC ĐỘ TRỄ 4 CHẶNG (LATENCY PIPELINE) TRÊN SOC RK3588</text>
+<text x="20" y="36" font-size="9.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Phân tách luồng xử lý thực tế giữa CPU, RGA và NPU 3-Core kèm đường thời gian End-to-End</text>
+<rect x="20" y="52" width="860" height="132" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="32" y="66" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1. LUỒNG THỰC THI PHẦN CỨNG (HARDWARE DATAFLOW PER FRAME)</text>
+<rect x="32" y="78" width="100" height="96" rx="4" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.0"/>
+<text x="82.0" y="94" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ảnh đầu vào</text>
+<text x="82.0" y="112" font-size="8.5" font-weight="400" fill="#455A64" text-anchor="middle" dominant-baseline="central">Camera RTSP</text>
+<text x="82.0" y="128" font-size="8.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Full HD (1080P)</text>
+<text x="82.0" y="144" font-size="8.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Định dạng BGR/NV12</text>
+<text x="82.0" y="162" font-size="7.5" font-weight="700" fill="#37474F" text-anchor="middle" dominant-baseline="central">DRAM Framebuffer</text>
+<path d="M 132 126.0 L 150 126.0" stroke="#78909C" stroke-width="1.8" fill="none" marker-end="url(#arr)"/>
+<rect x="152" y="78" width="200" height="96" rx="4" fill="#FFF8E1" stroke="#FFB300" stroke-width="1.2"/>
+<text x="162" y="94" font-size="9.5" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">Chặng 1: Pre-processing</text>
+<text x="342" y="94" font-size="9.0" font-weight="700" fill="#E65100" text-anchor="end" dominant-baseline="central">T_pre ~2.5 ms</text>
+<text x="162" y="110" font-size="8.0" font-weight="700" fill="#BF360C" text-anchor="start" dominant-baseline="central">Thực thi: CPU hoặc phần cứng RGA2</text>
+<text x="162" y="126" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Resize &amp; LetterBox (pad xám) -&gt; 640×640</text>
+<text x="162" y="141" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đổi màu BGR -&gt; RGB &amp; chuẩn hóa giá trị</text>
+<text x="162" y="156" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Lượng tử hoá: Scale sang INT8 Tensor</text>
+<text x="162" y="168" font-size="7.5" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">-&gt; Output: Tensor chuẩn (1×3×640×640)</text>
+<path d="M 352 126.0 L 396 126.0" stroke="#1E88E5" stroke-width="2.0" fill="none" marker-end="url(#arr)"/>
+<text x="374" y="118.0" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">DMA-BUF</text>
+<text x="374" y="136.0" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Zero-Copy</text>
+<rect x="398" y="78" width="260" height="96" rx="4" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.2"/>
+<text x="408" y="94" font-size="9.5" font-weight="700" fill="#0D47A1" text-anchor="start" dominant-baseline="central">Chặng 2: Pure NPU Inference</text>
+<text x="648" y="94" font-size="9.0" font-weight="700" fill="#0D47A1" text-anchor="end" dominant-baseline="central">T_npu ~12.5 ms</text>
+<text x="408" y="110" font-size="8.0" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">Thực thi: NPU RK3588 (Đỉnh 6.0 TOPS INT8)</text>
+<rect x="408.0" y="118" width="77.33333333333333" height="20" rx="2" fill="#BBDEFB" stroke="#1976D2" stroke-width="0.8"/>
+<text x="446.6666666666667" y="129" font-size="7.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">Core 0</text>
+<rect x="489.3333333333333" y="118" width="77.33333333333333" height="20" rx="2" fill="#BBDEFB" stroke="#1976D2" stroke-width="0.8"/>
+<text x="528.0" y="129" font-size="7.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">Core 1</text>
+<rect x="570.6666666666666" y="118" width="77.33333333333333" height="20" rx="2" fill="#BBDEFB" stroke="#1976D2" stroke-width="0.8"/>
+<text x="609.3333333333333" y="129" font-size="7.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">Core 2</text>
+<text x="408" y="150" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Backbone (C2f/C3k) -&gt; Neck (PANet) -&gt; Head</text>
+<text x="408" y="165" font-size="7.5" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Nạp weights INT8 từ SRAM đệm; nhân ma trận systolic</text>
+<path d="M 658 126.0 L 684 126.0" stroke="#78909C" stroke-width="1.8" fill="none" marker-end="url(#arr)"/>
+<text x="671" y="118.0" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Raw Tensor</text>
+<rect x="686" y="78" width="196" height="96" rx="4" fill="#F3E5F5" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="696" y="94" font-size="9.5" font-weight="700" fill="#4A148C" text-anchor="start" dominant-baseline="central">Chặng 3: Post-processing</text>
+<text x="872" y="94" font-size="9.0" font-weight="700" fill="#4A148C" text-anchor="end" dominant-baseline="central">T_post ~3.5 ms</text>
+<text x="696" y="110" font-size="8.0" font-weight="700" fill="#6A1B9A" text-anchor="start" dominant-baseline="central">Thực thi: CPU Cortex-A76</text>
+<text x="696" y="126" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Decode box &amp; lọc Conf (&gt;= 0.25)</text>
+<text x="696" y="141" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• NMS triệt tiêu box trùng (IoU 0.45)</text>
+<text x="696" y="156" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ánh xạ tọa độ về ảnh gốc 1080P</text>
+<text x="696" y="168" font-size="7.5" font-weight="700" fill="#4A148C" text-anchor="start" dominant-baseline="central">-&gt; Output: Danh sách bbox &amp; nhãn PPE</text>
+<rect x="20" y="196" width="860" height="114" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="32" y="210" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. DÒNG THỜI GIAN ĐỘ TRỄ TOÀN CHU TRÌNH (END-TO-END TIMELINE - CHẶNG 4)</text>
+<rect x="32" y="224" width="70.27027027027027" height="30" rx="3" fill="#FFE082" stroke="#FFB300" stroke-width="1.2"/>
+<text x="67.13513513513513" y="236" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">T_pre</text>
+<text x="67.13513513513513" y="247" font-size="8.0" font-weight="400" fill="#BF360C" text-anchor="middle" dominant-baseline="central">2.5 ms</text>
+<rect x="102.27027027027027" y="224" width="351.35135135135135" height="30" rx="3" fill="#90CAF9" stroke="#1E88E5" stroke-width="1.2"/>
+<text x="277.94594594594594" y="236" font-size="9.0" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">T_npu (Pure NPU Suy Luận Lượng Tử INT8)</text>
+<text x="277.94594594594594" y="247" font-size="8.0" font-weight="400" fill="#1565C0" text-anchor="middle" dominant-baseline="central">12.5 ms (Chiếm 67.5% tổng chu kỳ xử lý)</text>
+<rect x="453.6216216216216" y="224" width="98.37837837837839" height="30" rx="3" fill="#CE93D8" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="502.81081081081084" y="236" font-size="8.5" font-weight="700" fill="#4A148C" text-anchor="middle" dominant-baseline="central">T_post</text>
+<text x="502.81081081081084" y="247" font-size="8.0" font-weight="400" fill="#6A1B9A" text-anchor="middle" dominant-baseline="central">3.5 ms</text>
+<rect x="32" y="260" width="520.0" height="24" rx="3" fill="#E8F5E9" stroke="#43A047" stroke-width="1.5"/>
+<text x="292.0" y="273" font-size="9.0" fill="#1B5E20" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Chặng 4: T_E2E (End-to-End Latency) = </tspan><tspan>T_pre + T_npu + T_post = </tspan><tspan font-weight="700">2.5 + 12.5 + 3.5 = 18.5 ms</tspan></text>
+<rect x="568.0" y="216" width="312.0" height="82" rx="4" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="578.0" y="229" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ý NGHĨA TRONG TRIỂN KHAI THỰC TẾ:</text>
+<text x="578.0" y="244" font-size="8.0" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Xử lý tuần tự 1 luồng: </tspan><tspan>FPS = 1000 / 18.5 ≈ 54.1 FPS.</tspan></text>
+<text x="578.0" y="259" font-size="8.0" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Pipeline đa luồng (3 Core): </tspan><tspan>Pre/NPU/Post chạy gối đầu nhau.</tspan></text>
+<text x="578.0" y="273" font-size="8.0" fill="#C62828" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nút thắt chính (Bottleneck): </tspan><tspan>Là T_npu (12.5 ms) quyết định</tspan></text>
+<text x="586.0" y="285" font-size="7.5" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">thông lượng cực đại Throughput FPS ≈ 80 FPS.</text>
+<text x="10" y="342" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Rockchip RKNPU2 Toolkit v2.3.2 Manual; Benchmark thực tế YOLOv8n INT8 640×640 trên Orange Pi 5 RK3588S.</text>
+</svg>

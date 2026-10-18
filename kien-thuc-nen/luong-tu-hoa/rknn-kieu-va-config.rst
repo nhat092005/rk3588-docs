@@ -69,7 +69,7 @@ Thuật toán (UG232 tr.121):
 
    "The MMSE (Minimum Mean Square Error) quantization algorithm determines the maximum and minimum values of the quantization range by minimizing the mean square error loss between the floating-point numbers and the quantized and dequantized floating-point numbers." [T1 UG232 tr.121]
 
-Trong Operator List (tiếng Trung), mục 3.2.5 Convolution cho RK3588 (OPL PDF 58 đến 59): weight "量化支持 per‑layer, per‑channel", dtype "T1: int8(Tensor), float16(Tensor)" (ở OPL PDF 59; chữ "T1" là tên biến kiểu trong OPL, không phải tier). Input và output của Convolution chỉ "per‑layer".
+Trong Operator List (tiếng Trung), mục 3.2.5 Convolution cho RK3588 (OPL PDF 58 đến 59): weight "量化支持 per‑layer, per‑channel", dtype "T1: int8(Tensor), float16(Tensor)" (ở OPL PDF 59, chữ "T1" là tên biến kiểu trong OPL, không phải tier). Input và output của Convolution chỉ "per‑layer".
 
 |UG232 Figure 6-1| *Hình 4.1a. Lượng tử hóa tuyến tính đối xứng và bất đối xứng (RKNN-Toolkit2). Nguồn: [T1 UG232 tr.120, Figure 6-1]*
 
@@ -81,7 +81,7 @@ Trong Operator List (tiếng Trung), mục 3.2.5 Convolution cho RK3588 (OPL PDF
 - Thuật toán ``gdq`` chỉ hợp lệ với ``w4a16`` và ``w8a16`` (API232 tr.8). Tổng hợp của file này: ghép với hai câu ``w4a16`` và ``w8a16`` ở trên thì ``gdq`` không áp dụng cho RK3588. Tương tự ``group{SIZE}`` chỉ với ``w4a16``.
 - Thuật toán chạy được trên RK3588: ``normal``, ``mmse``, ``kl_divergence``. Phương pháp: ``layer``, ``channel`` (mặc định ``channel``).
 - Per-channel chỉ áp dụng cho weight, activation luôn per-layer (UG232 tr.120). Điều này khớp với NAGEL tr.8 về độ khó của per-channel cho activation (xem file ``03_``).
-- Khi không lượng tử hóa, tính toán là FP16, không phải FP32 (UG232 tr.131; API232 tr.8: ``float_dtype`` mặc định ``float16``).
+- Khi không lượng tử hóa, tính toán là FP16, không phải FP32 (UG232 tr.131. API232 tr.8: ``float_dtype`` mặc định ``float16``).
 
 **Giới hạn.** Chi tiết số bin, clipping của ``normal``, ``mmse``, ``kl_divergence`` trong toolkit là ``unknown``: code là ``.so``, công thức ở UG232 tr.119 đến 121 là ảnh (xem mục unknown).
 
@@ -142,9 +142,9 @@ Mã nguồn (T1, wheel 2.3.2):
 
 **Ý chính**
 
-- Các tham số tác động đến lượng tử hóa nằm ở hai nơi: ``config`` (kiểu, thuật toán, phương pháp, ``optimization_level``, ngưỡng hybrid, mean/std, ``quant_img_RGB2BGR``) và ``build`` (``do_quantization``, ``dataset``, ``auto_hybrid``) (API232 tr.6 đến 10, 14; UG232 tr.22, 122).
+- Các tham số tác động đến lượng tử hóa nằm ở hai nơi: ``config`` (kiểu, thuật toán, phương pháp, ``optimization_level``, ngưỡng hybrid, mean/std, ``quant_img_RGB2BGR``) và ``build`` (``do_quantization``, ``dataset``, ``auto_hybrid``) (API232 tr.6 đến 10, 14. UG232 tr.22, 122).
 - ``quant_img_RGB2BGR`` chỉ dùng khi đọc ảnh calibration và khi ``accuracy_analysis``, không ghi vào model. Vì vậy phải đảm bảo dữ liệu đưa vào lúc suy luận cũng đúng thứ tự kênh (API232 tr.7).
-- ``optimization_level`` mặc định 3; giảm xuống 2, 1 hoặc 0 tắt các rule tối ưu có thể ảnh hưởng độ chính xác (API232 tr.8). UG232 tr.133 xếp nó vào mục kiểm cấu hình khi gặp lỗi độ chính xác của lượng tử hóa trên simulator.
+- ``optimization_level`` mặc định 3, giảm xuống 2, 1 hoặc 0 tắt các rule tối ưu có thể ảnh hưởng độ chính xác (API232 tr.8). UG232 tr.133 xếp nó vào mục kiểm cấu hình khi gặp lỗi độ chính xác của lượng tử hóa trên simulator.
 - Mặc định ``do_quantization=True`` theo API232 tr.14 và ``rknn.py:188``.
 
 **Giới hạn**

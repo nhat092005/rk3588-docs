@@ -1,0 +1,13 @@
+{% extends "!layout.html" %}
+
+{%- block htmltitle %}
+{%- if not embedded and docstitle %}
+  {%- if title|striptags == docstitle or title|striptags == project %}
+    <title>{{ docstitle|e }}</title>
+  {%- else %}
+    <title>{{ title|striptags|e }} - {{ docstitle|e }}</title>
+  {%- endif %}
+{%- else %}
+  <title>{{ title|striptags|e }}</title>
+{%- endif %}
+{%- endblock %}

@@ -62,10 +62,10 @@ Trong TRM Part2 Table 1-3 (tr.19), danh sách master của interconnect có các
 
 **Ý chính**
 
-- Giao diện cấu hình là AHB, giao diện dữ liệu là AXI master (TRM1 tr.1985). Tổng hợp của file này: NPU lấy dữ liệu từ bộ nhớ hệ thống qua interconnect. Chương 36 chỉ liệt kê buffer 384KBx3 bên trong core (xem 2.6); MCU của NPU có TCM và cache riêng (2.2) và NPU còn dùng SRAM hệ thống (2.7).
+- Giao diện cấu hình là AHB, giao diện dữ liệu là AXI master (TRM1 tr.1985). Tổng hợp của file này: NPU lấy dữ liệu từ bộ nhớ hệ thống qua interconnect. Chương 36 chỉ liệt kê buffer 384KBx3 bên trong core (xem 2.6). MCU của NPU có TCM và cache riêng (2.2) và NPU còn dùng SRAM hệ thống (2.7).
 - Chương 36 chỉ nói "memory attached to the SoC AXI interconnect", không nói "DDR". Liên kết với bộ lập lịch DDR đến từ TRM Part2 Ch.1.
 
-**Giới hạn.** Ở mức phần cứng, TRM Chương 36 không nói NPU có đi qua IOMMU khi truy cập DDR hay không. Ở mức SDK, User Guide V2.3.2 tr.45 (Matmul API, tham số ``iommu_domain_id``) ghi "the size of each IOMMU address space is 4GB", nên bộ nhớ NPU nằm trong các miền IOMMU 4GB; quan hệ với phần cứng trong TRM là ``unknown``. Loại DRAM và băng thông thực của board xem :doc:`Bộ nhớ và hiệu năng </kien-thuc-nen/bo-nho-hieu-nang/index>`. Đóng một phần (T1 DRV, DTS; T3): node ``rknpu`` có ``iommus = <&rknpu_mmu>`` (DTS dòng 3478, commit f6eedab0, lưu tại ``3rdparty/rknpu-driver-0.9.8/dts/rk3588s.dtsi``); ``rknpu_mmu`` có compatible ``rockchip,iommu-v2`` (DTS dòng 3712-3728). Driver kiểm ``iommus`` và trạng thái node (``rknpu_drv.c:794-816``); nếu bật thì ``iommu_group_get``, ngược lại dùng reserved memory (``rknpu_drv.c:1294-1307``). ``dma_mask`` của cấu hình RK3588 là ``DMA_BIT_MASK(40)`` (``rknpu_drv.c:186``). Có ``RKNPU_MAX_IOMMU_DOMAIN_NUM`` = 16 (``rknpu_drv.h:56``) và ioctl ``RKNPU_GET_IOMMU_DOMAIN_ID``, ``RKNPU_SET_IOMMU_DOMAIN_ID`` (``rknpu_ioctl.h:135-136``). Board: dmesg ``RKNPU: rknpu iommu is enabled, using iommu mode`` (T3, đọc 2026-10-10). Hằng "4GB" của UG232 tr.45 không tìm thấy trong DRV (đã grep ``4GB``, ``4G``, ``SZ_4G``).
+**Giới hạn.** Ở mức phần cứng, TRM Chương 36 không nói NPU có đi qua IOMMU khi truy cập DDR hay không. Ở mức SDK, User Guide V2.3.2 tr.45 (Matmul API, tham số ``iommu_domain_id``) ghi "the size of each IOMMU address space is 4GB", nên bộ nhớ NPU nằm trong các miền IOMMU 4GB, quan hệ với phần cứng trong TRM là ``unknown``. Loại DRAM và băng thông thực của board xem :doc:`Bộ nhớ và hiệu năng </kien-thuc-nen/bo-nho-hieu-nang/index>`. Đóng một phần (T1 DRV, DTS. T3): node ``rknpu`` có ``iommus = <&rknpu_mmu>`` (DTS dòng 3478, commit f6eedab0, lưu tại ``3rdparty/rknpu-driver-0.9.8/dts/rk3588s.dtsi``).``rknpu_mmu`` có compatible ``rockchip,iommu-v2`` (DTS dòng 3712-3728). Driver kiểm ``iommus`` và trạng thái node (``rknpu_drv.c:794-816``). Nếu bật thì ``iommu_group_get``, ngược lại dùng reserved memory (``rknpu_drv.c:1294-1307``). ``dma_mask`` của cấu hình RK3588 là ``DMA_BIT_MASK(40)`` (``rknpu_drv.c:186``). Có ``RKNPU_MAX_IOMMU_DOMAIN_NUM`` = 16 (``rknpu_drv.h:56``) và ioctl ``RKNPU_GET_IOMMU_DOMAIN_ID``, ``RKNPU_SET_IOMMU_DOMAIN_ID`` (``rknpu_ioctl.h:135-136``). Board: dmesg ``RKNPU: rknpu iommu is enabled, using iommu mode`` (T3, đọc 2026-10-10). Hằng "4GB" của UG232 tr.45 không tìm thấy trong DRV (đã grep ``4GB``, ``4G``, ``SZ_4G``).
 
 --------------
 
@@ -80,7 +80,7 @@ Power domain và MCU đi kèm
 
    "Support multi power domains in VD_NPU: PD_NPUTOP, PD_NPU1, PD_NPU2" [T1 TRM1 tr.1091]
 
-TRM1 tr.1093 (Table 7-1, hàng VD_NPU) xếp: ``RKNN_CORE0`` cùng ``MCU_NPU``, ``PVTPLL_NPU``, ``TIMER_NPU`` trong PD_NPUTOP; ``RKNN_CORE1`` trong PD_NPU1; ``RKNN_CORE2`` trong PD_NPU2 (đối chiếu từ bố cục trang).
+TRM1 tr.1093 (Table 7-1, hàng VD_NPU) xếp: ``RKNN_CORE0`` cùng ``MCU_NPU``, ``PVTPLL_NPU``, ``TIMER_NPU`` trong PD_NPUTOP.``RKNN_CORE1`` trong PD_NPU1.``RKNN_CORE2`` trong PD_NPU2 (đối chiếu từ bố cục trang).
 
    "MCU in VD_NPU integrate 16KB Cache and 64KB TCM" [T1 DS tr.8]
 

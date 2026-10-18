@@ -6,11 +6,11 @@ Bảng F đến I
 
 .. admonition:: Tóm tắt
 
-   - Table F so FP32 (PyTorch), FP16 (NPU) và INT8 (NPU) của YOLOv8n và YOLOv8s để trả lời Case B; mọi ô số còn [TBD].
-   - Trong Table F, Δ là giá trị FP32 trừ giá trị của dòng đó, nên Δ dương nghĩa là mất accuracy trên NPU; dòng FP32 là "mốc".
-   - Table G tách Pre P50, NPU, Post P50 và E2E; NPU đo ở tầng 1 (`eval_perf`), các cột khác ở tầng 2; chưa có số.
+   - Table F so FP32 (PyTorch), FP16 (NPU) và INT8 (NPU) của YOLOv8n và YOLOv8s để trả lời Case B. Hiện mọi ô số còn [TBD].
+   - Trong Table F, Δ là giá trị FP32 trừ giá trị của dòng đó, nên Δ dương nghĩa là mất accuracy trên NPU. Dòng FP32 đóng vai trò là "mốc".
+   - Table G tách Pre P50, NPU, Post P50 và E2E, trong đó NPU đo ở tầng 1 (`eval_perf`), còn các cột khác đo ở tầng 2 (hiện chưa có số).
    - Table H so CPU board (`.onnx` FP32, ONNX Runtime), NPU board (`.rknn` FP16, INT8) và GPU PC RTX 3050 Laptop, trong đó GPU chỉ là tham chiếu.
-   - Table I so `core_mask` `AUTO`, `CORE_0`, `CORE_0_1`, `CORE_0_1_2` và 3 luồng trên cùng 1 model INT8; gộp core chỉ tăng tốc một số op.
+   - Table I so `core_mask` `AUTO`, `CORE_0`, `CORE_0_1`, `CORE_0_1_2` và 3 luồng trên cùng 1 model INT8. Việc gộp core chỉ tăng tốc một số op.
 
 .. contents:: Trong trang này
    :local:
@@ -21,7 +21,7 @@ Bảng F đến I
 Table F. Quantization Impact (FP32 → NPU)
 =========================================
 
-**Mục đích:** trả lời Case B (:ref:`Ví dụ gap có thể xuất hiện sau benchmark <43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark>`): quantize làm mất bao nhiêu accuracy, class nào mất nhiều nhất. Cùng 1 evaluator cho cả 3 dòng (:ref:`Evaluation Protocol v1 <50-evaluation-protocol-v1>`); mỗi seed quantize riêng, báo mean ± std khi có Phase 10. Bảng sinh tự động: ``results/<ds>/table_F_quantization.md``.
+**Mục đích:** trả lời Case B (:ref:`Ví dụ gap có thể xuất hiện sau benchmark <43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark>`): quantize làm mất bao nhiêu accuracy, class nào mất nhiều nhất. Cùng 1 evaluator cho cả 3 dòng (:ref:`Evaluation Protocol v1 <50-evaluation-protocol-v1>`). Mỗi seed quantize riêng, báo mean ± std khi có Phase 10. Bảng sinh tự động: ``results/<ds>/table_F_quantization.md``.
 
 .. list-table::
    :header-rows: 1
@@ -93,7 +93,7 @@ Table F. Quantization Impact (FP32 → NPU)
 **Cách đọc:**
 
 - **Δ** = giá trị của FP32 − giá trị của dòng đó (định nghĩa ở :ref:`AI Quality <51-ai-quality>`).
-- **Δ dương** = bị mất accuracy khi chạy trên NPU; Δ càng lớn càng mất nhiều.
+- **Δ dương** = bị mất accuracy khi chạy trên NPU, trong đó Δ càng lớn càng mất nhiều.
 - **"mốc"** = dòng FP32 là mốc để trừ, nên không có Δ. AP từng class của FP32 xem ở Table D.
 
 --------------
@@ -269,4 +269,4 @@ Table I. Deployment Configuration
      - [TBD]
      - [TBD]
 
-Với 1 luồng, Throughput FPS xấp xỉ FPS_latency; với nhiều luồng thì khác (:ref:`Hardware Performance <53-hardware-performance>`). Chế độ gộp core chỉ tăng tốc một số op (Conv, Add, Concat, ReLU...), op khác tự chạy trên Core0 (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`).
+Với 1 luồng, Throughput FPS xấp xỉ FPS_latency, nhưng với nhiều luồng thì khác (:ref:`Hardware Performance <53-hardware-performance>`). Chế độ gộp core chỉ tăng tốc một số op (Conv, Add, Concat, ReLU...), op khác tự chạy trên Core0 (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`).

@@ -13,10 +13,17 @@ Research problem và RQ
    - Log gọi op là `ConvExSwish`, tài liệu gọi `ConvolutionSwish`; chưa tài liệu nào xác nhận cùng một op, và cần chạy `eval_perf` ở `CORE_0_1_2` `[chưa kiểm chứng]`.
    - Research Question: giữ PPE detection accuracy tốt nhưng đồng thời cải thiện inference efficiency trên RK3588S NPU.
 
+.. contents:: Trong trang này
+   :local:
+   :depth: 2
+
 .. _21-research-problem-đề-xuất:
 
-Research problem đề xuất
-========================
+1. Vấn đề nghiên cứu đề xuất (Research Problem)
+====================================================================================================
+
+1.1. Các yếu tố quyết định hiệu năng Edge NPU
+----------------------------------------------------------------------------------------------------
 
 Các object detector có thể đạt accuracy tốt, nhưng khi triển khai real-time trên Edge NPU, hiệu quả thực tế còn phụ thuộc vào:
 
@@ -30,13 +37,16 @@ Các object detector có thể đạt accuracy tốt, nhưng khi triển khai re
 
    memory access → Cách model đọc/ghi dữ liệu từ memory trong lúc inference.
 
-   memory copy → Việc copy dữ liệu giữa các buffer; copy nhiều sẽ làm tăng latency.
+   memory copy → Việc copy dữ liệu giữa các buffer, copy nhiều sẽ làm tăng latency.
 
    compiler optimization → Các bước compiler tối ưu graph, operator, layout và memory trước khi chạy trên NPU.
 
    NPU architecture → Kiến trúc phần cứng của NPU quyết định loại phép toán nào chạy hiệu quả.
 
    pre/post-processing overhead → Thời gian ngoài inference, như resize, color conversion, NMS, decode output...
+
+1.2. Bằng chứng thực nghiệm trên nền tảng RK3588
+----------------------------------------------------------------------------------------------------
 
 3 yếu tố dưới đây đã có bằng chứng thật trên chính model/board của project (không phải trích paper ngoài):
 
@@ -69,6 +79,9 @@ Do đó:
    low FLOPs ≠ low latency
    small model ≠ fast model on NPU
 
+1.3. Nghịch lý chu kỳ bộ nhớ: DDR Cycles so với NPU Cycles
+----------------------------------------------------------------------------------------------------
+
 Minh hoạ nhẹ trên chính model ``sfchd`` YOLOv8n (model 7 class cũ, cần đo lại sau khi train 5 class; nguồn: build log ``tmp/05_training-logs/2026-09-18_sfchd_yolov8n_rknn_build_verbose_loglevel3.log``, dòng 331, cột ``Cycles(DDR/NPU/Total)`` = ``52317/51200/52317``):
 
 .. list-table::
@@ -83,13 +96,13 @@ Minh hoạ nhẹ trên chính model ``sfchd`` YOLOv8n (model 7 class cũ, cần 
      - 52.317
      - **1.022**
 
-NPU cycles = thời gian tính toán; DDR cycles = thời gian chờ đọc/ghi RAM. Ở các layer khác NPU cycles luôn cao hơn (tính toán là nút thắt). Riêng layer này DDR cycles cao hơn — nút thắt là di chuyển dữ liệu, không phải khối lượng tính toán.
+NPU cycles là thời gian tính toán, còn DDR cycles là thời gian chờ đọc/ghi RAM. Ở các layer khác NPU cycles luôn cao hơn (tính toán là nút thắt). Riêng layer này DDR cycles cao hơn, cho thấy nút thắt là di chuyển dữ liệu thay vì khối lượng tính toán.
 
 --------------
 
 .. _22-research-question:
 
-Research Question
-=================
+2. Câu hỏi nghiên cứu trọng tâm (Research Question)
+====================================================================================================
 
    **Làm thế nào giữ PPE detection accuracy ở mức tốt nhưng đồng thời cải thiện inference efficiency trên RK3588S NPU?**

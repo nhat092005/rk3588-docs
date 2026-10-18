@@ -9,7 +9,7 @@ Phase 4: đo trên board
    - Phase 4 đo tốc độ và tài nguyên theo protocol v1 bằng `make phase4 DATASET=<ds>` cho run seed 42 của YOLOv8n và YOLOv8s.
    - Tầng 1 đo FP16, INT8 (AUTO) và INT8 ở `CORE_0`, `CORE_0_1`, `CORE_0_1_2` bằng `benchmark-npu`, cho các bảng G, I, K, L.
    - Tầng 2 gồm `bench-board`, `bench-board-cpu` (`.onnx`, 4 thread), `bench-board-throughput` (1 và 3 context) và `bench-gpu` (GPU PC, tham chiếu).
-   - Hai mục kiểm `phase4` xong và `SOURCES.md` không có lỗi khoá tần số chưa đánh dấu; tiêu chí xong là G, H, I, K, L không còn `[TBD]`.
+   - Hai mục kiểm `phase4` xong và `SOURCES.md` không có lỗi khoá tần số chưa đánh dấu. Tiêu chí xong là G, H, I, K, L không còn `[TBD]`.
 
 .. _phase-4-benchmark-trên-board:
 
@@ -18,7 +18,7 @@ Phase 4. Benchmark trên board
 
 **Mục tiêu:** tốc độ và tài nguyên theo protocol v1.
 
-**Điều kiện:** Phase 3 xong; Runbook bước 4 và 9.
+**Điều kiện:** Phase 3 xong và Runbook bước 4 và 9.
 
 **Lệnh:** ``make phase4 DATASET=<ds>``, sau đó Runbook bước 11.
 

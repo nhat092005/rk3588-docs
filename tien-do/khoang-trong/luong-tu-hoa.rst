@@ -6,7 +6,7 @@
 
 .. admonition:: Tóm tắt
 
-   - Còn thiếu nguồn cho định nghĩa SQNR, thước đo sai số từng lớp cho detection, mixed-precision trên detection và lượng tử hóa YOLOv8; trang chỉ đề xuất truy vấn, chưa thực hiện.
+   - Còn thiếu nguồn cho định nghĩa SQNR, thước đo sai số từng lớp cho detection, mixed-precision trên detection và lượng tử hóa YOLOv8, trang chỉ đề xuất truy vấn, chưa thực hiện.
    - Bộ tài liệu 2.3.2 có 9 mâu thuẫn, ví dụ `quantized_dtype` mặc định `"w8a8"` (API232 tr.7) so với 'asymmetric_quantized-8' (UG232 tr.22).
    - Các mâu thuẫn khác gồm mặc định của `do_quantization` (True ở API232 tr.14, 'False' ở UG232 tr.122), số ảnh calibration và dtype hybrid (chỉ float16 ở UG232 tr.124, int8, int16, float16 ở `step1.py:47`).
    - Còn `unknown`: golden tính FP32 hay FP16, hướng so sánh euclid của `auto_hybrid`, ngưỡng cosine "đạt", và hybrid int8, int16 trên RK3588.
@@ -54,7 +54,7 @@ Mâu thuẫn và nhập nhằng đã ghi nhận
      - NAGEL tr.5, GHOLAMI tr.7: mỗi output filter một quantizer
      - Y7Q Figure 3: mịn hơn, filter-wise là mức mỗi filter
    * - 8-bit mất bao nhiêu
-     - NAGEL tr.16: "within 0.7%"; tr.25: "within only 1%"
+     - NAGEL tr.16: "within 0.7%", tr.25: "within only 1%"
      - NAGEL Table 6 (tr.17) EfficientDet-D1: 40.08 xuống 38.29 (W8A8 per-tensor)
    * - Weight hay activation gây sụt nhiều hơn
      - QYOLO tr.10: weight "consistently" nhiều hơn
@@ -95,7 +95,7 @@ Mâu thuẫn trong bộ tài liệu 2.3.2
    * - 1
      - ``quantized_dtype``
      - API232 tr.7 và ``rknn.py:56``: mặc định ``"w8a8"``
-     - UG232 tr.22: "the default is 'asymmetric_quantized-8'"; UG232 tr.122: "only linear asymmetric INT8 quantization is supported, and the default value is 'asymmetric_quantized-8'."
+     - UG232 tr.22: "the default is 'asymmetric_quantized-8'". UG232 tr.122: "only linear asymmetric INT8 quantization is supported, and the default value is 'asymmetric_quantized-8'."
    * - 2
      - Thuật toán
      - API232 tr.8: normal, mmse, kl_divergence, gdq
@@ -140,16 +140,16 @@ Còn thiếu nguồn (unknown)
    * - Câu hỏi
      - Vì sao unknown
      - Cách kiểm hoặc truy vấn
-   * - Resize ảnh calibration (stretch hay letterbox, interpolation). Đóng một phần (T3 PC, 2026-10-10): stretch toàn ảnh, nội suy có lấy trung bình; còn thiếu: thuật toán chính xác
+   * - Resize ảnh calibration (stretch hay letterbox, interpolation). Đóng một phần (T3 PC, 2026-10-10): stretch toàn ảnh, nội suy có lấy trung bình, còn thiếu: thuật toán chính xác
      - Code là ``.so``
-     - T3 thêm: phân biệt bilinear, area, antialias; model NHWC
-   * - Layout và dtype của ``.npy``; mean/std có áp dụng lên ``.npy``. Đóng một phần (T3 PC, 2026-10-10): NCHW ``[1,C,H,W]`` hoặc ``[C,H,W]``, float32 và uint8 đều nhận, NHWC bị từ chối, mean/std được áp dụng; chỉ thử model ONNX NCHW
+     - T3 thêm: phân biệt bilinear, area, antialias, model NHWC
+   * - Layout và dtype của ``.npy``, mean/std có áp dụng lên ``.npy``. Đóng một phần (T3 PC, 2026-10-10): NCHW ``[1,C,H,W]`` hoặc ``[C,H,W]``, float32 và uint8 đều nhận, NHWC bị từ chối, mean/std được áp dụng, chỉ thử model ONNX NCHW
      - UG232 tr.132, 165 chỉ nói chung
      - T3 thêm: model NHWC
    * - ``quantized_hybrid_level``
      - Có trong ``rknn.py:59``, không có mô tả
      - "rknn-toolkit2 quantized_hybrid_level"
-   * - Hybrid int8, int16 trên RK3588; ``proposal=False``
+   * - Hybrid int8, int16 trên RK3588.``proposal=False``
      - Mâu thuẫn 5 và 4.3
      - T3
    * - Hướng so sánh euclid
@@ -162,9 +162,9 @@ Còn thiếu nguồn (unknown)
      - UG232 tr.135 chỉ nhắc màu
      - T3
    * - Số bin, clipping của ``normal``, ``mmse``, ``kl_divergence``
-     - Code là ``.so``; công thức UG232 tr.119 đến 121 là ảnh
+     - Code là ``.so``, công thức UG232 tr.119 đến 121 là ảnh
      - "KL divergence calibration TensorRT 8-bit inference Migacz"
-   * - ``asymmetric_quantized-8`` còn được ``config()`` 2.3.2 chấp nhận. Đóng (T3 PC, 2026-10-10): ``config()`` trả 0 và ``quant_tab`` giống ``w8a8`` trên model thử; thông báo lỗi của ``config()`` không liệt kê tên này trong danh sách hợp lệ
+   * - ``asymmetric_quantized-8`` còn được ``config()`` 2.3.2 chấp nhận. Đóng (T3 PC, 2026-10-10): ``config()`` trả 0 và ``quant_tab`` giống ``w8a8`` trên model thử, thông báo lỗi của ``config()`` không liệt kê tên này trong danh sách hợp lệ
      - Mâu thuẫn 1
      - Không còn
 

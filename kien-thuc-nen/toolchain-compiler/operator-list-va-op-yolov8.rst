@@ -14,8 +14,8 @@ Operator List và op của YOLOv8
    - Op chạy ngoài NPU vì ba lý do: kích thước vượt giới hạn, chưa hỗ trợ, hoặc phần cứng không làm được [T1 UG232 tr.139].
    - RKNN chủ yếu chỉ hỗ trợ op 4 chiều, không hỗ trợ 6 chiều và NonMaxSuppression, nên hậu xử lý chạy ở CPU [T1 UG232 tr.168].
    - Ba cách viết "尚不支持", "暂不支持", "不支持" cho đa lõi không được Operator List định nghĩa, nên không phân biệt được nghĩa.
-   - SiLU có hai dạng trong OPL là ConvolutionSwish (OPL tr.63) và exSwish (OPL tr.98); model YOLOv8 từ Ultralytics ghép thành dạng nào là unknown.
-   - Resize mâu thuẫn giữa OPL tr.86, 87 và UG232 tr.176 "does not currently support hardware-level Resize"; hai nguồn T1 chưa thống nhất.
+   - SiLU có hai dạng trong OPL là ConvolutionSwish (OPL tr.63) và exSwish (OPL tr.98), model YOLOv8 từ Ultralytics ghép thành dạng nào là unknown.
+   - Resize mâu thuẫn giữa OPL tr.86, 87 và UG232 tr.176 "does not currently support hardware-level Resize", hai nguồn T1 chưa thống nhất.
    - Upsample không có trong danh sách NPU của RK3588, chỉ có mục ở chương CPU OPs (OPL tr.329).
 
 .. _61-operator-list-cấu-trúc-npu-và-cpu:
@@ -31,7 +31,7 @@ Operator List: cấu trúc, NPU và CPU
 
 ..
 
-   "RK2118 不支持所有 CPU 算子" [T1 OPL tr.319] (Tạm dịch: RK2118 không hỗ trợ toàn bộ CPU op; câu gốc ngắn nên có thể hiểu là "không có CPU op nào" hoặc "không đủ hết", file này chưa phân xử. Chương 4 là danh sách CPU op, không chia theo chip RK3588.)
+   "RK2118 不支持所有 CPU 算子" [T1 OPL tr.319] (Tạm dịch: RK2118 không hỗ trợ toàn bộ CPU op, câu gốc ngắn nên có thể hiểu là "không có CPU op nào" hoặc "không đủ hết", file này chưa phân xử. Chương 4 là danh sách CPU op, không chia theo chip RK3588.)
 
    "Generally speaking, the reasons why operators run on non-NPU are as follows:" [T1 UG232 tr.139]
 
@@ -62,12 +62,12 @@ Operator List: cấu trúc, NPU và CPU
 - Mỗi mục op của RK3588 gồm mô tả, danh sách input và output (shape, kiểu lượng tử hóa), ràng buộc kiểu dữ liệu, thuộc tính và mục "其他支持" (hỗ trợ khác) trong đó có dòng "多核联合" (chạy đa lõi) (OPL tr.56 đến 107).
 - Hầu hết op trong :ref:`Per-tensor, per-channel và các kiểu granularity khác <32-per-tensor-per-channel-và-các-kiểu-granularity-khác>` có ràng buộc kiểu dữ liệu ``int8`` và ``float16`` (một số op có ngoại lệ, ví dụ Transpose có ``int16``). Mục 3.2 có 79 mục, trong đó 59 mục có dòng "多核联合": 11 "支持", 18 "暂不支持", 23 "尚不支持", 7 "不支持" (đã đếm bằng script và kiểm lại tay ở vòng review).
 - Op chạy ngoài NPU vì ba lý do: kích thước vượt giới hạn, chưa hỗ trợ, hoặc phần cứng không làm được (UG232 tr.139). Operator List không nêu quy tắc "rơi về CPU". API232 tr.17 có tham số ``fallback_prior_device`` ("set fallback prior device when OP is not supported by NPU ... The default value is 'cpu'") và UG152 tr.27 nói op ngoài danh sách đa lõi "will fallback to Core0" (xem ``02_``).
-- UG232 tr.168: "In most cases, it only supports 4-dimensional"; 6 chiều không hỗ trợ. NMS và các op hậu xử lý không hỗ trợ, nên phần hậu xử lý được tách ra chạy ở CPU (UG232 tr.168).
+- UG232 tr.168: "In most cases, it only supports 4-dimensional", 6 chiều không hỗ trợ. NMS và các op hậu xử lý không hỗ trợ, nên phần hậu xử lý được tách ra chạy ở CPU (UG232 tr.168).
 
 **Giới hạn**
 
 - Ba cách viết "尚不支持", "暂不支持", "不支持" không được Operator List định nghĩa. UG232 tr.75 chỉ định nghĩa gián tiếp cho "đa lõi". Không phân biệt được nghĩa.
-- ``op_target`` (API232 tr.9) cho phép ép op chạy ở ``cpu``, ``npu``, ``gpu`` hoặc ``auto``. API232 tr.9 mô tả ``'auto'`` là tự chọn đích chạy; thuật toán chọn là ``unknown``.
+- ``op_target`` (API232 tr.9) cho phép ép op chạy ở ``cpu``, ``npu``, ``gpu`` hoặc ``auto``. API232 tr.9 mô tả ``'auto'`` là tự chọn đích chạy, thuật toán chọn là ``unknown``.
 
 --------------
 
@@ -97,7 +97,7 @@ Danh sách op dưới đây là danh sách op thường gặp trong detector, kh
      - 3.2.17
      - 63
      - có
-     - 暂不支持; T3 (log T3 board 2026-10-10, lượt 2 (``tmp/04_debug-logs/2026-10-10_t3-board-silu-resize/README.md``, ``raw/summary2.json``, ``raw/*_CORE_0_1_2_layers.txt``)): lớp ``ConvExSwish`` chạy lõi 0 (100%/0%/0%) ở CORE_0_1_2, phù hợp với "暂不支持" ở cột này; tên trong bảng lớp là ``ConvExSwish``, tên trong OPL là ConvolutionSwish, không khẳng định cùng một op (một model: YOLOv8n trọng số ngẫu nhiên ``nc=5``, INT8, 640x640, toolkit 2.3.2, RK3588S, NPU 1 GHz, ``eval_perf`` ``fix_freq=True``; xem ``08_``)
+     - 暂不支持. T3 (log T3 board 2026-10-10, lượt 2 (``tmp/04_debug-logs/2026-10-10_t3-board-silu-resize/README.md``, ``raw/summary2.json``, ``raw/*_CORE_0_1_2_layers.txt``)): lớp ``ConvExSwish`` chạy lõi 0 (100%/0%/0%) ở CORE_0_1_2, phù hợp với "暂不支持" ở cột này, tên trong bảng lớp là ``ConvExSwish``, tên trong OPL là ConvolutionSwish, không khẳng định cùng một op (một model: YOLOv8n trọng số ngẫu nhiên ``nc=5``, INT8, 640x640, toolkit 2.3.2, RK3588S, NPU 1 GHz, ``eval_perf`` ``fix_freq=True``, xem ``08_``)
    * - exSwish (SiLU đứng riêng)
      - 3.2.69
      - 98
@@ -167,7 +167,7 @@ Upsample không có trong danh sách NPU của RK3588. Chương CPU OPs có mộ
 
 ..
 
-   "按元素应用 Sigmoid 线性单元函数, Swish 函数也称为 SiLU 函数, y = x \* sigmoid(x)" [T1 OPL tr.98] (Áp dụng theo phần tử hàm Sigmoid Linear Unit; Swish còn gọi là SiLU. Đây là mục exSwish, op đứng riêng.)
+   "按元素应用 Sigmoid 线性单元函数, Swish 函数也称为 SiLU 函数, y = x \* sigmoid(x)" [T1 OPL tr.98] (Áp dụng theo phần tử hàm Sigmoid Linear Unit. Swish còn gọi là SiLU. Đây là mục exSwish, op đứng riêng.)
 
    "给定输入张量，函数 y = 1 / (1 + exp(‑x)) 按元素应用于输入张量，得到输出张量" [T1 OPL tr.95] (Cho tensor đầu vào, hàm ``y = 1 / (1 + exp(-x))`` được áp dụng theo phần tử và cho ra tensor đầu ra. Mục 3.2.63 Sigmoid.)
 
@@ -185,7 +185,7 @@ Upsample không có trong danh sách NPU của RK3588. Chương CPU OPs có mộ
 
 ..
 
-   "将向量沿着 axis 方向分成 num_outputs 个向量" [T1 OPL tr.91] (Split: tách vector theo ``axis`` thành ``num_outputs`` vector; ``axis ∈ {0, 1, 2, 3}``.)
+   "将向量沿着 axis 方向分成 num_outputs 个向量" [T1 OPL tr.91] (Split: tách vector theo ``axis`` thành ``num_outputs`` vector.``axis ∈ {0, 1, 2, 3}``.)
 
    "否则只有 steps == [1,1,1,1] 时，才可通过 NPU 运行 Slice OP" [T1 OPL tr.88] (Slice: nếu không thỏa điều kiện chứa ``subc`` thì chỉ ``steps == [1,1,1,1]`` mới chạy trên NPU. OPL không định nghĩa ``subc``.)
 
@@ -222,7 +222,7 @@ Operator List (OPL tr.86, 87) có mục Resize cho RK3588 với ``int8`` và ``f
 
 **Giới hạn**
 
-- Hai tài liệu T1 chưa thống nhất về Resize: Operator List liệt kê nó với ``int8``, ``float16``, còn User Guide tr.176 nói NPU chưa hỗ trợ Resize cấp phần cứng. Có thể hòa giải một phần: OPL tr.9 (V2.3.2) ghi "更新 Resize 算子限制"; ``CHANGELOG.md`` dòng 100 và 140 liệt kê Resize trong các NPU operator được thêm hỗ trợ ở các phiên bản cũ; User Guide nói toolkit đổi Resize thành ConvTranspose (có mục NPU 3.2.20); Operator List chương CPU cũng có Resize (mục 4.50, PDF 326, "支持插值方式 bilinear; nearest2d"). Chưa đủ để kết luận. Cần đo T3 (``eval_perf`` với ``optimization_level`` 3 và 2, đọc cột op và target) để chốt. Đóng một phần (T3 board, 2026-10-10): xem :ref:`Điều chưa biết về compiler nội bộ của Rockchip <66-điều-chưa-biết-về-compiler-nội-bộ-của-rockchip>`, hàng Resize.
+- Hai tài liệu T1 chưa thống nhất về Resize: Operator List liệt kê nó với ``int8``, ``float16``, còn User Guide tr.176 nói NPU chưa hỗ trợ Resize cấp phần cứng. Có thể hòa giải một phần: OPL tr.9 (V2.3.2) ghi "更新 Resize 算子限制". ``CHANGELOG.md`` dòng 100 và 140 liệt kê Resize trong các NPU operator được thêm hỗ trợ ở các phiên bản cũ. User Guide nói toolkit đổi Resize thành ConvTranspose (có mục NPU 3.2.20). Operator List chương CPU cũng có Resize (mục 4.50, PDF 326, "支持插值方式 bilinear; nearest2d"). Chưa đủ để kết luận. Cần đo T3 (``eval_perf`` với ``optimization_level`` 3 và 2, đọc cột op và target) để chốt. Đóng một phần (T3 board, 2026-10-10): xem :ref:`Điều chưa biết về compiler nội bộ của Rockchip <66-điều-chưa-biết-về-compiler-nội-bộ-của-rockchip>`, hàng Resize.
 - Danh sách op của detector là suy nghĩ chung, không có nguồn. Tên op trong log (ví dụ ``ConvExSwish``) không xuất hiện trong T1 nào và khác tên trong Operator List.
 
 Nguồn

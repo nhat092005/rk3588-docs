@@ -48,7 +48,7 @@ Các mục
      - Làm gì, vì sao, câu hỏi nghiên cứu và khoảng trống nghiên cứu là gì?
      - Mọi người, đọc đầu tiên
    * - :doc:`Kiến thức nền </kien-thuc-nen/index>`
-     - NPU, lượng tử hóa, toolchain, bộ nhớ, thiết kế model và YOLO hoạt động ra sao?
+     - Nền tảng AI, NPU, lượng tử hóa, toolchain, bộ nhớ, thiết kế model và YOLO hoạt động ra sao?
      - Người cần hiểu nền tảng
    * - :doc:`Phương pháp </phuong-phap/index>`
      - Dữ liệu, phần cứng, giao thức đánh giá và đặc tả bảng đã khóa như thế nào?
@@ -78,7 +78,7 @@ Các mục
 Thứ tự đọc gợi ý
 ================
 
-- **Muốn hiểu đề tài:** Tổng quan, rồi Kiến thức nền (NPU, Lượng tử hóa, Toolchain và compiler, Bộ nhớ và hiệu năng, Thiết kế model, YOLO).
+- **Muốn hiểu đề tài:** Tổng quan, rồi Kiến thức nền (Nền tảng AI, NPU, Lượng tử hóa, Toolchain và compiler, Bộ nhớ và hiệu năng, Thiết kế model, YOLO).
 - **Muốn kiểm kết quả:** Phương pháp, rồi Kết quả.
 - **Muốn kiểm một con số hay một câu:** Bài báo, Tài liệu hãng, Thuật ngữ.
 - **Muốn chạy lại hoặc làm tiếp:** Hướng dẫn, rồi Tiến độ.

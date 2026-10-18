@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 324" width="900" height="324" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="324" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="22" font-size="14.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Bản chất Hình học của IoU (Intersection over Union)</text>
+<line x1="20" y1="52" x2="45" y2="52" stroke="#E65100" stroke-width="2.0" stroke-dasharray="6 3"/>
+<text x="50" y="52" font-size="10" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Nhãn thực tế (Ground Truth B_gt)</text>
+<line x1="280" y1="52" x2="305" y2="52" stroke="#1E5BB8" stroke-width="2.0"/>
+<text x="310" y="52" font-size="10" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Dự đoán mô hình (Prediction B_p)</text>
+<rect x="540" y="45" width="16" height="14" rx="3" fill="#C8E6C9" stroke="none" stroke-width="1.2"/>
+<text x="562" y="52" font-size="10" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Phần giao nhau (Intersection ∩)</text>
+<rect x="10" y="68" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="147.5" y="84" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">1. Trùng khít cao (Rất tốt)</text>
+<rect x="56" y="110" width="89" height="69" fill="#C8E6C9" opacity="0.85"/>
+<rect x="50" y="104" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="56" y="110" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="147.5" y="215" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.88</text>
+<text x="147.5" y="231" font-size="11" font-weight="600" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Đạt chuẩn mọi mốc IoU</text>
+<rect x="310" y="68" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="447.5" y="84" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">2. Trùng khớp vừa (Ngưỡng cơ bản)</text>
+<rect x="378" y="128" width="67" height="51" fill="#C8E6C9" opacity="0.85"/>
+<rect x="350" y="104" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="378" y="128" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="447.5" y="215" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.52</text>
+<text x="447.5" y="231" font-size="11" font-weight="600" fill="#E65100" text-anchor="middle" dominant-baseline="central">Đạt mAP50, trượt mAP75 trở lên</text>
+<rect x="610" y="68" width="275" height="175" rx="4" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="747.5" y="84" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3. Lệch vị trí (Trượt ngưỡng)</text>
+<rect x="705" y="128" width="40" height="51" fill="#C8E6C9" opacity="0.85"/>
+<rect x="650" y="104" width="95" height="75" fill="none" stroke="#E65100" stroke-width="2.2" stroke-dasharray="6 3"/>
+<rect x="705" y="128" width="95" height="75" fill="none" stroke="#1E5BB8" stroke-width="2.2"/>
+<text x="747.5" y="215" font-size="13" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">IoU = 0.16</text>
+<text x="747.5" y="231" font-size="11" font-weight="600" fill="#C62828" text-anchor="middle" dominant-baseline="central">Phán đoán sai vị trí (FP)</text>
+<rect x="10" y="254" width="880" height="32" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.0"/>
+<text x="20" y="264" font-size="10" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Công thức tính IoU: </tspan><tspan font-weight="700">IoU = Diện tích vùng giao (B_p ∩ B_gt) / Diện tích vùng hợp (B_p ∪ B_gt)</tspan><tspan>  |  Miền giá trị: [0.0 (không chạm) đến 1.0 (trùng khít hoàn toàn)]</tspan></text>
+<text x="10" y="310" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Y6 tr.8.</text>
+</svg>

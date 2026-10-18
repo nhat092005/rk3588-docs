@@ -6,10 +6,10 @@ Evaluation Protocol v1
 
 .. admonition:: Tóm tắt
 
-   - Mọi model phải đo qua cùng 1 evaluator với tham số khoá; protocol hiện là v1 và kết quả lưu kèm phiên bản protocol và git commit.
+   - Mọi model phải đo qua cùng 1 evaluator với tham số khoá. Protocol hiện là v1 và kết quả lưu kèm phiên bản protocol và git commit.
    - Golden test chạy `yolov8n.pt` chính thức trên `sfchd_test` (1,238 ảnh), trên CPU, sai khác cho phép 0.0005 trên mỗi metric.
-   - Kiểm chéo giữa evaluator và `model.val()` phải lệch không quá 0.001; với model 7 class cũ, 24 metric lệch lớn nhất 0.0001.
-   - Đổi bất kỳ tham số nào thì lên v2 và đo lại toàn bộ; chỉ thêm metric mới mà không đổi số cũ thì lên v1.1.
+   - Kiểm chéo giữa evaluator và `model.val()` phải lệch không quá 0.001. Với model 7 class cũ, 24 metric lệch lớn nhất 0.0001.
+   - Đổi bất kỳ tham số nào thì lên v2 và đo lại toàn bộ. Nếu chỉ thêm metric mới mà không đổi số cũ thì lên v1.1.
 
 .. _50-evaluation-protocol-v1:
 
@@ -23,7 +23,7 @@ Quy tắc khoá:
 - Protocol có số phiên bản, hiện là **v1**. Mọi kết quả lưu kèm phiên bản protocol và git commit của evaluator.
 - **Golden test**: evaluator chạy trên 1 bộ ảnh và 1 model cố định phải ra đúng số đã lưu. Sửa code làm lệch số thì test báo lỗi.
 
-  - Model cố định: ``yolov8n.pt`` chính thức của Ultralytics (ai cũng tải lại được, kiểm bằng sha256). Model này train trên COCO nên mAP trên PPE không có ý nghĩa; chỉ cần số không đổi.
+  - Model cố định: ``yolov8n.pt`` chính thức của Ultralytics (ai cũng tải lại được, kiểm bằng sha256). Model này train trên COCO nên mAP trên PPE không có ý nghĩa, chỉ cần số không đổi.
   - Bộ ảnh: eval set ``sfchd_test`` (1,238 ảnh), kiểm cả dấu vân tay dataset. Chạy trên CPU vì GPU có thể lệch ở chữ số thứ 4 giữa các máy. Sai khác cho phép: 0.0005 trên mỗi metric.
   - Số đã lưu: ``ai/automation/golden/evaluator_v1.json``. Lệnh: ``make golden-test`` (khoảng 3 phút).
 

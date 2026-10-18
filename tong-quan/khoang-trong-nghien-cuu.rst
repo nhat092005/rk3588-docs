@@ -15,12 +15,12 @@ Research gap
 
 .. contents:: Trong trang này
    :local:
-   :depth: 1
+   :depth: 2
 
 .. _41-sai-cách:
 
-Sai cách
-========
+1. Tiếp cận sai cách: Chọn giải pháp trước khi tìm vấn đề
+====================================================================================================
 
 .. code:: text
 
@@ -34,8 +34,8 @@ Sai cách
 
 .. _42-đúng-cách:
 
-Đúng cách
-=========
+2. Tiếp cận đúng cách: Xuất phát từ nút thắt phần cứng thực tế
+====================================================================================================
 
 .. code:: text
 
@@ -55,13 +55,13 @@ Sai cách
 
 .. _43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark:
 
-Ví dụ gap có thể xuất hiện sau benchmark
-========================================
+3. Các khoảng trống nghiên cứu tiềm năng (Research Gaps)
+====================================================================================================
 
 .. _case-a--fp16-còn-chậm:
 
-Case A — FP16 còn chậm
-----------------------
+3.1. Case A: FP16 còn chậm (Cần tối ưu kiến trúc và toán tử)
+----------------------------------------------------------------------------------------------------
 
 .. code:: text
 
@@ -98,9 +98,9 @@ Bằng chứng RK3588-relevant: :download:`_assets/pdf/papers/06_nas/s3nas_npu_a
 
    "Finally, we selectively removed SE blocks from ours-XL+, resulting in ours-XL-rmSE+. [...] After removing SE blocks from ours-XL+ based on the metric, only about 60% of the blocks in the network have SE blocks. As a result, we could make the latency shorter, while the accuracy was slightly improved than ours-XL+. This model achieves 82.72% top-1 accuracy with only 11.66ms latency."
 
-Tức bỏ bớt SE blocks (tốn băng thông bộ nhớ, không khai thác tốt mảng PE của NPU) giúp model **vừa nhanh hơn vừa chính xác hơn** cùng lúc — không phải đánh đổi.
+Tức bỏ bớt SE blocks (tốn băng thông bộ nhớ, không khai thác tốt mảng PE của NPU) giúp model **vừa nhanh hơn vừa chính xác hơn** cùng lúc mà không phải đánh đổi.
 
-**``architecture optimization`` — Linear Depth Scaling:** cùng paper S3NAS, Table 4, tr.9 (dồn nhiều block hơn vào stage sâu, nơi feature map nhỏ nhưng số kênh lớn):
+**``architecture optimization`` (Linear Depth Scaling):** cùng paper S3NAS, Table 4, tr.9 (dồn nhiều block hơn vào stage sâu, nơi feature map nhỏ nhưng số kênh lớn):
 
 .. list-table::
    :header-rows: 1
@@ -119,11 +119,11 @@ Tức bỏ bớt SE blocks (tốn băng thông bộ nhớ, không khai thác t�
 
    "As shown in Table 4, a supernet with linear depth outperforms a supernet with constant depth in terms of accuracy with similar latency. It confirms that this simple change of block assignment in supernet gives notable accuracy boost with the same latency constraint, without any additional optimization techniques."
 
-**``operator-aware redesign`` — structural reparameterization:** :download:`_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf <../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`, tr.6, Figure 2 (train dùng nhiều nhánh, inference gộp về 1 conv chuẩn mà NPU hỗ trợ tốt):
+**``operator-aware redesign`` (structural reparameterization):** :download:`_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf <../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`, tr.6, Figure 2 (train dùng nhiều nhánh, inference gộp về 1 conv chuẩn mà NPU hỗ trợ tốt):
 
    "DBB has six transformation methods, which correspond to transforming conv-BN, branch addition, sequential convolutions, depth concatenation, and average pooling into a single convolutional layer, respectively."
 
-Lưu ý: bản thân phép gộp không tốn thêm chi phí lúc inference, nhưng module DBCA đầy đủ của DAHD-YOLO còn kèm attention (CAA) — xem Case C, cả model vẫn chậm hơn YOLOv8s. Phải đo trên board, không suy từ lý thuyết.
+Lưu ý: bản thân phép gộp không tốn thêm chi phí lúc inference, nhưng module DBCA đầy đủ của DAHD-YOLO còn kèm attention (CAA). Xem Case C, cả model vẫn chậm hơn YOLOv8s, nên phải đo trên board chứ không suy từ lý thuyết.
 
 Giả thuyết cụ thể cho đề tài (xem bảng :ref:`Research problem đề xuất <21-research-problem-đề-xuất>`): đổi activation SiLU của YOLOv8 sang ReLU hoặc LeakyReLU, vì theo tài liệu Rockchip chỉ Conv + ReLU/Clip/LeakyReLU mới được tăng tốc khi chạy nhiều core, còn Conv + Swish thì không. Cần đo 2 thứ: latency ở ``CORE_0_1_2`` trước và sau khi đổi, và mAP có giảm không (phải train lại) ``[chưa kiểm chứng]``.
 
@@ -146,12 +146,12 @@ Giả thuyết cụ thể cho đề tài (xem bảng :ref:`Research problem đ�
 
    "In theory, the model with more layers has a stronger ability to detect small objects. However, the results show that the YOLO v3 (3 layers)'s mAP is only slightly higher than YOLO v3 (5 layers)'s. [...] In experiments, YOLO v3 (three layers) needs 27.25 ms to process an image on GPU, which is 27% faster than YOLO v3 (five layers)."
 
-Tức thêm detection layer không tăng accuracy mà còn chậm hơn 27% — ủng hộ hướng head nhẹ hơn. (Paper ghi 27.25 ms trong văn bản nhưng 27.15 ms trong bảng — sai khác nhỏ ngay trong bản gốc.)
+Tức thêm detection layer không tăng accuracy mà còn chậm hơn 27%, ủng hộ hướng head nhẹ hơn. (Paper ghi 27.25 ms trong văn bản nhưng 27.15 ms trong bảng, một sai khác nhỏ ngay trong bản gốc.)
 
 .. _case-b--int8-nhanh-nhưng-accuracy-giảm:
 
-Case B — INT8 nhanh nhưng accuracy giảm
----------------------------------------
+3.2. Case B: INT8 nhanh nhưng suy giảm độ chính xác
+----------------------------------------------------------------------------------------------------
 
 .. code:: text
 
@@ -176,12 +176,12 @@ Hướng tối ưu có thể cân nhắc:
    → Train model có mô phỏng quantization để model thích nghi với INT8.
 
    mixed precision
-   → Không ép mọi layer dùng cùng precision; layer nhạy có thể giữ FP16, layer khác dùng INT8.
+   → Không ép mọi layer dùng cùng precision. Layer nhạy có thể giữ FP16, layer khác dùng INT8.
 
    quantization-sensitive layer analysis
    → Phân tích layer nào bị giảm accuracy nhiều khi quantize để xử lý riêng.
 
-Bằng chứng: :download:`_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf <../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`, Figure 7, tr.12. Bảng số liệu ở công nghệ 45nm: phép cộng INT8 (8b Add) tốn **0,03 pJ / 36 µm²**, phép cộng FP32 (32b FP Add) tốn **0,9 pJ / 7700 µm²** — INT8 rẻ hơn **30 lần năng lượng, ~214 lần diện tích**. Paper viết nguyên văn kết luận từ số liệu này:
+Bằng chứng: :download:`_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf <../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`, Figure 7, tr.12. Bảng số liệu ở công nghệ 45nm: phép cộng INT8 (8b Add) tốn **0,03 pJ / 36 µm²**, phép cộng FP32 (32b FP Add) tốn **0,9 pJ / 7700 µm²**, nghĩa là INT8 rẻ hơn **30 lần năng lượng, ~214 lần diện tích**. Paper viết nguyên văn kết luận từ số liệu này:
 
    "As one can see, lower precision provides exponentially better energy efficiency and higher throughput."
 
@@ -203,8 +203,8 @@ Các hướng cứu accuracy ở trên, đối chiếu với thực tế RKNN-To
 
 Chú thích "quantize theo channel": khi quantize trọng số 1 layer conv, cần chọn khoảng giá trị (clipping range) để map sang INT8.
 
-- **Theo layer (layerwise)**: cả layer dùng chung 1 khoảng → filter nào có giá trị dao động hẹp sẽ bị mất độ chính xác, vì khoảng chung bị kéo rộng theo filter có giá trị dao động rộng nhất.
-- **Theo channel (channelwise)**: mỗi filter có khoảng riêng → giữ độ chính xác cho từng filter, chi phí gần như không đáng kể.
+- **Theo layer (layerwise)**: Cả layer dùng chung 1 khoảng, filter nào có giá trị dao động hẹp sẽ bị mất độ chính xác, vì khoảng chung bị kéo rộng theo filter có giá trị dao động rộng nhất.
+- **Theo channel (channelwise)**: Mỗi filter có khoảng riêng, giữ độ chính xác cho từng filter, chi phí gần như không đáng kể.
 
 :download:`quantization_survey_2021gholami.pdf <../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`, Figure 3, tr.6, nguyên văn:
 
@@ -212,8 +212,8 @@ Chú thích "quantize theo channel": khi quantize trọng số 1 layer conv, c�
 
 .. _case-c--flops-thấp-nhưng-npu-vẫn-chậm:
 
-Case C — FLOPs thấp nhưng NPU vẫn chậm
---------------------------------------
+3.3. Case C: FLOPs thấp nhưng NPU vẫn chậm (Nghịch lý độ phức tạp)
+----------------------------------------------------------------------------------------------------
 
 .. code:: text
 
@@ -249,8 +249,8 @@ Bằng chứng trên đúng RK3588: :download:`_assets/pdf/papers/05_rk3588/dahd
      - 8.8M
      - **50.2**
 
-DAHD-YOLO ít FLOPs hơn 23% và nhỏ hơn 30%, nhưng chạy chậm hơn ~29% trên NPU thật. Lưu ý: mức 50.2 FPS dẫn ở mục 1 là nhờ multi-thread 3 core; bản thân thay đổi kiến trúc của DAHD-YOLO lại làm model chậm hơn YOLOv8s gốc.
+DAHD-YOLO ít FLOPs hơn 23% và nhỏ hơn 30%, nhưng chạy chậm hơn ~29% trên NPU thật. Lưu ý: mức 50.2 FPS dẫn ở mục 1 là nhờ multi-thread 3 core, trong khi bản thân thay đổi kiến trúc của DAHD-YOLO lại làm model chậm hơn YOLOv8s gốc.
 
-Chiều ngược lại cũng đúng — model nhiều FLOPs/params hơn vẫn có thể chạy nhanh hơn trên NPU. :download:`_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf <../_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf>`, tr.9 (so sánh ``ours-M`` với EfficientNet-B1 trên NPU MIDAP), nguyên văn:
+Chiều ngược lại cũng đúng: model nhiều FLOPs/params hơn vẫn có thể chạy nhanh hơn trên NPU. :download:`_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf <../_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf>`, tr.9 (so sánh ``ours-M`` với EfficientNet-B1 trên NPU MIDAP), nguyên văn:
 
    "Note that the number of parameters and the number of FLOPS in ours-M is larger than EfficientNet-B1. It implies that the complexity of the network is not a direct indicator of the end-to-end latency of the network. The end-to-end latency depends on the NPU architecture, and the proposed NAS technique could find a larger network with shorter latency by adding the latency factor to the loss function directly."

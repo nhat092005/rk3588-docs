@@ -4,7 +4,7 @@
 Thuật ngữ
 *********
 
-Vocabulary for the NPU deep-study material on the Orange Pi 5 (RK3588S). Names follow the vendor documents where the vendor is consistent; "NPU" is the single word for the hardware.
+Vocabulary for the NPU deep-study material on the Orange Pi 5 (RK3588S). Names follow the vendor documents where the vendor is consistent."NPU" is the single word for the hardware.
 
 Thuật ngữ dự án
 ===============
@@ -35,7 +35,7 @@ Thuật ngữ dự án
 
 **End-to-end head (``end2end``)**: The NMS-free ``Detect`` mode of YOLO26 that keeps a one-to-one branch next to the one-to-many branch and adds top-k selection to the graph. ``ultralytics`` turns it off for the ``rknn`` format, so the export path uses the one-to-many branch and needs NMS outside the graph. *Avoid*: "NMS-free model" (for the deployed RKNN graph)
 
-**Evidence tier**: Label on every claim in the study material. T1 = vendor document or official source code. T2 = paper or whitepaper under ``_assets/pdf/papers/``. T3 = measurement we ran ourselves, with a script and a log under ``tmp/04_debug-logs/``; every T3 claim states its environment ("T3 board" or "T3 PC") and is not treated as a document. A claim without a tier is not written; a gap is marked ``unknown`` with a search query. *Avoid*: citing ``docs/_notes``, ``docs/outputs``, blogs, forums or recalled knowledge
+**Evidence tier**: Label on every claim in the study material. T1 = vendor document or official source code. T2 = paper or whitepaper under ``_assets/pdf/papers/``. T3 = measurement we ran ourselves, with a script and a log under ``tmp/04_debug-logs/``, every T3 claim states its environment ("T3 board" or "T3 PC") and is not treated as a document. A claim without a tier is not written, a gap is marked ``unknown`` with a search query. *Avoid*: citing ``docs/_notes``, ``docs/outputs``, blogs, forums or recalled knowledge
 
 **Docs repo**: The separate git repository ``rk3588-docs`` holding all Sphinx ``.rst`` sources, figures and reference PDFs (papers, datasheets). Mounted in this repo as a git submodule. Private, so PDFs may be stored in it. *Avoid*: "docs folder" (the old unstructured ``docs/``), "wiki"
 
@@ -81,7 +81,7 @@ Các thuật ngữ dùng xuyên suốt tài liệu, phân theo nhóm chuyên mô
    * - 5
      - IoU
      - Diện tích giao ÷ diện tích hợp của 2 box
-     - Đo độ trùng khớp giữa box dự đoán và box ground-truth; ngưỡng 0.5 nghĩa là chồng lấn ≥50% mới tính là đúng
+     - Đo độ trùng khớp giữa box dự đoán và box ground-truth. Ngưỡng 0.5 nghĩa là chồng lấn ≥50% mới tính là đúng
    * - 6
      - AP
      - Diện tích dưới đường cong Precision-Recall của 1 class
@@ -97,7 +97,7 @@ Các thuật ngữ dùng xuyên suốt tài liệu, phân theo nhóm chuyên mô
    * - 9
      - mAP@0.5:0.95 (mAP50-95)
      - Trung bình mAP qua các ngưỡng IoU 0.5 → 0.95, bước 0.05
-     - Khắt khe hơn, phạt cả box lệch vị trí dù đúng lớp; chuẩn COCO
+     - Khắt khe hơn, phạt cả box lệch vị trí dù đúng lớp (theo chuẩn COCO)
    * - 10
      - LetterBox
      - Resize ảnh về khung vuông (vd 640×640) mà không bóp méo
@@ -134,7 +134,7 @@ Tối ưu hóa mô hình và Lượng tử hóa
    * - 4
      - QAT
      - Quantization-Aware Training
-     - Train lại model có mô phỏng lượng tử hoá ngay trong lúc train để model thích nghi với INT8; tốn công hơn PTQ
+     - Train lại model có mô phỏng lượng tử hoá ngay trong lúc train để model thích nghi với INT8, tốn công hơn PTQ
 
 .. _003-phần-mềm-và-phần-cứng-rknpu-rockchip:
 
@@ -151,27 +151,27 @@ Phần mềm và Phần cứng RKNPU Rockchip
    * - 1
      - RKNPU2
      - Bộ SDK phía board của Rockchip cho NPU: runtime ``librknnrt``, ``rknn_server``, C API ``rknn_api.h``
-     - Không phải package Python; tương ứng thư mục ``3rdparty/rknn-toolkit2/rknpu2/``
+     - Không phải package Python, tương ứng thư mục ``3rdparty/rknn-toolkit2/rknpu2/``
    * - 2
      - librknnrt
      - Thư viện C runtime (``librknnrt.so``) trên board, thực thi model trên NPU
-     - RKNN-Toolkit-Lite2 gọi trực tiếp; RKNN-Toolkit2 khi điều khiển board từ PC thì đi qua ``rknn_server`` trên board rồi mới tới thư viện này
+     - RKNN-Toolkit-Lite2 gọi trực tiếp. RKNN-Toolkit2 khi điều khiển board từ PC thì đi qua ``rknn_server`` trên board rồi mới tới thư viện này
    * - 3
      - RKNN-Toolkit2
      - Package Python để convert/quantize model sang ``.rknn``, và điều khiển board từ xa để đo
-     - Có bản x86_64 và arm64; project dùng bản x86_64 trên PC, kết nối board qua mạng
+     - Có bản x86_64 và arm64. Project dùng bản x86_64 trên PC, kết nối board qua mạng
    * - 4
      - RKNN-Toolkit-Lite2 (``rknn-toolkit-lite2``, lớp Python ``RKNNLite``)
      - Package Python chạy trên board (bản aarch64), chỉ load và chạy model ``.rknn`` có sẵn
-     - Không convert/quantize được; tên gần giống RKNN-Toolkit2 nhưng khác hẳn chức năng
+     - Không convert/quantize được, tên gần giống RKNN-Toolkit2 nhưng khác hẳn chức năng
    * - 5
      - core_mask
      - Tham số chọn core NPU chạy model: tự động (``AUTO``), 1 core (``CORE_0``), hoặc gộp nhiều core (``CORE_0_1_2``)
      - Đặt lúc gọi ``init_runtime()``, không phải lúc build model (``ai/core/rknn/benchmark.py``)
    * - 6
      - NPU, NPU core
-     - NPU là khối phần cứng tăng tốc gồm 3 NPU core trên RK3588 (TRM Part1 Chương 36, tr.1984: "Include triple NPU CORE"; TRM gọi khối này là "RKNN")
-     - Dùng "NPU" cho phần cứng; "RKNPU2" chỉ SDK phía board (dòng 1); "RKNPU" là tên họ NPU của Rockchip dùng chung nhiều chip
+     - NPU là khối phần cứng tăng tốc gồm 3 NPU core trên RK3588 (TRM Part1 Chương 36, tr.1984: "Include triple NPU CORE". TRM gọi khối này là "RKNN")
+     - Dùng "NPU" cho phần cứng, "RKNPU2" chỉ SDK phía board (dòng 1), còn "RKNPU" là tên họ NPU của Rockchip dùng chung nhiều chip
 
 .. _004-đánh-giá-hiệu-năng-và-hệ-thống:
 
@@ -200,4 +200,4 @@ Phần mềm và Phần cứng RKNPU Rockchip
    * - 4
      - Golden test
      - Bài test đối chiếu với số liệu đã lưu
-     - Chạy evaluator trên 1 bộ ảnh và 1 model cố định; ra số khác số đã lưu nghĩa là code evaluator vừa bị đổi (:ref:`Evaluation Protocol v1 <50-evaluation-protocol-v1>`)
+     - Chạy evaluator trên 1 bộ ảnh và 1 model cố định. Nếu ra số khác số đã lưu nghĩa là code evaluator vừa bị đổi (:ref:`Evaluation Protocol v1 <50-evaluation-protocol-v1>`)

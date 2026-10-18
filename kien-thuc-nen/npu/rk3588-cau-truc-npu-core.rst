@@ -65,7 +65,7 @@ Zero-skipping:
 **Ý chính**
 
 - Một core gồm đường vào dữ liệu (CNA), MAC array với accumulator, DPU cho các phép theo phần tử, và PPU cho pooling (TRM1 tr.1985). Chữ "CNA" xuất hiện trong sơ đồ nhưng TRM không khai triển tên.
-- Thanh ghi ``fc_skip_en`` được TRM mô tả là "FC zero skipping enable" (tiền tố "FC" không được khai triển) và tác dụng là bỏ fetch weight tương ứng khi feature bằng 0 (TRM1 tr.2006). Flow ở tr.2055 nói "We bypass BS_CORE, and use BN_CORE to calculate convolution" và đặt ``conv_mode`` của DPU bằng 3, là "Depthwise convolution mode" (TRM1 tr.2017). Tổng hợp của file này: TRM mô tả zero-skipping qua việc không fetch weight và một đường đi qua DPU; TRM không nói MAC array có bỏ phép nhân 0 hay không. Không dùng nội dung này để khẳng định hay phủ định cơ chế bỏ MAC ở :ref:`Sparsity và zero-skipping <17-sparsity-và-zero-skipping>` của :doc:`NPU và phần cứng </kien-thuc-nen/npu/index>`.
+- Thanh ghi ``fc_skip_en`` được TRM mô tả là "FC zero skipping enable" (tiền tố "FC" không được khai triển) và tác dụng là bỏ fetch weight tương ứng khi feature bằng 0 (TRM1 tr.2006). Flow ở tr.2055 nói "We bypass BS_CORE, and use BN_CORE to calculate convolution" và đặt ``conv_mode`` của DPU bằng 3, là "Depthwise convolution mode" (TRM1 tr.2017). Tổng hợp của file này: TRM mô tả zero-skipping qua việc không fetch weight và một đường đi qua DPU. TRM không nói MAC array có bỏ phép nhân 0 hay không. Không dùng nội dung này để khẳng định hay phủ định cơ chế bỏ MAC ở :ref:`Sparsity và zero-skipping <17-sparsity-và-zero-skipping>` của :doc:`NPU và phần cứng </kien-thuc-nen/npu/index>`.
 
 **Giới hạn.** TRM không khai triển các chữ BS, BN, CMAC, CSC, CBUF, DDMA, SDMA. Riêng EW có gợi nghĩa "element wise" ở một mô tả thanh ghi (TRM1 tr.2035). Định dạng nén weight mà khối Weight Decompress hỗ trợ là ``unknown``: TRM chỉ có thanh ghi ``wt_dec_bypass`` và ``decomp_control`` (TRM1 tr.2009).
 
@@ -120,7 +120,7 @@ Kiểu số và số MAC trên mỗi chu kỳ
 
 - API Reference V2.3.2 mặc định ``quantized_dtype`` là "w8a8" (tr.7). ``w4a16`` "(Only RK3576/RV1126B supported)", ``w16a16i`` "(Only RV1103/RV1106 supported)" (tr.7). Vì vậy không viết "RK3588 chạy model INT4, BF16, TF32 qua ``rknn.config``". Ngoại lệ ở đường khác: Matmul C API hỗ trợ ba kiểu dữ liệu "int4, int8 and float16" (UG232 tr.41), và Table 3-5 của UG232 (tr.49) có bố cục INT4 cho cột RK3588 (A int4 ``[K/32,M,32]``, B int4 ``[N/64,K/32,64,32]``, C int16 ``[N/8,M,8]``) trong khi RK3562 và RK3566/RK3568 ghi "unsupported". Chưa thấy nguồn SDK nào cho BF16 hay TF32. Chi tiết xem file ``04_``.
 
-**Giới hạn.** Không viết "6 TOPS" như kết quả suy ra trong tài liệu vendor: Datasheet ghi tần số tối đa của NPU là ``TBD`` (DS tr.31) và TRM không nêu quy ước đếm phép tính. Tần số 1 GHz chỉ xuất hiện trong ví dụ đầu ra ``eval_perf`` (UG232 tr.31, "NPU Current Frequency List: - 1000000000", tùy firmware) và ví dụ lệnh cố định tần số (UG152 tr.73), không phải tần số tối đa hay mặc định. Quy ước chung "TOPS defined as twice the number of MAC units multiplied by the clock frequency" có trong một paper (T2 BAMB tr.1, NXP eIQ Neutron), không riêng RK3588. Các tài liệu cũng không thống nhất: TRM1 36.1 viết "tf32", mục 36.3.2 viết "tf16"; DS tr.7 liệt kê 4 kiểu, mục 1.2.6 (DS tr.11) thêm Bfloat16 và tf32 ().
+**Giới hạn.** Không viết "6 TOPS" như kết quả suy ra trong tài liệu vendor: Datasheet ghi tần số tối đa của NPU là ``TBD`` (DS tr.31) và TRM không nêu quy ước đếm phép tính. Tần số 1 GHz chỉ xuất hiện trong ví dụ đầu ra ``eval_perf`` (UG232 tr.31, "NPU Current Frequency List: - 1000000000", tùy firmware) và ví dụ lệnh cố định tần số (UG152 tr.73), không phải tần số tối đa hay mặc định. Quy ước chung "TOPS defined as twice the number of MAC units multiplied by the clock frequency" có trong một paper (T2 BAMB tr.1, NXP eIQ Neutron), không riêng RK3588. Các tài liệu cũng không thống nhất: TRM1 36.1 viết "tf32", mục 36.3.2 viết "tf16". DS tr.7 liệt kê 4 kiểu, mục 1.2.6 (DS tr.11) thêm Bfloat16 và tf32 ().
 
 --------------
 
@@ -158,9 +158,9 @@ DPU, chế độ conv, matmul và layout
 
    "RKNN supports variety of convolution and matrix multiplication." [T1 TRM1 tr.2053]
 
-DPU (xem 2.3) xử lý các hàm theo phần tử như ``relu``, ``sigmoid``, ``tanh``, cùng ``softmax``, ``transpose`` và chuyển định dạng dữ liệu (TRM1 tr.1985). Ở mức thanh ghi, TRM1 tr.2000 có chế độ "Depthwise convolution" (``conv_mode``), tr.2001 có các trường atrous (dilation) và deconv; tr.1999 có ``nonalign_dma`` và ``argb_in``.
+DPU (xem 2.3) xử lý các hàm theo phần tử như ``relu``, ``sigmoid``, ``tanh``, cùng ``softmax``, ``transpose`` và chuyển định dạng dữ liệu (TRM1 tr.1985). Ở mức thanh ghi, TRM1 tr.2000 có chế độ "Depthwise convolution" (``conv_mode``), tr.2001 có các trường atrous (dilation) và deconv, tr.1999 có ``nonalign_dma`` và ``argb_in``.
 
-Native layout NC1HWC2: UG152 tr.56 mô tả "a special memory arrangement. The memory address from low to high is C2->W->H->C1->N". Table 4-6 cùng trang cho hàng RK3588 các giá trị ``16 8 8`` (cột int8, float16, int16, so với ``8 4 4`` của RK3566/RK3568). Đây là giá trị C2 theo chip; ý nghĩa đầy đủ xem file ``06_`` (UG232 tr.61).
+Native layout NC1HWC2: UG152 tr.56 mô tả "a special memory arrangement. The memory address from low to high is C2->W->H->C1->N". Table 4-6 cùng trang cho hàng RK3588 các giá trị ``16 8 8`` (cột int8, float16, int16, so với ``8 4 4`` của RK3566/RK3568). Đây là giá trị C2 theo chip. ý nghĩa đầy đủ xem file ``06_`` (UG232 tr.61).
 
 **Giới hạn.** Quan hệ giữa các chữ viết tắt thanh ghi (BS, BN, EW) và tên op trong Operator List là ``unknown``. Danh sách op thực sự chạy trên NPU RK3588 nằm ở Operator List, xem :doc:`Toolchain và compiler </kien-thuc-nen/toolchain-compiler/index>`.
 

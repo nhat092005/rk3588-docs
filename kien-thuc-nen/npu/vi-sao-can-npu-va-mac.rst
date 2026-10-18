@@ -89,12 +89,12 @@ MAC và PE array
 
 |Eyeriss Figure 1| *Hình 1.2a. Sơ đồ khối hệ thống bộ tăng tốc CNN: spatial architecture và DRAM ngoài chip, phóng to một PE. Nguồn: [T2 EYE tr.2, Figure 1]*
 
-|TPU Figure 1| *Hình 1.2b. Sơ đồ khối của TPU (hình ghi Matrix Multiply Unit "64K per cycle"; chữ MAC lấy từ TPU tr.1). Nguồn: [T2 TPU tr.3, Figure 1]*
+|TPU Figure 1| *Hình 1.2b. Sơ đồ khối của TPU (hình ghi Matrix Multiply Unit "64K per cycle", chữ MAC lấy từ TPU tr.1). Nguồn: [T2 TPU tr.3, Figure 1]*
 
 **Ý chính**
 
 - EYE chia thành nhiều PE nhỏ, mỗi PE có MAC, RF và FIFO. TPU nói theo "MACs" trong một ma trận 256x256 và không dùng chữ PE. Tổng hợp của file này: một PE không nhất thiết bằng một MAC, tùy bài báo.
-- Trong CNN, convolution là phép tính nặng nhất (EYE tr.1). Với TPU, CNN chỉ chiếm "just 5% of our datacenter workload" (TPU tr.2; MLP và LSTM chiếm phần lớn). Tổng hợp của file này: với CNN như YOLO, bộ tăng tốc xoay quanh việc chạy MAC song song cho convolution.
+- Trong CNN, convolution là phép tính nặng nhất (EYE tr.1). Với TPU, CNN chỉ chiếm "just 5% of our datacenter workload" (TPU tr.2. MLP và LSTM chiếm phần lớn). Tổng hợp của file này: với CNN như YOLO, bộ tăng tốc xoay quanh việc chạy MAC song song cho convolution.
 
 **Giới hạn.** Số PE và MAC của EYE (chip 65 nm, 168 PE, 200 MHz, 16-bit fixed-point, EYE tr.5) và TPU (65,536 MAC, TPU tr.1) không đại diện cho RK3588. Kích thước MAC array của RK3588 xem file ``02_``.
 

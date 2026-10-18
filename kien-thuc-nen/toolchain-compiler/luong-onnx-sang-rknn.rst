@@ -12,11 +12,11 @@ Luồng ONNX sang RKNN
 .. admonition:: Tóm tắt
 
    - Luồng chuyển đổi gồm config, nạp model, rknn.build() và rknn.export_rknn() để tạo file .rknn [T1 UG232 tr.9].
-   - Phải đặt target_platform='rk3588'; nếu không, model chỉ chạy được trên RK3566/RK3568 [T1 UG232 tr.173].
+   - Phải đặt target_platform='rk3588'. Nếu không, model chỉ chạy được trên RK3566/RK3568 [T1 UG232 tr.173].
    - Ví dụ yolov5/test.py mặc định target_platform='rk3566' và gọi init_runtime() không có target, nên suy luận chạy trên simulator.
    - target=None chạy trên simulator, đặt target='rk3588' chạy trên NPU của board nối PC [T1 API232 tr.16, 17].
    - Board-connected có hiệu năng thấp hơn on-board inference bằng RKNPU2 C API vì truyền dữ liệu qua adb [T1 UG232 tr.171].
-   - Mức lệch của simulator so với board và cách NTB khác ADB là unknown; phiên bản ONNX giữa API232 và UG232 chưa có nguồn phân xử.
+   - Mức lệch của simulator so với board và cách NTB khác ADB là unknown, phiên bản ONNX giữa API232 và UG232 chưa có nguồn phân xử.
 
 .. _51-luồng-chuyển-onnx-sang-rknn-model:
 
@@ -59,7 +59,7 @@ Ví dụ chính thức ``examples/onnx/yolov5/test.py`` gọi theo thứ tự: `
 
 **Ý chính**
 
-- Thứ tự trong tài liệu là: khởi tạo, ``config``, nạp model, ``build``, ``export_rknn``, ``release`` (UG232 tr.9, tr.21). Tổng hợp của file này: mọi nguồn và ví dụ đã đọc đều đặt ``config`` trước ``load_onnx``; API232 tr.6 chỉ nói "Before the RKNN model is built" và không cấm thứ tự ngược.
+- Thứ tự trong tài liệu là: khởi tạo, ``config``, nạp model, ``build``, ``export_rknn``, ``release`` (UG232 tr.9, tr.21). Tổng hợp của file này: mọi nguồn và ví dụ đã đọc đều đặt ``config`` trước ``load_onnx``. API232 tr.6 chỉ nói "Before the RKNN model is built" và không cấm thứ tự ngược.
 - Phải đặt ``target_platform='rk3588'``. Nếu không, model chỉ chạy được trên RK3566 và RK3568 (UG232 tr.173).
 - Model đã build cho RK3588 dùng được trên RK3588S (UG232 tr.158), khớp với board Orange Pi 5.
 - Ngoài API Python còn có công cụ dòng lệnh ``rknn_convert`` đọc file YAML (UG232 tr.25).
@@ -124,15 +124,15 @@ Mẫu chuẩn cho RK3588: ``examples/functions/npu_device_test/test.py`` có ``t
 
 **Ý chính**
 
-- ``target=None`` nghĩa là chạy trên simulator trên PC; đặt ``target='rk3588'`` thì chạy trên NPU của board nối với PC (API232 tr.16, 17).
-- ``eval_perf`` và ``eval_memory`` chỉ có khi model chạy trên phần cứng nối PC; không có simulator (API232 tr.18, 19).
-- Hiệu năng đo qua board-connected thấp hơn so với chạy trực tiếp trên board bằng C API vì có truyền dữ liệu qua adb (UG232 tr.171, 175). Tổng hợp của file này: con số FPS dùng báo cáo nên đo bằng C API trên board, còn ``eval_perf`` dùng để phân tích từng lớp. UG232 tr.171, 175 chỉ so board-connected với C API; đường chạy RKNN-Toolkit-Lite2 (Python) trên board không được so sánh trong các trang này.
+- ``target=None`` nghĩa là chạy trên simulator trên PC. đặt ``target='rk3588'`` thì chạy trên NPU của board nối với PC (API232 tr.16, 17).
+- ``eval_perf`` và ``eval_memory`` chỉ có khi model chạy trên phần cứng nối PC, không có simulator (API232 tr.18, 19).
+- Hiệu năng đo qua board-connected thấp hơn so với chạy trực tiếp trên board bằng C API vì có truyền dữ liệu qua adb (UG232 tr.171, 175). Tổng hợp của file này: con số FPS dùng báo cáo nên đo bằng C API trên board, còn ``eval_perf`` dùng để phân tích từng lớp. UG232 tr.171, 175 chỉ so board-connected với C API. đường chạy RKNN-Toolkit-Lite2 (Python) trên board không được so sánh trong các trang này.
 - Hình Figure 1-2 vẽ toolkit có khối Compiler với OP Fuse, Tiling, Memory Planning. Tài liệu không mô tả thuật toán của chúng (xem :doc:`Toolchain và compiler </kien-thuc-nen/toolchain-compiler/index>`).
 
 **Giới hạn**
 
 - Simulator "không đảm bảo kết quả giống hệt board" (UG232 tr.171). Mức lệch là ``unknown``.
-- UG232 tr.31 mô tả ``fix_freq`` là "try to fix the frequency of the hardware (including CPU/NPU/DDR)"; chỉ cách đặt qua node nào là ``unknown``.
+- UG232 tr.31 mô tả ``fix_freq`` là "try to fix the frequency of the hardware (including CPU/NPU/DDR)", chỉ cách đặt qua node nào là ``unknown``.
 - Giao thức NTB khác ADB thế nào: ``unknown`` (API232 tr.23 chỉ nêu có hai chế độ).
 
 --------------

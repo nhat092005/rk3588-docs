@@ -33,13 +33,13 @@ Bản đồ code
      - Protocol v1: LetterBox, NMS, AP, dấu vân tay dataset
      - evaluate, run, check
    * - ``ai/core/backends.py``
-     - PyTorch/ONNX trên PC; ``.rknn``: đọc output board, kiểm md5 input
+     - PyTorch/ONNX trên PC. Với ``.rknn``: đọc output board, kiểm md5 input
      - evaluator
    * - ``ai/core/provenance.py``
      - git commit, git_dirty, sha256, thời điểm
      - mọi file kết quả
    * - ``ai/automation/evaluate.py``
-     - AI Quality 1 run × 1 backend; với ``.rknn`` điều phối chạy trên board qua ssh
+     - AI Quality 1 run × 1 backend, với ``.rknn`` điều phối chạy trên board qua ssh
      - ``make evaluate``
    * - ``ai/board/infer_dump.py``
      - Inference ``.rknn`` trên board, lưu output thô + md5 input

@@ -2,7 +2,7 @@
 Bài báo về ứng dụng PPE và RK3588
 *********************************
 
-9 bài. Chưa bài nào có trích dẫn nguyên văn; thêm trích dẫn kèm số trang PDF, đối chiếu trên PDF, rồi mới tách thành trang riêng.
+9 bài. Chưa bài nào có trích dẫn nguyên văn. Cần thêm trích dẫn kèm số trang PDF, đối chiếu trên PDF rồi mới tách thành trang riêng.
 
 .. list-table::
    :header-rows: 1

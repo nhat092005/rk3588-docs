@@ -11,11 +11,11 @@ Re-parameterization
 
 .. admonition:: Tóm tắt
 
-   - Re-parameterization gộp các nhánh conv 3x3, 1x1, identity và BN thành một Conv 3x3; phép gộp cần cùng stride và padding lệch một pixel [T2 REPVGG tr.5].
+   - Re-parameterization gộp các nhánh conv 3x3, 1x1, identity và BN thành một Conv 3x3, phép gộp cần cùng stride và padding lệch một pixel [T2 REPVGG tr.5].
    - Thứ hạng tốc độ phụ thuộc thiết bị: RepVGG-B0 nhanh hơn EfficientNet-B0 trên GPU 1080Ti (1817 so với 829 ví dụ/giây) [T2 REPVGG Table 4] nhưng chậm hơn trên CPU, GPU 2080Ti và iPhone 12 [T2 MOBONE Table 9].
    - Không bài nào đo RepVGG hay MobileOne trên NPU hay trên RK3588, nên kết quả trên NPU là unknown.
    - RepVGG khó lượng tử hóa INT8: "more than 20% top-1 accuracy drop on ImageNet" [T2 QAREP tr.1], và mức sụt dao động rất lớn giữa các biến thể theo Table 5.
-   - QARepVGG sửa bằng cách bỏ BN khỏi nhánh identity và 1x1 rồi thêm BN sau phép cộng; kết quả chỉ đo bằng PyTorch-Quantization, không suy ra cho RKNN [T2 QAREP tr.5].
+   - QARepVGG sửa bằng cách bỏ BN khỏi nhánh identity và 1x1 rồi thêm BN sau phép cộng, kết quả chỉ đo bằng PyTorch-Quantization, không suy ra cho RKNN [T2 QAREP tr.5].
 
 .. _81-re-parameterization-repvgg-mobileone:
 
@@ -46,7 +46,7 @@ Re-parameterization (RepVGG, MobileOne)
 
 |RepVGG Figure 4| *Hình 8.1a. Structural re-parameterization của một khối RepVGG: ba nhánh (3x3 + BN, 1x1 + BN, identity + BN) được cộng lại thành một Conv 3x3 (A: cấu trúc, B: tham số). Nguồn: [T2 REPVGG tr.5, Figure 4]*
 
-|MobileOne Figure 3| *Hình 8.1b. Khối MobileOne lúc train (nhiều nhánh có thể reparameterize, k khối) và lúc suy luận (3x3d Conv + BN + Act rồi 1x1 Conv + BN + Act; khối được thiết kế cho conv tách thành depthwise và pointwise, MOBONE tr.4). Nguồn: [T2 MOBONE tr.5, Figure 3]*
+|MobileOne Figure 3| *Hình 8.1b. Khối MobileOne lúc train (nhiều nhánh có thể reparameterize, k khối) và lúc suy luận (3x3d Conv + BN + Act rồi 1x1 Conv + BN + Act, khối được thiết kế cho conv tách thành depthwise và pointwise, MOBONE tr.4). Nguồn: [T2 MOBONE tr.5, Figure 3]*
 
 Số đo (nguyên từ bảng, kèm thiết bị):
 
@@ -60,11 +60,11 @@ Số đo (nguyên từ bảng, kèm thiết bị):
    * - REPVGG
      - Table 4, tr.7
      - NVIDIA 1080Ti, batch 128, fp32 (EfficientNet-B0 ở đây là bản tự huấn luyện 120 epoch, 75.11, khác bản 77.1 của MOBONE)
-     - RepVGG-B0: 75.14 top-1, 1817 ví dụ/giây; ResNet-50: 76.31, 719; EfficientNet-B0: 75.11, 829
+     - RepVGG-B0: 75.14 top-1, 1817 ví dụ/giây. ResNet-50: 76.31, 719. EfficientNet-B0: 75.11, 829
    * - MOBONE
      - Table 9, tr.7
      - iPhone 12 (Core ML), CPU Xeon, GPU RTX 2080Ti (TensorRT, batch 1)
-     - RepVGG-B0: CPU 55.97 ms, GPU 1.45 ms, mobile 1.82 ms; EfficientNet-B0: 28.71, 1.35, 1.72; MobileOne-S1: 13.04, 0.66, 0.89
+     - RepVGG-B0: CPU 55.97 ms, GPU 1.45 ms, mobile 1.82 ms. EfficientNet-B0: 28.71, 1.35, 1.72. MobileOne-S1: 13.04, 0.66, 0.89
    * - MOBONE
      - Table 5, tr.5
      - huấn luyện ImageNet
@@ -72,7 +72,7 @@ Số đo (nguyên từ bảng, kèm thiết bị):
 
 **Ý chính**
 
-- Phép gộp gộp các nhánh conv (3x3, 1x1), nhánh identity và BN vào một Conv 3x3 có bias; MobileOne nói BN được gộp vào conv trước nó trong mọi nhánh (MOBONE tr.4). Phép gộp cần cùng stride và padding lệch một pixel (REPVGG tr.5).
+- Phép gộp gộp các nhánh conv (3x3, 1x1), nhánh identity và BN vào một Conv 3x3 có bias. MobileOne nói BN được gộp vào conv trước nó trong mọi nhánh (MOBONE tr.4). Phép gộp cần cùng stride và padding lệch một pixel (REPVGG tr.5).
 - Graph lúc suy luận chỉ còn một loại op: Conv 3x3 + ReLU (REPVGG tr.2). REPVGG nói chip chuyên dụng có thể nhanh hơn vì ít loại op, đây là giả thuyết của tác giả, không có số đo.
 - Thứ hạng tốc độ phụ thuộc thiết bị: RepVGG-B0 nhanh hơn EfficientNet-B0 trên GPU 1080Ti (1817 so với 829 ví dụ/giây, REPVGG Table 4), nhưng chậm hơn trên CPU, GPU 2080Ti và iPhone 12 (55.97 so với 28.71 ms, 1.45 so với 1.35 ms, 1.82 so với 1.72 ms, MOBONE Table 9).
 
@@ -149,12 +149,12 @@ QAREP Table 5 (tr.6), trích một phần (bỏ các hàng RepVGG-B1g2, RepVGG-B
      - 79.0
      - 77.7
 
-QAREP Table 8 (tr.7) là bảng phát hiện đối tượng trên COCO (mAP FP32 và INT8: YOLOv6s-RepVGG 42.4 và 35.0; YOLOv6s-QARepVGG 42.3 và 41.0; YOLOv6t-RepVGG 40.8 và 37.8); phân đoạn ngữ nghĩa là Table 9.
+QAREP Table 8 (tr.7) là bảng phát hiện đối tượng trên COCO (mAP FP32 và INT8: YOLOv6s-RepVGG 42.4 và 35.0. YOLOv6s-QARepVGG 42.3 và 41.0. YOLOv6t-RepVGG 40.8 và 37.8), phân đoạn ngữ nghĩa là Table 9.
 
 **Ý chính**
 
 - Sụt độ chính xác của RepVGG dao động rất lớn giữa các biến thể: từ khoảng 20 điểm (A0) tới 77 điểm (B1g4) theo Table 5. "Khoảng 20%" trong abstract chỉ là mức thấp nhất.
-- QARepVGG sửa bằng bốn thay đổi M1 đến M4 (QAREP Table 3, tr.5): M1 dùng L2 thường thay cho custom L2 (INT8 của RepVGG-A0 từ 50.3 lên 61.6), M2 và M3 bỏ BN khỏi nhánh identity và nhánh 1x1, M4 thêm BN sau phép cộng ba nhánh (INT8 lần lượt 62.5, 69.5, 70.4 khi cộng dồn M2, M3, M4; FP32 72.2 ở cấu hình cuối). Mô hình vẫn gộp được thành một Conv 3x3 (QAREP tr.1, tr.5, Figure 1).
+- QARepVGG sửa bằng bốn thay đổi M1 đến M4 (QAREP Table 3, tr.5): M1 dùng L2 thường thay cho custom L2 (INT8 của RepVGG-A0 từ 50.3 lên 61.6), M2 và M3 bỏ BN khỏi nhánh identity và nhánh 1x1, M4 thêm BN sau phép cộng ba nhánh (INT8 lần lượt 62.5, 69.5, 70.4 khi cộng dồn M2, M3, M4. FP32 72.2 ở cấu hình cuối). Mô hình vẫn gộp được thành một Conv 3x3 (QAREP tr.1, tr.5, Figure 1).
 
 **Giới hạn**
 

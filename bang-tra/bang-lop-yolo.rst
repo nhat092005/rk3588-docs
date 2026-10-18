@@ -8,7 +8,7 @@ Bảng lớp YOLO
 
    - Bảng từng lớp YOLOv8n và YOLO26n cho đường xuất RKNN (nc=5, 640x640, đã fuse): YOLOv8n có tổng 3,006,623 tham số và 8.087 GFLOPs, YOLO26n có 2,375,811 tham số và 5.314 GFLOPs.
    - Lớp Detect của YOLOv8n chiếm 2.965 trên 8.087 GFLOPs (khoảng 37%), còn Detect của YOLO26n chiếm 0.435 trên 5.314 (khoảng 8%).
-   - Theo tổng hợp của file, phần lớn mức giảm FLOPs của YOLO26n nằm ở đầu Detect; ngoài đầu, YOLOv8n còn 5.122 và YOLO26n còn 4.879 GFLOPs.
+   - Theo tổng hợp của file, phần lớn mức giảm FLOPs của YOLO26n nằm ở đầu Detect. Ngoài đầu, YOLOv8n còn 5.122 và YOLO26n còn 4.879 GFLOPs.
    - Số liệu do T1 tính bằng layer_table.py, GFLOPs bằng FlopCounterMode với 2 FLOP mỗi MAC.
 
 .. _93-bảng-từng-lớp-đường-xuất-rknn-nc5-640x640-đã-fuse:
@@ -338,7 +338,7 @@ YOLO26n
      - 5.314
      - 
 
-Tổng hợp của file này: lớp ``Detect`` của YOLOv8n chiếm 2.965 trên 8.087 GFLOPs (khoảng 37%), trong khi ``Detect`` của YOLO26n chiếm 0.435 trên 5.314 (khoảng 8%); phần lớn mức giảm FLOPs của YOLO26n so với YOLOv8n nằm ở đầu. Ngoài đầu, hai model gần nhau (YOLOv8n còn lại 5.122, YOLO26n còn lại 4.879 GFLOPs).
+Tổng hợp của file này: lớp ``Detect`` của YOLOv8n chiếm 2.965 trên 8.087 GFLOPs (khoảng 37%), trong khi ``Detect`` của YOLO26n chiếm 0.435 trên 5.314 (khoảng 8%). Phần lớn mức giảm FLOPs của YOLO26n so với YOLOv8n nằm ở đầu. Ngoài đầu, hai model gần nhau (YOLOv8n còn lại 5.122, YOLO26n còn lại 4.879 GFLOPs).
 
 --------------
 

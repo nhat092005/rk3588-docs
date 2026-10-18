@@ -15,7 +15,7 @@ RKNN: hybrid và accuracy
    - Hybrid quantization gồm bốn bước, và lớp được đưa về FP16 chạy chậm hơn trên NPU [T1 UG232 tr.123].
    - `hybrid_quantization_step2` trả `0` hoặc `-1` và không tự ghi file `.rknn`, nên phải gọi `export_rknn` sau đó.
    - Hybrid int16 trên RK3588 là `unknown`, và hướng so sánh euclid của `auto_hybrid_euc_thresh` cũng `unknown` vì API232 và UG232 viết khác nhau.
-   - Accuracy analysis so sánh từng lớp giữa `golden` và `simulator`, trong đó `entire` là sai số tích lũy còn `single` là sai số của riêng lớp (theo README của ví dụ chính thức); API232 và UG232 gọi tên các cột này khác nhau.
+   - Accuracy analysis so sánh từng lớp giữa `golden` và `simulator`, trong đó `entire` là sai số tích lũy còn `single` là sai số của riêng lớp (theo README của ví dụ chính thức). API232 và UG232 gọi tên các cột này khác nhau.
    - Quy trình vendor yêu cầu FP16 đúng trước, rồi mới xét quantization inference [T1 UG232 tr.131].
    - Chưa có nguồn nào áp dụng quy trình xử lý lỗi độ chính xác này cho YOLOv8 hay PPE, nên là `unknown`.
 
@@ -72,8 +72,8 @@ Chữ ký hàm trong code: ``hybrid_quantization_step1(self, dataset='dataset.tx
 
 - Bốn bước: (1) ``hybrid_quantization_step1`` sinh ba file, (2) sửa ``.quantization.cfg``, (3) ``hybrid_quantization_step2`` rồi ``export_rknn``, (4) suy luận (UG232 tr.123, 124, 125).
 - Lớp được đưa về FP16 chạy chậm hơn trên NPU (UG232 tr.123). Trade-off giữa độ chính xác và tốc độ là điều UG232 tr.134 nhắc lại.
-- ``hybrid_quantization_step2`` trả ``0`` hoặc ``-1``, không tự ghi file ``.rknn``. Phải gọi ``export_rknn`` sau đó (Figure 6-4; EX ``step2.py:23``).
-- ``auto_hybrid`` tự đổi các lớp có cosine distance thấp hơn ngưỡng (mặc định 0.98) về FP16 (API232 tr.10, 14; UG232 tr.125).
+- ``hybrid_quantization_step2`` trả ``0`` hoặc ``-1``, không tự ghi file ``.rknn``. Phải gọi ``export_rknn`` sau đó (Figure 6-4. EX ``step2.py:23``).
+- ``auto_hybrid`` tự đổi các lớp có cosine distance thấp hơn ngưỡng (mặc định 0.98) về FP16 (API232 tr.10, 14. UG232 tr.125).
 
 **Giới hạn**
 
@@ -110,7 +110,7 @@ Accuracy analysis
 
    "It is divided into 4 columns of accuracy, as follows:" [T1 UG232 tr.30]
 
-Các cột (UG232 tr.31): ``simulator_error`` gồm ``entire`` ("The cosine distance and Euclidean distance from the beginning to the current layer simulator result compared with the golden result.") và ``single``; ``runtime_error`` gồm ``entire`` và ``single_sim``. Ví dụ chính thức giải thích: "entire: output error of each layer between 'golden' and 'simulator', these errors will accumulate layer by layer." và "single: single-layer output error between 'golden' and 'simulator', can better reflect the single-layer accuracy of the simulator." [T1 EX ``functions/accuracy_analysis/README.md:19-21``].
+Các cột (UG232 tr.31): ``simulator_error`` gồm ``entire`` ("The cosine distance and Euclidean distance from the beginning to the current layer simulator result compared with the golden result.") và ``single``.``runtime_error`` gồm ``entire`` và ``single_sim``. Ví dụ chính thức giải thích: "entire: output error of each layer between 'golden' and 'simulator', these errors will accumulate layer by layer." và "single: single-layer output error between 'golden' and 'simulator', can better reflect the single-layer accuracy of the simulator." [T1 EX ``functions/accuracy_analysis/README.md:19-21``].
 
 |UG232 Figure 3-2| *Hình 4.4. Kết quả accuracy analysis: bốn nhóm cột ``simulator_error`` (entire, single) và ``runtime_error`` (entire, single_sim), mỗi nhóm có ``cos`` và ``euc``. Nguồn: [T1 UG232 tr.30, Figure 3-2]*
 
@@ -163,7 +163,7 @@ Thứ tự kiểm tra theo Figure 7-1: lỗi runtime thì kiểm tra Simulator F
 
 - Mọi bước sau chỉ có ý nghĩa nếu bước trước đúng: FP16 trước, lượng tử hóa sau, board sau cùng (UG232 tr.131).
 - FP16 overflow là một nguyên nhân riêng: giá trị ngoài khoảng (-65504 đến 65504) làm tensor tràn (UG232 tr.133).
-- UG232 tr.134 gợi ý thứ tự: đổi ``quantized_method`` sang ``channel``, rồi đổi thuật toán sang ``kl_divergence`` hoặc ``mmse``. Đổi thuật toán "may significantly increase the quantization time" nhưng "The runtime performance is not adversely affected"; hybrid thì làm lớp được chọn chạy chậm hơn trên NPU.
+- UG232 tr.134 gợi ý thứ tự: đổi ``quantized_method`` sang ``channel``, rồi đổi thuật toán sang ``kl_divergence`` hoặc ``mmse``. Đổi thuật toán "may significantly increase the quantization time" nhưng "The runtime performance is not adversely affected", hybrid thì làm lớp được chọn chạy chậm hơn trên NPU.
 
 **Giới hạn.** Quy trình này là của vendor cho model thông thường. Chưa có nguồn nào áp dụng cho YOLOv8 hay PPE: ``unknown``.
 

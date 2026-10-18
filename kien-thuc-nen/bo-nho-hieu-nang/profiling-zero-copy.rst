@@ -13,10 +13,10 @@ Profiling và zero-copy
 
    - `perf_debug` cho thời gian từng lớp [T1 API232 tr.16], nhưng chế độ này thêm mã debug và "some parallel mechanisms may be disabled" nên thời gian dài hơn [T1 UG232 tr.177].
    - Cột `NPUCycles` hiện chỉ tính cho Conv [T1 UG232 tr.140], và NPU load không trực tiếp biểu diễn MAC utilization thực [T1 UG232 tr.137].
-   - `RW(KB)` và `DDRCycles` là số đo thực hay tính từ mô hình thì `unknown`; `eval_memory` báo dung lượng bộ nhớ của model, không phải băng thông.
+   - `RW(KB)` và `DDRCycles` là số đo thực hay tính từ mô hình thì `unknown`.`eval_memory` báo dung lượng bộ nhớ của model, không phải băng thông.
    - Zero-copy dùng bộ nhớ cấp trước nên tránh copy dữ liệu mỗi frame [T1 UG232 tr.64], và phải query bằng `RKNN_QUERY_NATIVE_INPUT_ATTR` [T1 UG232 tr.69].
    - Wheel RKNN-Toolkit2 và RKNN-Toolkit-Lite2 2.3.2 không có API cấp phát bộ nhớ, zero-copy hay đồng bộ cache cho Python, zero-copy chỉ có ở C API.
-   - UG232 tr.69 nói không dùng `RKNN_QUERY_INPUT_ATTR` nhưng `rknn_create_mem_demo.cpp` dòng 205 lại dùng; trang khuyên tin UG232 và kiểm lại bằng T3.
+   - UG232 tr.69 nói không dùng `RKNN_QUERY_INPUT_ATTR` nhưng `rknn_create_mem_demo.cpp` dòng 205 lại dùng, trang khuyên tin UG232 và kiểm lại bằng T3.
 
 .. _73-profiling:
 
@@ -59,7 +59,7 @@ Các cột báo cáo (UG232 tr.32 đến 33): ``DDRCycles``, ``NPUCycles``, ``Ma
 
 **Ý chính**
 
-- Hai cách đọc ở Figure 8-5 theo User Guide: lớp 3 có DDR Cycles lớn hơn nhiều NPU Cycles nên bị giới hạn bởi băng thông; lớp 12 có DDR Cycles nhỏ hơn nhiều NPU Cycles nên bị giới hạn bởi tính toán (UG232 tr.140). Tổng hợp của file này: đây tương tự phân loại roofline nhưng ở mức từng lớp (UG232 không dùng chữ roofline), và NPU Cycles chỉ có cho Conv.
+- Hai cách đọc ở Figure 8-5 theo User Guide: lớp 3 có DDR Cycles lớn hơn nhiều NPU Cycles nên bị giới hạn bởi băng thông, lớp 12 có DDR Cycles nhỏ hơn nhiều NPU Cycles nên bị giới hạn bởi tính toán (UG232 tr.140). Tổng hợp của file này: đây tương tự phân loại roofline nhưng ở mức từng lớp (UG232 không dùng chữ roofline), và NPU Cycles chỉ có cho Conv.
 - ``perf_debug`` cho thời gian từng lớp (API232 tr.16), nhưng UG232 tr.177 ghi chế độ này thêm mã debug và "some parallel mechanisms may be disabled", nên thời gian dài hơn khi ``perf_debug=True``.
 - ``eval_perf`` và ``eval_memory`` có ở RKNN-Toolkit2 và API232 tr.18, 19 ghi điều kiện "connected to PC". RKNN-Toolkit-Lite2 không có chúng (``rknn_lite.py``, xem ``05_``). Bản RKNN-Toolkit2 ARM64 có thể có các hàm này nhưng hành vi khi chạy trên board là ``unknown``.
 - ``eval_memory`` báo dung lượng bộ nhớ của model, không phải băng thông (UG232 tr.33).
@@ -68,7 +68,7 @@ Các cột báo cáo (UG232 tr.32 đến 33): ``DDRCycles``, ``NPUCycles``, ``Ma
 **Giới hạn**
 
 - ``RW(KB)`` và ``DDRCycles`` là số đo thực hay tính từ mô hình: ``unknown`` (UG232 chỉ định nghĩa cột).
-- Định dạng đầu ra và chu kỳ lấy mẫu của ``rknpu/load``: ``unknown``. Đóng một phần (T1 DRV, T3; DRV xem mục Nguồn cuối trang): định dạng như :ref:`Driver rknpu và các node trạng thái <54-driver-rknpu-và-các-node-trạng-thái>` (``rknpu_debugger.c:39-76``: ``NPU load:``, rồi ``Core%d:`` và ``%2.d%%,`` cho mỗi lõi khi ``num_irqs`` > 1). ``RKNPU_LOAD_INTERVAL`` = 1000000000 (``rknpu_drv.h:40``) và được dùng trong ``ktime_set(0, RKNPU_LOAD_INTERVAL)`` (``rknpu_drv.c:783``); đơn vị ns, tức chu kỳ 1 s, là suy ra từ ``ktime_set``. Lúc đầu chưa đọc được trên board (T3, ``Permission denied``); sau đó đọc được bằng sudo, xem mệnh đề sau. Đóng một phần (T3 board, đọc bằng sudo 2026-10-10; log T3 board 2026-10-10 (``tmp/04_debug-logs/2026-10-10_t3-board-silu-resize/README.md``)): ``load`` lúc nhàn rỗi ra ``NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,``, khớp ``rknpu_debugger.c:39-76`` kể cả dấu phẩy sau lõi cuối; ``version`` ra ``RKNPU driver: v0.9.8``. Chu kỳ lấy mẫu của ``load`` vẫn chưa đo (chỉ đọc lúc nhàn rỗi).
+- Định dạng đầu ra và chu kỳ lấy mẫu của ``rknpu/load``: ``unknown``. Đóng một phần (T1 DRV, T3. DRV xem mục Nguồn cuối trang): định dạng như :ref:`Driver rknpu và các node trạng thái <54-driver-rknpu-và-các-node-trạng-thái>` (``rknpu_debugger.c:39-76``: ``NPU load:``, rồi ``Core%d:`` và ``%2.d%%,`` cho mỗi lõi khi ``num_irqs`` > 1). ``RKNPU_LOAD_INTERVAL`` = 1000000000 (``rknpu_drv.h:40``) và được dùng trong ``ktime_set(0, RKNPU_LOAD_INTERVAL)`` (``rknpu_drv.c:783``). đơn vị ns, tức chu kỳ 1 s, là suy ra từ ``ktime_set``. Lúc đầu chưa đọc được trên board (T3, ``Permission denied``), sau đó đọc được bằng sudo, xem mệnh đề sau. Đóng một phần (T3 board, đọc bằng sudo 2026-10-10, log T3 board 2026-10-10 (``tmp/04_debug-logs/2026-10-10_t3-board-silu-resize/README.md``)): ``load`` lúc nhàn rỗi ra ``NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,``, khớp ``rknpu_debugger.c:39-76`` kể cả dấu phẩy sau lõi cuối.``version`` ra ``RKNPU driver: v0.9.8``. Chu kỳ lấy mẫu của ``load`` vẫn chưa đo (chỉ đọc lúc nhàn rỗi).
 - Cơ chế ``fix_freq=True`` đặt tần số qua node nào: ``unknown``.
 
 --------------
@@ -108,7 +108,7 @@ Zero-copy, cờ bộ nhớ và căn lề
 
    "In order to achieve optimal performance, it is recommended that rknn_batch_size be a multiple of 3 for RK3588, and a multiple of 2 for RK3576." [T1 UG232 tr.105]
 
-Table 5-2 (UG232 tr.65), điều kiện zero-copy cho input: với input 4 chiều có số kênh 1, 3 hoặc 4 yêu cầu "Width 16-byte aligned" cho nhóm chip gồm RK3588 (nhóm RV1103/RV1106/RV1126B/RK3562/RK3576/RK3588); input không phải 4 chiều yêu cầu "Total size 16-byte aligned". Nhóm RV1103B/RV1106B/RK3566/RK3568 là 8 byte.
+Table 5-2 (UG232 tr.65), điều kiện zero-copy cho input: với input 4 chiều có số kênh 1, 3 hoặc 4 yêu cầu "Width 16-byte aligned" cho nhóm chip gồm RK3588 (nhóm RV1103/RV1106/RV1126B/RK3562/RK3576/RK3588), input không phải 4 chiều yêu cầu "Total size 16-byte aligned". Nhóm RV1103B/RV1106B/RK3566/RK3568 là 8 byte.
 
 Cờ cấp phát (HDR dòng 381 đến 386): ``RKNN_FLAG_MEMORY_CACHEABLE = 1 << 0``, ``RKNN_FLAG_MEMORY_NON_CACHEABLE = 1 << 1``, ``RKNN_FLAG_MEMORY_TRY_ALLOC_SRAM = 1 << 2`` (chú thích: "Try to allocate memory in SRAM if possible. if SRAM is not enough, allocate rest memory in DRAM.").
 
@@ -118,7 +118,7 @@ Cờ cấp phát (HDR dòng 381 đến 386): ``RKNN_FLAG_MEMORY_CACHEABLE = 1 <<
 
 - Zero-copy dùng bộ nhớ cấp trước nên giảm copy, tăng hiệu năng và giảm băng thông (UG232 tr.64).
 - Ở general API, khi thỏa điều kiện căn lề của zero-copy input thì normalize và quantize chạy trên NPU nhưng dữ liệu input vẫn phải được CPU copy vào buffer input của model (UG232 tr.65). Ở zero-copy API, normalize, quantize và suy luận đều chạy trên NPU.
-- Phải query bằng ``RKNN_QUERY_NATIVE_INPUT_ATTR``; layout và kiểu query ra là tối ưu phần cứng. Truyền kiểu khác (ví dụ float32 thay vì uint8) khiến CPU phải chuyển kiểu (UG232 tr.69).
+- Phải query bằng ``RKNN_QUERY_NATIVE_INPUT_ATTR``, layout và kiểu query ra là tối ưu phần cứng. Truyền kiểu khác (ví dụ float32 thay vì uint8) khiến CPU phải chuyển kiểu (UG232 tr.69).
 - Bộ nhớ cacheable cần đồng bộ cache trước khi NPU truy cập (UG232 tr.112).
 - Đã tách (ít nhất) ba loại căn lề trong file này (:ref:`Layout NC1HWC2 và các kiểu alignment <64-layout-nc1hwc2-và-các-kiểu-alignment>` liệt kê thêm C2 của layout và căn lề output): điều kiện zero-copy input (Table 5-2, 16 byte), căn lề cấp phát SRAM (4K, SRAM dòng 21), và căn lề kênh để chạy hiệu quả, "not mandatory" (UG232 tr.144, xem ``06_``).
 

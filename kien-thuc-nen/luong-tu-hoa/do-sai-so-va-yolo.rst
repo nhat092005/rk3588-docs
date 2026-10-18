@@ -11,12 +11,12 @@
 
 .. admonition:: Tóm tắt
 
-   - Sai số lượng tử hóa của task đo bằng chênh lệch độ chính xác [T2 NAGEL tr.18]; detection dùng COCO metrics [T2 QYOLO tr.8].
+   - Sai số lượng tử hóa của task đo bằng chênh lệch độ chính xác [T2 NAGEL tr.18], detection dùng COCO metrics [T2 QYOLO tr.8].
    - Quy trình debug của NAGEL đi từ toàn bộ tensor xuống từng lớp, lượng tử hóa từng phần và giữ phần còn lại ở 32 bit [T2 NAGEL tr.19].
    - SQNR chỉ được nhắc tên, không có định nghĩa hay công thức trong corpus, nên là `unknown`.
-   - QYOLO gắn sụt độ chính xác của YOLO với activation distribution imbalance và liên hệ với SiLU [T2 QYOLO tr.2] [T2 QYOLO tr.7]; trang coi đây là quan sát của tác giả, không phải chứng minh.
+   - QYOLO gắn sụt độ chính xác của YOLO với activation distribution imbalance và liên hệ với SiLU [T2 QYOLO tr.2] [T2 QYOLO tr.7], trang coi đây là quan sát của tác giả, không phải chứng minh.
    - QYOLO viết weight "consistently" gây sụt nhiều hơn activation, nhưng Table 3 ở 6-bit YOLOv5m cho activation tệ hơn (-0.8 so với -0.4).
-   - Không có số nào cho YOLOv8, C2f, DFL hay decoupled head; các mục này là `unknown`.
+   - Không có số nào cho YOLOv8, C2f, DFL hay decoupled head, các mục này là `unknown`.
 
 .. contents:: Trong trang này
    :local:
@@ -96,7 +96,7 @@ QYOLO Table 2 (tr.9), YOLOv5s, AP, activation asymmetric so với symmetric (rea
      - 14.0
      - 2.7
 
-Cùng bảng cho YOLOv5m (real-valued 45.1): 6-6: 44.0 và 42.4; 4-4: 28.8 và 11.3.
+Cùng bảng cho YOLOv5m (real-valued 45.1): 6-6: 44.0 và 42.4, 4-4: 28.8 và 11.3.
 
 **Ý chính**
 
@@ -128,9 +128,9 @@ Chủ đề bổ sung mà các PDF nhấn mạnh
    * - Static và dynamic quantization
      - GHOLAMI tr.6
    * - Non-uniform quantization
-     - GHOLAMI tr.7; Y7Q tr.3
+     - GHOLAMI tr.7. Y7Q tr.3
    * - Lượng tử hóa lớp đầu và cuối: QYOLO giữ float, QAREP lượng tử cả hai
-     - QYOLO tr.9; QAREP tr.6
+     - QYOLO tr.9. QAREP tr.6
 
 |NAGEL Figure 2| *Hình 3.9. Logic nhân ma trận trong bộ tăng tốc cho suy luận lượng tử hóa: input và weight INT8, accumulator INT32, requantization trả về INT8. Nguồn: [T2 NAGEL tr.4, Figure 2]*
 

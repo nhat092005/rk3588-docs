@@ -11,7 +11,7 @@ Lượng tử hóa cơ bản
 
 .. admonition:: Tóm tắt
 
-   - Uniform affine quantization có ba tham số: scale factor s, zero-point z và bit-width b; symmetric quantizer đặt zero-point bằng 0 [T2 NAGEL tr.4].
+   - Uniform affine quantization có ba tham số: scale factor s, zero-point z và bit-width b, symmetric quantizer đặt zero-point bằng 0 [T2 NAGEL tr.4].
    - Hai nguồn ký hiệu zero-point ngược dấu (NAGEL Eq. 4, 6 so với GHOLAMI Eq. 2, 3), và trang chọn NAGEL làm chuẩn khi viết công thức.
    - Cách chọn thường gặp là asymmetric activation quantization và symmetric weight quantization, để tránh số hạng phụ thuộc dữ liệu [T2 NAGEL tr.8].
    - Per-channel hầu như không cải thiện ở W8 nhưng cải thiện nhiều ở W4: ResNet18 Min-Max từ 0.12 lên 44.49 (NAGEL Table 1, tr.9).
@@ -153,7 +153,7 @@ NAGEL Table 1 (tr.9): chỉ lượng tử hóa weight (symmetric), activation gi
      - 68.89
      - 27.17
 
-FP32: ResNet18 69.68, MobileNetV2 71.72. Bài ghi hai hàng đầu là "Min-Max" và "MSE" và hai hàng sau là "(Per-channel)"; nhãn "(per-tensor)" ở hai hàng đầu do file này thêm để đối chiếu.
+FP32: ResNet18 69.68, MobileNetV2 71.72. Bài ghi hai hàng đầu là "Min-Max" và "MSE" và hai hàng sau là "(Per-channel)", nhãn "(per-tensor)" ở hai hàng đầu do file này thêm để đối chiếu.
 
 NAGEL Table 6 (tr.17), một phần: EfficientDet-D1 trên COCO (mean average precision), FP32 40.08.
 
@@ -174,7 +174,7 @@ Y7Q Table I (tr.4), 4-bit, chỉ weight, quantize đều (Uniform), mAP, FP16 ba
 
 **Ý chính**
 
-- Per-channel nghĩa là mỗi output channel của weight một quantizer (NAGEL tr.5). Nó hầu như không cải thiện ở W8 nhưng cải thiện nhiều ở W4: ResNet18 Min-Max 0.12 lên 44.49 (+44.4) và MobileNetV2 Min-Max 0.59 lên 18.40 (+17.8) ở Table 1; EfficientDet-D1 W4A8 0.31 lên 35.08 ở Table 6. NAGEL tr.17 nêu mức giảm accuracy của per-tensor tăng lên 2.5% (MobileNetV2) và 4.2% (EfficientNet lite), và viết: "This is likely due to the quantization of the depth-wise separable convolutions." Cùng đoạn: per-channel tăng accuracy của EfficientNet lite thêm 2.8% so với per-tensor, và hiệu ứng tương tự ở EfficientDet-D1 và DeeplabV3 (cùng dùng depth-wise separable convolution). Đoạn này không nói về cấu hình W4A8 của Table 6 [T2 NAGEL tr.17].
+- Per-channel nghĩa là mỗi output channel của weight một quantizer (NAGEL tr.5). Nó hầu như không cải thiện ở W8 nhưng cải thiện nhiều ở W4: ResNet18 Min-Max 0.12 lên 44.49 (+44.4) và MobileNetV2 Min-Max 0.59 lên 18.40 (+17.8) ở Table 1. EfficientDet-D1 W4A8 0.31 lên 35.08 ở Table 6. NAGEL tr.17 nêu mức giảm accuracy của per-tensor tăng lên 2.5% (MobileNetV2) và 4.2% (EfficientNet lite), và viết: "This is likely due to the quantization of the depth-wise separable convolutions." Cùng đoạn: per-channel tăng accuracy của EfficientNet lite thêm 2.8% so với per-tensor, và hiệu ứng tương tự ở EfficientDet-D1 và DeeplabV3 (cùng dùng depth-wise separable convolution). Đoạn này không nói về cấu hình W4A8 của Table 6 [T2 NAGEL tr.17].
 - Per-channel cho activation khó thực hiện vì phải rescale accumulator (NAGEL tr.8). Tổng hợp của file này: khi viết "per-channel" phải nói rõ là của weight.
 - Hỗ trợ phần cứng là điều kiện cần kiểm tra (NAGEL tr.8).
 

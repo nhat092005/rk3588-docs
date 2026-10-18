@@ -76,21 +76,21 @@ details summary{cursor:pointer;color:var(--blue)}
 <li><a href="#hinh-0-1">Hình 0.1</a></li>
 <li><a href="#hinh-0-2">Hình 0.2</a></li>
 </ul></li>
-<li><a href="#phan-1" data-part-link="1">Phần 1: NPU cơ bản</a> <span class="prog" id="prog-1"></span><ul>
+<li><a href="#phan-1" data-part-link="1">Phần 1: NPU cơ bản</a> <span class="prog" id="prog-1"></span> <span class="prog">(1 ghi chú)</span><ul>
 <li><a href="#hinh-1-1">Hình 1.1</a></li>
 <li><a href="#hinh-1-2">Hình 1.2</a></li>
 <li><a href="#hinh-1-3">Hình 1.3</a></li>
 <li><a href="#hinh-1-4">Hình 1.4</a></li>
 <li><a href="#hinh-1-5">Hình 1.5</a></li>
 </ul></li>
-<li><a href="#phan-2" data-part-link="2">Phần 2: Phần cứng RK3588</a> <span class="prog" id="prog-2"></span><ul>
+<li><a href="#phan-2" data-part-link="2">Phần 2: Phần cứng RK3588</a> <span class="prog" id="prog-2"></span> <span class="prog">(1 ghi chú)</span><ul>
 <li><a href="#hinh-2-1">Hình 2.1</a></li>
 <li><a href="#hinh-2-2">Hình 2.2</a></li>
 <li><a href="#hinh-2-3">Hình 2.3</a></li>
 <li><a href="#hinh-2-4">Hình 2.4</a></li>
 <li><a href="#hinh-2-5">Hình 2.5</a></li>
 </ul></li>
-<li><a href="#phan-3" data-part-link="3">Phần 3: Lý thuyết lượng tử</a> <span class="prog" id="prog-3"></span><ul>
+<li><a href="#phan-3" data-part-link="3">Phần 3: Lý thuyết lượng tử</a> <span class="prog" id="prog-3"></span> <span class="prog">(1 ghi chú)</span><ul>
 <li><a href="#hinh-3-1">Hình 3.1</a></li>
 <li><a href="#hinh-3-2">Hình 3.2</a></li>
 <li><a href="#hinh-3-3">Hình 3.3</a></li>
@@ -153,55 +153,55 @@ details summary{cursor:pointer;color:var(--blue)}
 <p class="caption">Bản đồ đường học gồm một ô cho mỗi phần 1 đến 11, mỗi ô ghi câu hỏi mở đầu rút gọn, số hình, huy hiệu tier và phần cần biết trước; mũi tên là quan hệ "cần biết trước". Màu ô theo tier: xanh lá là T2 chung (phần 1, 3), xanh dương là T1 RK3588 (phần 2, 4 đến 7, 9), nửa xanh lá nửa xanh dương là phần 8 (<a class="xref" href="#hinh-8-1">Hình 8.1</a> là T2, <a class="xref" href="#hinh-8-2">Hình 8.2</a> là T1), đỏ nhạt là T3 đo (phần 10), xám là quyết định (phần 11). Các mũi tên là suy ra của bộ hình từ dòng "Khái niệm" trong các `chu-thich.md` (Phần 4 và 5 tới Phần 9 là suy ra từ đường xuất của <a class="xref" href="#hinh-9-3">Hình 9.3</a>). Ô cuối là câu hỏi của dự án: chọn YOLOv8n SiLU, YOLOv8n ReLU hay YOLO26n cho NPU RK3588, theo quy tắc đã chốt trước khi có số; mAP50-95 INT8 của ba model chưa có nên câu hỏi này chưa trả lời được (khung unknown). Hộp "Cách học": đi theo mũi tên, mỗi hình có huy hiệu tier, khung đỏ là unknown, phần 10 dự đoán trước khi xem, tích ô "đã học" trong trang HTML.</p>
 <p class="meta"><span><b>Đọc thêm:</b> 00_ mục 10; quy tắc: `tmp/02_decisions/2026-10-11_model-selection-rule.md`.</span> &nbsp;|&nbsp; <span><b>Số đo:</b> <a class="xref" href="#hinh-10-8">Hình 10.8</a></span></p>
 <details class="src"><summary>Nguồn (64 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
-<tr><td>Câu hỏi mở đầu của Phần 1 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>tính convolution bằng những đơn vị nào</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 1 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>vì sao cách giữ và di chuyển dữ liệu quan trọng hơn số phép nhân</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 2 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>gồm những khối nào, nối với SoC bằng đường nào</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 3 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>biến thành số nguyên INT8 như thế nào, sai số đến từ đâu</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 4 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>cho chọn những kiểu, thuật toán, phương pháp lượng tử nào, làm sao tìm lớp gây sai số</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 5 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>phải gọi những hàm nào ở đâu</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 5 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>phần mềm trên board xếp thành những tầng nào</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 6 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>chạy trên NPU RK3588 hay rơi sang CPU</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 6 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>được ghép với op đứng trước và chia cho ba core không</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 7 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>nằm ở những bộ nhớ nào, một con số độ trễ đo đoạn nào của một frame</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 8 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>tiêu chí nào đã có nguồn T1 (vendor), T2 (paper) hoặc T3</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 8 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>vẫn là unknown trên RK3588</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 9 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>YOLOv8n và YOLO26n khác nhau ở khối nào</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 9 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>đi qua đường xuất RKNN thành lớp nào trên NPU RK3588</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 10 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Những điều ở phần cứng và API (phần 2)</td></tr>
-<tr><td>Câu hỏi mở đầu của Phần 10 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>có thấy được trong số đo thật trên board RK3588S không, và số đo nào đủ chắc để kết luận</td></tr>
-<tr><td>Phần 1: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Hình 1.1 (h1-1-mac-pe) [T2 chung]</td></tr>
-<tr><td>Phần 1: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Hình 1.5 (h1-5-systolic-da-loi)</td></tr>
-<tr><td>Phần 2: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>Hình 2.1 (h2-1-npu-trong-soc) [T1 RK3588]</td></tr>
-<tr><td>Phần 2: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>Hình 2.5 (h2-5-mot-job)</td></tr>
-<tr><td>Phần 3: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Hình 3.1 (h3-1-affine) [T2 chung]</td></tr>
-<tr><td>Phần 3: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Hình 3.5 (h3-5-ptq-qat)</td></tr>
-<tr><td>Phần 4: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>Hình 4.1 (h4-1-ho-tro-rk3588) [T1 RK3588]</td></tr>
-<tr><td>Phần 4: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>Hình 4.4 (h4-4-mau-thuan-tai-lieu)</td></tr>
-<tr><td>Phần 5: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Hình 5.1 (h5-1-chuoi-api) [T1 RK3588]</td></tr>
-<tr><td>Phần 5: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Hình 5.3 (h5-3-stack-board)</td></tr>
-<tr><td>Phần 6: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Hình 6.1 (h6-1-npu-hay-cpu) [T1 RK3588]</td></tr>
-<tr><td>Phần 6: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Hình 6.4 (h6-4-layout)</td></tr>
-<tr><td>Phần 7: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Hình 7.1 (h7-1-duong-du-lieu) [T1 RK3588]</td></tr>
-<tr><td>Phần 7: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Hình 7.3 (h7-3-cong-cu-do)</td></tr>
-<tr><td>Phần 9: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Hình 9.1 (h9-1-v8n-26n) [T1 RK3588]</td></tr>
-<tr><td>Phần 9: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Hình 9.4 (h9-4-ma-tran-tieu-chi)</td></tr>
-<tr><td>Phần 10: hình đầu và tier</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Hình 10.1 (h10-1-silu-relu) [T3 đo]</td></tr>
-<tr><td>Phần 10: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Hình 10.8 (h10-8-do-tre-map)</td></tr>
-<tr><td>Phần 8: hình 8.1 là T2 chung (ô nửa xanh lá)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Hình 8.1 (h8-1-reparam) [T2 chung]</td></tr>
-<tr><td>Phần 8: hình 8.2 là T1 RK3588 (ô nửa xanh dương)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Hình 8.2 (h8-2-checklist) [T1 RK3588]</td></tr>
-<tr><td>Phần 11: hình 11.1</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/README.md</td><td>h11-1-quy-tac</td></tr>
-<tr><td>Phần 11: hình 11.2</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/README.md</td><td>h11-2-unknown</td></tr>
-<tr><td>Mũi tên 1 -&gt; 2 (hình 1.1 nối về hình 2.2, 2.3)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Khái niệm: Hình 2.2, Hình 2.3</td></tr>
-<tr><td>Mũi tên 3 -&gt; 4 (hình 3.1 nối về hình 4.1)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Khái niệm: Hình 4.1</td></tr>
-<tr><td>Mũi tên 4 -&gt; 5 (hình 5.1 nối về hình 4.1)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Khái niệm: Hình 4.1</td></tr>
-<tr><td>Mũi tên 2 -&gt; 6 (hình 6.1 nối về hình 2.4)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Khái niệm: Hình 2.4, Hình 8.2, Hình 9.3</td></tr>
-<tr><td>Mũi tên 2 -&gt; 7 (hình 7.1 nối về hình 2.1 đến 2.3)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Khái niệm: Hình 2.1, Hình 2.2, Hình 2.3, Hình 5.2, Hình 5.3</td></tr>
-<tr><td>Mũi tên 3 -&gt; 8 và ô 8 cần Hình 3.5, 6.3 (hình 8.1 nối về hình 3.5, 6.3)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Khái niệm: Hình 3.5, Hình 6.3</td></tr>
-<tr><td>Mũi tên 6 -&gt; 9 (hình 9.3 nối về hình 6.2, 6.3)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Khái niệm: Hình 6.2, Hình 6.3</td></tr>
-<tr><td>Mũi tên 4 -&gt; 9 và 5 -&gt; 9: suy ra của bộ hình từ đường xuất RKNN (Hình 9.3) đi qua toolkit (Phần 5) và lượng tử (Phần 4)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>(số học)</td></tr>
-<tr><td>Mũi tên 7 -&gt; 10 (hình 10.2 nối về hình 7.3, 6.2, 9.3)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 7.3, Hình 6.2, Hình 9.3</td></tr>
-<tr><td>Mũi tên 9 -&gt; 10 (hình 10.4 nối về hình 9.1, 9.3, 1.4)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 9.1, Hình 9.3, Hình 1.4</td></tr>
-<tr><td>Mũi tên 10 -&gt; 11 (hình 10.8 nối về hình 11.1)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 11.1, Hình 7.2</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 1 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>tính convolution bằng những đơn vị nào</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 1 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>vì sao cách giữ và di chuyển dữ liệu quan trọng hơn số phép nhân</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 2 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>gồm những khối nào, nối với SoC bằng đường nào</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 3 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>biến thành số nguyên INT8 như thế nào, sai số đến từ đâu</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 4 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>cho chọn những kiểu, thuật toán, phương pháp lượng tử nào, làm sao tìm lớp gây sai số</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 5 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>phải gọi những hàm nào ở đâu</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 5 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>phần mềm trên board xếp thành những tầng nào</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 6 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>chạy trên NPU RK3588 hay rơi sang CPU</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 6 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>được ghép với op đứng trước và chia cho ba core không</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 7 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>nằm ở những bộ nhớ nào, một con số độ trễ đo đoạn nào của một frame</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 8 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>tiêu chí nào đã có nguồn T1 (vendor), T2 (paper) hoặc T3</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 8 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>vẫn là unknown trên RK3588</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 9 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>YOLOv8n và YOLO26n khác nhau ở khối nào</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 9 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>đi qua đường xuất RKNN thành lớp nào trên NPU RK3588</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 10 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Những điều ở phần cứng và API (phần 2)</td></tr>
+<tr><td>Câu hỏi mở đầu của Phần 10 (rút gọn trên hình)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>có thấy được trong số đo thật trên board RK3588S không, và số đo nào đủ chắc để kết luận</td></tr>
+<tr><td>Phần 1: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Hình 1.1 (h1-1-mac-pe) [T2 chung]</td></tr>
+<tr><td>Phần 1: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Hình 1.5 (h1-5-systolic-da-loi)</td></tr>
+<tr><td>Phần 2: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>Hình 2.1 (h2-1-npu-trong-soc) [T1 RK3588]</td></tr>
+<tr><td>Phần 2: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/02-phan-cung-rk3588/chu-thich.md</td><td>Hình 2.5 (h2-5-mot-job)</td></tr>
+<tr><td>Phần 3: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Hình 3.1 (h3-1-affine) [T2 chung]</td></tr>
+<tr><td>Phần 3: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Hình 3.5 (h3-5-ptq-qat)</td></tr>
+<tr><td>Phần 4: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>Hình 4.1 (h4-1-ho-tro-rk3588) [T1 RK3588]</td></tr>
+<tr><td>Phần 4: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md</td><td>Hình 4.4 (h4-4-mau-thuan-tai-lieu)</td></tr>
+<tr><td>Phần 5: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Hình 5.1 (h5-1-chuoi-api) [T1 RK3588]</td></tr>
+<tr><td>Phần 5: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Hình 5.3 (h5-3-stack-board)</td></tr>
+<tr><td>Phần 6: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Hình 6.1 (h6-1-npu-hay-cpu) [T1 RK3588]</td></tr>
+<tr><td>Phần 6: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Hình 6.4 (h6-4-layout)</td></tr>
+<tr><td>Phần 7: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Hình 7.1 (h7-1-duong-du-lieu) [T1 RK3588]</td></tr>
+<tr><td>Phần 7: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Hình 7.3 (h7-3-cong-cu-do)</td></tr>
+<tr><td>Phần 9: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Hình 9.1 (h9-1-v8n-26n) [T1 RK3588]</td></tr>
+<tr><td>Phần 9: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Hình 9.4 (h9-4-ma-tran-tieu-chi)</td></tr>
+<tr><td>Phần 10: hình đầu và tier</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Hình 10.1 (h10-1-silu-relu) [T3 đo]</td></tr>
+<tr><td>Phần 10: hình cuối (số hình của ô)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Hình 10.8 (h10-8-do-tre-map)</td></tr>
+<tr><td>Phần 8: hình 8.1 là T2 chung (ô nửa xanh lá)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Hình 8.1 (h8-1-reparam) [T2 chung]</td></tr>
+<tr><td>Phần 8: hình 8.2 là T1 RK3588 (ô nửa xanh dương)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Hình 8.2 (h8-2-checklist) [T1 RK3588]</td></tr>
+<tr><td>Phần 11: hình 11.1</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/README.md</td><td>h11-1-quy-tac</td></tr>
+<tr><td>Phần 11: hình 11.2</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/README.md</td><td>h11-2-unknown</td></tr>
+<tr><td>Mũi tên 1 -&gt; 2 (hình 1.1 nối về hình 2.2, 2.3)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/01-npu-co-ban/chu-thich.md</td><td>Khái niệm: Hình 2.2, Hình 2.3</td></tr>
+<tr><td>Mũi tên 3 -&gt; 4 (hình 3.1 nối về hình 4.1)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/03-ly-thuyet-luong-tu/chu-thich.md</td><td>Khái niệm: Hình 4.1</td></tr>
+<tr><td>Mũi tên 4 -&gt; 5 (hình 5.1 nối về hình 4.1)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/05-toolchain/chu-thich.md</td><td>Khái niệm: Hình 4.1</td></tr>
+<tr><td>Mũi tên 2 -&gt; 6 (hình 6.1 nối về hình 2.4)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/06-compiler-op/chu-thich.md</td><td>Khái niệm: Hình 2.4, Hình 8.2, Hình 9.3</td></tr>
+<tr><td>Mũi tên 2 -&gt; 7 (hình 7.1 nối về hình 2.1 đến 2.3)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/07-bo-nho-hieu-nang/chu-thich.md</td><td>Khái niệm: Hình 2.1, Hình 2.2, Hình 2.3, Hình 5.2, Hình 5.3</td></tr>
+<tr><td>Mũi tên 3 -&gt; 8 và ô 8 cần Hình 3.5, 6.3 (hình 8.1 nối về hình 3.5, 6.3)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/08-thiet-ke-model/chu-thich.md</td><td>Khái niệm: Hình 3.5, Hình 6.3</td></tr>
+<tr><td>Mũi tên 6 -&gt; 9 (hình 9.3 nối về hình 6.2, 6.3)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>Khái niệm: Hình 6.2, Hình 6.3</td></tr>
+<tr><td>Mũi tên 4 -&gt; 9 và 5 -&gt; 9: suy ra của bộ hình từ đường xuất RKNN (Hình 9.3) đi qua toolkit (Phần 5) và lượng tử (Phần 4)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/chu-thich.md</td><td>(số học)</td></tr>
+<tr><td>Mũi tên 7 -&gt; 10 (hình 10.2 nối về hình 7.3, 6.2, 9.3)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 7.3, Hình 6.2, Hình 9.3</td></tr>
+<tr><td>Mũi tên 9 -&gt; 10 (hình 10.4 nối về hình 9.1, 9.3, 1.4)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 9.1, Hình 9.3, Hình 1.4</td></tr>
+<tr><td>Mũi tên 10 -&gt; 11 (hình 10.8 nối về hình 11.1)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Khái niệm: Hình 11.1, Hình 7.2</td></tr>
 <tr><td>Phần 10 cần Phần 1 đến 9: suy ra của bộ hình</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_hoc-theo-hinh.md</td><td>(số học)</td></tr>
 <tr><td>Phần 10: mỗi biểu đồ có câu dự đoán và link hai chiều với hình khái niệm</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_hoc-theo-hinh.md</td><td>link hai chiều với hình khái niệm</td></tr>
 <tr><td>Câu hỏi dự án: ba ứng viên</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_model-selection-rule.md</td><td>chọn model triển khai trên RK3588: YOLOv8n SiLU, YOLOv8n ReLU, YOLO26n</td></tr>
@@ -210,10 +210,10 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Quy tắc: không rõ thì giữ YOLOv8n SiLU</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_model-selection-rule.md</td><td>giữ YOLOv8n SiLU</td></tr>
 <tr><td>Quy tắc chốt trước khi có số</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_model-selection-rule.md</td><td>Vì vậy quy tắc được chốt trước</td></tr>
 <tr><td>Chưa có mAP INT8 của model nào trong ba model</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_model-selection-rule.md</td><td>Chưa có AP INT8 của bất kỳ model nào trong ba model</td></tr>
-<tr><td>Hình 10.7 và 10.8 chờ pipeline phase3, phase4</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Trạng thái: chờ pipeline phase3 và phase4</td></tr>
-<tr><td>Cách học 2: huy hiệu tier</td><td>tính</td><td>REPO docs/visual_guide/README.md</td><td>Huy hiệu tier</td></tr>
-<tr><td>Cách học 3: khung đỏ là unknown, nguồn không cho</td><td>tính</td><td>REPO docs/visual_guide/README.md</td><td>điều nguồn không cho; không đoán</td></tr>
-<tr><td>Cách học 4: Phần 10 dự đoán trước khi xem</td><td>tính</td><td>REPO docs/visual_guide/README.md</td><td>Dự đoán trước khi xem</td></tr>
+<tr><td>Hình 10.7 và 10.8 chờ pipeline phase3, phase4</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/10-so-do-thuc-te/chu-thich.md</td><td>Trạng thái: chờ pipeline phase3 và phase4</td></tr>
+<tr><td>Cách học 2: huy hiệu tier</td><td>tính</td><td>REPO docs/tools/visual_guide/README.md</td><td>Huy hiệu tier</td></tr>
+<tr><td>Cách học 3: khung đỏ là unknown, nguồn không cho</td><td>tính</td><td>REPO docs/tools/visual_guide/README.md</td><td>điều nguồn không cho; không đoán</td></tr>
+<tr><td>Cách học 4: Phần 10 dự đoán trước khi xem</td><td>tính</td><td>REPO docs/tools/visual_guide/README.md</td><td>Dự đoán trước khi xem</td></tr>
 <tr><td>Cách học 5: ô đã học trong trang HTML</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_hoc-theo-hinh.md</td><td>ô &quot;đã học&quot; (localStorage)</td></tr>
 <tr><td>Cách học 1: thứ tự học theo mũi tên (suy ra của bộ hình)</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_hoc-theo-hinh.md</td><td>(số học)</td></tr>
 <tr><td>Nội dung unknown: mAP INT8 chưa có</td><td>tính</td><td>REPO tmp/02_decisions/2026-10-11_model-selection-rule.md</td><td>Chưa có AP INT8 của bất kỳ model nào trong ba model</td></tr>
@@ -234,12 +234,12 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Ultralytics: opset = min(opset or 19, 19)</td><td>T1</td><td>ULT engine/exporter.py:1538</td><td>self.args.opset = min(self.args.opset or 19, 19)  # rknn-toolkit expects opset&lt;=19</td></tr>
 <tr><td>Ultralytics: onnxslim.slim</td><td>T1</td><td>ULT engine/exporter.py:1139</td><td>model_onnx = onnxslim.slim(model_onnx)</td></tr>
 <tr><td>Ultralytics: INT8 xóa file ONNX sau khi build, đồ thị chứa tọa độ chuẩn hóa</td><td>T1</td><td>ULT engine/exporter.py:1565</td><td>if self.args.quantize == 8:  # INT8 graphs hold normalized coordinates, so they are not reusable</td></tr>
-<tr><td>YOLOv8n ONNX của format=onnx: Concat 17</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Concat&quot;: 17, &quot;Split&quot;: 8</td></tr>
-<tr><td>YOLOv8n ONNX của format=onnx: Slice 2</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Slice&quot;: 2, &quot;Sub&quot;: 2</td></tr>
-<tr><td>YOLOv8n ONNX của format=onnx: Div 1</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Softmax&quot;: 1, &quot;Div&quot;: 1</td></tr>
-<tr><td>YOLOv8n ONNX đưa vào toolkit: Concat 18</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Concat&quot;: 18, &quot;Split&quot;: 8</td></tr>
-<tr><td>YOLOv8n ONNX đưa vào toolkit: Slice 4</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3</td></tr>
-<tr><td>YOLOv8n ONNX đưa vào toolkit: Div 2</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Sub&quot;: 2, &quot;Div&quot;: 2</td></tr>
+<tr><td>YOLOv8n ONNX của format=onnx: Concat 17</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Concat&quot;: 17, &quot;Split&quot;: 8</td></tr>
+<tr><td>YOLOv8n ONNX của format=onnx: Slice 2</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Slice&quot;: 2, &quot;Sub&quot;: 2</td></tr>
+<tr><td>YOLOv8n ONNX của format=onnx: Div 1</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Softmax&quot;: 1, &quot;Div&quot;: 1</td></tr>
+<tr><td>YOLOv8n ONNX đưa vào toolkit: Concat 18</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Concat&quot;: 18, &quot;Split&quot;: 8</td></tr>
+<tr><td>YOLOv8n ONNX đưa vào toolkit: Slice 4</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3</td></tr>
+<tr><td>YOLOv8n ONNX đưa vào toolkit: Div 2</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Sub&quot;: 2, &quot;Div&quot;: 2</td></tr>
 <tr><td>Ultralytics gọi config với mean, std, target_platform (không có quantized_dtype)</td><td>T1</td><td>ULT utils/export/rknn.py:74</td><td>&quot;mean_values&quot;: [[0, 0, 0]], &quot;std_values&quot;: [[255, 255, 255]], &quot;target_platform&quot;: name</td></tr>
 <tr><td>quantized_dtype không truyền nên dùng mặc định w8a8 (suy ra của bộ hình từ hai dòng)</td><td>T1</td><td>ULT utils/export/rknn.py:74</td><td>(số học)</td></tr>
 <tr><td>quantized_dtype mặc định w8a8</td><td>T1</td><td>API232 tr.7</td><td>The default value is &quot;w8a8&quot;.</td></tr>
@@ -312,7 +312,7 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>"ReLU nhanh hơn SiLU 29 đến 39% nên chọn ReLU"</td><td>số đo đó trên trọng số ngẫu nhiên, chỉ là phép đo cấu trúc, không dùng để chọn model; quy tắc chọn dùng mAP50-95 INT8 [tmp/02_decisions/2026-10-11_model-selection-rule.md] (<a class="xref" href="#hinh-10-1">Hình 10.1</a>, 0.1)</td></tr>
 </tbody></table></div>
 <div class="quiz"><h3>Câu hỏi tự kiểm</h3>
-<div class="q"><p><b>Câu 1</b> <span class="kind">giải thích</span><br>Vì sao ONNX do YOLO(...).export(format="onnx") khác ONNX thật đưa vào onnx2rknn, và khác ở những op nào của YOLOv8n?</p><details><summary>Đáp án</summary><p>với format rknn và quantize 8, Ultralytics bọc đầu ra bằng _NormalizeCoords để scale INT8 per-tensor của RKNN giữ được điểm số lớp; ONNX thật có thêm op: Concat 17 thành 18, Slice 2 thành 4, Div 1 thành 2 [ULT engine/exporter.py:1063, 1101; REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json] (<a class="xref" href="#hinh-9-3">Hình 9.3</a>, 0.2)</p></details></div>
+<div class="q"><p><b>Câu 1</b> <span class="kind">giải thích</span><br>Vì sao ONNX do YOLO(...).export(format="onnx") khác ONNX thật đưa vào onnx2rknn, và khác ở những op nào của YOLOv8n?</p><details><summary>Đáp án</summary><p>với format rknn và quantize 8, Ultralytics bọc đầu ra bằng _NormalizeCoords để scale INT8 per-tensor của RKNN giữ được điểm số lớp; ONNX thật có thêm op: Concat 17 thành 18, Slice 2 thành 4, Div 1 thành 2 [ULT engine/exporter.py:1063, 1101; REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json] (<a class="xref" href="#hinh-9-3">Hình 9.3</a>, 0.2)</p></details></div>
 <div class="q"><p><b>Câu 2</b> <span class="kind">phân biệt</span><br>Hai nghĩa của "fallback" trong tài liệu RKNN là gì, và mỗi nghĩa nằm ở tầng nào của đường đi?</p><details><summary>Đáp án</summary><p>fallback_prior_device của config() nói về op NPU không hỗ trợ (rời NPU sang CPU hoặc GPU, tầng toolkit trên PC); UG152 nói các op ngoài danh sách đa core "fallback to Core0" (ở lại NPU, về core 0, tầng chọn core của runtime và driver) [API232 tr.17; UG152 tr.27] (<a class="xref" href="#hinh-6-1">Hình 6.1</a>, 2.4)</p></details></div>
 <div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Bạn chạy model YOLOv8n SiLU INT8 với RKNN_NPU_CORE_0_1_2 và kỳ vọng nhanh gấp ba so với CORE_0. Đường đi ở <a class="xref" href="#hinh-0-2">Hình 0.2</a> và số đo cho biết điều gì?</p><details><summary>Đáp án</summary><p>không nên kỳ vọng: OPL ghi ConvolutionSwish là 多核联合 暂不支持 và ở T3 cả 57 lớp ConvExSwish chạy 100%/0%/0%, nên model SiLU không khác biệt ngoài độ trải giữa các core_mask, trong khi model ReLU (ConvRelu chia ba core) nhanh hơn CORE_0 khoảng 8%; kết quả chỉ cho YOLOv8n INT8 640x640, RK3588S, trọng số ngẫu nhiên [OPL tr.63; LOG 2026-10-10_t3-board-silu-resize/README.md] (<a class="xref" href="#hinh-2-4">Hình 2.4</a>, 6.3, 10.3)</p></details></div>
 </div>
@@ -697,7 +697,7 @@ details summary{cursor:pointer;color:var(--blue)}
 </div></div></div>
 </section>
 <section class="part" id="phan-1" data-part="1">
-<h2>Phần 1: NPU cơ bản</h2>
+<h2>Phần 1: NPU cơ bản <button class="notes-open" type="button" data-notes="1">Ghi chú (1)</button></h2>
 <p class="opening"><b>Câu hỏi mở đầu.</b> Một NPU tính convolution bằng những đơn vị nào, vì sao cách giữ và di chuyển dữ liệu quan trọng hơn số phép nhân, và điều nào trong số đó đã biết cho RK3588?</p>
 <article class="fig" id="hinh-1-1" data-fig="hinh-1-1">
 <header><span class="tier t2">T2 chung</span><h3>Hình 1.1 <small>h1-1-mac-pe</small></h3><label class="learned"><input type="checkbox" data-learn="hinh-1-1"> đã học</label></header>
@@ -907,9 +907,91 @@ details summary{cursor:pointer;color:var(--blue)}
 <div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Một lớp convolution có rất ít kênh chạy trên NPU nhiều core. Theo JUNG, chia theo kênh có rủi ro gì, và với RK3588 có kết luận được lớp đó chia thế nào không?</p><details><summary>Đáp án</summary><p>JUNG: hướng kênh đòi alignment lớn hơn hướng không gian, và nếu số kênh quá nhỏ để chia đều cho các core thì mức dùng core giảm. Với RK3588 thì không kết luận được: TRM không nói cách chia, UG152 chỉ liệt kê op nhanh hơn khi nhiều core (Conv, Add, Concat...) và các op khác về Core0; số đo thật ở <a class="xref" href="#hinh-10-3">Hình 10.3</a> [JUNG tr.9; UG152 tr.27] (<a class="xref" href="#hinh-1-5">Hình 1.5</a>, <a class="xref" href="#hinh-2-4">Hình 2.4</a>)</p></details></div>
 <div class="q"><p><b>Câu 4</b> <span class="kind">áp dụng</span><br>Một bài viết nói "YOLO chạy trên RK3588 là compute-bound vì là CNN". Nhận định này có đủ căn cứ từ phần này không, và cần thêm gì để kiểm?</p><details><summary>Đáp án</summary><p>Không. Kết luận "CNN compute-bound" chỉ đúng cho 6 ứng dụng của TPU với trục integer operations per byte of weights read, và CNN1 của TPU lại chỉ đạt 14.1 TOPS. Với RK3588 cần đỉnh tính toán và băng thông DDR mà NPU nhận được; TRM1 cho 1024x3 MAC mỗi chu kỳ INT8 nhưng tần số tối đa ở Datasheet là TBD, nên ridge point là unknown [TPU tr.2, tr.6; TRM1 tr.1984; DS tr.31] (<a class="xref" href="#hinh-1-4">Hình 1.4</a>, <a class="xref" href="#hinh-2-3">Hình 2.3</a>)</p></details></div>
 </div>
+<div class="notes-store" hidden><div class="note" id="note-1-01-kieu-so-va-tai-su-dung" data-title="Kiểu số, utilization và tái sử dụng dữ liệu" data-question="Cùng một mảng MAC, vì sao có lớp chạy gần đỉnh còn lớp khác chỉ đạt một phần nhỏ, và phần cứng dùng lại dữ liệu cùng che độ trễ nạp weight bằng cách nào?" data-count="2">
+<h3 class="note-title">Kiểu số, utilization và tái sử dụng dữ liệu</h3>
+<p class="opening"><b>Câu hỏi mở đầu.</b> Cùng một mảng MAC, vì sao có lớp chạy gần đỉnh còn lớp khác chỉ đạt một phần nhỏ, và phần cứng dùng lại dữ liệu cùng che độ trễ nạp weight bằng cách nào?</p>
+<div class="note-items">
+<div class="ni" data-label="U.1"><article class="fig" id="note-1-01-kieu-so-va-tai-su-dung-U-1" data-fig="note-1-01-kieu-so-va-tai-su-dung-U-1">
+<header><span class="tier t2">T2 chung</span><h3>Hình U.1 <small>hu-1-kieu-so-va-utilization</small></h3></header>
+<div class="fig-body">
+<img class="zoomable" src="01-npu-co-ban/_notes/01-kieu-so-va-tai-su-dung/hu-1-kieu-so-va-utilization.png" alt="Hình U.1" loading="lazy">
+<p class="caption">Có hai lý do khiến mảng MAC không đạt đỉnh: kiểu số rộng hơn làm giảm số phép MAC mỗi chu kỳ, và lớp có ít kênh để trống một phần MAC. Matrix Unit 256x256 của TPU chạy nửa tốc khi trộn 8-bit với 16-bit, và một phần tư tốc khi cả hai là 16-bit. Theo Table 3 của TPU, CNN0 dùng có ích 78.2% chu kỳ và đạt 86.0 trên đỉnh 92 TOPS. CNN1 chỉ dùng có ích 22.5%, vì 23.7% chu kỳ chạy với MAC trống do lớp nông, nên chỉ đạt 14.1 TOPS. MLP0 lại mất 53.9% chu kỳ để chờ nạp weight. Với RK3588, TRM chỉ cho số MAC mỗi chu kỳ theo từng kiểu: INT16, FP16 và BF16 đều bằng nửa INT8. Cách RK3588 chạy kiểu trộn, và cách nó lấp mảng MAC khi lớp có ít kênh, đều là unknown. Cột MacUsage(%) của eval_perf là chỗ đo được utilization trên board.</p>
+<p class="meta"><span><b>Đọc thêm:</b> 01_ mục 1.4, 1.8. Khái niệm: <a class="xref" href="#hinh-1-4">Hình 1.4</a>, <a class="xref" href="#hinh-2-3">Hình 2.3</a>, <a class="xref" href="#hinh-7-3">Hình 7.3</a></span></p>
+<details class="src"><summary>Nguồn (23 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
+<tr><td>Matrix Unit 256x256 MAC, 8-bit</td><td>T2</td><td>TPU tr.3</td><td>It contains 256x256 MACs that can perform 8-bit multiply-and-adds</td></tr>
+<tr><td>Trộn 8-bit với 16-bit: nửa tốc</td><td>T2</td><td>TPU tr.3</td><td>When using a mix of 8-bit weights and 16-bit activations (or vice versa), the Matrix Unit computes at half-speed</td></tr>
+<tr><td>Cả hai 16-bit: một phần tư tốc</td><td>T2</td><td>TPU tr.3</td><td>computes at a quarter-speed when both are 16 bits</td></tr>
+<tr><td>RK3588: INT8 1024 MAC mỗi chu kỳ mỗi core, 3 core</td><td>T1</td><td>TRM1 tr.1984</td><td>1024x3 integer 8 MAC operations per cycle</td></tr>
+<tr><td>RK3588: INT16 512 MAC</td><td>T1</td><td>TRM1 tr.1984</td><td>512x3 integer 16 MAC operations per cycle</td></tr>
+<tr><td>RK3588: FP16 512 MAC</td><td>T1</td><td>TRM1 tr.1984</td><td>512x3 float 16 MAC operations per cycle</td></tr>
+<tr><td>RK3588: BF16 512 MAC</td><td>T1</td><td>TRM1 tr.1984</td><td>512x3 bfloat 16 MAC operations per cycle</td></tr>
+<tr><td>Tỉ lệ 512 / 1024 = 1/2</td><td>T1</td><td>TRM1 tr.1984</td><td>(số học)</td></tr>
+<tr><td>RK3588 chạy kiểu trộn 8 và 16-bit ở tốc độ nào: TRM chỉ liệt kê từng kiểu</td><td>T1</td><td>TRM1 tr.1984</td><td>(unknown)</td></tr>
+<tr><td>Table 3: array active cycles theo ứng dụng</td><td>T2</td><td>TPU tr.7</td><td>Array active cycles 12.7% 10.6% 8.2% 10.5% 78.2% 46.2%</td></tr>
+<tr><td>Table 3: useful MACs</td><td>T2</td><td>TPU tr.7</td><td>Useful MACs in 64K matrix (% peak) 12.5% 9.4% 8.2% 6.3% 78.2% 22.5%</td></tr>
+<tr><td>Table 3: unused MACs</td><td>T2</td><td>TPU tr.7</td><td>Unused MACs 0.3% 1.2% 0.0% 4.2% 0.0% 23.7%</td></tr>
+<tr><td>Table 3: weight stall</td><td>T2</td><td>TPU tr.7</td><td>Weight stall cycles 53.9% 44.2% 58.1% 62.1% 0.0% 28.1%</td></tr>
+<tr><td>Table 3: weight shift</td><td>T2</td><td>TPU tr.7</td><td>Weight shift cycles 15.9% 13.4% 15.8% 17.1% 0.0% 7.0%</td></tr>
+<tr><td>Table 3: non-matrix</td><td>T2</td><td>TPU tr.7</td><td>Non-matrix cycles 17.5% 31.9% 17.9% 10.3% 21.8% 18.7%</td></tr>
+<tr><td>Table 3: TOPS đạt, đỉnh 92</td><td>T2</td><td>TPU tr.7</td><td>TeraOps/sec (92 Peak) 12.3 9.7 3.7 2.8 86.0 14.1</td></tr>
+<tr><td>Hàng 1, 4, 5, 6 cộng lại 100%; hàng 2 và 3 tách hàng 1</td><td>T2</td><td>TPU tr.7</td><td>Rows 2 and 3 further break down the fraction of 64K weights in the matrix</td></tr>
+<tr><td>Hàng 1, 4, 5, 6 cộng lại 100%</td><td>T2</td><td>TPU tr.7</td><td>Rows 1, 4, 5, and 6 total 100%</td></tr>
+<tr><td>CNN1: khoảng một nửa MAC không giữ weight có ích vì lớp nông</td><td>T2</td><td>TPU tr.6</td><td>only about half of the 65,536 MACs hold useful weights because some layers in CNN1 have shallow feature depths</td></tr>
+<tr><td>Cột MacUsage(%) của eval_perf là MAC usage</td><td>T1</td><td>UG232 tr.32</td><td>MacUsage(%) MAC usage</td></tr>
+<tr><td>NPU load không biểu diễn trực tiếp MAC utilization</td><td>T1</td><td>UG232 tr.137</td><td>the NPU load does not directly represent the actual MAC utilization</td></tr>
+<tr><td>Đường dẫn đọc NPU load</td><td>T1</td><td>UG232 tr.137</td><td>cat /sys/kernel/debug/rknpu/load</td></tr>
+<tr><td>RK3588 lấp mảng MAC thế nào khi lớp có ít kênh: TRM không mô tả</td><td>T1</td><td>TRM1 tr.1984</td><td>(unknown)</td></tr>
+</tbody></table></details></div></article></div>
+<div class="ni" data-label="U.2"><article class="fig" id="note-1-01-kieu-so-va-tai-su-dung-U-2" data-fig="note-1-01-kieu-so-va-tai-su-dung-U-2">
+<header><span class="tier t2">T2 chung</span><h3>Hình U.2 <small>hu-2-tai-su-dung-va-double-buffering</small></h3></header>
+<div class="fig-body">
+<img class="zoomable" src="01-npu-co-ban/_notes/01-kieu-so-va-tai-su-dung/hu-2-tai-su-dung-va-double-buffering.png" alt="Hình U.2" loading="lazy">
+<p class="caption">Spatial architecture giảm truy cập bộ nhớ đắt bằng cách dùng lại dữ liệu giữa các PE nối trực tiếp với nhau, còn double buffering che thời gian nạp weight. EYE nêu ba kiểu input data reuse. Convolutional reuse dùng lại mỗi weight E² lần trên một mặt ifmap và mỗi pixel thường R² lần; kiểu này không có ở lớp FC. Filter reuse dùng lại weight qua N ảnh của batch. Ifmap reuse dùng lại pixel qua M filter. Ví dụ của bộ hình: với N = 1 thì filter reuse chỉ còn 1 lần. TPU giữ một tile weight 64 KiB cộng một tile nữa để double-buffering, nhằm che 256 chu kỳ dịch một tile vào. Accumulator cũng được nhân đôi để compiler dùng double buffering. Trong TRM1 tr.1984 đến 2060, RK3588 chỉ có ping-pong cho thanh ghi cấu hình, nên việc RK3588 có double buffering dữ liệu hay không là unknown.</p>
+<p class="meta"><span><b>Đọc thêm:</b> 01_ mục 1.2, 1.3, 1.6. Khái niệm: <a class="xref" href="#hinh-1-1">Hình 1.1</a>, <a class="xref" href="#hinh-1-2">Hình 1.2</a>, <a class="xref" href="#hinh-1-3">Hình 1.3</a>, <a class="xref" href="#hinh-2-5">Hình 2.5</a></span></p>
+<details class="src"><summary>Nguồn (25 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
+<tr><td>Định nghĩa spatial architecture</td><td>T2</td><td>EYE tr.2</td><td>direct communication between an array of relatively simple processing engines (PEs)</td></tr>
+<tr><td>SA so với SIMD/SIMT</td><td>T2</td><td>EYE tr.2</td><td>Compared with SIMD/SIMT architectures, SAs are particularly suitable for applications</td></tr>
+<tr><td>SA hợp với quan hệ producer-consumer hoặc chia sẻ dữ liệu giữa các PE</td><td>T2</td><td>EYE tr.2</td><td>exhibits producer-consumer relationships or can leverage</td></tr>
+<tr><td>Hình gốc Figure 1</td><td>T2</td><td>EYE tr.2</td><td>Block diagram of a general CNN accelerator system consisting of a spatial architecture accelerator and an off-chip DRAM</td></tr>
+<tr><td>Bốn cấp lưu trữ</td><td>T2</td><td>EYE tr.2</td><td>four levels of storage hierarchy for data accesses, including DRAM, global buffer, array (inter-PE communication) and RF</td></tr>
+<tr><td>DRAM đắt nhất, RF rẻ nhất</td><td>T2</td><td>EYE tr.2</td><td>with the highest cost at DRAM and the lowest cost at RF</td></tr>
+<tr><td>Global buffer khai thác input data reuse và che độ trễ DRAM</td><td>T2</td><td>EYE tr.2</td><td>used to exploit input data reuse and hide DRAM access latency</td></tr>
+<tr><td>Global buffer thường 100 đến 300kB</td><td>T2</td><td>EYE tr.2</td><td>is around 100–300kB</td></tr>
+<tr><td>Ký hiệu N</td><td>T2</td><td>EYE tr.3</td><td>batch size of 3D fmaps</td></tr>
+<tr><td>Ký hiệu M</td><td>T2</td><td>EYE tr.3</td><td># of ofmap channels</td></tr>
+<tr><td>Ký hiệu H</td><td>T2</td><td>EYE tr.3</td><td>ifmap plane width/height</td></tr>
+<tr><td>Ký hiệu R</td><td>T2</td><td>EYE tr.3</td><td>plane width/height (= H in FC)</td></tr>
+<tr><td>Ký hiệu E</td><td>T2</td><td>EYE tr.3</td><td>ofmap plane width/height (= 1 in FC)</td></tr>
+<tr><td>Convolutional reuse: weight E² lần trên một mặt ifmap</td><td>T2</td><td>EYE tr.3</td><td>is reused E 2 times in the same ifmap plane</td></tr>
+<tr><td>Convolutional reuse: pixel thường R² lần</td><td>T2</td><td>EYE tr.3</td><td>is usually reused R2 times</td></tr>
+<tr><td>FC không có convolutional reuse</td><td>T2</td><td>EYE tr.3</td><td>FC layers, however, do not have this type of data reuse</td></tr>
+<tr><td>Filter reuse: weight qua N ifmap của batch, CONV và FC</td><td>T2</td><td>EYE tr.4</td><td>the batch of N ifmaps in both CONV and FC layers</td></tr>
+<tr><td>Ifmap reuse: pixel qua M filter, CONV và FC</td><td>T2</td><td>EYE tr.4</td><td>Each ifmap pixel is further reused across M</td></tr>
+<tr><td>Ví dụ R = 3, E = 80, M = 64, N = 1: 6400, 9, 64, 1</td><td>T2</td><td>EYE tr.3</td><td>(số học)</td></tr>
+<tr><td>TPU: một tile 64 KiB cộng một tile để double-buffering, che 256 chu kỳ</td><td>T2</td><td>TPU tr.3</td><td>one 64 KiB tile of weights plus one for double-buffering (to hide the 256 cycles it takes to shift a tile in)</td></tr>
+<tr><td>Accumulator làm tròn lên 2048 rồi nhân đôi cho double buffering</td><td>T2</td><td>TPU tr.3</td><td>duplicated it so that the compiler could use double buffering</td></tr>
+<tr><td>Accumulator: làm tròn lên 2048</td><td>T2</td><td>TPU tr.3</td><td>so we rounded that up to 2048</td></tr>
+<tr><td>Trục thời gian shift và tính là minh họa của bộ hình</td><td>T2</td><td>TPU tr.3</td><td>(đọc từ hình)</td></tr>
+<tr><td>RK3588: ping-pong là chế độ nạp thanh ghi của PC task</td><td>T1</td><td>TRM1 tr.1997</td><td>PC task ping-pong mode enable</td></tr>
+<tr><td>RK3588 double buffering dữ liệu trong buffer 384KB: không có trong TRM1 tr.1984-2060</td><td>T1</td><td>TRM1 tr.1984</td><td>(unknown)</td></tr>
+</tbody></table></details></div></article></div>
+<div class="ni" data-label="Hiểu sai"><div class="mistakes"><h3>Hiểu sai thường gặp</h3><table><thead><tr><th>Hiểu sai</th><th>Đúng, kèm nguồn</th></tr></thead><tbody>
+<tr><td>"Đổi INT8 sang INT16 chỉ làm file lớn hơn, tốc độ như cũ"</td><td>TPU chạy nửa tốc khi trộn 8-bit với 16-bit, và một phần tư tốc khi cả hai 16-bit; RK3588 có 512 MAC mỗi chu kỳ cho INT16, so với 1024 cho INT8 [TPU tr.3; TRM1 tr.1984] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-1" data-label="U.1">Hình U.1</a>)</td></tr>
+<tr><td>"Mô hình có cường độ tính toán cao thì luôn chạy gần đỉnh"</td><td>CNN1 có cường độ cao nhưng chỉ đạt 14.1 TOPS, vì khoảng một nửa số MAC không giữ weight có ích do lớp nông [TPU tr.6, tr.7] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-1" data-label="U.1">Hình U.1</a>)</td></tr>
+<tr><td>"NPU load 100% nghĩa là MAC dùng hết"</td><td>UG232 nói load không biểu diễn trực tiếp MAC utilization; MacUsage(%) là cột riêng của eval_perf [UG232 tr.32, tr.137] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-1" data-label="U.1">Hình U.1</a>)</td></tr>
+<tr><td>"Lớp FC cũng có convolutional reuse như CONV"</td><td>EYE ghi FC không có kiểu reuse này; FC chỉ có filter reuse và ifmap reuse [EYE tr.3, tr.4] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-2" data-label="U.2">Hình U.2</a>)</td></tr>
+<tr><td>"Ping-pong của RK3588 là double buffering weight"</td><td>ping-pong trong TRM là chế độ nạp thanh ghi của PC task; double buffering dữ liệu của RK3588 là unknown [TRM1 tr.1997] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-2" data-label="U.2">Hình U.2</a>)</td></tr>
+</tbody></table></div></div>
+<div class="ni" data-label="Tự kiểm"><div class="quiz"><h3>Câu hỏi tự kiểm</h3>
+<div class="q"><p><b>Câu 1</b> <span class="kind">giải thích</span><br>Theo TPU Table 3, vì sao CNN1 chỉ đạt 14.1 TOPS trong khi CNN0 đạt 86.0?</p><details><summary>Đáp án</summary><p>Ở CNN1, array active cycles là 46.2%, nhưng chỉ 22.5% chu kỳ có MAC giữ weight có ích; 23.7% là unused MACs, do một số lớp có feature depth nông. Ngoài ra 28.1% chu kỳ là weight stall. CNN0 có 78.2% useful MACs và 0% weight stall [TPU tr.6, tr.7] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-1" data-label="U.1">Hình U.1</a>)</p></details></div>
+<div class="q"><p><b>Câu 2</b> <span class="kind">phân biệt</span><br>Phân biệt convolutional reuse, filter reuse và ifmap reuse; kiểu nào có ở lớp FC?</p><details><summary>Đáp án</summary><p>Convolutional reuse dùng lại weight E² lần trên một mặt ifmap và pixel R² lần trên một mặt filter, chỉ có ở CONV. Filter reuse dùng lại weight qua N ifmap của batch. Ifmap reuse dùng lại pixel qua M filter. Hai kiểu sau có ở cả CONV và FC [EYE tr.3, tr.4] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-2" data-label="U.2">Hình U.2</a>)</p></details></div>
+<div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Một camera chạy N = 1. Kiểu reuse nào của weight còn lại cho lớp conv 3x3 có ofmap 80x80?</p><details><summary>Đáp án</summary><p>Filter reuse chỉ còn 1 lần, nên chỉ còn convolutional reuse: mỗi weight dùng lại E² = 6400 lần. Đây là phép tính của bộ hình theo công thức của EYE [EYE tr.3, tr.4] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-2" data-label="U.2">Hình U.2</a>)</p></details></div>
+<div class="q"><p><b>Câu 4</b> <span class="kind">giải thích</span><br>TPU dùng tile weight thứ hai để làm gì?</p><details><summary>Đáp án</summary><p>Để double-buffering: nạp tile kế tiếp trong khi tính tile hiện tại, che 256 chu kỳ dịch một tile vào [TPU tr.3] (<a class="xref note-xref" href="#note-1-01-kieu-so-va-tai-su-dung-U-2" data-label="U.2">Hình U.2</a>)</p></details></div>
+</div></div>
+</div></div></div>
 </section>
 <section class="part" id="phan-2" data-part="2">
-<h2>Phần 2: Phần cứng RK3588</h2>
+<h2>Phần 2: Phần cứng RK3588 <button class="notes-open" type="button" data-notes="2">Ghi chú (1)</button></h2>
 <p class="opening"><b>Câu hỏi mở đầu.</b> NPU của RK3588 gồm những khối nào, nối với SoC bằng đường nào, và phần mềm điều khiển nó theo trình tự nào?</p>
 <article class="fig" id="hinh-2-1" data-fig="hinh-2-1">
 <header><span class="tier t1">T1 RK3588</span><h3>Hình 2.1 <small>h2-1-npu-trong-soc</small></h3><label class="learned"><input type="checkbox" data-learn="hinh-2-1"> đã học</label></header>
@@ -1120,9 +1202,144 @@ details summary{cursor:pointer;color:var(--blue)}
 <div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Một model có các op Conv, Add, Concat, MaxPool và Resize chạy với RKNN_NPU_CORE_0_1_2. Theo UG152, op nào nằm trong danh sách nhanh hơn khi nhiều core và op nào về Core0?</p><details><summary>Đáp án</summary><p>Conv, Add, Concat nằm trong danh sách; MaxPool và Resize không có trong danh sách nên theo câu "Other type of op will fallback to Core0 to continue running" chúng chạy về Core0. Số đo thực tế xem <a class="xref" href="#hinh-10-3">Hình 10.3</a> [UG152 tr.27] (<a class="xref" href="#hinh-2-4">Hình 2.4</a>)</p></details></div>
 <div class="q"><p><b>Câu 4</b> <span class="kind">áp dụng</span><br>Driver nhận một job có core_mask = 0x0 khi ba core có task_num lần lượt 5, 3, 3. Driver chọn core nào và job chạy trên mấy core?</p><details><summary>Đáp án</summary><p>Core 1. Vòng lặp bắt đầu với core 0 (task_num 5), so sánh bằng "lớn hơn": core 1 có 3 nhỏ hơn 5 nên được chọn, core 2 có 3 không nhỏ hơn 3 nên giữ core 1 (hòa thì core số nhỏ). Job chạy trên 1 core [DRV rknpu_job.c:508-538] (<a class="xref" href="#hinh-2-4">Hình 2.4</a>)</p></details></div>
 </div>
+<div class="notes-store" hidden><div class="note" id="note-2-01-clock-nguon-reset" data-title="Clock, DVFS, nguồn điện, reset, IOMMU và MCU của NPU" data-question="Trước khi NPU chạy được một job, driver phải bật nguồn, bật clock, chọn tần số và gắn IOMMU theo thứ tự nào, và phần nào của chuỗi này TRM thật sự mô tả?" data-count="2">
+<h3 class="note-title">Clock, DVFS, nguồn điện, reset, IOMMU và MCU của NPU</h3>
+<p class="opening"><b>Câu hỏi mở đầu.</b> Trước khi NPU chạy được một job, driver phải bật nguồn, bật clock, chọn tần số và gắn IOMMU theo thứ tự nào, và phần nào của chuỗi này TRM thật sự mô tả?</p>
+<div class="note-items">
+<div class="ni" data-label="K.1"><article class="fig" id="note-2-01-clock-nguon-reset-K-1" data-fig="note-2-01-clock-nguon-reset-K-1">
+<header><span class="tier t1">T1 RK3588</span><h3>Hình K.1 <small>hk-1-clock-dvfs</small></h3></header>
+<div class="fig-body">
+<img class="zoomable" src="02-phan-cung-rk3588/_notes/01-clock-nguon-reset/hk-1-clock-dvfs.png" alt="Hình K.1" loading="lazy">
+<p class="caption">Tần số NPU được chọn qua các mux trong CRU, và bảng OPP ghép mỗi mức tần số với một mức điện áp: tần số càng cao thì điện áp càng cao. Mux `clk_rknn_dsu0_src_t` chọn một trong năm nguồn PLL rồi chia cho (div_con + 1). Sau đó `clk_rknn_dsu0` chọn giữa nguồn này và `clk_npu_pvtpll`. TRM nói RKNN có hai clock domain AHB và AXI, AXI clock cũng là core clock, và tần số do CRU điều khiển. DTS lại đặt clock `clk_npu` là `SCMI_CLK_NPU` với 200000000. TRM và DTS không nối hai cách gọi này với nhau. Trong nhóm "RK3588 npu OPPs", điện áp đầu là 700 mV từ 300 đến 700 MHz, rồi tăng lên 750, 800 và 850 mV ở 800, 900 và 1000 MHz. Governor `rknpu_ondemand` của driver chỉ trả `ondemand_freq` (đặt qua debugfs `rknpu/freq`) hoặc `previous_freq`, rồi `dev_pm_opp_set_rate` áp mức OPP tương ứng.</p>
+<p class="meta"><span><b>Đọc thêm:</b> 02_ mục 2.6. Khái niệm: <a class="xref" href="#hinh-2-3">Hình 2.3</a>, <a class="xref" href="#hinh-7-3">Hình 7.3</a></span></p>
+<details class="src"><summary>Nguồn (44 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
+<tr><td>Mux clk_rknn_dsu0_src_t</td><td>T1</td><td>TRM1 tr.82</td><td>clk_rknn_dsu0_src_t clock mux.</td></tr>
+<tr><td>Năm nguồn của mux (ví dụ NPLL là 3&#x27;b011)</td><td>T1</td><td>TRM1 tr.82</td><td>3&#x27;b011: clk_npll_mux</td></tr>
+<tr><td>Nguồn GPLL</td><td>T1</td><td>TRM1 tr.82</td><td>3&#x27;b000: clk_gpll_mux</td></tr>
+<tr><td>Nguồn SPLL</td><td>T1</td><td>TRM1 tr.82</td><td>3&#x27;b100: clk_spll_mux</td></tr>
+<tr><td>Bộ chia (div_con + 1)</td><td>T1</td><td>TRM1 tr.82</td><td>Divide clk_rknn_dsu0_src_t by (div_con + 1).</td></tr>
+<tr><td>Bit chọn của mux src_t là 9:7 trong CRU_CLKSEL_CON73</td><td>T1</td><td>TRM1 tr.82</td><td>CRU_CLKSEL_CON73</td></tr>
+<tr><td>Mux hclk_rknn_root: 200m, 100m, 50m, osc0</td><td>T1</td><td>TRM1 tr.82</td><td>hclk_rknn_root clock mux.</td></tr>
+<tr><td>hclk_rknn_root có nguồn 50m</td><td>T1</td><td>TRM1 tr.82</td><td>2&#x27;b10: clk_matrix_50m_src</td></tr>
+<tr><td>Mux clk_npu_pvtpll</td><td>T1</td><td>TRM1 tr.83</td><td>clk_npu_pvtpll clock mux.</td></tr>
+<tr><td>Mux clk_rknn_dsu0 chọn src_t hoặc clk_npu_pvtpll</td><td>T1</td><td>TRM1 tr.83</td><td>clk_rknn_dsu0 clock mux.</td></tr>
+<tr><td>clk_rknn_dsu0 chọn 1 là clk_npu_pvtpll</td><td>T1</td><td>TRM1 tr.83</td><td>1&#x27;b1: clk_npu_pvtpll</td></tr>
+<tr><td>Hai clock domain AHB và AXI</td><td>T1</td><td>TRM1 tr.2052</td><td>RKNN has two clock domains, one is AHB clock, the other is AXI clock</td></tr>
+<tr><td>AXI clock cũng là core clock</td><td>T1</td><td>TRM1 tr.2052</td><td>also used for core clock for every Calculate Core and Control Core</td></tr>
+<tr><td>Tần số do CRU điều khiển</td><td>T1</td><td>TRM1 tr.2052</td><td>Clock frequency can be controlled by CRU</td></tr>
+<tr><td>Gần như mọi flip-flop được gate</td><td>T1</td><td>TRM1 tr.2052</td><td>Almost all of the flip-flops are clock gated in the design</td></tr>
+<tr><td>Block rảnh thì tự gate, phần mềm tắt được</td><td>T1</td><td>TRM1 tr.2052</td><td>then the clock of that block will be gated automatically. This feature can be disabled by software</td></tr>
+<tr><td>DTS: clock đầu là SCMI_CLK_NPU</td><td>T1</td><td>DTS dòng 3459</td><td>clocks = &lt;&amp;scmi_clk SCMI_CLK_NPU&gt;, &lt;&amp;cru ACLK_NPU0&gt;,</td></tr>
+<tr><td>DTS: tên clock đầu là clk_npu</td><td>T1</td><td>DTS dòng 3463</td><td>clock-names = &quot;clk_npu&quot;, &quot;aclk0&quot;,</td></tr>
+<tr><td>DTS: assigned-clock-rates 200000000</td><td>T1</td><td>DTS dòng 3468</td><td>assigned-clock-rates = &lt;200000000&gt;;</td></tr>
+<tr><td>Ánh xạ SCMI_CLK_NPU sang mux CRU, và clk_rknn_dsu0 có phải core clock: không có trong TRM, DTS</td><td>T1</td><td>TRM1 tr.2052</td><td>(unknown)</td></tr>
+<tr><td>Nhóm &quot;RK3588 npu OPPs&quot;</td><td>T1</td><td>DTS dòng 3533</td><td>/* RK3588 npu OPPs */</td></tr>
+<tr><td>300 MHz, 700 mV</td><td>T1</td><td>DTS dòng 3536-3537</td><td>opp-hz = /bits/ 64 &lt;300000000&gt;; opp-microvolt = &lt;700000</td></tr>
+<tr><td>400 MHz, 700 mV</td><td>T1</td><td>DTS dòng 3552-3553</td><td>opp-hz = /bits/ 64 &lt;400000000&gt;; opp-microvolt = &lt;700000</td></tr>
+<tr><td>500 MHz, 700 mV</td><td>T1</td><td>DTS dòng 3568-3569</td><td>opp-hz = /bits/ 64 &lt;500000000&gt;; opp-microvolt = &lt;700000</td></tr>
+<tr><td>600 MHz, 700 mV</td><td>T1</td><td>DTS dòng 3584-3585</td><td>opp-hz = /bits/ 64 &lt;600000000&gt;; opp-microvolt = &lt;700000</td></tr>
+<tr><td>700 MHz, 700 mV</td><td>T1</td><td>DTS dòng 3600-3601</td><td>opp-hz = /bits/ 64 &lt;700000000&gt;; opp-microvolt = &lt;700000</td></tr>
+<tr><td>800 MHz, 750 mV</td><td>T1</td><td>DTS dòng 3612-3613</td><td>opp-hz = /bits/ 64 &lt;800000000&gt;; opp-microvolt = &lt;750000</td></tr>
+<tr><td>900 MHz, 800 mV</td><td>T1</td><td>DTS dòng 3626-3627</td><td>opp-hz = /bits/ 64 &lt;900000000&gt;; opp-microvolt = &lt;800000</td></tr>
+<tr><td>1000 MHz, 850 mV</td><td>T1</td><td>DTS dòng 3642-3643</td><td>opp-hz = /bits/ 64 &lt;1000000000&gt;; opp-microvolt = &lt;850000</td></tr>
+<tr><td>mV = µV / 1000</td><td>T1</td><td>DTS dòng 3537</td><td>(số học)</td></tr>
+<tr><td>init-freq 1000000 KHz</td><td>T1</td><td>DTS dòng 3525</td><td>rockchip,init-freq = &lt;1000000&gt;; /* KHz */</td></tr>
+<tr><td>high-temp 85000</td><td>T1</td><td>DTS dòng 3530</td><td>rockchip,high-temp = &lt;85000&gt;;</td></tr>
+<tr><td>high-temp-max-freq 800000</td><td>T1</td><td>DTS dòng 3531</td><td>rockchip,high-temp-max-freq = &lt;800000&gt;;</td></tr>
+<tr><td>RK3588J/M có nhóm OPP riêng</td><td>T1</td><td>DTS dòng 3657</td><td>/* RK3588J/M npu OPPs */</td></tr>
+<tr><td>DS mục NPU: một voltage domain riêng cho DVFS</td><td>T1</td><td>DS tr.11</td><td>One isolated voltage domain to support DVFS</td></tr>
+<tr><td>Governor tên rknpu_ondemand</td><td>T1</td><td>DRV rknpu_devfreq.c:73</td><td>.name = &quot;rknpu_ondemand&quot;,</td></tr>
+<tr><td>Governor trả ondemand_freq nếu đã đặt</td><td>T1</td><td>DRV rknpu_devfreq.c:54-61</td><td>*freq = rknpu_dev-&gt;ondemand_freq;</td></tr>
+<tr><td>Ngược lại trả previous_freq</td><td>T1</td><td>DRV rknpu_devfreq.c:54-61</td><td>*freq = df-&gt;previous_freq;</td></tr>
+<tr><td>npu_devfreq_target gọi dev_pm_opp_set_rate</td><td>T1</td><td>DRV rknpu_devfreq.c:281-307</td><td>ret = dev_pm_opp_set_rate(dev, *freq);</td></tr>
+<tr><td>Bảng OPP nạp theo clock clk_npu</td><td>T1</td><td>DRV rknpu_devfreq.c:337</td><td>rockchip_init_opp_table(dev, info, &quot;clk_npu&quot;, &quot;rknpu&quot;);</td></tr>
+<tr><td>debugfs freq ghi ondemand_freq</td><td>T1</td><td>DRV rknpu_debugger.c:229</td><td>rknpu_dev-&gt;ondemand_freq = freq;</td></tr>
+<tr><td>Node debugfs &quot;freq&quot; dùng rknpu_freq_set</td><td>T1</td><td>DRV rknpu_debugger.c:308</td><td>{ &quot;freq&quot;, rknpu_freq_show, rknpu_freq_set, NULL },</td></tr>
+<tr><td>UG232 có mục đặt tần số NPU</td><td>T1</td><td>UG232 tr.136</td><td>Querying and setting CPU, DDR, and NPU frequencies</td></tr>
+<tr><td>Tần số thực khi chạy model của dự án: chưa đo</td><td>T3</td><td>REPO docs/tools/visual_guide/README.md</td><td>(unknown)</td></tr>
+</tbody></table></details></div></article></div>
+<div class="ni" data-label="K.2"><article class="fig" id="note-2-01-clock-nguon-reset-K-2" data-fig="note-2-01-clock-nguon-reset-K-2">
+<header><span class="tier t1">T1 RK3588</span><h3>Hình K.2 <small>hk-2-nguon-reset-iommu</small></h3></header>
+<div class="fig-body">
+<img class="zoomable" src="02-phan-cung-rk3588/_notes/01-clock-nguon-reset/hk-2-nguon-reset-iommu.png" alt="Hình K.2" loading="lazy">
+<p class="caption">VD_NPU có ba power domain, mỗi domain chứa một RKNN core: PD_NPUTOP chứa core 0 cùng MCU_NPU, PD_NPU1 chứa core 1, PD_NPU2 chứa core 2. Khi bật, driver bật regulator trước, rồi clock, rồi ba domain theo thứ tự npu0, npu1, npu2. Khi tắt, driver đi ngược lại, nhưng phải chờ IOMMU tắt hẳn rồi mới tắt các domain. TRM yêu cầu giữ Aresetn và Hresetn ít nhất 32 core clock cycles rồi nhả cùng lúc. Soft reset của driver assert cả 6 reset, chờ 10 µs, deassert, chờ 10 µs, rồi gắn lại domain IOMMU. Driver gọi soft reset khi job timeout, khi có ioctl RKNPU_ACT_RESET, hoặc khi ghi "1" vào debugfs. MCU_NPU là Cortex-M0 với TCM 64KB và cache 16KB; vai trò của nó với một job là unknown. Mã driver không có chữ mailbox hay mcu, và driver giao job bằng thanh ghi PC của core.</p>
+<p class="meta"><span><b>Đọc thêm:</b> 02_ mục 2.1, 2.6, 2.7. Khái niệm: <a class="xref" href="#hinh-2-1">Hình 2.1</a>, <a class="xref" href="#hinh-2-5">Hình 2.5</a>, <a class="xref" href="#hinh-5-3">Hình 5.3</a></span></p>
+<details class="src"><summary>Nguồn (59 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
+<tr><td>VD_NPU có ba power domain</td><td>T1</td><td>TRM1 tr.1091</td><td>Support multi power domains in VD_NPU: PD_NPUTOP, PD_NPU1, PD_NPU2</td></tr>
+<tr><td>PMU bật tắt mọi power domain bằng phần mềm hoặc phần cứng</td><td>T1</td><td>TRM1 tr.1091</td><td>Support power down/up all power domains by software or hardware</td></tr>
+<tr><td>Table 7-1: PD_NPUTOP có BIU_NPUTOP, MCU_NPU, PVTM_NPU</td><td>T1</td><td>TRM1 tr.1093</td><td>BIU_NPUTOP MCU_NPU PVTM_NPU</td></tr>
+<tr><td>Table 7-1: TIMER_NPU, RKNN_CORE0</td><td>T1</td><td>TRM1 tr.1093</td><td>TIMER_NPU RKNN_CORE0</td></tr>
+<tr><td>Table 7-1: PD_NPU1 có BIU_NPU1, RKNN_CORE1</td><td>T1</td><td>TRM1 tr.1093</td><td>BIU_NPU1 PD_NPU1 RKNN_CORE1</td></tr>
+<tr><td>Table 7-1: PD_NPU2 có BIU_NPU2, RKNN_CORE2</td><td>T1</td><td>TRM1 tr.1093</td><td>BIU_NPU2 PD_NPU2 RKNN_CORE2</td></tr>
+<tr><td>Phân nhóm thành phần theo từng PD đọc theo vị trí dòng của Table 7-1</td><td>T1</td><td>TRM1 tr.1093</td><td>(đọc từ hình)</td></tr>
+<tr><td>DTS: power-domains NPUTOP, NPU1, NPU2 tên npu0, npu1, npu2</td><td>T1</td><td>DTS dòng 3473-3476</td><td>power-domains = &lt;&amp;power RK3588_PD_NPUTOP&gt;,</td></tr>
+<tr><td>DTS: tên domain</td><td>T1</td><td>DTS dòng 3476</td><td>power-domain-names = &quot;npu0&quot;, &quot;npu1&quot;, &quot;npu2&quot;;</td></tr>
+<tr><td>Bật 1: regulator vdd</td><td>T1</td><td>DRV rknpu_drv.c:911</td><td>ret = regulator_enable(rknpu_dev-&gt;vdd);</td></tr>
+<tr><td>Bật 1: regulator mem nếu có</td><td>T1</td><td>DRV rknpu_drv.c:922</td><td>ret = regulator_enable(rknpu_dev-&gt;mem);</td></tr>
+<tr><td>Bật 2: mọi clock</td><td>T1</td><td>DRV rknpu_drv.c:933</td><td>ret = clk_bulk_prepare_enable(rknpu_dev-&gt;num_clks, rknpu_dev-&gt;clks);</td></tr>
+<tr><td>Bật 3: domain npu0</td><td>T1</td><td>DRV rknpu_drv.c:950</td><td>pm_runtime_get_sync(rknpu_dev-&gt;genpd_dev_npu0);</td></tr>
+<tr><td>Bật 3: domain npu1</td><td>T1</td><td>DRV rknpu_drv.c:965</td><td>pm_runtime_get_sync(rknpu_dev-&gt;genpd_dev_npu1);</td></tr>
+<tr><td>Bật 3: domain npu2</td><td>T1</td><td>DRV rknpu_drv.c:980</td><td>pm_runtime_get_sync(rknpu_dev-&gt;genpd_dev_npu2);</td></tr>
+<tr><td>Bật 4: thiết bị</td><td>T1</td><td>DRV rknpu_drv.c:991</td><td>ret = pm_runtime_get_sync(dev);</td></tr>
+<tr><td>Tắt 1: thiết bị</td><td>T1</td><td>DRV rknpu_drv.c:1020</td><td>pm_runtime_put_sync(dev);</td></tr>
+<tr><td>Lý do chờ IOMMU: suspend bất đồng bộ</td><td>T1</td><td>DRV rknpu_drv.c:1025-1031</td><td>Because IOMMU&#x27;s runtime suspend callback is asynchronous,</td></tr>
+<tr><td>Truy cập thanh ghi khi PD/VD/CLK tắt sẽ crash</td><td>T1</td><td>DRV rknpu_drv.c:1025-1031</td><td>If the PD/VD/CLK is closed, the register access will crash.</td></tr>
+<tr><td>Chỉ tắt PD sau khi IOMMU tắt</td><td>T1</td><td>DRV rknpu_drv.c:1025-1031</td><td>it&#x27;s safe to close pd stuff until iommu disabled</td></tr>
+<tr><td>Tắt 2: chờ IOMMU bằng readx_poll_timeout</td><td>T1</td><td>DRV rknpu_drv.c:1033</td><td>ret = readx_poll_timeout(rockchip_iommu_is_enabled, dev, val,</td></tr>
+<tr><td>Tắt 3: npu2, npu1, npu0</td><td>T1</td><td>DRV rknpu_drv.c:1046-1051</td><td>pm_runtime_put_sync(rknpu_dev-&gt;genpd_dev_npu2);</td></tr>
+<tr><td>Tắt 3: npu0 sau cùng</td><td>T1</td><td>DRV rknpu_drv.c:1051</td><td>pm_runtime_put_sync(rknpu_dev-&gt;genpd_dev_npu0);</td></tr>
+<tr><td>Tắt 4: clock</td><td>T1</td><td>DRV rknpu_drv.c:1058</td><td>clk_bulk_disable_unprepare(rknpu_dev-&gt;num_clks, rknpu_dev-&gt;clks);</td></tr>
+<tr><td>Hai tín hiệu reset: Aresetn</td><td>T1</td><td>TRM1 tr.2052</td><td>Aresetn, the reset signal for AXI interface and every Calculate Core and Control Core</td></tr>
+<tr><td>Hresetn</td><td>T1</td><td>TRM1 tr.2052</td><td>Hresetn is the AHB interface reset pin and which is synchronized to the AHB clock domain</td></tr>
+<tr><td>Giữ ít nhất 32 core clock cycles theo clock chậm hơn</td><td>T1</td><td>TRM1 tr.2052</td><td>must be asserted for a minimum of 32 core clock cycles, using the slowest of the two clocks</td></tr>
+<tr><td>Nhả cả hai cùng lúc</td><td>T1</td><td>TRM1 tr.2052</td><td>Then two signals must be release at the same time</td></tr>
+<tr><td>DTS: 6 reset SRST_A_RKNN0..2, SRST_H_RKNN0..2</td><td>T1</td><td>DTS dòng 3469-3470</td><td>resets = &lt;&amp;cru SRST_A_RKNN0&gt;, &lt;&amp;cru SRST_A_RKNN1&gt;, &lt;&amp;cru SRST_A_RKNN2&gt;, &lt;&amp;cru SRST_H_RKNN0&gt;</td></tr>
+<tr><td>DTS: tên reset srst_a0..2, srst_h0..2</td><td>T1</td><td>DTS dòng 3471-3472</td><td>reset-names = &quot;srst_a0&quot;, &quot;srst_a1&quot;, &quot;srst_a2&quot;, &quot;srst_h0&quot;, &quot;srst_h1&quot;, &quot;srst_h2&quot;;</td></tr>
+<tr><td>Soft reset 1: assert mọi reset</td><td>T1</td><td>DRV rknpu_reset.c:125</td><td>ret |= rknpu_reset_assert(rknpu_dev-&gt;srsts[i]);</td></tr>
+<tr><td>Soft reset 2 và 4: udelay(10)</td><td>T1</td><td>DRV rknpu_reset.c:127</td><td>udelay(10);</td></tr>
+<tr><td>Soft reset 3: deassert</td><td>T1</td><td>DRV rknpu_reset.c:130</td><td>ret |= rknpu_reset_deassert(rknpu_dev-&gt;srsts[i]);</td></tr>
+<tr><td>Soft reset 5: gắn lại IOMMU</td><td>T1</td><td>DRV rknpu_reset.c:145-146</td><td>iommu_detach_device(domain, rknpu_dev-&gt;dev); iommu_attach_device(domain, rknpu_dev-&gt;dev);</td></tr>
+<tr><td>Gọi khi job timeout</td><td>T1</td><td>DRV rknpu_job.c:584-604</td><td>LOG_ERROR(&quot;job timeout, flags: %#x:\n&quot;, job-&gt;flags);</td></tr>
+<tr><td>Gọi khi job timeout (nhánh kiểm theo thời gian)</td><td>T1</td><td>DRV rknpu_job.c:711-714</td><td>job-&gt;args-&gt;timeout) { rknpu_soft_reset(rknpu_dev);</td></tr>
+<tr><td>Gọi qua ioctl RKNPU_ACT_RESET</td><td>T1</td><td>DRV rknpu_drv.c:420-421</td><td>case RKNPU_ACT_RESET: ret = rknpu_soft_reset(rknpu_dev);</td></tr>
+<tr><td>Gọi khi ghi &quot;1&quot; vào debugfs reset</td><td>T1</td><td>DRV rknpu_debugger.c:293-295</td><td>if (strcmp(buf, &quot;1&quot;) == 0 &amp;&amp;</td></tr>
+<tr><td>Node debugfs &quot;reset&quot;</td><td>T1</td><td>DRV rknpu_debugger.c:312</td><td>{ &quot;reset&quot;, rknpu_reset_show, rknpu_reset_set, NULL },</td></tr>
+<tr><td>DTS: node rknpu có iommus</td><td>T1</td><td>DTS dòng 3478</td><td>iommus = &lt;&amp;rknpu_mmu&gt;;</td></tr>
+<tr><td>DTS: rknpu_mmu là iommu-v2 tại fdab9000</td><td>T1</td><td>DTS dòng 3712-3713</td><td>rknpu_mmu: iommu@fdab9000 { compatible = &quot;rockchip,iommu-v2&quot;;</td></tr>
+<tr><td>DTS: 4 cửa sổ thanh ghi</td><td>T1</td><td>DTS dòng 3714-3717</td><td>reg = &lt;0x0 0xfdab9000 0x0 0x100&gt;,</td></tr>
+<tr><td>DTS: 3 ngắt npu0_mmu, npu1_mmu, npu2_mmu</td><td>T1</td><td>DTS dòng 3721</td><td>interrupt-names = &quot;npu0_mmu&quot;, &quot;npu1_mmu&quot;, &quot;npu2_mmu&quot;;</td></tr>
+<tr><td>DTS: rknpu_mmu status disabled trong dtsi</td><td>T1</td><td>DTS dòng 3727</td><td>status = &quot;disabled&quot;;</td></tr>
+<tr><td>Driver đọc thuộc tính iommus</td><td>T1</td><td>DRV rknpu_drv.c:798</td><td>iommu = of_parse_phandle(dev-&gt;of_node, &quot;iommus&quot;, 0);</td></tr>
+<tr><td>Driver đặt iommu_en</td><td>T1</td><td>DRV rknpu_drv.c:1294</td><td>rknpu_dev-&gt;iommu_en = rknpu_is_iommu_enable(dev);</td></tr>
+<tr><td>GEM lấy domain IOMMU</td><td>T1</td><td>DRV rknpu_gem.c:504</td><td>domain = iommu_get_domain_for_dev(rknpu_dev-&gt;dev);</td></tr>
+<tr><td>GEM gọi iommu_map với IOVA</td><td>T1</td><td>DRV rknpu_gem.c:549</td><td>ret = iommu_map(domain, rknpu_obj-&gt;iova_start,</td></tr>
+<tr><td>MCU subsystem là Cortex-M0</td><td>T1</td><td>TRM1 tr.1276</td><td>one MCU processor(Cortex-M0,r0p0-03rel0)</td></tr>
+<tr><td>NPU_M0: TCM 64KB</td><td>T1</td><td>TRM1 tr.1276</td><td>TCM 16KB 64KB 32KB</td></tr>
+<tr><td>NPU_M0: cache 16KB</td><td>T1</td><td>TRM1 tr.1276</td><td>CACHE 16KB 16KB NA</td></tr>
+<tr><td>NPU_M0: IRQ_NUM 16</td><td>T1</td><td>TRM1 tr.1276</td><td>IRQ_NUM 32 16 8</td></tr>
+<tr><td>DS: MCU trong VD_NPU có 16KB cache, 64KB TCM</td><td>T1</td><td>DS tr.8</td><td>MCU in VD_NPU integrate 16KB Cache and 64KB TCM</td></tr>
+<tr><td>Mailbox2 gắn với MCU_NPU</td><td>T1</td><td>TRM1 tr.19</td><td>MAILBOX2(MCU_NPU)</td></tr>
+<tr><td>Driver giao job: ghi địa chỉ lệnh vào thanh ghi PC</td><td>T1</td><td>DRV rknpu_job.c:346</td><td>REG_WRITE(first_task-&gt;regcmd_addr, RKNPU_OFFSET_PC_DATA_ADDR);</td></tr>
+<tr><td>Driver giao job: bật PC_OP_EN</td><td>T1</td><td>DRV rknpu_job.c:371</td><td>REG_WRITE(0x1, RKNPU_OFFSET_PC_OP_EN);</td></tr>
+<tr><td>Mã driver không có chữ mailbox hay mcu (grep -ric mọi file .c, .h)</td><td>T1</td><td>DRV rknpu_drv.c:1</td><td>(unknown)</td></tr>
+<tr><td>Vai trò MCU_NPU với job NPU: TRM, DS, UG232, driver không nêu</td><td>T1</td><td>TRM1 tr.1276</td><td>(unknown)</td></tr>
+<tr><td>Ánh xạ tên reset DTS sang tên CRU trong TRM; trình tự bật VD/PD do phần cứng yêu cầu</td><td>T1</td><td>TRM1 tr.1091</td><td>(unknown)</td></tr>
+</tbody></table></details></div></article></div>
+<div class="ni" data-label="Hiểu sai"><div class="mistakes"><h3>Hiểu sai thường gặp</h3><table><thead><tr><th>Hiểu sai</th><th>Đúng, kèm nguồn</th></tr></thead><tbody>
+<tr><td>"TRM cho biết NPU chạy ở bao nhiêu MHz"</td><td>chương RKNN chỉ nói tần số do CRU điều khiển; các mức tần số và điện áp nằm trong `npu_opp_table` của DTS [TRM1 tr.2052; DTS dòng 3536-3537] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-1" data-label="K.1">Hình K.1</a>)</td></tr>
+<tr><td>"rknpu_ondemand tự tăng giảm tần số theo tải như ondemand của CPU"</td><td>hàm governor chỉ trả `ondemand_freq` hoặc `previous_freq` [DRV rknpu_devfreq.c:54-61] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-1" data-label="K.1">Hình K.1</a>)</td></tr>
+<tr><td>"Thứ tự bật tắt nguồn NPU là quy định của TRM"</td><td>thứ tự trong hình là của driver; TRM chỉ nói PMU bật tắt domain bằng phần mềm hoặc phần cứng [DRV rknpu_drv.c:904-1060; TRM1 tr.1091] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-2" data-label="K.2">Hình K.2</a>)</td></tr>
+<tr><td>"MCU_NPU điều khiển job của NPU"</td><td>không nguồn nào nói vậy; driver ghi job vào thanh ghi PC của core [DRV rknpu_job.c:346, 371] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-2" data-label="K.2">Hình K.2</a>)</td></tr>
+</tbody></table></div></div>
+<div class="ni" data-label="Tự kiểm"><div class="quiz"><h3>Câu hỏi tự kiểm</h3>
+<div class="q"><p><b>Câu 1</b> <span class="kind">giải thích</span><br>Vì sao rknpu_power_off phải chờ IOMMU tắt rồi mới tắt các power domain?</p><details><summary>Đáp án</summary><p>Runtime suspend của IOMMU chạy bất đồng bộ và có truy cập thanh ghi; nếu PD, VD hoặc CLK đã tắt thì truy cập đó làm crash, nên driver chờ IOMMU tắt rồi mới tắt PD [DRV rknpu_drv.c:1025-1031] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-2" data-label="K.2">Hình K.2</a>)</p></details></div>
+<div class="q"><p><b>Câu 2</b> <span class="kind">phân biệt</span><br>Phân biệt yêu cầu reset của TRM với soft reset của driver.</p><details><summary>Đáp án</summary><p>TRM yêu cầu giữ Aresetn (AXI và các core) và Hresetn (AHB) ít nhất 32 core clock cycles theo clock chậm hơn, rồi nhả cùng lúc. Driver assert mọi reset trong DTS, chờ udelay(10), deassert, chờ udelay(10), rồi detach và attach lại IOMMU [TRM1 tr.2052; DRV rknpu_reset.c:125-146] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-2" data-label="K.2">Hình K.2</a>)</p></details></div>
+<div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Theo nhóm "RK3588 npu OPPs", chạy NPU ở 1000 MHz thay vì 700 MHz thì điện áp đầu đổi thế nào?</p><details><summary>Đáp án</summary><p>Từ 700 mV lên 850 mV (opp-microvolt 700000 và 850000) [DTS dòng 3600-3601, 3642-3643] (<a class="xref note-xref" href="#note-2-01-clock-nguon-reset-K-1" data-label="K.1">Hình K.1</a>)</p></details></div>
+</div></div>
+</div></div></div>
 </section>
 <section class="part" id="phan-3" data-part="3">
-<h2>Phần 3: Lý thuyết lượng tử</h2>
+<h2>Phần 3: Lý thuyết lượng tử <button class="notes-open" type="button" data-notes="3">Ghi chú (1)</button></h2>
 <p class="opening"><b>Câu hỏi mở đầu.</b> Một số thực được biến thành số nguyên INT8 như thế nào, sai số đến từ đâu, và các kỹ thuật PTQ, QAT sửa sai số đó ra sao?</p>
 <article class="fig" id="hinh-3-1" data-fig="hinh-3-1">
 <header><span class="tier t2">T2 chung</span><h3>Hình 3.1 <small>h3-1-affine</small></h3><label class="learned"><input type="checkbox" data-learn="hinh-3-1"> đã học</label></header>
@@ -1440,6 +1657,56 @@ details summary{cursor:pointer;color:var(--blue)}
 <div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Với RKNN-Toolkit2 trên RK3588, tài liệu vendor nói granularity của weight và của activation là gì, và điều đó khớp với lý do phần cứng của NAGEL ra sao?</p><details><summary>Đáp án</summary><p>UG232 tr.120 ghi per-channel chỉ áp dụng cho weight, còn activation và giá trị trung gian vẫn per-layer. Điều này phù hợp với lập luận của NAGEL rằng per-channel cho activation phải rescale accumulator; đó là suy ra của bộ hình, UG232 không nêu lý do. Chi tiết RKNN ở <a class="xref" href="#hinh-4-1">Hình 4.1</a> [UG232 tr.120; NAGEL tr.8] (<a class="xref" href="#hinh-3-2">Hình 3.2</a>)</p></details></div>
 <div class="q"><p><b>Câu 4</b> <span class="kind">áp dụng</span><br>Model YOLO sau khi lượng tử hóa INT8 có mAP thấp hơn nhiều so với FP32. Theo lưu đồ debug của NAGEL, làm gì trước, và nguồn nào cho biết nguyên nhân là SiLU hay C2f của YOLOv8?</p><details><summary>Đáp án</summary><p>Trước hết đặt bit-width weight và activation về 32 và kiểm tra sai số xấp xỉ 0 (FP32 sanity check), rồi lượng tử hóa riêng tensor weight, riêng tensor activation để xem phần nào gây sụt, sửa bằng range setting, AdaRound, per-channel, CLE, bias correction, sau đó đi từng lớp, và chỉ khi vẫn chưa đạt mới dùng QAT. Không nguồn nào nêu nguyên nhân cho YOLOv8: QYOLO tr.7 chỉ gắn sụt độ chính xác của YOLOv5, YOLOv7 với SiLU như quan sát của tác giả, nên với YOLOv8 là unknown. Số INT8 mAP thật chờ pipeline, xem <a class="xref" href="#hinh-10-7">Hình 10.7</a> [NAGEL tr.17, 18, 19; QYOLO tr.7, 9] (<a class="xref" href="#hinh-3-5">Hình 3.5</a>, <a class="xref" href="#hinh-3-4">Hình 3.4</a>)</p></details></div>
 </div>
+<div class="notes-store" hidden><div class="note" id="note-3-01-cac-kieu-luong-tu" data-title="Static và dynamic, uniform và non-uniform, mixed precision" data-question="Ngoài scale, zero-point và granularity, còn những lựa chọn nào khi lượng tử một mạng, và RKNN trên RK3588 đứng ở đâu trong các lựa chọn đó?" data-count="1">
+<h3 class="note-title">Static và dynamic, uniform và non-uniform, mixed precision</h3>
+<p class="opening"><b>Câu hỏi mở đầu.</b> Ngoài scale, zero-point và granularity, còn những lựa chọn nào khi lượng tử một mạng, và RKNN trên RK3588 đứng ở đâu trong các lựa chọn đó?</p>
+<div class="note-items">
+<div class="ni" data-label="L.1"><article class="fig" id="note-3-01-cac-kieu-luong-tu-L-1" data-fig="note-3-01-cac-kieu-luong-tu-L-1">
+<header><span class="tier t2">T2 chung</span><h3>Hình L.1 <small>hl-1-static-dynamic-nonuniform-mixed</small></h3></header>
+<div class="fig-body">
+<img class="zoomable" src="03-ly-thuyet-luong-tu/_notes/01-cac-kieu-luong-tu/hl-1-static-dynamic-nonuniform-mixed.png" alt="Hình L.1" loading="lazy">
+<p class="caption">Có ba lựa chọn độc lập với granularity: tính range của activation lúc nào (static hay dynamic), đặt các mức lượng tử đều hay không đều (uniform hay non-uniform), và cho mọi lớp cùng số bit hay mỗi lớp một số bit (mixed precision). Dynamic tính range cho từng activation map lúc chạy, thường chính xác nhất nhưng rất tốn. Static tính range trước một lần, không thêm chi phí lúc chạy nên được dùng nhiều nhất. Non-uniform cho phép bước và mức cách nhau không đều, có thể chính xác hơn ở cùng số bit với phân bố hình chuông. Mixed precision giữ lớp nhạy ở bit cao và chỉ hạ bit ở lớp không nhạy. Khó khăn là số cách chọn bit tăng theo hàm mũ của số lớp. Với RK3588: - Calibration set dùng để tính range của activation lúc build, nên RKNN theo cách static. - INT8 của RKNN là lượng tử tuyến tính với khoảng đều. - Dạng mixed precision của RKNN là hybrid quantization.</p>
+<p class="meta"><span><b>Đọc thêm:</b> 03_ mục 3.2, 3.5. Khái niệm: <a class="xref" href="#hinh-3-1">Hình 3.1</a>, <a class="xref" href="#hinh-3-2">Hình 3.2</a>, <a class="xref" href="#hinh-4-1">Hình 4.1</a>, <a class="xref" href="#hinh-4-2">Hình 4.2</a></span></p>
+<details class="src"><summary>Nguồn (27 dòng)</summary><table><thead><tr><th>Nội dung</th><th>Tier</th><th>Nguồn</th><th>Nguyên văn ngắn</th></tr></thead><tbody>
+<tr><td>Hai cách lượng tử activation: dynamic và static</td><td>T2</td><td>GHOLAMI tr.6</td><td>are two approaches to quantizing activations: dynamic</td></tr>
+<tr><td>Dynamic: range tính cho từng activation map lúc chạy</td><td>T2</td><td>GHOLAMI tr.6</td><td>calculated for each activation map during runtime</td></tr>
+<tr><td>Dynamic: tính min, max, percentile có thể rất tốn</td><td>T2</td><td>GHOLAMI tr.6</td><td>statistics (min, max, percentile, etc.) which can have a</td></tr>
+<tr><td>Dynamic: chi phí rất cao</td><td>T2</td><td>GHOLAMI tr.6</td><td>very high overhead</td></tr>
+<tr><td>Static: range tính trước và cố định</td><td>T2</td><td>GHOLAMI tr.6</td><td>in which the clipping range is pre-calculated and static</td></tr>
+<tr><td>Static: không thêm chi phí, thường kém chính xác hơn dynamic</td><td>T2</td><td>GHOLAMI tr.6</td><td>putational overhead, but it typically results in lower</td></tr>
+<tr><td>Dynamic thường chính xác nhất</td><td>T2</td><td>GHOLAMI tr.7</td><td>range of each activation and often achieves the highest</td></tr>
+<tr><td>Thực tế dùng static</td><td>T2</td><td>GHOLAMI tr.7</td><td>most often use static quantization where the clipping</td></tr>
+<tr><td>RKNN: calibration set dùng tính range activation</td><td>T1</td><td>UG232 tr.122</td><td>The quantization calibration set is used to compute the quantization range of activation values</td></tr>
+<tr><td>RKNN: dataset truyền vào build</td><td>T1</td><td>UG232 tr.125</td><td>rknn.build(do_quantization=True, dataset=&#x27;./dataset.txt&#x27;</td></tr>
+<tr><td>Dynamic quantization trên RKNN: không có trong UG232, API232</td><td>T1</td><td>UG232 tr.122</td><td>(unknown)</td></tr>
+<tr><td>Non-uniform: bước và mức không đều</td><td>T2</td><td>GHOLAMI tr.7</td><td>are allowed to be non-uniformly spaced</td></tr>
+<tr><td>Eq. 6</td><td>T2</td><td>GHOLAMI tr.7</td><td>Q(r) = Xi , if r ∈ [∆i , ∆i+1 ).</td></tr>
+<tr><td>Xi và Δi đều không cách đều</td><td>T2</td><td>GHOLAMI tr.7</td><td>Note that neither Xi ’s nor ∆i ’s are uniformly spaced.</td></tr>
+<tr><td>Có thể chính xác hơn ở cùng số bit</td><td>T2</td><td>GHOLAMI tr.7</td><td>Non-uniform quantization may achieve higher accuracy</td></tr>
+<tr><td>Thiết kế cho phân bố hình chuông</td><td>T2</td><td>GHOLAMI tr.7</td><td>bell-shaped distributions of the weights and activations</td></tr>
+<tr><td>Y7Q: non-uniform chia clipping range không đều</td><td>T2</td><td>Y7Q tr.3</td><td>divides the clipping range unequally</td></tr>
+<tr><td>Y7Q: khoảng giữa các mức không đều</td><td>T2</td><td>Y7Q tr.3</td><td>In non-uniform quantization, the distance between</td></tr>
+<tr><td>Đường chuông và vị trí mức trong panel B là minh họa</td><td>T2</td><td>GHOLAMI tr.7</td><td>(đọc từ hình)</td></tr>
+<tr><td>RKNN: lượng tử tuyến tính có khoảng đều</td><td>T1</td><td>UG232 tr.120</td><td>In linear quantization, the intervals between fixed-point numbers are uniform</td></tr>
+<tr><td>RKNN: INT8 chia range thành 256 mức</td><td>T1</td><td>UG232 tr.120</td><td>quantization evenly divides the quantization range into 256 numbers</td></tr>
+<tr><td>Mixed precision: lượng tử đều xuống bit rất thấp có thể giảm độ chính xác đáng kể</td><td>T2</td><td>GHOLAMI tr.13</td><td>uniformly quantizing a model to ultra low-precision can</td></tr>
+<tr><td>Hình gốc Figure 8</td><td>T2</td><td>GHOLAMI tr.13</td><td>Figure 8: Illustration of mixed-precision quantization.</td></tr>
+<tr><td>Giữ lớp nhạy và hiệu quả ở bit cao</td><td>T2</td><td>GHOLAMI tr.13</td><td>In mixed-precision quantization the goal is to keep sensitive</td></tr>
+<tr><td>Số cách chọn bit tăng theo hàm mũ của số lớp</td><td>T2</td><td>GHOLAMI tr.14</td><td>this bit setting is exponential in the number of layers.</td></tr>
+<tr><td>Lớp chia nhạy và không nhạy</td><td>T2</td><td>GHOLAMI tr.14</td><td>NN are grouped into sensitive/insensitive to quantization</td></tr>
+<tr><td>NAGEL chỉ xét homogeneous bit-width</td><td>T2</td><td>NAGEL tr.8</td><td>Note that in this white paper we only consider homogeneous bit-width.</td></tr>
+</tbody></table></details></div></article></div>
+<div class="ni" data-label="Hiểu sai"><div class="mistakes"><h3>Hiểu sai thường gặp</h3><table><thead><tr><th>Hiểu sai</th><th>Đúng, kèm nguồn</th></tr></thead><tbody>
+<tr><td>"Dynamic quantization luôn tốt hơn nên nên dùng"</td><td>dynamic thường chính xác nhất nhưng tính range lúc chạy rất tốn, nên static được dùng nhiều nhất [GHOLAMI tr.7] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</td></tr>
+<tr><td>"RKNN INT8 đặt mức dày ở gần 0 như non-uniform"</td><td>UG232 ghi lượng tử tuyến tính có khoảng đều, INT8 chia range thành 256 mức đều [UG232 tr.120] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</td></tr>
+<tr><td>"Whitepaper NAGEL hướng dẫn mixed precision"</td><td>NAGEL chỉ xét homogeneous bit-width [NAGEL tr.8] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</td></tr>
+</tbody></table></div></div>
+<div class="ni" data-label="Tự kiểm"><div class="quiz"><h3>Câu hỏi tự kiểm</h3>
+<div class="q"><p><b>Câu 1</b> <span class="kind">phân biệt</span><br>Static và dynamic quantization khác nhau ở điểm nào, và vì sao static được dùng nhiều hơn?</p><details><summary>Đáp án</summary><p>Static tính clipping range trước và cố định cho mọi input. Dynamic tính range cho từng activation map lúc chạy (min, max, percentile), chính xác hơn nhưng có thể rất tốn. Vì tốn, static được dùng nhiều nhất [GHOLAMI tr.6, 7] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</p></details></div>
+<div class="q"><p><b>Câu 2</b> <span class="kind">giải thích</span><br>Non-uniform quantization có lợi gì, và với phân bố nào?</p><details><summary>Đáp án</summary><p>Bước và mức lượng tử được phép không đều, nên có thể chính xác hơn ở cùng số bit; các phương pháp này thiết kế cho phân bố hình chuông của weight và activation [GHOLAMI tr.7] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</p></details></div>
+<div class="q"><p><b>Câu 3</b> <span class="kind">áp dụng</span><br>Dataset calibration truyền vào rknn.build dùng để làm gì, và điều đó xếp RKNN vào static hay dynamic?</p><details><summary>Đáp án</summary><p>Để tính range của activation lúc build; range không tính lại lúc chạy, nên đó là cách làm static [UG232 tr.122, tr.125] (<a class="xref note-xref" href="#note-3-01-cac-kieu-luong-tu-L-1" data-label="L.1">Hình L.1</a>)</p></details></div>
+</div></div>
+</div></div></div>
 </section>
 <section class="part" id="phan-4" data-part="4">
 <h2>Phần 4: Lượng tử RKNN</h2>
@@ -2743,8 +3010,8 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Bảng lớp: đầu vào 640x640</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/layer_table.py:27</td><td>x = torch.zeros(1, 3, 640, 640)</td></tr>
 <tr><td>Bảng lớp: đã fuse, end2end tắt (đường xuất RKNN)</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/layer_table.py:55</td><td>table(copy.deepcopy(cfg), tag + &#x27;_export_rknn&#x27;, end2end_export=False)</td></tr>
 <tr><td>Bảng lớp: fuse model trước khi đếm</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/layer_table.py:24</td><td>m.fuse(verbose=False) if hasattr(m, &#x27;fuse&#x27;) else None</td></tr>
-<tr><td>YOLOv8n: Conv trong ONNX theo loại (1x1, 3x3 s1, 3x3 s2, depthwise)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;3x3 s2&quot;: 7, &quot;1x1&quot;: 25, &quot;3x3 s1&quot;: 32</td></tr>
-<tr><td>YOLO26n: Conv trong ONNX theo loại (1x1, 3x3 s1, 3x3 s2, depthwise)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;3x3 s2&quot;: 7, &quot;1x1&quot;: 55, &quot;3x3 s1&quot;: 32, &quot;depthwise 3x3&quot;: 8</td></tr>
+<tr><td>YOLOv8n: Conv trong ONNX theo loại (1x1, 3x3 s1, 3x3 s2, depthwise)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;3x3 s2&quot;: 7, &quot;1x1&quot;: 25, &quot;3x3 s1&quot;: 32</td></tr>
+<tr><td>YOLO26n: Conv trong ONNX theo loại (1x1, 3x3 s1, 3x3 s2, depthwise)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;3x3 s2&quot;: 7, &quot;1x1&quot;: 55, &quot;3x3 s1&quot;: 32, &quot;depthwise 3x3&quot;: 8</td></tr>
 <tr><td>Đầu ra [1, 9, 8400] gồm 4 hộp cộng 5 lớp</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/out/table_v8n.md</td><td>(số học)</td></tr>
 <tr><td>Phần trăm tham số của Detect: 751519 / 3006623 = 25.0%, 120443 / 2375811 = 5.1%</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/out/table_v8n.md</td><td>(số học)</td></tr>
 <tr><td>Phần trăm GFLOPs của Detect: 2.965 / 8.087 = 36.7%, 0.435 / 5.314 = 8.2%</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/out/table_26n.md</td><td>(số học)</td></tr>
@@ -2888,8 +3155,8 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>C3k2 lớp 22: Bottleneck Conv 3x3 64 -&gt; 128</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/out/structure_and_ops.log:329</td><td>Conv2d(64, 128, kernel_size=(3, 3)</td></tr>
 <tr><td>Đầu vào khối attention là lưới 20 x 20, N = 400 token</td><td>T1 tính</td><td>LOG 2026-10-10_yolo-arch/out/table_26n.md</td><td>(số học)</td></tr>
 <tr><td>Số đầu: max(128 // 64, 1) = 2</td><td>T1 tính</td><td>ULT nn/modules/block.py:1483</td><td>(số học)</td></tr>
-<tr><td>ONNX YOLO26n (đường RKNN): Transpose 4, MatMul 4</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4</td></tr>
-<tr><td>ONNX YOLO26n (đường RKNN): Softmax 2</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Softmax&quot;: 2</td></tr>
+<tr><td>ONNX YOLO26n (đường RKNN): Transpose 4, MatMul 4</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4</td></tr>
+<tr><td>ONNX YOLO26n (đường RKNN): Softmax 2</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Softmax&quot;: 2</td></tr>
 <tr><td>T3: lớp exSDPAttention thứ nhất (lớp 10)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolo26n_AUTO.txt:77</td><td>exSDPAttention INT8 NPU (2,32,1,400),(2,32,1,400)</td></tr>
 <tr><td>T3: lớp exSDPAttention thứ hai (lớp 22)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolo26n_AUTO.txt:162</td><td>exSDPAttention INT8 NPU (2,32,1,400),(2,32,1,400)</td></tr>
 <tr><td>Detect: c2, c3 là kênh trung gian của nhánh hộp và nhánh lớp</td><td>T1</td><td>ULT nn/modules/head.py:122</td><td>c2, c3 = max((16, ch[0] // 4, self.reg_max * 4)), max(ch[0], min(self.nc, 100))  # channels</td></tr>
@@ -2983,16 +3250,16 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>onnx2rknn: build với dataset khi INT8</td><td>T1</td><td>ULT utils/export/rknn.py:79</td><td>build_kwargs[&quot;dataset&quot;] = str(dataset)</td></tr>
 <tr><td>onnx2rknn: build gọi rknn_batch_size</td><td>T1</td><td>ULT utils/export/rknn.py:80</td><td>rknn.build(**build_kwargs, rknn_batch_size=batch)</td></tr>
 <tr><td>onnx2rknn: export_rknn ghi file .rknn</td><td>T1</td><td>ULT utils/export/rknn.py:81</td><td>rknn.export_rknn(</td></tr>
-<tr><td>YOLOv8n: op ONNX của YOLO(...).export(format=&quot;onnx&quot;), opset 19, onnxslim</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Conv&quot;: 64, &quot;Sigmoid&quot;: 58, &quot;Mul&quot;: 58, &quot;Concat&quot;: 17, &quot;Split&quot;: 8, &quot;Add&quot;: 8, &quot;Reshape&quot;: 8, &quot;MaxPool&quot;: 3, &quot;Resize&quot;: 2, &quot;Slice&quot;: 2, &quot;Sub&quot;: 2, &quot;Transpose&quot;: 1, &quot;Softmax&quot;: 1, &quot;Div&quot;: 1</td></tr>
-<tr><td>YOLOv8n: tổng nút ONNX (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>(số học)</td></tr>
-<tr><td>YOLO26n: op ONNX của YOLO(...).export(format=&quot;onnx&quot;), opset 19, onnxslim</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Conv&quot;: 102, &quot;Mul&quot;: 90, &quot;Sigmoid&quot;: 88, &quot;Concat&quot;: 23, &quot;Add&quot;: 22, &quot;Reshape&quot;: 12, &quot;Split&quot;: 11, &quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Softmax&quot;: 2, &quot;Resize&quot;: 2, &quot;Slice&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 1</td></tr>
-<tr><td>YOLO26n: tổng nút ONNX (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>(số học)</td></tr>
-<tr><td>YOLOv8n: op ONNX thật đưa vào onnx2rknn (có _NormalizeCoords)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Conv&quot;: 64, &quot;Sigmoid&quot;: 58, &quot;Mul&quot;: 58, &quot;Concat&quot;: 18, &quot;Split&quot;: 8, &quot;Add&quot;: 8, &quot;Reshape&quot;: 8, &quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Resize&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 2, &quot;Transpose&quot;: 1, &quot;Softmax&quot;: 1</td></tr>
-<tr><td>YOLOv8n: tổng nút ONNX đường RKNN (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>(số học)</td></tr>
-<tr><td>YOLOv8n: đầu ra ONNX đường RKNN [1, 9, 8400]</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;output&quot;: [ [ 1, 9, 8400 ] ]</td></tr>
-<tr><td>YOLO26n: op ONNX thật đưa vào onnx2rknn (có _NormalizeCoords)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Conv&quot;: 102, &quot;Mul&quot;: 90, &quot;Sigmoid&quot;: 88, &quot;Concat&quot;: 24, &quot;Add&quot;: 22, &quot;Reshape&quot;: 12, &quot;Split&quot;: 11, &quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4, &quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Softmax&quot;: 2, &quot;Resize&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 2</td></tr>
-<tr><td>YOLO26n: tổng nút ONNX đường RKNN (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>(số học)</td></tr>
-<tr><td>YOLO26n: đầu ra ONNX đường RKNN [1, 9, 8400]</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;output&quot;: [ [ 1, 9, 8400 ] ]</td></tr>
+<tr><td>YOLOv8n: op ONNX của YOLO(...).export(format=&quot;onnx&quot;), opset 19, onnxslim</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Conv&quot;: 64, &quot;Sigmoid&quot;: 58, &quot;Mul&quot;: 58, &quot;Concat&quot;: 17, &quot;Split&quot;: 8, &quot;Add&quot;: 8, &quot;Reshape&quot;: 8, &quot;MaxPool&quot;: 3, &quot;Resize&quot;: 2, &quot;Slice&quot;: 2, &quot;Sub&quot;: 2, &quot;Transpose&quot;: 1, &quot;Softmax&quot;: 1, &quot;Div&quot;: 1</td></tr>
+<tr><td>YOLOv8n: tổng nút ONNX (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>(số học)</td></tr>
+<tr><td>YOLO26n: op ONNX của YOLO(...).export(format=&quot;onnx&quot;), opset 19, onnxslim</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Conv&quot;: 102, &quot;Mul&quot;: 90, &quot;Sigmoid&quot;: 88, &quot;Concat&quot;: 23, &quot;Add&quot;: 22, &quot;Reshape&quot;: 12, &quot;Split&quot;: 11, &quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Softmax&quot;: 2, &quot;Resize&quot;: 2, &quot;Slice&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 1</td></tr>
+<tr><td>YOLO26n: tổng nút ONNX (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>(số học)</td></tr>
+<tr><td>YOLOv8n: op ONNX thật đưa vào onnx2rknn (có _NormalizeCoords)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Conv&quot;: 64, &quot;Sigmoid&quot;: 58, &quot;Mul&quot;: 58, &quot;Concat&quot;: 18, &quot;Split&quot;: 8, &quot;Add&quot;: 8, &quot;Reshape&quot;: 8, &quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Resize&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 2, &quot;Transpose&quot;: 1, &quot;Softmax&quot;: 1</td></tr>
+<tr><td>YOLOv8n: tổng nút ONNX đường RKNN (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>(số học)</td></tr>
+<tr><td>YOLOv8n: đầu ra ONNX đường RKNN [1, 9, 8400]</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;output&quot;: [ [ 1, 9, 8400 ] ]</td></tr>
+<tr><td>YOLO26n: op ONNX thật đưa vào onnx2rknn (có _NormalizeCoords)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;Conv&quot;: 102, &quot;Mul&quot;: 90, &quot;Sigmoid&quot;: 88, &quot;Concat&quot;: 24, &quot;Add&quot;: 22, &quot;Reshape&quot;: 12, &quot;Split&quot;: 11, &quot;Transpose&quot;: 4, &quot;MatMul&quot;: 4, &quot;Slice&quot;: 4, &quot;MaxPool&quot;: 3, &quot;Softmax&quot;: 2, &quot;Resize&quot;: 2, &quot;Sub&quot;: 2, &quot;Div&quot;: 2</td></tr>
+<tr><td>YOLO26n: tổng nút ONNX đường RKNN (số học: cộng các op ở dòng trên)</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>(số học)</td></tr>
+<tr><td>YOLO26n: đầu ra ONNX đường RKNN [1, 9, 8400]</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;output&quot;: [ [ 1, 9, 8400 ] ]</td></tr>
 <tr><td>YOLOv8n: số lớp RKNN loại ConvExSwish (bảng xếp hạng thời gian của eval_perf)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolov8n_AUTO.txt</td><td>ConvExSwish 57 0 0 11184 11184 59.87%</td></tr>
 <tr><td>YOLOv8n: số lớp RKNN loại exSoftmax13 (bảng xếp hạng thời gian của eval_perf)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolov8n_AUTO.txt</td><td>exSoftmax13 1 0 0 2105 2105 11.27%</td></tr>
 <tr><td>YOLOv8n: số lớp RKNN loại Concat (bảng xếp hạng thời gian của eval_perf)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolov8n_AUTO.txt</td><td>Concat 17 0 0 1625 1625 8.70%</td></tr>
@@ -3071,13 +3338,13 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>MaxPool: strides_h ∈ (0, 8]</td><td>T1</td><td>OPL tr.79</td><td>strides_h ∈ (0, 8]</td></tr>
 <tr><td>MaxPool: ceil_mode không hỗ trợ</td><td>T1</td><td>OPL tr.79</td><td>使用 ceil 或 floor 的方式计算输出的 shape : 不支持</td></tr>
 <tr><td>MaxPool: pad_top ∈ [0, 7]</td><td>T1</td><td>OPL tr.80</td><td>pad_top ∈ [0, 7]</td></tr>
-<tr><td>MaxPool: ONNX kernel 5, pads 2, strides 1, ceil_mode 0</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;maxpool_attrs&quot;: [ { &quot;ceil_mode&quot;: 0, &quot;dilations&quot;: [ 1, 1 ], &quot;kernel_shape&quot;: [ 5, 5 ], &quot;pads&quot;: [ 2, 2, 2, 2 ], &quot;strides&quot;: [ 1, 1 ] } ]</td></tr>
+<tr><td>MaxPool: ONNX kernel 5, pads 2, strides 1, ceil_mode 0</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;maxpool_attrs&quot;: [ { &quot;ceil_mode&quot;: 0, &quot;dilations&quot;: [ 1, 1 ], &quot;kernel_shape&quot;: [ 5, 5 ], &quot;pads&quot;: [ 2, 2, 2, 2 ], &quot;strides&quot;: [ 1, 1 ] } ]</td></tr>
 <tr><td>Resize: mục NPU 3.2.54, int8, float16</td><td>T1</td><td>OPL tr.86</td><td>3.2.54 Resize</td></tr>
 <tr><td>Resize: coordinate_transformation_mode chỉ half_pixel, pytorch_half_pixel, align_corners</td><td>T1</td><td>OPL tr.87</td><td>目前仅支持 half_pixel，pytorch_half_pixel，align_corners 三种</td></tr>
 <tr><td>Resize: nearest_mode không hỗ trợ đặt</td><td>T1</td><td>OPL tr.87</td><td>nearest_mode : strings（默认值为”round_prefer_floor”） – 目前不支持设置</td></tr>
 <tr><td>Resize: chỉ phóng nguyên lần 2 đến 8</td><td>T1</td><td>OPL tr.87</td><td>缩放倍数为 2‑8 的整数倍</td></tr>
 <tr><td>Resize: đa lõi 不支持</td><td>T1</td><td>OPL tr.87</td><td>多核联合: 不支持</td></tr>
-<tr><td>Resize ONNX: nearest, asymmetric, floor, scale 2</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;coordinate_transformation_mode&quot;: &quot;asymmetric&quot;, &quot;cubic_coeff_a&quot;: -0.75, &quot;mode&quot;: &quot;nearest&quot;, &quot;nearest_mode&quot;: &quot;floor&quot;</td></tr>
+<tr><td>Resize ONNX: nearest, asymmetric, floor, scale 2</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;coordinate_transformation_mode&quot;: &quot;asymmetric&quot;, &quot;cubic_coeff_a&quot;: -0.75, &quot;mode&quot;: &quot;nearest&quot;, &quot;nearest_mode&quot;: &quot;floor&quot;</td></tr>
 <tr><td>Upsample chỉ có mục CPU 4.67</td><td>T1</td><td>OPL tr.329</td><td>4.67 Upsample</td></tr>
 <tr><td>UG232: toolkit đổi Resize thành ConvTranspose</td><td>T1</td><td>UG232 tr.176</td><td>the RKNN-Toolki2 will convert Reszie to ConvTranspose</td></tr>
 <tr><td>UG232: optimization_level=2 đưa Resize về CPU</td><td>T1</td><td>UG232 tr.176</td><td>At this time, the Resize Op will use the CPU</td></tr>
@@ -3103,12 +3370,12 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Cast: chỉ có mục CPU 4.7</td><td>T1</td><td>OPL tr.320</td><td>4.7 Cast</td></tr>
 <tr><td>Flatten: chỉ có mục CPU 4.19</td><td>T1</td><td>OPL tr.322</td><td>4.19 Flatten</td></tr>
 <tr><td>OPSUP: TopK Not Supported</td><td>T1</td><td>OPSUP dòng 189</td><td>TopK | Not Supported</td></tr>
-<tr><td>ONNX end2end bật: TopK</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;TopK&quot;: 2</td></tr>
-<tr><td>ONNX end2end bật: GatherElements</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;GatherElements&quot;: 3</td></tr>
-<tr><td>ONNX end2end bật: ReduceMax</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;ReduceMax&quot;: 1</td></tr>
-<tr><td>ONNX end2end bật: Mod</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Mod&quot;: 1</td></tr>
-<tr><td>ONNX end2end bật: Cast</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Cast&quot;: 1</td></tr>
-<tr><td>ONNX end2end bật: Flatten</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Flatten&quot;: 1</td></tr>
+<tr><td>ONNX end2end bật: TopK</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;TopK&quot;: 2</td></tr>
+<tr><td>ONNX end2end bật: GatherElements</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;GatherElements&quot;: 3</td></tr>
+<tr><td>ONNX end2end bật: ReduceMax</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;ReduceMax&quot;: 1</td></tr>
+<tr><td>ONNX end2end bật: Mod</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Mod&quot;: 1</td></tr>
+<tr><td>ONNX end2end bật: Cast</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Cast&quot;: 1</td></tr>
+<tr><td>ONNX end2end bật: Flatten</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/ops_via_exporter.json</td><td>&quot;Flatten&quot;: 1</td></tr>
 <tr><td>UG232 tr.75: danh sách op đã có chia nhiệm vụ đa lõi</td><td>T1</td><td>UG232 tr.75</td><td>Conv, DepthwiseConvolution, Add, Concat, Relu, Clip, Relu6, ThresholdedRelu, PRelu, and LeakyRelu</td></tr>
 <tr><td>UG232 Table 8-2: Depthwise Conv INT8 kênh 64</td><td>T1</td><td>UG232 tr.145</td><td>Int8 32 32 64 16</td></tr>
 <tr><td>UG232 tr.142: Conv+Sigmoid(Tanh/Elu/Silu...)</td><td>T1</td><td>UG232 tr.142</td><td>Conv+Sigmoid(Tanh/Elu/Silu...)</td></tr>
@@ -3144,9 +3411,9 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Hành vi đầu end2end bật trên board chưa đo</td><td>T3</td><td>(không có)</td><td>(unknown)</td></tr>
 <tr><td>Concat axis -1 trên tensor 3 chiều: OPL ghi shape 4 chiều, điều kiện unknown</td><td>T1</td><td>(không có)</td><td>(unknown)</td></tr>
 <tr><td>Điều kiện steps của hai nút Slice từ _NormalizeCoords chưa kiểm được</td><td>T1</td><td>(không có)</td><td>(unknown)</td></tr>
-<tr><td>Concat ONNX: axis 1 và axis -1</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;concat_axes&quot;: { &quot;1&quot;: 22, &quot;-1&quot;: 2 }</td></tr>
-<tr><td>Split ONNX YOLO26n: axis 1 và axis 2</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;split_axes&quot;: { &quot;1&quot;: 9, &quot;2&quot;: 2 }</td></tr>
-<tr><td>Softmax ONNX YOLO26n: axis -1</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;softmax_axes&quot;: { &quot;-1&quot;: 2 }</td></tr>
+<tr><td>Concat ONNX: axis 1 và axis -1</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;concat_axes&quot;: { &quot;1&quot;: 22, &quot;-1&quot;: 2 }</td></tr>
+<tr><td>Split ONNX YOLO26n: axis 1 và axis 2</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;split_axes&quot;: { &quot;1&quot;: 9, &quot;2&quot;: 2 }</td></tr>
+<tr><td>Softmax ONNX YOLO26n: axis -1</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;softmax_axes&quot;: { &quot;-1&quot;: 2 }</td></tr>
 <tr><td>Training-only: bỏ DFL, reg_max 1 (YOFF)</td><td>T2</td><td>YOFF tr.6</td><td>YOLO26 removes the Distribution Focal Loss (DFL) module from the detection head.</td></tr>
 <tr><td>Training-only: ProgLoss, STAL (Y26A, không đổi đồ thị theo mô tả)</td><td>T2</td><td>Y26A tr.4</td><td>ProgLoss adaptively reweights objectives to prevent domination by easy examples late in training</td></tr>
 <tr><td>Training-only: MuSGD là bộ tối ưu hóa</td><td>T2</td><td>Y26A tr.7</td><td>the introduction of the MuSGD optimizer</td></tr>
@@ -3157,7 +3424,7 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>exSDPAttention: channel ∈ (0, 8192]</td><td>T1</td><td>OPL tr.104</td><td>channel ∈ (0, 8192]</td></tr>
 <tr><td>T3 với SiLU: Add đứng riêng (YOLOv8n 8 Add cạnh 57 ConvExSwish, không có ConvAdd)</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolov8n_AUTO.txt</td><td>(số học)</td></tr>
 <tr><td>T3: YOLO26n không có lớp exSoftmax13 và không có lớp Transpose; không còn MatMul, Softmax</td><td>T3</td><td>LOG 2026-10-10_yolo-phaseA/raw/layers_yolo26n_AUTO.txt</td><td>(số học)</td></tr>
-<tr><td>Concat ONNX YOLOv8n: axis 1 ở 16 nút, axis -1 ở 2 nút</td><td>T1 tính</td><td>REPO docs/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;concat_axes&quot;: { &quot;1&quot;: 16, &quot;-1&quot;: 2 }</td></tr>
+<tr><td>Concat ONNX YOLOv8n: axis 1 ở 16 nút, axis -1 ở 2 nút</td><td>T1 tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/09-yolo/data/rknn_path_onnx.json</td><td>&quot;concat_axes&quot;: { &quot;1&quot;: 16, &quot;-1&quot;: 2 }</td></tr>
 <tr><td>Tên ConvExSwish không có trong OPL và UG232</td><td>T1</td><td>(không có)</td><td>(unknown)</td></tr>
 <tr><td>exMatMul: đa lõi 不支持</td><td>T1</td><td>OPL tr.102</td><td>多核联合: 不支持</td></tr>
 </tbody></table></details></div></article>
@@ -3646,7 +3913,7 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>INT16: API232 w16a16i chỉ RV1103 và RV1106</td><td>T1</td><td>API232 tr.7</td><td>Only RV1103/RV1106 supported</td></tr>
 <tr><td>Calibration normal 20-100 ảnh</td><td>T1</td><td>API232 tr.8</td><td>The recommended quantization data is generally about 20-100 pieces.</td></tr>
 <tr><td>Calibration 20-200 ở UG232 tr.159</td><td>T1</td><td>UG232 tr.159</td><td>For normal or kl_divergence, 20-200 sets of data are recommended.</td></tr>
-<tr><td>Hybrid hàng 5, 6, 8 không có nguồn phân xử</td><td>T1</td><td>REPO docs/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md:23</td><td>Hàng 5, 6, 8 không có code hay nguồn thứ ba phân xử</td></tr>
+<tr><td>Hybrid hàng 5, 6, 8 không có nguồn phân xử</td><td>T1</td><td>REPO docs/tools/visual_guide/npu_rk3588/04-luong-tu-rknn/chu-thich.md:23</td><td>Hàng 5, 6, 8 không có code hay nguồn thứ ba phân xử</td></tr>
 <tr><td>17 sự kiện ngắt</td><td>T1</td><td>TRM1 tr.2053</td><td>one of the 17 possible events that the RKNN can signal to the host processor</td></tr>
 <tr><td>Bit 13 là bit cuối được mô tả</td><td>T1</td><td>TRM1 tr.1995</td><td>mask[13]: DMA write error;</td></tr>
 <tr><td>Errata #1: PD_NPUTOP còn BIU_NPUTOP</td><td>T1</td><td>TRM1 tr.1093</td><td>BIU_NPUTOP</td></tr>
@@ -3687,7 +3954,7 @@ details summary{cursor:pointer;color:var(--blue)}
 <tr><td>Độ chính xác INT8 của khối attention chưa đo (Hình 9.4)</td><td>T3</td><td>(không có)</td><td>(unknown)</td></tr>
 <tr><td>Tên ConvExSwish không có trong OPL, UG232 (Hình 9.3)</td><td>T1</td><td>(không có)</td><td>(unknown)</td></tr>
 <tr><td>Quy tắc nhận exSDPAttention (Hình 9.3)</td><td>T1</td><td>(không có)</td><td>(unknown)</td></tr>
-<tr><td>Số dòng unknown mỗi phần (phép đếm của bộ hình trên bảng nguồn các phần 1 đến 10)</td><td>tính</td><td>REPO docs/visual_guide/npu_rk3588/11-chon-model/gen.py</td><td>(số học)</td></tr>
+<tr><td>Số dòng unknown mỗi phần (phép đếm của bộ hình trên bảng nguồn các phần 1 đến 10)</td><td>tính</td><td>REPO docs/tools/visual_guide/npu_rk3588/11-chon-model/gen.py</td><td>(số học)</td></tr>
 </tbody></table></details></div></article>
 <div class="mistakes"><h3>Hiểu sai thường gặp</h3><table><thead><tr><th>Hiểu sai</th><th>Đúng, kèm nguồn</th></tr></thead><tbody>
 <tr><td>"YOLO26n chậm hơn nên bị loại"</td><td>mới có độ trễ trên trọng số ngẫu nhiên (chậm hơn khoảng 13 đến 16%), quy tắc không dùng số này; loại hay không do mAP INT8 và trung vị tier 1 của model đã huấn luyện [REPO model-selection-rule.md; LOG phaseA README.md] (<a class="xref" href="#hinh-11-1">Hình 11.1</a>, <a class="xref" href="#hinh-10-4">Hình 10.4</a>)</td></tr>

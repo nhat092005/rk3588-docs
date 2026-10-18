@@ -10,7 +10,7 @@
    - Có 7 mâu thuẫn tài liệu đã ghi nhận, ví dụ runtime tối thiểu cho SRAM ">=1.3.4b14" so với ">=1.6.0", và `rknn_mem_size.reserved` là `reserved[12]` so với `reserved[10]`.
    - `RKNN_FLAG_SHARE_SRAM` có định nghĩa trong HDR dòng 72 nhưng UG232 tr.108 nói "has not yet been implemented".
    - Băng thông đỉnh DDR của RK3588S, cấu hình DRAM thực của board và việc `RW(KB)`, `DDRCycles` là đo hay tính từ mô hình đều còn `unknown`.
-   - Weight SRAM bằng cờ C API còn `unknown`, và 68KB còn lại của 1MB SRAM chưa được giải thích; wheel 2.3.2 không có API Python zero-copy.
+   - Weight SRAM bằng cờ C API còn `unknown`, và 68KB còn lại của 1MB SRAM chưa được giải thích, wheel 2.3.2 không có API Python zero-copy.
    - Định dạng `rknpu/load` lúc nhàn rỗi đã đọc được trên board ngày 2026-10-10 (Core0, Core1, Core2 đều 0%), nhưng chu kỳ lấy mẫu vẫn chưa đo.
 
 .. contents:: Trong trang này
@@ -29,14 +29,14 @@ Phép đo T3 cần có (chỉ liệt kê, chưa thực hiện)
      - Phép đo
      - Để trả lời
    * - 1
-     - Tần số DDR, NPU, CPU thực tế khi chạy; xác nhận ``fix_freq`` có hiệu lực
+     - Tần số DDR, NPU, CPU thực tế khi chạy, xác nhận ``fix_freq`` có hiệu lực
      - tần số mặc định và khi cố định
    * - 2
      - Loại DRAM, số kênh, dung lượng thực của board
      - cấu hình DDR của RK3588S
    * - 3
      - Băng thông DDR đạt được thực tế (ví dụ ``mbw`` như EDGE tr.3)
-     - thay chỗ trống của 7.1; so với 8807 MiB/s của EDGE
+     - thay chỗ trống của 7.1, so với 8807 MiB/s của EDGE
    * - 4
      - Trạng thái SRAM: ``dmesg``, ``rknpu/mm``, ``total_sram_size``, ``free_sram_size``
      - 956KB có được cấp thực tế không
@@ -88,7 +88,7 @@ Mâu thuẫn đã ghi nhận
      - UG232 tr.107: cờ ``RKNN_FLAG_ENABLE_SRAM``, chỉ Internal
    * - 3
      - ``RKNN_FLAG_SHARE_SRAM``
-     - HDR dòng 72: có định nghĩa; RT232 tr.19 mô tả như dùng được
+     - HDR dòng 72: có định nghĩa. RT232 tr.19 mô tả như dùng được
      - UG232 tr.108: "has not yet been implemented"
    * - 4
      - ``rknn_mem_size.reserved``
@@ -115,24 +115,24 @@ Còn thiếu nguồn (unknown)
 
    * - Câu hỏi
      - Truy vấn hoặc cách kiểm
-   * - Băng thông đỉnh DDR của RK3588S và board; số kênh RK3588S
-     - "RK3588S datasheet memory interface LPDDR4X channels bandwidth"; T3
+   * - Băng thông đỉnh DDR của RK3588S và board, số kênh RK3588S
+     - "RK3588S datasheet memory interface LPDDR4X channels bandwidth". T3
    * - Cấu hình DRAM thực của board
-     - schematic hoặc BOM chính thức của board; T3 log boot
+     - schematic hoặc BOM chính thức của board. T3 log boot
    * - ``RW(KB)`` và ``DDRCycles`` là đo hay tính từ mô hình
      - "RKNN eval_perf DDRCycles RW(KB) definition"
-   * - Định dạng đầu ra ``rknpu/load``. Đóng một phần (T1 DRV, T3): xem 7.3. Đóng (T3 board, đọc bằng sudo 2026-10-10; log T3 board 2026-10-10): ``NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,`` lúc nhàn rỗi; chu kỳ lấy mẫu vẫn chưa đo
+   * - Định dạng đầu ra ``rknpu/load``. Đóng một phần (T1 DRV, T3): xem 7.3. Đóng (T3 board, đọc bằng sudo 2026-10-10, log T3 board 2026-10-10): ``NPU load:  Core0:  0%, Core1:  0%, Core2:  0%,`` lúc nhàn rỗi, chu kỳ lấy mẫu vẫn chưa đo
      - T3, hoặc ``rknpu_debugger.c``
-   * - Weight SRAM bằng cờ C API; lý do hai version runtime khác nhau. Đóng một phần (T1 DRV, T3): ``CONFIG_ROCKCHIP_RKNPU_SRAM`` không đặt trên board nên ``rknpu/mm`` không tồn tại; hiệu lực cờ SRAM trong C API trên board vẫn ``unknown`` (xem 7.2)
+   * - Weight SRAM bằng cờ C API, lý do hai version runtime khác nhau. Đóng một phần (T1 DRV, T3): ``CONFIG_ROCKCHIP_RKNPU_SRAM`` không đặt trên board nên ``rknpu/mm`` không tồn tại, hiệu lực cờ SRAM trong C API trên board vẫn ``unknown`` (xem 7.2)
      - "RKNN release notes RKNN_INTERNAL_MEM_TYPE introduced librknnrt version"
    * - Độ trễ, băng thông SYSTEM_SRAM nhìn từ NPU
      - "RK3588 TRM share memory NPU AXI slave port"
-   * - 68KB còn lại của 1MB SRAM; vùng chỉ truy cập secure
+   * - 68KB còn lại của 1MB SRAM, vùng chỉ truy cập secure
      - "RK3588 system SRAM secure region size"
    * - Có API Python zero-copy không
      - wheel 2.3.2 không có
    * - T2 về thiết kế mạng cho thiết bị có DRAM và NPU
-     - "layer fusion reduce DRAM traffic CNN accelerator"; "activation memory scheduling NPU edge DRAM bandwidth"
+     - "layer fusion reduce DRAM traffic CNN accelerator"."activation memory scheduling NPU edge DRAM bandwidth"
 
 .. |UG232 Figure 8-5| image:: ../../_assets/img/npu/07_memory_performance/ug232_p140_fig8-5.png
 .. |UG232 Figure 5-5 và 5-6| image:: ../../_assets/img/npu/07_memory_performance/ug232_p65_fig5-5_fig5-6.png

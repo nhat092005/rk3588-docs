@@ -7,11 +7,11 @@ Bốn nhóm metric
 .. admonition:: Tóm tắt
 
    - AI Quality khoá v1 theo mặc định val của Ultralytics 8.4.154: LetterBox 640×640 `rect=False`, NMS conf 0.001, IoU 0.7, max_det 300, AP nội suy 101 điểm.
-   - Accuracy `.rknn` đo bằng inference trên board, NMS và AP chạy trên PC; với model nháp, FP16 ra mAP50-95 0.3677 so với FP32 0.3669.
+   - Accuracy `.rknn` đo bằng inference trên board, NMS và AP chạy trên PC. Với model nháp, FP16 ra mAP50-95 0.3677 so với FP32 0.3669.
    - Số của `model.val()` in ra lúc train không dùng để điền bảng, vì với `.pt` Ultralytics tự bật `rect=True` còn model export thì tắt.
    - Model Complexity đo trên model đã fuse ở 640×640 với MACs = GFLOPs / 2, không dùng kích thước `.pt` vì `best.pt` lưu ở FP16.
-   - Tầng 1 dùng `eval_perf(fix_freq=True)` với 3 phiên `init_runtime` riêng; tầng 2 chạy trên board với 20 lần warmup rồi toàn bộ ảnh `sfchd_test`.
-   - FPS_latency và Throughput FPS đo hai thứ khác nhau; DAHD-YOLO báo latency 79.1 ms nhưng 50.2 FPS vì dùng thread pool 3 core.
+   - Tầng 1 dùng `eval_perf(fix_freq=True)` với 3 phiên `init_runtime` riêng, còn tầng 2 chạy trên board với 20 lần warmup rồi toàn bộ ảnh `sfchd_test`.
+   - FPS_latency và Throughput FPS đo hai thứ khác nhau. Cụ thể, DAHD-YOLO báo latency 79.1 ms nhưng 50.2 FPS vì dùng thread pool 3 core.
 
 .. contents:: Trong trang này
    :local:
@@ -45,7 +45,7 @@ AI Quality
    * - Tham số
      - Giá trị
    * - Tập đánh giá
-     - eval set ``sfchd_test`` (1,238 ảnh) cho mọi model; thêm ``shel5k_test`` (500 ảnh) và ``chv_test`` (44 ảnh, mới) cho model Lựa chọn 2
+     - eval set ``sfchd_test`` (1,238 ảnh) cho mọi model. Thêm ``shel5k_test`` (500 ảnh) và ``chv_test`` (44 ảnh, mới) cho model Lựa chọn 2
    * - Resize
      - Resize cạnh dài về 640, rồi LetterBox 640×640 vuông (``rect=False``), không phóng to thêm, căn giữa, viền màu 114
    * - NMS
@@ -55,11 +55,11 @@ AI Quality
    * - Precision / Recall
      - lấy tại ngưỡng conf cho F1 trung bình lớn nhất
    * - Model ``.rknn`` (FP16/INT8)
-     - Inference chạy trên board bằng RKNNLite với đúng input của evaluator; NMS và AP chạy trên PC bằng cùng code như FP32
+     - Inference chạy trên board bằng RKNNLite với đúng input của evaluator. Khâu NMS và AP chạy trên PC bằng cùng code như FP32
 
-Nguồn trong ``.venv/lib/python3.12/site-packages/ultralytics/``: ``cfg/default.yaml`` (conf, iou, max_det), ``data/base.py`` ``load_image`` (resize cạnh dài), ``data/dataset.py`` dòng 320 (LetterBox khi val), ``models/yolo/detect/val.py`` ``postprocess`` (``multi_label=True``), ``utils/metrics.py`` (``compute_ap``: *"101-point interp (COCO)"*; ``ap_per_class``: *"max-F1 precision, recall"*).
+Nguồn trong ``.venv/lib/python3.12/site-packages/ultralytics/``: ``cfg/default.yaml`` (conf, iou, max_det), ``data/base.py`` ``load_image`` (resize cạnh dài), ``data/dataset.py`` dòng 320 (LetterBox khi val), ``models/yolo/detect/val.py`` ``postprocess`` (``multi_label=True``), ``utils/metrics.py`` (``compute_ap``: *"101-point interp (COCO)"*, ``ap_per_class``: *"max-F1 precision, recall"*).
 
-**Accuracy của ``.rknn``:** ``ai/board/infer_dump.py`` chạy trên board, ghi output thô của mọi anchor có score lớn nhất > 0.001 (anchor khác không thể qua NMS ở conf 0.001, nên không mất thông tin) kèm md5 input từng ảnh; PC đọc lại bằng ``RknnDumpBackend``, kiểm md5 trùng input của evaluator, rồi NMS và AP như FP32. Không gọi ``rknn.inference()`` từ PC qua ``rknn_server``: đo ngày 2026-09-26 qua Tailscale, 1 ảnh FP16 mất khoảng 35 s (trên board 42 ms), tức khoảng 12 giờ cho 1,238 ảnh. Kiểm đường đo mới với model nháp: FP16 ra mAP50-95 0.3677 so với FP32 0.3669.
+**Accuracy của ``.rknn``:** ``ai/board/infer_dump.py`` chạy trên board, ghi output thô của mọi anchor có score lớn nhất > 0.001 (anchor khác không thể qua NMS ở conf 0.001, nên không mất thông tin) kèm md5 input từng ảnh. PC đọc lại bằng ``RknnDumpBackend``, kiểm md5 trùng input của evaluator, rồi NMS và AP như FP32. Không gọi ``rknn.inference()`` từ PC qua ``rknn_server``: đo ngày 2026-09-26 qua Tailscale, 1 ảnh FP16 mất khoảng 35 s (trên board 42 ms), tức khoảng 12 giờ cho 1,238 ảnh. Kiểm đường đo mới với model nháp: FP16 ra mAP50-95 0.3677 so với FP32 0.3669.
 
 **Khác với ``model.val()`` mặc định:** gọi ``model.val()`` trên file ``.pt`` thì Ultralytics tự bật ảnh chữ nhật (``engine/model.py`` dòng 633: ``custom = {"rect": True}``), còn với model đã export (``.onnx``, ``.rknn``) thì tắt (``engine/validator.py``: ``self.args.rect = False``). Nếu dùng ``model.val()`` nguyên bản, FP32 và INT8 sẽ khác nhau cả ở cách resize chứ không chỉ ở model. NPU chỉ nhận input vuông 640×640, nên protocol v1 khoá ``rect=False`` cho mọi backend. Vì vậy số của ``model.val()`` in ra lúc train (thư mục ``plots/``) không dùng để điền bảng.
 
@@ -95,12 +95,12 @@ Hardware Performance
    Pure NPU inference latency (1 frame)
    Post-processing latency
    End-to-end latency
-   FPS_latency = 1000 / E2E mean (tầng 2); từ tầng 1 thì = 1000 / NPU latency, ghi rõ tầng
+   FPS_latency = 1000 / E2E mean (tầng 2). Nếu tính từ tầng 1 thì = 1000 / NPU latency, ghi rõ tầng
    Throughput FPS (đo trên pipeline thật, ghi rõ số context/luồng và core_mask)
 
 Hai loại FPS đo 2 thứ khác nhau, không đặt cạnh nhau như cùng một loại:
 
-- **FPS_latency**: suy từ latency 1 frame. Latency đo bằng ``rknn.eval_perf()`` khi board kết nối PC; ``fix_freq=True`` (mặc định) cố định tần số phần cứng để đo lặp lại được (:download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`, API ``eval_perf``, trang PDF 18).
+- **FPS_latency**: suy từ latency 1 frame. Latency đo bằng ``rknn.eval_perf()`` khi board kết nối PC, trong đó ``fix_freq=True`` (mặc định) cố định tần số phần cứng để đo lặp lại được (:download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`, API ``eval_perf``, trang PDF 18).
 - **Throughput FPS**: số frame/giây của cả pipeline khi chạy nhiều context/luồng song song. Ví dụ DAHD-YOLO (:download:`dahd_yolo_rk3588_2025.pdf <../../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`, tr.18): latency 1 ảnh 79.1 ms nhưng báo 50.2 FPS (trong khi 1000 / 79.1 ≈ 12.6), vì FPS đo với thread pool 3 core. Paper nguyên văn:
 
 ..
@@ -142,7 +142,7 @@ Hai loại FPS đo 2 thứ khác nhau, không đặt cạnh nhau như cùng mộ
    * - 3
      - ``eval_mem=True``
      - Bộ nhớ NPU (``eval_memory``)
-     - Bắt buộc để ``eval_memory`` chạy (toolkit báo lỗi *"When init runtime, parameter <eval_mem> should be set to True"*); đo thử: bật ``eval_mem`` làm ``eval_perf`` tăng từ 17.2 lên 22.9 ms
+     - Bắt buộc để ``eval_memory`` chạy (toolkit báo lỗi *"When init runtime, parameter <eval_mem> should be set to True"*). Đo thử: bật ``eval_mem`` làm ``eval_perf`` tăng từ 17.2 lên 22.9 ms
 
 Định dạng output của bản 2.3.2 (lưu ở ``tests/fixtures/eval_perf_2.3.2_*.txt``, kiểm bằng ``make test-parsers``): phiên 1 in ``Total Time(us): <n>``, phiên 2 in ``Total Operator Elapsed Per Frame Time(us): <n>`` và bảng layer. ``fix_freq=True`` chuyển governor NPU và DDR sang ``userspace`` ở tần số tối đa (NPU 1 GHz, DDR 2112 MHz) và giữ nguyên sau khi đo.
 
@@ -167,11 +167,11 @@ Hai loại FPS đo 2 thứ khác nhau, không đặt cạnh nhau như cùng mộ
      - Pre + NPU + Post
      - 
 
-Post dùng conf 0.25 (``cfg/default.yaml``: *"defaults: predict=0.25, val=0.001"*) vì tầng 2 đo tốc độ lúc triển khai; với conf 0.001 số box qua NMS lớn hơn nhiều và thời gian post không phản ánh lúc chạy thật.
+Post dùng conf 0.25 (``cfg/default.yaml``: *"defaults: predict=0.25, val=0.001"*) vì tầng 2 đo tốc độ lúc triển khai. Với conf 0.001 số box qua NMS lớn hơn nhiều và thời gian post không phản ánh lúc chạy thật.
 
 - Không bấm giờ quanh ``rknn.inference()`` gọi từ PC: con số sẽ cộng cả thời gian truyền ảnh qua mạng.
 - Tầng 2 dùng ảnh thật vì thời gian NMS phụ thuộc số object trong ảnh. So sánh NPU giữa các model thì dùng tầng 1, vì thời gian NPU không phụ thuộc nội dung ảnh.
-- Khoá tần số CPU/DDR/NPU trước khi đo tầng 2, theo :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 72–73. Tài liệu dùng governor ``userspace``; board này có sẵn governor ``performance`` cho cả CPU, NPU (``fdab0000.npu``) và DDR (``dmc``), giữ mọi clock ở tần số tối đa mà không cần đường debugfs, nên script ``ai/board/lock_freq.sh`` dùng ``performance``. Mọi file kết quả tầng 2 tự ghi governor và tần số trước/sau khi đo (``frequency_before``, ``frequency_after``, cờ ``locked``).
+- Khoá tần số CPU/DDR/NPU trước khi đo tầng 2, theo :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 72–73. Tài liệu dùng governor ``userspace``, nhưng board này có sẵn governor ``performance`` cho cả CPU, NPU (``fdab0000.npu``) và DDR (``dmc``), giữ mọi clock ở tần số tối đa mà không cần đường debugfs, nên script ``ai/board/lock_freq.sh`` dùng ``performance``. Mọi file kết quả tầng 2 tự ghi governor và tần số trước/sau khi đo (``frequency_before``, ``frequency_after``, cờ ``locked``).
 - Throughput FPS ghi rõ số context/luồng và ``core_mask``. Code: ``ai/board/bench_throughput.py`` (mỗi context 1 luồng Python, frame lấy từ 200 ảnh test đã giải mã sẵn trong RAM).
 
 .. _54-resource--energy:
@@ -203,6 +203,6 @@ Resource & Energy
 **Code của protocol v1 (đã có, chi tiết file và lệnh ở :ref:`Runbook <81-runbook>`):**
 
 - ☒ Evaluator chung cho FP32 và NPU: ``ai/core/evaluator.py``, ``ai/core/backends.py``
-- ☒ Bỏ ``measure_map_drop`` cũ trong ``ai/core/rknn/benchmark.py`` (lệch protocol ở 3 chỗ: ``cv2.resize`` kéo thẳng, NMS IoU 0.65, chỉ đọc ``*.jpg``); accuracy NPU nay đo bằng evaluator với backend RKNN (inference trên board, NMS và AP trên PC, xem :ref:`AI Quality <51-ai-quality>`)
+- ☒ Bỏ ``measure_map_drop`` cũ trong ``ai/core/rknn/benchmark.py`` (lệch protocol ở 3 chỗ: ``cv2.resize`` kéo thẳng, NMS IoU 0.65, chỉ đọc ``*.jpg``). Accuracy NPU nay đo bằng evaluator với backend RKNN (inference trên board, NMS và AP trên PC, xem :ref:`AI Quality <51-ai-quality>`)
 - ☒ Code tầng 2 trên board: ``ai/board/bench_npu.py``, ``bench_cpu_onnx.py``, ``bench_throughput.py``
 - ☒ Golden test: ``ai/automation/check_evaluator.py``, số lưu ở ``ai/automation/golden/evaluator_v1.json``

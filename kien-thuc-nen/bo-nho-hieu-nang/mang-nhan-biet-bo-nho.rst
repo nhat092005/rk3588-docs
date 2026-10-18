@@ -12,8 +12,8 @@ Mạng nhận biết bộ nhớ
 
    - MCUNet nêu SRAM giới hạn kích thước activation còn Flash giới hạn kích thước model [T2 MCU tr.3].
    - Cả MCUNet và PhiNets đều tách bộ nhớ làm việc (activation) khỏi bộ nhớ tham số (weight) và tối ưu từng loại riêng.
-   - Detector đa tỉ lệ như YOLOv3 phải giữ activation trung gian nên peak memory tăng mạnh [T2 MCU tr.9]; đây là nhận xét về MCU, không phải bằng chứng cho RK3588.
-   - In-place depthwise đưa peak memory từ 2N xuống N+1 [T2 MCU tr.6]; compiler của Rockchip có làm tương tự hay không là `unknown`.
+   - Detector đa tỉ lệ như YOLOv3 phải giữ activation trung gian nên peak memory tăng mạnh [T2 MCU tr.9]. đây là nhận xét về MCU, không phải bằng chứng cho RK3588.
+   - In-place depthwise đưa peak memory từ 2N xuống N+1 [T2 MCU tr.6], compiler của Rockchip có làm tương tự hay không là `unknown`.
    - MCUNet đo trên STM32 và PhiNets cũng trên MCU, không bài nào đo băng thông DDR hay NPU, nên T2 cho thiết bị có DRAM và NPU còn thiếu.
 
 .. _75-thiết-kế-mạng-nhận-biết-bộ-nhớ-t2:
@@ -51,7 +51,7 @@ Thiết kế mạng nhận biết bộ nhớ (T2)
 
 - Hai bài đều tách rõ bộ nhớ làm việc (activation, trong SRAM hoặc RAM) với bộ nhớ tham số (weight, trong Flash) và tối ưu từng loại riêng.
 - MCUNet nêu detector đa tỉ lệ như YOLOv3 phải giữ activation trung gian nên peak memory tăng mạnh (MCU tr.9). Tổng hợp của file này: đây là nhận xét về MCU, không phải bằng chứng cho hành vi của RK3588.
-- In-place depthwise (MCU tr.6) là kỹ thuật cho MCU có SRAM nhỏ; compiler của Rockchip có làm tương tự hay không là ``unknown``.
+- In-place depthwise (MCU tr.6) là kỹ thuật cho MCU có SRAM nhỏ, compiler của Rockchip có làm tương tự hay không là ``unknown``.
 
 **Giới hạn.** MCUNet đo trên STM32 và PhiNets cũng trên MCU. Không bài nào đo băng thông DDR hay NPU. T2 về thiết kế mạng cho thiết bị có DRAM và NPU còn thiếu (xem truy vấn dưới).
 
