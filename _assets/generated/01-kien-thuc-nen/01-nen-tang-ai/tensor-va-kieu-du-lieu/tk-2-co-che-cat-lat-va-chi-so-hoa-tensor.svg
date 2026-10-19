@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 345" width="900" height="345" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="345" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CƠ CHẾ CẮT LÁT (SLICING) VÀ LẬP CHỈ MỤC TRÊN TENSOR ĐA TRỤC</text>
+<text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Cách trích xuất dữ liệu không gian, kênh màu và mẫu dữ liệu từ Batch: Phân biệt chỉ số cố định và lát cắt range (:)</text>
+<rect x="16" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
+<rect x="24" y="66" width="264" height="26" rx="3" fill="#EDE7F6" stroke="#B39DDB" stroke-width="0.8"/>
+<text x="156.0" y="79" font-size="8.2" font-weight="700" fill="#4A148C" text-anchor="middle" dominant-baseline="central">A. LẤY 1 MẪU TỪ BATCH (4D → 3D)</text>
+<rect x="24" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<polygon points="38,130 48,122 82,122 82,156 72,164 38,164" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.1"/>
+<line x1="72" y1="130" x2="82" y2="122" stroke="#8E24AA" stroke-width="0.9"/>
+<line x1="72" y1="130" x2="72" y2="164" stroke="#8E24AA" stroke-width="0.9"/>
+<line x1="38" y1="130" x2="72" y2="130" stroke="#8E24AA" stroke-width="0.9"/>
+<text x="55.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=0</text>
+<polygon points="84,130 94,122 128,122 128,156 118,164 84,164" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.1"/>
+<line x1="118" y1="130" x2="128" y2="122" stroke="#CE93D8" stroke-width="0.9"/>
+<line x1="118" y1="130" x2="118" y2="164" stroke="#CE93D8" stroke-width="0.9"/>
+<line x1="84" y1="130" x2="118" y2="130" stroke="#CE93D8" stroke-width="0.9"/>
+<text x="101.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=1</text>
+<polygon points="130,130 140,122 174,122 174,156 164,164 130,164" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.1"/>
+<line x1="164" y1="130" x2="174" y2="122" stroke="#CE93D8" stroke-width="0.9"/>
+<line x1="164" y1="130" x2="164" y2="164" stroke="#CE93D8" stroke-width="0.9"/>
+<line x1="130" y1="130" x2="164" y2="130" stroke="#CE93D8" stroke-width="0.9"/>
+<text x="147.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=2</text>
+<text x="55" y="114" font-size="7.2" font-weight="700" fill="#8E24AA" text-anchor="middle" dominant-baseline="central">Trích ảnh i=0</text>
+<path d="M 191 145 L 221 145" stroke="#8E24AA" stroke-width="1.5" marker-end="url(#m1E5BB8n)"/>
+<polygon points="231,130 241,122 275,122 275,156 265,164 231,164" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.1"/>
+<line x1="265" y1="130" x2="275" y2="122" stroke="#8E24AA" stroke-width="0.9"/>
+<line x1="265" y1="130" x2="265" y2="164" stroke="#8E24AA" stroke-width="0.9"/>
+<line x1="231" y1="130" x2="265" y2="130" stroke="#8E24AA" stroke-width="0.9"/>
+<text x="248.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3D</text>
+<text x="28" y="210" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cú pháp thực hiện:</text>
+<rect x="24" y="220" width="264" height="26" rx="3" fill="#263238" stroke="#263238" stroke-width="1.2"/>
+<text x="32" y="233" font-size="7.5" font-weight="400" fill="#80D8FF" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">img = batch[0]  # shape: [C, H, W]</text>
+<text x="28" y="260" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ý nghĩa:</text>
+<text x="28" y="274" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Cố định trục batch n=0, giải phóng trục N.</text>
+<text x="28" y="287" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Giảm bậc từ 4D xuống 3D (C, H, W).</text>
+<text x="28" y="300" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Tương đương cú pháp batch[0, :, :, :].</text>
+<rect x="308" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
+<rect x="316" y="66" width="264" height="26" rx="3" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="0.8"/>
+<text x="448.0" y="79" font-size="8.2" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">B. CẮT KÊNH MÀU CHANNEL (3D → 2D)</text>
+<rect x="316" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<polygon points="328,124 340,116 380,116 380,154 368,162 328,162" fill="#FFCDD2" stroke="#C62828" stroke-width="1.1"/>
+<line x1="368" y1="124" x2="380" y2="116" stroke="#C62828" stroke-width="0.9"/>
+<line x1="368" y1="124" x2="368" y2="162" stroke="#C62828" stroke-width="0.9"/>
+<line x1="328" y1="124" x2="368" y2="124" stroke="#C62828" stroke-width="0.9"/>
+<text x="348.0" y="143.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">R</text>
+<polygon points="363,132 375,124 415,124 415,162 403,170 363,170" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.1"/>
+<line x1="403" y1="132" x2="415" y2="124" stroke="#388E3C" stroke-width="0.9"/>
+<line x1="403" y1="132" x2="403" y2="170" stroke="#388E3C" stroke-width="0.9"/>
+<line x1="363" y1="132" x2="403" y2="132" stroke="#388E3C" stroke-width="0.9"/>
+<text x="383.0" y="151.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">G</text>
+<polygon points="398,140 410,132 450,132 450,170 438,178 398,178" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.1"/>
+<line x1="438" y1="140" x2="450" y2="132" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="438" y1="140" x2="438" y2="178" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="398" y1="140" x2="438" y2="140" stroke="#1E5BB8" stroke-width="0.9"/>
+<text x="418.0" y="159.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">B</text>
+<text x="346" y="113" font-size="7.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Kênh 0 (R)</text>
+<path d="M 468 145 L 503 145" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
+<rect x="516" y="122" width="52" height="46" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="542" y="140" font-size="7.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">2D (H×W)</text>
+<text x="542" y="152" font-size="6.8" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Ma trận ảnh</text>
+<text x="320" y="210" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cú pháp thực hiện:</text>
+<rect x="316" y="220" width="264" height="26" rx="3" fill="#263238" stroke="#263238" stroke-width="1.2"/>
+<text x="324" y="233" font-size="7.5" font-weight="400" fill="#A5D6A7" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">red_plane = img[0, :, :]  # [H, W]</text>
+<text x="320" y="260" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ý nghĩa:</text>
+<text x="320" y="274" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Cố định chỉ số channel c=0 (kênh Red).</text>
+<text x="320" y="287" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Giữ nguyên toàn bộ chiều cao (H) và rộng (W).</text>
+<text x="320" y="300" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Kết quả là một ma trận 2D cường độ điểm ảnh.</text>
+<rect x="600" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
+<rect x="608" y="66" width="264" height="26" rx="3" fill="#E3F2FD" stroke="#90CAF9" stroke-width="0.8"/>
+<text x="740.0" y="79" font-size="8.2" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">C. TRÍCH PIXEL ĐA KÊNH (3D → 1D)</text>
+<rect x="608" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<polygon points="620,124 632,116 672,116 672,154 660,162 620,162" fill="#FFCDD2" stroke="#C62828" stroke-width="1.1"/>
+<line x1="660" y1="124" x2="672" y2="116" stroke="#C62828" stroke-width="0.9"/>
+<line x1="660" y1="124" x2="660" y2="162" stroke="#C62828" stroke-width="0.9"/>
+<line x1="620" y1="124" x2="660" y2="124" stroke="#C62828" stroke-width="0.9"/>
+<text x="640.0" y="143.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">R</text>
+<polygon points="655,132 667,124 707,124 707,162 695,170 655,170" fill="#E8F5E9" stroke="#388E3C" stroke-width="1.1"/>
+<line x1="695" y1="132" x2="707" y2="124" stroke="#388E3C" stroke-width="0.9"/>
+<line x1="695" y1="132" x2="695" y2="170" stroke="#388E3C" stroke-width="0.9"/>
+<line x1="655" y1="132" x2="695" y2="132" stroke="#388E3C" stroke-width="0.9"/>
+<text x="675.0" y="151.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">G</text>
+<polygon points="690,140 702,132 742,132 742,170 730,178 690,178" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.1"/>
+<line x1="730" y1="140" x2="742" y2="132" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="730" y1="140" x2="730" y2="178" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="690" y1="140" x2="730" y2="140" stroke="#1E5BB8" stroke-width="0.9"/>
+<text x="710.0" y="159.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">B</text>
+<circle cx="645" cy="133" r="3" fill="#D50000"/>
+<circle cx="680" cy="141" r="3" fill="#00C853"/>
+<circle cx="715" cy="149" r="3" fill="#2979FF"/>
+<line x1="645" y1="133" x2="715" y2="149" stroke="#D50000" stroke-width="1.5" stroke-dasharray="3 2"/>
+<path d="M 745 145 L 775 145" stroke="#1565C0" stroke-width="1.5" marker-end="url(#m1E5BB8n)"/>
+<rect x="795" y="116" width="40" height="18" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="0.8"/>
+<text x="815" y="125.0" font-size="6.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">R=255</text>
+<rect x="795" y="134" width="40" height="18" rx="3" fill="#E8F5E9" stroke="#388E3C" stroke-width="0.8"/>
+<text x="815" y="143.0" font-size="6.5" font-weight="700" fill="#388E3C" text-anchor="middle" dominant-baseline="central">G=128</text>
+<rect x="795" y="152" width="40" height="18" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="815" y="161.0" font-size="6.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">B=64</text>
+<text x="848" y="143.0" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1D</text>
+<text x="612" y="210" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cú pháp thực hiện:</text>
+<rect x="608" y="220" width="264" height="26" rx="3" fill="#263238" stroke="#263238" stroke-width="1.2"/>
+<text x="616" y="233" font-size="7.5" font-weight="400" fill="#80D8FF" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">pixel = img[:, h, w]  # [C=3]</text>
+<text x="612" y="260" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ý nghĩa:</text>
+<text x="612" y="274" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Cố định tọa độ không gian (h, w).</text>
+<text x="612" y="287" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Trích xuất toàn bộ kênh màu thành vector 1D.</text>
+<text x="612" y="300" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Là pixel biểu diễn màu sắc tại vị trí (h, w).</text>
+<text x="10" y="331" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 D2L tr.31, tr.44, tr.135]. Chỉ số nguyên cố định làm giảm bậc (rank); dấu : giữ nguyên trục.</text>
+</svg>

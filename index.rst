@@ -8,31 +8,31 @@ Tài liệu nghiên cứu phát hiện thiết bị bảo hộ cá nhân (PPE) b
    :caption: Bối cảnh
    :maxdepth: 1
 
-   tong-quan/index
-   kien-thuc-nen/index
+   contents/00-tong-quan/index
+   contents/01-kien-thuc-nen/index
 
 .. toctree::
    :caption: Nghiên cứu
    :maxdepth: 1
 
-   phuong-phap/index
-   ket-qua/index
+   contents/02-phuong-phap/index
+   contents/03-ket-qua/index
 
 .. toctree::
    :caption: Tra cứu
    :maxdepth: 1
 
-   bai-bao/index
-   tai-lieu-hang/index
-   bang-tra/index
+   contents/04-bai-bao/index
+   contents/05-tai-lieu-hang/index
+   contents/06-bang-tra/index
    thuat-ngu
 
 .. toctree::
    :caption: Vận hành
    :maxdepth: 1
 
-   huong-dan/index
-   tien-do/index
+   contents/07-huong-dan/index
+   contents/08-tien-do/index
 
 Các mục
 =======
@@ -44,34 +44,34 @@ Các mục
    * - Mục
      - Trả lời câu hỏi
      - Ai nên đọc
-   * - :doc:`Tổng quan </tong-quan/index>`
+   * - :doc:`Tổng quan </contents/00-tong-quan/index>`
      - Làm gì, vì sao, câu hỏi nghiên cứu và khoảng trống nghiên cứu là gì?
      - Mọi người, đọc đầu tiên
-   * - :doc:`Kiến thức nền </kien-thuc-nen/index>`
+   * - :doc:`Kiến thức nền </contents/01-kien-thuc-nen/index>`
      - Nền tảng AI, NPU, lượng tử hóa, toolchain, bộ nhớ, thiết kế model và YOLO hoạt động ra sao?
      - Người cần hiểu nền tảng
-   * - :doc:`Phương pháp </phuong-phap/index>`
+   * - :doc:`Phương pháp </contents/02-phuong-phap/index>`
      - Dữ liệu, phần cứng, giao thức đánh giá và đặc tả bảng đã khóa như thế nào?
      - Hội đồng, người đánh giá
-   * - :doc:`Kết quả </ket-qua/index>`
+   * - :doc:`Kết quả </contents/03-ket-qua/index>`
      - Số liệu nào đã có, nằm ở file nào, đã đóng băng chưa?
      - Hội đồng, người đánh giá
-   * - :doc:`Bài báo </bai-bao/index>`
+   * - :doc:`Bài báo </contents/04-bai-bao/index>`
      - Một khẳng định lấy từ bài báo nào? (35 bài, bảy chủ đề)
      - Người kiểm nguồn
-   * - :doc:`Tài liệu hãng </tai-lieu-hang/index>`
+   * - :doc:`Tài liệu hãng </contents/05-tai-lieu-hang/index>`
      - Rockchip viết gì (datasheet, TRM, RKNN)?
      - Người kiểm nguồn T1
-   * - :doc:`Bảng tra </bang-tra/index>`
+   * - :doc:`Bảng tra </contents/06-bang-tra/index>`
      - Code nào làm việc gì, từng lớp của model là gì?
      - Người chạy lại hoặc tiếp tục đề tài
    * - :doc:`Thuật ngữ </thuat-ngu>`
      - Tên gọi nào dùng thống nhất trong dự án?
      - Mọi người
-   * - :doc:`Hướng dẫn </huong-dan/index>`
+   * - :doc:`Hướng dẫn </contents/07-huong-dan/index>`
      - Chạy lại từng bước thế nào, lỗi thường gặp xử lý ra sao?
      - Người chạy lại hoặc tiếp tục đề tài
-   * - :doc:`Tiến độ </tien-do/index>`
+   * - :doc:`Tiến độ </contents/08-tien-do/index>`
      - Đã làm tới phase nào, đã khóa quyết định gì, còn chưa rõ điều gì?
      - Người tiếp tục đề tài
 

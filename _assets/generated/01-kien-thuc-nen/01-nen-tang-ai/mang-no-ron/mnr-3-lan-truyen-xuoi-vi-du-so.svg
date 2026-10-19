@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 356" width="900" height="356" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="356" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">LAN TRUYỀN XUÔI (FORWARD PASS) QUA VÍ DỤ SỐ MẠNG 2-2-1</text>
+<text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Minh họa tiến trình tính toán: Biến đổi affine z = W⁽¹⁾x, phi tuyến h = ReLU(z) và đầu ra o = W⁽²⁾h</text>
+<rect x="20" y="56" width="455" height="258" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="32" y="70" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1. ĐỒ THỊ MẠNG 2-2-1 VÀ LUỒNG TÍN HIỆU SỐ</text>
+<text x="32" y="83" font-size="7.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Đầu vào x = (1, 2) · Không bias · Kích hoạt ReLU tại lớp ẩn</text>
+<text x="65" y="95" font-size="7.6" font-weight="700" fill="#0284C7" text-anchor="middle" dominant-baseline="central">Lớp vào x</text>
+<text x="65" y="107" font-size="6.6" font-weight="400" fill="#0369A1" text-anchor="middle" dominant-baseline="central">x ∈ ℝ²</text>
+<text x="236" y="95" font-size="7.6" font-weight="700" fill="#7C3AED" text-anchor="middle" dominant-baseline="central">Lớp ẩn h = ReLU(z)</text>
+<text x="236" y="107" font-size="6.6" font-weight="400" fill="#6D28D9" text-anchor="middle" dominant-baseline="central">2 đơn vị ẩn · W⁽¹⁾</text>
+<text x="415" y="95" font-size="7.6" font-weight="700" fill="#EA580C" text-anchor="middle" dominant-baseline="central">Lớp ra o</text>
+<text x="415" y="107" font-size="6.6" font-weight="400" fill="#C2410C" text-anchor="middle" dominant-baseline="central">1 đơn vị ra · W⁽²⁾</text>
+<line x1="81" y1="138" x2="194" y2="138" stroke="#94A3B8" stroke-width="1.2" marker-end="url(#m94A3B8n)"/>
+<line x1="81" y1="216" x2="194" y2="216" stroke="#94A3B8" stroke-width="1.2" marker-end="url(#m94A3B8n)"/>
+<line x1="81" y1="138" x2="194" y2="216" stroke="#CBD5E1" stroke-width="1.0" marker-end="url(#mCBD5E1n)"/>
+<line x1="81" y1="216" x2="194" y2="138" stroke="#CBD5E1" stroke-width="1.0" marker-end="url(#mCBD5E1n)"/>
+<rect x="118" y="122" width="26" height="13" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="131" y="128" font-size="6.5" font-weight="700" fill="#0284C7" text-anchor="middle" dominant-baseline="central">w=1</text>
+<rect x="115" y="220" width="32" height="13" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="131" y="226" font-size="6.5" font-weight="700" fill="#0284C7" text-anchor="middle" dominant-baseline="central">w=0.5</text>
+<rect x="101" y="155" width="32" height="13" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="117" y="161" font-size="6.5" font-weight="700" fill="#0284C7" text-anchor="middle" dominant-baseline="central">w=0.5</text>
+<rect x="146" y="155" width="28" height="13" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="160" y="161" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">w=-1</text>
+<line x1="278" y1="138" x2="375" y2="177" stroke="#94A3B8" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#m94A3B8n)"/>
+<line x1="278" y1="216" x2="375" y2="177" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#m7C3AEDn)"/>
+<rect x="312" y="144" width="30" height="13" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="327" y="150" font-size="6.5" font-weight="700" fill="#64748B" text-anchor="middle" dominant-baseline="central">w₁=1</text>
+<rect x="312" y="203" width="30" height="13" rx="2" fill="#FFFFFF" stroke="#DDD6FE" stroke-width="0.8"/>
+<text x="327" y="209" font-size="6.5" font-weight="700" fill="#7C3AED" text-anchor="middle" dominant-baseline="central">w₂=2</text>
+<circle cx="65" cy="138" r="16" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+<text x="65" y="138" font-size="8.0" font-weight="700" fill="#0369A1" text-anchor="middle" dominant-baseline="central">x₁ = 1</text>
+<circle cx="65" cy="216" r="16" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.4"/>
+<text x="65" y="216" font-size="8.0" font-weight="700" fill="#0369A1" text-anchor="middle" dominant-baseline="central">x₂ = 2</text>
+<rect x="194" y="117" width="84" height="42" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="236" y="131" font-size="7.2" font-weight="700" fill="#64748B" text-anchor="middle" dominant-baseline="central">z₁ = -1.0</text>
+<text x="236" y="146" font-size="8.0" fill="#DC2626" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>h₁ = </tspan><tspan font-weight="700">0.0</tspan></text>
+<text x="236" y="166" font-size="6.0" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(ReLU triệt tiêu)</text>
+<rect x="194" y="195" width="84" height="42" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="236" y="209" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="middle" dominant-baseline="central">z₂ = +1.5</text>
+<text x="236" y="224" font-size="8.0" fill="#7C3AED" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>h₂ = </tspan><tspan font-weight="700">1.5</tspan></text>
+<text x="236" y="244" font-size="6.0" font-weight="700" fill="#16A34A" text-anchor="middle" dominant-baseline="central">(kích hoạt &gt; 0)</text>
+<rect x="375" y="154" width="80" height="46" rx="8" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.6"/>
+<text x="415" y="167" font-size="7.2" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">o = W⁽²⁾h</text>
+<text x="415" y="185" font-size="11.0" font-weight="700" fill="#EA580C" text-anchor="middle" dominant-baseline="central">= 3.0</text>
+<text x="415" y="208" font-size="6.2" font-weight="400" fill="#9A3412" text-anchor="middle" dominant-baseline="central">(kết quả mạng)</text>
+<rect x="30" y="262" width="435" height="42" rx="3" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="38" y="274" font-size="6.6" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Bản chất: ReLU cắt cụt phần âm (z₁ = -1 &lt; 0 ⇒ h₁ = 0), làm tắt hoàn toàn nhánh ẩn 1.</text>
+<text x="38" y="290" font-size="6.6" fill="#1E293B" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Toàn bộ kết quả ra phụ thuộc nhánh ẩn 2: </tspan><tspan font-weight="700">o = 1·(0) + 2·(1.5) = 0 + 3.0 = 3.0.</tspan></text>
+<rect x="485" y="56" width="395" height="258" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="497" y="70" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. TIẾN TRÌNH TÍNH TOÁN 3 BƯỚC (FORWARD PASS)</text>
+<text x="497" y="83" font-size="7.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Công thức tổng quát bám sát D2L Mục 5.3 [tr. 180]</text>
+<rect x="497" y="90" width="371" height="67" rx="4" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="0.9"/>
+<text x="505" y="102" font-size="7.4" font-weight="700" fill="#0369A1" text-anchor="start" dominant-baseline="central">BƯỚC 1: BIẾN ĐỔI AFFINE ẨN  z = W⁽¹⁾x</text>
+<text x="505" y="117" font-size="7.0" fill="#0C4A6E" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• z₁ = 1·(1) + (-1)·(2) = 1 - 2 = </tspan><tspan font-weight="700">-1.0</tspan></text>
+<text x="505" y="131" font-size="7.0" fill="#0C4A6E" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• z₂ = 0.5·(1) + 0.5·(2) = 0.5 + 1.0 = </tspan><tspan font-weight="700">1.5</tspan></text>
+<text x="505" y="145" font-size="6.8" fill="#0369A1" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>⇒ Vector trung gian: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="5.8">z = [-1.0,  1.5]ᵀ</tspan></text>
+<rect x="497" y="161" width="371" height="67" rx="4" fill="#FAF5FF" stroke="#E9D5FF" stroke-width="0.9"/>
+<text x="505" y="173" font-size="7.4" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">BƯỚC 2: HÀM KÍCH HOẠT PHI TUYẾN  h = φ(z) = ReLU(z)</text>
+<text x="505" y="188" font-size="7.0" fill="#581C87" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• h₁ = ReLU(-1.0) = max(-1.0, 0) = </tspan><tspan font-weight="700">0.0</tspan><tspan>  (âm bị chặn dưới)</tspan></text>
+<text x="505" y="202" font-size="7.0" fill="#581C87" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• h₂ = ReLU(1.5) = max(1.5, 0) = </tspan><tspan font-weight="700">1.5</tspan><tspan>  (dương giữ nguyên)</tspan></text>
+<text x="505" y="216" font-size="6.8" fill="#6B21A8" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>⇒ Vector kích hoạt ẩn: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="5.8">h = [0.0,  1.5]ᵀ</tspan></text>
+<rect x="497" y="232" width="371" height="76" rx="4" fill="#FFF7ED" stroke="#FED7AA" stroke-width="0.9"/>
+<text x="505" y="244" font-size="7.4" font-weight="700" fill="#C2410C" text-anchor="start" dominant-baseline="central">BƯỚC 3: TỔ HỢP TUYẾN TÍNH ĐẦU RA  o = W⁽²⁾h</text>
+<text x="505" y="259" font-size="7.0" fill="#7C2D12" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• o = [1,  2] · [0.0,  1.5]ᵀ = 1·(0.0) + 2·(1.5)</tspan></text>
+<text x="505" y="273" font-size="7.2" fill="#7C2D12" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• o = 0.0 + 3.0 = </tspan><tspan font-weight="700">3.0</tspan></text>
+<rect x="505" y="285" width="355" height="18" rx="3" fill="#FFEDD5" stroke="#FB923C" stroke-width="0.8"/>
+<text x="682.5" y="294" font-size="7.2" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">KẾT QUẢ FORWARD PASS ĐẦU RA: o = 3.0</text>
+<text x="10" y="342" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Dive into Deep Learning (D2L 2023, tr. 180 - Section 5.3: Forward Propagation qua ví dụ số).</text>
+</svg>

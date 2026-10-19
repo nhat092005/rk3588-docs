@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 375" width="900" height="375" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="375" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">BẢN CHẤT CỦA CHANNEL: TỪ KÊNH MÀU RGB ĐẦU VÀO ĐẾN KÊNH ĐẶC TRƯNG (FEATURE MAP)</text>
+<text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Sự chuyển dịch ý nghĩa: Từ 3 kênh màu quang học vật lý đến hàng trăm bản đồ đặc trưng ngữ nghĩa trong mạng sâu</text>
+<rect x="16" y="58" width="376" height="270" rx="5" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.1"/>
+<rect x="24" y="66" width="360" height="26" rx="3" fill="#E3F2FD" stroke="#90CAF9" stroke-width="0.8"/>
+<text x="204.0" y="79" font-size="8.2" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">A. KÊNH MÀU QUANG HỌC VẬT LÝ (INPUT RGB)</text>
+<rect x="26" y="100" width="356" height="88" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<polygon points="42,120 56,110 120,110 120,158 106,168 42,168" fill="#FFCDD2" stroke="#E53935" stroke-width="1.1"/>
+<line x1="106" y1="120" x2="120" y2="110" stroke="#E53935" stroke-width="0.9"/>
+<line x1="106" y1="120" x2="106" y2="168" stroke="#E53935" stroke-width="0.9"/>
+<line x1="42" y1="120" x2="106" y2="120" stroke="#E53935" stroke-width="0.9"/>
+<text x="58" y="144.0" font-size="9" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">R</text>
+<polygon points="78,132 92,122 156,122 156,170 142,180 78,180" fill="#C8E6C9" stroke="#43A047" stroke-width="1.1"/>
+<line x1="142" y1="132" x2="156" y2="122" stroke="#43A047" stroke-width="0.9"/>
+<line x1="142" y1="132" x2="142" y2="180" stroke="#43A047" stroke-width="0.9"/>
+<line x1="78" y1="132" x2="142" y2="132" stroke="#43A047" stroke-width="0.9"/>
+<text x="94" y="156.0" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">G</text>
+<polygon points="114,144 128,134 192,134 192,182 178,192 114,192" fill="#BBDEFB" stroke="#1E88E5" stroke-width="1.1"/>
+<line x1="178" y1="144" x2="192" y2="134" stroke="#1E88E5" stroke-width="0.9"/>
+<line x1="178" y1="144" x2="178" y2="192" stroke="#1E88E5" stroke-width="0.9"/>
+<line x1="114" y1="144" x2="178" y2="144" stroke="#1E88E5" stroke-width="0.9"/>
+<text x="146.0" y="168.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">B</text>
+<text x="221" y="122" font-size="7.8" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">Shape ảnh gốc: (C=3, H, W)</text>
+<text x="221" y="138" font-size="7.0" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• R: Kênh Đỏ (Red)</text>
+<text x="221" y="152" font-size="7.0" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• G: Kênh Lục (Green)</text>
+<text x="221" y="166" font-size="7.0" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">• B: Kênh Lam (Blue)</text>
+<text x="221" y="180" font-size="6.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Kích thước H × W giữ nguyên</text>
+<rect x="26" y="196" width="356" height="118" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<text x="34" y="212" font-size="7.8" font-weight="700" fill="#263238" text-anchor="start" dominant-baseline="central">Bản chất vật lý của Kênh màu RGB:</text>
+<text x="34" y="230" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đo cường độ bức xạ ánh sáng trên 3 dải bước sóng quang học.</text>
+<text x="34" y="244" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Mỗi vị trí (h, w) mang vector 3 phần tử [R, G, B] chỉ màu sắc điểm ảnh.</text>
+<text x="34" y="258" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Số channel cố định theo cảm biến camera (3 cho RGB, 1 cho xám).</text>
+<text x="34" y="276" font-size="7.0" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">Trích dẫn D2L tr.252:</text>
+<text x="34" y="292" font-size="6.8" font-weight="400" fill="#37474F" text-anchor="start" dominant-baseline="central" font-style="italic">&quot;each RGB input image has shape 3 × h × w. We refer to</text>
+<text x="34" y="304" font-size="6.8" font-weight="400" fill="#37474F" text-anchor="start" dominant-baseline="central" font-style="italic"> this axis, with a size of 3, as the channel dimension.&quot;</text>
+<rect x="400" y="88" width="100" height="210" rx="4" fill="#FFFDE7" stroke="#FFF59D" stroke-width="0.9"/>
+<text x="450.0" y="106" font-size="7.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">CÁC LỚP</text>
+<text x="450.0" y="118" font-size="7.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">TÍCH CHẬP</text>
+<text x="450.0" y="130" font-size="6.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">(CONVOLUTION)</text>
+<path d="M418 156 L476 156" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<text x="450.0" y="176" font-size="6.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Bộ lọc trượt (Kernels)</text>
+<text x="450.0" y="188" font-size="6.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">học đặc trưng đa tầng</text>
+<rect x="406" y="202" width="88" height="86" rx="3" fill="#FFFFFF" stroke="#FFF176" stroke-width="0.6"/>
+<text x="450.0" y="216" font-size="6.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Quy luật D2L:</text>
+<text x="450.0" y="230" font-size="6.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Mạng càng sâu:</text>
+<text x="450.0" y="246" font-size="6.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">• Channel ↑ (tăng)</text>
+<text x="450.0" y="258" font-size="6.2" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central"> (3 → 64 → 256)</text>
+<text x="450.0" y="272" font-size="6.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">• Không gian ↓ (giảm)</text>
+<text x="450.0" y="282" font-size="6.2" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central"> (H × W thu nhỏ)</text>
+<rect x="508" y="58" width="376" height="270" rx="5" fill="#FCFDFD" stroke="#CFD8DC" stroke-width="1.1"/>
+<rect x="516" y="66" width="360" height="26" rx="3" fill="#EDE7F6" stroke="#D1C4E9" stroke-width="0.8"/>
+<text x="696.0" y="79" font-size="8.2" font-weight="700" fill="#512DA8" text-anchor="middle" dominant-baseline="central">B. KÊNH ĐẶC TRƯNG NGỮ NGHĨA (FEATURE MAPS)</text>
+<rect x="518" y="100" width="356" height="88" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<polygon points="532,119 542,112 596,112 596,154 586,161 532,161" fill="#EDE7F6" stroke="#7E57C2" stroke-width="1.1"/>
+<line x1="586" y1="119" x2="596" y2="112" stroke="#7E57C2" stroke-width="0.9"/>
+<line x1="586" y1="119" x2="586" y2="161" stroke="#7E57C2" stroke-width="0.9"/>
+<line x1="532" y1="119" x2="586" y2="119" stroke="#7E57C2" stroke-width="0.9"/>
+<text x="544" y="140.0" font-size="8" font-weight="700" fill="#512DA8" text-anchor="middle" dominant-baseline="central">0</text>
+<polygon points="558,127 568,120 622,120 622,162 612,169 558,169" fill="#D1C4E9" stroke="#5E35B1" stroke-width="1.1"/>
+<line x1="612" y1="127" x2="622" y2="120" stroke="#5E35B1" stroke-width="0.9"/>
+<line x1="612" y1="127" x2="612" y2="169" stroke="#5E35B1" stroke-width="0.9"/>
+<line x1="558" y1="127" x2="612" y2="127" stroke="#5E35B1" stroke-width="0.9"/>
+<text x="570" y="148.0" font-size="8" font-weight="700" fill="#512DA8" text-anchor="middle" dominant-baseline="central">1</text>
+<polygon points="584,135 594,128 648,128 648,170 638,177 584,177" fill="#B39DDB" stroke="#4527A0" stroke-width="1.1"/>
+<line x1="638" y1="135" x2="648" y2="128" stroke="#4527A0" stroke-width="0.9"/>
+<line x1="638" y1="135" x2="638" y2="177" stroke="#4527A0" stroke-width="0.9"/>
+<line x1="584" y1="135" x2="638" y2="135" stroke="#4527A0" stroke-width="0.9"/>
+<text x="596" y="156.0" font-size="8" font-weight="700" fill="#4527A0" text-anchor="middle" dominant-baseline="central">2</text>
+<polygon points="610,143 620,136 674,136 674,178 664,185 610,185" fill="#9575CD" stroke="#311B92" stroke-width="1.1"/>
+<line x1="664" y1="143" x2="674" y2="136" stroke="#311B92" stroke-width="0.9"/>
+<line x1="664" y1="143" x2="664" y2="185" stroke="#311B92" stroke-width="0.9"/>
+<line x1="610" y1="143" x2="664" y2="143" stroke="#311B92" stroke-width="0.9"/>
+<text x="637.0" y="164.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">255</text>
+<text x="704" y="122" font-size="7.8" font-weight="700" fill="#512DA8" text-anchor="start" dominant-baseline="central">Shape tầng sâu: (C=256, H&#x27;, W&#x27;)</text>
+<text x="704" y="138" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ch 0: Bản đồ cạnh &amp; góc</text>
+<text x="704" y="152" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ch 1: Hoa văn, kết cấu bề mặt</text>
+<text x="704" y="166" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ch 2..k: Hình dạng bộ phận vật thể</text>
+<text x="704" y="180" font-size="6.8" font-weight="400" fill="#512DA8" text-anchor="start" dominant-baseline="central">• Kích thước H&#x27; × W&#x27; co nhỏ lại</text>
+<rect x="518" y="196" width="356" height="118" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
+<text x="526" y="212" font-size="7.8" font-weight="700" fill="#263238" text-anchor="start" dominant-baseline="central">Bản chất toán học của Feature Map:</text>
+<text x="526" y="230" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Không còn là màu sắc! Là mức độ phản ứng với một đặc trưng cụ thể.</text>
+<text x="526" y="244" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tầng nông học cạnh viền, góc; tầng sâu học bộ phận (bánh xe, khuôn mặt).</text>
+<text x="526" y="258" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Số channel được quyết định bởi số bộ lọc (kernels) thiết kế trong kiến trúc.</text>
+<text x="526" y="276" font-size="7.0" font-weight="700" fill="#512DA8" text-anchor="start" dominant-baseline="central">Trích dẫn D2L tr.238:</text>
+<text x="526" y="292" font-size="6.8" font-weight="400" fill="#37474F" text-anchor="start" dominant-baseline="central" font-style="italic">&quot;They are also sometimes called feature maps, as each</text>
+<text x="526" y="304" font-size="6.8" font-weight="400" fill="#37474F" text-anchor="start" dominant-baseline="central" font-style="italic"> provides a spatialized set of learned features for the subsequent layer.&quot;</text>
+<text x="10" y="361" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 D2L tr.44, tr.135, tr.238, tr.252, tr.253]. Kênh màu đo quang học; Kênh đặc trưng đo mức kích hoạt của thuộc tính học được.</text>
+</svg>

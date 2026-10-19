@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 328" width="900" height="328" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="328" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CẤU TRÚC NEURON VÀ PHÉP BIẾN ĐỔI AFFINE (ŷ = wᵀx + b)</text>
+<text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Mô hình toán học của một neuron: Đầu vào, trọng số, bias, bộ cộng tích lũy và ví dụ tính số thực tế</text>
+<rect x="20" y="56" width="455" height="230" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="32" y="72" font-size="8.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1. SƠ ĐỒ GIẢI PHẪU NEURON (AFFINE)</text>
+<rect x="30" y="86" width="44" height="186" rx="4" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="0.8"/>
+<text x="52" y="97" font-size="7.2" font-weight="700" fill="#455A64" text-anchor="middle" dominant-baseline="central">Đầu vào</text>
+<text x="52" y="109" font-size="7.5" fill="#1E88E5" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">x ∈ ℝ</tspan><tspan>ᵈ</tspan></text>
+<circle cx="52" cy="132" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.2"/>
+<text x="52" y="132" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="52" cy="170" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.2"/>
+<text x="52" y="170" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="52" cy="193" r="1.5" fill="#78909C"/>
+<circle cx="52" cy="199" r="1.5" fill="#78909C"/>
+<circle cx="52" cy="205" r="1.5" fill="#78909C"/>
+<circle cx="52" cy="232" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.2"/>
+<text x="52" y="232" font-size="8.0" fill="#0D47A1" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">x</tspan><tspan>d</tspan></text>
+<circle cx="265" cy="176" r="44" fill="#FFFFFF" stroke="#37474F" stroke-width="1.8"/>
+<text x="265" y="154" font-size="7.2" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">THÂN NEURON</text>
+<text x="265" y="174" font-size="26" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">∑</text>
+<text x="265" y="196" font-size="6.8" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">Bộ cộng tích lũy</text>
+<text x="140" y="97" font-size="7.2" font-weight="700" fill="#777777" text-anchor="middle" dominant-baseline="central">Trọng số (w)</text>
+<text x="140" y="109" font-size="6.4" font-weight="400" fill="#90A4AE" text-anchor="middle" dominant-baseline="central">(Khớp thần kinh)</text>
+<path d="M 64.7 134.6 L 221.9 167.1" stroke="#1E88E5" stroke-width="1.4" fill="none" marker-end="url(#m1E5BB8n)"/>
+<rect x="119.88977473505861" y="140.9161975978525" width="28" height="16" rx="3" fill="#FFFFFF" stroke="#90CAF9" stroke-width="0.9"/>
+<text x="133.8897747350586" y="148.9161975978525" font-size="8.0" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">w₁</text>
+<path d="M 65.0 170.4 L 221.0 174.8" stroke="#1E88E5" stroke-width="1.4" fill="none" marker-end="url(#m1E5BB8n)"/>
+<rect x="119.64478984951421" y="164.2998532351976" width="28" height="16" rx="3" fill="#FFFFFF" stroke="#90CAF9" stroke-width="0.9"/>
+<text x="133.6447898495142" y="172.2998532351976" font-size="8.0" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">w₂</text>
+<path d="M 64.6 228.7 L 222.4 187.2" stroke="#1E88E5" stroke-width="1.4" fill="none" marker-end="url(#m1E5BB8n)"/>
+<rect x="120.03702941444612" y="202.43157912108458" width="28" height="16" rx="3" fill="#FFFFFF" stroke="#90CAF9" stroke-width="0.9"/>
+<text x="134.03702941444612" y="210.43157912108458" font-size="7.5" fill="#0D47A1" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">w</tspan><tspan>d</tspan></text>
+<circle cx="265" cy="98" r="12" fill="#FFF8E1" stroke="#FFB300" stroke-width="1.3"/>
+<text x="265" y="98" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">+b</text>
+<text x="283" y="94" font-size="7.2" font-weight="700" fill="#BF360C" text-anchor="start" dominant-baseline="central">Bias b (độ lệch / offset)</text>
+<text x="283" y="105" font-size="6.5" font-weight="400" fill="#D84315" text-anchor="start" dominant-baseline="central">Dịch chuyển độc lập</text>
+<path d="M 265 110 L 265 132" stroke="#E65100" stroke-width="1.5" fill="none" marker-end="url(#m222222n)"/>
+<path d="M 309 176 L 386 176" stroke="#222222" stroke-width="2.2" fill="none" marker-end="url(#m222222n)"/>
+<text x="347.5" y="164" font-size="7.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tín hiệu ra</text>
+<circle cx="408" cy="176" r="20" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.6"/>
+<text x="408" y="176" font-size="17" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">ŷ</text>
+<text x="408" y="204" font-size="7.5" fill="#1B5E20" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">ŷ = </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="6.5">wᵀx + b</tspan></text>
+<text x="408" y="218" font-size="6.8" font-weight="400" fill="#388E3C" text-anchor="middle" dominant-baseline="central" font-style="italic">(Biến đổi Affine)</text>
+<rect x="490" y="56" width="390" height="230" rx="4" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="502" y="70" font-size="8.8" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">2. MINH HỌA TÍNH SỐ THỰC TẾ (VÍ DỤ TỰ TÍNH TRONG BÀI)</text>
+<rect x="502" y="84" width="366" height="34" rx="3" fill="#F5F5F5" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="510" y="95" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Dữ liệu ví dụ mục 1:</text>
+<text x="510" y="107" font-size="7.2" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="6.2">• x = (1.0, 2.0, 3.0)</tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="6.2">  |  w = (0.5, -1.0, 0.25)</tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="6.2">  |  b = 0.1</tspan></text>
+<rect x="502" y="124" width="366" height="42" rx="3" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="0.8"/>
+<text x="510" y="135" font-size="7.5" font-weight="700" fill="#0D47A1" text-anchor="start" dominant-baseline="central">Bước 1: Tính tích từng đặc trưng với trọng số (wᵢ · xᵢ)</text>
+<rect x="510" y="143" width="115.33333333333333" height="18" rx="2" fill="#E3F2FD" stroke="#90CAF9" stroke-width="0.8"/>
+<text x="567.6666666666666" y="152" font-size="6.8" fill="#0D47A1" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>w₁x₁ = 0.5 × 1.0 = </tspan><tspan font-weight="700">+0.50</tspan></text>
+<rect x="629.3333333333334" y="143" width="115.33333333333333" height="18" rx="2" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="0.8"/>
+<text x="687.0" y="152" font-size="6.8" fill="#C62828" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>w₂x₂ = -1.0 × 2.0 = </tspan><tspan font-weight="700">-2.00</tspan></text>
+<rect x="748.6666666666666" y="143" width="115.33333333333333" height="18" rx="2" fill="#E3F2FD" stroke="#90CAF9" stroke-width="0.8"/>
+<text x="806.3333333333333" y="152" font-size="6.8" fill="#0D47A1" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>w₃x₃ = 0.25 × 3.0 = </tspan><tspan font-weight="700">+0.75</tspan></text>
+<rect x="502" y="172" width="366" height="42" rx="3" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="0.8"/>
+<text x="510" y="183" font-size="7.5" font-weight="700" fill="#0D47A1" text-anchor="start" dominant-baseline="central">Bước 2: Tính tổng có trọng số rồi cộng bias (wᵀx + b)</text>
+<text x="510" y="199" font-size="7.5" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tổng các tích = </tspan><tspan>0.5 - 2.0 + 0.75 = </tspan><tspan font-weight="700">-0.75</tspan><tspan>  |  Cộng bias: </tspan><tspan>-0.75 + 0.1 = </tspan><tspan font-weight="700">-0.65</tspan></text>
+<rect x="502" y="220" width="366" height="56" rx="4" fill="#E8F5E9" stroke="#4CAF50" stroke-width="1.2"/>
+<text x="510" y="234" font-size="8.0" font-weight="700" fill="#1B5E20" text-anchor="start" dominant-baseline="central">KẾT QUẢ ĐẦU RA NEURON (AFFINE TRANSFORMATION):</text>
+<text x="510" y="251" font-size="7.5" fill="#1B5E20" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y = w₁x₁ + w₂x₂ + w₃x₃ + b = 0.5 - 2.0 + 0.75 + 0.1 = </tspan><tspan font-weight="700">-0.65</tspan></text>
+<text x="510" y="265" font-size="7.0" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central" font-style="italic">✓ Khớp 100% với công thức và kết quả tính toán trong bài học.</text>
+<text x="10" y="314" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Dive into Deep Learning (D2L 2023, tr. 83-84, 90); Số liệu tự tính bám sát văn bản bài học.</text>
+</svg>

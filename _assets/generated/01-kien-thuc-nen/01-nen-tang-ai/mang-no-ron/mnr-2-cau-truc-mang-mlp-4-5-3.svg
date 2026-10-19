@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 352" width="900" height="352" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="352" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CẤU TRÚC MẠNG NHIỀU LỚP (MLP) VÀ QUY TẮC ĐẾM LỚP</text>
+<text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Mô hình mạng Perceptron đa tầng 4-5-3 (D2L Fig. 5.1.1): Cấu trúc Fully Connected và quy tắc xác định số lớp</text>
+<rect x="20" y="56" width="455" height="254" rx="4" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="1.0"/>
+<text x="32" y="70" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">1. ĐỒ HÌNH MẠNG MLP 4-5-3 (D2L FIG. 5.1.1)</text>
+<text x="75" y="86" font-size="7.8" font-weight="700" fill="#455A64" text-anchor="middle" dominant-baseline="central">Lớp đầu vào</text>
+<text x="75" y="98" font-size="6.6" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(4 đặc trưng)</text>
+<text x="230" y="86" font-size="7.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Lớp ẩn (Hidden)</text>
+<text x="230" y="98" font-size="6.6" font-weight="400" fill="#FB8C00" text-anchor="middle" dominant-baseline="central">(5 đơn vị ẩn · W⁽¹⁾)</text>
+<text x="385" y="86" font-size="7.8" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">Lớp đầu ra (Output)</text>
+<text x="385" y="98" font-size="6.6" font-weight="400" fill="#43A047" text-anchor="middle" dominant-baseline="central">(3 kết quả · W⁽²⁾)</text>
+<text x="152.5" y="98" font-size="6.8" fill="#1E88E5" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Liên kết W⁽¹⁾</tspan></text>
+<text x="307.5" y="98" font-size="6.8" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Liên kết W⁽²⁾</tspan></text>
+<line x1="88.0" y1="127.5" x2="217.0" y2="122.5" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.8" y1="130.0" x2="217.2" y2="150.0" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.3" y1="132.3" x2="217.7" y2="177.7" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="86.4" y1="134.2" x2="218.6" y2="205.8" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="85.5" y1="135.7" x2="219.5" y2="234.3" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.5" y1="160.6" x2="217.5" y2="125.4" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="88.0" y1="163.0" x2="217.0" y2="153.0" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.9" y1="165.5" x2="217.1" y2="180.5" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.4" y1="167.8" x2="217.6" y2="208.2" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="86.6" y1="169.8" x2="218.4" y2="236.2" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="86.6" y1="194.2" x2="218.4" y2="127.8" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.4" y1="196.2" x2="217.6" y2="155.8" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.9" y1="198.5" x2="217.1" y2="183.5" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="88.0" y1="201.0" x2="217.0" y2="211.0" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.5" y1="203.4" x2="217.5" y2="238.6" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="85.5" y1="228.3" x2="219.5" y2="129.7" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="86.4" y1="229.8" x2="218.6" y2="158.2" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.3" y1="231.7" x2="217.7" y2="186.3" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="87.8" y1="234.0" x2="217.2" y2="214.0" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="88.0" y1="236.5" x2="217.0" y2="241.5" stroke="#90CAF9" stroke-width="0.8"/>
+<line x1="242.9" y1="123.7" x2="372.1" y2="140.3" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.1" y1="126.7" x2="372.9" y2="177.3" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="240.9" y1="129.0" x2="374.1" y2="215.0" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="243.0" y1="151.2" x2="372.0" y2="142.8" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.8" y1="154.5" x2="372.2" y2="179.5" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="241.8" y1="157.4" x2="373.2" y2="216.6" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.6" y1="178.8" x2="372.4" y2="145.2" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="243.0" y1="182.0" x2="372.0" y2="182.0" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.6" y1="185.2" x2="372.4" y2="218.8" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="241.8" y1="206.6" x2="373.2" y2="147.4" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.8" y1="209.5" x2="372.2" y2="184.5" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="243.0" y1="212.8" x2="372.0" y2="221.2" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="240.9" y1="235.0" x2="374.1" y2="149.0" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.1" y1="237.3" x2="372.9" y2="186.7" stroke="#C8E6C9" stroke-width="0.9"/>
+<line x1="242.9" y1="240.3" x2="372.1" y2="223.7" stroke="#C8E6C9" stroke-width="0.9"/>
+<circle cx="75" cy="128" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.3"/>
+<text x="75" y="128" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="75" cy="164" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.3"/>
+<text x="75" y="164" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="75" cy="200" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.3"/>
+<text x="75" y="200" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₃</text>
+<circle cx="75" cy="236" r="13" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.3"/>
+<text x="75" y="236" font-size="8.5" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">x₄</text>
+<circle cx="230" cy="122" r="13" fill="#FFF3E0" stroke="#FB8C00" stroke-width="1.3"/>
+<text x="230" y="122" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">h₁</text>
+<circle cx="230" cy="152" r="13" fill="#FFF3E0" stroke="#FB8C00" stroke-width="1.3"/>
+<text x="230" y="152" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">h₂</text>
+<circle cx="230" cy="182" r="13" fill="#FFF3E0" stroke="#FB8C00" stroke-width="1.3"/>
+<text x="230" y="182" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">h₃</text>
+<circle cx="230" cy="212" r="13" fill="#FFF3E0" stroke="#FB8C00" stroke-width="1.3"/>
+<text x="230" y="212" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">h₄</text>
+<circle cx="230" cy="242" r="13" fill="#FFF3E0" stroke="#FB8C00" stroke-width="1.3"/>
+<text x="230" y="242" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">h₅</text>
+<circle cx="385" cy="142" r="13" fill="#E8F5E9" stroke="#43A047" stroke-width="1.3"/>
+<text x="385" y="142" font-size="8.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">o₁</text>
+<circle cx="385" cy="182" r="13" fill="#E8F5E9" stroke="#43A047" stroke-width="1.3"/>
+<text x="385" y="182" font-size="8.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">o₂</text>
+<circle cx="385" cy="222" r="13" fill="#E8F5E9" stroke="#43A047" stroke-width="1.3"/>
+<text x="385" y="222" font-size="8.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">o₃</text>
+<rect x="33" y="265" width="84" height="32" rx="4" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="75" y="276" font-size="6.8" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">0 phép tính</text>
+<text x="75" y="287" font-size="6.2" font-weight="400" fill="#90A4AE" text-anchor="middle" dominant-baseline="central" font-style="italic">(Không tính lớp)</text>
+<rect x="180" y="265" width="100" height="32" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="0.8"/>
+<text x="230" y="276" font-size="6.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Lớp tính toán 1</text>
+<text x="230" y="287" font-size="6.2" font-weight="400" fill="#FB8C00" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ẩn - 5 units)</text>
+<rect x="335" y="265" width="100" height="32" rx="4" fill="#C8E6C9" stroke="#81C784" stroke-width="0.8"/>
+<text x="385" y="276" font-size="6.8" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">Lớp tính toán 2</text>
+<text x="385" y="287" font-size="6.2" font-weight="400" fill="#43A047" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ra - 3 units)</text>
+<rect x="490" y="56" width="390" height="254" rx="4" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="502" y="70" font-size="8.5" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">2. BẢN CHẤT KIẾN TRÚC &amp; QUY TẮC ĐẾM LỚP</text>
+<rect x="502" y="84" width="366" height="56" rx="3" fill="#FFFDE7" stroke="#FFF59D" stroke-width="0.8"/>
+<text x="512" y="96" font-size="7.6" font-weight="700" fill="#F57F17" text-anchor="start" dominant-baseline="central">★ QUY TẮC ĐẾM SỐ LỚP CỦA MLP (D2L tr.169):</text>
+<text x="512" y="111" font-size="7.2" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• </tspan><tspan>Mạng có 3 tầng node, nhưng chỉ được tính là </tspan><tspan font-weight="700">MẠNG 2 LỚP (2-layer MLP).</tspan></text>
+<text x="512" y="126" font-size="6.8" font-weight="400" fill="#5D4037" text-anchor="start" dominant-baseline="central">• Lớp đầu vào không được tính vì không thực hiện phép tính và không có tham số.</text>
+<rect x="502" y="148" width="366" height="80" rx="3" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="0.8"/>
+<rect x="502" y="148" width="366" height="20" fill="#ECEFF1" rx="3"/>
+<text x="514" y="158" font-size="7.0" font-weight="700" fill="#37474F" text-anchor="start" dominant-baseline="central">Tầng</text>
+<text x="566" y="158" font-size="7.0" font-weight="700" fill="#37474F" text-anchor="start" dominant-baseline="central">Vai trò &amp; Phép biến đổi</text>
+<text x="835" y="158" font-size="7.0" font-weight="700" fill="#37474F" text-anchor="middle" dominant-baseline="central">Số đơn vị</text>
+<line x1="502" y1="168" x2="868" y2="168" stroke="#CFD8DC" stroke-width="0.6"/>
+<text x="514" y="178" font-size="7.0" font-weight="700" fill="#0D47A1" text-anchor="start" dominant-baseline="central">Đầu vào</text>
+<text x="566" y="178" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Nhận vector đặc trưng x ∈ ℝ⁴ (không tham số)</text>
+<text x="835" y="178" font-size="7.2" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">4</text>
+<line x1="502" y1="188" x2="868" y2="188" stroke="#CFD8DC" stroke-width="0.6"/>
+<text x="514" y="198" font-size="7.0" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">Lớp ẩn</text>
+<text x="566" y="198" font-size="6.8" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Fully connected: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="5.8">h = φ(W⁽¹⁾x + b⁽¹⁾)</tspan><tspan> (đơn vị ẩn)</tspan></text>
+<text x="835" y="198" font-size="7.2" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">5</text>
+<line x1="502" y1="208" x2="868" y2="208" stroke="#CFD8DC" stroke-width="0.6"/>
+<text x="514" y="218" font-size="7.0" font-weight="700" fill="#1B5E20" text-anchor="start" dominant-baseline="central">Đầu ra</text>
+<text x="566" y="218" font-size="6.8" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Fully connected: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="5.8">o = W⁽²⁾h + b⁽²⁾</tspan><tspan> (xuất kết quả)</tspan></text>
+<text x="835" y="218" font-size="7.2" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="502" y="236" width="366" height="64" rx="3" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="0.8"/>
+<text x="512" y="248" font-size="7.5" font-weight="700" fill="#1B5E20" text-anchor="start" dominant-baseline="central">BẢN CHẤT LIÊN KẾT ĐẦY ĐỦ (FULLY CONNECTED):</text>
+<text x="512" y="263" font-size="6.8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Mỗi neuron tầng sau nhận tín hiệu từ toàn bộ neuron ở tầng ngay trước nó.</text>
+<text x="512" y="278" font-size="7.0" fill="#1B5E20" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Tổng tham số của mạng: </tspan><tspan font-weight="700">(4×5 + 5) + (5×3 + 3) = 25 + 18 = 43 tham số.</tspan></text>
+<text x="512" y="290" font-size="6.4" font-weight="400" fill="#388E3C" text-anchor="start" dominant-baseline="central" font-style="italic">  (20 trọng số + 5 bias lớp ẩn; 15 trọng số + 3 bias lớp ra).</text>
+<text x="10" y="338" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Dive into Deep Learning (D2L 2023, tr. 167, 169 - Fig. 5.1.1).</text>
+</svg>

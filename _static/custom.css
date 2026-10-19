@@ -112,6 +112,8 @@ body, .rst-content, .wy-menu-vertical, .wy-nav-content {
 .rst-content p, .rst-content li { font-size: 17.5px; line-height: 1.7; }
 .rst-content a, .rst-content a:visited { color: var(--link); }
 .rst-content a:hover { color: #1e40af; }
+/* `.. contents::` turns each section title into a back-link (a.toc-backref). Keep titles ink-coloured, also once visited. */
+.rst-content a.toc-backref, .rst-content a.toc-backref:visited, .rst-content a.toc-backref:hover { color: inherit; }
 
 /* ---------- Tables: wrap, never clip or scroll ---------- */
 .wy-table-responsive { overflow: visible; margin-bottom: 1.5em; }
