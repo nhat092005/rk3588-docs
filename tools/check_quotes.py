@@ -8,12 +8,18 @@ Nhãn không có PDF (DRV, DTS, SRAM-zh) bị bỏ qua.
 import re
 import subprocess
 import sys
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent
 ROOT = DOCS.parent
 PDF = {
+    "Chen 2016": DOCS / "_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf",
+    "Jouppi 2017": DOCS / "_assets/pdf/papers/01_hardware/tpu_datacenter_2017jouppi.pdf",
+    "Min 2023": DOCS / "_assets/pdf/papers/01_hardware/flexer_multi_npu_2023min.pdf",
+    "Gao 2023": DOCS / "_assets/pdf/papers/01_hardware/layer_puzzle_multicore_2023gao.pdf",
+    "Jung 2023": DOCS / "_assets/pdf/papers/01_hardware/mobile_multicore_npu_2023jung.pdf",
     "TRM1": DOCS / "_assets/pdf/datasheet/trm/rk3588_part1.pdf",
     "TRM2": DOCS / "_assets/pdf/datasheet/trm/rk3588_part2.pdf",
     "DS V1.7": DOCS / "_assets/pdf/datasheet/soc/Rockchip_RK3588S_Datasheet_V1.7.pdf",
@@ -24,6 +30,10 @@ PDF = {
     "OPL": DOCS / "_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf",
     "UG232": ROOT / "3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf",
     "QS232": ROOT / "3rdparty/rknn-toolkit2/doc/01_Rockchip_RKNPU_Quick_Start_RKNN_SDK_V2.3.2_EN.pdf",
+    "Nagel 2021": DOCS / "_assets/pdf/papers/02_quantization/quant_whitepaper_2021nagel.pdf",
+    "Gholami 2021": DOCS / "_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf",
+    "Wang 2023": DOCS / "_assets/pdf/papers/02_quantization/qyolo_ptq_2023wang.pdf",
+    "Baghbanbashi 2024": DOCS / "_assets/pdf/papers/02_quantization/quant_yolov7_2024.pdf",
 }
 CITE = re.compile(r"\[T[12] (?P<label>[A-Za-z0-9 .]+?) (?:tr|pdf)\.? ?(?P<page>\d+)[^\]]*\]")
 Q1 = r'"(?:(?!\n\n)[^"]){12,}"'
@@ -33,6 +43,7 @@ QUOTE = re.compile(r'"((?:(?!\n\n)[^"])+)"')
 
 
 def norm(s):
+    s = unicodedata.normalize("NFKD", s)
     return re.sub(r"[^0-9a-z]+", "", s.lower())
 
 

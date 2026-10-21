@@ -2,12 +2,10 @@
 YOLO
 ****
 
-Kiến trúc YOLOv8n và YOLO26n, và tiêu chí thân thiện NPU.
+Kiến trúc YOLOv8n và YOLO26n, và huấn luyện đổi đồ thị suy luận ra sao. Phần chạy trên RK3588 nằm ở Nền tảng RK3588.
 
 .. toctree::
    :maxdepth: 1
 
-   01-so-sanh-va-khoi-cau-thanh
-   02-do-thi-xuat
-   03-tieu-chi-than-thien-npu
-   04-huan-luyen-he-qua-dieu-chua-ro
+   01-kien-truc-va-khoi-cau-thanh-yolo
+   02-bien-doi-do-thi-suy-luan

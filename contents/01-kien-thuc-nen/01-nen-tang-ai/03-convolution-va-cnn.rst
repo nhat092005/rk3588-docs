@@ -82,7 +82,7 @@ Bốn giá trị đầu ra được tính tại từng vị trí cửa sổ [T2 
      - :math:`4 \cdot 0 + 5 \cdot 1 + 7 \cdot 2 + 8 \cdot 3`
      - :math:`43`
 
-Liên hệ RK3588: Mảng nhân cộng MAC array của NPU RK3588 tính toán song song các tích vô hướng của cửa sổ trượt này (xem :doc:`MAC và PE array </contents/01-kien-thuc-nen/02-npu/01-vi-sao-can-npu-va-mac>`).
+Liên hệ RK3588: Mảng nhân cộng MAC array của NPU RK3588 tính toán song song các tích vô hướng của cửa sổ trượt này (xem :doc:`MAC và PE array </contents/01-kien-thuc-nen/02-npu/01-kien-truc-npu-va-mac>`).
 
 2. Kernel, stride, padding, dilation và công thức kích thước đầu ra
 ===================================================================
@@ -125,7 +125,7 @@ Khi kernel có độ giãn nở (dilation hay atrous convolution), khoảng các
 
    Cơ chế Padding, Stride và Atrous Dilation trong Convolution 2D: (1) Padding đệm viền bảo toàn kích thước không gian; (2) Stride nhảy cách quãng thu nhỏ đặc trưng thay thế pooling; (3) Dilation mở rộng trường tiếp nhận mà không tăng số lượng trọng số.
 
-Liên hệ RK3588: Bộ điều khiển tiền xử lý (pre-process controller) của NPU RK3588 hỗ trợ trực tiếp các chế độ stride, padding và atrous dilation ở cấp thanh ghi phần cứng [T1 TRM1 tr.1985]. NPU không cần ghi các hàng/cột padding số 0 ra ngoài DRAM mà tự động tiêm giá trị 0 trực tiếp vào mảng MAC, tiết kiệm tối đa dung lượng bộ nhớ và băng thông (xem :doc:`DPU và chế độ conv </contents/01-kien-thuc-nen/02-npu/05-rk3588-cau-truc-npu-core>`).
+Liên hệ RK3588: Bộ điều khiển tiền xử lý (pre-process controller) của NPU RK3588 hỗ trợ trực tiếp các chế độ stride, padding và atrous dilation ở cấp thanh ghi phần cứng [T1 TRM1 tr.1985]. NPU không cần ghi các hàng/cột padding số 0 ra ngoài DRAM mà tự động tiêm giá trị 0 trực tiếp vào mảng MAC, tiết kiệm tối đa dung lượng bộ nhớ và băng thông (xem :doc:`DPU và chế độ conv </contents/02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core>`).
 
 3. Receptive field (Trường tiếp nhận)
 =====================================
@@ -174,7 +174,7 @@ Việc xếp chồng nhiều lớp tích chập với kernel nhỏ (ví dụ hai
      - Hiếm dùng trong CNN hiện đại
      - Dễ ánh xạ phần cứng NPU, tối ưu hóa bộ đệm CBUF
 
-Liên hệ RK3588: Trong các mô hình phát hiện vật thể, receptive field quyết định khả năng nhận diện các vật thể có kích thước lớn ở các tầng đặc trưng sâu (xem :doc:`Các khối cấu thành của detector </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
+Liên hệ RK3588: Trong các mô hình phát hiện vật thể, receptive field quyết định khả năng nhận diện các vật thể có kích thước lớn ở các tầng đặc trưng sâu (xem :doc:`Các khối cấu thành của detector </contents/01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`).
 
 4. Nhiều kênh vào, nhiều kênh ra, đếm params và MACs
 ====================================================
@@ -213,7 +213,7 @@ Về khối lượng tính toán, sách nêu độ phức tạp cho ảnh :math:
 - Số tham số: :math:`32 \cdot 16 \cdot 3 \cdot 3 + 32 = 4608 + 32 = 4640`.
 - Số MACs: :math:`28 \cdot 28 \cdot 32 \cdot 16 \cdot 3 \cdot 3 = 3{,}612{,}672` (khoảng 3.61 MMACs).
 
-Liên hệ RK3588: Tỷ lệ giữa số MACs và lượng byte dữ liệu nạp từ bộ nhớ quyết định vị trí của lớp trên mô hình Roofline của RK3588 (xem :doc:`Roofline và dataflow </contents/01-kien-thuc-nen/02-npu/02-dataflow-bo-nho-roofline>`).
+Liên hệ RK3588: Tỷ lệ giữa số MACs và lượng byte dữ liệu nạp từ bộ nhớ quyết định vị trí của lớp trên mô hình Roofline của RK3588 (xem :doc:`Roofline và dataflow </contents/01-kien-thuc-nen/02-npu/02-dataflow-va-phan-cap-bo-nho>`).
 
 5. Tích chập quy về nhân ma trận (im2col)
 =========================================
@@ -250,7 +250,7 @@ Sách D2L minh họa góc nhìn tương đương: viết lại kernel thành ma 
 
    Hạ bậc tích chập về nhân ma trận GEMM qua biến đổi im2col: Trải các cửa sổ trượt 3D thành các cột ma trận dữ liệu :math:`D_m` để nhân với ma trận bộ lọc :math:`F_m`; đánh đổi bộ nhớ do dữ liệu bị sao chép lặp lại tới :math:`R \times S` lần.
 
-Liên hệ RK3588: Thay vì bung ma trận :math:`D_m` ra bộ nhớ ngoài DDR gây tốn dung lượng RAM khổng lồ, bộ điều khiển CNA của NPU RK3588 giải mã địa chỉ on-the-fly, nạp trực tiếp từng cửa sổ từ bộ đệm nội bộ CBUF vào mảng MAC theo cơ chế Implicit GEMM [T1 TRM1 tr.1985], đạt thông lượng tính toán GEMM cực đại mà không tốn chi phí bộ nhớ trung gian (xem :doc:`Layout NC1HWC2 và alignment </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
+Liên hệ RK3588: Thay vì bung ma trận :math:`D_m` ra bộ nhớ ngoài DDR gây tốn dung lượng RAM khổng lồ, bộ điều khiển CNA của NPU RK3588 giải mã địa chỉ on-the-fly, nạp trực tiếp từng cửa sổ từ bộ đệm nội bộ CBUF vào mảng MAC theo cơ chế Implicit GEMM [T1 TRM1 tr.1985], đạt thông lượng tính toán GEMM cực đại mà không tốn chi phí bộ nhớ trung gian (xem :doc:`Layout NC1HWC2 và alignment </contents/02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2>`).
 
 6. Depthwise và pointwise
 =========================
@@ -289,7 +289,7 @@ Với kernel :math:`3 \times 3`, lượng tính toán giảm từ 8 đến 9 l�
 
    "MobileNet uses 3 × 3 depthwise separable convolutions which uses between 8 to 9 times less computation than standard convolutions at only a small reduction in accuracy." [T2 MOBILENET tr.3]
 
-Liên hệ RK3588: TRM của RK3588 có riêng chế độ phần cứng Depthwise convolution mode trong bộ điều khiển DPU (xem :doc:`Cấu trúc NPU core và DPU </contents/01-kien-thuc-nen/02-npu/05-rk3588-cau-truc-npu-core>`).
+Liên hệ RK3588: TRM của RK3588 có riêng chế độ phần cứng Depthwise convolution mode trong bộ điều khiển DPU (xem :doc:`Cấu trúc NPU core và DPU </contents/02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core>`).
 
 7. Group convolution
 ====================
@@ -359,7 +359,7 @@ Kiến trúc ResNeXt khắc phục nhược điểm thiếu liên kết giữa c
      - Tốt nếu số nhóm chia đều trên các cụm MAC RK3588
      - DW dễ bị memory-bound (ít tính toán); PW chạy tối đa mảng MAC :math:`32 \times 32`
 
-Liên hệ RK3588: Group convolution được hỗ trợ trực tiếp trong danh sách toán tử của bộ biên dịch RKNN Toolkit. Trên NPU RK3588, lớp Depthwise Conv (:math:`3 \times 3`) trong YOLO thường có hiệu suất sử dụng MAC (MacUsage) thấp (chỉ 0.3% - 1.2%) do nghẽn nạp bộ nhớ; trong khi lớp Pointwise Conv (:math:`1 \times 1`) và Group Conv là phép nhân ma trận thuần túy GEMM, lấp đầy mảng MAC :math:`32 \times 32` và đạt hiệu suất tính toán cao (xem :doc:`Operator List RKNN </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
+Liên hệ RK3588: Group convolution được hỗ trợ trực tiếp trong danh sách toán tử của bộ biên dịch RKNN Toolkit. Trên NPU RK3588, lớp Depthwise Conv (:math:`3 \times 3`) trong YOLO thường có hiệu suất sử dụng MAC (MacUsage) thấp (chỉ 0.3% - 1.2%) do nghẽn nạp bộ nhớ; trong khi lớp Pointwise Conv (:math:`1 \times 1`) và Group Conv là phép nhân ma trận thuần túy GEMM, lấp đầy mảng MAC :math:`32 \times 32` và đạt hiệu suất tính toán cao (xem :doc:`Operator List RKNN </contents/02-nen-tang-rk3588/03-toolchain-runtime/04-operator-list>`).
 
 8. Pooling và upsample
 ======================
@@ -415,7 +415,7 @@ Về mặt đại số tuyến tính, phép tính này tương đương với vi
      - Tự học cách hoàn nguyên độ phân giải
      - Tốn nhiều chu kỳ MAC và băng thông SRAM
 
-Liên hệ RK3588: Toán tử MaxPool, AvgPool và Resize Nearest được hỗ trợ tăng tốc native trong nhân DPU của RK3588, hoàn toàn không tiêu tốn mảng MAC nhân ma trận, giải phóng năng lực tính toán cho các lớp tích chập. Nhánh giải mã đặc trưng FPN/PAN của YOLOv5/v8 ưu tiên dùng Resize Nearest Neighbor để giảm tối đa lưu lượng bộ nhớ SRAM và đạt tốc độ khung hình (FPS) cao nhất trên SoC RK3588 (xem :doc:`Toán tử YOLO trên RK3588 </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
+Liên hệ RK3588: Toán tử MaxPool, AvgPool và Resize Nearest được hỗ trợ tăng tốc native trong nhân DPU của RK3588, hoàn toàn không tiêu tốn mảng MAC nhân ma trận, giải phóng năng lực tính toán cho các lớp tích chập. Nhánh giải mã đặc trưng FPN/PAN của YOLOv5/v8 ưu tiên dùng Resize Nearest Neighbor để giảm tối đa lưu lượng bộ nhớ SRAM và đạt tốc độ khung hình (FPS) cao nhất trên SoC RK3588 (xem :doc:`Toán tử YOLO trên RK3588 </contents/02-nen-tang-rk3588/03-toolchain-runtime/04-operator-list>`).
 
 9. Toán tử Add và khối residual
 ===============================
@@ -474,7 +474,7 @@ Nhánh tắt (shortcut connection) dẫn trực tiếp đầu vào :math:`\mathb
      - Tính thêm 1 lớp Conv :math:`1 \times 1` trên NPU
      - Ghép Add vào Conv, triệt tiêu đọc/ghi DRAM
 
-Liên hệ RK3588: Trình biên dịch RKNN tự động nhận diện mẫu Conv + BN + Add + ReLU để tạo thành khối toán tử dung hợp (Fused Operator), chạy khép kín trọn vẹn trong 1 chu kỳ phần cứng của NPU Core. Khối Residual dung hợp giúp loại bỏ các lần cấp phát mảng trung gian ra ngoài DDR, tiết kiệm 66% lưu lượng bộ nhớ và giữ trọn băng thông cho các tác vụ xử lý video đa luồng song song (xem :doc:`Fusion và tối ưu đồ thị </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
+Liên hệ RK3588: Trình biên dịch RKNN tự động nhận diện mẫu Conv + BN + Add + ReLU để tạo thành khối toán tử dung hợp (Fused Operator), chạy khép kín trọn vẹn trong 1 chu kỳ phần cứng của NPU Core. Khối Residual dung hợp giúp loại bỏ các lần cấp phát mảng trung gian ra ngoài DDR, tiết kiệm 66% lưu lượng bộ nhớ và giữ trọn băng thông cho các tác vụ xử lý video đa luồng song song (xem :doc:`Fusion và tối ưu đồ thị </contents/02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2>`).
 
 10. Ghép khối thành CNN từ ảnh đến đặc trưng
 ============================================
@@ -517,7 +517,7 @@ LeNet-5 là ví dụ kinh điển gồm hai phần: phần mã hóa tích chập
 
 Kiến trúc VGG chuẩn hóa việc thiết kế mạng theo các khối đồng nhất: mỗi khối VGG gồm một chuỗi các lớp tích chập :math:`3 \times 3` có đệm :math:`p = 1` để giữ nguyên độ phân giải, theo sau là lớp max-pooling :math:`2 \times 2` với stride :math:`2` để giảm một nửa kích thước chiều cao và chiều rộng [T2 D2L tr.279].
 
-Quy luật ghép khối phổ biến trong các mạng phát hiện vật thể (như backbone của YOLO) kế thừa cấu trúc này: giảm dần độ phân giải không gian qua các tầng để tăng số lượng kênh đặc trưng, sau đó kết hợp đặc trưng đa quy mô qua các nhánh FPN/PAN (xem :doc:`So sánh và khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
+Quy luật ghép khối phổ biến trong các mạng phát hiện vật thể (như backbone của YOLO) kế thừa cấu trúc này: giảm dần độ phân giải không gian qua các tầng để tăng số lượng kênh đặc trưng, sau đó kết hợp đặc trưng đa quy mô qua các nhánh FPN/PAN (xem :doc:`Kiến trúc và các khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`).
 
 .. _fig-cv-feature-hierarchy:
 
@@ -558,7 +558,7 @@ Quy luật ghép khối phổ biến trong các mạng phát hiện vật thể 
      - Xác suất phân loại hoặc Bounding Box
      - GAP tốn ít MAC; YOLO Head cần NMS hậu xử lý CPU
 
-Liên hệ RK3588: Trên SoC RK3588, tầng nông (Stage 1-2) có kích thước không gian lớn, chiếm dụng nhiều bộ nhớ SRAM và dễ nghẽn băng thông DRAM (cần chia mảnh layer tiling khi vượt quá dung lượng SRAM); trong khi tầng sâu (Stage 4-5) có số kênh lớn (512-1024) giúp khai thác 100% công suất mảng MAC :math:`32 \times 32` của NPU, đạt đỉnh hiệu năng tính toán cực đại. Cơ chế kết hợp đa tầng trong YOLO sử dụng Backbone trích xuất đặc trưng đa quy mô, sau đó nhánh Neck (FPN/PAN) kết hợp P3 (vật thể nhỏ), P4 (vật thể vừa) và P5 (vật thể lớn) để dung hòa độ phân giải với ngữ nghĩa (xem :doc:`So sánh và khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
+Liên hệ RK3588: Trên SoC RK3588, tầng nông (Stage 1-2) có kích thước không gian lớn, chiếm dụng nhiều bộ nhớ SRAM và dễ nghẽn băng thông DRAM (cần chia mảnh layer tiling khi vượt quá dung lượng SRAM); trong khi tầng sâu (Stage 4-5) có số kênh lớn (512-1024) giúp khai thác 100% công suất mảng MAC :math:`32 \times 32` của NPU, đạt đỉnh hiệu năng tính toán cực đại. Cơ chế kết hợp đa tầng trong YOLO sử dụng Backbone trích xuất đặc trưng đa quy mô, sau đó nhánh Neck (FPN/PAN) kết hợp P3 (vật thể nhỏ), P4 (vật thể vừa) và P5 (vật thể lớn) để dung hòa độ phân giải với ngữ nghĩa (xem :doc:`Kiến trúc và các khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`).
 
 Nguồn
 =====

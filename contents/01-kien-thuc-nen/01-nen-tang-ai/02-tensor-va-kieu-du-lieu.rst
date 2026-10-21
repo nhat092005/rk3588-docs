@@ -90,8 +90,8 @@ Shape của tensor là bộ số thể hiện độ dài theo từng trục tư�
 * **Tensor 3 chiều (Bậc 3)**: Xếp chồng nhiều ma trận 2D theo trục kênh (channel). Ví dụ: một ảnh màu RGB có 3 kênh Đỏ, Lục, Lam với shape ``(3, 640, 640)``; hoặc bản đồ đặc trưng (feature map) ở đầu ra lớp tích chập.
 * **Tensor 4 chiều (Bậc 4)**: Gom nhiều tensor 3 chiều theo trục batch. Ví dụ: một mini-batch gồm 4 ảnh đưa vào NPU RK3588 có shape ``(4, 3, 640, 640)`` theo chuẩn NCHW.
 
-Cơ chế cắt lát (Slicing) và lập chỉ mục đa trục
----------------------------------------------------------------
+1.1 Cơ chế cắt lát (Slicing) và lập chỉ mục đa trục
+---------------------------------------------------
 
 Khi thao tác với tensor trong các framework lập trình và runtime biên dịch mô hình, việc trích xuất dữ liệu con tuân theo hai quy tắc nền tảng:
 
@@ -229,7 +229,7 @@ Chỉ riêng với RKNN-Toolkit2, tài liệu của hãng dùng tên "nchw" và 
 
    "data_format: The layout list of input data. "nchw" or "nhwc" , only valid for 4-dims input. The default value is None, means all inputs layout is "nhwc"." [T1 RKNNAPI pdf 17]
 
-Phần layout riêng của RKNN được trình bày ở trang :doc:`../04-toolchain-compiler/04-fusion-layout-tiling`.
+Phần layout riêng của RKNN được trình bày ở trang :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2`.
 
 5. Kiểu số FP32, FP16 và INT8, số byte mỗi phần tử
 ==================================================
@@ -467,7 +467,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
      - 8
    * - ``RKNNAPI``
      - T1
-     - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
+     - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
      - 2
 
 Số trang của D2L là số trang in, bằng số trang PDF trừ 40. Số trang của MIXP và BF16 theo thứ tự trang của PDF. Số trang của RKNNAPI là chỉ số trang PDF. PTMF là tài liệu PyTorch dạng trang web nên không có số trang. Ba hình trong trang là hình gốc của nguồn, cắt từ trang PDF và lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/tensor-va-kieu-du-lieu/``: Figure 3 của NAGEL (trang 5, mục 5), Figure 7 của GHOLAMI (trang 12, mục 6) và Figure 1 của MIXP (trang 3, mục 6). Năm hình đồ họa ở các mục 1, 3, 4 và 5 được sinh bởi công cụ ``docs/tools/figure_gen/01-kien-thuc-nen/02-tensor-va-kieu-du-lieu/gen.py`` và lưu tại ``_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/02-tensor-va-kieu-du-lieu/``.

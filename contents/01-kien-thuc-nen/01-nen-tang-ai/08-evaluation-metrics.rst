@@ -301,7 +301,7 @@ Cơ chế đánh đổi phần cứng và bản chất sai số
 2. Nhóm hiệu năng phần cứng (Efficiency / Hardware Metrics)
 ===========================================================
 
-Đối với bài toán Edge AI chạy trên chip Rockchip RK3588S (hoặc RK3588), một mô hình có mAP cao nhưng chạy quá chậm hoặc tràn RAM thì không thể ứng dụng được. Nhóm chỉ số này được quy định chi tiết tại :doc:`/contents/02-phuong-phap/02-giao-thuc/02-bon-nhom-metric`.
+Đối với bài toán Edge AI chạy trên chip Rockchip RK3588S (hoặc RK3588), một mô hình có mAP cao nhưng chạy quá chậm hoặc tràn RAM thì không thể ứng dụng được. Nhóm chỉ số này được quy định chi tiết tại :doc:`/contents/03-phuong-phap/02-giao-thuc/02-bon-nhom-metric`.
 
 2.1. Thông số mô hình (Parameters / Params)
 -------------------------------------------
@@ -614,6 +614,6 @@ Bản chất đối chiếu giữa Latency FPS và Throughput FPS
 - Công thức tính Precision, Recall, mAP trong bài toán PPE: :download:`_assets/pdf/papers/07_ppe_detection/shel5k_helmet_2022otgonbold.pdf <../../../_assets/pdf/papers/07_ppe_detection/shel5k_helmet_2022otgonbold.pdf>`, tr.8 (Equation 1-4).
 - Hai hình thực tế ở mục 1.1 và 1.6 (CHV, Figure 7 và Figure 8): :download:`_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf <../../../_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf>`, tr.10 và tr.11. Hình cắt từ trang PDF, giữ nguyên nội dung, lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/``.
 - Quy chuẩn nội suy 101 điểm cho AP và COCO mAP: `Ultralytics utils/metrics.py`, hàm `compute_ap`.
-- Quy chuẩn đo đạc 4 nhóm metric của dự án trên RK3588: :doc:`/contents/02-phuong-phap/02-giao-thuc/02-bon-nhom-metric`.
+- Quy chuẩn đo đạc 4 nhóm metric của dự án trên RK3588: :doc:`/contents/03-phuong-phap/02-giao-thuc/02-bon-nhom-metric`.
 - Đo lường và đối sánh Throughput FPS đa luồng trên RK3588: :download:`_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf <../../../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`, tr.18 (Table 6).
 - Chú giải thuật ngữ chi tiết: :doc:`/thuat-ngu`.

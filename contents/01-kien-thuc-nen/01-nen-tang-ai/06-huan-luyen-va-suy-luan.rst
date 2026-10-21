@@ -16,7 +16,7 @@ Huấn luyện và suy luận
    - Huấn luyện lặp lại forward, tính loss, backward và cập nhật tham số. Suy luận chỉ chạy forward với tham số cố định (xem :doc:`05-loss-va-backpropagation` mục 1) [T2 D2L tr.105, tr.180].
    - ``model.train()`` và ``model.eval()`` đổi chế độ của mạng và chỉ ảnh hưởng một số lớp, ví dụ Dropout và BatchNorm [T1 PTMOD].
    - ``torch.no_grad()`` tắt tính gradient, giảm bộ nhớ khi chắc chắn không gọi ``backward()``. Đây là cơ chế khác với ``eval()`` [T1 PTGRAD, T1 PTMOD].
-   - Dropout chỉ bật lúc huấn luyện [T2 D2L tr.196]. BatchNorm dùng thống kê mini-batch lúc huấn luyện và thống kê tích lũy lúc suy luận (xem :doc:`04-chuan-hoa-va-activation` mục 5).
+   - Dropout chỉ bật lúc huấn luyện [T2 D2L tr.196]. BatchNorm dùng thống kê mini-batch lúc huấn luyện và thống kê tích lũy lúc suy luận (xem :doc:`04-chuan-hoa-va-activation` mục 3).
    - Pipeline suy luận có ba chặng: tiền xử lý, forward và hậu xử lý. Trên board, dự án dùng LetterBox 640, đầu vào RGB uint8 ``(1, 640, 640, 3)``, ngưỡng conf 0.25, IoU 0.7, tối đa 300 box [T3 ai/board/common.py:19 đến 26, 62 đến 77].
    - Xuất ONNX cần đặt chế độ mạng trước khi xuất, cung cấp đầu vào mẫu (bộ xuất ghi lại shape của đầu vào mẫu) và chọn opset theo runtime hoặc compiler đích [T1 PTONNX].
    - Đường xuất của dự án đi qua Ultralytics: ``imgsz=640``, ``opset=19`` [T3 ai/core/rknn/baseline.py:22 đến 24] và bộ xuất của Ultralytics gọi ``model.eval()`` rồi ``fuse()`` (gộp Conv và BatchNorm) trước khi xuất [T1 ultralytics 8.4.154 engine/exporter.py:861, 863].
@@ -88,7 +88,7 @@ Bảng dưới gom các điểm khác nhau. Chi tiết của từng điểm nằ
    * - BatchNorm
      - Thống kê của mini-batch, cập nhật running mean và running var
      - Cố định running mean và running var
-     - :doc:`04-chuan-hoa-va-activation` mục 5
+     - :doc:`04-chuan-hoa-va-activation` mục 4
    * - Dropout
      - Bật, loại ngẫu nhiên một phần nút [T2 D2L tr.194]
      - Tắt: "Typically, we disable dropout at test time." [T2 D2L tr.196]
@@ -130,8 +130,8 @@ Suy luận một ảnh gồm ba chặng nối tiếp.
      - Giải mã đầu ra thô thành box, lọc ngưỡng và NMS
      - :doc:`07-bai-toan-phat-hien-vat-the` mục 6 và 7
 
-Pipeline của dự án trên board
------------------------------
+3.1 Pipeline của dự án trên board
+---------------------------------
 
 Mã trên board chỉ dùng numpy, opencv, psutil và pyyaml, không có torch hay ultralytics. Tiền xử lý và hậu xử lý được viết lại bằng numpy để khớp với bộ đánh giá. [T3 ai/board/common.py:1 đến 5] Bảng dưới liệt kê các giá trị đọc từ mã.
 
@@ -187,10 +187,10 @@ Ngưỡng ``conf`` khi đánh giá AP trên PC (0.001 theo cấu hình mặc đ�
 4. Xuất mô hình để triển khai (PyTorch sang ONNX)
 =================================================
 
-ONNX là định dạng trung gian giữa PyTorch và trình biên dịch của NPU. Luồng ONNX sang RKNN nằm ở :doc:`../04-toolchain-compiler/01-luong-onnx-sang-rknn`. Mục này chỉ nêu phần phía PyTorch.
+ONNX là định dạng trung gian giữa PyTorch và trình biên dịch của NPU. Luồng ONNX sang RKNN nằm ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/01-luong-onnx-sang-rknn`. Mục này chỉ nêu phần phía PyTorch.
 
-Những việc cần chuẩn bị
------------------------
+4.1 Những việc cần chuẩn bị
+---------------------------
 
 .. list-table::
    :header-rows: 1
@@ -218,17 +218,17 @@ Những việc cần chuẩn bị
 
 Tài liệu cũng nêu bộ xuất mới dựa trên ``torch.export`` là bộ xuất mới nhất cho PyTorch 2.6 trở lên. [T1 PTONNX]
 
-Khác biệt giữa docs 2.14 và torch 2.4.0
----------------------------------------
+4.2 Khác biệt giữa docs 2.14 và torch 2.4.0
+-------------------------------------------
 
 Docs trong repo là bản 2.14. Chữ ký ``torch.onnx.export`` kiểm trên môi trường dự án (torch 2.4.0) cho: ``training=TrainingMode.EVAL``, ``dynamo=False``. [T1 torch 2.4.0] Trong khi đó chữ ký trong docs 2.14 có ``dynamo=True``. [T1 PTONNX] Vì vậy các mô tả "mặc định" của docs 2.14 không áp dụng nguyên cho môi trường dự án.
 
-Đường xuất của dự án
---------------------
+4.3 Đường xuất của dự án
+------------------------
 
 Dự án không gọi ``torch.onnx.export`` trực tiếp. Hàm ``export_onnx`` gọi ``YOLO(weights).export(format="onnx", imgsz=imgsz, opset=19)`` với ``imgsz`` mặc định 640. [T3 ai/core/rknn/baseline.py:22 đến 24] Tài liệu Ultralytics về xuất RKNN ghi ``imgsz`` mặc định 640, ``batch`` mặc định 1, ``simplify`` mặc định True. Mặc định của ``opset`` trong bảng là None, và mô tả ghi "Defaults to 19 if unset, and values above 19 are reduced to 19". [T1 Ultralytics RKNN doc]
 
-Bên trong bộ xuất của Ultralytics 8.4.154 cài trong ``.venv``, mạng được đặt ``requires_grad=False`` cho mọi tham số, gọi ``model.eval()`` rồi ``model.fuse()`` trước khi xuất. [T1 ultralytics 8.4.154 engine/exporter.py:859 đến 863] ``fuse`` gộp lớp Conv và BatchNorm, xóa nhánh BN và đổi ``forward`` sang bản đã gộp (dòng 252 đến 263). Hàm cũng tái tham số hóa RepConv và RepVGGDW (dòng 264 đến 269) và bỏ nhánh phát hiện không dùng của ``Detect`` (dòng 270, 271). [T1 ultralytics 8.4.154 nn/tasks.py:240 đến 274] Điều này khớp với kỹ thuật Conv-BN folding ở :doc:`04-chuan-hoa-va-activation` mục 6.
+Bên trong bộ xuất của Ultralytics 8.4.154 cài trong ``.venv``, mạng được đặt ``requires_grad=False`` cho mọi tham số, gọi ``model.eval()`` rồi ``model.fuse()`` trước khi xuất. [T1 ultralytics 8.4.154 engine/exporter.py:859 đến 863] ``fuse`` gộp lớp Conv và BatchNorm, xóa nhánh BN và đổi ``forward`` sang bản đã gộp (dòng 252 đến 263). Hàm cũng tái tham số hóa RepConv và RepVGGDW (dòng 264 đến 269) và bỏ nhánh phát hiện không dùng của ``Detect`` (dòng 270, 271). [T1 ultralytics 8.4.154 nn/tasks.py:240 đến 274] Điều này khớp với kỹ thuật Conv-BN folding ở :doc:`04-chuan-hoa-va-activation` mục 5.
 
 .. _fig-hl-3-luong-xuat-model-pytorch-sang-rknn:
 
@@ -253,9 +253,9 @@ Các điểm ở trên dẫn tới ba hệ quả khi đưa model lên board.
    * - Hệ quả
      - Lý do và nguồn
    * - Phải xuất ở chế độ ``eval``
-     - Nếu BN còn ở chế độ train, đầu ra phụ thuộc thống kê của batch hiện tại thay vì thống kê tích lũy (:doc:`04-chuan-hoa-va-activation` mục 5). PyTorch cho biết ``eval()`` đổi hành vi của BatchNorm và Dropout [T1 PTMOD]. Bộ xuất của Ultralytics gọi ``eval()`` trước khi xuất [T1 ultralytics 8.4.154 engine/exporter.py:861]
+     - Nếu BN còn ở chế độ train, đầu ra phụ thuộc thống kê của batch hiện tại thay vì thống kê tích lũy (:doc:`04-chuan-hoa-va-activation` mục 3). PyTorch cho biết ``eval()`` đổi hành vi của BatchNorm và Dropout [T1 PTMOD]. Bộ xuất của Ultralytics gọi ``eval()`` trước khi xuất [T1 ultralytics 8.4.154 engine/exporter.py:861]
    * - BN gộp được vào Conv
-     - Ở ``eval``, BN là phép affine cố định nên có thể gộp vào Conv đứng trước (:doc:`04-chuan-hoa-va-activation` mục 6). Ultralytics làm bước này lúc xuất [T1 ultralytics 8.4.154 engine/exporter.py:863]
+     - Ở ``eval``, BN là phép affine cố định nên có thể gộp vào Conv đứng trước (:doc:`04-chuan-hoa-va-activation` mục 5). Ultralytics làm bước này lúc xuất [T1 ultralytics 8.4.154 engine/exporter.py:863]
    * - Tiền xử lý và hậu xử lý phải khớp huấn luyện và đánh giá
      - Mã board viết lại tiền xử lý và hậu xử lý bằng numpy để khớp bộ đánh giá [T3 ai/board/common.py:1 đến 5]. Nếu LetterBox, thứ tự kênh hoặc phép chia 255 bị lệch thì đầu vào mạng khác đầu vào lúc đánh giá (suy luận, chưa đo)
 

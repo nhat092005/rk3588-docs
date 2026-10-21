@@ -187,7 +187,7 @@ Bằng chứng: :download:`_assets/pdf/papers/02_quantization/quantization_surve
 
 Đây là lý do NPU luôn thiên về precision thấp, không chỉ vì giảm bộ nhớ.
 
-Các hướng cứu accuracy ở trên, đối chiếu với thực tế RKNN-Toolkit2 trên RK3588 (Toolkit2-API = :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/papers/05_rk3588/01_vendor_docs/03_rknn_npu/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`):
+Các hướng cứu accuracy ở trên, đối chiếu với thực tế RKNN-Toolkit2 trên RK3588 (Toolkit2-API = :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`):
 
 .. list-table::
    :header-rows: 1

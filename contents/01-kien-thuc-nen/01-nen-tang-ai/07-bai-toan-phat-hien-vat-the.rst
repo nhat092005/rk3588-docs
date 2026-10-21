@@ -136,7 +136,7 @@ Mã kiểm tra còn buộc chỉ số lớp nhỏ hơn số lớp khai báo củ
 
 Ngoài các lớp vật thể còn có lớp nền (background). Trong cách gán nhãn dựa trên anchor, một anchor không được gán hộp nào thì mang lớp "background" và gọi là anchor âm, các anchor còn lại gọi là anchor dương. [T2 D2L tr.616] Với detector không dùng anchor, một vị trí không nằm trong hộp nào thì là mẫu âm với nhãn nền :math:`c^* = 0`. [T2 FCOS tr.4]
 
-Trang này không nêu tên hay số lượng lớp của một bộ dữ liệu cụ thể. Phần định nghĩa lớp, cách gộp lớp và số liệu nằm ở :doc:`../../02-phuong-phap/01-du-lieu/02-class-mapping`.
+Trang này không nêu tên hay số lượng lớp của một bộ dữ liệu cụ thể. Phần định nghĩa lớp, cách gộp lớp và số liệu nằm ở :doc:`../../03-phuong-phap/01-du-lieu/02-class-mapping`.
 
 4. Kiến trúc detector gồm backbone, neck và head
 ================================================
@@ -188,13 +188,13 @@ Lý do cần neck nhiều mức: bài FPN cho biết phát hiện đa tỉ lệ 
 
    Bốn cách dùng đặc trưng nhiều tỉ lệ: (a) kim tự tháp ảnh, (b) một bản đồ đặc trưng, (c) phân cấp đặc trưng của mạng, (d) Feature Pyramid Network. Nguồn: [T2 FPN tr.1, Fig. 1]
 
-Các khối cụ thể của YOLOv8n và YOLO26n (``C2f``, ``C3k2``, ``SPPF``, đầu ``Detect``) nằm ở :doc:`../07-yolo/01-so-sanh-va-khoi-cau-thanh`. Trang này không lặp lại chúng.
+Các khối cụ thể của YOLOv8n và YOLO26n (``C2f``, ``C3k2``, ``SPPF``, đầu ``Detect``) nằm ở :doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`. Trang này không lặp lại chúng.
 
 5. Anchor-based và anchor-free
 ==============================
 
-Anchor-based
-------------
+5.1 Anchor-based
+----------------
 
 Các thuật toán phát hiện thường lấy mẫu nhiều vùng trong ảnh, xét vùng nào chứa vật quan tâm và điều chỉnh biên của vùng cho khớp hộp thật hơn. Một cách lấy mẫu là sinh nhiều hộp với tỉ lệ và khuôn dạng khác nhau, tâm đặt ở mỗi pixel. Các hộp này gọi là anchor box. [T2 D2L tr.609]
 
@@ -218,8 +218,8 @@ Mạng không dự đoán tọa độ tuyệt đối mà dự đoán độ lệc
 
 Giá trị mặc định của sách là :math:`\mu_x = \mu_y = \mu_w = \mu_h = 0`, :math:`\sigma_x = \sigma_y = 0.1`, :math:`\sigma_w = \sigma_h = 0.2`. [T2 D2L tr.616]
 
-Anchor-free
------------
+5.2 Anchor-free
+---------------
 
 Bài FCOS nêu gần như mọi detector hiện đại thời đó (RetinaNet, SSD, YOLOv3, Faster R-CNN) dựa vào anchor được định nghĩa trước, còn FCOS thì không có anchor. [T2 FCOS tr.1]
 
@@ -273,8 +273,8 @@ Trong họ YOLO, bài khảo sát Sapkota ghi YOLOv2 đưa vào anchor box [T2 S
 
 Đầu ra thô của detector không phải danh sách box cuối cùng. Với mỗi ứng viên (một anchor hoặc một vị trí), mạng cho điểm các lớp và tham số của hộp. Bước giải mã đổi các tham số đó thành hộp trong tọa độ ảnh.
 
-Giải mã anchor-based
---------------------
+6.1 Giải mã anchor-based
+------------------------
 
 Lúc dự đoán, sách sinh nhiều anchor và dự đoán lớp cùng độ lệch cho từng anchor. Hộp dự đoán nhận được từ anchor cộng độ lệch dự đoán, tức áp phép biến đổi ngược của công thức độ lệch ở mục 5. [T2 D2L tr.619]
 
@@ -290,15 +290,15 @@ Lúc dự đoán, sách sinh nhiều anchor và dự đoán lớp cùng độ l�
 
 Hộp ``xyxy`` tương ứng là xấp xỉ :math:`(79.57, 81.63, 128.43, 114.37)`. Dùng độ lệch này lại cho đúng các giá trị :math:`o` ban đầu. [Tự tính, đối chiếu script]
 
-Giải mã anchor-free
--------------------
+6.2 Giải mã anchor-free
+-----------------------
 
 Với detector kiểu FCOS, đầu ra tại vị trí :math:`(x, y)` là bốn khoảng cách :math:`(l, t, r, b)` tới bốn cạnh hộp. [T2 FCOS tr.2, tr.4] Hộp là :math:`(x - l,\ y - t,\ x + r,\ y + b)`. Công thức này suy ra từ định nghĩa các khoảng cách, bài không viết nó thành phương trình riêng.
 
 **Ví dụ tự tính.** Vị trí :math:`(100, 80)` với :math:`(l, t, r, b) = (30, 20, 50, 40)` cho hộp :math:`(70, 60, 150, 120)`. [Tự tính, đối chiếu script]
 
-Điểm và lớp của một hộp
------------------------
+6.3 Điểm và lớp của một hộp
+---------------------------
 
 Với một hộp dự đoán, mạng cho khả năng của từng lớp. Sách gọi giá trị lớn nhất :math:`p` là độ tin cậy (confidence hay score) của hộp và lớp tương ứng là lớp dự đoán. [T2 D2L tr.619]
 
@@ -309,8 +309,8 @@ Hình dạng và đơn vị cụ thể của đầu ra thô trên board (số c�
 7. Lọc ngưỡng confidence và NMS
 ===============================
 
-Lọc theo confidence
--------------------
+7.1 Lọc theo confidence
+-----------------------
 
 Trước NMS, các hộp có confidence dưới ngưỡng bị bỏ. Cấu hình mặc định của Ultralytics ghi ngưỡng confidence là 0.25 khi dự đoán và 0.001 khi đánh giá, kèm IoU cho NMS là 0.7 và tối đa 300 phát hiện mỗi ảnh. [T1 ultralytics 8.4.154 cfg/default.yaml:55 đến 57]
 
@@ -318,8 +318,8 @@ Cấu hình ghi riêng hai ngưỡng confidence cho hai tình huống. Hợp lý
 
 Mặc định của hàm cũng khác mặc định của cấu hình: hàm ``non_max_suppression`` đặt ``iou_thres=0.45`` và ``conf_thres=0.25`` làm mặc định tham số. [T1 ultralytics 8.4.154 utils/nms.py:13 đến 16] Khi đọc một con số "IoU của NMS" cần biết nó đến từ hàm hay từ cấu hình.
 
-Non-maximum suppression
------------------------
+7.2 Non-maximum suppression
+---------------------------
 
 Nhiều anchor hoặc vị trí cùng bao một vật nên cho nhiều hộp chồng nhau. NMS gộp các hộp tương tự về một. [T2 D2L tr.619] Thuật toán của sách như sau. [T2 D2L tr.619, tr.620]
 
@@ -379,8 +379,8 @@ Cả hai kết quả đã đối chiếu bằng script tự viết và bằng ``
 
 Ví dụ cho thấy hai điều. Thứ nhất, ngưỡng cao hơn loại ít hộp hơn. Thứ hai, thứ tự quan trọng: D có IoU 0.6807 với B, nhưng B đã bị loại ở bước chọn A nên không còn gì để so, D được giữ vì IoU với A chỉ 0.4706.
 
-NMS và lớp
-----------
+7.3 NMS và lớp
+--------------
 
 Mô tả thuật toán của sách xét các hộp không phải nền mà không nhắc tách theo lớp. [T2 D2L tr.619] Bản NMS trên board của dự án tách theo lớp bằng cách cộng vào tọa độ hộp một độ lệch tỉ lệ với chỉ số lớp (``MAX_WH``) trước khi tính IoU, nên hai hộp khác lớp không bao giờ bị loại nhau. [T3 ai/board/common.py:115]
 
@@ -393,8 +393,8 @@ Mô tả thuật toán của sách xét các hộp không phải nền mà khôn
 
    Hình 7.4: Diễn biến thuật toán Non-Maximum Suppression (NMS) trên 4 hộp ứng viên ở hai ngưỡng IoU (0.5 và 0.7) cùng kỹ thuật Batched NMS trên phần cứng RK3588 (cộng độ lệch chỉ số lớp) [T2 D2L tr.619, tr.620, T3 ai/board/common.py:22 đến 25, 115, T1 ultralytics engine/exporter.py:682 đến 688].
 
-Vì sao YOLO26 vẫn cần NMS khi xuất cho RK3588
----------------------------------------------
+7.4 Vì sao YOLO26 vẫn cần NMS khi xuất cho RK3588
+-------------------------------------------------
 
 Bài FCOS xếp NMS vào bước hậu xử lý duy nhất của detector anchor-free. [T2 FCOS tr.1] YOLO26 có nhánh ``end2end`` (một-một) không cần NMS. Trong bộ xuất của Ultralytics, nếu định dạng nằm trong nhóm ``rknn``, ``ncnn``, ``executorch``, ``paddle``, ``imx``, ``edgetpu``, ``qnn`` thì nhánh ``end2end`` bị tắt với cảnh báo "This export format does not support end2end models, disabling the end2end branch." [T1 ultralytics 8.4.154 engine/exporter.py:682 đến 688] Vì vậy mô hình xuất sang RKNN dùng nhánh một-nhiều và NMS chạy bên ngoài đồ thị (xem Hình 7.4). Thuật ngữ này trùng với mục ``End-to-end head`` trong ``GLOSSARY.md`` của repo. Lý do tắt theo chú thích mã là "formats without top-k support".
 

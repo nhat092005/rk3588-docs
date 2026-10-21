@@ -82,8 +82,8 @@ Sách mô tả đơn vị lặp như sau: một epoch là một lượt đi qua 
 2. Hàm loss MSE và cross-entropy
 ================================
 
-Squared loss cho hồi quy
-------------------------
+2.1 Squared loss cho hồi quy
+----------------------------
 
    "For regression problems, the most common loss function is the squared error." [T2 D2L tr.84]
 
@@ -93,8 +93,8 @@ Squared loss cho hồi quy
 
 Sách giải thích hệ số :math:`1/2` chỉ để tiện ký hiệu, vì nó triệt tiêu khi lấy đạo hàm: :math:`\partial l / \partial \hat{y} = \hat{y} - y`. [T2 D2L tr.84] Trung bình các squared loss trên tập dữ liệu gọi là MSE (mean squared error). Sách cho biết giảm MSE tương đương ước lượng hợp lý cực đại của mô hình tuyến tính khi nhiễu là Gaussian cộng tính. [T2 D2L tr.90]
 
-Softmax và cross-entropy cho phân loại
---------------------------------------
+2.2 Softmax và cross-entropy cho phân loại
+------------------------------------------
 
 Với bài toán :math:`q` lớp, mạng cho ra vector logit :math:`\mathbf{o}`. Softmax chuẩn hóa nó thành vector xác suất. [T2 D2L tr.128]
 
@@ -127,8 +127,8 @@ Vì :math:`\mathbf{y}` là one-hot, tổng chỉ còn một số hạng :math:`-
 
 Sách nhận xét rằng gradient này giống trường hợp hồi quy, nơi gradient là hiệu giữa quan sát và ước lượng. [T2 D2L tr.130]
 
-Bảng so sánh
-------------
+2.3 Bảng so sánh
+----------------
 
 .. list-table::
    :header-rows: 1
@@ -160,8 +160,8 @@ Bảng so sánh
 
 Detector vừa phải nói vật thể thuộc lớp nào, vừa phải đặt box đúng chỗ. Loss vì vậy gồm nhiều thành phần cộng lại. Mục này nêu dạng chung của loss detector và các thành phần phổ biến. Loss cụ thể của từng mô hình YOLO thuộc phần mô hình, không nằm ở trang kiến thức nền này.
 
-Dạng chung
-----------
+3.1 Dạng chung
+--------------
 
 Bài YOLOv6 viết loss phát hiện là tổng có trọng số của ba thành phần. [T2 YOLOv6 tr.9]
 
@@ -173,8 +173,8 @@ Trong đó :math:`L_{cls}`, :math:`L_{reg}`, :math:`L_{obj}` là loss phân lo�
 
 **unknown:** giá trị trọng số loss mặc định của từng họ YOLO dùng trong dự án. Truy vấn tìm nguồn: "ultralytics default hyp box cls dfl loss gain" trong tài liệu hãng, hoặc đọc file cấu hình hyperparameter trong mã nguồn đã dùng để huấn luyện.
 
-Loss phân loại: từ BCE đến focal loss
---------------------------------------
+3.2 Loss phân loại: từ BCE đến focal loss
+-----------------------------------------
 
 Với một lớp (nhị phân), cross-entropy viết theo xác suất :math:`p` cho nhãn :math:`y = 1`. Đặt :math:`p_t = p` nếu :math:`y = 1` và :math:`p_t = 1 - p` nếu ngược lại, thì :math:`\mathrm{CE}(p_t) = -\log(p_t)`. [T2 Focal tr.3]
 
@@ -200,8 +200,8 @@ Dòng sau là dạng cân bằng :math:`\alpha` mà tác giả dùng trong thự
 
 Bài nêu :math:`\gamma = 2` và :math:`\alpha = 0.25` cho kết quả tốt nhất trong thí nghiệm RetinaNet của họ. [T2 Focal tr.3, tr.5] Đó là giá trị tinh chỉnh cho một mô hình, không phải quy tắc chung. Bài cũng cho biết mở rộng sang nhiều lớp là "straightforward" nhưng chỉ trình bày dạng nhị phân. [T2 Focal tr.3]
 
-Loss hồi quy box: họ IoU
-------------------------
+3.3 Loss hồi quy box: họ IoU
+----------------------------
 
 IoU (giao trên hợp, định nghĩa ở trang :doc:`08-evaluation-metrics`) dùng được làm loss dưới dạng :math:`L_{IoU} = 1 - \mathrm{IoU}`. Điểm yếu: khi hai box không giao nhau IoU bằng 0 và không phản ánh hai box cách xa bao nhiêu. [T2 GIoU tr.2]
 
@@ -265,8 +265,8 @@ Bài DIoU nêu lý do dùng khoảng cách tâm thay cho phần trống của GI
 
 Về DFL (Distribution Focal Loss), bài YOLO26 nêu rằng YOLO26 bỏ module DFL khỏi head phát hiện. [T2 YOLO26 tr.6] Trang này không trình bày công thức DFL.
 
-Liên hệ thực tế khi triển khai NPU RK3588
------------------------------------------
+3.4 Liên hệ thực tế khi triển khai NPU RK3588
+---------------------------------------------
 
 Trong quy trình triển khai mô hình lên NPU RK3588, toàn bộ các hàm loss phức tạp (Focal Loss, CIoU Loss, DFL) chỉ tồn tại trong giai đoạn huấn luyện (PyTorch) trên máy chủ host. Khi export sang mô hình suy luận RKNN, các nhánh tính loss và gán nhãn ground-truth hoàn toàn bị cắt bỏ (pruned).
 
@@ -316,8 +316,8 @@ Hệ quả thực tế: backward dùng lại các giá trị trung gian đã lư
 
    Đồ thị tính toán hai chiều trên mạng 2-2-1 khớp 100% ví dụ số. Lượt forward truyền từ :math:`\mathbf{x}` qua :math:`\mathbf{z}, \mathbf{h}, o` đến :math:`L=2.0`. Lượt backward lần ngược tính gradient từng trạm; tại :math:`z_1 = -1 < 0`, đạo hàm ReLU dập tắt toàn bộ gradient dòng 1 của :math:`W^{(1)}` (hiện tượng Dying ReLU). Bước SGD với :math:`\eta = 0.05` đưa loss xuống :math:`0.0028`.
 
-Ví dụ số trên mạng 2-2-1
-------------------------
+5.1 Ví dụ số trên mạng 2-2-1
+----------------------------
 
 Ví dụ tiếp nối mạng ở trang :doc:`01-mang-no-ron`: không bias, ReLU, :math:`\mathbf{x} = (1, 2)`, :math:`W^{(1)} = \begin{pmatrix} 1 & -1 \\ 0.5 & 0.5 \end{pmatrix}`, :math:`W^{(2)} = [1, 2]`. Forward cho :math:`\mathbf{z} = (-1, 1.5)`, :math:`\mathbf{h} = (0, 1.5)`, :math:`o = 3.0`. Thêm nhãn :math:`y = 1` và loss :math:`L = \tfrac{1}{2}(o - y)^2`, thì :math:`L = 2`.
 
@@ -350,8 +350,8 @@ Hàng 1 của :math:`W^{(1)}` có gradient bằng 0 vì :math:`z_1 = -1 < 0`, Re
 
 Một bước SGD với :math:`\eta = 0.05` đổi :math:`W^{(2)}` thành :math:`[1,\ 1.85]` và :math:`W^{(1)}` thành :math:`\begin{pmatrix} 1 & -1 \\ 0.3 & 0.1 \end{pmatrix}`. Forward lại cho :math:`\mathbf{z} = (-1, 0.5)`, :math:`\mathbf{h} = (0, 0.5)`, :math:`o = 0.925`, nên :math:`L = \tfrac{1}{2}(0.925 - 1)^2 \approx 0.0028`. Loss giảm từ 2 xuống 0.0028 sau một bước. Cả bảng gradient và giá trị sau cập nhật đã được đối chiếu bằng PyTorch autograd (torch 2.4.0) [Tự tính, đối chiếu autograd].
 
-Lớp tích chập
--------------
+5.2 Lớp tích chập
+-----------------
 
 Với mạng có tích chập, framework vẫn áp dụng cùng quy tắc chuỗi cho từng phép toán trên đồ thị. [T2 D2L tr.60] Trang này không viết lại công thức backward của lớp Conv.
 
@@ -360,8 +360,8 @@ Với mạng có tích chập, framework vẫn áp dụng cùng quy tắc chuỗ
 6. Bộ tối ưu SGD, momentum và Adam
 ==================================
 
-SGD và minibatch
-----------------
+6.1 SGD và minibatch
+--------------------
 
 SGD (stochastic gradient descent) lấy ngẫu nhiên một mẫu :math:`i` mỗi lần và cập nhật bằng gradient của mẫu đó. [T2 D2L tr.493]
 
@@ -375,8 +375,8 @@ SGD (stochastic gradient descent) lấy ngẫu nhiên một mẫu :math:`i` mỗ
 
 Trong thực tế dùng minibatch, trung bình gradient của một nhóm mẫu. Mục 7 nói về kích thước nhóm.
 
-Momentum
---------
+6.2 Momentum
+------------
 
 Momentum giữ một vận tốc :math:`\mathbf{v}` là trung bình rò rỉ của các gradient trước và đi theo vận tốc thay vì theo gradient hiện tại. [T2 D2L tr.510, tr.512]
 
@@ -387,8 +387,8 @@ Momentum giữ một vận tốc :math:`\mathbf{v}` là trung bình rò rỉ c�
 
 Khi :math:`\beta = 0` thì quay về gradient descent thường. [T2 D2L tr.513] Sách tóm tắt: "Momentum replaces gradients with a leaky average over past gradients." [T2 D2L tr.518] Sách dùng nhiều giá trị :math:`\beta` khác nhau trong ví dụ (:math:`0.5`, :math:`0.25`, :math:`0.9`) và không nêu giá trị mặc định. [T2 D2L tr.513, tr.515]
 
-Adam
-----
+6.3 Adam
+--------
 
 Adam kết hợp momentum (ước lượng :math:`\mathbf{v}_t`) và co giãn theo bình phương gradient (ước lượng :math:`\mathbf{s}_t`), sau đó hiệu chỉnh độ lệch khởi tạo. [T2 D2L tr.532, tr.533]
 
@@ -446,8 +446,8 @@ Khi dùng thư viện, mặc định của thư viện có thể khác sách. Ki
 
    Quỹ đạo hội tụ của ba thuật toán tối ưu trong bề mặt loss dạng thung lũng hẹp (Ravine): SGD dao động zigzag mạnh giữa hai vách dốc; Momentum tích lũy vận tốc triệt tiêu dao động ngang và lướt dọc đáy; Adam tự thích nghi bước nhảy theo từng chiều giúp tiến thẳng về cực tiểu :math:`\theta^*`.
 
-Liên hệ thực tế khi triển khai NPU RK3588
------------------------------------------
+6.4 Liên hệ thực tế khi triển khai NPU RK3588
+---------------------------------------------
 
 Đối với NPU RK3588, các bộ đệm trạng thái của thuật toán tối ưu (chẳng hạn vector xung lượng :math:`\mathbf{v}_t` trong Momentum, hoặc cả :math:`\mathbf{v}_t` và :math:`\mathbf{s}_t` trong Adam vốn chiếm dung lượng bộ nhớ gấp 2-3 lần kích thước trọng số mô hình) chỉ tồn tại trong bộ nhớ GPU khi huấn luyện.
 
@@ -456,13 +456,13 @@ Quá trình chuyển đổi mô hình PyTorch (``.pt``) sang định dạng RKNN
 7. Learning rate, scheduler, epoch và batch
 ===========================================
 
-Learning rate
--------------
+7.1 Learning rate
+-----------------
 
 Tác động của :math:`\eta` đã nêu ở mục 4. Sách nói thêm rằng thay :math:`\eta` bằng :math:`\eta(t)` thay đổi theo thời gian làm việc kiểm soát hội tụ phức tạp hơn. Giảm quá nhanh thì dừng tối ưu sớm, giảm quá chậm thì lãng phí thời gian. [T2 D2L tr.495]
 
-Scheduler
----------
+7.2 Scheduler
+-------------
 
    "Common choices are polynomial decay and piecewise constant schedules. Beyond that, cosine learning rate schedules have been found to work well empirically on some problems. Lastly, on some problems it is beneficial to warm up the optimizer prior to using large learning rates." [T2 D2L tr.540]
 
@@ -495,8 +495,8 @@ Warmup là giai đoạn đầu tăng dần learning rate. Sách giải thích r�
 
 **unknown:** số bước warmup, hệ số giảm và loại scheduler mà dự án dùng cho YOLO. Sách không đưa giá trị khuyến nghị cho số bước warmup. Truy vấn tìm nguồn: cấu hình huấn luyện (``args.yaml``) của các run trong ``results/`` (T3).
 
-Epoch, iteration và batch
--------------------------
+7.3 Epoch, iteration và batch
+-----------------------------
 
 Một epoch là một lượt qua toàn bộ tập huấn luyện [T2 D2L tr.105]. Từ định nghĩa epoch và iteration, suy ra với :math:`n` mẫu và batch size :math:`B` thì số lần cập nhật mỗi epoch là :math:`\lceil n / B \rceil`. Ví dụ của sách: batch size 1 trên 1500 mẫu cho 1500 lần cập nhật mỗi epoch. [T2 D2L tr.506]
 
@@ -511,8 +511,8 @@ Sách tính loss trung bình trên minibatch, nên gradient không cần chia th
 8. Overfitting, tăng cường dữ liệu và tập validation
 ====================================================
 
-Overfitting và validation
--------------------------
+8.1 Overfitting và validation
+-----------------------------
 
    "The phenomenon of fitting closer to our training data than to the underlying distribution is called overfitting, and techniques for combatting overfitting are often called regularization methods." [T2 D2L tr.113]
 
@@ -532,8 +532,8 @@ Khi dữ liệu ít, sách nêu K-fold cross-validation như một giải pháp.
 
 **unknown:** tỷ lệ chia train, validation, test của các bộ dữ liệu trong dự án. Truy vấn tìm nguồn: ``data/*/DATA_CARD.md`` (T3).
 
-Weight decay
-------------
+8.2 Weight decay
+----------------
 
 Weight decay (còn gọi :math:`\ell_2` regularization) cộng một số hạng phạt độ lớn trọng số vào loss. Hằng số :math:`\lambda` là siêu tham số chọn bằng dữ liệu validation. [T2 D2L tr.119]
 
@@ -543,8 +543,8 @@ Weight decay (còn gọi :math:`\ell_2` regularization) cộng một số hạng
 
 Với :math:`\lambda = 0` ta có loss gốc, với :math:`\lambda > 0` độ lớn :math:`\|\mathbf{w}\|` bị giới hạn. [T2 D2L tr.119] Tên "decay" xuất phát từ việc thuật toán tối ưu làm trọng số co lại ở mỗi bước. [T2 D2L tr.120] Sách không nêu giá trị :math:`\lambda` mặc định.
 
-Dropout
--------
+8.3 Dropout
+-----------
 
 Dropout đặt về 0 một phần các nút của mỗi lớp trước khi tính lớp kế tiếp. [T2 D2L tr.194] Với xác suất :math:`p`, mỗi activation bị loại với xác suất :math:`p` và các activation còn lại được chia cho :math:`1 - p`. [T2 D2L tr.195, tr.196] Sách nêu: "Typically, we disable dropout at test time." [T2 D2L tr.196] Cách dropout hoạt động khác nhau giữa huấn luyện và suy luận được trình bày ở trang :doc:`06-huan-luyen-va-suy-luan`. Sách không nêu giá trị :math:`p` mặc định.
 
@@ -558,8 +558,8 @@ Sách mô tả trường hợp loại :math:`h_2` và :math:`h_5`: khi đó phé
 
    Mạng MLP trước và sau dropout. Nguồn: [T2 D2L tr.195, Fig. 5.6.1]
 
-Tăng cường dữ liệu
-------------------
+8.4 Tăng cường dữ liệu
+----------------------
 
    "Image augmentation generates similar but distinct training examples after a series of random changes to the training images, thereby expanding the size of the training set." [T2 D2L tr.592]
 

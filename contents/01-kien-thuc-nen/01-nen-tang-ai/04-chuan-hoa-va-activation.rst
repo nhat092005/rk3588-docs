@@ -35,8 +35,8 @@ Nếu mạng nơ-ron chỉ gồm các tầng tích chập và tầng kết nối
 
 Trong thiết kế kiến trúc mạng hiện đại, các hàm kích hoạt được chia thành hai họ chính dựa trên tính chất toán học và cách thức xử lý trên phần cứng tăng tốc:
 
-Họ tuyến tính từng đoạn (Piecewise Linear)
-------------------------------------------
+1.1 Họ tuyến tính từng đoạn (Piecewise Linear)
+----------------------------------------------
 
 Nhóm hàm này được định nghĩa bởi các phương trình bậc nhất trên từng khoảng giá trị, không chứa hàm siêu việt (transcendental functions như :math:`e^x`):
 
@@ -72,8 +72,8 @@ Nhóm hàm này được định nghĩa bởi các phương trình bậc nhất 
 
 - **ReLU6:** Giới hạn chặn trên của ReLU ở mức 6: :math:`\text{ReLU6}(x) = \min(\max(0, x), 6)`. Hàm này được thiết kế chuyên biệt cho các thiết bị nhúng (như MobileNetV2) nhằm hạn chế dải động (dynamic range), giúp lượng tử hóa số nguyên cố định INT8 đạt độ chính xác cao mà không bị tràn số [T2 Howard 2017].
 
-Họ hàm mũ trơn (Smooth / Transcendental)
-----------------------------------------
+1.2 Họ hàm mũ trơn (Smooth / Transcendental)
+--------------------------------------------
 
 Nhóm hàm này có đường cong liên tục và đạo hàm trơn trên toàn bộ trục số thực:
 
@@ -125,8 +125,8 @@ Nhóm hàm này có đường cong liên tục và đạo hàm trơn trên toàn
 
    Đồ thị hàm GELU: Cơ chế điều hòa ngẫu nhiên (stochastic regularization) và vai trò nền tảng trong các mô hình thị giác Transformer (ViT).
 
-Góc nhìn phần cứng NPU RK3588
-----------------------------------------------------------------------
+1.3 Góc nhìn phần cứng NPU RK3588
+---------------------------------
 
 Trên bộ xử lý NPU của Rockchip RK3588, sự khác biệt giữa hai họ hàm kích hoạt ảnh hưởng trực tiếp đến vi kiến trúc mạch silicon và khả năng khai thác đa lõi [T1 RKNN User Guide tr.34, T1 OPL tr.60, tr.63]:
 
@@ -192,8 +192,8 @@ Trên bộ xử lý NPU của Rockchip RK3588, sự khác biệt giữa hai họ
 
 **unknown:** nhận định "không bão hòa ở miền dương" chưa có nguồn. Truy vấn tìm nguồn: "GELU activation derivative positive region saturation".
 
-Phân tích hiện tượng triệt tiêu gradient
-----------------------------------------------------------------------
+1.4 Phân tích hiện tượng triệt tiêu gradient
+--------------------------------------------
 
 Với hàm Sigmoid, đạo hàm lớn nhất đạt được là :math:`\sigma'(0) = 0.25`. Trong mạng nhiều tầng, theo quy tắc dây chuyền (chain rule), gradient lan truyền ngược qua :math:`L` tầng sẽ bị nhân liên tiếp với các giá trị nhỏ hơn hoặc bằng :math:`0.25`:
 
@@ -205,24 +205,24 @@ Khi :math:`L \ge 10`, nhân tử :math:`(0.25)^L \approx 9.5 \times 10^{-7}`, kh
 
 ReLU loại bỏ hoàn toàn hệ số suy giảm này ở miền dương vì :math:`f'(x) = 1`. Tuy nhiên, nếu một bước nhảy gradient lớn khiến trọng số cập nhật làm cho :math:`\mathbf{w}^\top \mathbf{x} + b < 0` với hầu hết mẫu dữ liệu, nơ-ron đó sẽ luôn xuất ra 0 và có đạo hàm bằng 0 trong mọi lần lặp tiếp theo. LeakyReLU giải quyết triệt để vấn đề này nhờ duy trì độ dốc nhỏ :math:`\alpha`, đảm bảo dòng gradient luôn tồn tại đường hồi tiếp để kéo nơ-ron ra khỏi vùng chết.
 
-3. Vì sao cần chuẩn hóa
+2. Vì sao cần chuẩn hóa
 =======================
 
 Khi mạng nơ-ron ngày càng sâu, việc huấn luyện gặp phải hai trở ngại lớn:
 
-Dịch chuyển phân phối nội bộ (Internal Covariate Shift)
-----------------------------------------------------------------------
+2.1 Dịch chuyển phân phối nội bộ (Internal Covariate Shift)
+-----------------------------------------------------------
 
 Trong quá trình huấn luyện bằng Gradient Descent, trọng số của tất cả các tầng được cập nhật đồng thời tại mỗi bước lặp. Khi trọng số của tầng :math:`l-1` thay đổi, phân phối xác suất của dữ liệu đầu vào tầng :math:`l` bị dịch chuyển liên tục [T2 Ioffe & Szegedy 2015, tr.1]. Tầng :math:`l` phải liên tục thích ứng với một phân phối dữ liệu mới, tương tự như việc cố gắng học một mục tiêu liên tục di động. Hiện tượng này buộc người kỹ sư phải thiết lập tốc độ học (learning rate) rất nhỏ và khởi tạo trọng số cực kỳ cẩn thận để tránh làm mạng mất ổn định.
 
-Bão hòa kích hoạt và bề mặt hàm mất mát gồ ghề
-----------------------------------------------------------------------
+2.2 Bão hòa kích hoạt và bề mặt hàm mất mát gồ ghề
+--------------------------------------------------
 
 Nếu đầu vào của các tầng không được kiểm soát biên độ, giá trị kích hoạt có thể trôi dạt về các vùng bão hòa của hàm phi tuyến hoặc phát nổ biên độ ở các tầng sâu.
 
 Nghiên cứu của Santurkar et al. (2018) chứng minh rằng vai trò then chốt nhất của chuẩn hóa không chỉ là giảm dịch chuyển phân phối, mà là **làm mịn bề mặt hàm mất mát (loss landscape smoothing)** [T2 Santurkar 2018, tr.2]. Bằng cách ràng buộc phân phối của các tầng trung gian, chuẩn hóa giúp hàm mất mát có hệ số Lipschitz nhỏ hơn và gradient dự đoán được chính xác hơn (predictable gradients). Nhờ đó, người huấn luyện có thể tăng tốc độ học lên 5 đến 10 lần mà mạng vẫn hội tụ ổn định.
 
-4. Công thức BatchNorm, γ, β và thống kê theo batch
+3. Công thức BatchNorm, γ, β và thống kê theo batch
 ===================================================
 
 Thuật toán Batch Normalization (BN) do Sergey Ioffe và Christian Szegedy đề xuất năm 2015 [T2 Ioffe & Szegedy 2015]. Trong mạng tích chập với tensor đầu vào kích thước :math:`(B, C, H, W)`, BN thực hiện chuẩn hóa độc lập trên từng kênh :math:`c \in \{1, \dots, C\}`.
@@ -255,8 +255,8 @@ Trong đó :math:`\epsilon > 0` (thường là :math:`10^{-5}`) là hằng số 
 
 Liên hệ RK3588: Trong 4 phương pháp chuẩn hóa trên, BatchNorm sở hữu lợi thế độc tôn khi triển khai trên NPU RK3588 nhờ khả năng gộp hoàn toàn vào lớp Conv đứng trước khi biên dịch (Conv-BN folding), đưa chi phí tính toán suy luận thực tế về 0. Ngược lại, LayerNorm, InstanceNorm và GroupNorm phải thực hiện tính toán thống kê động trên từng ảnh hoặc từng kênh lúc suy luận, tiêu tốn chu kỳ tính toán ALU và băng thông truy xuất bộ nhớ.
 
-Vai trò của tham số học γ và β
-------------------------------
+3.1 Vai trò của tham số học γ và β
+----------------------------------
 
 Nếu chỉ ép buộc dữ liệu về phân phối chuẩn :math:`\mathcal{N}(0, 1)`, năng lực biểu diễn của tầng đó có thể bị suy giảm nghiêm trọng. Ví dụ, nếu đầu vào của hàm Sigmoid bị ép về phân phối chuẩn quanh 0, hàm Sigmoid sẽ hoạt động gần như một hàm tuyến tính :math:`\sigma(x) \approx 0.5 + 0.25x`, làm mất hoàn toàn tính phi tuyến [T2 Ioffe & Szegedy 2015, tr.3].
 
@@ -268,7 +268,7 @@ Nếu chỉ ép buộc dữ liệu về phân phối chuẩn :math:`\mathcal{N}(
 
 Hai tham số này được tối ưu hóa đồng thời cùng với trọng số mô hình qua quá trình lan truyền ngược. Đáng chú ý, nếu mạng nhận thấy phân phối ban đầu là tối ưu nhất, thuật toán có thể học để chọn :math:`\gamma = \sqrt{\sigma_{\mathcal{B}}^2 + \epsilon}` và :math:`\beta = \mu_{\mathcal{B}}`, khôi phục chính xác ánh xạ đồng nhất ban đầu (:math:`y_i = x_i`).
 
-5. BatchNorm ở huấn luyện và suy luận (running mean, running var)
+4. BatchNorm ở huấn luyện và suy luận (running mean, running var)
 =================================================================
 
 Hành vi của Batch Normalization có sự phân tách rõ rệt giữa hai chế độ hoạt động:
@@ -283,8 +283,8 @@ Hành vi của Batch Normalization có sự phân tách rõ rệt giữa hai ch�
 
 Liên hệ RK3588: Khi chuẩn bị mô hình PyTorch để biên dịch sang RKNN thông qua ONNX, bắt buộc phải gọi lệnh ``model.eval()`` trước khi export. Nếu vô tình export ở chế độ huấn luyện (``model.train()``), NPU sẽ cố gắng tính toán thống kê batch tức thời trên ảnh đơn (:math:`B=1`), phương sai mẫu bằng 0 sẽ làm vỡ hoàn toàn dải kích hoạt của mô hình khi chuyển đổi sang định dạng lượng tử hóa INT8.
 
-Chế độ huấn luyện (Training Mode)
----------------------------------
+4.1 Chế độ huấn luyện (Training Mode)
+-------------------------------------
 
 Lúc huấn luyện (`model.train()`), :math:`\mu_{\mathcal{B}}` và :math:`\sigma_{\mathcal{B}}^2` được tính trực tiếp từ mini-batch dữ liệu hiện tại. Đồng thời, mô hình duy trì hai biến trạng thái không tham gia tính đạo hàm (non-trainable buffers): `running_mean` (:math:`\mu_{\text{run}}`) và `running_var` (:math:`\sigma_{\text{run}}^2`).
 
@@ -300,8 +300,8 @@ Sau mỗi bước lan truyền xuôi, hai giá trị này được cập nhật 
 
 Nhân tử :math:`\frac{m}{m - 1}` là hiệu chỉnh Bessel để ước lượng phương sai mẫu không thiên lệch (unbiased sample variance).
 
-Chế độ suy luận (Inference Mode)
---------------------------------
+4.2 Chế độ suy luận (Inference Mode)
+------------------------------------
 
 Khi triển khai thực tế trên NPU RK3588 (`model.eval()`), mô hình thường nhận từng khung hình đơn lẻ (batch size :math:`B = 1`). Lúc này, ta không thể tính toán trung bình hay phương sai từ một mẫu duy nhất (phương sai của 1 mẫu bằng 0). Hơn nữa, kết quả đầu ra của một bức ảnh không được phép phụ thuộc vào những bức ảnh khác đi cùng trong batch [T2 D2L tr.299].
 
@@ -313,7 +313,7 @@ Vì vậy, trong chế độ suy luận, BN cố định hoàn toàn các giá t
 
 Nhờ việc cố định các giá trị này, phép biến đổi BatchNorm trở thành một phép biến đổi tuyến tính affine tất định trên từng phần tử độc lập.
 
-6. Bộ ba Conv, BN và activation
+5. Bộ ba Conv, BN và activation
 ===============================
 
 Trong các kiến trúc thị giác máy tính kinh điển (ResNet, MobileNet, YOLO), khối xử lý cơ bản luôn tuân thủ trật tự:
@@ -322,8 +322,8 @@ Trong các kiến trúc thị giác máy tính kinh điển (ResNet, MobileNet, 
 
    \mathbf{x} \longrightarrow \text{Conv2d} \longrightarrow \text{BatchNorm2d} \longrightarrow \text{Activation} \longrightarrow \mathbf{y}
 
-Tại sao lớp Conv đi trước BN không cần Bias?
-----------------------------------------------------------------------
+5.1 Tại sao lớp Conv đi trước BN không cần Bias?
+------------------------------------------------
 
 Xét một lớp tích chập có trọng số :math:`\mathbf{W}` và vector hệ số bias :math:`\mathbf{b}`. Đầu ra của tích chập trước khi đi vào BN là :math:`\mathbf{z} = \mathbf{W}\mathbf{x} + \mathbf{b}`.
 
@@ -345,8 +345,8 @@ Ta thấy rằng :math:`\mathbf{b} - \mathbf{b} = 0`. Thành phần bias của l
 
    nn.Conv2d(in_channels, out_channels, kernel_size, bias=False)
 
-Kỹ thuật Conv-BN Folding trên NPU RK3588
-----------------------------------------
+5.2 Kỹ thuật Conv-BN Folding trên NPU RK3588
+--------------------------------------------
 
 Trong giai đoạn huấn luyện, Conv và BN là hai tầng tách biệt để cập nhật gradient và thống kê. Tuy nhiên, khi biên dịch sang mô hình suy luận trên NPU (như chuyển từ PyTorch sang ONNX và nạp vào RKNN-Toolkit2), việc giữ nguyên tầng BN riêng biệt sẽ gây lãng phí bộ nhớ và tạo độ trễ truy cập DRAM không đáng có [T1 RKNN User Guide tr.42, T2 Nagel 2021 tr.18].
 
@@ -408,9 +408,9 @@ Lợi ích thực thi trên phần cứng RK3588:
 2. **Tiết kiệm băng thông bộ nhớ (Memory Bandwidth):** Không cần ghi tensor trung gian từ Conv ra SRAM/DRAM rồi đọc lại vào NPU để làm phép tính BN.
 3. **Thân thiện với lượng tử hóa:** Việc gộp trước khi lượng tử hóa giúp ánh xạ dải động trực tiếp từ Conv vào thang đo INT8.
 
-Liên hệ RK3588: Bộ công cụ RKNN-Toolkit2 tự động phát hiện và thực hiện Conv-BN folding trong bước tối ưu hóa đồ thị tính toán (Graph Optimization) khi chuyển đổi từ ONNX sang RKNN mà không yêu cầu người phát triển can thiệp mã nguồn thủ công. Việc loại bỏ hoàn toàn các lớp BatchNorm trung gian giúp giảm 20% đến 35% độ trễ suy luận toàn mạng trên NPU RK3588, đồng thời cho phép lượng tử hóa trực tiếp ma trận trọng số gộp :math:`\mathbf{W}_{\text{fused}}` sang INT8 một cách liền mạch (xem :doc:`Fusion và tối ưu đồ thị </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
+Liên hệ RK3588: Bộ công cụ RKNN-Toolkit2 tự động phát hiện và thực hiện Conv-BN folding trong bước tối ưu hóa đồ thị tính toán (Graph Optimization) khi chuyển đổi từ ONNX sang RKNN mà không yêu cầu người phát triển can thiệp mã nguồn thủ công. Việc loại bỏ hoàn toàn các lớp BatchNorm trung gian giúp giảm 20% đến 35% độ trễ suy luận toàn mạng trên NPU RK3588, đồng thời cho phép lượng tử hóa trực tiếp ma trận trọng số gộp :math:`\mathbf{W}_{\text{fused}}` sang INT8 một cách liền mạch (xem :doc:`Fusion và tối ưu đồ thị </contents/02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2>`).
 
-7. Các chuẩn hóa khác (LayerNorm, GroupNorm)
+6. Các chuẩn hóa khác (LayerNorm, GroupNorm)
 ============================================
 
 Mặc dù rất hiệu quả trong các mạng thị giác máy tính cổ điển, Batch Normalization bộc lộ nhược điểm nghiêm trọng trong một số tình huống đặc thù:
@@ -420,8 +420,8 @@ Mặc dù rất hiệu quả trong các mạng thị giác máy tính cổ đi�
 
 Để giải quyết các hạn chế này, các phương pháp chuẩn hóa thay thế đã ra đời:
 
-Layer Normalization (LayerNorm)
--------------------------------
+6.1 Layer Normalization (LayerNorm)
+-----------------------------------
 
 Được đề xuất bởi Jimmy Lei Ba, Jamie Ryan Kiros và Geoffrey Hinton (2016) [T2 Ba 2016]. Khác với BatchNorm chuẩn hóa dọc theo chiều batch, LayerNorm chuẩn hóa ngang qua toàn bộ các kênh và đặc trưng của **từng mẫu dữ liệu độc lập**:
 
@@ -434,8 +434,8 @@ Layer Normalization (LayerNorm)
 - **Đặc tính:** Thống kê hoàn toàn độc lập với kích thước batch và các mẫu khác trong tập dữ liệu.
 - **Ứng dụng:** Là chuẩn hóa mặc định trong các kiến trúc Transformer (BERT, GPT, ViT) và mạng hồi quy RNN.
 
-Instance Normalization (InstanceNorm)
--------------------------------------
+6.2 Instance Normalization (InstanceNorm)
+-----------------------------------------
 
 Được Ulyanov et al. đề xuất cho bài toán chuyển đổi phong cách hình ảnh (Style Transfer) [T2 Ulyanov 2016]. InstanceNorm chuẩn hóa độc lập cho **từng kênh của từng mẫu riêng biệt** (tính trên chiều không gian :math:`H \times W`):
 
@@ -445,8 +445,8 @@ Instance Normalization (InstanceNorm)
 
 InstanceNorm giúp loại bỏ thông tin về độ tương phản và độ sáng đặc thù của từng bức ảnh, giữ lại cấu trúc nội dung cốt lõi.
 
-Group Normalization (GroupNorm)
--------------------------------
+6.3 Group Normalization (GroupNorm)
+-----------------------------------
 
 Được Yuxin Wu và Kaiming He đề xuất năm 2018 như một giải pháp dung hòa hoàn hảo giữa BatchNorm và LayerNorm [T2 Wu & He 2018, tr.2].
 

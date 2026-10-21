@@ -1,16 +1,12 @@
-****************
-NPU và phần cứng
-****************
+*************
+Nguyên lý NPU
+*************
 
-NPU là gì, và NPU của RK3588 được cấu tạo ra sao.
+NPU là gì và tính toán thế nào: MAC, dataflow, roofline, systolic, sparsity và NPU nhiều core.
 
 .. toctree::
    :maxdepth: 1
 
-   01-vi-sao-can-npu-va-mac
-   02-dataflow-bo-nho-roofline
-   03-systolic-sparsity-nhieu-core
-   04-rk3588-vi-tri-nguon-dien
-   05-rk3588-cau-truc-npu-core
-   06-rk3588-nhieu-core-sram
-   07-rk3588-clock-thanh-ghi
+   01-kien-truc-npu-va-mac
+   02-dataflow-va-phan-cap-bo-nho
+   03-systolic-array-va-kien-truc-da-loi

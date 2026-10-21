@@ -10,29 +10,30 @@ Tài liệu nghiên cứu phát hiện thiết bị bảo hộ cá nhân (PPE) b
 
    contents/00-tong-quan/index
    contents/01-kien-thuc-nen/index
+   contents/02-nen-tang-rk3588/index
 
 .. toctree::
    :caption: Nghiên cứu
    :maxdepth: 1
 
-   contents/02-phuong-phap/index
-   contents/03-ket-qua/index
+   contents/03-phuong-phap/index
+   contents/04-ket-qua/index
 
 .. toctree::
    :caption: Tra cứu
    :maxdepth: 1
 
-   contents/04-bai-bao/index
-   contents/05-tai-lieu-hang/index
-   contents/06-bang-tra/index
+   contents/05-bai-bao/index
+   contents/06-tai-lieu-hang/index
+   contents/07-bang-tra/index
    thuat-ngu
 
 .. toctree::
    :caption: Vận hành
    :maxdepth: 1
 
-   contents/07-huong-dan/index
-   contents/08-tien-do/index
+   contents/08-huong-dan/index
+   contents/09-tien-do/index
 
 Các mục
 =======
@@ -48,37 +49,40 @@ Các mục
      - Làm gì, vì sao, câu hỏi nghiên cứu và khoảng trống nghiên cứu là gì?
      - Mọi người, đọc đầu tiên
    * - :doc:`Kiến thức nền </contents/01-kien-thuc-nen/index>`
-     - Nền tảng AI, NPU, lượng tử hóa, toolchain, bộ nhớ, thiết kế model và YOLO hoạt động ra sao?
-     - Người cần hiểu nền tảng
-   * - :doc:`Phương pháp </contents/02-phuong-phap/index>`
+     - Nền tảng AI, nguyên lý NPU, lượng tử hóa, compiler, bộ nhớ, thiết kế model và kiến trúc YOLO là gì?
+     - Người cần hiểu lý thuyết chung
+   * - :doc:`Nền tảng RK3588 </contents/02-nen-tang-rk3588/index>`
+     - RK3588S và RKNN cụ thể làm gì: phần cứng NPU, lượng tử hóa, toolchain, bộ nhớ, YOLO trên RKNN?
+     - Người cần hiểu chip đích
+   * - :doc:`Phương pháp </contents/03-phuong-phap/index>`
      - Dữ liệu, phần cứng, giao thức đánh giá và đặc tả bảng đã khóa như thế nào?
      - Hội đồng, người đánh giá
-   * - :doc:`Kết quả </contents/03-ket-qua/index>`
+   * - :doc:`Kết quả </contents/04-ket-qua/index>`
      - Số liệu nào đã có, nằm ở file nào, đã đóng băng chưa?
      - Hội đồng, người đánh giá
-   * - :doc:`Bài báo </contents/04-bai-bao/index>`
+   * - :doc:`Bài báo </contents/05-bai-bao/index>`
      - Một khẳng định lấy từ bài báo nào? (35 bài, bảy chủ đề)
      - Người kiểm nguồn
-   * - :doc:`Tài liệu hãng </contents/05-tai-lieu-hang/index>`
+   * - :doc:`Tài liệu hãng </contents/06-tai-lieu-hang/index>`
      - Rockchip viết gì (datasheet, TRM, RKNN)?
      - Người kiểm nguồn T1
-   * - :doc:`Bảng tra </contents/06-bang-tra/index>`
+   * - :doc:`Bảng tra </contents/07-bang-tra/index>`
      - Code nào làm việc gì, từng lớp của model là gì?
      - Người chạy lại hoặc tiếp tục đề tài
    * - :doc:`Thuật ngữ </thuat-ngu>`
      - Tên gọi nào dùng thống nhất trong dự án?
      - Mọi người
-   * - :doc:`Hướng dẫn </contents/07-huong-dan/index>`
+   * - :doc:`Hướng dẫn </contents/08-huong-dan/index>`
      - Chạy lại từng bước thế nào, lỗi thường gặp xử lý ra sao?
      - Người chạy lại hoặc tiếp tục đề tài
-   * - :doc:`Tiến độ </contents/08-tien-do/index>`
+   * - :doc:`Tiến độ </contents/09-tien-do/index>`
      - Đã làm tới phase nào, đã khóa quyết định gì, còn chưa rõ điều gì?
      - Người tiếp tục đề tài
 
 Thứ tự đọc gợi ý
 ================
 
-- **Muốn hiểu đề tài:** Tổng quan, rồi Kiến thức nền (Nền tảng AI, NPU, Lượng tử hóa, Toolchain và compiler, Bộ nhớ và hiệu năng, Thiết kế model, YOLO).
+- **Muốn hiểu đề tài:** Tổng quan, rồi Kiến thức nền (lý thuyết chung), rồi Nền tảng RK3588 (chip đích).
 - **Muốn kiểm kết quả:** Phương pháp, rồi Kết quả.
 - **Muốn kiểm một con số hay một câu:** Bài báo, Tài liệu hãng, Thuật ngữ.
 - **Muốn chạy lại hoặc làm tiếp:** Hướng dẫn, rồi Tiến độ.
@@ -86,7 +90,7 @@ Thứ tự đọc gợi ý
 Cách đọc nguồn
 ==============
 
-Mỗi khẳng định trong mục Kiến thức nền mang một nhãn nguồn, ví dụ ``[T1 TRM1 tr.1984]``: tier T1, nguồn TRM1, trang PDF 1984.
+Mỗi khẳng định trong mục Kiến thức nền và Nền tảng RK3588 mang một nhãn nguồn, ví dụ ``[T1 TRM1 tr.1984]``: tier T1, nguồn TRM1, trang PDF 1984.
 
 .. list-table::
    :header-rows: 1
