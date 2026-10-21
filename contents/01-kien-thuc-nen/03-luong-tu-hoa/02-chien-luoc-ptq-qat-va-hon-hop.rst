@@ -6,183 +6,282 @@ Chiến lược lượng tử hóa: PTQ, QAT và hỗn hợp
 
 .. admonition:: Trang này trả lời
 
-   - không train lại thì chọn scale và zero-point thế nào?
-   - mô phỏng lượng tử hóa trong lúc train, và đạo hàm qua phép làm tròn thế nào?
-   - có nên dùng nhiều mức bit trong cùng một model?
+   - Không train lại thì chọn scale và zero-point thế nào (PTQ và calibration)?
+   - QAT mô phỏng lượng tử hóa lúc train ra sao, và đạo hàm qua phép làm tròn xử lý thế nào?
+   - Khi nào dùng nhiều mức bit trong một model, và khi nào nên chọn PTQ hay QAT?
 
 .. admonition:: Tóm tắt
 
-   - Weight thường không cần calibration data còn activation thường cần vài batch, nhưng AdaRound là ngoại lệ dùng dữ liệu để tối ưu weight [T2 NAGEL tr.9] [T2 NAGEL tr.16].
-   - Các cách chọn range gồm min-max, MSE, percentile và KL divergence, min-max nhạy với outlier [T2 NAGEL tr.9] [T2 GHOLAMI tr.6].
-   - NAGEL khuyến nghị kinh nghiệm 500 đến 1000 ảnh calibration, QYOLO dùng 1500 ảnh COCO train2017, hai số này không phải quy tắc chung cho mọi model.
-   - QAT cần train lại, cần dữ liệu có nhãn và thêm siêu tham số [T2 NAGEL tr.19]. STE xử lý việc đạo hàm của làm tròn bằng 0 hoặc không xác định.
-   - Mixed-precision giữ lớp nhạy cảm ở độ chính xác cao hơn, nhưng QAREP là phản ví dụ: đặt hai lớp về float cho 51.3% so với 50.3% INT8 của RepVGG-A0 tái hiện.
-   - Không PDF nào đo cấu hình mixed-precision trên mô hình detection, nên mục này là `unknown`.
+   - PTQ lấy mạng FP32 đã train và chuyển thẳng sang dấu phẩy tĩnh mà không cần quy trình train gốc [T2 Nagel 2021 tr.8].
+   - Weight thường không cần dữ liệu calibration, activation thường cần vài batch. AdaRound là ngoại lệ vì dùng dữ liệu để tối ưu weight [T2 Nagel 2021 tr.9] [T2 Nagel 2021 tr.16].
+   - Các cách chọn range gồm min-max, MSE, cross-entropy, dựa trên BN, percentile và KL divergence. Min-max nhạy với outlier [T2 Nagel 2021 tr.9] [T2 Gholami 2021 tr.6].
+   - Nagel khuyến nghị 500 đến 1000 ảnh không nhãn làm tập calibration, Q-YOLO dùng 1500 ảnh COCO train2017. Hai số này là điều kiện thí nghiệm, không phải quy tắc chung [T2 Nagel 2021 tr.16] [T2 Wang 2023 tr.8].
+   - QAT thêm khối quantizer vào đồ thị tính toán lúc train, cần dữ liệu có nhãn và thêm siêu tham số. STE xấp xỉ đạo hàm của làm tròn bằng 1 [T2 Nagel 2021 tr.19].
+   - Mixed precision giữ lớp nhạy cảm ở độ chính xác cao hơn. Không nguồn nào đo cấu hình này trên detector, và chi phí chuyển kiểu giữa lớp là unknown.
 
 .. contents:: Trong trang này
    :local:
    :depth: 1
 
-.. _33-ptq-và-calibration-chọn-range:
+1. PTQ và calibration
+=====================
 
-PTQ và calibration (chọn range)
-===============================
+   "Post-training quantization (PTQ) algorithms take a pre-trained FP32 network and convert it directly into a fixed-point network without the need for the original training pipeline." [T2 Nagel 2021 tr.8]
 
-**Câu hỏi:** không train lại thì chọn scale và zero-point thế nào?
+Nagel nói PTQ không cần hoặc cần ít dữ liệu, ít chỉnh siêu tham số và không train đầu cuối, nên gần như dùng được qua một lời gọi API [T2 Nagel 2021 tr.9]. Bước nền tảng là tìm range cho từng quantizer, tức :math:`q_{min}` và :math:`q_{max}` trong công thức ở :doc:`01-luong-tu-hoa-affine-va-granularity`. Gholami gọi quá trình này là calibration [T2 Gholami 2021 tr.5].
 
-**Nguồn nói gì**
+1.1 Chọn range: min-max, percentile, entropy
+--------------------------------------------
 
-   "Post-training quantization (PTQ) algorithms take a pre-trained FP32 network and convert it directly into a fixed-point network without the need for the original training pipeline." [T2 NAGEL tr.8]
+Nagel nhấn mạnh sự đánh đổi giữa clipping và rounding error khi chọn range, và các phương pháp thường tối ưu hàm chi phí cục bộ thay vì loss của task, vì PTQ cần nhanh và không train đầu cuối [T2 Nagel 2021 tr.9]. Dữ liệu cần cho từng loại tensor:
 
-..
+   "Weights can usually be quantized without any need for calibration data. However, determining parameters for activation quantization often requires a few batches of calibration data." [T2 Nagel 2021 tr.9]
 
-   "The process of choosing the clipping range is often referred to as calibration." [T2 GHOLAMI tr.5]
+.. list-table::
+   :header-rows: 1
+   :widths: 20 52 28
 
-   "Weights can usually be quantized without any need for calibration data. However, determining parameters for activation quantization often requires a few batches of calibration data." [T2 NAGEL tr.9]
+   * - Cách
+     - Ý chính theo nguồn
+     - Nguồn
+   * - Min-max
+     - :math:`q_{min} = \min V`, :math:`q_{max} = \max V`. Không có clipping error nhưng nhạy với outlier.
+     - [T2 Nagel 2021 tr.9]
+   * - MSE
+     - Tìm :math:`q_{min}, q_{max}` làm tối thiểu MSE giữa tensor gốc và tensor đã lượng tử hóa. Giải bằng grid search, golden section hoặc nghiệm giải tích.
+     - [T2 Nagel 2021 tr.9]
+   * - Cross-entropy
+     - Dùng khi các giá trị không quan trọng như nhau, ví dụ logits lớp cuối cần giữ thứ tự giá trị lớn.
+     - [T2 Nagel 2021 tr.10]
+   * - Dựa trên BN
+     - Với activation đã qua batch norm, mean và std theo channel bằng tham số shift và scale đã học, dùng để suy ra range.
+     - [T2 Nagel 2021 tr.10]
+   * - Percentile
+     - Dùng percentile của tín hiệu thay cho min và max.
+     - [T2 Gholami 2021 tr.6]
+   * - Entropy / KL
+     - Chọn :math:`\alpha, \beta` làm tối thiểu KL divergence giữa giá trị thực và giá trị đã lượng tử hóa.
+     - [T2 Gholami 2021 tr.6]
 
-..
+Nagel Table 2 (tr.10) cho thấy chọn range cho activation (asymmetric, weight giữ FP32) ảnh hưởng mạnh khi giảm bit. ImageNet, trung bình 5 lần chạy, FP32 ResNet18 69.68 và MobileNetV2 71.72:
 
-   "This leads to no clipping error. However, this approach is sensitive to outliers as strong outliers may cause excessive rounding errors." [T2 NAGEL tr.9]
+.. list-table::
+   :header-rows: 1
+   :widths: 28 12 12 12 12 12 12
 
-   "we find qmin and qmax that minimize the MSE between the original and the quantized tensor" [T2 NAGEL tr.9]
+   * - Phương pháp
+     - ResNet18 A8
+     - A6
+     - A4
+     - MobileNetV2 A8
+     - A6
+     - A4
+   * - Min-Max
+     - 69.60
+     - 68.19
+     - 18.82
+     - 70.96
+     - 64.58
+     - 0.53
+   * - MSE
+     - 69.59
+     - 67.84
+     - 31.40
+     - 71.35
+     - 67.55
+     - 13.57
+   * - MSE + Xent
+     - 69.60
+     - 68.91
+     - 59.07
+     - 71.36
+     - 68.85
+     - 30.94
+   * - BN (α = 6)
+     - 69.54
+     - 68.73
+     - 23.83
+     - 71.32
+     - 65.20
+     - 0.66
 
-..
+Ở A8 mọi phương pháp gần như như nhau. Khác biệt chỉ lộ ra ở 4 bit.
 
-   "One approach to address this is to use percentile instead of min/max of the signal" [T2 GHOLAMI tr.6]
+Gholami phân biệt static và dynamic quantization theo thời điểm tính range. Static tính sẵn clipping range và giữ cố định lúc suy luận, không thêm chi phí tính toán nhưng thường kém chính xác hơn dynamic [T2 Gholami 2021 tr.6]. Dynamic tính range của từng activation lúc suy luận nên thường đạt độ chính xác cao nhất nhưng tốn kém, vì vậy thực tế thường dùng static [T2 Gholami 2021 tr.7].
 
-   "Another approach is to select α and β to minimize KL divergence (i.e., information loss) between the real values and the quantized values" [T2 GHOLAMI tr.6]
+.. _fig-nagel-pipeline-ptq:
 
-..
+.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_fig8.png
+   :align: center
+   :alt: Pipeline PTQ chuẩn của Nagel
 
-   "Another quantization approach is static quantization, in which the clipping range is pre-calculated and static during inference. This approach does not add any computational overhead, but it typically results in lower accuracy as compared to dynamic quantization." [T2 GHOLAMI tr.6]
+   Pipeline PTQ chuẩn: cross-layer equalization, thêm quantizer, weight range setting (MSE), AdaRound nếu có dữ liệu hoặc bias correction nếu không, activation range setting (MSE). Nguồn: [T2 Nagel 2021 tr.16, Figure 8]
 
-   "Usually, between 500 and 1000 unlabeled images are sufficient as a calibration set." [T2 NAGEL tr.16]
+Không nên viết "chỉ activation cần dữ liệu calibration" tuyệt đối. Trong pipeline của Nagel, AdaRound dùng dữ liệu để tối ưu weight, còn khi không có dữ liệu thì dùng bias correction [T2 Nagel 2021 tr.16].
 
-..
+1.2 Cần bao nhiêu dữ liệu calibration
+--------------------------------------
 
-   "we recommend using symmetric quantizers for the weights and asymmetric quantizers for the activations." [T2 NAGEL tr.16]
+   "Usually, between 500 and 1000 unlabeled images are sufficient as a calibration set." [T2 Nagel 2021 tr.16]
 
-|NAGEL Figure 8| *Hình 3.3. Pipeline PTQ chuẩn của NAGEL: CLE, thêm quantizer, weight range setting (MSE), AdaRound (nếu có dữ liệu) hoặc bias correction (nếu không), activation range setting (MSE). Nguồn: [T2 NAGEL tr.16, Figure 8]*
+Đây là khuyến nghị kinh nghiệm cho pipeline chuẩn của Nagel. Q-YOLO chọn ngẫu nhiên 1500 ảnh train2017 của COCO làm dữ liệu calibration trong thí nghiệm của mình [T2 Wang 2023 tr.8]. Cả hai là điều kiện thí nghiệm, không có nguồn nào đưa số ảnh tối thiểu chung cho mọi model. Cách chuẩn bị tập calibration trong RKNN-Toolkit2 nằm ở :doc:`../../02-nen-tang-rk3588/02-rknn-luong-tu-hoa/02-tap-calibration-va-quy-trinh-qat`.
 
-**Ý chính**
+Một điểm cần cẩn thận khi đọc Q-YOLO: tr.4 mô tả MinMax là chuẩn hóa về [-1, 1], còn Eq. 6 của chính bài (tr.6) là :math:`l_x = \min(x)`, :math:`u_x = \max(x)`. Trang dùng định nghĩa Nagel Eq. 14 và 15 cho min-max [T2 Nagel 2021 tr.9].
 
-- Weight "usually" không cần dữ liệu calibration, activation "often requires a few batches of calibration data" (NAGEL tr.9). Ngoại lệ trong cùng nguồn: AdaRound dùng dữ liệu để tối ưu weight (NAGEL tr.16, Figure 8: "Use Data? Yes: AdaRound, No: Bias Correction"). Tổng hợp của file này: không viết "chỉ activation cần dữ liệu calibration" một cách tuyệt đối.
-- Một số cách chọn range trong nguồn: min-max, MSE, percentile, KL divergence (NAGEL tr.9. GHOLAMI tr.6). NAGEL còn nêu cross-entropy và BN-based range setting (tr.10). Min-max nhạy với outlier.
+2. QAT
+======
 
-**Giới hạn**
+Nagel nêu lý do dùng QAT khi PTQ chưa đủ, nhất là với activation từ 4 bit trở xuống:
 
-- Số ảnh calibration: NAGEL đưa ra khuyến nghị kinh nghiệm 500 đến 1000 ảnh cho pipeline PTQ chuẩn của bài (NAGEL tr.16). QYOLO dùng 1500 ảnh COCO train2017 làm điều kiện thí nghiệm (QYOLO tr.8). Hai con số này không phải quy tắc chung cho mọi model.
-- QYOLO tr.4 mô tả MinMax là "chuẩn hóa về [-1, 1]", lệch với Eq. 6 của chính bài (QYOLO tr.6, ``l_x = min(x)``, ``u_x = max(x)``). Khi viết dùng NAGEL Eq. 14-15 (tr.9).
+   "QAT models the quantization noise source (see section 2.3) during training. This allows the model to find more optimal solutions than post-training quantization. However, the higher accuracy comes with the usual costs of neural network training, i.e., longer training times, need for labeled data and hyper-parameter search." [T2 Nagel 2021 tr.19]
 
---------------
+2.1 Simulated quantization (fake-quant)
+---------------------------------------
 
-.. _34-qat-simulated-quantization-và-ste:
+   "we introduce quantizer blocks in the compute graph to induce quantization effects." [T2 Nagel 2021 tr.6]
 
-QAT, simulated quantization và STE
-==================================
+Mô phỏng chạy bằng phép tính float, đầu vào và đầu ra của khối quantizer đều là float nhưng đầu ra nằm trên lưới lượng tử hóa [T2 Nagel 2021 tr.6]. Nagel còn ghi trên thiết bị thật, các lớp như batch norm được gộp vào lớp tuyến tính liền trước hoặc sau (BN folding) [T2 Nagel 2021 tr.6].
 
-**Câu hỏi:** mô phỏng lượng tử hóa trong lúc train, và đạo hàm qua phép làm tròn thế nào?
+.. _fig-nagel-simulated-quant:
 
-**Nguồn nói gì**
+.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_p6_fig4.png
+   :align: center
+   :alt: Suy luận lượng tử hóa trên thiết bị và mô phỏng bằng float
 
-   "we introduce quantizer blocks in the compute graph to induce quantization effects." [T2 NAGEL tr.6]
+   (a) Suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8. (b) Mô phỏng bằng phép tính float với các khối quantizer. Nguồn: [T2 Nagel 2021 tr.6, Figure 4]
 
-..
+"Simulated quantization" có hai ngữ cảnh khác nhau trong hai nguồn. Nagel dùng nó làm công cụ mô phỏng khi train và đánh giá trên phần cứng float [T2 Nagel 2021 tr.6]. Gholami dùng nó cho một cách triển khai suy luận lưu tham số bit thấp nhưng tính bằng phép toán float, trái với integer-only quantization chạy toàn bộ bằng số nguyên [T2 Gholami 2021 tr.12]. Khi viết cần nói rõ đang theo nghĩa nào.
 
-   "Both the input and output of the quantizer are in floating-point format but the output lies on the quantization grid." [T2 NAGEL tr.6]
+2.2 Straight-through estimator
+------------------------------
 
-   "QAT models the quantization noise source (see section 2.3) during training. This allows the model to find more optimal solutions than post-training quantization. However, the higher accuracy comes with the usual costs of neural network training, i.e., longer training times, need for labeled data and hyper-parameter search." [T2 NAGEL tr.19]
+Vấn đề của QAT là phép làm tròn không có đạo hàm hữu ích:
 
-..
+   "the gradient of the round-to-nearest operation in equation (4) is either zero or undefined everywhere, which makes gradient-based training impossible." [T2 Nagel 2021 tr.19]
 
-   "the gradient of the round-to-nearest operation in equation (4) is either zero or undefined everywhere, which makes gradient-based training impossible." [T2 NAGEL tr.19]
+Giải pháp phổ biến là STE, xấp xỉ đạo hàm của phép làm tròn bằng 1 [T2 Nagel 2021 tr.19]. Gholami diễn đạt thành "bỏ qua làm tròn, xem như hàm đồng nhất", và nhận xét STE thô nhưng thường dùng được trong thực tế, trừ lượng tử hóa cực thấp bit như nhị phân [T2 Gholami 2021 tr.9]:
 
-   "approximate the gradient using the straight-through estimator" [T2 NAGEL tr.19]
+   "Despite the coarse approximation of STE, it often works well in practice, except for ultra low-precision quantization such as binary quantization" [T2 Gholami 2021 tr.9]
 
-..
+.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_p9_fig5.png
+   :align: center
+   :alt: Quy trình QAT với straight-through estimator
 
-   "STE essentially ignores the rounding operation and approximates it with an identity function" [T2 GHOLAMI tr.9]
+   Quy trình QAT: forward qua bộ lượng tử hóa, backward dùng STE như hàm đồng nhất. Nguồn: [T2 Gholami 2021 tr.9, Figure 5]
 
-   "Despite the coarse approximation of STE, it often works well in practice, except for ultra low-precision quantization such as binary quantization" [T2 GHOLAMI tr.9]
+3. Mixed và hybrid precision
+============================
 
-|NAGEL Figure 4| *Hình 3.4a. (a) suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8, (b) mô phỏng bằng phép tính float với các khối Quantizer. Nguồn: [T2 NAGEL tr.6, Figure 4]*
+Nagel chỉ xét homogeneous bit-width (cùng bit-width cho weight hoặc activation ở mọi lớp) và ghi nhận phần cứng thường hỗ trợ cách này phổ biến hơn [T2 Nagel 2021 tr.8]. Mixed precision (hay heterogeneous bit-width) là hướng thay thế.
 
-|GHOLAMI Figure 5| *Hình 3.4b. Quy trình QAT: forward qua bộ lượng tử hóa, backward dùng STE như hàm đồng nhất. Nguồn: [T2 GHOLAMI tr.9, Figure 5]*
+3.1 Chọn lớp nhạy cảm
+---------------------
 
-**Ý chính**
+   "Different layers in a Neural Net have different impact on the loss function, and this motivates a mixed-precision approach to quantization." [T2 Gholami 2021 tr.4]
 
-- Mô phỏng (simulated quantization) thêm khối quantizer vào đồ thị tính toán nhưng giữ dữ liệu ở dạng float (NAGEL tr.6).
-- QAT cần train lại, cần dữ liệu có nhãn và thêm siêu tham số (NAGEL tr.19). STE giải quyết việc đạo hàm của làm tròn bằng 0 hoặc không xác định.
+Mục tiêu là giữ lớp nhạy và kém hiệu quả ở độ chính xác cao hơn, chỉ áp dụng bit thấp cho lớp không nhạy. Tiêu chí hiệu quả phụ thuộc phần cứng, có thể là độ trễ hoặc năng lượng [T2 Gholami 2021 tr.13]. Khó khăn:
 
-**Giới hạn.** "Simulated quantization" được hai nguồn nhấn vào hai khía cạnh khác nhau: công cụ mô phỏng khi train và đánh giá trên phần cứng float (NAGEL tr.6), và một kiểu triển khai suy luận lưu tham số bit thấp nhưng tính bằng phép toán float (GHOLAMI tr.12). Khi viết nên nói rõ đang dùng khía cạnh nào.
+   "One challenge with this approach is that the search space for choosing this bit setting is exponential in the number of layers." [T2 Gholami 2021 tr.14]
 
---------------
+Gholami điểm qua các cách giải: tìm kiếm bằng reinforcement learning hoặc NAS (tốn tài nguyên, nhạy siêu tham số), regularization chu kỳ, và HAWQ dùng độ nhạy bậc hai (Hessian) của mô hình [T2 Gholami 2021 tr.14]. Gholami cũng nhắc lợi ích của lượng tử hóa phụ thuộc phần cứng, nên có hướng hardware-aware dùng bảng tra độ trễ theo lớp và bit-width [T2 Gholami 2021 tr.14].
 
-.. _35-mixed-và-hybrid-precision:
+.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_p13_fig8.png
+   :align: center
+   :alt: Mixed-precision quantization: mỗi lớp 4 hoặc 8 bit
 
-Mixed và hybrid precision
-=========================
+   Mixed-precision: mỗi lớp chọn mức bit, cân bằng giữa độ trễ và độ nhạy. Nguồn: [T2 Gholami 2021 tr.13, Figure 8]
 
-**Câu hỏi:** có nên dùng nhiều mức bit trong cùng một model?
+Ví dụ thực hành trong bài về YOLO: Q-YOLO giữ lớp vào và lớp ra ở độ chính xác gốc vì chúng nhạy với mất độ chính xác. Đây là quy ước theo kinh nghiệm, bài không có thí nghiệm riêng cho lựa chọn này:
 
-**Nguồn nói gì**
+   "The input and output layers of the model are more sensitive to the loss of accuracy. In order to maintain the overall performance of the model, the original accuracy of these layers is usually retained. We also follow this practice." [T2 Wang 2023 tr.9]
 
-   "Different layers in a Neural Net have different impact on the loss function, and this motivates a mixed-precision approach to quantization." [T2 GHOLAMI tr.4]
+Chưa có nguồn nào trong bộ T2 đã kiểm đo cấu hình mixed-precision trên mô hình detection. Unknown. Đã tìm ở: Nagel, Gholami, Wang (Q-YOLO), Baghbanbashi (YOLOv7 quantization), từ khóa: "mixed precision", "mixed". Bài YOLOv7 có thử trộn các granularity khác nhau trong một mô hình (Table II, "Mix of 4 options" và "Mix of 3 options", tr.4) nhưng đó là trộn granularity ở cùng 4 bit, không phải trộn bit-width [T2 Baghbanbashi 2024 tr.4].
 
-..
+3.2 Chi phí chuyển đổi kiểu giữa các lớp
+----------------------------------------
 
-   "One challenge with this approach is that the search space for choosing this bit setting is exponential in the number of layers." [T2 GHOLAMI tr.14]
+Nguồn T2 không nêu chi phí chuyển kiểu số giữa hai lớp kề nhau có bit-width khác nhau. Unknown. Đã tìm ở: Nagel, Gholami, từ khóa: "conversion", "cast", "switch", "mixed". Gholami chỉ nói chung rằng lợi ích tăng tốc của lượng tử hóa phụ thuộc phần cứng với nhiều yếu tố như bộ nhớ trên chip, băng thông và cache [T2 Gholami 2021 tr.14].
 
-   "Note that in this white paper we only consider homogeneous bit-width." [T2 NAGEL tr.8]
+Điều gần nhất nguồn nêu là requantization khi hai nhánh có tham số lượng tử hóa khác nhau: với phép cộng element-wise và concatenation, lưới lượng tử hóa của hai nhánh có thể không trùng nên cần thêm bước requantization, hoặc tối ưu mạng để hai nhánh dùng chung tham số [T2 Nagel 2021 tr.8]. Cách RKNN-Toolkit2 làm hybrid quantization và đo lợi hại trên NPU nằm ở :doc:`../../02-nen-tang-rk3588/02-rknn-luong-tu-hoa/03-hybrid-quantization-va-accuracy-analysis`.
 
-..
+4. Khi nào chọn cái nào: bảng quyết định
+========================================
 
-   "The input and output layers of the model are more sensitive to the loss of accuracy. In order to maintain the overall performance of the model, the original accuracy of these layers is usually retained. We also follow this practice." [T2 QYOLO tr.9]
+Bảng dưới là tổng hợp của trang này từ các khẳng định ở trên (suy ra), không phải khuyến nghị nguyên văn của một nguồn.
 
-   "Partial quantization results of RepVGG-A0 (w/ custom L2 ) in Table 2 is only 51.3%, after setting Layer 5 and 6 float." [T2 QAREP tr.4]
+.. list-table::
+   :header-rows: 1
+   :widths: 30 40 30
 
-|GHOLAMI Figure 8| *Hình 3.5. Mixed-precision: mỗi lớp chọn 4 hoặc 8 bit, cân bằng giữa độ trễ và độ nhạy. Nguồn: [T2 GHOLAMI tr.13, Figure 8]*
+   * - Tình huống
+     - Lựa chọn hợp lý
+     - Cơ sở
+   * - Cần kết quả nhanh, ít dữ liệu, 8 bit
+     - PTQ với weight symmetric, activation asymmetric, range MSE
+     - [T2 Nagel 2021 tr.16]
+   * - PTQ ở 4 bit activation hoặc thấp hơn chưa đạt
+     - Chuyển sang QAT, chấp nhận train lại và cần dữ liệu có nhãn
+     - [T2 Nagel 2021 tr.19]
+   * - Có vài lớp nhạy làm hỏng độ chính xác
+     - Giữ riêng các lớp đó ở độ chính xác cao hơn (mixed precision)
+     - [T2 Gholami 2021 tr.4]
+   * - Không có dữ liệu để calibrate weight
+     - Bias correction thay AdaRound
+     - [T2 Nagel 2021 tr.16]
+   * - Có phần cứng không hỗ trợ bit-width khác nhau
+     - Kiểm tra hỗ trợ của thiết bị đích trước khi chọn mixed precision
+     - [T2 Nagel 2021 tr.8] [T2 Gholami 2021 tr.14]
 
-**Ý chính.** Ý tưởng chung là giữ lớp nhạy cảm ở độ chính xác cao hơn (GHOLAMI tr.14). QYOLO giữ lớp đầu và cuối ở độ chính xác gốc, chỉ như một quy ước, không có thí nghiệm riêng (QYOLO tr.9). QAREP là một phản ví dụ: đặt hai lớp về float chưa cứu được độ chính xác của RepVGG (51.3% so với 50.3% INT8 của bản RepVGG-A0 tái hiện, QAREP Table 2 tr.4, bản RepVGG-A0 chính thức là 52.2%, Table 5 tr.6).
+5. Hiểu sai thường gặp
+======================
 
-**Giới hạn.** Không PDF nào đo cấu hình mixed-precision trên mô hình detection. ``unknown``. Cách RKNN-Toolkit2 thực hiện hybrid quantization xem file ``04_``.
+.. list-table::
+   :header-rows: 1
+   :widths: 28 52 20
 
---------------
-
-.. |NAGEL Figure 8| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_fig8.png
-
-.. |NAGEL Figure 4| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_p6_fig4.png
-
-.. |GHOLAMI Figure 5| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_p9_fig5.png
-
-.. |GHOLAMI Figure 8| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_p13_fig8.png
+   * - Hiểu sai
+     - Thực tế theo nguồn
+     - Nguồn
+   * - Chỉ activation mới cần dữ liệu calibration
+     - Weight thường không cần, nhưng AdaRound dùng dữ liệu để tối ưu weight
+     - [T2 Nagel 2021 tr.9] [T2 Nagel 2021 tr.16]
+   * - Cần 500 đến 1000 ảnh cho mọi model
+     - Đó là khuyến nghị kinh nghiệm cho pipeline của Nagel, Q-YOLO dùng 1500
+     - [T2 Nagel 2021 tr.16] [T2 Wang 2023 tr.8]
+   * - QAT luôn tốt hơn PTQ nên chọn QAT
+     - QAT có chi phí train, cần dữ liệu có nhãn và tìm siêu tham số
+     - [T2 Nagel 2021 tr.19]
+   * - STE là đạo hàm đúng của phép làm tròn
+     - STE là xấp xỉ thô, thường dùng được nhưng không đảm bảo ở cực thấp bit
+     - [T2 Gholami 2021 tr.9]
+   * - Simulated quantization là suy luận số nguyên
+     - Nagel dùng cho mô phỏng bằng float, Gholami dùng cho cách triển khai tính bằng float
+     - [T2 Nagel 2021 tr.6] [T2 Gholami 2021 tr.12]
 
 Nguồn
 =====
 
-Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
-
 .. list-table::
    :header-rows: 1
-   :widths: 12 8 70 10
+   :widths: 22 8 60 10
 
    * - Nhãn
      - Tier
-     - Nguồn
+     - Tệp
      - Số lần
-   * - ``NAGEL``
+   * - ``Nagel 2021``
      - T2
      - :download:`quant_whitepaper_2021nagel.pdf <../../../_assets/pdf/papers/02_quantization/quant_whitepaper_2021nagel.pdf>`
-     - 14
-   * - ``GHOLAMI``
+     - 37
+   * - ``Gholami 2021``
      - T2
      - :download:`quantization_survey_2021gholami.pdf <../../../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`
-     - 10
-   * - ``QYOLO``
+     - 21
+   * - ``Wang 2023``
      - T2
      - :download:`qyolo_ptq_2023wang.pdf <../../../_assets/pdf/papers/02_quantization/qyolo_ptq_2023wang.pdf>`
-     - 1
-   * - ``QAREP``
+     - 4
+   * - ``Baghbanbashi 2024``
      - T2
-     - :download:`qarepvgg_quant_2024chu.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/qarepvgg_quant_2024chu.pdf>`
+     - :download:`quant_yolov7_2024.pdf <../../../_assets/pdf/papers/02_quantization/quant_yolov7_2024.pdf>`
      - 1
