@@ -4,31 +4,31 @@
 <text x="20" y="24" font-size="13" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CƠ CHẾ CẮT LÁT (SLICING) VÀ LẬP CHỈ MỤC TRÊN TENSOR ĐA TRỤC</text>
 <text x="20" y="42" font-size="9.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Cách trích xuất dữ liệu không gian, kênh màu và mẫu dữ liệu từ Batch: Phân biệt chỉ số cố định và lát cắt range (:)</text>
 <rect x="16" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
-<rect x="24" y="66" width="264" height="26" rx="3" fill="#EDE7F6" stroke="#B39DDB" stroke-width="0.8"/>
-<text x="156.0" y="79" font-size="8.2" font-weight="700" fill="#4A148C" text-anchor="middle" dominant-baseline="central">A. LẤY 1 MẪU TỪ BATCH (4D → 3D)</text>
+<rect x="24" y="66" width="264" height="26" rx="3" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="156.0" y="79" font-size="8.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">A. LẤY 1 MẪU TỪ BATCH (4D → 3D)</text>
 <rect x="24" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
-<polygon points="38,130 48,122 82,122 82,156 72,164 38,164" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.1"/>
-<line x1="72" y1="130" x2="82" y2="122" stroke="#8E24AA" stroke-width="0.9"/>
-<line x1="72" y1="130" x2="72" y2="164" stroke="#8E24AA" stroke-width="0.9"/>
-<line x1="38" y1="130" x2="72" y2="130" stroke="#8E24AA" stroke-width="0.9"/>
-<text x="55.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=0</text>
-<polygon points="84,130 94,122 128,122 128,156 118,164 84,164" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.1"/>
-<line x1="118" y1="130" x2="128" y2="122" stroke="#CE93D8" stroke-width="0.9"/>
-<line x1="118" y1="130" x2="118" y2="164" stroke="#CE93D8" stroke-width="0.9"/>
-<line x1="84" y1="130" x2="118" y2="130" stroke="#CE93D8" stroke-width="0.9"/>
-<text x="101.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=1</text>
-<polygon points="130,130 140,122 174,122 174,156 164,164 130,164" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.1"/>
-<line x1="164" y1="130" x2="174" y2="122" stroke="#CE93D8" stroke-width="0.9"/>
-<line x1="164" y1="130" x2="164" y2="164" stroke="#CE93D8" stroke-width="0.9"/>
-<line x1="130" y1="130" x2="164" y2="130" stroke="#CE93D8" stroke-width="0.9"/>
-<text x="147.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=2</text>
-<text x="55" y="114" font-size="7.2" font-weight="700" fill="#8E24AA" text-anchor="middle" dominant-baseline="central">Trích ảnh i=0</text>
-<path d="M 191 145 L 221 145" stroke="#8E24AA" stroke-width="1.5" marker-end="url(#m1E5BB8n)"/>
-<polygon points="231,130 241,122 275,122 275,156 265,164 231,164" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.1"/>
-<line x1="265" y1="130" x2="275" y2="122" stroke="#8E24AA" stroke-width="0.9"/>
-<line x1="265" y1="130" x2="265" y2="164" stroke="#8E24AA" stroke-width="0.9"/>
-<line x1="231" y1="130" x2="265" y2="130" stroke="#8E24AA" stroke-width="0.9"/>
-<text x="248.0" y="147.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3D</text>
+<polygon points="38,140 48,132 82,132 82,166 72,174 38,174" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.1"/>
+<line x1="72" y1="140" x2="82" y2="132" stroke="#1565C0" stroke-width="0.9"/>
+<line x1="72" y1="140" x2="72" y2="174" stroke="#1565C0" stroke-width="0.9"/>
+<line x1="38" y1="140" x2="72" y2="140" stroke="#1565C0" stroke-width="0.9"/>
+<text x="55.0" y="157.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=0</text>
+<polygon points="84,140 94,132 128,132 128,166 118,174 84,174" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+<line x1="118" y1="140" x2="128" y2="132" stroke="#90CAF9" stroke-width="0.9"/>
+<line x1="118" y1="140" x2="118" y2="174" stroke="#90CAF9" stroke-width="0.9"/>
+<line x1="84" y1="140" x2="118" y2="140" stroke="#90CAF9" stroke-width="0.9"/>
+<text x="101.0" y="157.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=1</text>
+<polygon points="130,140 140,132 174,132 174,166 164,174 130,174" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.1"/>
+<line x1="164" y1="140" x2="174" y2="132" stroke="#90CAF9" stroke-width="0.9"/>
+<line x1="164" y1="140" x2="164" y2="174" stroke="#90CAF9" stroke-width="0.9"/>
+<line x1="130" y1="140" x2="164" y2="140" stroke="#90CAF9" stroke-width="0.9"/>
+<text x="147.0" y="157.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">i=2</text>
+<text x="55" y="124" font-size="7.2" font-weight="700" fill="#1565C0" text-anchor="middle" dominant-baseline="central">Trích ảnh i=0</text>
+<path d="M 191 155 L 221 155" stroke="#1565C0" stroke-width="1.5" marker-end="url(#m1E5BB8n)"/>
+<polygon points="231,140 241,132 275,132 275,166 265,174 231,174" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.1"/>
+<line x1="265" y1="140" x2="275" y2="132" stroke="#1565C0" stroke-width="0.9"/>
+<line x1="265" y1="140" x2="265" y2="174" stroke="#1565C0" stroke-width="0.9"/>
+<line x1="231" y1="140" x2="265" y2="140" stroke="#1565C0" stroke-width="0.9"/>
+<text x="248.0" y="157.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3D</text>
 <text x="28" y="210" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cú pháp thực hiện:</text>
 <rect x="24" y="220" width="264" height="26" rx="3" fill="#263238" stroke="#263238" stroke-width="1.2"/>
 <text x="32" y="233" font-size="7.5" font-weight="400" fill="#80D8FF" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">img = batch[0]  # shape: [C, H, W]</text>
@@ -37,8 +37,8 @@
 <text x="28" y="287" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Giảm bậc từ 4D xuống 3D (C, H, W).</text>
 <text x="28" y="300" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Tương đương cú pháp batch[0, :, :, :].</text>
 <rect x="308" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
-<rect x="316" y="66" width="264" height="26" rx="3" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="0.8"/>
-<text x="448.0" y="79" font-size="8.2" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">B. CẮT KÊNH MÀU CHANNEL (3D → 2D)</text>
+<rect x="316" y="66" width="264" height="26" rx="3" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="448.0" y="79" font-size="8.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">B. CẮT KÊNH MÀU CHANNEL (3D → 2D)</text>
 <rect x="316" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
 <polygon points="328,124 340,116 380,116 380,154 368,162 328,162" fill="#FFCDD2" stroke="#C62828" stroke-width="1.1"/>
 <line x1="368" y1="124" x2="380" y2="116" stroke="#C62828" stroke-width="0.9"/>
@@ -55,7 +55,7 @@
 <line x1="438" y1="140" x2="438" y2="178" stroke="#1E5BB8" stroke-width="0.9"/>
 <line x1="398" y1="140" x2="438" y2="140" stroke="#1E5BB8" stroke-width="0.9"/>
 <text x="418.0" y="159.0" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">B</text>
-<text x="346" y="113" font-size="7.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Kênh 0 (R)</text>
+<text x="346" y="108" font-size="7.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Kênh 0 (R)</text>
 <path d="M 468 145 L 503 145" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
 <rect x="516" y="122" width="52" height="46" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
 <text x="542" y="140" font-size="7.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">2D (H×W)</text>
@@ -68,8 +68,8 @@
 <text x="320" y="287" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Giữ nguyên toàn bộ chiều cao (H) và rộng (W).</text>
 <text x="320" y="300" font-size="7.0" font-weight="400" fill="#455A64" text-anchor="start" dominant-baseline="central">• Kết quả là một ma trận 2D cường độ điểm ảnh.</text>
 <rect x="600" y="58" width="280" height="252" rx="5" fill="#FBFBFC" stroke="#CFD8DC" stroke-width="1.1"/>
-<rect x="608" y="66" width="264" height="26" rx="3" fill="#E3F2FD" stroke="#90CAF9" stroke-width="0.8"/>
-<text x="740.0" y="79" font-size="8.2" font-weight="700" fill="#0D47A1" text-anchor="middle" dominant-baseline="central">C. TRÍCH PIXEL ĐA KÊNH (3D → 1D)</text>
+<rect x="608" y="66" width="264" height="26" rx="3" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="740.0" y="79" font-size="8.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">C. TRÍCH PIXEL ĐA KÊNH (3D → 1D)</text>
 <rect x="608" y="100" width="264" height="95" rx="3" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="0.8"/>
 <polygon points="620,124 632,116 672,116 672,154 660,162 620,162" fill="#FFCDD2" stroke="#C62828" stroke-width="1.1"/>
 <line x1="660" y1="124" x2="672" y2="116" stroke="#C62828" stroke-width="0.9"/>

@@ -13,12 +13,12 @@
 <polygon points="216,94 224,98 216,102" fill="#C62828"/>
 <text x="195" y="86" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">ΔmAP</text>
 <text x="195" y="114" font-size="11.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">-1.4%</text>
-<rect x="252" y="72" width="114" height="86" rx="4" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
-<text x="309.0" y="89" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">INT8 (RKNN)</text>
+<rect x="252" y="72" width="114" height="86" rx="4" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+<text x="309.0" y="89" font-size="9.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">INT8 (RKNN)</text>
 <text x="309.0" y="109" font-size="12.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">mAP: 43.8%</text>
-<text x="309.0" y="127" font-size="8.0" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Bộ nhớ: -75% (Tiết kiệm)</text>
-<text x="309.0" y="143" font-size="8.0" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tốc độ: x3.8 (Tối đa 3 Core)</text>
-<rect x="24" y="168" width="412" height="56" rx="4" fill="#F1F8E9" stroke="#C8E6C9" stroke-width="1.0"/>
+<text x="309.0" y="127" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bộ nhớ: -75% (Tiết kiệm)</text>
+<text x="309.0" y="143" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Tốc độ: x3.8 (Tối đa 3 Core)</text>
+<rect x="24" y="168" width="412" height="56" rx="4" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
 <text x="32" y="184" font-size="9.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tiêu chuẩn đánh giá suy giảm:</text>
 <text x="32" y="200" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">ΔmAP ≤ 1.5 - 2.0%: </tspan><tspan>PASS. Đạt chuẩn đưa thẳng vào vận hành công nghiệp.</tspan></text>
 <text x="32" y="214" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">ΔmAP &gt; 3.0%: </tspan><tspan>FAIL. Cần can thiệp QAT hoặc Hybrid Quantization (FP16).</tspan></text>

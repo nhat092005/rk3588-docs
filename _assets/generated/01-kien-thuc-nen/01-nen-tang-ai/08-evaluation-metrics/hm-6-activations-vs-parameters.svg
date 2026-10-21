@@ -8,38 +8,38 @@
 <text x="32" y="82" font-size="6.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Weights cố định theo model; Activations tăng bậc 2 theo diện tích H × W</text>
 <rect x="30" y="92" width="405" height="168" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="0.8"/>
 <line x1="45" y1="222" x2="415" y2="222" stroke="#90A4AE" stroke-width="1.0"/>
-<line x1="45" y1="177" x2="415" y2="177" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>
-<text x="42" y="177" font-size="5.8" font-weight="400" fill="#90A4AE" text-anchor="end" dominant-baseline="central">100 MB</text>
-<line x1="45" y1="132" x2="415" y2="132" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>
-<text x="42" y="132" font-size="5.8" font-weight="400" fill="#90A4AE" text-anchor="end" dominant-baseline="central">200 MB</text>
+<line x1="58" y1="177" x2="415" y2="177" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="33" y="177" font-size="6.5" font-weight="400" fill="#90A4AE" text-anchor="start" dominant-baseline="central">100 MB</text>
+<line x1="58" y1="132" x2="415" y2="132" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="33" y="132" font-size="6.5" font-weight="400" fill="#90A4AE" text-anchor="start" dominant-baseline="central">200 MB</text>
 <rect x="65" y="212" width="52" height="10" rx="2" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2"/>
 <rect x="65" y="198" width="52" height="12" rx="2" fill="#0284C7" stroke="#0369A1" stroke-width="0.8"/>
 <text x="91" y="204" font-size="6.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">3.2 MB</text>
 <text x="91" y="232" font-size="6.8" font-weight="700" fill="#0369A1" text-anchor="middle" dominant-baseline="central">Parameters</text>
-<text x="91" y="244" font-size="6.0" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(Cố định)</text>
+<text x="91" y="244" font-size="6.5" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(Cố định)</text>
 <rect x="150" y="206" width="52" height="16" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
 <rect x="150" y="192" width="52" height="12" rx="2" fill="#16A34A" stroke="#15803D" stroke-width="0.8"/>
 <text x="176" y="198" font-size="6.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">~15 MB</text>
 <text x="176" y="232" font-size="6.8" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Ảnh 320²</text>
-<text x="176" y="244" font-size="6.0" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(1x diện tích)</text>
+<text x="176" y="244" font-size="6.5" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(1x diện tích)</text>
 <rect x="235" y="184" width="52" height="38" rx="2" fill="#FED7AA" stroke="#EA580C" stroke-width="1.2"/>
 <rect x="235" y="170" width="52" height="12" rx="2" fill="#EA580C" stroke="#C2410C" stroke-width="0.8"/>
 <text x="261" y="176" font-size="6.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">~60 MB</text>
 <rect x="235" y="156" width="52" height="11" rx="2" fill="#FFEDD5" stroke="#FDBA74" stroke-width="0.7"/>
-<text x="261" y="161" font-size="5.5" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">x4 diện tích</text>
+<text x="261" y="161" font-size="6.5" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">x4 diện tích</text>
 <text x="261" y="232" font-size="6.8" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">Ảnh 640²</text>
-<text x="261" y="244" font-size="6.0" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(Chuẩn phổ biến)</text>
+<text x="261" y="244" font-size="6.5" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">(Chuẩn phổ biến)</text>
 <rect x="320" y="126" width="52" height="96" rx="2" fill="#FECACA" stroke="#DC2626" stroke-width="1.5"/>
 <rect x="320" y="112" width="52" height="12" rx="2" fill="#DC2626" stroke="#B91C1C" stroke-width="0.8"/>
 <text x="346" y="118" font-size="6.8" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">~240 MB</text>
 <rect x="320" y="98" width="52" height="11" rx="2" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="0.7"/>
-<text x="346" y="103" font-size="5.8" font-weight="700" fill="#991B1B" text-anchor="middle" dominant-baseline="central">x16 lần!</text>
+<text x="346" y="103" font-size="6.5" font-weight="700" fill="#991B1B" text-anchor="middle" dominant-baseline="central">x16 lần!</text>
 <text x="346" y="232" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="middle" dominant-baseline="central">Ảnh 1280²</text>
-<text x="346" y="244" font-size="6.0" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(Bùng nổ bộ nhớ)</text>
-<path d="M 195 190 Q 255 155 320 108" stroke="#DC2626" stroke-width="1.8" fill="none" stroke-dasharray="4 2" marker-end="url(#mDC2626n)"/>
+<text x="346" y="244" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(Bùng nổ bộ nhớ)</text>
+<path d="M 195 190 Q 240 128 320 108" stroke="#DC2626" stroke-width="1.8" fill="none" stroke-dasharray="4 2" marker-end="url(#mDC2626n)"/>
 <rect x="240" y="134" width="76" height="13" rx="2" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="0.7"/>
-<text x="278" y="140.5" font-size="6.2" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Bùng nổ O(H×W)</text>
-<rect x="30" y="268" width="405" height="50" rx="3" fill="#FFF5F5" stroke="#FFCDD2" stroke-width="0.8"/>
+<text x="278" y="140.5" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Bùng nổ O(H×W)</text>
+<rect x="30" y="268" width="405" height="50" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="0.8"/>
 <text x="36" y="279" font-size="7.2" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Đặc tính cốt lõi: Trọng số (weights) bất biến, chỉ nạp 1 lần vào RAM khi khởi động.</text>
 <text x="36" y="293" font-size="7.2" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Nguy cơ thực tế: NPU hiếm khi nghẽn vì weights (chỉ 3.2 MB), mà luôn bị đe dọa</text>
 <text x="36" y="305" font-size="7.2" font-weight="700" fill="#B71C1C" text-anchor="start" dominant-baseline="central">  bởi Feature Maps của ảnh độ phân giải cao vượt quá dung lượng SRAM nội bộ.</text>
@@ -51,36 +51,36 @@
 <text x="483" y="114" font-size="7.2" font-weight="700" fill="#1E293B" text-anchor="start" dominant-baseline="central">Lõi NPU RK3588 (Core 0/1/2)</text>
 <rect x="483" y="124" width="149" height="38" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="0.9"/>
 <text x="557" y="137" font-size="6.8" font-weight="700" fill="#0369A1" text-anchor="middle" dominant-baseline="central">Mảng Tính Toán MAC</text>
-<text x="557" y="150" font-size="6.0" font-weight="400" fill="#0284C7" text-anchor="middle" dominant-baseline="central">Đỉnh 2.0 TOPS / Core</text>
+<text x="557" y="150" font-size="6.5" font-weight="400" fill="#0284C7" text-anchor="middle" dominant-baseline="central">Đỉnh 2.0 TOPS / Core</text>
 <rect x="483" y="178" width="149" height="64" rx="3" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
 <text x="557" y="192" font-size="7.2" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">ON-CHIP SRAM CACHE</text>
-<text x="557" y="206" font-size="6.2" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Dung lượng giới hạn (~vài MB)</text>
-<text x="557" y="219" font-size="6.2" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Băng thông siêu tốc &gt; hàng trăm GB/s</text>
-<text x="557" y="232" font-size="5.8" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Độ trễ 0 ns · Tiêu hao điện cực thấp</text>
+<text x="557" y="206" font-size="6.5" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Dung lượng giới hạn (~vài MB)</text>
+<text x="557" y="219" font-size="6.5" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Băng thông siêu tốc &gt; hàng trăm GB/s</text>
+<text x="557" y="232" font-size="6.5" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Độ trễ 0 ns · Tiêu hao điện cực thấp</text>
 <path d="M 520 162 L 520 178" stroke="#16A34A" stroke-width="1.8" marker-end="url(#m16A34An)"/>
 <path d="M 590 178 L 590 162" stroke="#16A34A" stroke-width="1.8" marker-end="url(#m16A34An)"/>
-<text x="555" y="170" font-size="5.8" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Cache Hit</text>
+<text x="555" y="170" font-size="6.5" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Cache Hit</text>
 <line x1="640" y1="176" x2="735" y2="176" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="3 2"/>
 <line x1="735" y1="190" x2="640" y2="190" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="3 2"/>
 <rect x="650" y="166" width="75" height="34" rx="3" fill="#FEE2E2" stroke="#EF4444" stroke-width="0.9"/>
-<text x="687" y="175" font-size="6.5" font-weight="700" fill="#991B1B" text-anchor="middle" dominant-baseline="central">BUS DDR</text>
-<text x="687" y="187" font-size="5.8" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Nút thắt cổ chai</text>
-<text x="687" y="196" font-size="5.2" font-weight="400" fill="#991B1B" text-anchor="middle" dominant-baseline="central">(Memory Wall)</text>
+<text x="687" y="173" font-size="6.5" font-weight="700" fill="#991B1B" text-anchor="middle" dominant-baseline="central">BUS DDR</text>
+<text x="687" y="183.5" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Nút thắt cổ chai</text>
+<text x="687" y="193" font-size="6.5" font-weight="400" fill="#991B1B" text-anchor="middle" dominant-baseline="central">(Memory Wall)</text>
 <rect x="735" y="102" width="125" height="148" rx="4" fill="#FFF1F2" stroke="#E11D48" stroke-width="1.1"/>
 <text x="797" y="114" font-size="7.2" font-weight="700" fill="#9F1239" text-anchor="middle" dominant-baseline="central">External DRAM</text>
-<text x="797" y="125" font-size="6.0" font-weight="400" fill="#E11D48" text-anchor="middle" dominant-baseline="central">(LPDDR4x / LPDDR5)</text>
+<text x="797" y="125" font-size="6.5" font-weight="400" fill="#E11D48" text-anchor="middle" dominant-baseline="central">(LPDDR4x / LPDDR5)</text>
 <rect x="743" y="134" width="109" height="108" rx="3" fill="#FFFFFF" stroke="#FDA4AF" stroke-width="0.8"/>
 <text x="797" y="146" font-size="6.8" font-weight="700" fill="#BE123C" text-anchor="middle" dominant-baseline="central">RAM Ngoại Vi</text>
-<text x="749" y="162" font-size="6.2" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Dung lượng: 4 - 16 GB</text>
-<text x="749" y="176" font-size="6.2" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Băng thông: ~34 GB/s</text>
-<text x="749" y="190" font-size="6.2" font-weight="700" fill="#E11D48" text-anchor="start" dominant-baseline="central">• Tràn ra ngoài (Spill):</text>
-<text x="749" y="204" font-size="6.2" font-weight="700" fill="#E11D48" text-anchor="start" dominant-baseline="central">  Tiêu hao điện x10-50!</text>
-<text x="749" y="218" font-size="5.8" font-weight="400" fill="#9F1239" text-anchor="start" dominant-baseline="central">  Độ trễ cao (~100+ chu kỳ)</text>
-<text x="749" y="230" font-size="6.2" font-weight="700" fill="#DC2626" text-anchor="start" dominant-baseline="central">  Kéo tụt FPS thực tế</text>
-<rect x="465" y="268" width="405" height="50" rx="3" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.8"/>
-<text x="471" y="279" font-size="7.2" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">CHIẾN LƯỢC TỐI ƯU CỦA RKNN COMPILER &amp; SYSTEM DESIGNER:</text>
-<text x="471" y="293" font-size="7.0" font-weight="400" fill="#14532D" text-anchor="start" dominant-baseline="central">• Operator Fusion: Ghép Conv + BN + ReLU để giam giữ feature map trung gian trong SRAM.</text>
-<text x="471" y="305" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Cân đối độ phân giải: Giữ ảnh 640×640 để vừa vặn SRAM, tránh sập bẫy nghẽn Bus DDR.</text>
+<text x="749" y="162" font-size="6.5" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Dung lượng: 4 - 16 GB</text>
+<text x="749" y="176" font-size="6.5" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Băng thông: ~34 GB/s</text>
+<text x="749" y="190" font-size="6.5" font-weight="700" fill="#E11D48" text-anchor="start" dominant-baseline="central">• Tràn ra ngoài (Spill):</text>
+<text x="749" y="204" font-size="6.5" font-weight="700" fill="#E11D48" text-anchor="start" dominant-baseline="central">  Tiêu hao điện x10-50!</text>
+<text x="749" y="218" font-size="6.5" font-weight="400" fill="#9F1239" text-anchor="start" dominant-baseline="central">  Độ trễ cao (~100+ chu kỳ)</text>
+<text x="749" y="230" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="start" dominant-baseline="central">  Kéo tụt FPS thực tế</text>
+<rect x="465" y="268" width="405" height="50" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="471" y="279" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CHIẾN LƯỢC TỐI ƯU CỦA RKNN COMPILER &amp; SYSTEM DESIGNER:</text>
+<text x="471" y="293" font-size="7.0" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Operator Fusion: Ghép Conv + BN + ReLU để giam giữ feature map trung gian trong SRAM.</text>
+<text x="471" y="305" font-size="7.0" font-weight="400" fill="#374151" text-anchor="start" dominant-baseline="central">• Cân đối độ phân giải: Giữ ảnh 640×640 để vừa vặn SRAM, tránh sập bẫy nghẽn Bus DDR.</text>
 <rect x="20" y="334" width="860" height="24" rx="3" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
 <text x="450" y="346" font-size="7.5" font-weight="700" fill="#1E293B" text-anchor="middle" dominant-baseline="central">BẢN CHẤT: Parameters quyết định dung lượng file (.rknn); Activations quyết định RAM thực thi và nguy cơ nghẽn phần cứng.</text>
 <text x="10" y="382" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Rockchip RK3588 TRM; Chen et al. Eyeriss ISCA 2016; Lin et al. MCUNet 2020.</text>

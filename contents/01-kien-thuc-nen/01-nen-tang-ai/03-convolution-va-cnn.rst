@@ -43,7 +43,6 @@ Trong phép tương quan chéo hai chiều, cửa sổ kernel trượt qua từn
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/d2l-fig-7-2-1-cross-correlation.png
    :align: center
-   :width: 75%
    :alt: Phép tương quan chéo hai chiều trên ảnh đầu vào 3x3 và kernel 2x2
 
    Phép tương quan chéo hai chiều: Cửa sổ kernel 2x2 trượt trên ảnh 3x3 tạo ra đầu ra 2x2. Nguồn: [T2 D2L tr.241, Fig. 7.2.1]
@@ -118,7 +117,15 @@ Khi kernel có độ giãn nở (dilation hay atrous convolution), khoảng các
 
 Đầu ra thu nhỏ thành :math:`4 \times 4`.
 
-Liên hệ RK3588: Bộ điều khiển tiền xử lý tích chập của NPU RK3588 hỗ trợ trực tiếp các chế độ stride, padding và atrous dilation ở cấp thanh ghi phần cứng (xem :doc:`DPU và chế độ conv </contents/01-kien-thuc-nen/02-npu/05-rk3588-cau-truc-npu-core>`).
+.. _fig-cv-stride-padding-dilation:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-1-stride-padding-dilation.svg
+   :align: center
+   :alt: Cơ chế Padding, Stride và Atrous Dilation trong Convolution 2D
+
+   Cơ chế Padding, Stride và Atrous Dilation trong Convolution 2D: (1) Padding đệm viền bảo toàn kích thước không gian; (2) Stride nhảy cách quãng thu nhỏ đặc trưng thay thế pooling; (3) Dilation mở rộng trường tiếp nhận mà không tăng số lượng trọng số.
+
+Liên hệ RK3588: Bộ điều khiển tiền xử lý (pre-process controller) của NPU RK3588 hỗ trợ trực tiếp các chế độ stride, padding và atrous dilation ở cấp thanh ghi phần cứng [T1 TRM1 tr.1985]. NPU không cần ghi các hàng/cột padding số 0 ra ngoài DRAM mà tự động tiêm giá trị 0 trực tiếp vào mảng MAC, tiết kiệm tối đa dung lượng bộ nhớ và băng thông (xem :doc:`DPU và chế độ conv </contents/01-kien-thuc-nen/02-npu/05-rk3588-cau-truc-npu-core>`).
 
 3. Receptive field (Trường tiếp nhận)
 =====================================
@@ -133,6 +140,40 @@ Sách lấy ví dụ từ Fig. 7.2.1: một phần tử ở lớp đầu ra :mat
 
 Việc xếp chồng nhiều lớp tích chập với kernel nhỏ (ví dụ hai lớp :math:`3 \times 3`) cho cùng receptive field với một kernel lớn (:math:`5 \times 5`), nhưng giảm số tham số và bổ sung thêm các hàm phi tuyến [T2 D2L tr.279].
 
+.. _fig-cv-receptive-field:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-2-co-che-receptive-field.svg
+   :align: center
+   :alt: Cơ chế mở rộng Receptive Field qua các tầng CNN
+
+   Cơ chế mở rộng Receptive Field qua các tầng CNN: Xếp chồng hai lớp tích chập 3x3 liên tiếp đạt trường tiếp nhận 5x5 trên ảnh gốc nhưng giảm 28% số lượng tham số so với một lớp 5x5 đơn lẻ và tăng tính phi tuyến.
+
+.. list-table:: So sánh kiến trúc: Hai lớp Conv 3×3 xếp chồng vs Một lớp Conv 5×5 đơn lẻ
+   :widths: 20 28 26 26
+   :header-rows: 1
+   :align: center
+
+   * - Tiêu chí so sánh
+     - Hai lớp Conv 3×3 liên tiếp
+     - Một lớp Conv 5×5 đơn lẻ
+     - Đánh giá / Ưu thế
+   * - Trường tiếp nhận (RF)
+     - :math:`5 \times 5` pixel trên ảnh gốc
+     - :math:`5 \times 5` pixel trên ảnh gốc
+     - Tương đương nhau 100%, bao quát cùng một vùng
+   * - Số lượng tham số (Weights)
+     - :math:`2 \times (3 \times 3) = 18` trọng số (giả sử 1 kênh)
+     - :math:`1 \times (5 \times 5) = 25` trọng số (giả sử 1 kênh)
+     - Giảm 28% tham số, tiết kiệm bộ nhớ RAM
+   * - Tính phi tuyến (Non-linearity)
+     - 2 lớp hàm kích hoạt ReLU
+     - Chỉ có 1 lớp kích hoạt ReLU
+     - Mạng sâu hơn biểu diễn hàm phức tạp tốt hơn
+   * - Ứng dụng trong YOLO / NPU
+     - Chuẩn thiết kế VGG / CSPDarknet
+     - Hiếm dùng trong CNN hiện đại
+     - Dễ ánh xạ phần cứng NPU, tối ưu hóa bộ đệm CBUF
+
 Liên hệ RK3588: Trong các mô hình phát hiện vật thể, receptive field quyết định khả năng nhận diện các vật thể có kích thước lớn ở các tầng đặc trưng sâu (xem :doc:`Các khối cấu thành của detector </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
 
 4. Nhiều kênh vào, nhiều kênh ra, đếm params và MACs
@@ -144,7 +185,6 @@ Khi dữ liệu đầu vào chứa :math:`c_i` kênh, mỗi bộ lọc phải c�
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/d2l-fig-7-4-1-multi-channel.png
    :align: center
-   :width: 75%
    :alt: Phép tương quan chéo với hai kênh đầu vào
 
    Phép tính tương quan chéo với hai kênh đầu vào: Tích chập độc lập trên từng kênh rồi cộng dồn kết quả. Nguồn: [T2 D2L tr.253, Fig. 7.4.1]
@@ -155,13 +195,13 @@ Lớp tích chập :math:`1 \times 1` không liên kết các điểm ảnh lân
 
    "You could think of the 1 × 1 convolutional layer as constituting a fully connected layer applied at every single pixel location to transform the c_i corresponding input values into c_o output values." [T2 D2L tr.255]
 
-Số tham số của lớp tích chập gồm trọng số và bias:
+Số tham số của lớp tích chập gồm trọng số và bias [T2 D2L tr.254]:
 
 .. math::
 
    \text{số tham số} = c_o \cdot c_i \cdot k_h \cdot k_w + c_o
 
-**unknown:** Công thức tổng quát cho số tham số lớp conv không được viết tường minh trong sách D2L, đây là công thức suy ra từ shape tensor trọng số :math:`[c_o, c_i, k_h, k_w]` và vector bias :math:`[c_o]`. Truy vấn tìm nguồn: "convolution layer learnable parameters formula weight bias c_out c_in k_h k_w".
+Công thức trên suy trực tiếp từ cấu trúc tensor trọng số :math:`c_o \times c_i \times k_h \times k_w` và vector bias :math:`c_o` được định nghĩa trong [T2 D2L tr.254], đồng nhất với định nghĩa chuẩn của lớp Conv2d trong tài liệu PyTorch.
 
 Về khối lượng tính toán, sách nêu độ phức tạp cho ảnh :math:`h \times w` với :math:`c_i` kênh vào và :math:`c_o` kênh ra là :math:`O(h \cdot w \cdot k^2 \cdot c_i \cdot c_o)` [T2 D2L tr.256]. Theo cách tính chuẩn của các kiến trúc thị giác [T2 MOBILENET tr.2, Eq. 2], số phép nhân tích lũy (MACs) cho một lớp tích chập với kích thước đầu ra :math:`h_{out} \times w_{out}` là:
 
@@ -186,7 +226,6 @@ Liên hệ RK3588: Tỷ lệ giữa số MACs và lượng byte dữ liệu nạ
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/cudnn-fig-1-convolution-lowering.png
    :align: center
-   :width: 80%
    :alt: Biến đổi tích chập thành phép nhân ma trận bằng cách hạ bậc dữ liệu
 
    Hạ bậc tích chập về nhân ma trận (im2col): Ma trận trọng số :math:`F_m` kích thước :math:`K \times CRS` nhân với ma trận dữ liệu trải phẳng :math:`D_m` kích thước :math:`CRS \times NPQ`. Nguồn: [T2 CUDNN tr.4, Figure 1]
@@ -203,7 +242,15 @@ Thao tác trải dữ liệu (thường gọi là im2col) chuyển mỗi vùng t
 
 Sách D2L minh họa góc nhìn tương đương: viết lại kernel thành ma trận trọng số thưa :math:`W` kích thước :math:`4 \times 9` nhân với vector đầu vào trải phẳng :math:`X` độ dài :math:`9` để cho ra vector đầu ra độ dài :math:`4` [T2 D2L tr.658].
 
-Liên hệ RK3588: Phần cứng NPU RK3588 nạp trực tiếp dữ liệu từ bộ đệm nội bộ mà không cần sinh ma trận im2col trung gian ra ngoài bộ nhớ DRAM (xem :doc:`Layout NC1HWC2 và alignment </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
+.. _fig-cv-im2col-gemm:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-3-ha-bac-im2col-va-gemm.svg
+   :align: center
+   :alt: Hạ bậc tích chập về nhân ma trận GEMM qua biến đổi im2col
+
+   Hạ bậc tích chập về nhân ma trận GEMM qua biến đổi im2col: Trải các cửa sổ trượt 3D thành các cột ma trận dữ liệu :math:`D_m` để nhân với ma trận bộ lọc :math:`F_m`; đánh đổi bộ nhớ do dữ liệu bị sao chép lặp lại tới :math:`R \times S` lần.
+
+Liên hệ RK3588: Thay vì bung ma trận :math:`D_m` ra bộ nhớ ngoài DDR gây tốn dung lượng RAM khổng lồ, bộ điều khiển CNA của NPU RK3588 giải mã địa chỉ on-the-fly, nạp trực tiếp từng cửa sổ từ bộ đệm nội bộ CBUF vào mảng MAC theo cơ chế Implicit GEMM [T1 TRM1 tr.1985], đạt thông lượng tính toán GEMM cực đại mà không tốn chi phí bộ nhớ trung gian (xem :doc:`Layout NC1HWC2 và alignment </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
 
 6. Depthwise và pointwise
 =========================
@@ -216,7 +263,6 @@ Kiến trúc MobileNet giới thiệu phép phân rã tích chập (factorized c
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/mobilenet-fig-2-depthwise-separable.png
    :align: center
-   :width: 70%
    :alt: Phân rã tích chập chuẩn thành depthwise convolution và pointwise convolution
 
    Phân rã tích chập tiêu chuẩn (a) thành bộ lọc Depthwise (b) và bộ lọc Pointwise 1x1 (c). Nguồn: [T2 MOBILENET tr.3, Figure 2]
@@ -279,7 +325,41 @@ Phổ liên tục giữa các biến thể tích chập qua tham số nhóm :mat
 
 Kiến trúc ResNeXt khắc phục nhược điểm thiếu liên kết giữa các nhóm bằng cách kẹp lớp group convolution ở giữa hai lớp tích chập :math:`1 \times 1` [T2 D2L tr.310].
 
-Liên hệ RK3588: Group convolution được hỗ trợ trực tiếp trong danh sách toán tử của bộ biên dịch RKNN Toolkit (xem :doc:`Operator List RKNN </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
+.. _fig-cv-dwconv-group-conv:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-4-depthwise-pointwise-va-group-conv.svg
+   :align: center
+   :alt: Phổ phân rã tích chập: Standard Conv, Group Conv và Depthwise Separable Conv
+
+   Phổ phân rã tích chập: So sánh cơ chế luồng kênh giữa Standard Conv (kết nối dày đặc), Group Conv (khối đường chéo độc lập) và Depthwise Separable Conv (tách riêng lọc không gian và trộn kênh, giảm 8 đến 9 lần phép tính MAC).
+
+.. list-table:: So sánh định lượng FLOPs và đặc tính phần cứng (Ví dụ: :math:`K=3, C_{in}=64, C_{out}=128, H=W=28`)
+   :widths: 22 26 26 26
+   :header-rows: 1
+   :align: center
+
+   * - Đặc tính
+     - Standard Conv (:math:`3 \times 3`)
+     - Group Conv (:math:`g = 4`)
+     - Depthwise Separable (:math:`3 \times 3`)
+   * - Số tham số (Weights)
+     - :math:`128 \times 64 \times 9 = 73{,}728`
+     - :math:`(128 \times 64 \times 9) / 4 = 18{,}432`
+     - :math:`(64 \times 9) + (64 \times 128 \times 1) = 8{,}768` (giảm 8.4×)
+   * - Số phép MAC toàn lớp
+     - 57.8 MMACs
+     - 14.4 MMACs (giảm 4×)
+     - 6.87 MMACs (giảm 8.41×)
+   * - Giao tiếp giữa các kênh
+     - Toàn bộ mọi kênh
+     - Chỉ trong nội bộ từng nhóm
+     - Tách riêng: DW không trộn, PW trộn 100%
+   * - Độ phù hợp phần cứng NPU
+     - Tận dụng 100% mảng MAC, compute-bound, hiệu năng cao
+     - Tốt nếu số nhóm chia đều trên các cụm MAC RK3588
+     - DW dễ bị memory-bound (ít tính toán); PW chạy tối đa mảng MAC :math:`32 \times 32`
+
+Liên hệ RK3588: Group convolution được hỗ trợ trực tiếp trong danh sách toán tử của bộ biên dịch RKNN Toolkit. Trên NPU RK3588, lớp Depthwise Conv (:math:`3 \times 3`) trong YOLO thường có hiệu suất sử dụng MAC (MacUsage) thấp (chỉ 0.3% - 1.2%) do nghẽn nạp bộ nhớ; trong khi lớp Pointwise Conv (:math:`1 \times 1`) và Group Conv là phép nhân ma trận thuần túy GEMM, lấp đầy mảng MAC :math:`32 \times 32` và đạt hiệu suất tính toán cao (xem :doc:`Operator List RKNN </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
 
 8. Pooling và upsample
 ======================
@@ -295,8 +375,47 @@ Ngược lại với quá trình giảm độ phân giải, mạng cần tăng k
    "In transposed convolution, each element in the input tensor is multiplied by the kernel so that the resulting k_h × k_w tensor replaces a portion in each intermediate tensor... In the end, all the intermediate results are summed over to produce the output." [T2 D2L tr.655]
 
 Về mặt đại số tuyến tính, phép tính này tương đương với việc nhân vector đầu vào với ma trận chuyển vị :math:`W^{\top}` của ma trận trọng số thưa từ phép tích chập xuôi [T2 D2L tr.658]. Ngoài tích chập chuyển vị, các phương pháp upsample nội suy (nearest neighbor, bilinear) cũng thường được dùng để tránh sinh thêm tham số.
+ 
+.. _fig-cv-pooling-upsample:
 
-Liên hệ RK3588: RKNN hỗ trợ nội suy Resize và Transpose/Deconvolution, trong đó phép nội suy Nearest Neighbor thường có chi phí tính toán thấp hơn trên NPU (xem :doc:`Toán tử YOLO trên RK3588 </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-5-pooling-va-upsample.svg
+   :align: center
+   :alt: Cơ chế Pooling (Downsampling) và Upsampling trong CNN
+
+   Cơ chế Pooling (Downsampling) và Upsampling trong CNN: (1) Pooling trượt không tham số độc lập trên từng kênh gồm Max Pooling (giữ biên cạnh nổi bật) và Average Pooling (làm mịn tín hiệu); (2) Upsampling tăng độ phân giải gồm Nearest Neighbor (sao chép điểm ảnh, 0 MAC) và Transposed Conv (nhân ma trận trọng số chuyển vị :math:`W^{\top}`).
+
+.. list-table:: So sánh các toán tử Pooling và Upsampling trong mạng CNN
+   :widths: 18 24 16 22 20
+   :header-rows: 1
+   :align: center
+
+   * - Toán tử
+     - Cơ chế toán học
+     - Tham số học
+     - Đặc tính kiến trúc
+     - Đánh giá trên NPU RK3588
+   * - Max Pooling
+     - Lấy giá trị lớn nhất trong cửa sổ :math:`k \times k`
+     - 0 (không tham số)
+     - Giữ biên cạnh sắc nét, bất biến dịch chuyển
+     - Tăng tốc native trong DPU, không tốn mảng MAC
+   * - Average Pooling
+     - Trung bình cộng các phần tử
+     - 0 (không tham số)
+     - Làm mịn không gian, nén vector (GAP)
+     - Tối ưu tốt trong DPU, thường dùng ở tầng cuối
+   * - Nearest Upsample
+     - Sao chép lặp giá trị điểm ảnh gần nhất
+     - 0 (không tham số)
+     - Phóng to không làm biến dạng giá trị gốc
+     - Nhanh nhất, tối ưu băng thông cho YOLO Neck
+   * - Transposed Conv
+     - Nhân kernel :math:`W^{\top}` thế chỗ
+     - :math:`c_o \times c_i \times k^2`
+     - Tự học cách hoàn nguyên độ phân giải
+     - Tốn nhiều chu kỳ MAC và băng thông SRAM
+
+Liên hệ RK3588: Toán tử MaxPool, AvgPool và Resize Nearest được hỗ trợ tăng tốc native trong nhân DPU của RK3588, hoàn toàn không tiêu tốn mảng MAC nhân ma trận, giải phóng năng lực tính toán cho các lớp tích chập. Nhánh giải mã đặc trưng FPN/PAN của YOLOv5/v8 ưu tiên dùng Resize Nearest Neighbor để giảm tối đa lưu lượng bộ nhớ SRAM và đạt tốc độ khung hình (FPS) cao nhất trên SoC RK3588 (xem :doc:`Toán tử YOLO trên RK3588 </contents/01-kien-thuc-nen/04-toolchain-compiler/03-operator-list-va-op-yolov8>`).
 
 9. Toán tử Add và khối residual
 ===============================
@@ -309,7 +428,6 @@ Khi mạng nơ-ron trở nên rất sâu, việc huấn luyện gặp khó khăn
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/d2l-fig-8-6-2-residual-block.png
    :align: center
-   :width: 75%
    :alt: So sánh khối thông thường và khối residual trong ResNet
 
    Khối thông thường (trái) học trực tiếp :math:`f(\mathbf{x})` so với khối residual (phải) học ánh xạ phần dư :math:`g(\mathbf{x}) = f(\mathbf{x}) - \mathbf{x}` qua kết nối tắt identity. Nguồn: [T2 D2L tr.304, Fig. 8.6.2]
@@ -322,7 +440,41 @@ Nhánh tắt (shortcut connection) dẫn trực tiếp đầu vào :math:`\mathb
 
 Để thực hiện phép cộng Add, nhánh chính và nhánh tắt phải có kích thước không gian và số lượng kênh giống hệt nhau. Khi cần thay đổi số kênh hoặc giảm kích thước không gian, một lớp tích chập :math:`1 \times 1` được bổ sung trên nhánh tắt [T2 D2L tr.304].
 
-Liên hệ RK3588: Toán tử Add trên nhánh residual có thể được dung hợp (fusion) với lớp tích chập đứng trước để giảm việc ghi và đọc trung gian ra bộ nhớ (xem :doc:`Fusion và tối ưu đồ thị </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
+.. _fig-cv-residual-add:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-6-khoi-residual-va-toan-tu-add.svg
+   :align: center
+   :alt: Cấu trúc Khối Residual, Nhánh Shortcut và Dung hợp Toán tử Add
+
+   Cấu trúc Khối Residual, Nhánh Shortcut và Dung hợp Toán tử Add: (1) Identity Shortcut nối trực tiếp khi giữ nguyên chiều; (2) Projection Shortcut đi qua Conv 1x1 khi đổi số kênh hoặc stride; (3) Cơ chế Add Fusion trên RK3588 dung hợp toán tử Add vào bộ đệm SRAM, giảm 66% lưu lượng truy xuất bộ nhớ DRAM ngoài.
+
+.. list-table:: So sánh các cấu trúc nhánh Shortcut trong khối Residual
+   :widths: 22 26 26 26
+   :header-rows: 1
+   :align: center
+
+   * - Tiêu chí
+     - Identity Shortcut (Cơ bản)
+     - Projection Shortcut (Đổi kênh / Stride)
+     - Dung hợp Add trên RK3588 NPU
+   * - Điều kiện áp dụng
+     - :math:`c_{in} = c_{out}` và :math:`\text{stride} = 1`
+     - :math:`c_{in} \neq c_{out}` hoặc :math:`\text{stride} = 2`
+     - Toán tử Add đứng ngay sau Conv / BN
+   * - Tham số trên Shortcut
+     - 0 (đường dây nối thuần túy)
+     - :math:`c_{out} \times c_{in} \times (1 \times 1) + c_{out}`
+     - 0 (tối ưu hóa ở cấp biên dịch đồ thị)
+   * - Dòng chảy Gradient
+     - Cộng trực tiếp hệ số :math:`+1` không suy giảm
+     - Nhân qua ma trận trọng số :math:`1 \times 1`
+     - Không đổi về mặt toán học, chuẩn xác 100%
+   * - Ảnh hưởng bộ nhớ NPU
+     - Giữ tensor :math:`\mathbf{x}` trong SRAM đệm
+     - Tính thêm 1 lớp Conv :math:`1 \times 1` trên NPU
+     - Ghép Add vào Conv, triệt tiêu đọc/ghi DRAM
+
+Liên hệ RK3588: Trình biên dịch RKNN tự động nhận diện mẫu Conv + BN + Add + ReLU để tạo thành khối toán tử dung hợp (Fused Operator), chạy khép kín trọn vẹn trong 1 chu kỳ phần cứng của NPU Core. Khối Residual dung hợp giúp loại bỏ các lần cấp phát mảng trung gian ra ngoài DDR, tiết kiệm 66% lưu lượng bộ nhớ và giữ trọn băng thông cho các tác vụ xử lý video đa luồng song song (xem :doc:`Fusion và tối ưu đồ thị </contents/01-kien-thuc-nen/04-toolchain-compiler/04-fusion-layout-tiling>`).
 
 10. Ghép khối thành CNN từ ảnh đến đặc trưng
 ============================================
@@ -366,6 +518,47 @@ LeNet-5 là ví dụ kinh điển gồm hai phần: phần mã hóa tích chập
 Kiến trúc VGG chuẩn hóa việc thiết kế mạng theo các khối đồng nhất: mỗi khối VGG gồm một chuỗi các lớp tích chập :math:`3 \times 3` có đệm :math:`p = 1` để giữ nguyên độ phân giải, theo sau là lớp max-pooling :math:`2 \times 2` với stride :math:`2` để giảm một nửa kích thước chiều cao và chiều rộng [T2 D2L tr.279].
 
 Quy luật ghép khối phổ biến trong các mạng phát hiện vật thể (như backbone của YOLO) kế thừa cấu trúc này: giảm dần độ phân giải không gian qua các tầng để tăng số lượng kênh đặc trưng, sau đó kết hợp đặc trưng đa quy mô qua các nhánh FPN/PAN (xem :doc:`So sánh và khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
+
+.. _fig-cv-feature-hierarchy:
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/03-convolution-va-cnn/cv-7-phan-tang-dac-trung-cnn-feature-hierarchy.svg
+   :align: center
+   :alt: Phân tầng Đặc trưng (Feature Hierarchy) và Luồng Tensor trong CNN
+
+   Phân tầng Đặc trưng (Feature Hierarchy) và Luồng Tensor trong CNN: Tiến trình trừu tượng hóa từ đặc trưng hình học cục bộ (cạnh, góc) ở tầng nông sang ngữ nghĩa trừu tượng (bộ phận, vật thể) ở tầng sâu; quy luật giảm độ phân giải không gian để tăng số lượng kênh đặc trưng.
+
+.. list-table:: Phân tầng đặc trưng và đánh đổi tài nguyên phần cứng NPU RK3588 qua các Stage CNN
+   :widths: 20 18 20 22 20
+   :header-rows: 1
+   :align: center
+
+   * - Tầng kiến trúc
+     - Tensor Shape
+     - Receptive Field
+     - Bản chất đặc trưng
+     - Hành vi trên NPU RK3588
+   * - Tầng nông (Stage 1-2)
+     - :math:`320 \times 320 \times 64`
+     - Nhỏ (:math:`3 \times 3` đến :math:`7 \times 7`)
+     - Cạnh biên, góc nhọn, tương phản viền
+     - Memory-bound: Activation lớn, tốn đệm SRAM
+   * - Tầng giữa (Stage 3)
+     - :math:`80 \times 80 \times 256`
+     - Trung bình (15 đến 35)
+     - Vân bề mặt, hoa văn, hình khối
+     - Cân bằng: Tỷ lệ Compute/Memory đạt mức tối ưu
+   * - Tầng sâu (Stage 4-5)
+     - :math:`20 \times 20 \times 1024`
+     - Rất lớn (bao trùm toàn vật thể)
+     - Ngữ nghĩa trừu tượng, bộ phận vật thể
+     - Compute-bound: 1024 kênh lấp đầy mảng MAC :math:`32 \times 32`
+   * - Tầng tác vụ (Heads)
+     - Vector / P3-P5
+     - Bao phủ toàn bộ ảnh gốc
+     - Xác suất phân loại hoặc Bounding Box
+     - GAP tốn ít MAC; YOLO Head cần NMS hậu xử lý CPU
+
+Liên hệ RK3588: Trên SoC RK3588, tầng nông (Stage 1-2) có kích thước không gian lớn, chiếm dụng nhiều bộ nhớ SRAM và dễ nghẽn băng thông DRAM (cần chia mảnh layer tiling khi vượt quá dung lượng SRAM); trong khi tầng sâu (Stage 4-5) có số kênh lớn (512-1024) giúp khai thác 100% công suất mảng MAC :math:`32 \times 32` của NPU, đạt đỉnh hiệu năng tính toán cực đại. Cơ chế kết hợp đa tầng trong YOLO sử dụng Backbone trích xuất đặc trưng đa quy mô, sau đó nhánh Neck (FPN/PAN) kết hợp P3 (vật thể nhỏ), P4 (vật thể vừa) và P5 (vật thể lớn) để dung hòa độ phân giải với ngữ nghĩa (xem :doc:`So sánh và khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-so-sanh-va-khoi-cau-thanh>`).
 
 Nguồn
 =====

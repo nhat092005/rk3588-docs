@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="380" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="42" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phổ phân rã tích chập: Standard Conv, Group Conv và Depthwise Separable Conv</text>
+<rect x="10" y="64" width="280" height="280" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="150.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Standard Conv (g = 1)</text>
+<text x="22" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kết nối dày đặc: </tspan><tspan>Mọi kênh vào nối với</tspan></text>
+<text x="22" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  mọi kênh ra (Full channel mixing).</tspan></text>
+<text x="22" y="127.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Filter 3D: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.2">K × K × C_in</tspan><tspan> cho mỗi kênh ra.</tspan></text>
+<rect x="35" y="156" width="45" height="18" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="57" y="165" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 0</text>
+<line x1="80" y1="165" x2="220" y2="165" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="165" x2="220" y2="191" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="165" x2="220" y2="217" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="165" x2="220" y2="243" stroke="#B0BEC5" stroke-width="0.7"/>
+<rect x="35" y="182" width="45" height="18" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="57" y="191" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 1</text>
+<line x1="80" y1="191" x2="220" y2="165" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="191" x2="220" y2="191" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="191" x2="220" y2="217" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="191" x2="220" y2="243" stroke="#B0BEC5" stroke-width="0.7"/>
+<rect x="35" y="208" width="45" height="18" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="57" y="217" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 2</text>
+<line x1="80" y1="217" x2="220" y2="165" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="217" x2="220" y2="191" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="217" x2="220" y2="217" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="217" x2="220" y2="243" stroke="#B0BEC5" stroke-width="0.7"/>
+<rect x="35" y="234" width="45" height="18" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="57" y="243" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 3</text>
+<line x1="80" y1="243" x2="220" y2="165" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="243" x2="220" y2="191" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="243" x2="220" y2="217" stroke="#B0BEC5" stroke-width="0.7"/>
+<line x1="80" y1="243" x2="220" y2="243" stroke="#B0BEC5" stroke-width="0.7"/>
+<rect x="220" y="156" width="45" height="18" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="242" y="165" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 0</text>
+<rect x="220" y="182" width="45" height="18" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="242" y="191" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 1</text>
+<rect x="220" y="208" width="45" height="18" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="242" y="217" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 2</text>
+<rect x="220" y="234" width="45" height="18" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="242" y="243" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 3</text>
+<rect x="22" y="272" width="256" height="60" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1"/>
+<text x="28" y="286.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trọng số: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.5">C_out · C_in · K²</tspan></text>
+<text x="28" y="299.5" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Phép MAC: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.5">H · W · C_out · C_in · K²</tspan></text>
+<text x="28" y="313.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Chi phí tính toán cao nhất.</tspan></text>
+<rect x="306" y="64" width="280" height="280" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="446.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Group Conv (1 &lt; g &lt; C_in)</text>
+<text x="318" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Chia </tspan><tspan font-weight="700">g nhóm độc lập: </tspan><tspan>Không có sự trao</tspan></text>
+<text x="318" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  đổi thông tin giữa các nhóm khác nhau.</tspan></text>
+<text x="318" y="127.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Ma trận dạng khối chéo (block-diagonal).</tspan></text>
+<rect x="322" y="158" width="248" height="48" rx="3" fill="none" stroke="#1E5BB8" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="334" y="158" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke"> Nhóm 0 (Kênh 0, 1) </text>
+<rect x="331" y="160" width="45" height="16" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="353" y="168" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 0</text>
+<line x1="376" y1="168" x2="501" y2="168" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="376" y1="168" x2="501" y2="190" stroke="#1E5BB8" stroke-width="0.9"/>
+<rect x="501" y="160" width="45" height="16" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="523" y="168" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 0</text>
+<rect x="331" y="182" width="45" height="16" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="353" y="190" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 1</text>
+<line x1="376" y1="190" x2="501" y2="168" stroke="#1E5BB8" stroke-width="0.9"/>
+<line x1="376" y1="190" x2="501" y2="190" stroke="#1E5BB8" stroke-width="0.9"/>
+<rect x="501" y="182" width="45" height="16" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="523" y="190" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 1</text>
+<rect x="322" y="214" width="248" height="48" rx="3" fill="none" stroke="#E65100" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="334" y="214" font-size="8.2" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke"> Nhóm 1 (Kênh 2, 3) </text>
+<rect x="331" y="216" width="45" height="16" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1"/>
+<text x="353" y="224" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 2</text>
+<line x1="376" y1="224" x2="501" y2="224" stroke="#E65100" stroke-width="0.9"/>
+<line x1="376" y1="224" x2="501" y2="246" stroke="#E65100" stroke-width="0.9"/>
+<rect x="501" y="216" width="45" height="16" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="523" y="224" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 2</text>
+<rect x="331" y="238" width="45" height="16" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1"/>
+<text x="353" y="246" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">In 3</text>
+<line x1="376" y1="246" x2="501" y2="224" stroke="#E65100" stroke-width="0.9"/>
+<line x1="376" y1="246" x2="501" y2="246" stroke="#E65100" stroke-width="0.9"/>
+<rect x="501" y="238" width="45" height="16" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="523" y="246" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Out 3</text>
+<rect x="318" y="272" width="256" height="60" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1"/>
+<text x="324" y="286.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trọng số: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.5">(C_out · C_in · K²) / g</tspan></text>
+<text x="324" y="299.5" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Phép MAC: </tspan><tspan>Giảm chính xác </tspan><tspan font-weight="700">g lần</tspan></text>
+<text x="324" y="313.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• D2L tr.309: Ma trận dạng block-diagonal.</tspan></text>
+<rect x="602" y="64" width="280" height="280" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="742.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">3. Depthwise Separable (g = C_in)</text>
+<text x="614" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tách thành 2 bước riêng biệt: </tspan></text>
+<text x="614" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  1) Depthwise: Lọc không gian từng kênh.</tspan></text>
+<text x="614" y="127.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  2) Pointwise (1×1): Trộn đặc trưng kênh.</tspan></text>
+<rect x="622" y="154" width="38" height="16" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="641" y="162" font-size="8" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Ch 0</text>
+<line x1="660" y1="162" x2="697" y2="162" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="697" y="154" width="45" height="16" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/>
+<text x="719" y="162" font-size="8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">K×K×1</text>
+<line x1="742" y1="162" x2="767" y2="162" stroke="#2E7D32" stroke-width="1.2"/>
+<rect x="622" y="175" width="38" height="16" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="641" y="183" font-size="8" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Ch 1</text>
+<line x1="660" y1="183" x2="697" y2="183" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="697" y="175" width="45" height="16" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/>
+<text x="719" y="183" font-size="8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">K×K×1</text>
+<line x1="742" y1="183" x2="767" y2="183" stroke="#2E7D32" stroke-width="1.2"/>
+<rect x="622" y="196" width="38" height="16" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1"/>
+<text x="641" y="204" font-size="8" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Ch 2</text>
+<line x1="660" y1="204" x2="697" y2="204" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="697" y="196" width="45" height="16" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1"/>
+<text x="719" y="204" font-size="8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">K×K×1</text>
+<line x1="742" y1="204" x2="767" y2="204" stroke="#2E7D32" stroke-width="1.2"/>
+<rect x="767" y="154" width="45" height="58" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="789" y="176" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">PW 1×1</text>
+<text x="789" y="192" font-size="8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trộn kênh</text>
+<line x1="812" y1="183" x2="837" y2="183" stroke="#2E7D32" stroke-width="1.4"/>
+<rect x="837" y="163" width="36" height="40" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1"/>
+<text x="855" y="183" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Out</text>
+<rect x="614" y="220" width="256" height="44" rx="3" fill="#F0F4F8" stroke="#2E7D32" stroke-width="1"/>
+<text x="742.0" y="234" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tách rời: Spatial (DW) + Channel (PW)</text>
+<text x="742.0" y="250" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tiết kiệm 8.41× FLOPs tính toán với K=3</text>
+<rect x="614" y="272" width="256" height="60" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1"/>
+<text x="620" y="286.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tỷ lệ cắt giảm: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.5">1/C_out + 1/K²</tspan></text>
+<text x="620" y="299.5" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Với K=3: Giảm </tspan><tspan font-weight="700">8 đến 9 lần</tspan><tspan> phép MAC!</tspan></text>
+<text x="620" y="313.0" font-size="9.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• MOBILENET tr.3, Eq. 5: Tiết kiệm lớn.</tspan></text>
+<text x="10" y="366" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 MOBILENET tr.2, tr.3], [T2 D2L tr.309]. Depthwise separable conv giảm 8-9 lần tính toán so với standard conv.</text>
+</svg>

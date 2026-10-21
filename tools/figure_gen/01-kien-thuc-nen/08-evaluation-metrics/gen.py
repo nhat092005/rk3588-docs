@@ -21,13 +21,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, Fig, run, source  # noqa: E402
 
-DEFAULT_OUTDIR = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "evaluation-metrics"))
+DEFAULT_OUTDIR = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "08-evaluation-metrics"))
 
 W = 900
 CALC = "#EAF2FF"      # Nền khối tính toán / số học
 ORANGE = "#E65100"
-PURPLE = "#7B1FA2"
-TEAL = "#00796B"
 GRAY_BG = "#F5F5F5"
 
 
@@ -198,14 +196,14 @@ def fig_precision():
     f.text(p2_x + (p2_w - 20) / 2 + 10, p2_y + 68, "Mẫu số là toàn bộ những gì mô hình đã phán đoán", size=9.5, italic=True, fill=DARK, anchor="middle")
 
     # Diễn giải ý nghĩa
-    txt(f, p2_x + 14, p2_y + 102, [
+    txt(f, p2_x + 14, p2_y + 112, [
         [("• Bản chất: ", "b"), ("Trong các hộp tìm ra, bao nhiêu % là đúng?", "t")],
         [("• Ý nghĩa thực tế: ", "b"), ("Precision cao -> Rất ít báo động giả.", "t")],
         [("  Hệ thống giám sát không gây phiền toái vì báo sai vi phạm.", "t")],
         [("• Không xét đến FN: ", "b"), ("Chỉ đo độ tin cậy của box đã đoán,", "t")],
         [("  hoàn toàn không quan tâm có bao nhiêu vật thể bị bỏ sót.", "t")],
         [("• Đánh đổi: ", "b"), ("Hạ ngưỡng confidence -> Ra nhiều box -> Dễ tăng FP.", "t")],
-    ], size=9.5, dy=17)
+    ], size=10.5, dy=25)
 
     source(f, 318, "Nguồn: Ultralytics utils/metrics.py; SHEL5K tr.8 (Equation 1).")
     return f
@@ -283,14 +281,14 @@ def fig_recall():
     f.text(p2_x + (p2_w - 20) / 2 + 10, p2_y + 68, "Mẫu số là toàn bộ số vật thể thực tế có trong ảnh", size=9.5, italic=True, fill=DARK, anchor="middle")
 
     # Diễn giải ý nghĩa
-    txt(f, p2_x + 14, p2_y + 102, [
+    txt(f, p2_x + 14, p2_y + 112, [
         [("• Bản chất: ", "b"), ("Trong tổng số vật thể thật, bắt được bao nhiêu %?", "t")],
         [("• Ý nghĩa an toàn: ", "b"), ("Recall cao -> Cực kỳ ít bỏ sót vi phạm.", "t")],
         [("  Đảm bảo không bỏ lọt công nhân không đội mũ hoặc thiếu bảo hộ.", "t")],
         [("• Không xét đến FP: ", "b"), ("Chỉ đo mức độ bao phủ vật thể thật,", "t")],
         [("  hoàn toàn không bị giảm điểm khi có báo động giả (FP).", "t")],
         [("• Đánh đổi: ", "b"), ("Tăng ngưỡng confidence -> Lọc bớt box -> Dễ tăng FN -> Recall giảm.", "t")],
-    ], size=9.5, dy=17)
+    ], size=10.5, dy=25)
 
     source(f, 318, "Nguồn: Ultralytics utils/metrics.py; SHEL5K tr.8 (Equation 2).")
     return f
@@ -349,7 +347,7 @@ def fig_f1_score():
     # Thanh kết luận đáy panel trái
     y_bot = y_s3 + case_h + gap
     rect(f, p1_x + 10, y_bot, p1_w - 20, 20, fill="white", stroke="#B0BEC5", sw=1.0, rx=3)
-    f.text(p1_x + p1_w / 2, y_bot + 10, "F1-Score chỉ cao khi CẢ HAI chỉ số Precision và Recall cùng đạt mức tốt", size=8.5, weight=700, fill=PURPLE, anchor="middle")
+    f.text(p1_x + p1_w / 2, y_bot + 10, "F1-Score chỉ cao khi CẢ HAI chỉ số Precision và Recall cùng đạt mức tốt", size=8.5, weight=700, fill=DARK, anchor="middle")
 
     # Panel Phải: Công thức & Ứng dụng
     p2_x, p2_y, p2_w, p2_h = 455, 38, 435, 190
@@ -358,11 +356,11 @@ def fig_f1_score():
 
     # Khung công thức toán học
     f_h = 46
-    rect(f, p2_x + 10, p2_y + 25, p2_w - 20, f_h, fill="#F3E5F5", stroke="#CE93D8", sw=1.0, rx=4)
+    rect(f, p2_x + 10, p2_y + 25, p2_w - 20, f_h, fill=CALC, stroke="#90CAF9", sw=1.0, rx=4)
     f.rich(p2_x + (p2_w - 20) / 2 + 10, p2_y + 39, [
         ("F1-Score = ", "b"),
         ("2 × (Precision × Recall) / (Precision + Recall)", "b"),
-    ], size=11.0, anchor="middle", fill=PURPLE)
+    ], size=11.0, anchor="middle", fill=BLUE)
     f.text(p2_x + (p2_w - 20) / 2 + 10, p2_y + 57, "Trung bình điều hòa luôn bị kéo mạnh về phía giá trị thấp hơn", size=8.8, italic=True, fill=DARK, anchor="middle")
 
     # Diễn giải ý nghĩa
@@ -487,33 +485,33 @@ def fig_pr_curve_and_ap():
 
     # Khối A: Cơ chế sinh răng cưa
     b1_y = p2_y + 24
-    rect(f, p2_x + 10, b1_y, p2_w - 20, 50, fill="#FFF8E1", stroke="#FFE082", sw=1.0, rx=3)
+    rect(f, p2_x + 10, b1_y, p2_w - 20, 56, fill="#FFF8E1", stroke="#FFE082", sw=1.0, rx=3)
     f.text(p2_x + 16, b1_y + 11, "A. Cơ chế sinh răng cưa (Sawtooth Curve):", size=8.8, weight=700, fill=ORANGE)
-    f.text(p2_x + 16, b1_y + 25, "• Sắp xếp tất cả box dự đoán theo Confidence giảm dần.", size=8.2, fill=DARK)
-    f.rich(p2_x + 16, b1_y + 38, [
+    f.text(p2_x + 16, b1_y + 29, "• Sắp xếp tất cả box dự đoán theo Confidence giảm dần.", size=8.2, fill=DARK)
+    f.rich(p2_x + 16, b1_y + 44, [
         ("• ", "t"), ("Gặp TP", "b"), (" -> Recall tăng  |  ", "t"),
         ("Gặp FP", "b"), (" -> Precision tụt dốc.", "t"),
     ], size=8.2, fill=DARK)
 
     # Khối B: Công thức nội suy cực đại
-    b2_y = b1_y + 56
-    rect(f, p2_x + 10, b2_y, p2_w - 20, 58, fill="#E3F2FD", stroke="#90CAF9", sw=1.0, rx=3)
+    b2_y = b1_y + 66
+    rect(f, p2_x + 10, b2_y, p2_w - 20, 64, fill="#E3F2FD", stroke="#90CAF9", sw=1.0, rx=3)
     f.text(p2_x + 16, b2_y + 11, "B. Nội suy cực đại (Interpolated Precision):", size=8.8, weight=700, fill=BLUE)
-    f.rich(p2_x + (p2_w - 20) / 2 + 10, b2_y + 27, [
+    f.rich(p2_x + (p2_w - 20) / 2 + 10, b2_y + 31, [
         ("p_interp(r) = ", "b"),
         ("max { p(r̃)  với  r̃ ≥ r }", "b"),
     ], size=9.8, anchor="middle", fill=BLUE)
-    f.text(p2_x + (p2_w - 20) / 2 + 10, b2_y + 45, "Lấy giá trị Precision lớn nhất ở bên phải, làm phẳng răng cưa", size=8.0, italic=True, fill=DARK, anchor="middle")
+    f.text(p2_x + (p2_w - 20) / 2 + 10, b2_y + 52, "Lấy giá trị Precision lớn nhất ở bên phải, làm phẳng răng cưa", size=8.0, italic=True, fill=DARK, anchor="middle")
 
     # Khối C: Tính diện tích AP chuẩn COCO 101 mốc
-    b3_y = b2_y + 64
-    rect(f, p2_x + 10, b3_y, p2_w - 20, 58, fill="#F1F8E9", stroke="#C8E6C9", sw=1.0, rx=3)
+    b3_y = b2_y + 74
+    rect(f, p2_x + 10, b3_y, p2_w - 20, 64, fill="#F1F8E9", stroke="#C8E6C9", sw=1.0, rx=3)
     f.text(p2_x + 16, b3_y + 11, "C. Chuẩn COCO: Tính AP trên 101 mốc Recall:", size=8.8, weight=700, fill=GREEN)
-    f.rich(p2_x + (p2_w - 20) / 2 + 10, b3_y + 27, [
+    f.rich(p2_x + (p2_w - 20) / 2 + 10, b3_y + 31, [
         ("AP = (1 / 101) × Σ p_interp(r)", "b"),
         ("   (r ∈ {0.00, ..., 1.00})", "t"),
     ], size=9.2, anchor="middle", fill=GREEN)
-    f.text(p2_x + (p2_w - 20) / 2 + 10, b3_y + 45, "Trung bình cộng tại 101 mốc đều nhau xuyên suốt dải [0, 1]", size=8.0, italic=True, fill=DARK, anchor="middle")
+    f.text(p2_x + (p2_w - 20) / 2 + 10, b3_y + 52, "Trung bình cộng tại 101 mốc đều nhau xuyên suốt dải [0, 1]", size=8.0, italic=True, fill=DARK, anchor="middle")
 
     source(f, 290, "Nguồn: PASCAL VOC 2012; COCO Evaluation Protocol; Everingham et al. IJCV 2010.")
     return f
@@ -537,9 +535,9 @@ def fig_map_classes():
     # 5 thanh Bar Chart ngang
     bar_data = [
         ("person (người)", 0.7186, "71.86%", BLUE),
-        ("safety_clothes (áo phản quang)", 0.6494, "64.94%", TEAL),
-        ("helmet (mũ bảo hộ)", 0.6210, "62.10%", GREEN),
-        ("self_clothes (quần áo thường)", 0.5764, "57.64%", PURPLE),
+        ("safety_clothes (áo phản quang)", 0.6494, "64.94%", BLUE),
+        ("helmet (mũ bảo hộ)", 0.6210, "62.10%", BLUE),
+        ("self_clothes (quần áo thường)", 0.5764, "57.64%", BLUE),
         ("head (đầu trần / không mũ)", 0.3884, "38.84%", RED),
     ]
 
@@ -557,7 +555,11 @@ def fig_map_classes():
         bw = val * max_bar_w
         rect(f, p1_x + 162, by, bw, 17, fill=col, stroke="none", rx=3)
         # Text giá trị AP
-        f.text(p1_x + 166 + bw, by + 9, f"{val:.4f} ({pct})", size=8.2, weight=700, fill=col)
+        lbl_x = p1_x + 166 + bw
+        mean_px = p1_x + 162 + 0.5908 * max_bar_w
+        if lbl_x < mean_px + 3 < lbl_x + 105:  # nhãn bị đường trung bình cắt: đặt sang phải đường
+            lbl_x = mean_px + 6
+        f.text(lbl_x, by + 9, f"{val:.4f} ({pct})", size=8.2, weight=700, fill=col)
 
     # Đường mốc mAP trung bình = 0.5908
     mean_val = 0.5908
@@ -587,7 +589,7 @@ def fig_map_classes():
         [("  không bị lớp có nhiều ảnh lấn át lớp hiếm gặp.", "t")],
         [("• Cảnh báo lớp yếu: ", "b"), ("Lớp head (38.8%) kéo tụt mAP chung,", "t")],
         [("  chỉ ra điểm nghẽn cần bổ sung thêm dữ liệu huấn luyện.", "t")],
-    ], size=8.0, dy=14.5)
+    ], size=8.5, dy=19)
 
     source(f, 226, "Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.")
     return f
@@ -597,17 +599,17 @@ def fig_map_classes():
 # HÌNH 3B: SO SÁNH MAP@0.50 (VOC) VS MAP@0.50:0.95 (COCO)
 # ==============================================================================
 def fig_map50_vs_95():
-    f = Fig(W, 266)
+    f = Fig(W, 238)
     tier(f, "T2 chung")
     f.text(10, 20, "So sánh Chuẩn mAP@0.50 (PASCAL VOC) vs mAP@0.50:0.95 (MS COCO)", size=13.5, weight=700, fill=DARK)
 
-    col_h = 194
+    col_h = 166
     y_c = 38
 
     # Cột 1: mAP@0.50 (Khoan dung)
     c1_x, c1_w = 10, 275
-    rect(f, c1_x, y_c, c1_w, col_h, fill="#F1F8E9", stroke="#C8E6C9", sw=1.0, rx=5)
-    f.text(c1_x + c1_w / 2, y_c + 14, "A. Chuẩn VOC: mAP@0.50 (Khoan dung)", size=9.5, weight=700, fill=GREEN, anchor="middle")
+    rect(f, c1_x, y_c, c1_w, col_h, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=5)
+    f.text(c1_x + c1_w / 2, y_c + 14, "A. Chuẩn VOC: mAP@0.50 (Khoan dung)", size=9.5, weight=700, fill=DARK, anchor="middle")
 
     # Mini plot P-R mAP50
     gx1, gy1, gw_s, gh_s = c1_x + 30, y_c + 30, 215, 80
@@ -627,13 +629,14 @@ def fig_map50_vs_95():
 
     # Mũi tên siết IoU giữa Cột 1 và Cột 2
     f.a(f'<polygon points="290,{y_c+70} 305,{y_c+70} 301,{y_c+66} 309,{y_c+70} 301,{y_c+74} 305,{y_c+70}" fill="{DARK}" stroke="{DARK}" stroke-width="1.5"/>')
-    f.text(300, y_c + 56, "Siết IoU", size=8.0, weight=700, fill=RED, anchor="middle")
-    f.text(300, y_c + 84, "0.5 -> 0.95", size=7.5, fill="#666666", anchor="middle")
+    f.text(300, y_c + 56, "Siết IoU", size=7.5, weight=700, fill=RED, anchor="middle")
+    f.text(300, y_c + 84, "0.5 →", size=7.5, fill="#666666", anchor="middle")
+    f.text(300, y_c + 94, "0.95", size=7.5, fill="#666666", anchor="middle")
 
     # Cột 2: Tại mốc IoU = 0.95 (Cực kỳ khắt khe)
     c2_x, c2_w = 314, 275
-    rect(f, c2_x, y_c, c2_w, col_h, fill="#FFF5F5", stroke="#FFCDD2", sw=1.0, rx=5)
-    f.text(c2_x + c2_w / 2, y_c + 14, "B. Mốc khắt khe: IoU = 0.95", size=9.5, weight=700, fill=RED, anchor="middle")
+    rect(f, c2_x, y_c, c2_w, col_h, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=5)
+    f.text(c2_x + c2_w / 2, y_c + 14, "B. Mốc khắt khe: IoU = 0.95", size=9.5, weight=700, fill=DARK, anchor="middle")
 
     # Mini plot P-R IoU=0.95
     gx2, gy2 = c2_x + 30, y_c + 30
@@ -653,12 +656,12 @@ def fig_map50_vs_95():
 
     # Cột 3: Chuẩn COCO mAP50-95 (Tổng hợp toàn diện)
     c3_x, c3_w = 597, 293
-    rect(f, c3_x, y_c, c3_w, col_h, fill="#E3F2FD", stroke="#90CAF9", sw=1.0, rx=5)
-    f.text(c3_x + c3_w / 2, y_c + 14, "C. Chuẩn COCO: mAP@0.50:0.95", size=9.5, weight=700, fill=BLUE, anchor="middle")
+    rect(f, c3_x, y_c, c3_w, col_h, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=5)
+    f.text(c3_x + c3_w / 2, y_c + 14, "C. Chuẩn COCO: mAP@0.50:0.95", size=9.5, weight=700, fill=DARK, anchor="middle")
 
     # Khung công thức trung bình 10 mốc
-    rect(f, c3_x + 10, y_c + 28, c3_w - 20, 56, fill="white", stroke="#90CAF9", sw=1.0, rx=4)
-    f.text(c3_x + (c3_w - 20) / 2 + 10, y_c + 42, "Trung bình cộng tại 10 mốc IoU:", size=8.5, weight=700, fill=BLUE, anchor="middle")
+    rect(f, c3_x + 10, y_c + 28, c3_w - 20, 56, fill="white", stroke="#B0BEC5", sw=1.0, rx=4)
+    f.text(c3_x + (c3_w - 20) / 2 + 10, y_c + 42, "Trung bình cộng tại 10 mốc IoU:", size=8.5, weight=700, fill=DARK, anchor="middle")
     f.text(c3_x + (c3_w - 20) / 2 + 10, y_c + 57, "0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95", size=7.5, fill="#555555", anchor="middle")
     f.text(c3_x + (c3_w - 20) / 2 + 10, y_c + 72, "mAP50-95 = 0.5908 (Điểm thực tế)", size=8.5, weight=700, fill=DARK, anchor="middle")
 
@@ -671,7 +674,7 @@ def fig_map50_vs_95():
         [("  bắt trúng đối tượng nhưng vị trí viền méo mó.", "t")],
     ], size=8.0, dy=14.5)
 
-    source(f, 238, "Nguồn: COCO Evaluation Protocol; Lin et al. ECCV 2014; Y6 tr.8.")
+    source(f, 210, "Nguồn: COCO Evaluation Protocol; Lin et al. ECCV 2014; Y6 tr.8.")
     return f
 
 
@@ -714,15 +717,15 @@ def fig_delta_map_quantization():
     col2_x, col2_w = p1_x + 242, 114
     col2_h = 86
     col2_y = p_y + 34
-    rect(f, col2_x, col2_y, col2_w, col2_h, fill="#E8F5E9", stroke=GREEN, sw=1.5, rx=4)
-    f.text(col2_x + col2_w / 2, col2_y + 17, "INT8 (RKNN)", size=9.5, weight=700, fill=GREEN, anchor="middle")
+    rect(f, col2_x, col2_y, col2_w, col2_h, fill="#FFF3E0", stroke=ORANGE, sw=1.5, rx=4)
+    f.text(col2_x + col2_w / 2, col2_y + 17, "INT8 (RKNN)", size=9.5, weight=700, fill=ORANGE, anchor="middle")
     f.text(col2_x + col2_w / 2, col2_y + 37, "mAP: 43.8%", size=12.0, weight=700, fill=DARK, anchor="middle")
-    f.text(col2_x + col2_w / 2, col2_y + 55, "Bộ nhớ: -75% (Tiết kiệm)", size=8.0, weight=700, fill=GREEN, anchor="middle")
-    f.text(col2_x + col2_w / 2, col2_y + 71, "Tốc độ: x3.8 (Tối đa 3 Core)", size=8.0, weight=700, fill=GREEN, anchor="middle")
+    f.text(col2_x + col2_w / 2, col2_y + 55, "Bộ nhớ: -75% (Tiết kiệm)", size=8.0, weight=700, fill=DARK, anchor="middle")
+    f.text(col2_x + col2_w / 2, col2_y + 71, "Tốc độ: x3.8 (Tối đa 3 Core)", size=8.0, weight=700, fill=DARK, anchor="middle")
 
     # Khung tiêu chuẩn đánh giá công nghiệp
     box_res_y = p_y + 130
-    rect(f, p1_x + 14, box_res_y, p1_w - 28, 56, fill="#F1F8E9", stroke="#C8E6C9", sw=1.0, rx=4)
+    rect(f, p1_x + 14, box_res_y, p1_w - 28, 56, fill="white", stroke="#B0BEC5", sw=1.0, rx=4)
     f.text(p1_x + 22, box_res_y + 16, "Tiêu chuẩn đánh giá suy giảm:", size=9.0, weight=700, fill=DARK)
     f.rich(p1_x + 22, box_res_y + 32, [
         ("• ", "t"), ("ΔmAP ≤ 1.5 - 2.0%: ", "b"),
@@ -826,20 +829,20 @@ def fig_parameters():
     # 3 khối thành phần
     kw = 126
     # Khối Backbone
-    rect(f, p1_x + 22, d_box_y + 26, kw, 52, fill="#E8F5E9", stroke="#A5D6A7", sw=1.0, rx=3)
-    f.text(p1_x + 22 + kw / 2, d_box_y + 40, "Backbone (~45%)", size=8.5, weight=700, fill=GREEN, anchor="middle")
+    rect(f, p1_x + 22, d_box_y + 26, kw, 52, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=3)
+    f.text(p1_x + 22 + kw / 2, d_box_y + 40, "Backbone (~45%)", size=8.5, weight=700, fill=DARK, anchor="middle")
     f.text(p1_x + 22 + kw / 2, d_box_y + 54, "~1.44M params", size=8.0, fill=DARK, anchor="middle")
     f.text(p1_x + 22 + kw / 2, d_box_y + 68, "Trích xuất đặc trưng", size=7.0, fill="#555555", anchor="middle")
 
     # Khối Neck
-    rect(f, p1_x + 156, d_box_y + 26, kw, 52, fill="#FFF3E0", stroke="#FFCC80", sw=1.0, rx=3)
-    f.text(p1_x + 156 + kw / 2, d_box_y + 40, "Neck / PANet (~35%)", size=8.5, weight=700, fill=ORANGE, anchor="middle")
+    rect(f, p1_x + 156, d_box_y + 26, kw, 52, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=3)
+    f.text(p1_x + 156 + kw / 2, d_box_y + 40, "Neck / PANet (~35%)", size=8.5, weight=700, fill=DARK, anchor="middle")
     f.text(p1_x + 156 + kw / 2, d_box_y + 54, "~1.12M params", size=8.0, fill=DARK, anchor="middle")
     f.text(p1_x + 156 + kw / 2, d_box_y + 68, "Hợp nhất đa tỷ lệ", size=7.0, fill="#555555", anchor="middle")
 
     # Khối Head
-    rect(f, p1_x + 290, d_box_y + 26, kw, 52, fill="#FCE4EC", stroke="#F48FB1", sw=1.0, rx=3)
-    f.text(p1_x + 290 + kw / 2, d_box_y + 40, "Detect Head (~20%)", size=8.5, weight=700, fill=RED, anchor="middle")
+    rect(f, p1_x + 290, d_box_y + 26, kw, 52, fill="#FAFAFA", stroke="#B0BEC5", sw=1.0, rx=3)
+    f.text(p1_x + 290 + kw / 2, d_box_y + 40, "Detect Head (~20%)", size=8.5, weight=700, fill=DARK, anchor="middle")
     f.text(p1_x + 290 + kw / 2, d_box_y + 54, "~0.64M params", size=8.0, fill=DARK, anchor="middle")
     f.text(p1_x + 290 + kw / 2, d_box_y + 68, "Phân loại & Box reg", size=7.0, fill="#555555", anchor="middle")
 
@@ -859,30 +862,30 @@ def fig_parameters():
     f.text(p2_x + 30, tb_y + 14, "Định dạng", size=7.5, weight=700, fill=DARK)
     f.text(p2_x + 110, tb_y + 14, "Byte / Param", size=7.5, weight=700, fill=DARK)
     f.text(p2_x + 200, tb_y + 14, "Dung lượng (3.2M)", size=7.5, weight=700, fill=DARK)
-    f.text(p2_x + 320, tb_y + 14, "Tác động phần cứng RK3588", size=7.5, weight=700, fill=DARK)
+    f.text(p2_x + 300, tb_y + 14, "Tác động phần cứng RK3588", size=7.5, weight=700, fill=DARK)
 
     # Dòng 1: FP32
-    f.text(p2_x + 30, tb_y + 36, "FP32 (PyTorch)", size=7.5, fill=BLUE, weight=700)
+    f.text(p2_x + 30, tb_y + 36, "FP32 (PyTorch)", size=7.5, fill=DARK, weight=700)
     f.text(p2_x + 110, tb_y + 36, "4 bytes", size=7.5, fill=DARK)
     f.text(p2_x + 200, tb_y + 36, "12.8 MB", size=8.0, weight=700, fill=DARK)
-    f.text(p2_x + 320, tb_y + 36, "Nặng, NPU không tối ưu", size=7.5, fill="#555555")
+    f.text(p2_x + 300, tb_y + 36, "Nặng, NPU không tối ưu", size=7.5, fill="#555555")
 
     # Dòng 2: FP16
     f.text(p2_x + 30, tb_y + 54, "FP16 (Nửa chính xác)", size=7.5, fill=DARK, weight=700)
     f.text(p2_x + 110, tb_y + 54, "2 bytes", size=7.5, fill=DARK)
     f.text(p2_x + 200, tb_y + 54, "6.4 MB (-50%)", size=8.0, weight=700, fill=DARK)
-    f.text(p2_x + 320, tb_y + 54, "Chạy tốt trên NPU core", size=7.5, fill="#555555")
+    f.text(p2_x + 300, tb_y + 54, "Chạy tốt trên NPU core", size=7.5, fill="#555555")
 
     # Dòng 3: INT8
     f.text(p2_x + 30, tb_y + 72, "INT8 (RKNN)", size=7.5, fill=GREEN, weight=700)
     f.text(p2_x + 110, tb_y + 72, "1 byte", size=7.5, fill=GREEN, weight=700)
     f.text(p2_x + 200, tb_y + 72, "3.2 MB (-75%)", size=8.0, weight=700, fill=GREEN)
-    f.text(p2_x + 320, tb_y + 72, "Vừa vặn SRAM, siêu nhanh", size=7.5, fill=GREEN, weight=700)
+    f.text(p2_x + 300, tb_y + 72, "Vừa vặn SRAM, siêu nhanh", size=7.5, fill=GREEN, weight=700)
 
     # Khung lưu ý phân biệt: Params vs Activations vs FLOPs
     nt_y = p_y + 122
-    rect(f, p2_x + 14, nt_y, p2_w - 28, 66, fill="#FFF8E1", stroke="#FFE082", sw=1.0, rx=4)
-    f.text(p2_x + 22, nt_y + 15, "Lưu ý then chốt khi thiết kế cho Edge AI:", size=8.5, weight=700, fill="#F57F17")
+    rect(f, p2_x + 14, nt_y, p2_w - 28, 66, fill="white", stroke="#B0BEC5", sw=1.0, rx=4)
+    f.text(p2_x + 22, nt_y + 15, "Lưu ý then chốt khi thiết kế cho Edge AI:", size=8.5, weight=700, fill=DARK)
     f.rich(p2_x + 22, nt_y + 31, [
         ("• ", "t"), ("Parameters = Bộ nhớ tĩnh: ", "b"),
         ("Chỉ phụ thuộc số tầng và số kênh, không đổi theo cỡ ảnh.", "t"),
@@ -932,49 +935,49 @@ def fig_activations_memory():
 
     # Đường gióng mức dung lượng
     for y_val, lbl in [(177, "100 MB"), (132, "200 MB")]:
-        f.a(f'<line x1="45" y1="{y_val}" x2="415" y2="{y_val}" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>')
-        f.text(42, y_val, lbl, size=5.8, fill="#90A4AE", anchor="end")
+        f.a(f'<line x1="58" y1="{y_val}" x2="415" y2="{y_val}" stroke="#ECEFF1" stroke-width="0.8" stroke-dasharray="3 3"/>')
+        f.text(33, y_val, lbl, size=6.5, fill="#90A4AE", anchor="start")
 
     # Cột 0: Parameters (Weights) - Cố định
     rect(f, 65, base_y - 10, 52, 10, fill="#E0F2FE", stroke="#0284C7", sw=1.2, rx=2)
     rect(f, 65, base_y - 24, 52, 12, fill="#0284C7", stroke="#0369A1", sw=0.8, rx=2)
     f.text(91, base_y - 18, "3.2 MB", size=6.5, weight=700, fill="#FFFFFF", anchor="middle")
     f.text(91, base_y + 10, "Parameters", size=6.8, weight=700, fill="#0369A1", anchor="middle")
-    f.text(91, base_y + 22, "(Cố định)", size=6.0, fill="#78909C", anchor="middle")
+    f.text(91, base_y + 22, "(Cố định)", size=6.5, fill="#78909C", anchor="middle")
 
     # Cột 1: Activation 320x320
     rect(f, 150, base_y - 16, 52, 16, fill="#DCFCE7", stroke="#16A34A", sw=1.2, rx=2)
     rect(f, 150, base_y - 30, 52, 12, fill="#16A34A", stroke="#15803D", sw=0.8, rx=2)
     f.text(176, base_y - 24, "~15 MB", size=6.5, weight=700, fill="#FFFFFF", anchor="middle")
     f.text(176, base_y + 10, "Ảnh 320²", size=6.8, weight=700, fill="#166534", anchor="middle")
-    f.text(176, base_y + 22, "(1x diện tích)", size=6.0, fill="#78909C", anchor="middle")
+    f.text(176, base_y + 22, "(1x diện tích)", size=6.5, fill="#78909C", anchor="middle")
 
     # Cột 2: Activation 640x640 (Chuẩn)
     rect(f, 235, base_y - 38, 52, 38, fill="#FED7AA", stroke="#EA580C", sw=1.2, rx=2)
     rect(f, 235, base_y - 52, 52, 12, fill="#EA580C", stroke="#C2410C", sw=0.8, rx=2)
     f.text(261, base_y - 46, "~60 MB", size=6.5, weight=700, fill="#FFFFFF", anchor="middle")
     rect(f, 235, base_y - 66, 52, 11, fill="#FFEDD5", stroke="#FDBA74", sw=0.7, rx=2)
-    f.text(261, base_y - 61, "x4 diện tích", size=5.5, weight=700, fill="#9A3412", anchor="middle")
+    f.text(261, base_y - 61, "x4 diện tích", size=6.5, weight=700, fill="#9A3412", anchor="middle")
     f.text(261, base_y + 10, "Ảnh 640²", size=6.8, weight=700, fill="#9A3412", anchor="middle")
-    f.text(261, base_y + 22, "(Chuẩn phổ biến)", size=6.0, fill="#78909C", anchor="middle")
+    f.text(261, base_y + 22, "(Chuẩn phổ biến)", size=6.5, fill="#78909C", anchor="middle")
 
     # Cột 3: Activation 1280x1280 (Bùng nổ)
     rect(f, 320, base_y - 96, 52, 96, fill="#FECACA", stroke="#DC2626", sw=1.5, rx=2)
     rect(f, 320, base_y - 110, 52, 12, fill="#DC2626", stroke="#B91C1C", sw=0.8, rx=2)
     f.text(346, base_y - 104, "~240 MB", size=6.8, weight=700, fill="#FFFFFF", anchor="middle")
     rect(f, 320, base_y - 124, 52, 11, fill="#FEE2E2", stroke="#FCA5A5", sw=0.7, rx=2)
-    f.text(346, base_y - 119, "x16 lần!", size=5.8, weight=700, fill="#991B1B", anchor="middle")
+    f.text(346, base_y - 119, "x16 lần!", size=6.5, weight=700, fill="#991B1B", anchor="middle")
     f.text(346, base_y + 10, "Ảnh 1280²", size=6.8, weight=700, fill="#991B1B", anchor="middle")
-    f.text(346, base_y + 22, "(Bùng nổ bộ nhớ)", size=6.0, weight=700, fill="#DC2626", anchor="middle")
+    f.text(346, base_y + 22, "(Bùng nổ bộ nhớ)", size=6.5, weight=700, fill="#DC2626", anchor="middle")
 
     # Mũi tên uốn lượn biểu diễn bùng nổ O(H x W)
-    f.a(f'<path d="M 195 190 Q 255 155 320 108" stroke="#DC2626" stroke-width="1.8" fill="none" stroke-dasharray="4 2" marker-end="url(#{f.marker("#DC2626", 1.8)})"/>')
+    f.a(f'<path d="M 195 190 Q 240 128 320 108" stroke="#DC2626" stroke-width="1.8" fill="none" stroke-dasharray="4 2" marker-end="url(#{f.marker("#DC2626", 1.8)})"/>')
     # Badge nền trắng chống đè nét đứt lên chữ
     rect(f, 240, 134, 76, 13, fill="#FFFFFF", stroke="#FCA5A5", sw=0.7, rx=2)
-    f.text(278, 140.5, "Bùng nổ O(H×W)", size=6.2, weight=700, fill="#DC2626", anchor="middle")
+    f.text(278, 140.5, "Bùng nổ O(H×W)", size=6.5, weight=700, fill="#DC2626", anchor="middle")
 
     # Khung kết luận đáy trái
-    rect(f, p1_x + 10, 268, p1_w - 20, 50, fill="#FFF5F5", stroke="#FFCDD2", sw=0.8, rx=3)
+    rect(f, p1_x + 10, 268, p1_w - 20, 50, fill="#FFFFFF", stroke="#CFD8DC", sw=0.8, rx=3)
     f.text(p1_x + 16, 279, "• Đặc tính cốt lõi: Trọng số (weights) bất biến, chỉ nạp 1 lần vào RAM khi khởi động.", size=7.2, fill="#374151")
     f.text(p1_x + 16, 293, "• Nguy cơ thực tế: NPU hiếm khi nghẽn vì weights (chỉ 3.2 MB), mà luôn bị đe dọa", size=7.2, fill="#374151")
     f.text(p1_x + 16, 305, "  bởi Feature Maps của ảnh độ phân giải cao vượt quá dung lượng SRAM nội bộ.", size=7.2, weight=700, fill="#B71C1C")
@@ -998,19 +1001,19 @@ def fig_activations_memory():
     # Mảng MAC
     rect(f, 483, 124, 149, 38, fill="#E0F2FE", stroke="#0284C7", sw=0.9, rx=3)
     f.text(557, 137, "Mảng Tính Toán MAC", size=6.8, weight=700, fill="#0369A1", anchor="middle")
-    f.text(557, 150, "Đỉnh 2.0 TOPS / Core", size=6.0, fill="#0284C7", anchor="middle")
+    f.text(557, 150, "Đỉnh 2.0 TOPS / Core", size=6.5, fill="#0284C7", anchor="middle")
 
     # On-chip SRAM Cache
     rect(f, 483, 178, 149, 64, fill="#DCFCE7", stroke="#16A34A", sw=1.2, rx=3)
     f.text(557, 192, "ON-CHIP SRAM CACHE", size=7.2, weight=700, fill="#166534", anchor="middle")
-    f.text(557, 206, "Dung lượng giới hạn (~vài MB)", size=6.2, fill="#15803D", anchor="middle")
-    f.text(557, 219, "Băng thông siêu tốc > hàng trăm GB/s", size=6.2, weight=700, fill="#166534", anchor="middle")
-    f.text(557, 232, "Độ trễ 0 ns · Tiêu hao điện cực thấp", size=5.8, fill="#15803D", anchor="middle")
+    f.text(557, 206, "Dung lượng giới hạn (~vài MB)", size=6.5, fill="#15803D", anchor="middle")
+    f.text(557, 219, "Băng thông siêu tốc > hàng trăm GB/s", size=6.5, weight=700, fill="#166534", anchor="middle")
+    f.text(557, 232, "Độ trễ 0 ns · Tiêu hao điện cực thấp", size=6.5, fill="#15803D", anchor="middle")
 
     # Mũi tên vòng nội bộ MAC <-> SRAM (Cache Hit)
     f.a(f'<path d="M 520 162 L 520 178" stroke="#16A34A" stroke-width="1.8" marker-end="url(#{f.marker("#16A34A", 1.8)})"/>')
     f.a(f'<path d="M 590 178 L 590 162" stroke="#16A34A" stroke-width="1.8" marker-end="url(#{f.marker("#16A34A", 1.8)})"/>')
-    f.text(555, 170, "Cache Hit", size=5.8, weight=700, fill="#166534", anchor="middle")
+    f.text(555, 170, "Cache Hit", size=6.5, weight=700, fill="#166534", anchor="middle")
 
     # 2. Kênh Bus DDR và Biểu tượng Nút thắt cổ chai
     f.a(f'<line x1="640" y1="176" x2="735" y2="176" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="3 2"/>')
@@ -1018,29 +1021,29 @@ def fig_activations_memory():
 
     # Badge nút thắt cổ chai
     rect(f, 650, 166, 75, 34, fill="#FEE2E2", stroke="#EF4444", sw=0.9, rx=3)
-    f.text(687, 175, "BUS DDR", size=6.5, weight=700, fill="#991B1B", anchor="middle")
-    f.text(687, 187, "Nút thắt cổ chai", size=5.8, weight=700, fill="#DC2626", anchor="middle")
-    f.text(687, 196, "(Memory Wall)", size=5.2, fill="#991B1B", anchor="middle")
+    f.text(687, 173, "BUS DDR", size=6.5, weight=700, fill="#991B1B", anchor="middle")
+    f.text(687, 183.5, "Nút thắt cổ chai", size=6.5, weight=700, fill="#DC2626", anchor="middle")
+    f.text(687, 193, "(Memory Wall)", size=6.5, fill="#991B1B", anchor="middle")
 
     # 3. Khối External DRAM bên phải
     rect(f, 735, 102, 125, 148, fill="#FFF1F2", stroke="#E11D48", sw=1.1, rx=4)
     f.text(797, 114, "External DRAM", size=7.2, weight=700, fill="#9F1239", anchor="middle")
-    f.text(797, 125, "(LPDDR4x / LPDDR5)", size=6.0, fill="#E11D48", anchor="middle")
+    f.text(797, 125, "(LPDDR4x / LPDDR5)", size=6.5, fill="#E11D48", anchor="middle")
 
     rect(f, 743, 134, 109, 108, fill="#FFFFFF", stroke="#FDA4AF", sw=0.8, rx=3)
     f.text(797, 146, "RAM Ngoại Vi", size=6.8, weight=700, fill="#BE123C", anchor="middle")
-    f.text(749, 162, "• Dung lượng: 4 - 16 GB", size=6.2, fill="#374151")
-    f.text(749, 176, "• Băng thông: ~34 GB/s", size=6.2, fill="#374151")
-    f.text(749, 190, "• Tràn ra ngoài (Spill):", size=6.2, weight=700, fill="#E11D48")
-    f.text(749, 204, "  Tiêu hao điện x10-50!", size=6.2, weight=700, fill="#E11D48")
-    f.text(749, 218, "  Độ trễ cao (~100+ chu kỳ)", size=5.8, fill="#9F1239")
-    f.text(749, 230, "  Kéo tụt FPS thực tế", size=6.2, weight=700, fill="#DC2626")
+    f.text(749, 162, "• Dung lượng: 4 - 16 GB", size=6.5, fill="#374151")
+    f.text(749, 176, "• Băng thông: ~34 GB/s", size=6.5, fill="#374151")
+    f.text(749, 190, "• Tràn ra ngoài (Spill):", size=6.5, weight=700, fill="#E11D48")
+    f.text(749, 204, "  Tiêu hao điện x10-50!", size=6.5, weight=700, fill="#E11D48")
+    f.text(749, 218, "  Độ trễ cao (~100+ chu kỳ)", size=6.5, fill="#9F1239")
+    f.text(749, 230, "  Kéo tụt FPS thực tế", size=6.5, weight=700, fill="#DC2626")
 
     # Khung kết luận đáy phải
-    rect(f, p2_x + 10, 268, p2_w - 20, 50, fill="#F0FDF4", stroke="#86EFAC", sw=0.8, rx=3)
-    f.text(p2_x + 16, 279, "CHIẾN LƯỢC TỐI ƯU CỦA RKNN COMPILER & SYSTEM DESIGNER:", size=7.2, weight=700, fill="#166534")
-    f.text(p2_x + 16, 293, "• Operator Fusion: Ghép Conv + BN + ReLU để giam giữ feature map trung gian trong SRAM.", size=7.0, fill="#14532D")
-    f.text(p2_x + 16, 305, "• Cân đối độ phân giải: Giữ ảnh 640×640 để vừa vặn SRAM, tránh sập bẫy nghẽn Bus DDR.", size=7.0, fill="#15803D")
+    rect(f, p2_x + 10, 268, p2_w - 20, 50, fill="#FFFFFF", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(p2_x + 16, 279, "CHIẾN LƯỢC TỐI ƯU CỦA RKNN COMPILER & SYSTEM DESIGNER:", size=7.2, weight=700, fill=DARK)
+    f.text(p2_x + 16, 293, "• Operator Fusion: Ghép Conv + BN + ReLU để giam giữ feature map trung gian trong SRAM.", size=7.0, fill="#374151")
+    f.text(p2_x + 16, 305, "• Cân đối độ phân giải: Giữ ảnh 640×640 để vừa vặn SRAM, tránh sập bẫy nghẽn Bus DDR.", size=7.0, fill="#374151")
 
     # Dải băng thông điệp xuyên suốt toàn bộ hình
     rect(f, 20, 334, 860, 24, fill="#F1F5F9", stroke="#CBD5E1", sw=0.8, rx=3)
@@ -1097,8 +1100,8 @@ def fig_latency_4_stages():
 
     # Camera OSD (On-Screen Display)
     f.a(f'<circle cx="{disp_x + 8}" cy="{disp_y + 7}" r="2.2" fill="#EF4444"/>')
-    f.text(disp_x + 13, disp_y + 7, "REC", size=5.5, weight=700, fill="#EF4444")
-    f.text(disp_x + disp_w - 4, disp_y + 7, "1080P", size=5.5, weight=700, fill="#64748B", anchor="end")
+    f.text(disp_x + 13, disp_y + 7, "REC", size=6.5, weight=700, fill="#EF4444")
+    f.text(disp_x + disp_w - 4, disp_y + 7, "1080P", size=6.5, weight=700, fill="#64748B", anchor="end")
 
     # Thông số khung hình camera
     f.text(b0_x + b0_w / 2, b0_y + 96, "Full HD (1920×1080)", size=7.2, weight=700, fill="#1E293B", anchor="middle")
@@ -1112,15 +1115,15 @@ def fig_latency_4_stages():
 
     # Mũi tên 0 -> 1
     f.a(f'<path d="M {b0_x + b0_w + 1} 173 L {b0_x + b0_w + 18} 173" stroke="#64748B" stroke-width="1.8" fill="none" marker-end="url(#{f.marker("#64748B", 1.8)})"/>')
-    f.text(b0_x + b0_w + 10, 163, "RGA2", size=6.2, weight=700, fill="#C2410C", anchor="middle")
+    f.text(b0_x + b0_w + 10, 163, "RGA2", size=6.5, weight=700, fill="#B45309", anchor="middle")
 
     # -------------------------------------------------------------------------
     # Khối 1: Chặng 1 - Pre-processing (RGA2 / CPU)
     # -------------------------------------------------------------------------
     b1_x, b1_y, b1_w, b1_h = 173, 82, 186, 182
-    rect(f, b1_x, b1_y, b1_w, b1_h, fill="#FFFBEB", stroke="#F59E0B", sw=1.2, rx=4)
+    rect(f, b1_x, b1_y, b1_w, b1_h, fill="#FFFFFF", stroke="#F59E0B", sw=1.2, rx=4)
     f.text(b1_x + 10, b1_y + 14, "Chặng 1: Pre-processing", size=8.5, weight=700, fill="#B45309")
-    rect(f, b1_x + b1_w - 68, b1_y + 6, 60, 16, fill="#FEF3C7", stroke="#D97706", sw=0.8, rx=2)
+    rect(f, b1_x + b1_w - 68, b1_y + 6, 60, 16, fill="#FFFFFF", stroke="#D97706", sw=0.8, rx=2)
     f.text(b1_x + b1_w - 38, b1_y + 14, "T_pre ~2.5 ms", size=7.0, weight=700, fill="#B45309", anchor="middle")
 
     f.text(b1_x + 10, b1_y + 28, "Thực thi: Bộ tăng tốc RGA2 hoặc CPU", size=6.8, fill="#92400E")
@@ -1132,11 +1135,11 @@ def fig_latency_4_stages():
 
     # Top pad (viền xám 114)
     rect(f, lb_x, lb_y, lb_w, 14, fill="#94A3B8", stroke="none")
-    f.text(lb_x + lb_w / 2, lb_y + 7, "Pad xám (114, 114, 114)", size=5.0, fill="#FFFFFF", anchor="middle")
+    f.text(lb_x + lb_w / 2, lb_y + 7, "Pad xám (114)", size=6.5, fill="#FFFFFF", anchor="middle")
 
     # Bottom pad
     rect(f, lb_x, lb_y + lb_h - 14, lb_w, 14, fill="#94A3B8", stroke="none")
-    f.text(lb_x + lb_w / 2, lb_y + lb_h - 7, "Giữ tỉ lệ 16:9, tránh méo", size=5.0, fill="#FFFFFF", anchor="middle")
+    f.text(lb_x + lb_w / 2, lb_y + lb_h - 7, "Giữ tỉ lệ 16:9", size=6.5, fill="#FFFFFF", anchor="middle")
 
     # Ảnh trung tâm 16:9 được scale gọn
     rect(f, lb_x, lb_y + 14, lb_w, 38, fill="#E0F2FE", stroke="none")
@@ -1149,8 +1152,8 @@ def fig_latency_4_stages():
     rect(f, wks_cx + 0.5, lb_y + 37, 2.3, 7, fill="#334155", stroke="none")
 
     # Nhãn kích thước đặt bên trái và dưới đáy box
-    f.text(lb_x - 4, lb_y + lb_h / 2, "640", size=5.8, weight=700, fill="#D97706", anchor="end")
-    f.text(lb_x + lb_w / 2, lb_y + lb_h + 8, "Khung chuẩn 640×640", size=5.8, weight=700, fill="#B45309", anchor="middle")
+    f.text(lb_x - 4, lb_y + lb_h / 2, "640", size=6.5, weight=700, fill="#D97706", anchor="end")
+    f.text(lb_x + lb_w / 2, lb_y + lb_h + 8, "Khung chuẩn 640×640", size=6.5, weight=700, fill="#B45309", anchor="middle")
 
     # Danh sách thao tác
     f.text(b1_x + 10, b1_y + 118, "• Resize & LetterBox: Giữ tỉ lệ, chống méo", size=6.8, fill="#334155")
@@ -1163,16 +1166,16 @@ def fig_latency_4_stages():
     arr1_end = arr1_start + 45
     f.a(f'<path d="M {arr1_start + 1} 173 L {arr1_end - 2} 173" stroke="#0284C7" stroke-width="2.0" fill="none" marker-end="url(#{f.marker("#0284C7", 2.0)})"/>')
     f.text(arr1_start + 23, 160, "DMA-BUF", size=6.5, weight=700, fill="#0284C7", anchor="middle")
-    f.text(arr1_start + 23, 185, "Zero-Copy", size=5.8, fill="#0369A1", anchor="middle")
+    f.text(arr1_start + 23, 185, "Zero-Copy", size=6.5, fill="#0369A1", anchor="middle")
 
     # -------------------------------------------------------------------------
     # Khối 2: Chặng 2 - Pure NPU Inference (NPU RK3588)
     # -------------------------------------------------------------------------
     b2_x = arr1_end
     b2_y, b2_w, b2_h = 82, 246, 182
-    rect(f, b2_x, b2_y, b2_w, b2_h, fill="#F0F9FF", stroke="#0284C7", sw=1.2, rx=4)
+    rect(f, b2_x, b2_y, b2_w, b2_h, fill="#FFFFFF", stroke="#0284C7", sw=1.2, rx=4)
     f.text(b2_x + 10, b2_y + 14, "Chặng 2: Pure NPU Inference", size=8.5, weight=700, fill="#0369A1")
-    rect(f, b2_x + b2_w - 74, b2_y + 6, 66, 16, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
+    rect(f, b2_x + b2_w - 74, b2_y + 6, 66, 16, fill="#FFFFFF", stroke="#0284C7", sw=0.8, rx=2)
     f.text(b2_x + b2_w - 41, b2_y + 14, "T_npu ~12.5 ms", size=7.0, weight=700, fill="#0369A1", anchor="middle")
 
     f.text(b2_x + 10, b2_y + 28, "Thực thi: 3 Lõi NPU RK3588 (Đỉnh 6.0 TOPS INT8)", size=6.8, fill="#075985")
@@ -1181,44 +1184,44 @@ def fig_latency_4_stages():
     cw = (b2_w - 28) / 3
     for ci, cnm in enumerate(["Core 0 (2 TOPS)", "Core 1 (2 TOPS)", "Core 2 (2 TOPS)"]):
         cx = b2_x + 10 + ci * (cw + 4)
-        rect(f, cx, b2_y + 36, cw, 16, fill="#BAE6FD", stroke="#0284C7", sw=0.8, rx=2)
-        f.text(cx + cw / 2, b2_y + 44, cnm, size=5.8, weight=700, fill="#0369A1", anchor="middle")
+        rect(f, cx, b2_y + 36, cw, 16, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
+        f.text(cx + cw / 2, b2_y + 44, cnm, size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
     # Minh họa Mạng Nơ-ron Feature Maps & Head
     nn_y = b2_y + 58
     # Input Tensor
     rect(f, b2_x + 10, nn_y, 32, 46, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
-    f.text(b2_x + 26, nn_y + 16, "Tensor", size=6.0, fill="#0369A1", anchor="middle")
-    f.text(b2_x + 26, nn_y + 30, "640²×3", size=6.0, weight=700, fill="#0369A1", anchor="middle")
+    f.text(b2_x + 26, nn_y + 16, "Tensor", size=6.5, fill="#0369A1", anchor="middle")
+    f.text(b2_x + 26, nn_y + 30, "640²×3", size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
     # Mũi tên ->
     f.a(f'<path d="M {b2_x + 44} {nn_y + 23} L {b2_x + 53} {nn_y + 23}" stroke="#0284C7" stroke-width="1.2" fill="none" marker-end="url(#{f.marker("#0284C7", 1.2)})"/>')
 
     # Backbone Conv
-    rect(f, b2_x + 55, nn_y + 4, 48, 38, fill="#BAE6FD", stroke="#0369A1", sw=0.9, rx=2)
-    f.text(b2_x + 79, nn_y + 17, "Backbone", size=6.2, weight=700, fill="#0369A1", anchor="middle")
-    f.text(b2_x + 79, nn_y + 29, "C2f / Conv", size=5.5, fill="#0284C7", anchor="middle")
+    rect(f, b2_x + 55, nn_y + 4, 48, 38, fill="#E0F2FE", stroke="#0284C7", sw=0.9, rx=2)
+    f.text(b2_x + 79, nn_y + 17, "Backbone", size=6.5, weight=700, fill="#0369A1", anchor="middle")
+    f.text(b2_x + 79, nn_y + 29, "C2f / Conv", size=6.5, fill="#0284C7", anchor="middle")
 
     # Mũi tên ->
     f.a(f'<path d="M {b2_x + 105} {nn_y + 23} L {b2_x + 114} {nn_y + 23}" stroke="#0284C7" stroke-width="1.2" fill="none" marker-end="url(#{f.marker("#0284C7", 1.2)})"/>')
 
     # PANet & 3 Detect Heads
-    rect(f, b2_x + 116, nn_y, 46, 14, fill="#FBCFE8", stroke="#DB2777", sw=0.8, rx=2)
-    f.text(b2_x + 139, nn_y + 7, "P3 (80² S-obj)", size=5.0, weight=700, fill="#9D174D", anchor="middle")
+    rect(f, b2_x + 116, nn_y, 46, 14, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
+    f.text(b2_x + 139, nn_y + 7, "P3 (80² S-obj)", size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
-    rect(f, b2_x + 116, nn_y + 16, 46, 14, fill="#DDD6FE", stroke="#7C3AED", sw=0.8, rx=2)
-    f.text(b2_x + 139, nn_y + 23, "P4 (40² M-obj)", size=5.0, weight=700, fill="#5B21B6", anchor="middle")
+    rect(f, b2_x + 116, nn_y + 16, 46, 14, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
+    f.text(b2_x + 139, nn_y + 23, "P4 (40² M-obj)", size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
-    rect(f, b2_x + 116, nn_y + 32, 46, 14, fill="#FEF08A", stroke="#CA8A04", sw=0.8, rx=2)
-    f.text(b2_x + 139, nn_y + 39, "P5 (20² L-obj)", size=5.0, weight=700, fill="#854D0E", anchor="middle")
+    rect(f, b2_x + 116, nn_y + 32, 46, 14, fill="#E0F2FE", stroke="#0284C7", sw=0.8, rx=2)
+    f.text(b2_x + 139, nn_y + 39, "P5 (20² L-obj)", size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
     # Mũi tên gom ->
     f.a(f'<path d="M {b2_x + 164} {nn_y + 23} L {b2_x + 173} {nn_y + 23}" stroke="#0284C7" stroke-width="1.2" fill="none" marker-end="url(#{f.marker("#0284C7", 1.2)})"/>')
 
     # Raw Tensor output
-    rect(f, b2_x + 175, nn_y + 4, 60, 38, fill="#FEF3C7", stroke="#D97706", sw=1.0, rx=2)
-    f.text(b2_x + 205, nn_y + 17, "Raw Output", size=6.0, weight=700, fill="#92400E", anchor="middle")
-    f.text(b2_x + 205, nn_y + 29, "[1, 84, 8400]", size=5.8, weight=700, fill="#D97706", anchor="middle")
+    rect(f, b2_x + 175, nn_y + 4, 60, 38, fill="#E0F2FE", stroke="#0284C7", sw=1.0, rx=2)
+    f.text(b2_x + 205, nn_y + 17, "Raw Output", size=6.5, weight=700, fill="#0369A1", anchor="middle")
+    f.text(b2_x + 205, nn_y + 29, "[1, 84, 8400]", size=6.5, weight=700, fill="#0369A1", anchor="middle")
 
     # Danh sách thao tác
     f.text(b2_x + 10, b2_y + 120, "• Nạp trọng số INT8 từ SRAM Cache (weights 3.2 MB)", size=6.8, fill="#334155")
@@ -1231,15 +1234,15 @@ def fig_latency_4_stages():
     arr2_end = 680
     f.a(f'<path d="M {arr2_start + 1} 173 L {arr2_end - 2} 173" stroke="#64748B" stroke-width="1.8" fill="none" marker-end="url(#{f.marker("#64748B", 1.8)})"/>')
     rect(f, arr2_start + 3, 154, 22, 12, fill="#FFFFFF", stroke="#CBD5E1", sw=0.7, rx=2)
-    f.text(arr2_start + 14, 160, "8.4k", size=5.2, weight=700, fill="#64748B", anchor="middle")
+    f.text(arr2_start + 14, 160, "8.4k", size=6.5, weight=700, fill="#64748B", anchor="middle")
 
     # -------------------------------------------------------------------------
     # Khối 3: Chặng 3 - Post-processing (CPU)
     # -------------------------------------------------------------------------
     b3_x, b3_y, b3_w, b3_h = 680, 82, 190, 182
-    rect(f, b3_x, b3_y, b3_w, b3_h, fill="#FAF5FF", stroke="#A855F7", sw=1.2, rx=4)
+    rect(f, b3_x, b3_y, b3_w, b3_h, fill="#FFFFFF", stroke="#A855F7", sw=1.2, rx=4)
     f.text(b3_x + 10, b3_y + 14, "Chặng 3: Post-processing", size=8.5, weight=700, fill="#7E22CE")
-    rect(f, b3_x + b3_w - 68, b3_y + 6, 60, 16, fill="#F3E8FF", stroke="#A855F7", sw=0.8, rx=2)
+    rect(f, b3_x + b3_w - 68, b3_y + 6, 60, 16, fill="#FFFFFF", stroke="#A855F7", sw=0.8, rx=2)
     f.text(b3_x + b3_w - 38, b3_y + 14, "T_post ~3.5 ms", size=7.0, weight=700, fill="#7E22CE", anchor="middle")
 
     f.text(b3_x + 10, b3_y + 28, "Thực thi: CPU Cortex-A76", size=6.8, fill="#6B21A8")
@@ -1248,7 +1251,7 @@ def fig_latency_4_stages():
     nms_y = b3_y + 34
     # Panel Trước NMS
     rect(f, b3_x + 8, nms_y, 76, 72, fill="#FFFFFF", stroke="#CBD5E1", sw=0.8, rx=2)
-    f.text(b3_x + 46, nms_y + 8, "Trước NMS (Trùng lặp)", size=5.2, weight=700, fill="#475569", anchor="middle")
+    f.text(b3_x + 46, nms_y + 7, "Trước NMS", size=6.5, weight=700, fill="#475569", anchor="middle")
     # Người thu nhỏ
     p_cx = b3_x + 30
     f.a(f'<circle cx="{p_cx}" cy="{nms_y + 26}" r="3.0" fill="#F59E0B"/>')
@@ -1260,18 +1263,19 @@ def fig_latency_4_stages():
     rect(f, p_cx - 13, nms_y + 22, 23, 27, fill="none", stroke="#DC2626", sw=0.8, dashed=True, rx=1)
     rect(f, p_cx - 8, nms_y + 18, 19, 30, fill="none", stroke="#DC2626", sw=0.8, dashed=True, rx=1)
     # Nhãn danh sách các box đặt bên phải người trong mini-card
-    f.text(b3_x + 46, nms_y + 23, "• 0.88", size=5.2, weight=700, fill="#16A34A")
-    f.text(b3_x + 46, nms_y + 35, "• 0.65 ✖", size=5.0, weight=700, fill="#DC2626")
-    f.text(b3_x + 46, nms_y + 46, "• 0.42 ✖", size=5.0, weight=700, fill="#DC2626")
+    f.text(b3_x + 46, nms_y + 23, "• 0.88", size=6.5, weight=700, fill="#16A34A")
+    f.text(b3_x + 46, nms_y + 35, "• 0.65 ✖", size=6.5, weight=700, fill="#DC2626")
+    f.text(b3_x + 46, nms_y + 46, "• 0.42 ✖", size=6.5, weight=700, fill="#DC2626")
 
     # Mũi tên NMS
     f.a(f'<path d="M {b3_x + 86} {nms_y + 36} L {b3_x + 98} {nms_y + 36}" stroke="#7E22CE" stroke-width="1.4" fill="none" marker-end="url(#{f.marker("#7E22CE", 1.4)})"/>')
-    f.text(b3_x + 92, nms_y + 26, "NMS", size=5.5, weight=700, fill="#7E22CE", anchor="middle")
-    f.text(b3_x + 92, nms_y + 46, "IoU 0.45", size=4.8, fill="#7E22CE", anchor="middle")
+    f.text(b3_x + 92, nms_y + 26, "NMS", size=6.5, weight=700, fill="#7E22CE", anchor="middle")
+    f.text(b3_x + 92, nms_y + 45, "IoU", size=6.5, fill="#7E22CE", anchor="middle")
+    f.text(b3_x + 92, nms_y + 52, "0.45", size=6.5, fill="#7E22CE", anchor="middle")
 
     # Panel Sau NMS
     rect(f, b3_x + 101, nms_y, 81, 72, fill="#FFFFFF", stroke="#86EFAC", sw=0.9, rx=2)
-    f.text(b3_x + 141, nms_y + 8, "Sau NMS (Chuẩn xác)", size=5.2, weight=700, fill="#166534", anchor="middle")
+    f.text(b3_x + 141, nms_y + 7, "Sau NMS", size=6.5, weight=700, fill="#166534", anchor="middle")
     p2_cx = b3_x + 130
     # 1 BBox chuẩn duy nhất (vẽ trước với nền bán trong suốt)
     f.a(f'<rect x="{p2_cx - 11}" y="{nms_y + 20}" width="22" height="31" rx="1" fill="#DCFCE7" fill-opacity="0.35" stroke="#16A34A" stroke-width="1.4"/>')
@@ -1283,12 +1287,12 @@ def fig_latency_4_stages():
 
     # Tag kết quả person gắn đỉnh bbox
     rect(f, p2_cx - 14, nms_y + 11, 36, 8, fill="#16A34A", stroke="none", rx=1)
-    f.text(p2_cx + 4, nms_y + 15, "person 0.88", size=4.8, weight=700, fill="#FFFFFF", anchor="middle")
+    f.text(p2_cx + 4, nms_y + 15, "person 0.88", size=6.5, weight=700, fill="#FFFFFF", anchor="middle")
 
     # Tag helmet gắn trực tiếp cạnh nón bảo hộ kèm đường chỉ dẫn
-    f.a(f'<line x1="{p2_cx + 3}" y1="{nms_y + 26}" x2="{p2_cx + 12}" y2="{nms_y + 26}" stroke="#D97706" stroke-width="0.8"/>')
-    rect(f, p2_cx + 12, nms_y + 22, 34, 8, fill="#D97706", stroke="none", rx=1)
-    f.text(p2_cx + 29, nms_y + 26, "helmet 0.92", size=4.5, weight=700, fill="#FFFFFF", anchor="middle")
+    f.a(f'<line x1="{p2_cx + 3}" y1="{nms_y + 26}" x2="{p2_cx + 12}" y2="{nms_y + 26}" stroke="#16A34A" stroke-width="0.8"/>')
+    rect(f, p2_cx + 12, nms_y + 22, 34, 8, fill="#16A34A", stroke="none", rx=1)
+    f.text(p2_cx + 29, nms_y + 26, "helmet 0.92", size=6.5, weight=700, fill="#FFFFFF", anchor="middle")
 
     # Danh sách thao tác
     f.text(b3_x + 10, b3_y + 120, "• Lọc ngưỡng tin cậy Conf >= 0.25", size=6.8, fill="#334155")
@@ -1312,28 +1316,28 @@ def fig_latency_4_stages():
     tot_w = w_pre + w_npu + w_post  # 510 px
 
     # Segment 1: T_pre
-    rect(f, tl_x, tl_y, w_pre, 30, fill="#FEF3C7", stroke="#F59E0B", sw=1.2, rx=2)
+    rect(f, tl_x, tl_y, w_pre, 30, fill="#FFFFFF", stroke="#F59E0B", sw=1.2, rx=2)
     f.text(tl_x + w_pre / 2, tl_y + 11, "T_pre", size=8.0, weight=700, fill="#B45309", anchor="middle")
     f.text(tl_x + w_pre / 2, tl_y + 22, "2.5 ms (13.5%)", size=7.0, fill="#92400E", anchor="middle")
 
     # Segment 2: T_npu (Nút thắt)
-    rect(f, tl_x + w_pre, tl_y, w_npu, 30, fill="#BAE6FD", stroke="#0284C7", sw=1.5, rx=2)
+    rect(f, tl_x + w_pre, tl_y, w_npu, 30, fill="#FFFFFF", stroke="#0284C7", sw=1.5, rx=2)
     f.text(tl_x + w_pre + w_npu / 2, tl_y + 11, "T_npu: 12.5 ms (Pure NPU Suy Luận INT8 - Chiếm 67.5% Thời Gian)", size=8.5, weight=700, fill="#0369A1", anchor="middle")
     f.text(tl_x + w_pre + w_npu / 2, tl_y + 22, "NÚT THẮT TÍNH TOÁN CHÍNH CỦA HỆ THỐNG (BOTTLENECK)", size=7.0, weight=700, fill="#C2410C", anchor="middle")
 
     # Segment 3: T_post
-    rect(f, tl_x + w_pre + w_npu, tl_y, w_post, 30, fill="#F3E8FF", stroke="#A855F7", sw=1.2, rx=2)
+    rect(f, tl_x + w_pre + w_npu, tl_y, w_post, 30, fill="#FFFFFF", stroke="#A855F7", sw=1.2, rx=2)
     f.text(tl_x + w_pre + w_npu + w_post / 2, tl_y + 11, "T_post", size=8.0, weight=700, fill="#7E22CE", anchor="middle")
     f.text(tl_x + w_pre + w_npu + w_post / 2, tl_y + 22, "3.5 ms (18.9%)", size=7.0, fill="#6B21A8", anchor="middle")
 
     # Thanh tổng End-to-End
     e2e_y = tl_y + 36
-    rect(f, tl_x, e2e_y, tot_w, 24, fill="#DCFCE7", stroke="#16A34A", sw=1.5, rx=3)
+    rect(f, tl_x, e2e_y, tot_w, 24, fill="#F1F5F9", stroke="#64748B", sw=1.5, rx=3)
     f.rich(tl_x + tot_w / 2, e2e_y + 12, [
         ("Chặng 4: T_E2E (End-to-End Latency) = ", "b"),
         ("T_pre + T_npu + T_post = ", "t"),
         ("2.5 + 12.5 + 3.5 = 18.5 ms", "b"),
-    ], size=8.5, fill="#166534", anchor="middle")
+    ], size=8.5, fill="#1E293B", anchor="middle")
 
     # 2 Card so sánh chế độ thực thi bên phải
     c1_x = tl_x + tot_w + 14
@@ -1342,22 +1346,22 @@ def fig_latency_4_stages():
     c2_w = (W - 32) - c2_x
 
     # Card 1: Đơn luồng tuần tự (Sequential)
-    rect(f, c1_x, tl_y, c1_w, 88, fill="#FFF1F2", stroke="#F43F5E", sw=1.0, rx=3)
-    f.text(c1_x + 8, tl_y + 12, "Tuần tự 1 Luồng (Sequential):", size=7.8, weight=700, fill="#9F1239")
-    f.rich(c1_x + 8, tl_y + 26, [("FPS_latency = ", "t"), ("1000 / T_E2E", "b")], size=7.2, fill="#881337")
-    f.text(c1_x + 8, tl_y + 40, "≈ 54.1 FPS", size=9.5, weight=700, fill="#E11D48")
+    rect(f, c1_x, tl_y, c1_w, 88, fill="#FFFFFF", stroke="#94A3B8", sw=1.0, rx=3)
+    f.text(c1_x + 8, tl_y + 12, "Tuần tự 1 Luồng (Sequential):", size=7.8, weight=700, fill="#1E293B")
+    f.rich(c1_x + 8, tl_y + 26, [("FPS_latency = ", "t"), ("1000 / T_E2E", "b")], size=7.2, fill="#1E293B")
+    f.text(c1_x + 8, tl_y + 40, "≈ 54.1 FPS", size=9.5, weight=700, fill="#1E293B")
     f.text(c1_x + 8, tl_y + 54, "• NPU rảnh 6.0 ms (lãng phí 32%)", size=6.5, fill="#475569")
     f.text(c1_x + 8, tl_y + 68, "• 2 lõi NPU bỏ phí hoàn toàn (0%)", size=6.5, fill="#475569")
-    f.text(c1_x + 8, tl_y + 80, "• Kém tối ưu khi stream nhiều camera", size=6.2, italic=True, fill="#E11D48")
+    f.text(c1_x + 8, tl_y + 80, "• Kém tối ưu khi stream nhiều camera", size=6.5, italic=True, fill="#64748B")
 
     # Card 2: Đa luồng Pipeline (3 Core)
-    rect(f, c2_x, tl_y, c2_w, 88, fill="#ECFDF5", stroke="#10B981", sw=1.2, rx=3)
-    f.text(c2_x + 8, tl_y + 12, "Pipeline Đa Luồng (3 Core):", size=7.8, weight=700, fill="#065F46")
-    f.rich(c2_x + 8, tl_y + 26, [("Throughput = ", "t"), ("1000 / T_npu", "b")], size=7.2, fill="#047857")
-    f.text(c2_x + 8, tl_y + 40, "≈ 80.0 FPS (+48%!)", size=9.5, weight=700, fill="#059669")
+    rect(f, c2_x, tl_y, c2_w, 88, fill="#FFFFFF", stroke="#94A3B8", sw=1.2, rx=3)
+    f.text(c2_x + 8, tl_y + 12, "Pipeline Đa Luồng (3 Core):", size=7.8, weight=700, fill="#1E293B")
+    f.rich(c2_x + 8, tl_y + 26, [("Throughput = ", "t"), ("1000 / T_npu", "b")], size=7.2, fill="#1E293B")
+    f.text(c2_x + 8, tl_y + 40, "≈ 80.0 FPS (+48%!)", size=9.5, weight=700, fill="#047857")
     f.text(c2_x + 8, tl_y + 54, "• Pre / NPU / Post chạy gối đầu", size=6.5, fill="#334155")
     f.text(c2_x + 8, tl_y + 68, "• Cả 3 lõi NPU full tải (Zero Idle)", size=6.5, fill="#334155")
-    f.text(c2_x + 8, tl_y + 80, "• Chuẩn thiết kế cho Edge AI thực tế", size=6.2, weight=700, fill="#047857")
+    f.text(c2_x + 8, tl_y + 80, "• Chuẩn thiết kế cho Edge AI thực tế", size=6.5, weight=700, fill="#1E293B")
 
     source(f, 418, "Nguồn: Rockchip RKNPU2 Toolkit v2.3.2 Manual; Benchmark thực tế YOLOv8n INT8 640×640 trên Orange Pi 5 RK3588S.")
     return f
@@ -1456,8 +1460,8 @@ def fig_fps_latency_vs_throughput():
     # ==============================================================================
     # KỊCH BẢN 2: ĐA LUỒNG PIPELINE (3 CORE NPU)
     # ==============================================================================
-    rect(f, 20, 204, W - 40, 252, fill="#F9FBE7", stroke="#81C784", sw=1.2, rx=4)
-    f.text(32, 218, "2. KỊCH BẢN B: ĐƯỜNG ỐNG ĐA LUỒNG GỐI ĐẦU 3 CORE NPU (PIPELINED MULTI-THREADING)", size=9.0, weight=700, fill="#1B5E20")
+    rect(f, 20, 204, W - 40, 252, fill="#FAFAFA", stroke="#CFD8DC", sw=1.2, rx=4)
+    f.text(32, 218, "2. KỊCH BẢN B: ĐƯỜNG ỐNG ĐA LUỒNG GỐI ĐẦU 3 CORE NPU (PIPELINED MULTI-THREADING)", size=9.0, weight=700, fill=DARK)
 
     # Trục nhãn kịch bản B
     f.text(tl_x - 8, 235 + 8, "CPU Pre", size=7.5, weight=700, fill="#222222", anchor="end")
@@ -1499,28 +1503,28 @@ def fig_fps_latency_vs_throughput():
         f.text(tl_x + (start_t + 1.25) * s, 319 + 7.5, lbl, size=6.5, weight=700, fill="#222222", anchor="middle")
 
     # Mốc thời gian hoàn thành (Output completion ticks)
-    f.a(f'<path d="M {tl_x} 345 L {tl_x + 52.0 * s} 345" stroke="#81C784" stroke-width="1.0"/>')
+    f.a(f'<path d="M {tl_x} 345 L {tl_x + 52.0 * s} 345" stroke="#90A4AE" stroke-width="1.0"/>')
     out_ticks = [(18.5, "Xong F1 (18.5ms)", 0), (21.0, "F2 (21ms)", 8), (23.5, "F3 (23.5ms)", 0), (31.0, "F4", 0), (33.5, "F5", 8)]
     for t_val, t_lbl, y_shift in out_ticks:
         vx = tl_x + t_val * s
-        f.a(f'<path d="M {vx} 341 L {vx} 347" stroke="#2E7D32" stroke-width="1.2"/>')
-        f.text(vx, 353 + y_shift, t_lbl, size=6.5, weight=700, fill="#2E7D32", anchor="middle")
+        f.a(f'<path d="M {vx} 341 L {vx} 347" stroke="#546E7A" stroke-width="1.2"/>')
+        f.text(vx, 353 + y_shift, t_lbl, size=6.5, weight=700, fill=DARK, anchor="middle")
 
     # Ghi chú dưới timeline
-    rect(f, tl_x, 368, 52.0 * s, 24, fill="#E8F5E9", stroke="#4CAF50", sw=0.8, rx=3)
-    f.text(tl_x + 52.0 * s / 2, 380, "✓ Cả 3 Core NPU hoạt động 100% liên tục | Triệt tiêu khe rảnh (Zero Idle) | Nhả frame dồn dập", size=7.5, weight=700, fill="#1B5E20", anchor="middle")
+    rect(f, tl_x, 368, 52.0 * s, 24, fill="#FFFFFF", stroke="#B0BEC5", sw=0.8, rx=3)
+    f.text(tl_x + 52.0 * s / 2, 380, "✓ Cả 3 Core NPU hoạt động 100% liên tục | Triệt tiêu khe rảnh (Zero Idle) | Nhả frame dồn dập", size=7.5, weight=700, fill=DARK, anchor="middle")
 
     # Hộp 1 bên phải Kịch bản B: Throughput & DAHD-YOLO
     bx2_x = tl_x + 52.0 * s + 16
     bx2_w = (W - 32) - bx2_x
-    rect(f, bx2_x, 214, bx2_w, 102, fill="#FFFFFF", stroke="#81C784", sw=1.0, rx=4)
-    f.text(bx2_x + 10, 226, "KẾT QUẢ ĐA LUỒNG PIPELINE (3 CORE):", size=8.5, weight=700, fill="#1B5E20")
+    rect(f, bx2_x, 214, bx2_w, 102, fill="#FFFFFF", stroke="#B0BEC5", sw=1.0, rx=4)
+    f.text(bx2_x + 10, 226, "KẾT QUẢ ĐA LUỒNG PIPELINE (3 CORE):", size=8.5, weight=700, fill=DARK)
     f.rich(bx2_x + 10, 241, [("Throughput FPS = ", "b"), ("1000 / T_bottleneck", "c")], size=8.0, fill=DARK)
     f.rich(bx2_x + 10, 255, [("Với 1 core: 1000/12.5 = ", "t"), ("80.0 FPS", "b"), (" (Tăng 1.48×)", "t")], size=8.0, fill="#2E7D32")
     f.text(bx2_x + 10, 271, "• Bằng chứng paper DAHD-YOLO (Table 6, tr.18):", size=7.5, weight=700, fill=DARK)
     f.text(bx2_x + 18, 283, "- Đơn luồng: 79.1ms (12.6 FPS) -> Không đủ 25 FPS", size=7.0, fill=DARK)
     f.text(bx2_x + 18, 296, "- Thread pool 3 core NPU: Đạt 50.2 FPS (720P) / 43.8 FPS (1080P)", size=7.0, weight=700, fill="#1B5E20")
-    f.text(bx2_x + 18, 308, "-> Tăng gấp gần 4 lần, đáp ứng hoàn hảo real-time!", size=7.0, italic=True, fill="#1B5E20")
+    f.text(bx2_x + 18, 308, "-> Tăng gấp gần 4 lần, đáp ứng hoàn hảo real-time!", size=7.0, italic=True, fill=DARK)
 
     # Hộp 2 bên phải Kịch bản B: Minh họa ảnh PPE thực tế
     p1 = "data/demo/images/construction-safety.jpg"
@@ -1552,9 +1556,9 @@ def fig_fps_latency_vs_throughput():
     f.text(im2_x + 95 / 2, im1_y + 72, "Nhận diện PPE (5 classes)", size=6.5, weight=700, fill="#2E7D32", anchor="middle")
 
     f.text(bx2_x + 10, bx3_y + 104, "• Phân loại: person, helmet, safety_clothes, self_clothes, head", size=6.8, fill=DARK)
-    f.text(bx2_x + 10, bx3_y + 116, "• Pipeline đa luồng đảm bảo kiểm soát an toàn không trễ khung hình", size=6.8, italic=True, fill="#2E7D32")
+    f.text(bx2_x + 10, bx3_y + 116, "• Pipeline đa luồng đảm bảo kiểm soát an toàn không trễ khung hình", size=6.8, italic=True, fill=DARK)
 
-    source(f, 472, "Nguồn: Rockchip RKNPU2 Toolkit v2.3.2 Manual; DAHD-YOLO (Table 6, tr.18 - RK3588 NPU 3-Core Thread Pool); Dữ liệu thực nghiệm PPE.")
+    source(f, 460, "Nguồn: Rockchip RKNPU2 Toolkit v2.3.2 Manual; DAHD-YOLO (Table 6, tr.18 - RK3588 NPU 3-Core Thread Pool); Dữ liệu thực nghiệm PPE.")
     return f
 
 

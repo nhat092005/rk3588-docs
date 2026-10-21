@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="430" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="42" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Cấu trúc Khối Residual, Nhánh Shortcut và Dung hợp Toán tử Add</text>
+<rect x="10" y="64" width="280" height="330" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="150.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Identity Residual (C_in = C_out)</text>
+<text x="22" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Điều kiện: </tspan><tspan>Cùng số kênh, Stride = 1.</tspan></text>
+<text x="22" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nhánh tắt: </tspan><tspan>Dây nối trực tiếp </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.2">x</tspan><tspan> không qua trọng số.</tspan></text>
+<rect x="75" y="132" width="100" height="26" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="125" y="145" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu vào x</text>
+<path d="M125 158 L125 170" fill="none" stroke="#222222" stroke-width="1.6"/>
+<circle cx="125" cy="170" r="3.5" fill="#222222"/>
+<path d="M125 170 L125 182" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="65" y="182" width="120" height="24" rx="3" fill="white" stroke="#444444" stroke-width="1.2"/>
+<text x="125" y="194" font-size="9.8" font-weight="600" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3, BN, ReLU</text>
+<path d="M125 206 L125 218" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="65" y="218" width="120" height="24" rx="3" fill="white" stroke="#444444" stroke-width="1.2"/>
+<text x="125" y="230" font-size="9.8" font-weight="600" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3, BN</text>
+<path d="M125 242 L125 260" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M125 170 L235 170 L235 272 L145 272" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="240" y="219" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Identity x</text>
+<circle cx="125" cy="272" r="12" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.5"/>
+<text x="125" y="272" font-size="16" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">+</text>
+<path d="M125 284 L125 298" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="85" y="298" width="80" height="22" rx="3" fill="#F5F5F5" stroke="#444444" stroke-width="1.2"/>
+<text x="125" y="309" font-size="10.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU</text>
+<path d="M125 320 L125 332" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="65" y="332" width="120" height="26" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="125" y="345" font-size="10.2" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu ra y = F(x) + x</text>
+<text x="150.0" y="376" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Gradient: ∂L/∂x = ∂L/∂y · (∂F/∂x + 1)</text>
+<rect x="306" y="64" width="280" height="330" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="446.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Projection Residual (C_in ≠ C_out)</text>
+<text x="318" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Điều kiện: </tspan><tspan>Tăng kênh hoặc giảm không gian (Stride=2).</tspan></text>
+<text x="318" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Nhánh tắt: </tspan><tspan>Phải qua </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.2">Conv 1×1 (s=2)</tspan><tspan> để khớp shape.</tspan></text>
+<rect x="366" y="132" width="110" height="26" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="421" y="145" font-size="10.2" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">x [H × W × C_in]</text>
+<path d="M421 158 L421 170" fill="none" stroke="#222222" stroke-width="1.6"/>
+<circle cx="421" cy="170" r="3.5" fill="#222222"/>
+<path d="M421 170 L421 182" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="359" y="182" width="124" height="24" rx="3" fill="white" stroke="#444444" stroke-width="1.2"/>
+<text x="421" y="194" font-size="9.2" font-weight="600" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3 (s=2), BN, ReLU</text>
+<path d="M421 206 L421 218" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="359" y="218" width="124" height="24" rx="3" fill="white" stroke="#444444" stroke-width="1.2"/>
+<text x="421" y="230" font-size="9.2" font-weight="600" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv 3×3, BN</text>
+<path d="M421 242 L421 260" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M421 170 L534 170 L534 202" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="496" y="202" width="76" height="26" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="534" y="215" font-size="9" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Conv 1×1 (s=2)</text>
+<path d="M534 228 L534 272 L435 272" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<circle cx="421" cy="272" r="12" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.5"/>
+<text x="421" y="272" font-size="16" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">+</text>
+<path d="M421 284 L421 298" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="381" y="298" width="80" height="22" rx="3" fill="#F5F5F5" stroke="#444444" stroke-width="1.2"/>
+<text x="421" y="309" font-size="10.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ReLU</text>
+<path d="M421 320 L421 332" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="359" y="332" width="124" height="26" rx="3" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="421" y="345" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">y [H/2 × W/2 × C_out]</text>
+<text x="446.0" y="376" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Shortcut có trọng số: C_out × C_in × 1×1</text>
+<rect x="602" y="64" width="288" height="330" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="746.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">3. Dung hợp Add (Fusion) trên RK3588</text>
+<text x="614" y="98.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Vấn đề: </tspan><tspan>Nếu Add tách rời, NPU phải ghi và đọc</tspan></text>
+<text x="614" y="112.5" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  2 mảng tensor qua lại bộ nhớ DRAM ngoài.</tspan></text>
+<text x="614" y="127.0" font-size="10.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Giải pháp RKNN: </tspan><tspan>Dung hợp Add trực tiếp vào SRAM.</tspan></text>
+<rect x="614" y="142" width="264" height="84" rx="3" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+<text x="622" y="156" font-size="10.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">A. Không dung hợp (Tiêu tốn DRAM)</text>
+<rect x="622" y="168" width="70" height="20" rx="3" fill="white" stroke="#444444" stroke-width="1"/>
+<text x="657" y="178" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv Layer</text>
+<path d="M692 178 L712 178" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<rect x="712" y="168" width="60" height="20" rx="3" fill="#FFEBEE" stroke="#C62828" stroke-width="1"/>
+<text x="742" y="178" font-size="8.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Ghi DRAM</text>
+<path d="M772 178 L792 178" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<rect x="792" y="168" width="65" height="20" rx="3" fill="white" stroke="#444444" stroke-width="1"/>
+<text x="824" y="178" font-size="9" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Add Operator</text>
+<text x="622" y="204" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">=&gt; Đọc/ghi DRAM 3 lần, nghẽn băng thông bộ nhớ ngoài.</text>
+<rect x="614" y="249" width="264" height="130" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="622" y="265" font-size="10.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">B. Dung hợp RKNN (Add Fusion trên SRAM)</text>
+<rect x="622" y="279" width="248" height="42" rx="3" fill="white" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="746.0" y="292" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">[Khối Fused: Conv + BN + Add + ReLU]</text>
+<text x="746.0" y="308" font-size="9.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Thực thi trọn vẹn trong SRAM nội bộ NPU</text>
+<path d="M746 321 L746 336" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="662" y="336" width="168" height="22" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1"/>
+<text x="746.0" y="347" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Ghi DRAM duy nhất 1 lần</text>
+<text x="622" y="370" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">=&gt; Tiết kiệm 66% lưu lượng DRAM, hạ độ trễ pipeline.</text>
+<text x="10" y="416" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 D2L tr.304, tr.306, Fig. 8.6.2]. Khối ResNet học ánh xạ phần dư g(x) = f(x) - x; liên hệ RKNN Graph Fusion.</text>
+</svg>

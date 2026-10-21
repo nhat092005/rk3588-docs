@@ -24,7 +24,7 @@ from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THICK, THIN, Fig, run, sou
 
 DEFAULT_OUTDIR = os.path.abspath(
     os.path.join(
-        HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "tensor-va-kieu-du-lieu"
+        HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "02-tensor-va-kieu-du-lieu"
     )
 )
 
@@ -67,7 +67,7 @@ def fig_tensor_evolution():
     tier(f, "T2 chung")
 
     f.text(20, 24, "TIẾN HÓA CỦA TENSOR: TỪ SCALAR ĐẾN TENSOR 4 CHIỀU (0D ĐẾN 4D)", size=13, weight=700, fill=DARK)
-    f.text(20, 42, "Cấu trúc dữ liệu đa trục: Bậc (Rank/Order), Shape, Indexing và ví dụ thực tế trong Computer Vision / NPU", size=9.2, fill=GRAY)
+    f.text(20, 42, "Cấu trúc dữ liệu đa trục: Bậc (Order), Shape, Indexing và ví dụ thực tế trong Computer Vision / NPU", size=9.2, fill=GRAY)
 
     col_w = 168
     col_gap = 7
@@ -81,7 +81,7 @@ def fig_tensor_evolution():
             "name": "Số vô hướng",
             "bg": "#FAFAFA",
             "stroke": "#B0BEC5",
-            "shape": "()  hoặc  torch.Size([])",
+            "shape": "()  (không có trục nào)",
             "idx": "x  (không có chỉ số)",
             "cv": "Loss = 0.28, Conf_thresh = 0.25",
             "type": "scalar",
@@ -89,8 +89,8 @@ def fig_tensor_evolution():
         {
             "rank": "Bậc 1 (Vector)",
             "name": "Mảng 1 chiều",
-            "bg": "#F5FBF6",
-            "stroke": "#A5D6A7",
+            "bg": "#FAFAFA",
+            "stroke": "#B0BEC5",
             "shape": "(d,)  ví dụ  (4,)",
             "idx": "x[i]   (0 ≤ i < d)",
             "cv": "Tọa độ bbox [x1, y1, x2, y2], nhãn",
@@ -99,9 +99,9 @@ def fig_tensor_evolution():
         {
             "rank": "Bậc 2 (Matrix)",
             "name": "Ma trận 2 chiều",
-            "bg": "#F4F8FD",
-            "stroke": "#90CAF9",
-            "shape": "(H, W)  ví dụ  (4, 4)",
+            "bg": "#FAFAFA",
+            "stroke": "#B0BEC5",
+            "shape": "(H, W)  ví dụ  (3, 3)",
             "idx": "x[i, j]   (hàng i, cột j)",
             "cv": "Ảnh xám, trọng số Dense W[d_out, d_in]",
             "type": "matrix",
@@ -109,8 +109,8 @@ def fig_tensor_evolution():
         {
             "rank": "Bậc 3 (3D Tensor)",
             "name": "Khối 3 chiều",
-            "bg": "#FCF8F2",
-            "stroke": "#FFCC80",
+            "bg": "#FAFAFA",
+            "stroke": "#B0BEC5",
             "shape": "(C, H, W)  hoặc  (H, W, C)",
             "idx": "x[c, h, w]   (kênh c, cao h, rộng w)",
             "cv": "1 ảnh màu RGB (3 kênh), feature map",
@@ -119,8 +119,8 @@ def fig_tensor_evolution():
         {
             "rank": "Bậc 4 (4D Tensor)",
             "name": "Chuỗi khối 4 chiều",
-            "bg": "#F9F5FB",
-            "stroke": "#CE93D8",
+            "bg": "#FAFAFA",
+            "stroke": "#B0BEC5",
             "shape": "(N, C, H, W)  chuẩn NCHW",
             "idx": "x[n, c, h, w]   (ảnh n trong batch)",
             "cv": "Mini-batch nạp vào NPU RK3588",
@@ -158,16 +158,16 @@ def fig_tensor_evolution():
             vals = ["1.2", "-0.5", "3.0", "0.8"]
             for v_idx, val in enumerate(vals):
                 bx = vx_start + v_idx * box_sz
-                rect(f, bx, vy, box_sz, box_sz, fill="#E8F5E9", stroke="#2E7D32", sw=1.0)
-                f.text(bx + box_sz / 2, vy + box_sz / 2, val, size=7.0, weight=700, fill="#1B5E20", anchor="middle")
+                rect(f, bx, vy, box_sz, box_sz, fill="#E3F2FD", stroke="#1565C0", sw=1.0)
+                f.text(bx + box_sz / 2, vy + box_sz / 2, val, size=7.0, weight=700, fill="#0D47A1", anchor="middle")
                 f.text(bx + box_sz / 2, vy - 6, f"[{v_idx}]", size=6.5, fill=GRAY, anchor="middle")
             # Trục ngang
-            f.text(cx + col_w / 2, diag_y + 60, "Trục 0 (chiều dài d = 4)", size=7.5, fill="#2E7D32", anchor="middle")
+            f.text(cx + col_w / 2, diag_y + 60, "Trục 0 (chiều dài d = 4)", size=7.5, fill="#1565C0", anchor="middle")
 
         elif c["type"] == "matrix":
             # Lưới 3x3
             mx_start = cx + 54
-            my = diag_y + 8
+            my = diag_y + 10
             sz = 17
             for r in range(3):
                 for col in range(3):
@@ -179,7 +179,7 @@ def fig_tensor_evolution():
             # Nhãn hàng & cột thoáng đãng
             f.text(mx_start - 8, my + sz * 1.5, "Hàng", size=6.8, fill=DARK, anchor="end")
             f.text(mx_start + sz * 1.5, my - 4, "Cột", size=6.8, fill=DARK, anchor="middle")
-            f.text(cx + col_w / 2, diag_y + 68, "Lưới 2D: x[i, j]", size=7.5, fill="#1565C0", weight=700, anchor="middle")
+            f.text(cx + col_w / 2, diag_y + 70, "Lưới 2D: x[i, j]", size=7.5, fill="#1565C0", weight=700, anchor="middle")
 
         elif c["type"] == "3d":
             # 3 lát mặt phẳng (R, G, B)
@@ -187,10 +187,13 @@ def fig_tensor_evolution():
             sl_h = 32
             sl_x = cx + 34
             sl_y = diag_y + 8
-            draw_perspective_slice(f, sl_x, sl_y, sl_w, sl_h, "R", fill="#FFEBEE", stroke="#E53935", dx=11, dy=7)
-            draw_perspective_slice(f, sl_x + 16, sl_y + 9, sl_w, sl_h, "G", fill="#E8F5E9", stroke="#43A047", dx=11, dy=7)
+            draw_perspective_slice(f, sl_x, sl_y, sl_w, sl_h, "", fill="#FFEBEE", stroke="#E53935", dx=11, dy=7)
+            draw_perspective_slice(f, sl_x + 16, sl_y + 9, sl_w, sl_h, "", fill="#E8F5E9", stroke="#43A047", dx=11, dy=7)
             draw_perspective_slice(f, sl_x + 32, sl_y + 18, sl_w, sl_h, "B", fill="#E3F2FD", stroke=BLUE, dx=11, dy=7)
-            f.text(cx + col_w / 2, diag_y + 69, "3 kênh: (C=3, H, W)", size=7.5, fill="#D97706", weight=700, anchor="middle")
+            # Nhãn R, G đặt ở phần mặt trước còn lộ ra, vẽ sau cùng để không bị khối kế bên che
+            f.text(sl_x + 8, sl_y + 7 + sl_h / 2, "R", size=8.5, weight=700, fill=DARK, anchor="middle")
+            f.text(sl_x + 24, sl_y + 16 + sl_h / 2, "G", size=8.5, weight=700, fill=DARK, anchor="middle")
+            f.text(cx + col_w / 2, diag_y + 69, "3 kênh: (C=3, H, W)", size=7.5, fill=DARK, weight=700, anchor="middle")
 
         elif c["type"] == "4d":
             # 3 khối hộp nhỏ xếp theo hàng batch
@@ -200,8 +203,8 @@ def fig_tensor_evolution():
             by_base = diag_y + 15
             for b_i, b_lbl in enumerate(["N=0", "N=1", "..."]):
                 bx = bx_base + b_i * 44
-                draw_perspective_slice(f, bx, by_base, b_w, b_h, b_lbl, fill="#F3E8FF", stroke="#9333EA", dx=9, dy=7)
-            f.text(cx + col_w / 2, diag_y + 69, "Batch N ảnh: x[n, c, h, w]", size=7.5, fill="#7E22CE", weight=700, anchor="middle")
+                draw_perspective_slice(f, bx, by_base, b_w, b_h, b_lbl, fill="#E3F2FD", stroke="#1565C0", dx=9, dy=7)
+            f.text(cx + col_w / 2, diag_y + 69, "Batch N ảnh: x[n, c, h, w]", size=7.5, fill="#1565C0", weight=700, anchor="middle")
 
         # Khối thông số chi tiết (Shape, Index, CV)
         info_y = diag_y + diag_h + 8
@@ -258,8 +261,8 @@ def fig_tensor_slicing():
     w_a = 280
     x_a = 16
     rect(f, x_a, y_top, w_a, p_h, fill="#FBFBFC", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, x_a + 8, y_top + 8, w_a - 16, 26, fill="#EDE7F6", stroke="#B39DDB", sw=0.8, rx=3)
-    f.text(x_a + w_a / 2, y_top + 21, "A. LẤY 1 MẪU TỪ BATCH (4D → 3D)", size=8.2, weight=700, fill="#4A148C", anchor="middle")
+    rect(f, x_a + 8, y_top + 8, w_a - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(x_a + w_a / 2, y_top + 21, "A. LẤY 1 MẪU TỪ BATCH (4D → 3D)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa Panel A
     diag_ya = y_top + 42
@@ -268,15 +271,15 @@ def fig_tensor_slicing():
     # Batch 3 khối, khối 0 được highlight
     for bi in range(3):
         bx = x_a + 22 + bi * 46
-        by = diag_ya + 22
-        fill_b = "#E1BEE7" if bi == 0 else "#F3E5F5"
-        stroke_b = "#8E24AA" if bi == 0 else "#CE93D8"
+        by = diag_ya + 32
+        fill_b = "#BBDEFB" if bi == 0 else "#E3F2FD"
+        stroke_b = "#1565C0" if bi == 0 else "#90CAF9"
         draw_perspective_slice(f, bx, by, 34, 34, f"i={bi}", fill=fill_b, stroke=stroke_b, dx=10, dy=8)
-    f.text(x_a + 39, diag_ya + 14, "Trích ảnh i=0", size=7.2, weight=700, fill="#8E24AA", anchor="middle")
+    f.text(x_a + 39, diag_ya + 24, "Trích ảnh i=0", size=7.2, weight=700, fill="#1565C0", anchor="middle")
 
     # Mũi tên kéo ra khối 3D riêng
-    f.a(f'<path d="M {x_a + 175} {diag_ya + 45} L {x_a + 205} {diag_ya + 45}" stroke="#8E24AA" stroke-width="1.5" marker-end="url(#{f.marker(BLUE, THIN)})"/>')
-    draw_perspective_slice(f, x_a + 215, diag_ya + 22, 34, 34, "3D", fill="#E1BEE7", stroke="#8E24AA", dx=10, dy=8)
+    f.a(f'<path d="M {x_a + 175} {diag_ya + 55} L {x_a + 205} {diag_ya + 55}" stroke="#1565C0" stroke-width="1.5" marker-end="url(#{f.marker(BLUE, THIN)})"/>')
+    draw_perspective_slice(f, x_a + 215, diag_ya + 32, 34, 34, "3D", fill="#BBDEFB", stroke="#1565C0", dx=10, dy=8)
 
     # Code và giải thích Panel A
     f.text(x_a + 12, y_top + 152, "Cú pháp thực hiện:", size=7.5, weight=700, fill=DARK)
@@ -292,8 +295,8 @@ def fig_tensor_slicing():
     w_b = 280
     x_b = x_a + w_a + 12
     rect(f, x_b, y_top, w_b, p_h, fill="#FBFBFC", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, x_b + 8, y_top + 8, w_b - 16, 26, fill="#E8F5E9", stroke="#A5D6A7", sw=0.8, rx=3)
-    f.text(x_b + w_b / 2, y_top + 21, "B. CẮT KÊNH MÀU CHANNEL (3D → 2D)", size=8.2, weight=700, fill="#1B5E20", anchor="middle")
+    rect(f, x_b + 8, y_top + 8, w_b - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(x_b + w_b / 2, y_top + 21, "B. CẮT KÊNH MÀU CHANNEL (3D → 2D)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa Panel B
     diag_yb = y_top + 42
@@ -303,7 +306,7 @@ def fig_tensor_slicing():
     draw_perspective_slice(f, x_b + 20, diag_yb + 16, 40, 38, "R", fill="#FFCDD2", stroke="#C62828", dx=12, dy=8)
     draw_perspective_slice(f, x_b + 55, diag_yb + 24, 40, 38, "G", fill="#E8F5E9", stroke="#388E3C", dx=12, dy=8)
     draw_perspective_slice(f, x_b + 90, diag_yb + 32, 40, 38, "B", fill="#E3F2FD", stroke=BLUE, dx=12, dy=8)
-    f.text(x_b + 38, diag_yb + 13, "Kênh 0 (R)", size=7.2, weight=700, fill="#C62828", anchor="middle")
+    f.text(x_b + 38, diag_yb + 8, "Kênh 0 (R)", size=7.2, weight=700, fill="#C62828", anchor="middle")
 
     # Mũi tên kéo mặt phẳng R ra
     f.a(f'<path d="M {x_b + 160} {diag_yb + 45} L {x_b + 195} {diag_yb + 45}" stroke="#C62828" stroke-width="1.5" marker-end="url(#{f.marker(RED, THIN)})"/>')
@@ -325,8 +328,8 @@ def fig_tensor_slicing():
     w_c = 280
     x_c = x_b + w_b + 12
     rect(f, x_c, y_top, w_c, p_h, fill="#FBFBFC", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, x_c + 8, y_top + 8, w_c - 16, 26, fill="#E3F2FD", stroke="#90CAF9", sw=0.8, rx=3)
-    f.text(x_c + w_c / 2, y_top + 21, "C. TRÍCH PIXEL ĐA KÊNH (3D → 1D)", size=8.2, weight=700, fill="#0D47A1", anchor="middle")
+    rect(f, x_c + 8, y_top + 8, w_c - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(x_c + w_c / 2, y_top + 21, "C. TRÍCH PIXEL ĐA KÊNH (3D → 1D)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa Panel C
     diag_yc = y_top + 42
@@ -374,7 +377,7 @@ def fig_tensor_slicing():
 # HÌNH 3: BỐ CỤC BỘ NHỚ NCHW VS NHWC (tk-3)
 # ==============================================================================
 def fig_memory_layout_nchw_nhwc():
-    H = 415
+    H = 405
     f = Fig(W, H)
     tier(f, "T2 chung")
 
@@ -383,13 +386,13 @@ def fig_memory_layout_nchw_nhwc():
 
     y_top = 58
     pw = 428
-    ph = 320
+    ph = 310
 
     # Panel A: NCHW (Planar)
     xa = 16
     rect(f, xa, y_top, pw, ph, fill="#FCFDFD", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, xa + 8, y_top + 8, pw - 16, 26, fill="#E3F2FD", stroke="#90CAF9", sw=0.8, rx=3)
-    f.text(xa + pw / 2, y_top + 21, "A. NCHW (PLANAR / KÊNH TRƯỚC - PYTORCH CHUẨN)", size=8.2, weight=700, fill="#0D47A1", anchor="middle")
+    rect(f, xa + 8, y_top + 8, pw - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(xa + pw / 2, y_top + 21, "A. NCHW (PLANAR / KÊNH TRƯỚC - PYTORCH CHUẨN)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa Tensor 3D logic mẫu (C=3, H=2, W=2) trong Panel A
     diag_ya = y_top + 40
@@ -401,7 +404,7 @@ def fig_memory_layout_nchw_nhwc():
     draw_perspective_slice(f, xa + 76, diag_ya + 20, 38, 34, "B", fill="#BBDEFB", stroke="#1E88E5", dx=10, dy=7)
 
     # Giải thích logic NCHW bên cạnh đồ họa
-    f.text(xa + 130, diag_ya + 18, "Tensor 3D: C=3, H=2, W=2 (12 phần tử)", size=7.5, weight=700, fill="#1565C0")
+    f.text(xa + 130, diag_ya + 18, "Tensor 3D: C=3, H=2, W=2 (12 phần tử)", size=7.5, weight=700, fill=DARK)
     f.text(xa + 130, diag_ya + 34, "• Trật tự: Hết kênh Đỏ (R) → Kênh Lục (G) → Kênh Lam (B)", size=6.8, fill=DARK)
     f.text(xa + 130, diag_ya + 48, "• Lưu theo từng khối mặt phẳng 2D (Planar format).", size=6.8, fill=DARK)
 
@@ -443,7 +446,7 @@ def fig_memory_layout_nchw_nhwc():
 
     # Bảng Stride và Công thức NCHW
     box_info_y = ram_ya + 54
-    rect(f, xa + 10, box_info_y, pw - 20, 114, fill="#FFFFFF", stroke="#ECEFF1", sw=0.9, rx=4)
+    rect(f, xa + 10, box_info_y, pw - 20, 118, fill="#FFFFFF", stroke="#ECEFF1", sw=0.9, rx=4)
 
     f.text(xa + 18, box_info_y + 14, "Cơ chế Stride và công thức ánh xạ địa chỉ:", size=7.8, weight=700, fill="#263238")
 
@@ -474,8 +477,8 @@ def fig_memory_layout_nchw_nhwc():
     # Panel B: NHWC / Channels-Last
     xb = 456
     rect(f, xb, y_top, pw, ph, fill="#FCFDFD", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, xb + 8, y_top + 8, pw - 16, 26, fill="#FFF3E0", stroke="#FFE082", sw=0.8, rx=3)
-    f.text(xb + pw / 2, y_top + 21, "B. NHWC / CHANNELS-LAST (INTERLEAVED - RKNN NPU MẶC ĐỊNH)", size=8.2, weight=700, fill="#E65100", anchor="middle")
+    rect(f, xb + 8, y_top + 8, pw - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(xb + pw / 2, y_top + 21, "B. NHWC / CHANNELS-LAST (INTERLEAVED - RKNN API MẶC ĐỊNH)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa Tensor 3D logic mẫu trong Panel B
     diag_yb = y_top + 40
@@ -487,7 +490,7 @@ def fig_memory_layout_nchw_nhwc():
     draw_perspective_slice(f, xb + 76, diag_yb + 20, 38, 34, "B", fill="#BBDEFB", stroke="#1E88E5", dx=10, dy=7)
 
     # Giải thích logic NHWC bên cạnh đồ họa
-    f.text(xb + 130, diag_yb + 18, "Tensor 3D: C=3, H=2, W=2 (12 phần tử)", size=7.5, weight=700, fill="#E65100")
+    f.text(xb + 130, diag_yb + 18, "Tensor 3D: C=3, H=2, W=2 (12 phần tử)", size=7.5, weight=700, fill=DARK)
     f.text(xb + 130, diag_yb + 34, "• Trật tự: Pixel (0,0) → Pixel (0,1) → Pixel (1,0) → Pixel (1,1)", size=6.8, fill=DARK)
     f.text(xb + 130, diag_yb + 48, "• Lưu xen kẽ các kênh của cùng 1 pixel (Interleaved format).", size=6.8, fill=DARK)
 
@@ -518,7 +521,7 @@ def fig_memory_layout_nchw_nhwc():
     f.text(xb + pw / 2, ram_ya + 44, "Chỉ số offset phần tử trong bộ nhớ RAM tuyến tính (0 đến 11)", size=6.8, fill=GRAY, anchor="middle")
 
     # Bảng Stride và Công thức NHWC
-    rect(f, xb + 10, box_info_y, pw - 20, 114, fill="#FFFFFF", stroke="#ECEFF1", sw=0.9, rx=4)
+    rect(f, xb + 10, box_info_y, pw - 20, 118, fill="#FFFFFF", stroke="#ECEFF1", sw=0.9, rx=4)
     f.text(xb + 18, box_info_y + 14, "Cơ chế Stride và công thức ánh xạ địa chỉ:", size=7.8, weight=700, fill="#263238")
 
     # Stride box
@@ -542,10 +545,10 @@ def fig_memory_layout_nchw_nhwc():
     ], size=7.2)
 
     # Đánh giá ưu nhược điểm
-    f.text(xb + 18, box_info_y + 96, "• Channel là chiều dày nhất (stride=1). Tối ưu NPU đọc burst pixel.", size=6.8, fill="#2E7D32")
-    f.text(xb + 18, box_info_y + 108, "• Chuẩn mặc định của RKNN-Toolkit2 (input_is_nchw=False mặc định là NHWC).", size=6.8, fill="#E65100")
+    f.text(xb + 18, box_info_y + 96, "• Channel là chiều có stride=1: 3 kênh của cùng 1 pixel nằm liền nhau trong RAM.", size=6.8, fill="#2E7D32")
+    f.text(xb + 18, box_info_y + 108, "• Mặc định NHWC: init_runtime(data_format), input_is_nchw (TF/TFLite).", size=6.8, fill=DARK)
 
-    source(f, H - 22, "Nguồn: [T2 PTMF] PyTorch Channels Last Memory Format; [T1 RKNNAPI pdf 11, pdf 17]. Stride định nghĩa bước nhảy phần tử giữa các chỉ số.")
+    source(f, y_top + ph + 3, "Nguồn: [T2 PTMF] PyTorch Channels Last Memory Format; [T1 RKNNAPI pdf 11, pdf 12, pdf 17]. Stride định nghĩa bước nhảy phần tử giữa các chỉ số.")
     return f
 
 
@@ -591,7 +594,6 @@ def fig_bit_structure_datatypes():
             "range": "Max: 3.40 × 10³⁸",
             "prec": "Chính xác cao (~7 chữ số)",
             "npu": "Chuẩn gốc huấn luyện",
-            "color": "#1565C0",
         },
         {
             "name": "FP16",
@@ -604,8 +606,7 @@ def fig_bit_structure_datatypes():
             "unused_w": 230,
             "range": "Max: 6.55 × 10⁴ (dải hẹp)",
             "prec": "Trung bình (~3-4 chữ số)",
-            "npu": "Tiết kiệm 50% RAM, cần loss-scaling",
-            "color": "#E65100",
+            "npu": "Tiết kiệm 50% RAM (suy luận), cần loss-scaling",
         },
         {
             "name": "BFLOAT16",
@@ -618,8 +619,7 @@ def fig_bit_structure_datatypes():
             "unused_w": 230,
             "range": "Max: 3.38 × 10³⁸ (như FP32)",
             "prec": "Thấp hơn FP16 (~2-3 chữ số)",
-            "npu": "Tiết kiệm 50% RAM, dải rộng như FP32",
-            "color": "#7B1FA2",
+            "npu": "Tiết kiệm 50% RAM (suy luận), dải rộng như FP32",
         },
         {
             "name": "INT8",
@@ -635,7 +635,6 @@ def fig_bit_structure_datatypes():
             "range": "[-128, 127] hoặc [0, 255]",
             "prec": "Lượng tử hóa rời rạc",
             "npu": "Tiết kiệm 75% RAM, tối ưu NPU RK3588",
-            "color": "#2E7D32",
         },
     ]
 
@@ -647,7 +646,7 @@ def fig_bit_structure_datatypes():
 
         # Tên kiểu và dung lượng byte
         rect(f, 16, ry, 86, row_h, fill="#FAFAFA", stroke="#CFD8DC", sw=0.8, rx=3)
-        f.text(59, ry + 12, t["name"], size=8.5, weight=700, fill=t["color"], anchor="middle")
+        f.text(59, ry + 12, t["name"], size=8.5, weight=700, fill=DARK, anchor="middle")
         f.text(59, ry + 25, t["bytes"], size=6.8, fill=GRAY, anchor="middle")
 
         # Vẽ thanh ghi bit
@@ -690,8 +689,8 @@ def fig_bit_structure_datatypes():
 
     # Khối 1: Đánh đổi dải động và độ chính xác
     rect(f, 16, bot_y, box_w, 88, fill="#FCFDFD", stroke="#CFD8DC", sw=0.9, rx=4)
-    rect(f, 22, bot_y + 6, box_w - 12, 18, fill="#EDE7F6", stroke="#D1C4E9", sw=0.6, rx=2)
-    f.text(22 + (box_w - 12) / 2, bot_y + 15, "1. ĐÁNH ĐỔI GIỮA DẢI ĐỘNG (EXPONENT) VÀ ĐỘ CHÍNH XÁC (MANTISSA)", size=7.2, weight=700, fill="#512DA8", anchor="middle")
+    rect(f, 22, bot_y + 6, box_w - 12, 18, fill="#ECEFF1", stroke="#CFD8DC", sw=0.6, rx=2)
+    f.text(22 + (box_w - 12) / 2, bot_y + 15, "1. ĐÁNH ĐỔI GIỮA DẢI ĐỘNG (EXPONENT) VÀ ĐỘ CHÍNH XÁC (MANTISSA)", size=7.2, weight=700, fill=DARK, anchor="middle")
 
     f.text(26, bot_y + 36, "• BFLOAT16 giữ trọn 8 bit Exponent như FP32 nên giữ nguyên dải động (~10³⁸),", size=6.8, fill=DARK)
     f.text(26, bot_y + 49, "  giúp quá trình training hội tụ ổn định không cần sửa thuật toán loss-scaling.", size=6.8, fill=DARK)
@@ -700,15 +699,15 @@ def fig_bit_structure_datatypes():
 
     # Khối 2: Tối ưu trên phần cứng NPU
     rect(f, 456, bot_y, box_w, 88, fill="#FCFDFD", stroke="#CFD8DC", sw=0.9, rx=4)
-    rect(f, 462, bot_y + 6, box_w - 12, 18, fill="#E8F5E9", stroke="#C8E6C9", sw=0.6, rx=2)
-    f.text(462 + (box_w - 12) / 2, bot_y + 15, "2. Ý NGHĨA KHI TRIỂN KHAI TRÊN NPU RK3588 (6 TOPS INT8)", size=7.2, weight=700, fill="#1B5E20", anchor="middle")
+    rect(f, 462, bot_y + 6, box_w - 12, 18, fill="#ECEFF1", stroke="#CFD8DC", sw=0.6, rx=2)
+    f.text(462 + (box_w - 12) / 2, bot_y + 15, "2. Ý NGHĨA KHI TRIỂN KHAI TRÊN NPU RK3588 (6 TOPS INT8)", size=7.2, weight=700, fill=DARK, anchor="middle")
 
     f.text(466, bot_y + 36, "• INT8 (1 byte): Giảm tải 4× băng thông DRAM và SRAM cache so với FP32.", size=6.8, fill=DARK)
     f.text(466, bot_y + 49, "• Phép cộng INT8 tiết kiệm năng lượng 30× và diện tích silicon 116× so với FP32.", size=6.8, fill=DARK)
-    f.text(466, bot_y + 62, "• NPU RK3588 tối ưu hóa tuyệt đối cho INT8 (đạt đỉnh 6 TOPS với 3 lõi NPU),", size=6.8, fill="#1B5E20")
-    f.text(466, bot_y + 75, "  trong khi FP16/BF16 đạt khoảng 3 TFLOPS và tiêu thụ điện năng/băng thông lớn hơn.", size=6.8, fill=DARK)
+    f.text(466, bot_y + 62, "• NPU RK3588 tối ưu hóa tuyệt đối cho INT8 (đạt đỉnh 6 TOPS với 3 lõi NPU),", size=6.8, fill=DARK)
+    f.text(466, bot_y + 75, "  trong khi FP16/BF16 được hỗ trợ nhưng tốn băng thông gấp đôi (datasheet không nêu thông lượng).", size=6.8, fill=DARK)
 
-    source(f, bot_y + 94, "Nguồn: [T2 BF16 tr.4, Table 1], [T2 MIXP tr.1-3], [T2 NAGEL tr.5, Fig. 3], [T2 GHOLAMI pdf 12-13]. Tự tính: 1 byte = 8 bit.")
+    source(f, bot_y + 94, "Nguồn: [T2 BF16 tr.4, Table 1], [T2 MIXP tr.1-3], [T2 GHOLAMI pdf 12-13], [T1 RK3588 Datasheet V0.1 §1.2.6]. Tự tính: 1 byte = 8 bit.")
     return f
 
 
@@ -730,8 +729,8 @@ def fig_channel_nature_rgb_vs_feature_map():
     wa = 376
     xa = 16
     rect(f, xa, y_top, wa, ph, fill="#FCFDFD", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, xa + 8, y_top + 8, wa - 16, 26, fill="#E3F2FD", stroke="#90CAF9", sw=0.8, rx=3)
-    f.text(xa + wa / 2, y_top + 21, "A. KÊNH MÀU QUANG HỌC VẬT LÝ (INPUT RGB)", size=8.2, weight=700, fill="#0D47A1", anchor="middle")
+    rect(f, xa + 8, y_top + 8, wa - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(xa + wa / 2, y_top + 21, "A. KÊNH MÀU QUANG HỌC VẬT LÝ (INPUT RGB)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa 3 lát cắt RGB (R, G, B)
     diag_ya = y_top + 42
@@ -752,7 +751,7 @@ def fig_channel_nature_rgb_vs_feature_map():
     draw_perspective_slice(f, sl_x + 72, sl_y + 24, sl_w, sl_h, "B", fill="#BBDEFB", stroke="#1E88E5", dx=14, dy=dy)
 
     # Nhãn bên phải của đồ họa
-    f.text(xa + 205, diag_ya + 22, "Shape ảnh gốc: (C=3, H, W)", size=7.8, weight=700, fill="#1565C0")
+    f.text(xa + 205, diag_ya + 22, "Shape ảnh gốc: (C=3, H, W)", size=7.8, weight=700, fill=DARK)
     f.text(xa + 205, diag_ya + 38, "• R: Kênh Đỏ (Red)", size=7.0, fill="#C62828", weight=700)
     f.text(xa + 205, diag_ya + 52, "• G: Kênh Lục (Green)", size=7.0, fill="#2E7D32", weight=700)
     f.text(xa + 205, diag_ya + 66, "• B: Kênh Lam (Blue)", size=7.0, fill="#1565C0", weight=700)
@@ -765,38 +764,38 @@ def fig_channel_nature_rgb_vs_feature_map():
     f.text(xa + 18, info_ya + 34, "• Đo cường độ bức xạ ánh sáng trên 3 dải bước sóng quang học.", size=7.0, fill=DARK)
     f.text(xa + 18, info_ya + 48, "• Mỗi vị trí (h, w) mang vector 3 phần tử [R, G, B] chỉ màu sắc điểm ảnh.", size=7.0, fill=DARK)
     f.text(xa + 18, info_ya + 62, "• Số channel cố định theo cảm biến camera (3 cho RGB, 1 cho xám).", size=7.0, fill=DARK)
-    f.text(xa + 18, info_ya + 80, "Trích dẫn D2L tr.252:", size=7.0, weight=700, fill="#1565C0")
+    f.text(xa + 18, info_ya + 80, "Trích dẫn D2L tr.252:", size=7.0, weight=700, fill=DARK)
     f.text(xa + 18, info_ya + 96, '"each RGB input image has shape 3 × h × w. We refer to', size=6.8, italic=True, fill="#37474F")
     f.text(xa + 18, info_ya + 108, ' this axis, with a size of 3, as the channel dimension."', size=6.8, italic=True, fill="#37474F")
 
     # Khối giữa: Biến đổi qua Convolution (Middle: w=116, x=400)
     xm = 400
     wm = 100
-    rect(f, xm, y_top + 30, wm, 210, fill="#FFFDE7", stroke="#FFF59D", sw=0.9, rx=4)
-    f.text(xm + wm / 2, y_top + 48, "CÁC LỚP", size=7.5, weight=700, fill="#E65100", anchor="middle")
-    f.text(xm + wm / 2, y_top + 60, "TÍCH CHẬP", size=7.5, weight=700, fill="#E65100", anchor="middle")
-    f.text(xm + wm / 2, y_top + 72, "(CONVOLUTION)", size=6.8, weight=700, fill="#E65100", anchor="middle")
+    rect(f, xm, y_top + 30, wm, 210, fill="#FAFAFA", stroke="#CFD8DC", sw=0.9, rx=4)
+    f.text(xm + wm / 2, y_top + 48, "CÁC LỚP", size=7.5, weight=700, fill=DARK, anchor="middle")
+    f.text(xm + wm / 2, y_top + 60, "TÍCH CHẬP", size=7.5, weight=700, fill=DARK, anchor="middle")
+    f.text(xm + wm / 2, y_top + 72, "(CONVOLUTION)", size=6.8, weight=700, fill=DARK, anchor="middle")
 
     # Mũi tên dẫn hướng chuẩn figlib
-    f.line([(xm + 18, y_top + 98), (xm + wm - 18, y_top + 98)], RED, width=THICK)
+    f.line([(xm + 18, y_top + 98), (xm + wm - 18, y_top + 98)], INK, width=THICK)
     f.text(xm + wm / 2, y_top + 118, "Bộ lọc trượt (Kernels)", size=6.8, fill=DARK, anchor="middle")
     f.text(xm + wm / 2, y_top + 130, "học đặc trưng đa tầng", size=6.8, fill=DARK, anchor="middle")
 
     # Quy luật D2L tr.253
-    rect(f, xm + 6, y_top + 144, wm - 12, 86, fill="#FFFFFF", stroke="#FFF176", sw=0.6, rx=3)
-    f.text(xm + wm / 2, y_top + 158, "Quy luật D2L:", size=6.8, weight=700, fill="#E65100", anchor="middle")
+    rect(f, xm + 6, y_top + 144, wm - 12, 86, fill="#FFFFFF", stroke="#CFD8DC", sw=0.6, rx=3)
+    f.text(xm + wm / 2, y_top + 158, "Quy luật D2L:", size=6.8, weight=700, fill=DARK, anchor="middle")
     f.text(xm + wm / 2, y_top + 172, "Mạng càng sâu:", size=6.8, fill=DARK, anchor="middle")
-    f.text(xm + wm / 2, y_top + 188, "• Channel ↑ (tăng)", size=6.8, weight=700, fill="#2E7D32", anchor="middle")
-    f.text(xm + wm / 2, y_top + 200, " (3 → 64 → 256)", size=6.2, fill="#2E7D32", anchor="middle")
-    f.text(xm + wm / 2, y_top + 214, "• Không gian ↓ (giảm)", size=6.8, weight=700, fill="#C62828", anchor="middle")
-    f.text(xm + wm / 2, y_top + 224, " (H × W thu nhỏ)", size=6.2, fill="#C62828", anchor="middle")
+    f.text(xm + wm / 2, y_top + 188, "• Channel ↑ (tăng)", size=6.8, weight=700, fill=DARK, anchor="middle")
+    f.text(xm + wm / 2, y_top + 200, " (ví dụ: 3 → 64 → 256)", size=6.5, fill=DARK, anchor="middle")
+    f.text(xm + wm / 2, y_top + 214, "• Không gian ↓ (giảm)", size=6.8, weight=700, fill=DARK, anchor="middle")
+    f.text(xm + wm / 2, y_top + 224, " (H × W thu nhỏ)", size=6.5, fill=DARK, anchor="middle")
 
     # Panel B: Kênh đặc trưng ngữ nghĩa (Right: w=376, x=508)
     xb = 508
     wb = 376
     rect(f, xb, y_top, wb, ph, fill="#FCFDFD", stroke="#CFD8DC", sw=1.1, rx=5)
-    rect(f, xb + 8, y_top + 8, wb - 16, 26, fill="#EDE7F6", stroke="#D1C4E9", sw=0.8, rx=3)
-    f.text(xb + wb / 2, y_top + 21, "B. KÊNH ĐẶC TRƯNG NGỮ NGHĨA (FEATURE MAPS)", size=8.2, weight=700, fill="#512DA8", anchor="middle")
+    rect(f, xb + 8, y_top + 8, wb - 16, 26, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(xb + wb / 2, y_top + 21, "B. KÊNH ĐẶC TRƯNG NGỮ NGHĨA (FEATURE MAPS)", size=8.2, weight=700, fill=DARK, anchor="middle")
 
     # Đồ họa các Feature Maps
     diag_yb = y_top + 42
@@ -820,11 +819,11 @@ def fig_channel_nature_rgb_vs_feature_map():
     draw_perspective_slice(f, sl_xb + 78, sl_yb + 24, sl_w2, sl_h2, "255", fill="#9575CD", stroke="#311B92", dx=10, dy=dy2)
 
     # Nhãn bên phải của đồ họa
-    f.text(xb + 196, diag_yb + 22, "Shape tầng sâu: (C=256, H', W')", size=7.8, weight=700, fill="#512DA8")
+    f.text(xb + 196, diag_yb + 22, "Shape tầng sâu: (C=256, H', W')", size=7.8, weight=700, fill=DARK)
     f.text(xb + 196, diag_yb + 38, "• Ch 0: Bản đồ cạnh & góc", size=7.0, fill=DARK)
     f.text(xb + 196, diag_yb + 52, "• Ch 1: Hoa văn, kết cấu bề mặt", size=7.0, fill=DARK)
     f.text(xb + 196, diag_yb + 66, "• Ch 2..k: Hình dạng bộ phận vật thể", size=7.0, fill=DARK)
-    f.text(xb + 196, diag_yb + 80, "• Kích thước H' × W' co nhỏ lại", size=6.8, fill="#512DA8")
+    f.text(xb + 196, diag_yb + 80, "• Kích thước H' × W' co nhỏ lại", size=6.8, fill=GRAY)
 
     # Khối diễn giải bản chất Panel B
     info_yb = diag_yb + 96
@@ -833,11 +832,11 @@ def fig_channel_nature_rgb_vs_feature_map():
     f.text(xb + 18, info_yb + 34, "• Không còn là màu sắc! Là mức độ phản ứng với một đặc trưng cụ thể.", size=7.0, fill=DARK)
     f.text(xb + 18, info_yb + 48, "• Tầng nông học cạnh viền, góc; tầng sâu học bộ phận (bánh xe, khuôn mặt).", size=7.0, fill=DARK)
     f.text(xb + 18, info_yb + 62, "• Số channel được quyết định bởi số bộ lọc (kernels) thiết kế trong kiến trúc.", size=7.0, fill=DARK)
-    f.text(xb + 18, info_yb + 80, "Trích dẫn D2L tr.238:", size=7.0, weight=700, fill="#512DA8")
+    f.text(xb + 18, info_yb + 80, "Trích dẫn D2L tr.238:", size=7.0, weight=700, fill=DARK)
     f.text(xb + 18, info_yb + 96, '"They are also sometimes called feature maps, as each', size=6.8, italic=True, fill="#37474F")
     f.text(xb + 18, info_yb + 108, ' provides a spatialized set of learned features for the subsequent layer."', size=6.8, italic=True, fill="#37474F")
 
-    source(f, H - 22, "Nguồn: [T2 D2L tr.44, tr.135, tr.238, tr.252, tr.253]. Kênh màu đo quang học; Kênh đặc trưng đo mức kích hoạt của thuộc tính học được.")
+    source(f, y_top + ph + 3, "Nguồn: [T2 D2L tr.44, tr.135, tr.238, tr.252, tr.253]. Kênh màu đo quang học; Kênh đặc trưng đo mức kích hoạt của thuộc tính học được.")
     return f
 
 

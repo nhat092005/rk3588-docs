@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 382" width="900" height="382" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="382" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="42" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Phân tầng Đặc trưng (Feature Hierarchy) và Luồng Tensor trong CNN</text>
+<rect x="10" y="64" width="880" height="224" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="24" y="80" font-size="12.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tiến trình phân tầng đặc trưng: Từ điểm ảnh thô đến biểu diễn ngữ nghĩa trừu tượng</text>
+<text x="75" y="100" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Ảnh đầu vào</text>
+<text x="205" y="100" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tầng nông (Stage 1)</text>
+<text x="345" y="100" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Tầng giữa (Stage 3)</text>
+<text x="495" y="100" font-size="11" font-weight="700" fill="#8E24AA" text-anchor="middle" dominant-baseline="central">Tầng sâu (Stage 5)</text>
+<rect x="29.0" y="118" width="92" height="42" rx="4" fill="white" stroke="#1E5BB8" stroke-width="1"/>
+<rect x="65.0" y="123" width="6" height="6" rx="3" fill="#FFCDD2" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="72.0" y="123" width="6" height="6" rx="3" fill="#C8E6C9" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="79.0" y="123" width="6" height="6" rx="3" fill="#BBDEFB" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="65.0" y="130" width="6" height="6" rx="3" fill="#FFCDD2" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="72.0" y="130" width="6" height="6" rx="3" fill="#C8E6C9" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="79.0" y="130" width="6" height="6" rx="3" fill="#BBDEFB" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="65.0" y="137" width="6" height="6" rx="3" fill="#FFCDD2" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="72.0" y="137" width="6" height="6" rx="3" fill="#C8E6C9" stroke="#B0BEC5" stroke-width="0.6"/>
+<rect x="79.0" y="137" width="6" height="6" rx="3" fill="#BBDEFB" stroke="#B0BEC5" stroke-width="0.6"/>
+<text x="75" y="150" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Điểm ảnh RGB thô</text>
+<rect x="156.0" y="118" width="98" height="42" rx="4" fill="white" stroke="#2E7D32" stroke-width="1"/>
+<line x1="170.0" y1="131" x2="184.0" y2="131" stroke="#444444" stroke-width="1.8"/>
+<line x1="194.0" y1="124" x2="194.0" y2="138" stroke="#444444" stroke-width="1.8"/>
+<line x1="204.0" y1="137" x2="216.0" y2="125" stroke="#444444" stroke-width="1.8"/>
+<path d="M226.0 125 L226.0 137 L238.0 137" fill="none" stroke="#444444" stroke-width="1.8"/>
+<text x="205" y="150" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Cạnh biên &amp; Góc nhọn</text>
+<rect x="294.0" y="118" width="102" height="42" rx="4" fill="white" stroke="#FBC02D" stroke-width="1"/>
+<line x1="308.0" y1="124" x2="308.0" y2="138" stroke="#444444" stroke-width="1.2"/>
+<line x1="313.0" y1="124" x2="313.0" y2="138" stroke="#444444" stroke-width="1.2"/>
+<line x1="318.0" y1="124" x2="318.0" y2="138" stroke="#444444" stroke-width="1.2"/>
+<circle cx="336.0" cy="131" r="6" fill="none" stroke="#444444" stroke-width="1.2"/>
+<rect x="352.0" y="125" width="11" height="11" fill="none" stroke="#444444" stroke-width="1.2"/>
+<path d="M371.0 135 Q377.0 125 383.0 135" fill="none" stroke="#444444" stroke-width="1.2"/>
+<text x="345" y="150" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Hoa văn &amp; Vân lưới</text>
+<rect x="442.0" y="118" width="106" height="42" rx="4" fill="white" stroke="#8E24AA" stroke-width="1"/>
+<circle cx="458.0" cy="131" r="4.5" fill="none" stroke="#444444" stroke-width="1.2"/>
+<circle cx="470.0" cy="131" r="4.5" fill="none" stroke="#444444" stroke-width="1.2"/>
+<line x1="462.5" y1="131" x2="465.5" y2="131" stroke="#444444" stroke-width="1.2"/>
+<circle cx="490.0" cy="131" r="7" fill="none" stroke="#444444" stroke-width="1.2"/>
+<circle cx="490.0" cy="131" r="2.5" fill="#444444"/>
+<rect x="509.0" y="125" width="16" height="12" rx="3" fill="none" stroke="#444444" stroke-width="1.2"/>
+<text x="495" y="150" font-size="8.2" font-weight="700" fill="#8E24AA" text-anchor="middle" dominant-baseline="central">Bộ phận vật thể ngữ nghĩa</text>
+<polygon points="46.0,180.0 54.0,174.0 104.0,174.0 96.0,180.0" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.1" opacity="0.8"/>
+<polygon points="96.0,180.0 104.0,174.0 104.0,224.0 96.0,230.0" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.1" opacity="0.6"/>
+<rect x="46.0" y="180.0" width="50" height="50" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.1"/>
+<polygon points="177.0,185.0 193.0,173.0 233.0,173.0 217.0,185.0" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.1" opacity="0.8"/>
+<polygon points="217.0,185.0 233.0,173.0 233.0,213.0 217.0,225.0" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.1" opacity="0.6"/>
+<rect x="177.0" y="185.0" width="40" height="40" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.1"/>
+<polygon points="315.0,190.0 345.0,172.0 375.0,172.0 345.0,190.0" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.1" opacity="0.8"/>
+<polygon points="345.0,190.0 375.0,172.0 375.0,202.0 345.0,220.0" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.1" opacity="0.6"/>
+<rect x="315.0" y="190.0" width="30" height="30" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.1"/>
+<polygon points="458.0,195.0 512.0,169.0 532.0,169.0 478.0,195.0" fill="#F3E5F5" stroke="#8E24AA" stroke-width="1.1" opacity="0.8"/>
+<polygon points="478.0,195.0 532.0,169.0 532.0,189.0 478.0,215.0" fill="#F3E5F5" stroke="#8E24AA" stroke-width="1.1" opacity="0.6"/>
+<rect x="458.0" y="195.0" width="20" height="20" fill="#F3E5F5" stroke="#8E24AA" stroke-width="1.1"/>
+<path d="M110 205 L171 205" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="140.5" y="194" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">s=2</text>
+<path d="M239 205 L309 205" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="274.0" y="194" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">s=4</text>
+<path d="M381 205 L452 205" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="416.5" y="194" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">s=4</text>
+<text x="75" y="248" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">640 × 640 × 3</text>
+<text x="75" y="262" font-size="8.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(Pixel RGB)</text>
+<text x="205" y="248" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">320 × 320 × 64</text>
+<text x="205" y="262" font-size="8.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(RF: 3×3 – 7×7)</text>
+<text x="345" y="248" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">80 × 80 × 256</text>
+<text x="345" y="262" font-size="8.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(RF: 15×15 – 35×35)</text>
+<text x="495" y="248" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">20 × 20 × 1024</text>
+<text x="495" y="262" font-size="8.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(RF: Bao trùm toàn ảnh)</text>
+<path d="M538 205 L572 205" fill="none" stroke="#444444" stroke-width="1.6"/>
+<path d="M572 205 L572 125 L606 125" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M572 205 L572 209 L606 209" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="612" y="98" width="264" height="54" rx="4" fill="#F5F5F5" stroke="#444444" stroke-width="1.2"/>
+<text x="622" y="114" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nhánh Phân loại (Classification Head)</text>
+<text x="622" y="132" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">GAP → Vector [1024] → Dense → Softmax</text>
+<rect x="612" y="168" width="264" height="82" rx="4" fill="#F5F5F5" stroke="#444444" stroke-width="1.2"/>
+<text x="622" y="184" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Nhánh Phát hiện vật thể (YOLO Neck &amp; Head)</text>
+<text x="622" y="202" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Trích xuất đặc trưng đa tỷ lệ P3, P4, P5</text>
+<text x="622" y="216" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Đưa vào PANet/FPN Neck → Detect Head</text>
+<text x="622" y="232" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">→ Dự đoán tọa độ Bounding Box + Phân loại</text>
+<rect x="10" y="296" width="880" height="50" rx="4" fill="white" stroke="#444444" stroke-width="1.1"/>
+<rect x="18" y="302" width="135" height="17" rx="3" fill="#F5F5F5" stroke="#444444" stroke-width="0.8"/>
+<text x="85" y="311" font-size="8.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">KHÔNG GIAN (H × W)</text>
+<text x="165" y="311" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Giảm dần 32× (640 → 20) qua Stride/Pooling để nén tọa độ không gian và mở rộng Receptive Field.</text>
+<rect x="18" y="323" width="135" height="17" rx="3" fill="#F5F5F5" stroke="#444444" stroke-width="0.8"/>
+<text x="85" y="332" font-size="8.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">SỐ LƯỢNG KÊNH (C)</text>
+<text x="165" y="332" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Tăng dần &gt;340× (3 → 1024) theo cấp số nhân để mở rộng không gian biểu diễn ngữ nghĩa vật thể.</text>
+<text x="10" y="368" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 D2L tr.263-265, tr.279]. CNN trừu tượng hóa đặc trưng từ cục bộ hình học sang ngữ nghĩa toàn cục; liên hệ NPU RK3588.</text>
+</svg>

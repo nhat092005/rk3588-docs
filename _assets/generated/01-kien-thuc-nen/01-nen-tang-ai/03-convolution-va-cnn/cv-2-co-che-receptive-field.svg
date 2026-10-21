@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" width="900" height="380" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="380" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="42" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Cơ chế mở rộng Receptive Field (Trường tiếp nhận) qua các tầng CNN</text>
+<rect x="10" y="64" width="880" height="280" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Xếp chồng 2 lớp Conv 3×3: Nơ-ron tầng sâu quan sát toàn bộ vùng ảnh 5×5</text>
+<text x="95.0" y="106" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Layer 0: Ảnh đầu vào 5×5</text>
+<rect x="35" y="116" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="47.0" y="128.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">00</text>
+<rect x="59" y="116" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="71.0" y="128.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">01</text>
+<rect x="83" y="116" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="95.0" y="128.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">02</text>
+<rect x="107" y="116" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="119.0" y="128.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">03</text>
+<rect x="131" y="116" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="143.0" y="128.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">04</text>
+<rect x="35" y="140" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="47.0" y="152.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="59" y="140" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="71.0" y="152.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">11</text>
+<rect x="83" y="140" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="95.0" y="152.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">12</text>
+<rect x="107" y="140" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="119.0" y="152.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">13</text>
+<rect x="131" y="140" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="143.0" y="152.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">14</text>
+<rect x="35" y="164" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="47.0" y="176.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">20</text>
+<rect x="59" y="164" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="71.0" y="176.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">21</text>
+<rect x="83" y="164" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="95.0" y="176.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">22</text>
+<rect x="107" y="164" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="119.0" y="176.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">23</text>
+<rect x="131" y="164" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="143.0" y="176.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">24</text>
+<rect x="35" y="188" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="47.0" y="200.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">30</text>
+<rect x="59" y="188" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="71.0" y="200.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">31</text>
+<rect x="83" y="188" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="95.0" y="200.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">32</text>
+<rect x="107" y="188" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="119.0" y="200.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">33</text>
+<rect x="131" y="188" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="143.0" y="200.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">34</text>
+<rect x="35" y="212" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="47.0" y="224.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">40</text>
+<rect x="59" y="212" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="71.0" y="224.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">41</text>
+<rect x="83" y="212" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="95.0" y="224.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">42</text>
+<rect x="107" y="212" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="119.0" y="224.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">43</text>
+<rect x="131" y="212" width="24" height="24" rx="3" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.2"/>
+<text x="143.0" y="224.0" font-size="9" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">44</text>
+<text x="95.0" y="250" font-size="10" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">RF = 5×5 (25 pixel)</text>
+<path d="M163 176 L199 176" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="184" y="162" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Conv 3×3</text>
+<text x="184" y="190" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Lớp 1</text>
+<text x="258.0" y="106" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Layer 1: Map 3×3</text>
+<rect x="219" y="138" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="232.0" y="151.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m00</text>
+<rect x="245" y="138" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="258.0" y="151.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m01</text>
+<rect x="271" y="138" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="284.0" y="151.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m02</text>
+<rect x="219" y="164" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="232.0" y="177.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m10</text>
+<rect x="245" y="164" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="258.0" y="177.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m11</text>
+<rect x="271" y="164" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="284.0" y="177.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m12</text>
+<rect x="219" y="190" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="232.0" y="203.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m20</text>
+<rect x="245" y="190" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="258.0" y="203.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m21</text>
+<rect x="271" y="190" width="26" height="26" rx="3" fill="#E1BEE7" stroke="#8E24AA" stroke-width="1.2"/>
+<text x="284.0" y="203.0" font-size="9.5" font-weight="400" fill="#4A148C" text-anchor="middle" dominant-baseline="central">m22</text>
+<text x="258.0" y="230" font-size="9.8" font-weight="700" fill="#8E24AA" text-anchor="middle" dominant-baseline="central">Mỗi pixel nhìn 3×3</text>
+<path d="M305 176 L341 176" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="326" y="162" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Conv 3×3</text>
+<text x="326" y="190" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Lớp 2</text>
+<text x="378.0" y="106" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Layer 2: Ra 1×1</text>
+<rect x="361" y="159" width="34" height="34" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="378.0" y="176.0" font-size="13.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">z</text>
+<text x="378.0" y="207" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">RF = 5×5</text>
+<rect x="30" y="268" width="485" height="64" rx="3" fill="#F0F4F8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="42" y="284" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Công thức tích lũy Receptive Field qua từng tầng:</text>
+<text x="42" y="300.0" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Công thức: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">RF_k = RF_{k-1} + (k_l - 1) · s_{prev}</tspan><tspan>  (với stride s = 1)</tspan></text>
+<text x="42" y="314.5" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Tầng 1: </tspan><tspan>1 + (3 - 1) = </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">3 × 3</tspan><tspan>  |  </tspan><tspan font-weight="700">Tầng 2: </tspan><tspan>3 + (3 - 1) = </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">5 × 5 (Bao trùm toàn bộ ảnh gốc)</tspan></text>
+<rect x="530" y="100" width="345" height="232" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="1"/>
+<text x="702" y="118" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Định nghĩa &amp; Quy luật tích lũy:</text>
+<text x="544" y="138" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trích dẫn D2L tr.245: </tspan></text>
+<text x="544" y="157" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  &quot;its receptive field refers to all the elements</tspan></text>
+<text x="544" y="176" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  that may affect the calculation of x during</tspan></text>
+<text x="544" y="195" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  the forward propagation.&quot;</tspan></text>
+<text x="544" y="214" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Bước 1: </tspan><tspan>1 phần tử ở Layer 1 phụ thuộc</tspan></text>
+<text x="544" y="233" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  vào vùng 3×3 của Layer 0.</tspan></text>
+<text x="544" y="252" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Bước 2: </tspan><tspan>1 phần tử </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.6">z</tspan><tspan> ở Layer 2 phụ thuộc</tspan></text>
+<text x="544" y="271" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  vào toàn bộ 3×3 của Layer 1.</tspan></text>
+<text x="544" y="290" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kết luận: </tspan><tspan>Receptive field của </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.6">z</tspan><tspan> trên</tspan></text>
+<text x="544" y="309" font-size="10.6" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  ảnh gốc Layer 0 bao phủ trọn vẹn </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="9.6">5 × 5</tspan><tspan font-weight="700">!</tspan></text>
+<text x="10" y="366" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 D2L tr.245, tr.279]. Xếp chồng hai lớp 3x3 cho cùng receptive field 5x5 nhưng giảm 28% tham số và tăng tính phi tuyến.</text>
+</svg>

@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, Fig, run, source  # noqa: E402
 
-DEFAULT_OUTDIR = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "mang-no-ron"))
+DEFAULT_OUTDIR = os.path.abspath(os.path.join(HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "01-nen-tang-ai", "01-mang-no-ron"))
 
 W = 900
 H = 320
@@ -78,7 +78,7 @@ def fig_neuron_anatomy():
 
     # Tiêu đề cột trọng số
     f.text(140, 97, "Trọng số (w)", size=7.2, weight=700, fill=GRAY, anchor="middle")
-    f.text(140, 109, "(Khớp thần kinh)", size=6.4, fill="#90A4AE", anchor="middle")
+    f.text(140, 109, "(Khớp thần kinh)", size=6.5, fill="#90A4AE", anchor="middle")
 
     # LIÊN KẾT TRỌNG SỐ (Synaptic Connections with Weights on Edges)
     inputs_spec = [
@@ -126,7 +126,7 @@ def fig_neuron_anatomy():
     # NỬA PHẢI: MINH HỌA TÍNH SỐ THỰC TẾ (X: 490 -> 880, W: 390)
     # ==============================================================================
     rect(f, 490, 56, 390, 230, fill="#FFFFFF", stroke="#B0BEC5", sw=1.0, rx=4)
-    f.text(502, 70, "2. MINH HỌA TÍNH SỐ THỰC TẾ (VÍ DỤ TỰ TÍNH TRONG BÀI)", size=8.8, weight=700, fill="#1565C0")
+    f.text(502, 70, "2. MINH HỌA TÍNH SỐ THỰC TẾ (VÍ DỤ TỰ TÍNH TRONG BÀI)", size=8.8, weight=700, fill=DARK)
 
     # Thông số đầu vào
     rect(f, 502, 84, 366, 34, fill="#F5F5F5", stroke="#CFD8DC", sw=0.8, rx=3)
@@ -140,7 +140,7 @@ def fig_neuron_anatomy():
     # Bước 1: Ba tích riêng biệt
     p1_y = 124
     rect(f, 502, p1_y, 366, 42, fill="#FAFAFA", stroke="#E0E0E0", sw=0.8, rx=3)
-    f.text(510, p1_y + 11, "Bước 1: Tính tích từng đặc trưng với trọng số (wᵢ · xᵢ)", size=7.5, weight=700, fill="#0D47A1")
+    f.text(510, p1_y + 11, "Bước 1: Tính tích từng đặc trưng với trọng số (wᵢ · xᵢ)", size=7.5, weight=700, fill=DARK)
 
     item_w = (366 - 20) / 3
     # Tích 1
@@ -158,7 +158,7 @@ def fig_neuron_anatomy():
     # Bước 2: Tổng các tích và cộng bias
     p2_y = 172
     rect(f, 502, p2_y, 366, 42, fill="#FAFAFA", stroke="#E0E0E0", sw=0.8, rx=3)
-    f.text(510, p2_y + 11, "Bước 2: Tính tổng có trọng số rồi cộng bias (wᵀx + b)", size=7.5, weight=700, fill="#0D47A1")
+    f.text(510, p2_y + 11, "Bước 2: Tính tổng có trọng số rồi cộng bias (wᵀx + b)", size=7.5, weight=700, fill=DARK)
     f.rich(510, p2_y + 27, [
         ("Tổng các tích = ", "t"),
         ("0.5 - 2.0 + 0.75 = ", "t"),
@@ -266,29 +266,29 @@ def fig_mlp_architecture():
 
     rect(f, x_in - 42, foot_y, 84, foot_h, fill="#ECEFF1", stroke="#CFD8DC", sw=0.8, rx=4)
     f.text(x_in, foot_y + 11, "0 phép tính", size=6.8, weight=700, fill="#546E7A", anchor="middle")
-    f.text(x_in, foot_y + 22, "(Không tính lớp)", size=6.2, italic=True, fill="#90A4AE", anchor="middle")
+    f.text(x_in, foot_y + 22, "(Không tính lớp)", size=6.5, italic=True, fill="#90A4AE", anchor="middle")
 
     rect(f, x_hid - 50, foot_y, 100, foot_h, fill="#FFE0B2", stroke="#FFB74D", sw=0.8, rx=4)
     f.text(x_hid, foot_y + 11, "Lớp tính toán 1", size=6.8, weight=700, fill="#E65100", anchor="middle")
-    f.text(x_hid, foot_y + 22, "(Lớp ẩn - 5 units)", size=6.2, italic=True, fill="#FB8C00", anchor="middle")
+    f.text(x_hid, foot_y + 22, "(Lớp ẩn - 5 units)", size=6.5, italic=True, fill="#FB8C00", anchor="middle")
 
     rect(f, x_out - 50, foot_y, 100, foot_h, fill="#C8E6C9", stroke="#81C784", sw=0.8, rx=4)
     f.text(x_out, foot_y + 11, "Lớp tính toán 2", size=6.8, weight=700, fill="#1B5E20", anchor="middle")
-    f.text(x_out, foot_y + 22, "(Lớp ra - 3 units)", size=6.2, italic=True, fill="#43A047", anchor="middle")
+    f.text(x_out, foot_y + 22, "(Lớp ra - 3 units)", size=6.5, italic=True, fill="#43A047", anchor="middle")
 
     # ==============================================================================
     # NỬA PHẢI: BẢN CHẤT KIẾN TRÚC & QUY TẮC ĐẾM LỚP
     # ==============================================================================
     rect(f, 490, box_y, 390, box_h, fill="#FFFFFF", stroke="#B0BEC5", sw=1.0, rx=4)
-    f.text(502, 70, "2. BẢN CHẤT KIẾN TRÚC & QUY TẮC ĐẾM LỚP", size=8.5, weight=700, fill="#1565C0")
+    f.text(502, 70, "2. BẢN CHẤT KIẾN TRÚC & QUY TẮC ĐẾM LỚP", size=8.5, weight=700, fill=DARK)
 
     # Khối 1: Quy tắc đếm lớp kinh điển
     k1_y = 84
     k1_h = 56
-    rect(f, 502, k1_y, 366, k1_h, fill="#FFFDE7", stroke="#FFF59D", sw=0.8, rx=3)
-    f.text(512, k1_y + 12, "★ QUY TẮC ĐẾM SỐ LỚP CỦA MLP (D2L tr.169):", size=7.6, weight=700, fill="#F57F17")
+    rect(f, 502, k1_y, 366, k1_h, fill="#FAFAFA", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(512, k1_y + 12, "★ QUY TẮC ĐẾM SỐ LỚP CỦA MLP (D2L tr.169):", size=7.6, weight=700, fill=DARK)
     f.rich(512, k1_y + 27, [("• ", "b"), ("Mạng có 3 tầng node, nhưng chỉ được tính là ", "t"), ("MẠNG 2 LỚP (2-layer MLP).", "b")], size=7.2, fill=DARK)
-    f.text(512, k1_y + 42, "• Lớp đầu vào không được tính vì không thực hiện phép tính và không có tham số.", size=6.8, fill="#5D4037")
+    f.text(512, k1_y + 42, "• Lớp đầu vào không được tính vì không thực hiện phép tính và không có tham số.", size=6.8, fill=DARK)
 
     # Khối 2: Bảng đối chiếu 3 tầng
     k2_y = 148
@@ -321,11 +321,11 @@ def fig_mlp_architecture():
     # Khối 3: Định nghĩa Fully Connected
     k3_y = 236
     k3_h = 64
-    rect(f, 502, k3_y, 366, k3_h, fill="#E8F5E9", stroke="#A5D6A7", sw=0.8, rx=3)
-    f.text(512, k3_y + 12, "BẢN CHẤT LIÊN KẾT ĐẦY ĐỦ (FULLY CONNECTED):", size=7.5, weight=700, fill="#1B5E20")
-    f.text(512, k3_y + 27, "• Mỗi neuron tầng sau nhận tín hiệu từ toàn bộ neuron ở tầng ngay trước nó.", size=6.8, fill="#2E7D32")
-    f.rich(512, k3_y + 42, [("• Tổng tham số của mạng: ", "t"), ("(4×5 + 5) + (5×3 + 3) = 25 + 18 = 43 tham số.", "b")], size=7.0, fill="#1B5E20")
-    f.text(512, k3_y + 54, "  (20 trọng số + 5 bias lớp ẩn; 15 trọng số + 3 bias lớp ra).", size=6.4, italic=True, fill="#388E3C")
+    rect(f, 502, k3_y, 366, k3_h, fill="#FAFAFA", stroke="#CFD8DC", sw=0.8, rx=3)
+    f.text(512, k3_y + 12, "BẢN CHẤT LIÊN KẾT ĐẦY ĐỦ (FULLY CONNECTED):", size=7.5, weight=700, fill=DARK)
+    f.text(512, k3_y + 27, "• Mỗi neuron tầng sau nhận tín hiệu từ toàn bộ neuron ở tầng ngay trước nó.", size=6.8, fill=DARK)
+    f.rich(512, k3_y + 42, [("• Tổng tham số của mạng: ", "t"), ("(4×5 + 5) + (5×3 + 3) = 25 + 18 = 43 tham số.", "b")], size=7.0, fill=DARK)
+    f.text(512, k3_y + 54, "  (20 trọng số + 5 bias lớp ẩn; 15 trọng số + 3 bias lớp ra).", size=6.5, italic=True, fill=DARK)
 
     source(f, 320, "Nguồn: Dive into Deep Learning (D2L 2023, tr. 167, 169 - Fig. 5.1.1).")
     return f
@@ -422,19 +422,19 @@ def fig_forward_pass_example():
     rect(f, x_hid - 42, cy_in1 - 21, 84, 42, fill="#F8FAFC", stroke="#94A3B8", sw=1.2, dashed=True, rx=6)
     f.text(x_hid, cy_in1 - 7, "z₁ = -1.0", size=7.2, weight=700, fill="#64748B", anchor="middle")
     f.rich(x_hid, cy_in1 + 8, [("h₁ = ", "t"), ("0.0", "b")], size=8.0, fill="#DC2626", anchor="middle")
-    f.text(x_hid, cy_in1 + 28, "(ReLU triệt tiêu)", size=6.0, weight=700, fill="#DC2626", anchor="middle")
+    f.text(x_hid, cy_in1 + 28, "(ReLU triệt tiêu)", size=6.5, weight=700, fill="#DC2626", anchor="middle")
 
     # Node ẩn 2: z2 = 1.5 -> h2 = 1.5 (kích hoạt)
     rect(f, x_hid - 42, cy_in2 - 21, 84, 42, fill="#F5F3FF", stroke="#7C3AED", sw=1.5, rx=6)
     f.text(x_hid, cy_in2 - 7, "z₂ = +1.5", size=7.2, weight=700, fill="#6D28D9", anchor="middle")
     f.rich(x_hid, cy_in2 + 8, [("h₂ = ", "t"), ("1.5", "b")], size=8.0, fill="#7C3AED", anchor="middle")
-    f.text(x_hid, cy_in2 + 28, "(kích hoạt > 0)", size=6.0, weight=700, fill="#16A34A", anchor="middle")
+    f.text(x_hid, cy_in2 + 28, "(kích hoạt > 0)", size=6.5, weight=700, fill="#16A34A", anchor="middle")
 
     # 5. Vẽ Node Lớp Đầu Ra
     rect(f, x_out - 40, y_out - 23, 80, 46, fill="#FFF7ED", stroke="#EA580C", sw=1.6, rx=8)
     f.text(x_out, y_out - 10, "o = W⁽²⁾h", size=7.2, weight=700, fill="#9A3412", anchor="middle")
     f.text(x_out, y_out + 8, "= 3.0", size=11.0, weight=700, fill="#EA580C", anchor="middle")
-    f.text(x_out, y_out + 31, "(kết quả mạng)", size=6.2, fill="#9A3412", anchor="middle")
+    f.text(x_out, y_out + 31, "(kết quả mạng)", size=6.5, fill="#9A3412", anchor="middle")
 
     # Khung ghi chú chân bên trái
     rect(f, 30, 262, 435, 42, fill="#F1F5F9", stroke="#CBD5E1", sw=0.8, rx=3)

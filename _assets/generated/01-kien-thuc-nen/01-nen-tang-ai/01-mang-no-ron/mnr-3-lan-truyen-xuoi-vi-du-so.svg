@@ -37,15 +37,15 @@
 <rect x="194" y="117" width="84" height="42" rx="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="5 3"/>
 <text x="236" y="131" font-size="7.2" font-weight="700" fill="#64748B" text-anchor="middle" dominant-baseline="central">z₁ = -1.0</text>
 <text x="236" y="146" font-size="8.0" fill="#DC2626" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>h₁ = </tspan><tspan font-weight="700">0.0</tspan></text>
-<text x="236" y="166" font-size="6.0" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(ReLU triệt tiêu)</text>
+<text x="236" y="166" font-size="6.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(ReLU triệt tiêu)</text>
 <rect x="194" y="195" width="84" height="42" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
 <text x="236" y="209" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="middle" dominant-baseline="central">z₂ = +1.5</text>
 <text x="236" y="224" font-size="8.0" fill="#7C3AED" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan>h₂ = </tspan><tspan font-weight="700">1.5</tspan></text>
-<text x="236" y="244" font-size="6.0" font-weight="700" fill="#16A34A" text-anchor="middle" dominant-baseline="central">(kích hoạt &gt; 0)</text>
+<text x="236" y="244" font-size="6.5" font-weight="700" fill="#16A34A" text-anchor="middle" dominant-baseline="central">(kích hoạt &gt; 0)</text>
 <rect x="375" y="154" width="80" height="46" rx="8" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.6"/>
 <text x="415" y="167" font-size="7.2" font-weight="700" fill="#9A3412" text-anchor="middle" dominant-baseline="central">o = W⁽²⁾h</text>
 <text x="415" y="185" font-size="11.0" font-weight="700" fill="#EA580C" text-anchor="middle" dominant-baseline="central">= 3.0</text>
-<text x="415" y="208" font-size="6.2" font-weight="400" fill="#9A3412" text-anchor="middle" dominant-baseline="central">(kết quả mạng)</text>
+<text x="415" y="208" font-size="6.5" font-weight="400" fill="#9A3412" text-anchor="middle" dominant-baseline="central">(kết quả mạng)</text>
 <rect x="30" y="262" width="435" height="42" rx="3" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
 <text x="38" y="274" font-size="6.6" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Bản chất: ReLU cắt cụt phần âm (z₁ = -1 &lt; 0 ⇒ h₁ = 0), làm tắt hoàn toàn nhánh ẩn 1.</text>
 <text x="38" y="290" font-size="6.6" fill="#1E293B" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Toàn bộ kết quả ra phụ thuộc nhánh ẩn 2: </tspan><tspan font-weight="700">o = 1·(0) + 2·(1.5) = 0 + 3.0 = 3.0.</tspan></text>

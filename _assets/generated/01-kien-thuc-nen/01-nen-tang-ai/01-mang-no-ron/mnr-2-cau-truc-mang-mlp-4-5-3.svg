@@ -74,19 +74,19 @@
 <text x="385" y="222" font-size="8.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">o₃</text>
 <rect x="33" y="265" width="84" height="32" rx="4" fill="#ECEFF1" stroke="#CFD8DC" stroke-width="0.8"/>
 <text x="75" y="276" font-size="6.8" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">0 phép tính</text>
-<text x="75" y="287" font-size="6.2" font-weight="400" fill="#90A4AE" text-anchor="middle" dominant-baseline="central" font-style="italic">(Không tính lớp)</text>
+<text x="75" y="287" font-size="6.5" font-weight="400" fill="#90A4AE" text-anchor="middle" dominant-baseline="central" font-style="italic">(Không tính lớp)</text>
 <rect x="180" y="265" width="100" height="32" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="0.8"/>
 <text x="230" y="276" font-size="6.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Lớp tính toán 1</text>
-<text x="230" y="287" font-size="6.2" font-weight="400" fill="#FB8C00" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ẩn - 5 units)</text>
+<text x="230" y="287" font-size="6.5" font-weight="400" fill="#FB8C00" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ẩn - 5 units)</text>
 <rect x="335" y="265" width="100" height="32" rx="4" fill="#C8E6C9" stroke="#81C784" stroke-width="0.8"/>
 <text x="385" y="276" font-size="6.8" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">Lớp tính toán 2</text>
-<text x="385" y="287" font-size="6.2" font-weight="400" fill="#43A047" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ra - 3 units)</text>
+<text x="385" y="287" font-size="6.5" font-weight="400" fill="#43A047" text-anchor="middle" dominant-baseline="central" font-style="italic">(Lớp ra - 3 units)</text>
 <rect x="490" y="56" width="390" height="254" rx="4" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="1.0"/>
-<text x="502" y="70" font-size="8.5" font-weight="700" fill="#1565C0" text-anchor="start" dominant-baseline="central">2. BẢN CHẤT KIẾN TRÚC &amp; QUY TẮC ĐẾM LỚP</text>
-<rect x="502" y="84" width="366" height="56" rx="3" fill="#FFFDE7" stroke="#FFF59D" stroke-width="0.8"/>
-<text x="512" y="96" font-size="7.6" font-weight="700" fill="#F57F17" text-anchor="start" dominant-baseline="central">★ QUY TẮC ĐẾM SỐ LỚP CỦA MLP (D2L tr.169):</text>
+<text x="502" y="70" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. BẢN CHẤT KIẾN TRÚC &amp; QUY TẮC ĐẾM LỚP</text>
+<rect x="502" y="84" width="366" height="56" rx="3" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="512" y="96" font-size="7.6" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">★ QUY TẮC ĐẾM SỐ LỚP CỦA MLP (D2L tr.169):</text>
 <text x="512" y="111" font-size="7.2" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• </tspan><tspan>Mạng có 3 tầng node, nhưng chỉ được tính là </tspan><tspan font-weight="700">MẠNG 2 LỚP (2-layer MLP).</tspan></text>
-<text x="512" y="126" font-size="6.8" font-weight="400" fill="#5D4037" text-anchor="start" dominant-baseline="central">• Lớp đầu vào không được tính vì không thực hiện phép tính và không có tham số.</text>
+<text x="512" y="126" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Lớp đầu vào không được tính vì không thực hiện phép tính và không có tham số.</text>
 <rect x="502" y="148" width="366" height="80" rx="3" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="0.8"/>
 <rect x="502" y="148" width="366" height="20" fill="#ECEFF1" rx="3"/>
 <text x="514" y="158" font-size="7.0" font-weight="700" fill="#37474F" text-anchor="start" dominant-baseline="central">Tầng</text>
@@ -104,10 +104,10 @@
 <text x="514" y="218" font-size="7.0" font-weight="700" fill="#1B5E20" text-anchor="start" dominant-baseline="central">Đầu ra</text>
 <text x="566" y="218" font-size="6.8" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Fully connected: </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="5.8">o = W⁽²⁾h + b⁽²⁾</tspan><tspan> (xuất kết quả)</tspan></text>
 <text x="835" y="218" font-size="7.2" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">3</text>
-<rect x="502" y="236" width="366" height="64" rx="3" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="0.8"/>
-<text x="512" y="248" font-size="7.5" font-weight="700" fill="#1B5E20" text-anchor="start" dominant-baseline="central">BẢN CHẤT LIÊN KẾT ĐẦY ĐỦ (FULLY CONNECTED):</text>
-<text x="512" y="263" font-size="6.8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Mỗi neuron tầng sau nhận tín hiệu từ toàn bộ neuron ở tầng ngay trước nó.</text>
-<text x="512" y="278" font-size="7.0" fill="#1B5E20" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Tổng tham số của mạng: </tspan><tspan font-weight="700">(4×5 + 5) + (5×3 + 3) = 25 + 18 = 43 tham số.</tspan></text>
-<text x="512" y="290" font-size="6.4" font-weight="400" fill="#388E3C" text-anchor="start" dominant-baseline="central" font-style="italic">  (20 trọng số + 5 bias lớp ẩn; 15 trọng số + 3 bias lớp ra).</text>
+<rect x="502" y="236" width="366" height="64" rx="3" fill="#FAFAFA" stroke="#CFD8DC" stroke-width="0.8"/>
+<text x="512" y="248" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">BẢN CHẤT LIÊN KẾT ĐẦY ĐỦ (FULLY CONNECTED):</text>
+<text x="512" y="263" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Mỗi neuron tầng sau nhận tín hiệu từ toàn bộ neuron ở tầng ngay trước nó.</text>
+<text x="512" y="278" font-size="7.0" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Tổng tham số của mạng: </tspan><tspan font-weight="700">(4×5 + 5) + (5×3 + 3) = 25 + 18 = 43 tham số.</tspan></text>
+<text x="512" y="290" font-size="6.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">  (20 trọng số + 5 bias lớp ẩn; 15 trọng số + 3 bias lớp ra).</text>
 <text x="10" y="338" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Dive into Deep Learning (D2L 2023, tr. 167, 169 - Fig. 5.1.1).</text>
 </svg>

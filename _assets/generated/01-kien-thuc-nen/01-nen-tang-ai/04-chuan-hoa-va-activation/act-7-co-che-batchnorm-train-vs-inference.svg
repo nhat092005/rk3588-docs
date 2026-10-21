@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 430" width="860" height="430" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="430" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="18" font-size="14.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế toán học BatchNorm: Huấn luyện (Train) vs Suy luận (Inference)</text>
+<rect x="10" y="32" width="415" height="362" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="217.5" y="48" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Panel A: Chế độ Huấn luyện (model.train())</text>
+<rect x="22" y="64" width="115" height="38" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="79" y="79" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Mini-batch X</text>
+<text x="79" y="93" font-size="8.5" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">Kích thước (B, C, H, W)</text>
+<path d="M137 83 L170 83" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<rect x="170" y="64" width="240" height="38" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="290" y="77" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">1. Thống kê tức thời từ Batch:</text>
+<text x="290" y="92" font-size="8.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">μ_B = Σ x_i / m,  σ²_B = Σ (x_i - μ_B)² / m</text>
+<path d="M290 102 L290 118" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="170" y="118" width="240" height="38" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="290" y="131" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">2. Chuẩn hóa về N(0, 1):</text>
+<text x="290" y="146" font-size="9.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x̂_i = (x_i - μ_B) / √(σ²_B + ε)</text>
+<path d="M290 156 L290 172" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="170" y="172" width="240" height="38" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="290" y="185" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">3. Khôi phục biểu diễn (Scale &amp; Shift):</text>
+<text x="290" y="200" font-size="8.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">y_i = γ · x̂_i + β  (γ, β là tham số học)</text>
+<path d="M290 210 L290 226" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="225" y="226" width="130" height="30" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="290" y="241" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu ra huấn luyện Y</text>
+<rect x="22" y="268" width="388" height="116" rx="4" fill="#FAFAFA" stroke="#B0BEC5" stroke-width="1.2"/>
+<text x="32" y="283" font-size="9.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế cập nhật trạng thái tích lũy (Running Stats EMA):</text>
+<text x="32" y="299" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• μ_run ← (1 - η) · μ_run + η · μ_B  (hệ số động lượng η = 0.1)</text>
+<text x="32" y="315" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• σ²_run ← (1 - η) · σ²_run + η · [m/(m-1)] · σ²_B  (hiệu chỉnh Bessel)</text>
+<text x="32" y="331" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Bộ đệm non-trainable: Không tính gradient lan truyền ngược.</text>
+<text x="32" y="347" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Cung cấp giá trị thống kê cố định phục vụ giai đoạn suy luận.</text>
+<text x="32" y="363" font-size="8.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• Lưu trữ trực tiếp trong checkpoint (.pt / .onnx).</text>
+<path d="M 410,83 L 418,83 L 418,260 L 370,260 L 370,267" fill="none" stroke="#444444" stroke-width="1.2"/>
+<polygon points="370,267 367,261 373,261" fill="#444444"/>
+<rect x="435" y="32" width="415" height="362" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="642.5" y="48" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Panel B: Chế độ Suy luận (model.eval())</text>
+<rect x="447" y="64" width="120" height="38" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="507" y="79" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Ảnh đầu vào X</text>
+<text x="507" y="93" font-size="8.5" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">Kích thước (1, C, H, W)</text>
+<rect x="595" y="64" width="240" height="38" rx="4" fill="#FFF5F5" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="715" y="77" font-size="9.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">CẤM TÍNH THỐNG KÊ BATCH!</text>
+<text x="715" y="92" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Phương sai của 1 ảnh = 0, làm vỡ tensor!</text>
+<path d="M567 83 L593 83" fill="none" stroke="#C62828" stroke-width="1.2" marker-end="url(#mC62828n)"/>
+<rect x="595" y="118" width="240" height="38" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="715" y="131" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Nạp Running Stats cố định từ Checkpoint:</text>
+<text x="715" y="146" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">μ = μ_run,   σ² = σ²_run</text>
+<path d="M 507,102 L 507,191 L 593,191" fill="none" stroke="#1E5BB8" stroke-width="1.3"/>
+<polygon points="593,191 587,188 587,194" fill="#1E5BB8"/>
+<path d="M715 156 L715 172" fill="none" stroke="#222222" stroke-width="1.3" marker-end="url(#m222222n)"/>
+<rect x="595" y="172" width="240" height="38" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.5"/>
+<text x="715" y="185" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Phép biến đổi Tuyến tính Affine Tất định:</text>
+<text x="715" y="200" font-size="8.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">y = (γ / √(σ²_run + ε)) · (x - μ_run) + β</text>
+<path d="M715 210 L715 226" fill="none" stroke="#222222" stroke-width="1.3" marker-end="url(#m222222n)"/>
+<rect x="650" y="226" width="130" height="30" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="715" y="241" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu ra tất định Y</text>
+<rect x="447" y="268" width="388" height="116" rx="4" fill="#FAFAFA" stroke="#B0BEC5" stroke-width="1.2"/>
+<text x="457" y="283" font-size="9.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tính chất tất định (Deterministic) &amp; Lợi thế phần cứng:</text>
+<text x="457" y="299" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đầu ra của 1 bức ảnh không phụ thuộc vào các ảnh khác.</text>
+<text x="457" y="315" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Là phép biến đổi tuyến tính 100% tất định trên từng kênh.</text>
+<text x="457" y="331" font-size="9.0" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Cho phép gộp hoàn toàn vào lớp Conv đứng trước (Conv-BN folding).</text>
+<text x="457" y="347" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Triệt tiêu hoàn toàn chi phí tính toán của BN lúc suy luận trên NPU.</text>
+<text x="457" y="363" font-size="8.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• Tăng tốc thực tế 20 - 35% cho mạng suy luận.</text>
+<text x="10" y="416" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Ioffe &amp; Szegedy (ICML 2015), PyTorch BatchNorm Documentation.</text>
+</svg>

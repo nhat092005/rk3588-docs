@@ -48,17 +48,17 @@
 <text x="143.5" y="207" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Diện tích AP = 0.812</text>
 <rect x="505" y="38" width="385" height="242" rx="5" fill="#FCFDFD" stroke="#B0BEC5" stroke-width="1.0"/>
 <text x="519" y="52" font-size="10.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. Bản chất Toán học và Công thức COCO</text>
-<rect x="515" y="62" width="365" height="50" rx="3" fill="#FFF8E1" stroke="#FFE082" stroke-width="1.0"/>
+<rect x="515" y="62" width="365" height="56" rx="3" fill="#FFF8E1" stroke="#FFE082" stroke-width="1.0"/>
 <text x="521" y="73" font-size="8.8" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">A. Cơ chế sinh răng cưa (Sawtooth Curve):</text>
-<text x="521" y="87" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Sắp xếp tất cả box dự đoán theo Confidence giảm dần.</text>
-<text x="521" y="100" font-size="8.2" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">Gặp TP</tspan><tspan> -&gt; Recall tăng  |  </tspan><tspan font-weight="700">Gặp FP</tspan><tspan> -&gt; Precision tụt dốc.</tspan></text>
-<rect x="515" y="118" width="365" height="58" rx="3" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.0"/>
-<text x="521" y="129" font-size="8.8" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">B. Nội suy cực đại (Interpolated Precision):</text>
-<text x="697.5" y="145" font-size="9.8" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">p_interp(r) = </tspan><tspan font-weight="700">max { p(r̃)  với  r̃ ≥ r }</tspan></text>
-<text x="697.5" y="163" font-size="8.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Lấy giá trị Precision lớn nhất ở bên phải, làm phẳng răng cưa</text>
-<rect x="515" y="182" width="365" height="58" rx="3" fill="#F1F8E9" stroke="#C8E6C9" stroke-width="1.0"/>
-<text x="521" y="193" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">C. Chuẩn COCO: Tính AP trên 101 mốc Recall:</text>
-<text x="697.5" y="209" font-size="9.2" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">AP = (1 / 101) × Σ p_interp(r)</tspan><tspan>   (r ∈ {0.00, ..., 1.00})</tspan></text>
-<text x="697.5" y="227" font-size="8.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Trung bình cộng tại 101 mốc đều nhau xuyên suốt dải [0, 1]</text>
+<text x="521" y="91" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Sắp xếp tất cả box dự đoán theo Confidence giảm dần.</text>
+<text x="521" y="106" font-size="8.2" fill="#444444" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• </tspan><tspan font-weight="700">Gặp TP</tspan><tspan> -&gt; Recall tăng  |  </tspan><tspan font-weight="700">Gặp FP</tspan><tspan> -&gt; Precision tụt dốc.</tspan></text>
+<rect x="515" y="128" width="365" height="64" rx="3" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1.0"/>
+<text x="521" y="139" font-size="8.8" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">B. Nội suy cực đại (Interpolated Precision):</text>
+<text x="697.5" y="159" font-size="9.8" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">p_interp(r) = </tspan><tspan font-weight="700">max { p(r̃)  với  r̃ ≥ r }</tspan></text>
+<text x="697.5" y="180" font-size="8.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Lấy giá trị Precision lớn nhất ở bên phải, làm phẳng răng cưa</text>
+<rect x="515" y="202" width="365" height="64" rx="3" fill="#F1F8E9" stroke="#C8E6C9" stroke-width="1.0"/>
+<text x="521" y="213" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">C. Chuẩn COCO: Tính AP trên 101 mốc Recall:</text>
+<text x="697.5" y="233" font-size="9.2" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">AP = (1 / 101) × Σ p_interp(r)</tspan><tspan>   (r ∈ {0.00, ..., 1.00})</tspan></text>
+<text x="697.5" y="254" font-size="8.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Trung bình cộng tại 101 mốc đều nhau xuyên suốt dải [0, 1]</text>
 <text x="10" y="308" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: PASCAL VOC 2012; COCO Evaluation Protocol; Everingham et al. IJCV 2010.</text>
 </svg>

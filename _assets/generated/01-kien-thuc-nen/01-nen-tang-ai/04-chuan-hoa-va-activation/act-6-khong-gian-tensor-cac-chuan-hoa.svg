@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 332" width="860" height="332" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="332" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="18" font-size="14.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Không gian tensor của 4 phương pháp chuẩn hóa (Chuẩn Wu &amp; He, ECCV 2018)</text>
+<rect x="10" y="32" width="200" height="264" rx="4" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="110.0" y="46" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Batch Normalization (BN)</text>
+<polygon points="46,168 131,168 169,144 84,144" fill="none" stroke="#B0BEC5" stroke-dasharray="3 2"/>
+<rect x="46" y="83" width="85" height="85" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="46,83 131,83 169,59 84,59" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="131,83 169,59 169,144 131,168" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<rect x="46" y="97.25" width="85" height="24" fill="#1E5BB8" fill-opacity="0.85" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="46,97.25 131,97.25 169,73.25 84,73.25" fill="#1E5BB8" fill-opacity="0.6" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="131,97.25 169,73.25 169,97.25 131,121.25" fill="#1E5BB8" fill-opacity="0.95" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="41" y="125.5" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="end" dominant-baseline="central">C ↑</text>
+<text x="88.5" y="180" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">(H, W) →</text>
+<text x="172" y="156.0" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="start" dominant-baseline="central">N ↗</text>
+<rect x="15" y="188" width="190" height="104" rx="4" fill="#F8FAFC" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="110.0" y="202" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Theo từng Kênh (C)</text>
+<text x="20" y="218" font-size="8.8" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">• Gom: Gom toàn bộ N và (H, W)</text>
+<text x="20" y="234" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thống kê: μ_c, σ²_c trên (B×H×W)</text>
+<text x="20" y="249" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Ưu điểm: Gộp triệt để vào Conv</text>
+<text x="20" y="264" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Hạn chế: Kém khi batch B ≤ 4</text>
+<text x="20" y="279" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">• Phần cứng: Chi phí suy luận = 0</text>
+<rect x="220" y="32" width="200" height="264" rx="4" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="320.0" y="46" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Layer Normalization (LN)</text>
+<polygon points="256,168 341,168 379,144 294,144" fill="none" stroke="#B0BEC5" stroke-dasharray="3 2"/>
+<rect x="256" y="83" width="85" height="85" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="256,83 341,83 379,59 294,59" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="341,83 379,59 379,144 341,168" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<rect x="269.3" y="74.6" width="85" height="85" fill="#1E5BB8" fill-opacity="0.85" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="269.3,74.6 354.3,74.6 367.6,66.19999999999999 282.6,66.19999999999999" fill="#1E5BB8" fill-opacity="0.6" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="354.3,74.6 367.6,66.19999999999999 367.6,151.2 354.3,159.6" fill="#1E5BB8" fill-opacity="0.95" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="251" y="125.5" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="end" dominant-baseline="central">C ↑</text>
+<text x="298.5" y="180" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">(H, W) →</text>
+<text x="382" y="156.0" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="start" dominant-baseline="central">N ↗</text>
+<rect x="225" y="188" width="190" height="104" rx="4" fill="#F8FAFC" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="320.0" y="202" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Theo từng Mẫu (N)</text>
+<text x="230" y="218" font-size="8.8" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">• Gom: Gom toàn bộ C và (H, W)</text>
+<text x="230" y="234" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thống kê: μ_n, σ²_n trên (C×H×W)</text>
+<text x="230" y="249" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ưu điểm: Độc lập với Batch Size</text>
+<text x="230" y="264" font-size="8.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">• Hạn chế: Khó gập vào Conv trên NPU</text>
+<text x="230" y="279" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Phần cứng: Tốn chu kỳ ALU động</text>
+<rect x="430" y="32" width="200" height="264" rx="4" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="530.0" y="46" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Instance Normalization (IN)</text>
+<polygon points="466,168 551,168 589,144 504,144" fill="none" stroke="#B0BEC5" stroke-dasharray="3 2"/>
+<rect x="466" y="83" width="85" height="85" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="466,83 551,83 589,59 504,59" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="551,83 589,59 589,144 551,168" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<rect x="479.3" y="88.85" width="85" height="24" fill="#1E5BB8" fill-opacity="0.85" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="479.3,88.85 564.3,88.85 577.5999999999999,80.44999999999999 492.6,80.44999999999999" fill="#1E5BB8" fill-opacity="0.6" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="564.3,88.85 577.5999999999999,80.44999999999999 577.5999999999999,104.44999999999999 564.3,112.85" fill="#1E5BB8" fill-opacity="0.95" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="461" y="125.5" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="end" dominant-baseline="central">C ↑</text>
+<text x="508.5" y="180" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">(H, W) →</text>
+<text x="592" y="156.0" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="start" dominant-baseline="central">N ↗</text>
+<rect x="435" y="188" width="190" height="104" rx="4" fill="#F8FAFC" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="530.0" y="202" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Riêng 1 Kênh, 1 Mẫu</text>
+<text x="440" y="218" font-size="8.8" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">• Gom: Gom không gian (H, W)</text>
+<text x="440" y="234" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thống kê: μ_n,c, σ²_n,c trên (H×W)</text>
+<text x="440" y="249" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ưu điểm: Khử tương phản toàn cục</text>
+<text x="440" y="264" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Hạn chế: Mất thông tin độ sáng nền</text>
+<text x="440" y="279" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Phần cứng: Tính riêng từng ảnh</text>
+<rect x="640" y="32" width="200" height="264" rx="4" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="740.0" y="46" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Group Normalization (GN)</text>
+<polygon points="676,168 761,168 799,144 714,144" fill="none" stroke="#B0BEC5" stroke-dasharray="3 2"/>
+<rect x="676" y="83" width="85" height="85" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="676,83 761,83 799,59 714,59" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<polygon points="761,83 799,59 799,144 761,168" fill="none" stroke="#B0BEC5" stroke-width="1.0"/>
+<rect x="689.3" y="83.6" width="85" height="42" fill="#1E5BB8" fill-opacity="0.85" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="689.3,83.6 774.3,83.6 787.5999999999999,75.19999999999999 702.5999999999999,75.19999999999999" fill="#1E5BB8" fill-opacity="0.6" stroke="#1E5BB8" stroke-width="1.2"/>
+<polygon points="774.3,83.6 787.5999999999999,75.19999999999999 787.5999999999999,117.19999999999999 774.3,125.6" fill="#1E5BB8" fill-opacity="0.95" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="671" y="125.5" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="end" dominant-baseline="central">C ↑</text>
+<text x="718.5" y="180" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="middle" dominant-baseline="central">(H, W) →</text>
+<text x="802" y="156.0" font-size="9.5" font-weight="700" fill="#546E7A" text-anchor="start" dominant-baseline="central">N ↗</text>
+<rect x="645" y="188" width="190" height="104" rx="4" fill="#F8FAFC" stroke="#B0BEC5" stroke-width="1.0"/>
+<text x="740.0" y="202" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Theo nhóm Kênh (C/G)</text>
+<text x="650" y="218" font-size="8.8" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">• Gom: Gom C/G kênh và (H, W)</text>
+<text x="650" y="234" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thống kê: μ_n,g, σ²_n,g trên (C/G×H×W)</text>
+<text x="650" y="249" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ưu điểm: Rất ổn định khi batch nhỏ</text>
+<text x="650" y="264" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Hạn chế: Tốn tính toán hơn BN</text>
+<text x="650" y="279" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Phần cứng: Nhóm C/G linh hoạt</text>
+<text x="10" y="318" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Group Normalization (Wu &amp; He, ECCV 2018), Dive into Deep Learning (2023).</text>
+</svg>

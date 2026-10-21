@@ -14,11 +14,11 @@
 <text x="26" y="165" font-size="9.0" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Trường hợp 3: Cân bằng tối ưu (Đạt chuẩn triển khai)</text>
 <text x="26" y="180" font-size="8.5" fill="#2E7D32" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Precision = </tspan><tspan font-weight="700">0.85</tspan><tspan>  |  </tspan><tspan>Recall = </tspan><tspan font-weight="700">0.85</tspan><tspan>  -&gt;  </tspan><tspan>Cộng: 85.0%  |  </tspan><tspan font-weight="700">F1-Score: 85.0% (Cân bằng tốt)</tspan></text>
 <rect x="20" y="198" width="415" height="20" rx="3" fill="white" stroke="#B0BEC5" stroke-width="1.0"/>
-<text x="227.5" y="208" font-size="8.5" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">F1-Score chỉ cao khi CẢ HAI chỉ số Precision và Recall cùng đạt mức tốt</text>
+<text x="227.5" y="208" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">F1-Score chỉ cao khi CẢ HAI chỉ số Precision và Recall cùng đạt mức tốt</text>
 <rect x="455" y="38" width="435" height="190" rx="5" fill="#FCFDFD" stroke="#B0BEC5" stroke-width="1.0"/>
 <text x="469" y="53" font-size="11.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">2. Công thức toán học và Ứng dụng thực tế</text>
-<rect x="465" y="63" width="415" height="46" rx="4" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1.0"/>
-<text x="672.5" y="77" font-size="11.0" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">F1-Score = </tspan><tspan font-weight="700">2 × (Precision × Recall) / (Precision + Recall)</tspan></text>
+<rect x="465" y="63" width="415" height="46" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.0"/>
+<text x="672.5" y="77" font-size="11.0" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">F1-Score = </tspan><tspan font-weight="700">2 × (Precision × Recall) / (Precision + Recall)</tspan></text>
 <text x="672.5" y="95" font-size="8.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Trung bình điều hòa luôn bị kéo mạnh về phía giá trị thấp hơn</text>
 <text x="469" y="123.0" font-size="9.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Bản chất: </tspan><tspan>Thước đo đánh giá sự cân bằng giữa bắt đúng và ít báo nhầm.</tspan></text>
 <text x="469" y="137.5" font-size="9.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cơ chế tự phạt: </tspan><tspan>Nếu một trong hai chỉ số sụt giảm nghiêm trọng,</tspan></text>

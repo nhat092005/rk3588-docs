@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 200" width="860" height="200" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="200" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="15" y="18" font-size="14.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Hàm kích hoạt ReLU (Rectified Linear Unit) và Đạo hàm</text>
+<rect x="15" y="28" width="460" height="138" rx="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="25" y="43" font-size="12" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">ReLU: f(x) = max(0, x)</text>
+<text x="25" y="63" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Miền dương (x &gt; 0): f(x) = x, f&#x27;(x) = 1; chống triệt tiêu gradient, hội tụ nhanh.</text>
+<text x="25" y="84" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Miền âm (x &lt; 0) [Dying ReLU]: f(x) = 0, f&#x27;(x) = 0; nơ-ron ngừng học nếu rơi vào âm.</text>
+<text x="25" y="105" font-size="9.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Điểm gãy x = 0: Đạo hàm không xác định, nhảy bậc 0 → 1 (thực tế gán 0 hoặc 1).</text>
+<text x="25" y="126" font-size="9.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">• Phần cứng NPU RK3588: Ghép trực tiếp vào DPU (toán tử MAX), 0 overhead DRAM.</text>
+<text x="25" y="147" font-size="9.2" font-weight="400" fill="#555555" text-anchor="start" dominant-baseline="central">• Thân thiện INT8: Tuyến tính từng đoạn giúp lượng tử hóa số nguyên cực kỳ chính xác.</text>
+<rect x="487" y="28" width="358" height="138" rx="4" fill="#FCFDFD" stroke="#B0BEC5" stroke-width="1.0"/>
+<path d="M556.94 40 L556.94 156" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M598.94 40 L598.94 156" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M682.94 40 L682.94 156" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M724.94 40 L724.94 156" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M766.94 40 L766.94 156" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M497 93.36 L835 93.36" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M497 59.36 L835 59.36" fill="none" stroke="#E2E8F0" stroke-width="0.8" stroke-dasharray="5 4"/>
+<path d="M497 127.36 L835 127.36" fill="none" stroke="#90A4AE" stroke-width="1.2"/>
+<path d="M640.94 40 L640.94 156" fill="none" stroke="#90A4AE" stroke-width="1.2"/>
+<text x="837" y="127.36" font-size="10" font-weight="400" fill="#546E7A" text-anchor="start" dominant-baseline="central">x</text>
+<text x="640.94" y="36" font-size="10" font-weight="400" fill="#546E7A" text-anchor="middle" dominant-baseline="central">y</text>
+<text x="635.94" y="135.36" font-size="9" font-weight="400" fill="#78909C" text-anchor="end" dominant-baseline="central">0</text>
+<path d="M523.34 127.36 L640.94 127.36" fill="none" stroke="#1E5BB8" stroke-width="2.8"/>
+<path d="M640.94 127.36 L746.385 42" fill="none" stroke="#1E5BB8" stroke-width="2.8"/>
+<path d="M523.34 129.36 L640.94 129.36" fill="none" stroke="#C62828" stroke-width="1.8" stroke-dasharray="5 4"/>
+<path d="M640.94 93.36 L833.4 93.36" fill="none" stroke="#C62828" stroke-width="1.8" stroke-dasharray="5 4"/>
+<circle cx="640.94" cy="129.36" r="3.0" fill="none" stroke="#C62828" stroke-width="1.5"/>
+<circle cx="640.94" cy="93.36" r="3.0" fill="#C62828"/>
+<text x="624.1400000000001" y="62.760000000000005" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="end" dominant-baseline="central">f(x) = max(0, x)</text>
+<text x="716.5400000000001" y="106.36" font-size="9.5" font-weight="600" fill="#C62828" text-anchor="start" dominant-baseline="central">f&#x27;(x) = 1 (x &gt; 0)</text>
+<text x="577.94" y="141.36" font-size="9.2" font-weight="600" fill="#C62828" text-anchor="middle" dominant-baseline="central">f&#x27;(x) = 0 (x &lt; 0)</text>
+<path d="M675.94 151.36 L644.94 131.36" fill="none" stroke="#222222" stroke-width="1.1" marker-end="url(#m222222n)"/>
+<text x="678.94" y="153.36" font-size="8.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Điểm gãy x=0</text>
+<path d="M577.94 107.36 L577.94 124.36" fill="none" stroke="#C62828" stroke-width="1.1" marker-end="url(#mC62828n)"/>
+<text x="577.94" y="102.36" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Dying ReLU (dập tắt gradient)</text>
+<text x="10" y="186" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Nair &amp; Hinton (ICML 2010), Dive into Deep Learning (2023).</text>
+</svg>

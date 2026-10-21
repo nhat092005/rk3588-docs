@@ -47,16 +47,14 @@ Sách coi hồi quy tuyến tính là mạng một lớp chỉ có một neuron.
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/d2l-fig-3-1-2-linear-regression-single-layer.png
    :align: center
-   :width: 75%
    :alt: Hồi quy tuyến tính là mạng một lớp, d đầu vào x1 đến xd nối với một đầu ra o1
 
    Hồi quy tuyến tính là mạng một lớp: d đầu vào nối trực tiếp với một đầu ra. Nguồn: [T2 D2L tr.90, Fig. 3.1.2]
 
 .. _fig-cau-truc-neuron:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/mnr-1-cau-truc-giai-phau-neuron.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/01-mang-no-ron/mnr-1-cau-truc-giai-phau-neuron.svg
    :align: center
-   :width: 75%
    :alt: Cấu trúc giải phẫu Neuron và phép biến đổi affine w^T x + b
 
    Cấu trúc giải phẫu Neuron và phép biến đổi Affine: Sơ đồ toán học (trái) và ví dụ tính số thực nghiệm (phải).
@@ -86,16 +84,14 @@ Ví dụ trong Fig. 5.1.1 của sách: "This MLP has four inputs, three outputs,
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/d2l-fig-5-1-1-mlp-hidden-layer.png
    :align: center
-   :width: 75%
    :alt: MLP có một lớp ẩn năm đơn vị, bốn đầu vào và ba đầu ra, các lớp nối đầy đủ
 
    MLP có một lớp ẩn gồm năm hidden unit, bốn đầu vào và ba đầu ra. Nguồn: [T2 D2L tr.169, Fig. 5.1.1]
 
 .. _fig-cau-truc-mang-mlp:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/mnr-2-cau-truc-mang-mlp-4-5-3.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/01-mang-no-ron/mnr-2-cau-truc-mang-mlp-4-5-3.svg
    :align: center
-   :width: 75%
    :alt: Cấu trúc mạng nhiều lớp MLP 4-5-3 và quy tắc đếm lớp
 
    Cấu trúc mạng nhiều lớp (MLP) 4-5-3: Đồ hình mạng Fully Connected (trái) và quy tắc đếm số lớp (phải).
@@ -165,9 +161,8 @@ Phần tử đầu của :math:`\mathbf{z}` là :math:`-1` nên ReLU đưa nó v
 
 .. _fig-lan-truyen-xuoi-vi-du-so:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/mnr-3-lan-truyen-xuoi-vi-du-so.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/01-mang-no-ron/mnr-3-lan-truyen-xuoi-vi-du-so.svg
    :align: center
-   :width: 80%
    :alt: Quá trình Lan truyền xuôi (Forward Pass) qua ví dụ số mạng 2-2-1
 
    Quá trình Lan truyền xuôi (Forward Pass) qua ví dụ số mạng 2-2-1: Đồ thị luồng tín hiệu số (trái) và tiến trình tính toán 3 bước (phải).
@@ -285,9 +280,8 @@ Khi bỏ ReLU, hai lớp gộp được thành một phép nhân ma trận: W2 W
 
 .. _fig-vi-sao-mang-can-phi-tuyen:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/mnr-4-vi-sao-mang-can-phi-tuyen.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/01-mang-no-ron/mnr-4-vi-sao-mang-can-phi-tuyen.svg
    :align: center
-   :width: 80%
    :alt: Hiện tượng sụp đổ mô hình tuyến tính và vai trò của hàm phi tuyến
 
    Hiện tượng sụp đổ mô hình tuyến tính (Linear Collapse) và vai trò của hàm phi tuyến: Thiếu activation khiến mạng sụp đổ thành một lớp duy nhất (trái) so với bảo toàn kiến trúc đa tầng nhờ ReLU (phải).

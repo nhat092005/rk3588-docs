@@ -42,9 +42,8 @@ IoU là tỉ lệ giữa diện tích phần giao nhau và diện tích phần h
 
 .. _fig-iou-geometry:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-1-iou-ban-chat-hinh-hoc.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-1-iou-ban-chat-hinh-hoc.svg
    :align: center
-   :width: 75%
    :alt: Bản chất hình học của IoU và các mức trùng khớp bounding box
 
    Bản chất hình học của IoU và các mức độ trùng khớp bounding box.
@@ -53,7 +52,6 @@ IoU là tỉ lệ giữa diện tích phần giao nhau và diện tích phần h
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/chv-fig7-intersection-union-example.png
    :align: center
-   :width: 75%
    :alt: Giao và hợp của box nhãn thật và box dự đoán trên ảnh công nhân công trường
 
    Giao (Intersection) và hợp (Union) của box nhãn thật G (viền liền) và box dự đoán D (viền đứt) trên ảnh công trường thật. Nguồn: [T2 CHV tr.10, Figure 7]
@@ -105,9 +103,8 @@ Precision đo lường tỷ lệ các phát hiện của mô hình là chính x�
 
 .. _fig-precision:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-precision-do-chuan-xac.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-precision-do-chuan-xac.svg
    :align: center
-   :width: 75%
    :alt: Minh họa chỉ số Precision trong phát hiện vật thể
 
    Mô phỏng cơ chế tính Precision và ý nghĩa hạn chế báo động giả trong giám sát an toàn.
@@ -126,9 +123,8 @@ Recall đo lường tỷ lệ các vật thể thật ngoài đời được mô
 
 .. _fig-recall:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-recall-do-nhay-bao-phu.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-recall-do-nhay-bao-phu.svg
    :align: center
-   :width: 75%
    :alt: Minh họa chỉ số Recall trong phát hiện vật thể
 
    Mô phỏng cơ chế tính Recall và ý nghĩa hạn chế bỏ sót đối tượng trong giám sát an toàn.
@@ -167,9 +163,8 @@ Tại sao F1-Score bắt buộc phải dùng trung bình điều hòa thay vì t
 
 .. _fig-f1-score:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-f1-score-trung-binh-dieu-hoa.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-f1-score-trung-binh-dieu-hoa.svg
    :align: center
-   :width: 75%
    :alt: Minh họa chỉ số F1-Score trong đánh giá mô hình
 
    Cơ chế tự phạt của trung bình điều hòa trong F1-Score và ứng dụng tìm điểm cân bằng tối ưu.
@@ -207,9 +202,8 @@ Tại mỗi mốc Recall :math:`r`, giá trị Precision nội suy được lấ
 
 .. _fig-pr-curve-ap:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-2-co-che-duong-cong-pr-va-ap.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-2-co-che-duong-cong-pr-va-ap.svg
    :align: center
-   :width: 75%
    :alt: Bản chất đường cong P-R, cơ chế nội suy cực đại và diện tích AP chuẩn COCO
 
    Bản chất răng cưa của đường cong P-R, cơ chế nội suy cực đại và diện tích AP chuẩn COCO.
@@ -218,7 +212,6 @@ Tại mỗi mốc Recall :math:`r`, giá trị Precision nội suy được lấ
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/chv-fig8-precision-recall-curves.png
    :align: center
-   :width: 75%
    :alt: Đường cong Precision x Recall thực tế của tám mô hình YOLO trên tập dữ liệu của bài CHV
 
    Đường cong Precision × Recall thực tế của tám mô hình YOLO, mỗi màu là một lớp theo chú giải gốc (blue, person, red, vest, white, yellow). Đây là kết quả của bài CHV trên tập dữ liệu riêng của bài, không phải kết quả của dự án. Nguồn: [T2 CHV tr.11, Figure 8]
@@ -236,9 +229,8 @@ Chỉ số này phản ánh năng lực tổng thể của mô hình trên toàn
 
 .. _fig-map-classes:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-3a-map-co-che-trung-binh-cac-lop.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-3a-map-co-che-trung-binh-cac-lop.svg
    :align: center
-   :width: 75%
    :alt: Cơ chế tính Mean Average Precision từ AP của từng lớp đối tượng
 
    Cơ chế tính Mean Average Precision (mAP) bằng trung bình cộng AP của các lớp đối tượng.
@@ -259,9 +251,8 @@ Tiêu chuẩn COCO phạt rất nặng các mô hình định vị biên lỏng 
 
 .. _fig-map50-vs-95:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-3b-map50-vs-map50-95-so-sanh.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-3b-map50-vs-map50-95-so-sanh.svg
    :align: center
-   :width: 75%
    :alt: So sánh cơ chế đánh giá giữa mAP@0.50 và mAP@0.50:0.95
 
    So sánh cơ chế giữa mAP@0.50 (khoan dung) và mAP@0.50:0.95 (10 mốc IoU khắt khe chuẩn COCO).
@@ -287,9 +278,8 @@ Chỉ số này phản ánh độ hao hụt chất lượng nhận diện sau kh
 
 .. _fig-delta-map-quantization:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-4-delta-map-luong-tu-hoa.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-4-delta-map-luong-tu-hoa.svg
    :align: center
-   :width: 75%
    :alt: Độ sụt giảm do lượng tử hóa và đánh đổi hiệu năng NPU RK3588
 
    Độ sụt giảm do lượng tử hóa (ΔmAP), ngưỡng kiểm định công nghiệp và bản chất rung lắc tọa độ hộp biên.
@@ -326,9 +316,8 @@ Trong đó :math:`K` là kích thước kernel (ví dụ :math:`3 \times 3`), :m
 
 .. _fig-parameters-params:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-5-parameters-params-mo-hinh.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-5-parameters-params-mo-hinh.svg
    :align: center
-   :width: 75%
    :alt: Cấu thành Parameters và ý nghĩa bộ nhớ tĩnh trên RK3588
 
    Cấu thành Parameters trong tầng tích chập và dung lượng bộ nhớ tĩnh (RAM/ROM) trên SoC RK3588.
@@ -354,9 +343,8 @@ Trong đó :math:`B` là kích thước batch (thường bằng 1 trên camera b
 
 .. _fig-activations-vs-parameters:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-6-activations-vs-parameters.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-6-activations-vs-parameters.svg
    :align: center
-   :width: 75%
    :alt: Bộ nhớ động Activations và nút thắt băng thông SRAM DDR trên RK3588
 
    So sánh Parameters (bộ nhớ tĩnh) với Activations (bộ nhớ động) và cơ chế tràn bộ nhớ SRAM trên SoC RK3588.
@@ -416,9 +404,8 @@ Thời gian trễ (latency) khi xử lý một bức ảnh từ camera biên kh�
 
 .. _fig-latency-4-stages:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-7-latency-4-chang-end-to-end.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-7-latency-4-chang-end-to-end.svg
    :align: center
-   :width: 75%
    :alt: Cấu trúc độ trễ 4 chặng Latency Pipeline trên SoC RK3588
 
    Cấu trúc độ trễ 4 chặng: Phân tách luồng xử lý thực tế giữa CPU, RGA và NPU 3-Core kèm đường thời gian End-to-End.
@@ -454,9 +441,8 @@ Trong hệ thống nhúng, có hai khái niệm FPS hoàn toàn khác nhau cần
 
 .. _fig-fps-latency-vs-throughput:
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/evaluation-metrics/hm-8-fps-latency-vs-throughput.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics/hm-8-fps-latency-vs-throughput.svg
    :align: center
-   :width: 75%
    :alt: So sánh cơ chế FPS đơn luồng tuần tự và đa luồng Pipeline 3 Core NPU trên RK3588
 
    So sánh cơ chế tốc độ khung hình (FPS): Độ trễ đơn luồng (:math:`\text{FPS}_{\text{latency}}`) đối chiếu với đường ống gối đầu 3 Core NPU (:math:`\text{Throughput FPS}`) kèm dữ liệu kiểm chứng PPE thực tế.

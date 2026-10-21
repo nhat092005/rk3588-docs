@@ -168,6 +168,18 @@ body, .rst-content, .wy-menu-vertical, .wy-nav-content {
 /* ---------- Figures, quotes ---------- */
 .rst-content figure, .rst-content .figure { margin: 1.5em 0; text-align: center; }
 .rst-content img { border: 1px solid var(--line); border-radius: 6px; max-width: 100%; height: auto; }
+/* One box for every figure, whatever its pixel size or aspect ratio. Sphinx writes `:width:` as an inline style on the
+   <img>, so `!important` is needed to override it. PNG keeps its pixel width, capped by the box and never enlarged. SVG is
+   vector, so it is stretched to the box width. Add `:class: fig-native` together with `:width:` to keep a custom size. */
+:root { --fig-max-w: 1000px; --fig-max-h: 600px; }
+.rst-content figure:not(.fig-native) img, .rst-content .figure:not(.fig-native) img {
+  width: auto !important; max-width: min(100%, var(--fig-max-w)); max-height: var(--fig-max-h);
+}
+.rst-content figure:not(.fig-native) img[src$=".svg"], .rst-content .figure:not(.fig-native) img[src$=".svg"] {
+  min-width: min(100%, var(--fig-max-w));
+}
+/* Images from `|name| image::` substitutions have no inline width: same box, aspect ratio kept. */
+.rst-content img:not([style*="width"]) { max-width: min(100%, var(--fig-max-w)); max-height: var(--fig-max-h); }
 .rst-content figcaption, .rst-content .caption { color: var(--muted); font-size: 14px; margin-top: 8px; }
 .rst-content blockquote {
   margin: 1em 0; padding: 4px 16px; border-left: 3px solid var(--line); color: var(--ink-2); background: transparent;

@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 487" width="900" height="487" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="900" height="487" fill="white"/>
+<rect x="770" y="10" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="806.6" y="21.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="42" font-size="15.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Hạ bậc tích chập về nhân ma trận GEMM qua biến đổi im2col</text>
+<rect x="10" y="64" width="880" height="230" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="80" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">1. Biến đổi im2col: Trải các cửa sổ trượt 3D thành các cột ma trận</text>
+<text x="69.0" y="102" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Input Map (3×3)</text>
+<rect x="30" y="114" width="26" height="26" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1.2"/>
+<text x="43.0" y="127.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x00</text>
+<rect x="56" y="114" width="26" height="26" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1.2"/>
+<text x="69.0" y="127.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x01</text>
+<rect x="82" y="114" width="26" height="26" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="0.8"/>
+<text x="95.0" y="127.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x02</text>
+<rect x="30" y="140" width="26" height="26" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1.2"/>
+<text x="43.0" y="153.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x10</text>
+<rect x="56" y="140" width="26" height="26" rx="3" fill="#FFE082" stroke="#E65100" stroke-width="1.2"/>
+<text x="69.0" y="153.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x11</text>
+<rect x="82" y="140" width="26" height="26" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="0.8"/>
+<text x="95.0" y="153.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x12</text>
+<rect x="30" y="166" width="26" height="26" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="0.8"/>
+<text x="43.0" y="179.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x20</text>
+<rect x="56" y="166" width="26" height="26" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="0.8"/>
+<text x="69.0" y="179.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x21</text>
+<rect x="82" y="166" width="26" height="26" rx="3" fill="#FFFFFF" stroke="#90A4AE" stroke-width="0.8"/>
+<text x="95.0" y="179.0" font-size="9.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">x22</text>
+<rect x="30" y="114" width="52" height="52" rx="3" fill="none" stroke="#E65100" stroke-width="1.6"/>
+<text x="56" y="206" font-size="9.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Cửa sổ 0 (2×2)</text>
+<rect x="24" y="222" width="126" height="58" rx="3" fill="#F0F4F8" stroke="#CFD8DC" stroke-width="1"/>
+<text x="30" y="234" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• 4 cửa sổ trượt 2×2</tspan></text>
+<text x="30" y="248" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Mỗi patch: 4 pixel</tspan></text>
+<text x="30" y="262" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.2">• Duỗi thành 1 cột</tspan></text>
+<path d="M126 154 L166 154" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="149" y="140" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">im2col</text>
+<text x="149" y="168" font-size="9.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trải phẳng</text>
+<text x="296" y="102" font-size="11" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Ma trận dữ liệu D_m (CRS × NPQ = 4 × 4)</text>
+<rect x="186" y="112" width="222" height="28" fill="#E8E8E8"/>
+<text x="194" y="126.0" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Thành phần</text>
+<text x="264" y="126.0" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Col 0</text>
+<text x="302" y="126.0" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Col 1</text>
+<text x="340" y="126.0" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Col 2</text>
+<text x="378" y="126.0" font-size="9.8" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Col 3</text>
+<rect x="186" y="140" width="222" height="22.5" fill="#FFF8E1"/>
+<path d="M186 140 L408 140" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="194" y="151.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>k00</tspan></text>
+<text x="264" y="151.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x00</tspan></text>
+<text x="302" y="151.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x01</tspan></text>
+<text x="340" y="151.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x10</tspan></text>
+<text x="378" y="151.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x11</tspan></text>
+<rect x="186" y="162.5" width="222" height="22.5" fill="#FFF8E1"/>
+<path d="M186 162.5 L408 162.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="194" y="173.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>k01</tspan></text>
+<text x="264" y="173.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x01</tspan></text>
+<text x="302" y="173.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x02</tspan></text>
+<text x="340" y="173.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x11</tspan></text>
+<text x="378" y="173.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x12</tspan></text>
+<rect x="186" y="185.0" width="222" height="22.5" fill="#FFF8E1"/>
+<path d="M186 185.0 L408 185.0" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="194" y="196.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>k10</tspan></text>
+<text x="264" y="196.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x10</tspan></text>
+<text x="302" y="196.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x11</tspan></text>
+<text x="340" y="196.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x20</tspan></text>
+<text x="378" y="196.25" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x21</tspan></text>
+<rect x="186" y="207.5" width="222" height="22.5" fill="#FFF8E1"/>
+<path d="M186 207.5 L408 207.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="194" y="218.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>k11</tspan></text>
+<text x="264" y="218.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x11</tspan></text>
+<text x="302" y="218.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x12</tspan></text>
+<text x="340" y="218.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x21</tspan></text>
+<text x="378" y="218.75" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x22</tspan></text>
+<rect x="186" y="112" width="222" height="118.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M256 112 L256 230.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M294 112 L294 230.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M332 112 L332 230.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M370 112 L370 230.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="296" y="242" font-size="9.5" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central" font-style="italic">Mỗi cột là 1 cửa sổ trượt duỗi thẳng [T2 CUDNN tr.4]</text>
+<rect x="428" y="102" width="290" height="178" rx="3" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1"/>
+<text x="573" y="120" font-size="11.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Hiện tượng Trùng lặp dữ liệu:</text>
+<text x="440" y="140.0" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Trích dẫn CUDNN tr.4-5: </tspan></text>
+<text x="440" y="157.5" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  &quot;each element of D is duplicated</tspan></text>
+<text x="440" y="175.0" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  up to RS times in D_m.&quot;</tspan></text>
+<text x="440" y="192.5" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Điểm ảnh </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">x11</tspan><tspan> xuất hiện trong </tspan><tspan font-weight="700">cả 4 cột</tspan><tspan>!</tspan></text>
+<text x="440" y="210.0" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Đánh đổi lớn: </tspan><tspan>Nếu tạo ma trận </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">D_m</tspan></text>
+<text x="440" y="227.5" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  tường minh trong RAM, dung lượng bộ</tspan></text>
+<text x="440" y="245.0" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  nhớ phình to gấp </tspan><tspan font-family="Consolas, 'DejaVu Sans Mono', monospace" font-size="8.8">K × K = 4 đến 9 lần</tspan><tspan>.</tspan></text>
+<text x="440" y="262.5" font-size="9.8" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>• Gây nghẽn băng thông DRAM nghiêm trọng.</tspan></text>
+<rect x="10" y="306" width="880" height="145" rx="5" fill="#FAFAFA" stroke="#333333" stroke-width="1.2"/>
+<text x="450.0" y="322" font-size="13.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2. Phép nhân GEMM và Tái tạo Tensor đầu ra (O_m = F_m × D_m)</text>
+<text x="120" y="344" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Filters F_m (K × CRS)</text>
+<rect x="45" y="356" width="150" height="28" fill="#E8E8E8"/>
+<text x="53" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Fil</text>
+<text x="99" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">w0</text>
+<text x="125" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">w1</text>
+<text x="151" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">w2</text>
+<text x="177" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">w3</text>
+<rect x="45" y="384" width="150" height="22.5" fill="#E8F5E9"/>
+<path d="M45 384 L195 384" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="53" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Out 0</tspan></text>
+<text x="99" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w00</tspan></text>
+<text x="125" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w01</tspan></text>
+<text x="151" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w10</tspan></text>
+<text x="177" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w11</tspan></text>
+<rect x="45" y="406.5" width="150" height="22.5" fill="#E8F5E9"/>
+<path d="M45 406.5 L195 406.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="53" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Out 1</tspan></text>
+<text x="99" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w&#x27;0</tspan></text>
+<text x="125" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w&#x27;1</tspan></text>
+<text x="151" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w&#x27;2</tspan></text>
+<text x="177" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>w&#x27;3</tspan></text>
+<rect x="45" y="356" width="150" height="73.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M91 356 L91 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M117 356 L117 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M143 356 L143 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M169 356 L169 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="217" y="388" font-size="20" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">×</text>
+<text x="325" y="344" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Data D_m (CRS × NPQ)</text>
+<rect x="240" y="356" width="170" height="28" fill="#E8E8E8"/>
+<text x="248" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">K</text>
+<text x="298" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">c0</text>
+<text x="328" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">c1</text>
+<text x="358" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">c2</text>
+<text x="388" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">c3</text>
+<rect x="240" y="384" width="170" height="22.5" fill="#FFF8E1"/>
+<path d="M240 384 L410 384" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="248" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Row 0</tspan></text>
+<text x="298" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="328" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="358" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="388" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<rect x="240" y="406.5" width="170" height="22.5" fill="#FFF8E1"/>
+<path d="M240 406.5 L410 406.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="248" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Row 1</tspan></text>
+<text x="298" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="328" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="358" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<text x="388" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>•</tspan></text>
+<rect x="240" y="356" width="170" height="73.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M290 356 L290 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M320 356 L320 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M350 356 L350 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M380 356 L380 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="435" y="388" font-size="20" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">=</text>
+<text x="543" y="344" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Output O_m (K × NPQ)</text>
+<rect x="458" y="356" width="170" height="28" fill="#E8E8E8"/>
+<text x="466" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Out</text>
+<text x="516" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">p0</text>
+<text x="546" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">p1</text>
+<text x="576" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">p2</text>
+<text x="606" y="370.0" font-size="9.2" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">p3</text>
+<rect x="458" y="384" width="170" height="22.5" fill="#C8E6C9"/>
+<path d="M458 384 L628 384" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="466" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Ch 0</tspan></text>
+<text x="516" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y00</tspan></text>
+<text x="546" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y01</tspan></text>
+<text x="576" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y10</tspan></text>
+<text x="606" y="395.25" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y11</tspan></text>
+<rect x="458" y="406.5" width="170" height="22.5" fill="#C8E6C9"/>
+<path d="M458 406.5 L628 406.5" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="466" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Ch 1</tspan></text>
+<text x="516" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y&#x27;0</tspan></text>
+<text x="546" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y&#x27;1</tspan></text>
+<text x="576" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y&#x27;2</tspan></text>
+<text x="606" y="417.75" font-size="9.2" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>y&#x27;3</tspan></text>
+<rect x="458" y="356" width="170" height="73.0" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M508 356 L508 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M538 356 L538 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M568 356 L568 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M598 356 L598 429.0" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M643 388 L677 388" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="663" y="374" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Reshape</text>
+<rect x="693" y="356" width="145" height="74" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="765" y="376" font-size="10.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Output Tensor 3D</text>
+<text x="765" y="394" font-size="9.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">C_out × H_out × W_out</text>
+<text x="765" y="412" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">2 × 2 × 2</text>
+<text x="10" y="473" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: [T2 CUDNN tr.4, tr.5, Fig. 1], [T2 D2L tr.658], [T1 TRM1 tr.1985]. Tích chập đưa về GEMM; NPU RK3588 dùng Implicit GEMM.</text>
+</svg>

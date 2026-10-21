@@ -10,20 +10,20 @@
 <text x="366.429" y="79" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.7186 (71.86%)</text>
 <text x="165" y="105" font-size="8.5" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">safety_clothes (áo phản quang)</text>
 <rect x="172" y="96" width="265" height="17" rx="3" fill="#ECEFF1" stroke="none" stroke-width="1.2"/>
-<rect x="172" y="96" width="172.091" height="17" rx="3" fill="#00796B" stroke="none" stroke-width="1.2"/>
-<text x="348.091" y="105" font-size="8.2" font-weight="700" fill="#00796B" text-anchor="start" dominant-baseline="central">0.6494 (64.94%)</text>
+<rect x="172" y="96" width="172.091" height="17" rx="3" fill="#1E5BB8" stroke="none" stroke-width="1.2"/>
+<text x="348.091" y="105" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.6494 (64.94%)</text>
 <text x="165" y="131" font-size="8.5" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">helmet (mũ bảo hộ)</text>
 <rect x="172" y="122" width="265" height="17" rx="3" fill="#ECEFF1" stroke="none" stroke-width="1.2"/>
-<rect x="172" y="122" width="164.565" height="17" rx="3" fill="#2E7D32" stroke="none" stroke-width="1.2"/>
-<text x="340.565" y="131" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">0.6210 (62.10%)</text>
+<rect x="172" y="122" width="164.565" height="17" rx="3" fill="#1E5BB8" stroke="none" stroke-width="1.2"/>
+<text x="340.565" y="131" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.6210 (62.10%)</text>
 <text x="165" y="157" font-size="8.5" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">self_clothes (quần áo thường)</text>
 <rect x="172" y="148" width="265" height="17" rx="3" fill="#ECEFF1" stroke="none" stroke-width="1.2"/>
-<rect x="172" y="148" width="152.746" height="17" rx="3" fill="#7B1FA2" stroke="none" stroke-width="1.2"/>
-<text x="328.746" y="157" font-size="8.2" font-weight="700" fill="#7B1FA2" text-anchor="start" dominant-baseline="central">0.5764 (57.64%)</text>
+<rect x="172" y="148" width="152.746" height="17" rx="3" fill="#1E5BB8" stroke="none" stroke-width="1.2"/>
+<text x="334.562" y="157" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">0.5764 (57.64%)</text>
 <text x="165" y="183" font-size="8.5" font-weight="600" fill="#444444" text-anchor="end" dominant-baseline="central">head (đầu trần / không mũ)</text>
 <rect x="172" y="174" width="265" height="17" rx="3" fill="#ECEFF1" stroke="none" stroke-width="1.2"/>
 <rect x="172" y="174" width="102.926" height="17" rx="3" fill="#C62828" stroke="none" stroke-width="1.2"/>
-<text x="278.926" y="183" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">0.3884 (38.84%)</text>
+<text x="334.562" y="183" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">0.3884 (38.84%)</text>
 <line x1="328.6" y1="66" x2="328.6" y2="200" stroke="#444444" stroke-width="1.6" stroke-dasharray="3 3"/>
 <text x="328.562" y="208" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Trung bình mAP = 0.5908</text>
 <polygon points="526,129 540,129 536,124 544,129 536,134 540,129" fill="#444444" stroke="#444444" stroke-width="1.5"/>
@@ -32,10 +32,10 @@
 <rect x="558" y="64" width="322" height="52" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.0"/>
 <text x="719.0" y="78" font-size="10.5" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">mAP = (1 / C) × Σ AP_c</tspan></text>
 <text x="719.0" y="98" font-size="8.0" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">mAP = (AP_1 + AP_2 + AP_3 + AP_4 + AP_5) / 5 = 0.5908</text>
-<text x="562" y="130.0" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Thước đo toàn diện: </tspan><tspan>Đại diện sức mạnh chung của mạng AI.</tspan></text>
-<text x="562" y="144.5" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kháng mất cân bằng lớp: </tspan><tspan>Mỗi lớp có trọng số ngang nhau,</tspan></text>
-<text x="562" y="159.0" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  không bị lớp có nhiều ảnh lấn át lớp hiếm gặp.</tspan></text>
-<text x="562" y="173.5" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cảnh báo lớp yếu: </tspan><tspan>Lớp head (38.8%) kéo tụt mAP chung,</tspan></text>
-<text x="562" y="188.0" font-size="8.0" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  chỉ ra điểm nghẽn cần bổ sung thêm dữ liệu huấn luyện.</tspan></text>
+<text x="562" y="130" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Thước đo toàn diện: </tspan><tspan>Đại diện sức mạnh chung của mạng AI.</tspan></text>
+<text x="562" y="149" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Kháng mất cân bằng lớp: </tspan><tspan>Mỗi lớp có trọng số ngang nhau,</tspan></text>
+<text x="562" y="168" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  không bị lớp có nhiều ảnh lấn át lớp hiếm gặp.</tspan></text>
+<text x="562" y="187" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cảnh báo lớp yếu: </tspan><tspan>Lớp head (38.8%) kéo tụt mAP chung,</tspan></text>
+<text x="562" y="206" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  chỉ ra điểm nghẽn cần bổ sung thêm dữ liệu huấn luyện.</tspan></text>
 <text x="10" y="244" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.</text>
 </svg>

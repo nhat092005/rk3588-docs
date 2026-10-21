@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 406" width="860" height="406" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="406" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="10" y="18" font-size="14.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đường ống Conv-BN-Act và kỹ thuật Conv-BN Folding trên NPU RK3588</text>
+<rect x="10" y="32" width="415" height="338" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="217.5" y="48" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Panel A: Trước khi gộp (3 toán tử tách rời, nghẽn DRAM)</text>
+<rect x="22" y="62" width="185" height="36" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="114.5" y="75" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">nn.Conv2d</text>
+<text x="114.5" y="89" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trọng số W, bias = 0</text>
+<rect x="225" y="62" width="185" height="36" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="233" y="75" font-size="9.0" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">• Conv bỏ bias:</text>
+<text x="233" y="89" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">  BN trừ TB làm triệt tiêu b.</text>
+<path d="M207 80 L223 80" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<path d="M114.5 98 L114.5 114" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="225" y="102" width="185" height="16" rx="2" fill="white" stroke="#C62828" stroke-width="0.8"/>
+<text x="317" y="110" font-size="8.0" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Ghi SRAM/DRAM tensor z</text>
+<rect x="22" y="118" width="185" height="36" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="114.5" y="131" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">nn.BatchNorm2d</text>
+<text x="114.5" y="145" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tham số: γ, β, μ_run, σ²_run</text>
+<rect x="225" y="118" width="185" height="36" rx="4" fill="white" stroke="#C62828" stroke-width="1.0"/>
+<text x="233" y="131" font-size="9.0" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Nghẽn bộ nhớ DRAM:</text>
+<text x="233" y="145" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">  Đọc lại z từ RAM để tính affine.</text>
+<path d="M207 136 L223 136" fill="none" stroke="#C62828" stroke-width="1.2" marker-end="url(#mC62828n)"/>
+<path d="M114.5 154 L114.5 170" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="225" y="158" width="185" height="16" rx="2" fill="white" stroke="#C62828" stroke-width="0.8"/>
+<text x="317" y="166" font-size="8.0" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Ghi SRAM/DRAM tensor y</text>
+<rect x="22" y="174" width="185" height="34" rx="4" fill="#FAFAFA" stroke="#444444" stroke-width="1.2"/>
+<text x="114.5" y="186" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Activation (SiLU / ReLU)</text>
+<text x="114.5" y="199" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Toán tử phi tuyến</text>
+<rect x="20" y="218" width="390" height="142" rx="4" fill="white" stroke="#C62828" stroke-width="1.2"/>
+<text x="30" y="233" font-size="10" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Nhược điểm phần cứng khi chưa gộp:</text>
+<text x="30" y="252" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tốn băng thông: Conv ghi z ra DRAM, sau đó BN đọc lại z để tính affine.</text>
+<text x="30" y="271" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Lãng phí chu kỳ NPU: Tiêu tốn hàng triệu phép tính số học vô ích cho BN.</text>
+<text x="30" y="290" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tăng độ trễ suy luận: NPU phải chuyển đổi kernel thực thi liên tục.</text>
+<text x="30" y="309" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Cản trở lượng tử hóa INT8 trực tiếp trên ma trận trọng số.</text>
+<text x="30" y="328" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Tiêu hao năng lượng: Truy cập DRAM tiêu tốn năng lượng gấp 100 lần ALU.</text>
+<text x="30" y="347" font-size="8.8" font-weight="400" fill="#555555" text-anchor="start" dominant-baseline="central">• Giảm băng thông phục vụ các tác vụ song song khác trên SoC.</text>
+<rect x="435" y="32" width="415" height="338" rx="5" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="642.5" y="48" font-size="11.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Panel B: Sau khi gộp Conv-BN Folding (Tối ưu hóa RKNN)</text>
+<rect x="447" y="62" width="190" height="48" rx="5" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.6"/>
+<text x="542.0" y="76" font-size="11.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Fused Conv2d</text>
+<text x="542.0" y="91" font-size="9.0" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">Trọng số mới: W_fused</text>
+<text x="542.0" y="103" font-size="9.0" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">Bias mới: b_fused</text>
+<rect x="650" y="62" width="185" height="48" rx="4" fill="white" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="658" y="76" font-size="9.0" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Lớp BN biến mất hoàn toàn:</text>
+<text x="658" y="91" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">  Gộp toán học vào W và b.</text>
+<text x="658" y="103" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">  Chi phí tính toán BN = 0.</text>
+<path d="M637 86 L648 86" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<path d="M542 110 L542 122" fill="none" stroke="#222222" stroke-width="1.3" marker-end="url(#m222222n)"/>
+<rect x="650" y="116" width="185" height="20" rx="2" fill="white" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="742" y="126" font-size="8.0" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Nội bộ ALU (Không qua DRAM)</text>
+<rect x="447" y="122" width="190" height="34" rx="5" fill="#FAFAFA" stroke="#444444" stroke-width="1.5"/>
+<text x="542.0" y="134" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Activation (SiLU / ReLU)</text>
+<text x="542.0" y="147" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tích hợp thẳng vào đầu ra Conv</text>
+<rect x="447" y="166" width="390" height="194" rx="5" fill="#FAFAFA" stroke="#B0BEC5" stroke-width="1.2"/>
+<text x="457" y="182" font-size="10.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Công thức toán học Conv-BN Folding:</text>
+<text x="457" y="197" font-size="9.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Hệ số co giãn từng kênh c: s_c = γ_c / √(σ²_c + ε)</text>
+<rect x="460" y="205" width="364" height="38" rx="4" fill="white" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="642" y="219" font-size="9.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">W_fused[c, :, :, :] = s_c · W[c, :, :, :]</text>
+<text x="642" y="233" font-size="9.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">b_fused[c] = s_c · (b_c - μ_c) + β_c</text>
+<text x="457" y="257" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Triệt tiêu hoàn toàn lớp BN: Chi phí tính toán của BN = 0.</text>
+<text x="457" y="273" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tiết kiệm DRAM 100%: Không ghi tensor trung gian ra bộ nhớ ngoài.</text>
+<text x="457" y="289" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tối ưu INT8: Lượng tử hóa trực tiếp trên ma trận trọng số W_fused.</text>
+<text x="457" y="305" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tăng tốc thực tế: Giảm 20 - 35% độ trễ tổng thể của mạng CNN.</text>
+<text x="457" y="321" font-size="8.8" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">• Tương thích hoàn hảo: RKNN-Toolkit2 tự động thực hiện khi convert.</text>
+<text x="457" y="337" font-size="8.8" font-weight="400" fill="#555555" text-anchor="start" dominant-baseline="central">• Triển khai zero-code: Mô hình ONNX chuẩn được RKNN tối ưu đồ thị sẵn.</text>
+<text x="10" y="392" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Rockchip RKNN-Toolkit2 User Guide, Whitepaper on Neural Network Quantization (Nagel et al., 2021).</text>
+</svg>
