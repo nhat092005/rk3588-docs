@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 444" width="860" height="444" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="444" fill="white"/>
+<rect x="730" y="4" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="770.3" y="15.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="12" y="18" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Minh họa hình học Pipeline suy luận phát hiện vật thể trên RK3588 (NumPy &amp; RKNN)</text>
+<rect x="15" y="42" width="240" height="230" rx="5" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="15" y="42" width="240" height="28" rx="5" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="27" y="61" font-size="9.8" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">1. TIỀN XỬ LÝ (LetterBox 640)</text>
+<rect x="30" y="80" width="86" height="50" rx="4" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<circle cx="73" cy="100" r="7" fill="#94A3B8" stroke="#444444" stroke-width="1.2"/>
+<path d="M73 107 L73 122" fill="none" stroke="#444444" stroke-width="1.4"/>
+<text x="125" y="96" font-size="8.2" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">(H₀, W₀, 3) BGR</text>
+<text x="125" y="110" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Ảnh gốc 1080×1920</text>
+<path d="M73 134 L73 154" fill="none" stroke="#1E5BB8" stroke-width="1.4" marker-end="url(#m1E5BB8n)"/>
+<text x="83" y="147" font-size="7.5" font-weight="400" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Resize dài về 640</text>
+<rect x="30" y="160" width="86" height="86" rx="4" fill="#FFFFFF" stroke="#444444" stroke-width="1.2"/>
+<rect x="30" y="160" width="86" height="17" rx="4" fill="#727272" stroke="none" stroke-width="1.2"/>
+<text x="73" y="171" font-size="6.8" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">padh = 114</text>
+<rect x="30" y="177" width="86" height="52" rx="4" fill="#E2E8F0" stroke="none" stroke-width="1.2"/>
+<circle cx="73" cy="197" r="6" fill="#94A3B8" stroke="#444444" stroke-width="1.2"/>
+<path d="M73 203 L73 217" fill="none" stroke="#444444" stroke-width="1.4"/>
+<rect x="30" y="229" width="86" height="17" rx="4" fill="#727272" stroke="none" stroke-width="1.2"/>
+<text x="73" y="240" font-size="6.8" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">padh = 114</text>
+<text x="125" y="182" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">(1, 640, 640, 3)</text>
+<text x="125" y="198" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">uint8 RGB [NHWC]</text>
+<text x="125" y="214" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Lưu meta khôi phục:</text>
+<text x="125" y="228" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">gain, padw, padh</text>
+<text x="135" y="260" font-size="7.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Ảnh vuông đệm chuẩn board</text>
+<path d="M259 157 L305 157" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="282.5" y="150.0" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">uint8 NHWC</text>
+<rect x="310" y="42" width="240" height="230" rx="5" fill="#F8FAFC" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="310" y="42" width="240" height="28" rx="5" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="322" y="61" font-size="9.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">2. FORWARD NPU (RK3588 3-Core)</text>
+<rect x="322" y="78" width="216" height="68" rx="4" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="330" y="91" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Phần cứng NPU RK3588 (6 TOPS)</text>
+<rect x="330" y="98" width="58" height="40" rx="3" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1"/>
+<text x="359" y="113" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Core 0</text>
+<text x="359" y="126" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Backbone</text>
+<rect x="398" y="98" width="58" height="40" rx="3" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1"/>
+<text x="427" y="113" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Core 1</text>
+<text x="427" y="126" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Neck Fused</text>
+<rect x="466" y="98" width="58" height="40" rx="3" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1"/>
+<text x="495" y="113" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Core 2</text>
+<text x="495" y="126" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Detect Head</text>
+<path d="M430 150 L430 166" fill="none" stroke="#2E7D32" stroke-width="1.4" marker-end="url(#m2E7D32n)"/>
+<rect x="322" y="168" width="66" height="50" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="355" y="183" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">P3 / 8</text>
+<text x="355" y="196" font-size="7.5" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">80×80</text>
+<text x="355" y="209" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">6400 boxes</text>
+<rect x="397" y="168" width="66" height="50" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="430" y="183" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">P4 / 16</text>
+<text x="430" y="196" font-size="7.5" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">40×40</text>
+<text x="430" y="209" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">1600 boxes</text>
+<rect x="472" y="168" width="66" height="50" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="505" y="183" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">P5 / 32</text>
+<text x="505" y="196" font-size="7.5" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">20×20</text>
+<text x="505" y="209" font-size="7.0" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">400 boxes</text>
+<text x="430" y="236" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Đầu ra thô: (1, 4 + nc, 8400)</text>
+<text x="430" y="252" font-size="7.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Tổng cộng 8400 hộp dự đoán dạng xywh</text>
+<path d="M554 157 L600 157" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<text x="577.5" y="150.0" font-size="7.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">8400 boxes</text>
+<rect x="605" y="42" width="240" height="230" rx="5" fill="#F8FAFC" stroke="#E65100" stroke-width="1.3"/>
+<rect x="605" y="42" width="240" height="28" rx="5" fill="#FFFBEB" stroke="#E65100" stroke-width="1.3"/>
+<text x="617" y="61" font-size="9.8" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">3. HẬU XỬ LÝ (NMS &amp; Rescale)</text>
+<rect x="620" y="80" width="86" height="68" rx="4" fill="#FFFFFF" stroke="#444444" stroke-width="1.2"/>
+<circle cx="660" cy="110" r="6" fill="#94A3B8" stroke="#444444" stroke-width="1.2"/>
+<path d="M660 116 L660 132" fill="none" stroke="#444444" stroke-width="1.4"/>
+<rect x="645" y="98" width="30" height="42" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.4"/>
+<text x="660" y="88" font-size="6.6" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">0.89</text>
+<rect x="642" y="95" width="34" height="45" rx="4" fill="none" stroke="#C62828" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="687" y="88" font-size="6.5" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">0.72</text>
+<text x="715" y="92" font-size="8.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Lọc conf &gt; 0.25</text>
+<text x="715" y="106" font-size="8.0" font-weight="700" fill="#E65100" text-anchor="start" dominant-baseline="central">và NMS IoU &gt; 0.7</text>
+<text x="715" y="120" font-size="7.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Triệt tiêu các hộp</text>
+<text x="715" y="134" font-size="7.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">dự đoán trùng lặp</text>
+<path d="M660 152 L660 170" fill="none" stroke="#222222" stroke-width="1.4" marker-end="url(#m222222n)"/>
+<text x="670" y="163" font-size="7.4" font-weight="400" fill="#E65100" text-anchor="start" dominant-baseline="central">Trừ padw/h &amp; chia gain</text>
+<rect x="620" y="176" width="96" height="56" rx="4" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<circle cx="665" cy="200" r="7" fill="#94A3B8" stroke="#444444" stroke-width="1.2"/>
+<path d="M665 207 L665 222" fill="none" stroke="#444444" stroke-width="1.4"/>
+<rect x="649" y="190" width="32" height="38" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.6"/>
+<text x="665" y="185" font-size="6.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">person: 0.89</text>
+<text x="725" y="192" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Đầu ra cuối: (N, 6)</text>
+<text x="725" y="208" font-size="7.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">[x1, y1, x2, y2, conf, cls]</text>
+<text x="725" y="222" font-size="7.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Tọa độ pixel gốc</text>
+<text x="725" y="260" font-size="7.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Hộp chuẩn xác trên ảnh ban đầu</text>
+<rect x="15" y="286" width="830" height="135" rx="6" fill="#FAFAFA" stroke="#94A3B8" stroke-width="1.2"/>
+<rect x="15" y="286" width="830" height="24" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="25" y="302" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">3 ĐIỂM KHÁC BIỆT CỐT TỬ GIỮA BOARD (RKNN NPU) VÀ PC (PYTORCH GPU)</text>
+<rect x="23" y="318" width="264" height="92" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="32" y="334" font-size="8.8" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">1. Thứ tự trục (Tensor Layout)</text>
+<text x="32" y="351" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• PC PyTorch: NCHW float32 (1, 3, 640, 640)</text>
+<text x="32" y="366" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Board RKNN: NHWC uint8 (1, 640, 640, 3)</text>
+<text x="32" y="382" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; NPU tự đảo trục trong phần cứng, không tốn CPU.</text>
+<text x="32" y="396" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">   Tránh được overhead transpose của Python.</text>
+<rect x="297" y="318" width="264" height="92" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="306" y="334" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">2. Vị trí phép chia 255 (Normalization)</text>
+<text x="306" y="351" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• PC: PyTorch forward chia float32 / 255.0</text>
+<text x="306" y="366" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Board: Nung mean=0, std=255 vào file .rknn</text>
+<text x="306" y="382" font-size="7.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">-&gt; CẢNH BÁO: Board chia 255 trước sẽ bị chia 2 lần,</text>
+<text x="306" y="396" font-size="7.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">   làm sai lệch hoàn toàn kết quả phát hiện!</text>
+<rect x="571" y="318" width="264" height="92" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+<text x="580" y="334" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">3. Môi trường thực thi (Dependencies)</text>
+<text x="580" y="351" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• PC: PyTorch, CUDA, Ultralytics engine (~4 GB)</text>
+<text x="580" y="366" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Board: Thuần NumPy, OpenCV, RKNN C-API (&lt;80 MB)</text>
+<text x="580" y="382" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Loại bỏ hoàn toàn overhead nặng nề của PyTorch,</text>
+<text x="580" y="396" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">   giảm thiểu RAM tiêu thụ, tối ưu tốc độ thời gian thực.</text>
+<text x="10" y="430" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T3 ai/board/common.py:19-125, ai/core/backends.py:31; T1 ultralytics utils/export/rknn.py:74.</text>
+</svg>

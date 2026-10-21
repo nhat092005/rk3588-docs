@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 348" width="860" height="348" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="348" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="12" y="18" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đồ thị tính toán hai chiều Forward &amp; Backward trên mạng 2-2-1 (Khớp 100% ví dụ số)</text>
+<text x="430" y="33" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">LUỒNG FORWARD TÍNH ACTIVATIONS VÀ LOSS →</text>
+<text x="430" y="154" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">← LUỒNG BACKWARD QUY TẮC CHUỖI TÍNH GRADIENT</text>
+<rect x="15" y="42" width="115" height="42" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="72.5" y="58" font-size="9.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu vào x</text>
+<text x="72.5" y="74" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x = [1, 2]ᵀ</text>
+<rect x="15" y="94" width="115" height="46" rx="4" fill="#EDE7F6" stroke="#5E35B1" stroke-width="1.2"/>
+<text x="72.5" y="110" font-size="8.5" font-weight="700" fill="#5E35B1" text-anchor="middle" dominant-baseline="central">Trọng số W⁽¹⁾ (2×2)</text>
+<text x="72.5" y="128" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">[[1, -1], [0.5, 0.5]]</text>
+<rect x="185" y="62" width="125" height="60" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="247.5" y="78" font-size="9.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Tuyến tính z = W⁽¹⁾x</text>
+<text x="247.5" y="96" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">z = [-1, 1.5]ᵀ</text>
+<text x="247.5" y="112" font-size="8.2" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">z₁ = -1;  z₂ = 1.5</text>
+<path d="M130 63 L179.268 78.2282" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M130 117 L179.161 105.38" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<rect x="365" y="42" width="125" height="44" rx="4" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="427.5" y="58" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Kích hoạt h = ReLU(z)</text>
+<text x="427.5" y="74" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">h = [0, 1.5]ᵀ</text>
+<rect x="365" y="96" width="125" height="44" rx="4" fill="#EDE7F6" stroke="#5E35B1" stroke-width="1.2"/>
+<text x="427.5" y="112" font-size="8.5" font-weight="700" fill="#5E35B1" text-anchor="middle" dominant-baseline="central">Trọng số W⁽²⁾ (1×2)</text>
+<text x="427.5" y="128" font-size="9.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">W⁽²⁾ = [1, 2]</text>
+<path d="M310 80 L359.239 65.676" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="338" y="54" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">ReLU</text>
+<rect x="545" y="42" width="125" height="44" rx="4" fill="#E3F2FD" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="607.5" y="58" font-size="8.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đầu ra mạng o = W⁽²⁾h</text>
+<text x="607.5" y="74" font-size="9.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">o = 1·0 + 2·1.5 = 3.0</text>
+<rect x="545" y="96" width="125" height="44" rx="4" fill="#FFF3E0" stroke="#E65100" stroke-width="1.2"/>
+<text x="607.5" y="112" font-size="8.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Nhãn đích y</text>
+<text x="607.5" y="128" font-size="9.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">y = 1.0</text>
+<path d="M490 64 L539.016 60.4352" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M490 118 L540.315 77.7482" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<rect x="715" y="52" width="130" height="78" rx="5" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.5"/>
+<text x="780.0" y="70" font-size="9.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Hàm Loss L(o, y)</text>
+<text x="780.0" y="90" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">L = ½(o - y)²</text>
+<text x="780.0" y="108" font-size="10" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">= ½(3 - 1)² = 2.0</text>
+<text x="780.0" y="122" font-size="7.8" font-weight="400" fill="#78909C" text-anchor="middle" dominant-baseline="central">Điểm bắt đầu backward</text>
+<path d="M670 64 L709.203 74.454" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M670 118 L709.203 107.546" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<rect x="715" y="166" width="130" height="74" rx="4" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="780" y="181" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">1. Đạo hàm Loss</text>
+<text x="780" y="198" font-size="9.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">∂L/∂o = o - y</text>
+<text x="780" y="214" font-size="10" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">= 3 - 1 = 2.0</text>
+<text x="780" y="230" font-size="7.8" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">Độ dốc tại ngõ ra</text>
+<path d="M780 130 L780 160" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<rect x="515" y="166" width="155" height="74" rx="4" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="592.5" y="181" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">2. Phân nhánh tại o</text>
+<text x="592.5" y="197" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">∂L/∂W⁽²⁾ = (∂L/∂o) hᵀ = [0, 3]</text>
+<text x="592.5" y="213" font-size="8.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">∂L/∂h = W⁽²⁾ᵀ(∂L/∂o) = [2, 4]ᵀ</text>
+<text x="592.5" y="230" font-size="7.8" font-weight="400" fill="#555555" text-anchor="middle" dominant-baseline="central">(2 · [0, 1.5] và [1, 2]ᵀ · 2)</text>
+<path d="M715 203 L676 203" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<rect x="310" y="166" width="165" height="74" rx="4" fill="#FFCDD2" stroke="#B71C1C" stroke-width="1.6"/>
+<text x="392.5" y="181" font-size="9.0" font-weight="700" fill="#B71C1C" text-anchor="middle" dominant-baseline="central">3. Nút chặn Dying ReLU</text>
+<text x="392.5" y="197" font-size="8.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">∂L/∂z = (∂L/∂h) ⊙ ReLU&#x27;(z)</text>
+<text x="392.5" y="213" font-size="9.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">= [2·0, 4·1]ᵀ = [0, 4]ᵀ</text>
+<text x="392.5" y="230" font-size="8.2" font-weight="700" fill="#B71C1C" text-anchor="middle" dominant-baseline="central">z₁ = -1 &lt; 0 =&gt; ReLU&#x27;(-1) = 0!</text>
+<path d="M515 203 L481 203" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<rect x="15" y="166" width="255" height="74" rx="4" fill="#FFEBEE" stroke="#C62828" stroke-width="1.2"/>
+<text x="142.5" y="181" font-size="9.0" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">4. Gradient cập nhật trọng số Lớp 1</text>
+<text x="142.5" y="197" font-size="8.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">∂L/∂W⁽¹⁾ = (∂L/∂z) xᵀ = [0, 4]ᵀ [1, 2] = [[0, 0], [4, 8]]</text>
+<text x="142.5" y="213" font-size="8.0" font-weight="700" fill="#B71C1C" text-anchor="middle" dominant-baseline="central">• Dòng 1 hoàn toàn bằng 0 do z₁ bị ReLU dập tắt!</text>
+<text x="142.5" y="229" font-size="8.0" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">• Dòng 2 nhận gradient [4, 8] để kéo sai số về 0.</text>
+<path d="M310 203 L276 203" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<rect x="15" y="250" width="830" height="56" rx="4" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="25" y="266" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Cập nhật trọng số SGD (η = 0.05):</text>
+<text x="25" y="282" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• W⁽²⁾ mới = [1, 2] - 0.05 · [0, 3] = [1, 1.85]</text>
+<text x="25" y="297" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• W⁽¹⁾ mới = W⁽¹⁾ - 0.05 · [[0, 0], [4, 8]] = [[1, -1], [0.3, 0.1]]</text>
+<text x="465" y="266" font-size="9.2" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Kỳ diệu của Gradient Descent (Forward lại):</text>
+<text x="465" y="282" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• z mới = [-1, 0.5]ᵀ  =&gt;  h mới = [0, 0.5]ᵀ  =&gt;  o mới = 0.925</text>
+<text x="465" y="297" font-size="8.6" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Loss mới: L = ½(0.925 - 1)² ≈ 0.0028  (Giảm 99.86% sai số!)</text>
+<text x="10" y="334" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Dive into Deep Learning (2023, Mục 5.3), Tự tính toán số học đối chiếu PyTorch autograd 2.4.0.</text>
+</svg>

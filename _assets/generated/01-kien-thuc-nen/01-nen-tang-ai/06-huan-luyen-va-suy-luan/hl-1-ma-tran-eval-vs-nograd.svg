@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 452" width="860" height="452" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="452" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="12" y="18" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ma trận phối hợp PyTorch: Cấu trúc mạng (Dropout, BN) và Luồng Gradient theo 4 trạng thái</text>
+<rect x="165" y="38" width="340" height="36" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="335.0" y="53" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Autograd BẬT: torch.enable_grad() (Mặc định)</text>
+<text x="335.0" y="67" font-size="8.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Ghi chép đồ thị DAG, lưu intermediate activations vào VRAM</text>
+<rect x="515" y="38" width="340" height="36" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="685.0" y="53" font-size="9.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Autograd TẮT: with torch.no_grad()</text>
+<text x="685.0" y="67" font-size="8.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Tắt ghi DAG, kết quả requires_grad=False, giải phóng bộ nhớ</text>
+<rect x="15" y="82" width="140" height="160" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="25" y="104" font-size="11" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">model.train()</text>
+<text x="25" y="122" font-size="9" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Chế độ Huấn luyện</text>
+<text x="25" y="147" font-size="8.6" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Dropout: BẬT</text>
+<text x="25" y="161" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Loại ngẫu nhiên nút (p &gt; 0)</text>
+<text x="25" y="184" font-size="8.6" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">BatchNorm: CẬP NHẬT</text>
+<text x="25" y="198" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Dùng μ_B, σ²_B của batch</text>
+<text x="25" y="212" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Tích lũy running stats</text>
+<rect x="15" y="250" width="140" height="160" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="25" y="272" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">model.eval()</text>
+<text x="25" y="290" font-size="9" font-weight="600" fill="#444444" text-anchor="start" dominant-baseline="central">Chế độ Đánh giá / Suy luận</text>
+<text x="25" y="315" font-size="8.6" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Dropout: TẮT</text>
+<text x="25" y="329" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Hàm đồng nhất (Identity)</text>
+<text x="25" y="352" font-size="8.6" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">BatchNorm: CỐ ĐỊNH</text>
+<text x="25" y="366" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Dùng μ_run, σ²_run đã khóa</text>
+<text x="25" y="380" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Không đổi running stats</text>
+<rect x="165" y="82" width="340" height="160" rx="4" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.5"/>
+<rect x="173" y="90" width="140" height="18" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="243" y="102" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">HUẤN LUYỆN CHUẨN</text>
+<circle cx="200" cy="134" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="200" y="137" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="200" cy="172" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="200" y="175" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="270" cy="134" r="9" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="270" y="137" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">h₁</text>
+<circle cx="270" cy="172" r="11" fill="#FEE2E2" stroke="#C62828" stroke-width="1.2" stroke-dasharray="3 2"/>
+<text x="270" y="176" font-size="8.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">✕</text>
+<text x="270" y="192" font-size="7.0" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Drop (p)</text>
+<circle cx="340" cy="153" r="9" fill="#E0F2FE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="340" y="156" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">ŷ</text>
+<path d="M211 134 L259 134" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M211 172 L259 138" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M281 134 L329 150" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M329 158 L281 142" fill="none" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<path d="M259 134 L211 134" fill="none" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<text x="305" y="176" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">∇_w L</text>
+<text x="365" y="128" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Forward: lưu cache VRAM</text>
+<text x="365" y="144" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Dropout: triệt tiêu nút h₂</text>
+<text x="365" y="160" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• BN: μ_B, σ²_B từ mini-batch</text>
+<text x="365" y="176" font-size="8.0" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Backward: tính đạo hàm</text>
+<text x="365" y="192" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Sẵn sàng optimizer.step()</text>
+<text x="180" y="222" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Trạng thái chuẩn trong vòng lặp huấn luyện chính.</text>
+<rect x="515" y="82" width="340" height="160" rx="4" fill="#FFF5F5" stroke="#C62828" stroke-width="1.5"/>
+<rect x="523" y="90" width="155" height="18" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="600" y="102" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">LỖI LOGIC: QUÊN EVAL()</text>
+<circle cx="550" cy="134" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="550" y="137" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="550" cy="172" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="550" y="175" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="620" cy="134" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="620" y="137" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">h₁</text>
+<circle cx="620" cy="172" r="11" fill="#FEE2E2" stroke="#C62828" stroke-width="1.2" stroke-dasharray="3 2"/>
+<text x="620" y="176" font-size="8.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">✕</text>
+<text x="620" y="192" font-size="7.0" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Drop (p)</text>
+<circle cx="690" cy="153" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="690" y="156" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">ŷ</text>
+<path d="M561 134 L609 134" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M631 134 L679 150" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<rect x="635" y="164" width="52" height="18" rx="2" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="661" y="176" font-size="7.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">No DAG</text>
+<text x="710" y="128" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tiết kiệm RAM (tắt DAG)</text>
+<text x="710" y="144" font-size="8.0" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• CẢNH BÁO: Dropout vẫn bật</text>
+<text x="715" y="158" font-size="7.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">-&gt; Dự đoán bị nhiễu ngẫu nhiên!</text>
+<text x="710" y="174" font-size="8.0" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• BN vẫn cập nhật running stats</text>
+<text x="715" y="188" font-size="7.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">-&gt; Làm trôi lệch trọng số gốc!</text>
+<text x="530" y="222" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Lỗi ngầm cực kỳ nguy hiểm trong inference pipeline.</text>
+<rect x="165" y="250" width="340" height="160" rx="4" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1.5"/>
+<rect x="173" y="258" width="165" height="18" rx="3" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1"/>
+<text x="255" y="270" font-size="8.2" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">TÁC VỤ GRADIENT ĐẶC BIỆT</text>
+<circle cx="200" cy="302" r="9" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="200" y="305" font-size="7.8" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="200" cy="340" r="9" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="200" y="343" font-size="7.8" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="270" cy="302" r="9" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="270" y="305" font-size="7.8" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">h₁</text>
+<circle cx="270" cy="340" r="9" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="270" y="343" font-size="7.8" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">h₂</text>
+<text x="270" y="360" font-size="7.0" font-weight="400" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">100% nút</text>
+<circle cx="340" cy="321" r="9" fill="#F3E8FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="340" y="324" font-size="7.8" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">ŷ</text>
+<path d="M211 302 L259 302" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<path d="M281 321 L329 321" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<path d="M329 328 L281 328" fill="none" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<path d="M259 308 L211 308" fill="none" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<path d="M259 340 L211 340" fill="none" stroke="#C62828" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<text x="187" y="370" font-size="8.0" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">∂L/∂x</text>
+<text x="360" y="296" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Dropout tắt, BN khóa cố định</text>
+<text x="360" y="312" font-size="8.0" font-weight="600" fill="#7B1FA2" text-anchor="start" dominant-baseline="central">• Autograd tính đạo hàm input x</text>
+<text x="360" y="328" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Ứng dụng: FGSM Attack,</text>
+<text x="365" y="342" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  Grad-CAM giải thích mô hình</text>
+<text x="360" y="358" font-size="8.0" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Quên no_grad -&gt; tràn VRAM!</text>
+<text x="180" y="390" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Chỉ dùng khi cố ý cần phân tích gradient.</text>
+<rect x="515" y="250" width="340" height="160" rx="4" fill="#FFFFFF" stroke="#1E5BB8" stroke-width="1.5"/>
+<rect x="523" y="258" width="150" height="18" rx="3" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1"/>
+<text x="598" y="270" font-size="8.2" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">SUY LUẬN CHUẨN (INFER)</text>
+<circle cx="550" cy="302" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="550" y="305" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₁</text>
+<circle cx="550" cy="340" r="9" fill="#E2E8F0" stroke="#444444" stroke-width="1.2"/>
+<text x="550" y="343" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">x₂</text>
+<circle cx="620" cy="302" r="9" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="620" y="305" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">h₁</text>
+<circle cx="620" cy="340" r="9" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="620" y="343" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">h₂</text>
+<circle cx="690" cy="321" r="9" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="690" y="324" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">ŷ</text>
+<path d="M561 302 L609 302" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M561 340 L609 306" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M561 340 L609 340" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M631 302 L679 318" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<path d="M631 340 L679 324" fill="none" stroke="#1E5BB8" stroke-width="1.3" marker-end="url(#m1E5BB8n)"/>
+<rect x="637" y="348" width="62" height="16" rx="2" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="668" y="359" font-size="7.0" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">0 VRAM DAG</text>
+<text x="710" y="296" font-size="8.0" font-weight="600" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">• Giải phóng 100% RAM đồ thị</text>
+<text x="710" y="312" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Toàn bộ cấu trúc xác định</text>
+<text x="710" y="328" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• BN cố định μ_run, σ²_run</text>
+<text x="710" y="344" font-size="8.0" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Sẵn sàng gộp Conv-BN</text>
+<text x="715" y="358" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  để xuất sang ONNX / RKNN</text>
+<text x="530" y="390" font-size="8.0" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Cấu hình bắt buộc khi triển khai thực tế trên RK3588.</text>
+<text x="10" y="438" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T1 PyTorch docs torch.nn.Module [PTMOD] và torch.no_grad [PTGRAD]. eval() kiểm soát layer; no_grad() kiểm soát autograd.</text>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 444" width="860" height="444" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="444" fill="white"/>
+<rect x="730" y="4" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="770.3" y="15.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="12" y="18" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Minh họa biến đổi đồ thị tính toán: PyTorch (.pt) -&gt; Fuse Conv-BN -&gt; ONNX -&gt; Lượng tử hóa RKNN</text>
+<rect x="15" y="42" width="180" height="230" rx="5" fill="#FFFFFF" stroke="#C62828" stroke-width="1.3"/>
+<rect x="15" y="42" width="180" height="28" rx="5" fill="#FEE2E2" stroke="#C62828" stroke-width="1.3"/>
+<text x="105.0" y="61" font-size="9.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">1. PyTorch Model (.pt)</text>
+<rect x="40" y="78" width="130" height="22" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1.2"/>
+<text x="105" y="92" font-size="8.0" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Conv2d (W, b)</text>
+<path d="M105 100 L105 116" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="40" y="116" width="130" height="22" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1.2"/>
+<text x="105" y="130" font-size="7.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">BatchNorm2d (γ,β,μ,σ²)</text>
+<path d="M105 138 L105 154" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<circle cx="105" cy="166" r="14" fill="#E0F2FE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="105" y="170" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">SiLU</text>
+<rect x="27" y="186" width="156" height="56" rx="3" fill="#F8FAFC" stroke="#777777" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="105" y="199" font-size="7.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">RepConv Đa nhánh</text>
+<rect x="33" y="206" width="40" height="20" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="1"/>
+<text x="53" y="219" font-size="7.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">3×3</text>
+<rect x="85" y="206" width="40" height="20" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="1"/>
+<text x="105" y="219" font-size="7.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">1×1</text>
+<rect x="137" y="206" width="40" height="20" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="1"/>
+<text x="157" y="219" font-size="7.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Skip</text>
+<text x="105" y="260" font-size="7.2" font-weight="600" fill="#C62828" text-anchor="middle" dominant-baseline="central">Nhiều node tách rời, tốn RAM DDR</text>
+<path d="M199 157 L226 157" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="213.0" y="150.0" font-size="7.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">eval()</text>
+<rect x="231" y="42" width="180" height="230" rx="5" fill="#FFFFFF" stroke="#E65100" stroke-width="1.3"/>
+<rect x="231" y="42" width="180" height="28" rx="5" fill="#FEF3C7" stroke="#E65100" stroke-width="1.3"/>
+<text x="321.0" y="61" font-size="9.2" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">2. Gộp Fuse &amp; Reparam</text>
+<rect x="243" y="78" width="156" height="88" rx="4" fill="#FEF3C7" stroke="#E65100" stroke-width="1.2"/>
+<text x="321" y="92" font-size="8.0" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Conv-BN Folding (fuse())</text>
+<text x="321" y="108" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">W_fused = W · (γ / σ)</text>
+<text x="321" y="124" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">b_fused = (b - μ)·(γ/σ) + β</text>
+<rect x="251" y="134" width="140" height="24" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="321" y="149" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Xóa 100% lớp BatchNorm!</text>
+<rect x="243" y="176" width="156" height="64" rx="4" fill="#F8FAFC" stroke="#444444" stroke-width="1.2"/>
+<text x="321" y="191" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Tái tham số hóa RepConv</text>
+<path d="M321 196 L321 212" fill="none" stroke="#222222" stroke-width="1.3" marker-end="url(#m222222n)"/>
+<rect x="261" y="212" width="120" height="20" rx="2" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="321" y="225" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">1 Kernel 3×3 duy nhất</text>
+<text x="321" y="260" font-size="7.2" font-weight="600" fill="#E65100" text-anchor="middle" dominant-baseline="central">Đồ thị phẳng, sẵn sàng xuất</text>
+<path d="M415 157 L442 157" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="429.0" y="150.0" font-size="7.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">export</text>
+<rect x="447" y="42" width="180" height="230" rx="5" fill="#FFFFFF" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="447" y="42" width="180" height="28" rx="5" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="537.0" y="61" font-size="9.2" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">3. Đồ thị ONNX (.onnx)</text>
+<rect x="467" y="78" width="140" height="22" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1.2"/>
+<text x="537" y="92" font-size="7.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Input (1, 3, 640, 640)</text>
+<path d="M537 100 L537 116" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="463" y="116" width="148" height="34" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="537" y="130" font-size="8.0" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Fused Conv (W_f, b_f)</text>
+<text x="537" y="143" font-size="6.8" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Conv + BN đã là 1 node duy nhất</text>
+<path d="M537 150 L537 166" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<circle cx="537" cy="176" r="14" fill="#E0F2FE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="537" y="180" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">SiLU</text>
+<path d="M537 190 L537 204" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<rect x="467" y="204" width="140" height="22" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1.2"/>
+<text x="537" y="218" font-size="7.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Detect Head (Static)</text>
+<rect x="477" y="232" width="120" height="20" rx="3" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1"/>
+<text x="537" y="245" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">ONNX Opset 19</text>
+<text x="537" y="260" font-size="7.2" font-weight="600" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Đồ thị tĩnh, chuẩn hóa toán tử</text>
+<path d="M631 157 L658 157" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="645.0" y="150.0" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">build</text>
+<rect x="663" y="42" width="180" height="230" rx="5" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="663" y="42" width="180" height="28" rx="5" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="753.0" y="61" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">4. NPU RKNN (.rknn)</text>
+<rect x="675" y="78" width="156" height="88" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="753" y="91" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Lượng tử hóa INT8 / FP16</text>
+<text x="683" y="106" font-size="7.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">FP32:</text>
+<path d="M713 105 L813 105" fill="none" stroke="#1E5BB8" stroke-width="2.0"/>
+<text x="763" y="100" font-size="6.6" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Liên tục (float)</text>
+<path d="M753 109 L753 127" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<text x="683" y="138" font-size="7.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">INT8:</text>
+<circle cx="713" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="729" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="745" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="761" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="777" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="793" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<circle cx="809" cy="136" r="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="763" y="150" font-size="6.6" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">256 mức [-128..127]</text>
+<text x="763" y="160" font-size="6.8" font-weight="600" fill="#444444" text-anchor="middle" dominant-baseline="central">q = round(x / S) + Z</text>
+<rect x="675" y="174" width="156" height="40" rx="3" fill="#FFFFFF" stroke="#777777" stroke-width="1"/>
+<text x="753" y="188" font-size="7.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Chuẩn hóa nung trong model:</text>
+<text x="753" y="202" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">mean=0, std=255</text>
+<rect x="683" y="222" width="140" height="20" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="753" y="235" font-size="7.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Target: rk3588 (3 Core)</text>
+<text x="753" y="260" font-size="7.2" font-weight="600" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Nạp trực tiếp lên NPU Rock 5B</text>
+<rect x="15" y="286" width="830" height="135" rx="6" fill="#FAFAFA" stroke="#94A3B8" stroke-width="1.2"/>
+<rect x="15" y="286" width="830" height="24" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="25" y="302" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">VÌ SAO BẮT BUỘC PHẢI CHUYỂN EVAL VÀ GỘP CONV-BN TRƯỚC KHI XUẤT NPU?</text>
+<text x="25" y="328" font-size="9" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">1. Triệt tiêu hoàn toàn chi phí bộ nhớ của BatchNorm:</text>
+<text x="35" y="343" font-size="8.4" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Trên phần cứng NPU, nếu giữ nguyên lớp BatchNorm độc lập, NPU phải ghi tensor kết quả của Conv ra RAM DDR rồi nạp lại để tính BN.</text>
+<text x="35" y="357" font-size="8.4" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Khi gộp (fuse) thành một phép affine duy nhất W_fused và b_fused, chi phí tính toán và độ trễ truy xuất bộ nhớ của BN giảm về đúng 0.</text>
+<text x="25" y="376" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">2. Đảm bảo tính tất định và ổn định lượng tử hóa INT8:</text>
+<text x="35" y="391" font-size="8.4" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Ở chế độ eval(), thống kê BN cố định -&gt; đồ thị phẳng hơn, dải giá trị kích hoạt ổn định, hạn chế tối đa sai số kẹp biên (clipping error)</text>
+<text x="35" y="405" font-size="8.4" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">khi rknn-toolkit2 hiệu chuẩn lượng tử hóa 8-bit trên tập dữ liệu mẫu.</text>
+<text x="10" y="430" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T1 Ultralytics engine/exporter.py:859-863, nn/tasks.py:240-274; T3 ai/core/rknn/baseline.py:22-24.</text>
+</svg>

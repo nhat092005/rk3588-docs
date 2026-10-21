@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 428" width="860" height="428" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="860" height="428" fill="white"/>
+<rect x="730" y="4" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="766.6" y="15.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="12" y="18" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế dự đoán vị trí hộp: Anchor-based (độ lệch anchor) vs Anchor-free (khoảng cách l, t, r, b)</text>
+<rect x="15" y="42" width="405" height="205" rx="5" fill="#FFFFFF" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="15" y="42" width="405" height="28" rx="5" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="217.5" y="61" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Trường phái Anchor-based (Hộp mẫu tham chiếu)</text>
+<rect x="30" y="80" width="140" height="140" rx="3" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="100" y="92" font-size="7.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Ground Truth (hộp xanh lá)</text>
+<polygon points="60,114 140,114 140,194 60,194" fill="none" stroke="#1E5BB8" stroke-width="1.2" stroke-dasharray="5 3"/>
+<polygon points="45,126 155,126 155,182 45,182" fill="none" stroke="#1E5BB8" stroke-width="1.0" stroke-dasharray="5 3"/>
+<polygon points="72,99 128,99 128,209 72,209" fill="none" stroke="#1E5BB8" stroke-width="1.0" stroke-dasharray="5 3"/>
+<polygon points="70,104 145,104 145,199 70,199" fill="none" stroke="#2E7D32" stroke-width="2.0"/>
+<circle cx="100" cy="154" r="4" fill="#C62828" stroke="#444444" stroke-width="1.2"/>
+<text x="100" y="168" font-size="7.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">(x_a, y_a)</text>
+<path d="M100 154 L122 140" fill="none" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
+<text x="100" y="232" font-size="7.6" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Dự đoán độ lệch (Δx, Δy, Δw, Δh) so với anchor</text>
+<text x="180" y="88" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc điểm Anchor-based:</text>
+<text x="180" y="106" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đặt trước nhiều hộp mẫu (anchor)</text>
+<text x="187" y="120" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  với kích cỡ và tỉ lệ cạnh khác nhau.</text>
+<text x="180" y="138" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đích học: Mạng không đoán box trực tiếp</text>
+<text x="187" y="152" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  mà dự đoán độ lệch so với anchor mẫu.</text>
+<text x="180" y="170" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Gán nhãn huấn luyện: Tính IoU giữa</text>
+<text x="187" y="184" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  mọi anchor và ground truth (tốn RAM).</text>
+<text x="180" y="204" font-size="8.0" font-weight="600" fill="#C62828" text-anchor="start" dominant-baseline="central">• Nhược điểm: Rất nhạy cảm với siêu</text>
+<text x="187" y="218" font-size="7.8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">  tham số anchor (số lượng, tỉ lệ).</text>
+<rect x="440" y="42" width="405" height="205" rx="5" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="440" y="42" width="405" height="28" rx="5" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="642.5" y="61" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Trường phái Anchor-free (Dự đoán điểm &amp; 4 tia khoảng cách)</text>
+<rect x="455" y="80" width="140" height="140" rx="3" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0"/>
+<polygon points="475,92 575,92 575,202 475,202" fill="none" stroke="#2E7D32" stroke-width="2.0"/>
+<text x="567" y="106" font-size="7.2" font-weight="700" fill="#2E7D32" text-anchor="end" dominant-baseline="central">Ground Truth</text>
+<circle cx="515" cy="157" r="4" fill="#C62828" stroke="#444444" stroke-width="1.2"/>
+<text x="507" y="173" font-size="8.0" font-weight="700" fill="#C62828" text-anchor="end" dominant-baseline="central">(x, y)</text>
+<path d="M515 157 L475 157" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="495.0" y="151" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">l</text>
+<path d="M515 157 L515 92" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="521" y="124.5" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">t</text>
+<path d="M515 157 L575 157" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="545.0" y="151" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">r</text>
+<path d="M515 157 L515 202" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="521" y="179.5" font-size="8.0" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">b</text>
+<text x="525" y="234" font-size="7.6" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Hồi quy trực tiếp: [x - l, y - t, x + r, y + b]</text>
+<text x="605" y="88" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc điểm Anchor-free (FCOS/YOLO):</text>
+<text x="605" y="106" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Loại bỏ hoàn toàn hộp anchor mẫu,</text>
+<text x="612" y="120" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  triệt tiêu toàn bộ siêu tham số nhạy cảm.</text>
+<text x="605" y="138" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Mỗi điểm (x, y) trong vật thể là mẫu dương,</text>
+<text x="612" y="152" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  dự đoán 4 khoảng cách (l, t, r, b) tới 4 cạnh.</text>
+<text x="605" y="170" font-size="8.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Không cần tính toán ma trận IoU gán nhãn</text>
+<text x="612" y="184" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">  lúc train -&gt; huấn luyện nhanh và nhẹ hơn.</text>
+<text x="605" y="204" font-size="8.0" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Ưu thế: Kiến trúc hiện đại (YOLOv8 -&gt; v26)</text>
+<text x="612" y="218" font-size="7.8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">  dùng decoupled head anchor-free.</text>
+<rect x="15" y="262" width="830" height="130" rx="6" fill="#FAFAFA" stroke="#94A3B8" stroke-width="1.2"/>
+<rect x="15" y="262" width="830" height="24" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="25" y="278" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">BẢNG ĐỐI CHIẾU 4 TIÊU CHÍ CỐT LÕI GIỮA ANCHOR-BASED VÀ ANCHOR-FREE</text>
+<text x="25" y="306" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• 1. Hộp tham chiếu:</text>
+<text x="33" y="326" font-size="7.8" font-weight="600" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Anchor-based:</text>
+<text x="33" y="340" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Anchor đặt sẵn quanh pixel</text>
+<text x="33" y="358" font-size="7.8" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Anchor-free:</text>
+<text x="33" y="372" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Không dùng, mỗi vị trí là 1 mẫu</text>
+<text x="220" y="306" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• 2. Đích hồi quy:</text>
+<text x="228" y="326" font-size="7.8" font-weight="600" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Anchor-based:</text>
+<text x="228" y="340" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Độ lệch (Δx, Δy, log w, log h)</text>
+<text x="228" y="358" font-size="7.8" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Anchor-free:</text>
+<text x="228" y="372" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Khoảng cách 4 cạnh (l, t, r, b)</text>
+<text x="415" y="306" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• 3. Gán mẫu dương:</text>
+<text x="423" y="326" font-size="7.8" font-weight="600" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Anchor-based:</text>
+<text x="423" y="340" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Theo ngưỡng IoU với anchor</text>
+<text x="423" y="358" font-size="7.8" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Anchor-free:</text>
+<text x="423" y="372" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Điểm nằm trong hộp thật là mẫu dương</text>
+<text x="610" y="306" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">• 4. Siêu tham số:</text>
+<text x="618" y="326" font-size="7.8" font-weight="600" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Anchor-based:</text>
+<text x="618" y="340" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Kích thước, tỉ lệ cạnh anchor</text>
+<text x="618" y="358" font-size="7.8" font-weight="600" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Anchor-free:</text>
+<text x="618" y="372" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Không phụ thuộc siêu tham số anchor</text>
+<text x="10" y="414" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 D2L tr.609-616; T2 FCOS tr.1-4; T2 Sapkota tr.2-3 (YOLOv8 decoupled head).</text>
+</svg>

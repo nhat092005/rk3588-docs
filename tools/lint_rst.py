@@ -19,7 +19,7 @@ MAX_LINES = 650
 MAX_DEPTH = 3
 STRICT_CONTENT = False
 # dac-ta-bang is exempt only until its pages are rewritten (they hold the old [TBD] cells); then drop it from this list
-STATUS_DIRS = ("contents/08-tien-do", "contents/02-phuong-phap/03-dac-ta-bang", "contents/03-ket-qua")
+STATUS_DIRS = ("contents/09-tien-do", "contents/03-phuong-phap/03-dac-ta-bang", "contents/04-ket-qua")
 ADORN = re.compile(r"^([!-/:-@\[-`{-~])\1*$")
 
 

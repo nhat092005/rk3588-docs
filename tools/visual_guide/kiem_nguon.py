@@ -32,17 +32,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # ROOT = main repo root. This folder lives at <ROOT>/docs/tools/visual_guide (docs repo mounted as submodule at docs/).
 ROOT = os.environ.get("RK3588_ROOT") or os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 P = "docs/_assets/pdf/papers/"
-V = P + "05_rk3588/01_vendor_docs/"
 SDK = "3rdparty/rknn-toolkit2/doc/"
 
 # --- PDF sources, cited as "<KEY> tr.N". Same abbreviations as docs/npu_study/00_index.md sections 0 and 7.
 PDFS = {
-    "TRM1": V + "02_trm/01_Rockchip_RK3588_TRM_V1.0_Part1_20220309.pdf",
-    "TRM2": V + "02_trm/02_Rockchip_RK3588_TRM_V1.0_Part2_20220309.pdf",
-    "DS": V + "01_datasheet/02_RK3588_Datasheet_V0.1-20210727.pdf",
-    "UG152": V + "03_rknn_npu/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf",
-    "API232": V + "03_rknn_npu/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf",
-    "OPL": V + "03_rknn_npu/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf",
+    "TRM1": "docs/_assets/pdf/datasheet/trm/rk3588_part1.pdf",
+    "TRM2": "docs/_assets/pdf/datasheet/trm/rk3588_part2.pdf",
+    "DS": "docs/_assets/pdf/datasheet/soc/02_RK3588_Datasheet_V0.1-20210727.pdf",
+    "UG152": "docs/_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf",
+    "API232": "docs/_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf",
+    "OPL": "docs/_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf",
     "UG232": SDK + "02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf",
     "QS232": SDK + "01_Rockchip_RKNPU_Quick_Start_RKNN_SDK_V2.3.2_EN.pdf",
     "RT232": SDK + "04_Rockchip_RKNPU_API_Reference_RKNNRT_V2.3.2_EN.pdf",
