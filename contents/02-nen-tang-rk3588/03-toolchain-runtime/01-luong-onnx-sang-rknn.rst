@@ -40,7 +40,7 @@ UG232 mô tả giai đoạn convert gồm cấu hình, nạp, build và export [
 
 .. _fig-luong-convert-ug232:
 
-.. figure:: ../../../_assets/img/npu/05_toolchain/ug232_p21_fig3-1.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/luong-onnx-sang-rknn/ug232-fig3-1-model-conversion-flow.png
    :align: center
    :alt: Lưu đồ convert model: RKNN init, config, load_xxx, build, export_rknn, RKNN release
 
@@ -77,7 +77,7 @@ UG232 mô tả giai đoạn convert gồm cấu hình, nạp, build và export [
 
 Thứ tự ``config`` trước ``load_onnx`` theo Figure 3-1 và mọi ví dụ đã đọc. API232 tr.6 chỉ nói "Before the RKNN model is built" nên chưa có câu nào cấm thứ tự ngược lại (suy ra).
 
-Nếu ``build`` có ``do_quantization=True`` thì lượng tử hóa nằm trong lời gọi này. Cách chọn thuật toán, granularity và dữ liệu hiệu chỉnh ở :doc:`../02-rknn-luong-tu-hoa/01-kieu-du-lieu-va-config` và :doc:`../02-rknn-luong-tu-hoa/02-calibration-va-qat`.
+Nếu ``build`` có ``do_quantization=True`` thì lượng tử hóa nằm trong lời gọi này. Cách chọn thuật toán, granularity và dữ liệu hiệu chỉnh ở :doc:`../02-rknn-luong-tu-hoa/01-kieu-du-lieu-va-cau-hinh-luong-tu-hoa` và :doc:`../02-rknn-luong-tu-hoa/02-tap-calibration-va-quy-trinh-qat`.
 
 1.2 Tham số quyết định kết quả convert
 --------------------------------------
@@ -140,7 +140,7 @@ Nền. Pass là một bước biến đổi đồ thị tính toán, ví dụ g�
 
 .. _fig-toolkit2-software-diagram:
 
-.. figure:: ../../../_assets/img/npu/05_toolchain/ug232_p7_fig1-2.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/luong-onnx-sang-rknn/ug232-fig1-2-toolkit2-software-diagram.png
    :align: center
    :alt: Sơ đồ phần mềm RKNN-Toolkit2 gồm Frontend Loader, Graph Optimizer, Quantizer, Compiler, Debugger
 
@@ -364,4 +364,4 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
      - ``3rdparty/rknn-toolkit2/doc/RKNNToolKit2_API_Difference_With_Toolkit1-2.3.2.md``
      - 4
 
-Số trang UG232 và API232 là số trang PDF, trùng số in. Hình Figure 3-1 và Figure 1-2 lấy từ UG232 và nằm ở ``_assets/img/npu/05_toolchain/``.
+Số trang UG232 và API232 là số trang PDF, trùng số in. Hình Figure 3-1 và Figure 1-2 lấy từ UG232 và nằm ở ``_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/luong-onnx-sang-rknn/``.

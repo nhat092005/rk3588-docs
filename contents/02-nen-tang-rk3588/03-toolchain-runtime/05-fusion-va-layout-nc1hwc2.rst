@@ -40,9 +40,17 @@ Trục kênh ``C`` được cắt thành các khối ``C2`` kênh liền nhau, `
 
 UG232 bổ sung "C2 is determined by the platform" và "C1 is the rounded-up value of C/C2" [T1 UG232 tr.61]. Với ``C`` không chia hết cho ``C2``, phần cuối của khối kênh cuối là dữ liệu căn thêm không hợp lệ. UG232 lấy RK3568 làm ví dụ: int8 ``(1, 13, 4, 4)`` thành ``(1, 2, 4, 4, 8)``, với ``C2 = 8``, ``C1 = 2``, và ở khối 16 đến 31 chỉ năm giá trị đầu mỗi khối C2 là hợp lệ, ba giá trị còn lại là dữ liệu căn thêm [T1 UG232 tr.61].
 
+.. _fig-rknn-01-layout-nc1hwc2:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/03-toolchain-runtime/rknn-01-layout-nc1hwc2.svg
+   :align: center
+   :alt: Sơ đồ biến đổi định dạng Layout NC1HWC2 và ánh xạ vào 16 lane SIMD MAC của RK3588
+
+   Cơ chế biến đổi định dạng Layout NC1HWC2: Tầng hình học tách kênh C2=16 và tầng ánh xạ phần cứng vào 16 lane SIMD MAC trên NPU Core RK3588. Nguồn: [T1 UG232 tr.61, Fig. 5-1] [T1 UG152 tr.56] [T1 TRM1 tr.1984-1985].
+
 .. _fig-nc1hwc2-fig5-1:
 
-.. figure:: ../../../_assets/img/npu/06_compiler_operators/ug232_p61_fig5-1_table5-1.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/fusion-va-layout-nc1hwc2/ug232-fig5-1-table5-1-nc1hwc2-format.png
    :align: center
    :alt: Format NC1HWC2 và bảng C2 theo từng chip
 
@@ -154,7 +162,7 @@ Nền. "Alignment" là yêu cầu một kích thước (số kênh, độ rộng
    * - Căn SRAM
      - 4K khi cấp SRAM cho NPU
      - Điều kiện cấp phát
-     - Xem :doc:`../01-phan-cung-npu/03-nhieu-core-va-sram-he-thong`
+     - Xem :doc:`../01-phan-cung-npu/03-che-do-da-loi-va-system-sram`
 
 2.1 Input: căn lề width
 -----------------------
@@ -225,7 +233,7 @@ UG232 8.4.2 liệt kê rule fusion phần cứng [T1 UG232 tr.142]. Ảnh dướ
 
 .. _fig-fusion-fig8-7:
 
-.. figure:: ../../../_assets/img/npu/06_compiler_operators/ug232_p142_fig8-7_fusion_rules.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/fusion-va-layout-nc1hwc2/ug232-fig8-7-fusion-rules.png
    :align: center
    :alt: Đổi thứ tự Transpose và Clip để Conv và Clip hợp nhất bằng phần cứng, kèm bảng rule fusion
 

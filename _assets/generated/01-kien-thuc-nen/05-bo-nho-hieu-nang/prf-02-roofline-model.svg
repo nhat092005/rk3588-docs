@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 468" width="880" height="468" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="468" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Mô hình Roofline: Xác định giới hạn hiệu năng theo Băng thông bộ nhớ và Năng lực tính toán mảng MAC</text>
+<rect x="18" y="42" width="480" height="390" rx="5" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="28" y="58" font-size="10.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">BIỂU ĐỒ ROOFLINE: P_attainable = min(P_peak, BW × I)</text>
+<polygon points="55,310 235,110 235,310" fill="#FFFBEB" opacity="0.8"/>
+<polygon points="235,110 480,110 480,310 235,310" fill="#F0FDF4" opacity="0.8"/>
+<path d="M55 310 L490 310" fill="none" stroke="#444444" stroke-width="1.8" marker-end="url(#m444444n)"/>
+<path d="M55 310 L55 90" fill="none" stroke="#444444" stroke-width="1.8" marker-end="url(#m444444n)"/>
+<text x="63" y="95" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Hiệu năng P (TOPS, log)</text>
+<text x="485" y="324" font-size="8.5" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">Cường độ I (FLOPs/Byte, log)</text>
+<path d="M55 310 L230.986 114.46" fill="none" stroke="#C62828" stroke-width="3.0" marker-end="url(#mC62828t)"/>
+<path d="M235 110 L474 110" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<circle cx="235" cy="110" r="5" fill="#E65100" stroke="#444444" stroke-width="1.5"/>
+<text x="235" y="96" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Ridge Point (I_ridge = P_peak / BW)</text>
+<path d="M235 115 L235 310" fill="none" stroke="#E65100" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#mE65100n)"/>
+<text x="235" y="324" font-size="8.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">I_ridge</text>
+<text x="470" y="96" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="end" dominant-baseline="central">Trần tính toán: P_peak</text>
+<text x="68" y="138" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Độ dốc = Băng thông DRAM (BW)</text>
+<circle cx="135" cy="221" r="4.5" fill="#C62828" stroke="#444444" stroke-width="1.2"/>
+<text x="145" y="225" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Depthwise Conv (I thấp)</text>
+<circle cx="90" cy="271" r="4.5" fill="#C62828" stroke="#444444" stroke-width="1.2"/>
+<text x="100" y="275" font-size="8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">ReLU / Add / Norm</text>
+<circle cx="310" cy="110" r="4.5" fill="#2E7D32" stroke="#444444" stroke-width="1.2"/>
+<text x="310" y="128" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Dense Conv 3×3 (I cao)</text>
+<circle cx="410" cy="110" r="4.5" fill="#2E7D32" stroke="#444444" stroke-width="1.2"/>
+<text x="410" y="128" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">GEMM lớn</text>
+<text x="150" y="292" font-size="9.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">VÙNG NGHẼN BỘ NHỚ</text>
+<text x="150" y="304" font-size="8" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">(Memory-Bound)</text>
+<text x="350" y="292" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">VÙNG NGHẼN TÍNH TOÁN</text>
+<text x="350" y="304" font-size="8" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">(Compute-Bound)</text>
+<rect x="28" y="342" width="460" height="78" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="38" y="356" font-size="9.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Quy luật ứng dụng mô hình Roofline:</text>
+<text x="48" y="374" font-size="8.5" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">• Nếu I &lt; I_ridge: Lớp mạng bị đói dữ liệu; tăng xung nhịp NPU KHÔNG giảm độ trễ</text>
+<text x="48" y="392" font-size="8.5" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Nếu I &gt;= I_ridge: Mảng MAC bão hòa công suất; tối ưu băng thông DDR vô tác dụng</text>
+<text x="48" y="410" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Năng lượng truy cập DRAM gấp ~200× phép tính MAC on-chip (Chen 2016)</text>
+<rect x="508" y="42" width="354" height="390" rx="5" fill="#F8FAFC" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="520" y="58" font-size="10.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">HỆ QUẢ VÀ CHIẾN LƯỢC TỐI ƯU HÓA</text>
+<rect x="520" y="72" width="330" height="154" rx="4" fill="#FFF9F9" stroke="#C62828" stroke-width="1.2"/>
+<rect x="528" y="80" width="175" height="20" rx="3" fill="#C62828" stroke="#C62828" stroke-width="1"/>
+<text x="615" y="90" font-size="8.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">CHIẾN LƯỢC KHI MEMORY-BOUND</text>
+<text x="530" y="114" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">1. Gộp toán tử (Operator Fusion):</text>
+<text x="530" y="130" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Gộp Conv+BN+ReLU triệt tiêu đọc/ghi trung gian ra DRAM</text>
+<text x="530" y="146" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">2. Tăng kích thước Tile (Tiling Optimization):</text>
+<text x="530" y="162" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Khai thác tối đa dung lượng SRAM để giảm chi phí biên Halo</text>
+<text x="530" y="178" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">3. Chuyển đổi sang cấu trúc tái sử dụng cao:</text>
+<text x="530" y="194" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Dùng Inverted Bottleneck hoặc nhóm kênh (Grouped Conv)</text>
+<text x="530" y="210" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">4. Nâng cấp kênh nhớ: Chạy LPDDR5 4 kênh (Quad-channel)</text>
+<rect x="520" y="234" width="330" height="146" rx="4" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.2"/>
+<rect x="528" y="242" width="185" height="20" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="620" y="252" font-size="8.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">CHIẾN LƯỢC KHI COMPUTE-BOUND</text>
+<text x="530" y="274" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">1. Lượng tử hóa độ chính xác thấp (Quantization):</text>
+<text x="530" y="290" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Chuyển FP16 sang INT8 tăng gấp 2× đến 4× thông lượng PE</text>
+<text x="530" y="306" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">2. Cắt tỉa mô hình (Channel Pruning / Sparsity):</text>
+<text x="530" y="322" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Loại bỏ các kênh trọng số gần 0 để giảm tổng phép tính MAC</text>
+<text x="530" y="338" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">3. Tái tham số hóa (Structural Re-parameterization):</text>
+<text x="530" y="354" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">   Huấn luyện đa nhánh, suy luận thu về 1 nhánh duy nhất</text>
+<text x="530" y="370" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">4. Tăng tần số xung nhịp NPU (Khóa mức xung cao nhất)</text>
+<rect x="520" y="388" width="330" height="34" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="685.0" y="399" font-size="8.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Mục tiêu tối ưu: Đẩy toán tử tiến gần Ridge Point</text>
+<text x="685.0" y="412" font-size="8.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Khai thác tối đa mảng tính toán mà không bị nghẽn bus bộ nhớ</text>
+<text x="10" y="454" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Jouppi et al. (TPU 2017 tr.5), Chen et al. (Eyeriss 2016 tr.8)</text>
+</svg>

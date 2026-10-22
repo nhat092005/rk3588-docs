@@ -49,6 +49,13 @@ Khi compiler áp dụng operator fusion, nhiều toán tử liên tiếp đượ
 
    "We find that fused operators generate up to a 1.2× to 2× speedup by reducing memory accesses." [T2 TVM tr.4]
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/fus-01-unfused-vs-fused.svg
+   :align: center
+   :width: 95%
+   :alt: So sánh luồng thực thi Unfused và Fused qua bộ nhớ DRAM
+
+   So sánh luồng thực thi Unfused (trái: 3 lần ghi/đọc DRAM cho kết quả trung gian) và Fused (phải: 1 kernel duy nhất trên On-chip SRAM, triệt tiêu 66.7% lưu lượng DRAM) [T2 TVM tr.3-4] [T2 LEE24 tr.1].
+
 1.2 Mẫu điển hình Conv + BN + Activation
 ----------------------------------------
 

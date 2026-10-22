@@ -132,7 +132,7 @@ Kiến trúc PhiNets đưa ra các siêu tham số độc lập để điều kh
 * **Hệ số nhân kênh tầng sâu (:math:`\beta`)**: Điều chỉnh trực tiếp bộ nhớ tham số (PM / Flash). Phần lớn trọng số tập trung ở các khối sau của mạng (nơi số kênh đạt cực đại), nên :math:`\beta` cho phép nén dung lượng file mô hình mà không làm tăng bộ nhớ kích hoạt của các tầng đầu.
 * **Độ sâu (:math:`D`) và độ phân giải (:math:`R`)**: Điều tiết tổng số phép tính (MACs / FLOPs).
 
-.. figure:: ../../../_assets/img/npu/07_memory_performance/phinets_p8_fig4.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/05-bo-nho-hieu-nang/thiet-ke-nhan-thuc-bo-nho/phinets-fig4-ram-flash-constraints.png
    :align: center
    :alt: Ràng buộc bộ nhớ RAM và FLASH trong PhiNets
 
@@ -165,13 +165,20 @@ Lin 2020 khẳng định kỹ thuật này:
 
    "reduces the memory of depth-wise convolutions to N+1" [T2 MCU tr.6]
 
-.. figure:: ../../../_assets/img/npu/07_memory_performance/mcunet_p6_fig7.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/05-bo-nho-hieu-nang/thiet-ke-nhan-thuc-bo-nho/mcunet-fig7-in-place-depthwise-convolution.png
    :align: center
    :alt: In-place depth-wise convolution của TinyEngine
 
    Hình 7.5a. In-place depth-wise convolution của TinyEngine: peak memory giảm từ 2N xuống N+1 nhờ ghi đè activation của channel trước. Nguồn: [T2 MCU tr.6, Figure 7]
 
 Nhờ cơ chế này, tổng bộ nhớ cần thiết giảm từ :math:`2N` xuống còn :math:`N + 1` lát cắt, tiết kiệm tới gần 50% bộ nhớ đỉnh tại các lớp Depthwise mà không làm suy giảm dù chỉ một phép tính độ chính xác.
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/05-bo-nho-hieu-nang/mem-01-inplace-depthwise.svg
+   :align: center
+   :width: 95%
+   :alt: Kỹ thuật In-place Depthwise Convolution cắt giảm bộ nhớ đỉnh từ 2N xuống N+1
+
+   Kỹ thuật In-place Depthwise Convolution: cơ chế ghi đè kênh tuần tự qua bộ đệm phụ trợ 1 lát, cắt giảm bộ nhớ đỉnh từ 2N xuống N+1 [T2 Lin 2020 MCUNet tr.6], [T2 Paissan 2021 PhiNets tr.6, tr.8].
 
 Quy trình luân chuyển bộ nhớ chi tiết của In-place Depthwise Convolution:
 

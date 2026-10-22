@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 512" width="880" height="512" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="512" fill="white"/>
+<text x="14" y="28" font-size="16" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Ma trận tiêu chí thân thiện NPU trên RK3588: Phân loại toán tử và kiến trúc</text>
+<rect x="750" y="14" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="790.3" y="25.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<rect x="14" y="48" width="274" height="366" rx="6" ry="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5"/>
+<rect x="14" y="48" width="274" height="35" rx="6" ry="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+<text x="24" y="63" font-size="11" font-weight="bold" fill="#14532D" text-anchor="start" dominant-baseline="central">1. VÙNG XANH: THÂN THIỆN NPU</text>
+<text x="24" y="76" font-size="8.5" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">Thực thi 100% trên NPU, hỗ trợ đa lõi</text>
+<rect x="23" y="90" width="256" height="96" rx="4" ry="4" fill="white" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="33" y="108" font-size="10.5" font-weight="bold" fill="#14532D" text-anchor="start" dominant-baseline="central">Tích chập tiêu chuẩn (Conv)</text>
+<text x="33" y="125" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Conv 3x3 (stride 1, 2) &amp; Conv 1x1 [T1 OPL tr.58]</text>
+<text x="33" y="142" font-size="9" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Kênh INT8: Bắt buộc bội số 32 [T1 UG232 tr.145]</text>
+<text x="33" y="159" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Hỗ trợ chạy song song cả 3 core NPU</text>
+<text x="33" y="174" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Trọng số nhân &lt; 6 KB nằm trọn cache DPU</text>
+<rect x="23" y="194" width="256" height="96" rx="4" ry="4" fill="white" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="33" y="212" font-size="10.5" font-weight="bold" fill="#14532D" text-anchor="start" dominant-baseline="central">Hợp nhất ConvolutionSwish</text>
+<text x="33" y="229" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tự động gộp Conv + BN + SiLU [T1 OPL tr.63]</text>
+<text x="33" y="246" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thực thi như 1 lệnh phần cứng duy nhất</text>
+<text x="33" y="263" font-size="9" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Triệt tiêu ghi tensor trung gian ra DDR</text>
+<text x="33" y="278" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Tiết kiệm băng thông và giảm độ trễ</text>
+<rect x="23" y="298" width="256" height="96" rx="4" ry="4" fill="white" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="33" y="316" font-size="10.5" font-weight="bold" fill="#14532D" text-anchor="start" dominant-baseline="central">Khối C2f, C3k2 &amp; SPPF</text>
+<text x="33" y="333" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Phép cộng Add residual hỗ trợ 3 core [T1]</text>
+<text x="33" y="350" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Split và Concat 100% trong OPL 3.2</text>
+<text x="33" y="367" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• SPPF: MaxPool kernel &lt;= 7, auto_pad</text>
+<text x="33" y="382" font-size="8.5" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Toàn bộ khối chạy trọn vẹn trên NPU</text>
+<rect x="303" y="48" width="274" height="366" rx="6" ry="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1.5"/>
+<rect x="303" y="48" width="274" height="35" rx="6" ry="6" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.5"/>
+<text x="313" y="63" font-size="11" font-weight="bold" fill="#713F12" text-anchor="start" dominant-baseline="central">2. VÙNG VÀNG: CẦN TỐI ƯU HÓA</text>
+<text x="313" y="76" font-size="8.5" font-weight="400" fill="#854D0E" text-anchor="start" dominant-baseline="central">Chạy trên NPU nhưng có thể suy giảm hiệu năng</text>
+<rect x="312" y="90" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FDE047" stroke-width="1.2"/>
+<text x="322" y="108" font-size="10.5" font-weight="bold" fill="#713F12" text-anchor="start" dominant-baseline="central">Depthwise Conv (DWConv)</text>
+<text x="322" y="125" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Có hỗ trợ NPU nhưng MAC utilization thấp</text>
+<text x="322" y="142" font-size="9" font-weight="400" fill="#B45309" text-anchor="start" dominant-baseline="central">• Kênh INT8 bắt buộc bội số 64 [T1 UG232 tr.145]</text>
+<text x="322" y="159" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thiếu tái sử dụng dữ liệu chéo kênh</text>
+<text x="322" y="174" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Khuyến nghị: Ưu tiên Conv tiêu chuẩn 3x3</text>
+<rect x="312" y="194" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FDE047" stroke-width="1.2"/>
+<text x="322" y="212" font-size="10.5" font-weight="bold" fill="#713F12" text-anchor="start" dominant-baseline="central">Cơ chế chú ý (Attention)</text>
+<text x="322" y="229" font-size="9" font-weight="400" fill="#B45309" text-anchor="start" dominant-baseline="central">• MatMul rời rạc không có NPU tổng quát</text>
+<text x="322" y="246" font-size="9" font-weight="400" fill="#1D4ED8" text-anchor="start" dominant-baseline="central">• Bắt buộc: Bật enable_flash_attention=True</text>
+<text x="322" y="263" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Hợp nhất thành op exSDPAttention [T1]</text>
+<text x="322" y="278" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Giới hạn số kênh channel &lt;= 8192 [T1 OPL]</text>
+<rect x="312" y="298" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FDE047" stroke-width="1.2"/>
+<text x="322" y="316" font-size="10.5" font-weight="bold" fill="#713F12" text-anchor="start" dominant-baseline="central">Toán tử chuyển dữ liệu &amp; Resize</text>
+<text x="322" y="333" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Nhóm data transfer: Concat, Split, Reshape</text>
+<text x="322" y="350" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tiêu hao băng thông DDR, cần tiết giảm [T1]</text>
+<text x="322" y="367" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Resize: Phóng to 2-8x qua ConvTranspose</text>
+<text x="322" y="382" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Không có nhân phần cứng Resize chuyên dụng</text>
+<rect x="592" y="48" width="274" height="366" rx="6" ry="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+<rect x="592" y="48" width="274" height="35" rx="6" ry="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+<text x="602" y="63" font-size="11" font-weight="bold" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">3. VÙNG ĐỎ: NGUY CƠ RƠI CPU</text>
+<text x="602" y="76" font-size="8.5" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central">Thiếu nhân phần cứng, gây nghẽn tốc độ nặng</text>
+<rect x="601" y="90" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FCA5A5" stroke-width="1.2"/>
+<text x="611" y="108" font-size="10.5" font-weight="bold" fill="#991B1B" text-anchor="start" dominant-baseline="central">Khối DFL (Phân bố Box)</text>
+<text x="611" y="125" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Chứa Reshape + Softmax + Transpose</text>
+<text x="611" y="142" font-size="9" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Kích thước phẳng 16*8400 vượt p=8192 [T1]</text>
+<text x="611" y="159" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Toán tử Transpose bị đẩy về thực thi CPU</text>
+<text x="611" y="174" font-size="8.5" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Giải pháp: Dùng head trực tiếp không DFL</text>
+<rect x="601" y="194" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FCA5A5" stroke-width="1.2"/>
+<text x="611" y="212" font-size="10.5" font-weight="bold" fill="#991B1B" text-anchor="start" dominant-baseline="central">End-to-End NMS (Lọc hộp)</text>
+<text x="611" y="229" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• TopK &amp; GatherElements chỉ có trong CPU OPs</text>
+<text x="611" y="246" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• NPU không có mạch so sánh / sắp xếp động</text>
+<text x="611" y="263" font-size="9" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Ultralytics Exporter ép tắt end2end=False</text>
+<text x="611" y="278" font-size="8.5" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Bắt buộc: Đưa NMS ra CPU C++ ngoài đồ thị</text>
+<rect x="601" y="298" width="256" height="96" rx="4" ry="4" fill="white" stroke="#FCA5A5" stroke-width="1.2"/>
+<text x="611" y="316" font-size="10.5" font-weight="bold" fill="#991B1B" text-anchor="start" dominant-baseline="central">Toán tử logic &amp; Kiểu int64</text>
+<text x="611" y="333" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Cast sang int64: NPU không hỗ trợ [T1]</text>
+<text x="611" y="350" font-size="9" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Equal, Mod, ReduceMax: Chỉ có ở Ch.4 CPU</text>
+<text x="611" y="367" font-size="9" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Xuất hiện trong đồ thị sẽ làm phân rã luồng</text>
+<text x="611" y="382" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Thay thế bằng phép tính số học hoặc CPU</text>
+<rect x="14" y="424" width="852" height="54" rx="4" ry="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="24" y="442" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Quy tắc cốt lõi khi thiết kế detector YOLO trên Rockchip RK3588:</text>
+<text x="24" y="458" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Kênh Conv luôn chia hết cho 32 (DWConv chia hết 64); loại bỏ DFL chuyển sang hồi quy direct bbox để tránh rơi về CPU.</text>
+<text x="24" y="471" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Khai thác Conv-Swish hợp nhất; đưa 100% logic TopK/NMS ra CPU máy host viết bằng C++ đa luồng [T1 UG232 tr.145-147] [T1 OPL tr.58-104].</text>
+<text x="10" y="498" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 OPL tr.56-107, tr.320-333] [T1 UG232 tr.140-150] [T1 ULT engine/exporter.py:682-688]</text>
+</svg>

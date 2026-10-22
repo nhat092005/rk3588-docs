@@ -82,7 +82,7 @@ Câu then chốt của bước từng lớp:
 
    "We set each quantizer sequentially, to the target bit-width while keeping the rest of the network to 32 bits" [T2 Nagel 2021 tr.19]
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_p18_fig9.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/phan-tich-sai-so-va-dac-thu-yolo/nagel-fig9-ptq-debugging-flowchart.png
    :align: center
    :alt: Sơ đồ debug PTQ của Nagel
 
@@ -108,7 +108,7 @@ Tác giả mô tả giá trị activation dồn ở gần 0 và có cận dướ
 
    "This phenomenon can be attributed to the frequent utilization of the Swish (SILU) activation function in the YOLO series." [T2 Wang 2023 tr.7]
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/qyolo_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/phan-tich-sai-so-va-dac-thu-yolo/qyolo-fig1-yolov5s-activation-histogram.png
    :align: center
    :alt: Histogram activation của lớp model.21.conv trong YOLOv5s
 

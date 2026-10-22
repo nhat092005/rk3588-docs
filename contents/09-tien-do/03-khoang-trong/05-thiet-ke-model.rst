@@ -41,7 +41,7 @@ Mâu thuẫn và nhập nhằng đã ghi nhận
    * - 5
      - Op hỗ trợ đa lõi
      - UG232 tr.75: Relu, Clip, PRelu, LeakyRelu
-     - OPL tr.84 đến 86: các op này "暂不支持" (xem ``06_``)
+     - OPL tr.84 đến 86: các op này "暂不支持" (xem :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/04-operator-list`)
 
 Còn thiếu nguồn (unknown)
 =========================
@@ -64,14 +64,6 @@ Còn thiếu nguồn (unknown)
    * - Vì sao YOLO11 chậm hơn YOLOv8 trên RK3588 INT8
      - T3: ``perf_debug`` theo lớp (EDGE tr.5 chỉ nêu giả thuyết C3k2)
    * - Cấu trúc head YOLOv8 (DFL, decoupled)
-     - Không có trong T2 hợp lệ. Đóng một phần (T1): đã mô tả từ mã nguồn ``ultralytics`` (``head.py``) ở ``09_yolo_architecture.md`` :ref:`Đầu Detect <924-đầu-detect>`, tài liệu YOLOv8 chính thức chưa được trích cho cấu trúc head
+     - Không có trong T2 hợp lệ. Đóng một phần (T1): đã mô tả từ mã nguồn ``ultralytics`` (``head.py``) ở :doc:`../../01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`, tài liệu YOLOv8 chính thức chưa được trích cho cấu trúc head
    * - Nguồn ưu tiên khi UG232 và OPL lệch nhau về đa lõi. Đóng một phần (log T3 board 2026-10-10, lượt 2): với ``core_mask`` CORE_0_1_2, 57 lớp ``ConvExSwish`` (``silu_opt3``) đều WorkLoad 100%/0%/0% (chỉ lõi 0), còn 51 ``ConvRelu`` và 6 ``ConvReluAdd`` (``relu_opt3``) được chia ba lõi (khoảng 35%/32.5%/32.5%). ReLU nhanh hơn CORE_0 khoảng 8% khi dùng 3 lõi (13.969 ms xuống 12.854 ms ở ``relu_opt3``, 13.955 xuống 12.801 ở ``relu_noadd``), SiLU không khác biệt ngoài độ trải. đây là đo trên một model: YOLOv8n trọng số ngẫu nhiên ``nc=5``, INT8, 640x640, toolkit 2.3.2, RK3588S, NPU 1 GHz, ``eval_perf`` ``fix_freq=True``, không phải xác nhận cho mọi Conv+SiLU, phép đo chỉ ghi hành vi, chưa quyết định nguồn ưu tiên
      - T3 với ``perf_debug``
-
-.. |RepVGG Figure 4| image:: ../../../_assets/img/npu/08_model_design_for_npu/repvgg_p5_fig4.png
-.. |MobileOne Figure 3| image:: ../../../_assets/img/npu/08_model_design_for_npu/mobileone_p5_fig3.png
-.. |ActNAS Figure 1| image:: ../../../_assets/img/npu/08_model_design_for_npu/actnas_p1_fig1.png
-.. |S3NAS Figure 8| image:: ../../../_assets/img/npu/08_model_design_for_npu/s3nas_p6_fig8.png
-.. |YOLOv6 Figure 3| image:: ../../../_assets/img/npu/08_model_design_for_npu/yolov6_p4_fig3.png
-.. |EDGE Figure 3| image:: ../../../_assets/img/npu/08_model_design_for_npu/edge_p5_fig3.png
-.. |DAHD-YOLO Figure 1| image:: ../../../_assets/img/npu/08_model_design_for_npu/dahd_p5_fig1.png

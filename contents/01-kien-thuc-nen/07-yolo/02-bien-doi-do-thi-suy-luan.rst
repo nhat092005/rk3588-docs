@@ -49,6 +49,13 @@ Quá trình huấn luyện mô hình học sâu và quá trình suy luận thự
   - Tối ưu hóa thứ tự tensor và loại bỏ phép chuyển vị (Transpose Optimization): Các framework huấn luyện PyTorch mặc định định dạng bộ nhớ NCHW, trong khi nhiều kiến trúc NPU phần cứng biên ưa chuộng định dạng NHWC để tối ưu hóa việc nạp dữ liệu vào mảng PE. Quá trình tối ưu hóa đồ thị suy luận thường sắp xếp lại các phép chuyển vị nhằm giảm thiểu số lần hoán vị trục tensor giữa các tầng liền kề.
   - Khử bỏ các toán tử vô hiệu (Dead Code Elimination): Các nhánh tính toán hoặc biến trung gian chỉ phục vụ mục đích kiểm thử (logging, trích xuất đặc trưng trung gian) trong quá trình huấn luyện đều bị loại bỏ triệt để, đảm bảo đồ thị chỉ chứa đường dẫn tối thiểu từ input đến output.
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-03-train-to-infer-pipeline.svg
+   :align: center
+   :width: 95%
+   :alt: Đường ống biến đổi từ đồ thị huấn luyện sang đồ thị suy luận tối ưu cho NPU
+
+   Đường ống biến đổi từ đồ thị huấn luyện sang đồ thị suy luận: Conv-BN fusion, cắt tỉa nhánh phụ trợ và chuyển đổi sang dạng tĩnh tối ưu hóa NPU [T2 Y26A tr.17], [T2 Y26B tr.6-7].
+
 .. list-table:: Phân loại tác động của các thành phần huấn luyện lên đồ thị suy luận
    :header-rows: 1
    :widths: 25 35 40

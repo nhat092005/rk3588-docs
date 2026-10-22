@@ -142,7 +142,7 @@ Node NPU trong DTS của driver 0.9.8 [T1 DTS dòng 3450-3480]:
 
 Clock đầu tiên ``clk_npu`` là clock SCMI. Tần số khởi tạo gán là 200000000 Hz (dòng 3467-3468). Quan hệ giữa ``SCMI_CLK_NPU`` và ``clk_rknn_dsu0`` của CRU: unknown. Đã tìm ở: TRM1, DTS, từ khóa: ``SCMI_CLK_NPU``, ``clk_rknn_dsu0``.
 
-Miền nguồn cũng khai báo clock (dòng 3116-3149). ``RK3588_PD_NPUTOP`` có ``HCLK_NPU_ROOT``, ``PCLK_NPU_ROOT``, ``CLK_NPU_DSU0``, ``HCLK_NPU_CM0_ROOT``. ``RK3588_PD_NPU1`` và ``RK3588_PD_NPU2`` lồng trong PD_NPUTOP và đều có ``HCLK_NPU_ROOT``, ``PCLK_NPU_ROOT``, ``CLK_NPU_DSU0`` [T1 DTS dòng 3116-3149]. Node NPU gọi ba domain bằng ``power-domains`` với tên ``npu0``, ``npu1``, ``npu2`` [T1 DTS dòng 3473-3476]. Quan hệ lồng và bật tắt domain xem :doc:`01-vi-tri-trong-soc-va-nguon-dien`.
+Miền nguồn cũng khai báo clock (dòng 3116-3149). ``RK3588_PD_NPUTOP`` có ``HCLK_NPU_ROOT``, ``PCLK_NPU_ROOT``, ``CLK_NPU_DSU0``, ``HCLK_NPU_CM0_ROOT``. ``RK3588_PD_NPU1`` và ``RK3588_PD_NPU2`` lồng trong PD_NPUTOP và đều có ``HCLK_NPU_ROOT``, ``PCLK_NPU_ROOT``, ``CLK_NPU_DSU0`` [T1 DTS dòng 3116-3149]. Node NPU gọi ba domain bằng ``power-domains`` với tên ``npu0``, ``npu1``, ``npu2`` [T1 DTS dòng 3473-3476]. Quan hệ lồng và bật tắt domain xem :doc:`01-vi-tri-soc-phan-vung-nguon-va-mcu`.
 
 Ba domain cùng tham chiếu ``CLK_NPU_DSU0``. Suy ra: ba core có thể dùng chung nguồn clock này. Không có câu nào của hãng nói "ba core chạy cùng tần số". Đã tìm ở: TRM1 chương 36, UG152, UG232, API232, SRAM-zh, DTS, driver, từ khóa: ``same frequency``, ``share clock``, ``per-core``. Kết luận: unknown.
 

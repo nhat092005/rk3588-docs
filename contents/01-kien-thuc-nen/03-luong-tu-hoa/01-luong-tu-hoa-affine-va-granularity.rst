@@ -50,7 +50,7 @@ Trong bộ tăng tốc, tích của INT8 được cộng dồn vào accumulator 
 
 .. _fig-nagel-matmul-luong-tu-hoa:
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_p4_fig2.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/luong-tu-hoa-affine-va-granularity/nagel-fig2-matmul-accelerator-logic.png
    :align: center
    :alt: Logic nhân ma trận trong bộ tăng tốc suy luận lượng tử hóa
 
@@ -83,6 +83,13 @@ Theo Nagel, lượng tử hóa ánh xạ vector thực x sang lưới số nguy�
    \hat{x} = s\,(x_{int} - z)
 
 Giới hạn của lưới là :math:`q_{min} = -sz` và :math:`q_{max} = s(2^b - 1 - z)`. Giá trị ngoài đoạn này bị cắt (clipping error). Tăng scale để mở rộng đoạn làm giảm clipping error nhưng tăng rounding error, vì rounding error nằm trong :math:`[-s/2,\ s/2]` [T2 Nagel 2021 tr.4].
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/03-luong-tu-hoa/qnt-01-affine-mapping.svg
+   :align: center
+   :width: 95%
+   :alt: Nguyên lý ánh xạ lượng tử hóa Affine và tham số Scale, Zero-point
+
+   Nguyên lý ánh xạ lượng tử hóa Affine: miền số thực liên tục [α, β], bước nhảy Scale s, Zero-point z, sai số làm tròn và kẹp biên [T2 Nagel 2021 tr.4, tr.8], [T2 Gholami 2021 tr.5].
 
 Gholami viết cùng ý với ký hiệu khác: :math:`Q(r) = \mathrm{Int}(r/S) - Z` và :math:`\tilde{r} = S\,(Q(r) + Z)`, trong đó S là scale, Z là zero-point nguyên và :math:`S = (\beta - \alpha)/(2^b - 1)` với :math:`[\alpha, \beta]` là clipping range [T2 Gholami 2021 tr.5]. Quá trình chọn clipping range thường gọi là calibration [T2 Gholami 2021 tr.5].
 
@@ -181,13 +188,13 @@ Cái giá là offset bị bỏ nên ánh xạ giữa miền nguyên và miền t
 
 .. _fig-nagel-luoi-luong-tu:
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_p5_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/luong-tu-hoa-affine-va-granularity/nagel-fig3-quantization-grids-8bit.png
    :align: center
    :alt: Các lưới lượng tử hóa đều 8 bit: symmetric signed, symmetric unsigned, asymmetric
 
    Ba lưới lượng tử hóa đều ở 8 bit. Nguồn: [T2 Nagel 2021 tr.5, Figure 3]
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_fig2.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/luong-tu-hoa-affine-va-granularity/gholami-fig2-symmetric-vs-asymmetric.png
    :align: center
    :alt: Symmetric quantization so với asymmetric quantization
 
@@ -317,7 +324,7 @@ Nagel gán mức giảm lớn của per-tensor ở MobileNetV2 và EfficientNet 
 
 Nagel nói có công trình chia quantizer theo nhóm weight hoặc activation, mịn hơn per-channel. Độ mịn tăng thường cải thiện độ chính xác nhưng kèm chi phí do accumulator phải cộng các giá trị có scale khác nhau, và phần lớn bộ tăng tốc dấu phẩy tĩnh hiện tại không hỗ trợ [T2 Nagel 2021 tr.5]. Gholami gọi hai mức mịn hơn per-tensor là channelwise và sub-channelwise (groupwise), và xem groupwise là thỏa hiệp giữa độ phân giải và chi phí tính toán [T2 Gholami 2021 tr.7].
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/luong-tu-hoa-affine-va-granularity/gholami-fig3-layerwise-vs-channelwise.png
    :align: center
    :alt: Layerwise và channelwise quantization
 
@@ -345,7 +352,7 @@ Baghbanbashi (lượng tử hóa YOLOv7) so sánh thêm các granularity filter-
      - 0.621
      - ~1.68
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/y7q_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/luong-tu-hoa-affine-va-granularity/y7q-fig3-quantization-granularities.png
    :align: center
    :alt: Các granularity lượng tử hóa trong bài YOLOv7
 

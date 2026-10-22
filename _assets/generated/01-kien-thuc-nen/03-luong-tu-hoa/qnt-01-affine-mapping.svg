@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 446" width="880" height="446" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="446" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Nguyên lý ánh xạ lượng tử hóa Affine (Uniform Asymmetric Quantization)</text>
+<text x="30" y="50" font-size="10" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">1. Miền số thực liên tục x (FP32): x_min = α, x_max = β</text>
+<rect x="30" y="62" width="90" height="38" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.0" stroke-dasharray="5 3"/>
+<text x="75" y="78" font-size="9" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Clipping âm</text>
+<text x="75" y="91" font-size="8" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">x &lt; α (tràn dưới)</text>
+<rect x="125" y="62" width="370" height="38" rx="4" fill="#F0F7FF" stroke="#2563EB" stroke-width="1.2"/>
+<text x="310" y="78" font-size="10" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Miền giá trị lượng tử hóa hợp lệ [α, β]</text>
+<text x="310" y="91" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Phạm vi động (Dynamic Range) = β - α</text>
+<rect x="500" y="62" width="90" height="38" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.0" stroke-dasharray="5 3"/>
+<text x="545" y="78" font-size="9" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Clipping dương</text>
+<text x="545" y="91" font-size="8" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">x &gt; β (tràn trên)</text>
+<path d="M20 116 L594 116" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M125 110 L125 122" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="125" y="133" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="middle" dominant-baseline="central">α = r_min</text>
+<path d="M220 110 L220 122" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="220" y="133" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="middle" dominant-baseline="central">-0.5</text>
+<path d="M290 110 L290 122" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="290" y="133" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="middle" dominant-baseline="central">0.0 (Zero thực)</text>
+<path d="M380 110 L380 122" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="380" y="133" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="middle" dominant-baseline="central">+1.2</text>
+<path d="M495 110 L495 122" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="495" y="133" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="middle" dominant-baseline="central">β = r_max</text>
+<path d="M290 144 L290 166" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="305" y="148" width="108" height="20" rx="4" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.0"/>
+<text x="359" y="160" font-size="7.8" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">0.0 → z (chính xác)</text>
+<path d="M495 144 L495 166" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M125 144 L125 166" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="125" y="175" width="370" height="48" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1.2"/>
+<text x="310" y="192" font-size="9.5" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">2. Miền số nguyên rời rạc q (UINT8 / INT8): {0, 1, 2, ..., 255}</text>
+<text x="310" y="208" font-size="8.5" font-weight="400" fill="#78350F" text-anchor="middle" dominant-baseline="central">Khoảng cách giữa hai mức = Scale s = (β - α) / (q_max - q_min)</text>
+<path d="M125 240 L495 240" fill="none" stroke="#D97706" stroke-width="2.0"/>
+<path d="M125 234 L125 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="125" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_min = 0</text>
+<path d="M185 234 L185 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="185" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_1</text>
+<path d="M245 234 L245 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="245" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_2</text>
+<path d="M290 234 L290 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="290" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q = z (Zero-point)</text>
+<path d="M360 234 L360 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="360" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_k</text>
+<path d="M430 234 L430 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="430" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_n</text>
+<path d="M495 234 L495 246" fill="none" stroke="#D97706" stroke-width="1.8"/>
+<text x="495" y="257" font-size="8.5" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">q_max = 255</text>
+<rect x="175" y="275" width="150" height="48" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.1"/>
+<text x="250" y="291" font-size="9" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Sai số làm tròn (Rounding)</text>
+<text x="250" y="305" font-size="8.2" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">ε ∈ [-s/2, +s/2] khi làm tròn</text>
+<text x="250" y="317" font-size="8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">round(x/s) về số nguyên gần nhất</text>
+<rect x="30" y="275" width="135" height="48" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.1"/>
+<text x="97" y="291" font-size="9" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Sai số kẹp biên (Clipping)</text>
+<text x="97" y="305" font-size="8.2" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">Cắt cụt mọi giá trị ngoài</text>
+<text x="97" y="317" font-size="8" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">khoảng [α, β] về q_min/q_max</text>
+<rect x="610" y="50" width="250" height="355" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="610" y="50" width="250" height="32" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<text x="735" y="70" font-size="9.8" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Đối xứng (Sym) vs Bất đối xứng (Asym)</text>
+<text x="622" y="98" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Lượng tử hóa Asymmetric (Affine):</text>
+<text x="622" y="114" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Zero-point z ≠ 0, thuộc tập số nguyên.</text>
+<text x="622" y="128" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tối ưu cho Activation sau ReLU (x ≥ 0).</text>
+<text x="622" y="142" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Tận dụng 100% dải biểu diễn 256 mức.</text>
+<text x="622" y="156" font-size="8.5" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Nhược điểm: Phép nhân sinh số hạng chéo:</text>
+<text x="632" y="170" font-size="8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">W*X = s_w*s_x*(q_w - z_w)*(q_x - z_x).</text>
+<path d="M620 184 L850 184" fill="none" stroke="#CBD5E1" stroke-width="1.6"/>
+<text x="622" y="202" font-size="9" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">2. Lượng tử hóa Symmetric:</text>
+<text x="622" y="218" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Zero-point cố định z = 0, miền [-β, β].</text>
+<text x="622" y="232" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Tiêu chuẩn vàng cho Trọng số (Weights).</text>
+<text x="622" y="246" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Triệt tiêu hoàn toàn z_w, đơn giản hóa MAC:</text>
+<text x="632" y="260" font-size="8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">W*X = s_w*s_x * SUM(q_w * (q_x - z_x)).</text>
+<text x="622" y="276" font-size="8.5" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Nhược điểm: Lãng phí dải âm nếu phân phối</text>
+<text x="632" y="290" font-size="8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">dữ liệu lệch một phía (như ReLU).</text>
+<path d="M620 304 L850 304" fill="none" stroke="#CBD5E1" stroke-width="1.6"/>
+<text x="622" y="322" font-size="9" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">3. Công thức chuẩn (Nagel 2021 Eq. 4, 6):</text>
+<text x="625" y="338" font-size="8.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">q = clamp(round(x/s) + z; 0, 2^b - 1)</text>
+<text x="625" y="354" font-size="8.5" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">x_hat = s * (q - z)</text>
+<text x="622" y="372" font-size="8.5" font-weight="400" fill="#0F172A" text-anchor="start" dominant-baseline="central">• Zero padding và ReLU không sinh sai số</text>
+<text x="622" y="386" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">khi z là số nguyên chính xác [T2 Nagel].</text>
+<rect x="30" y="338" width="560" height="76" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.1"/>
+<text x="42" y="356" font-size="9.8" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Đánh đổi cốt lõi giữa Clipping Error và Rounding Error (Nagel 2021 tr.4):</text>
+<text x="42" y="373" font-size="8.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Mở rộng [α, β]: Giảm thiểu sai số kẹp biên (clipping) nhưng tăng bước nhảy s → tăng nhiễu làm tròn.</text>
+<text x="42" y="389" font-size="8.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Thu hẹp [α, β]: Giảm bước nhảy s (lượng tử mịn hơn) nhưng làm cắt cụt các giá trị ngoại lai (outliers).</text>
+<text x="10" y="442" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T2 Nagel 2021 tr.4, tr.8] [T2 Gholami 2021 tr.5]</text>
+</svg>

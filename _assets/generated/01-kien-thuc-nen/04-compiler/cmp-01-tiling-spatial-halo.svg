@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 483" width="880" height="483" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="483" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Phân khối không gian (Spatial Tiling) và vùng biên đè chồng (Halo Region) trong Conv 3x3</text>
+<rect x="18" y="40" width="412" height="402" rx="5" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="28" y="50" width="145" height="22" rx="3" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="100" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">CẤU TRÚC MỘT TILE</text>
+<text x="183" y="61" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Mở rộng 1 px mỗi phía cho Kernel 3x3</text>
+<rect x="134" y="96" width="180" height="180" rx="3" fill="#FEF3C7" stroke="#E65100" stroke-width="1.5"/>
+<text x="224.0" y="86" font-size="9.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Tile đầu vào: 10 × 10 = 100 điểm ảnh (Gồm Halo vàng)</text>
+<rect x="156" y="118" width="136" height="136" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="224.0" y="176.0" font-size="10.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">VÙNG LÕI HỮU ÍCH</text>
+<text x="224.0" y="194.0" font-size="9" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tile đầu ra: 8 × 8 = 64 điểm ảnh</text>
+<text x="224.0" y="210.0" font-size="7.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">(Dữ liệu sinh ra feature map mới)</text>
+<text x="224.0" y="107" font-size="8.2" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">Vùng đệm Halo (padding = 1 pixel mỗi phía)</text>
+<text x="224.0" y="265" font-size="8.2" font-weight="400" fill="#E65100" text-anchor="middle" dominant-baseline="central">36 điểm ảnh phụ trợ nạp từ DRAM cho Conv 3×3</text>
+<rect x="33" y="304" width="382" height="126" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="43" y="320" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Phân tích chi phí biên (Overhead) trên Tile 8×8:</text>
+<text x="53" y="340" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Dữ liệu hữu ích tính toán đầu ra: 64 phần tử (64.0%)</text>
+<text x="53" y="360" font-size="8.8" font-weight="400" fill="#E65100" text-anchor="start" dominant-baseline="central">• Dữ liệu Halo phụ trợ trường tiếp nhận: 36 phần tử (36.0%)</text>
+<text x="53" y="380" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Tỷ lệ chi phí biên lãng phí: 36 / 64 = 56.25% dung lượng nạp</text>
+<text x="53" y="400" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Kernel càng lớn (5×5, 7×7), vùng Halo càng phình to</text>
+<text x="53" y="418" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central" font-style="italic">• Nếu không có Halo, các điểm biên tile đầu ra sẽ bị tính sai</text>
+<rect x="450" y="40" width="412" height="402" rx="5" fill="#F8FAFC" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="460" y="50" width="185" height="22" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="552" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">CHỒNG LẤN HAI TILE KỀ NHAU</text>
+<text x="655" y="61" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Đọc lặp dữ liệu biên từ DRAM</text>
+<rect x="475" y="96" width="165" height="110" rx="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.5"/>
+<text x="535" y="131" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Tile A (NPU Core 0)</text>
+<text x="535" y="151" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tính outH 0..7</text>
+<rect x="605" y="96" width="165" height="110" rx="3" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="705" y="131" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tile B (NPU Core 1)</text>
+<text x="705" y="151" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tính outH 8..15</text>
+<rect x="605" y="96" width="35" height="110" rx="2" fill="#FEF3C7" stroke="#C62828" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="622" y="141" font-size="7.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">HALO</text>
+<text x="622" y="154" font-size="7.2" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">CHUNG</text>
+<text x="656.0" y="220" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Dải Halo biên chung bị DMA nạp 2 lần từ DRAM</text>
+<rect x="465" y="236" width="382" height="194" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="475" y="252" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đánh đổi kích thước Tile (Tile Size Trade-off):</text>
+<rect x="475" y="264" width="362" height="42" rx="3" fill="#FFF9F9" stroke="#C62828" stroke-width="1"/>
+<text x="485" y="276" font-size="9" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Tile nhỏ (8 × 8) - Tiết kiệm dung lượng SRAM:</text>
+<text x="485" y="292" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Halo = 36 px (Overhead 56.25%) -&gt; DMA đọc lặp nhiều, nghẽn bus DRAM</text>
+<rect x="475" y="312" width="362" height="42" rx="3" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1"/>
+<text x="485" y="324" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Tile lớn (32 × 32) - Tối ưu băng thông:</text>
+<text x="485" y="340" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Halo = 132 px (Overhead 12.89%) -&gt; Giảm đọc lặp nhưng đòi hỏi SRAM lớn</text>
+<text x="475" y="370" font-size="8.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ràng buộc: Dung lượng Tile + Double Buffer &lt;= Dung lượng SRAM on-chip</text>
+<text x="475" y="388" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Tiling theo dòng (line parallelism) bảo toàn burst transfers của bus DRAM</text>
+<text x="475" y="406" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Compiler phải giải bài toán quy hoạch ràng buộc (Constraint Programming)</text>
+<text x="10" y="469" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Bamberg et al. (eIQ Neutron 2023 tr.4, tr.8), Lee et al. (IEEE TVLSI 2024 tr.2)</text>
+</svg>

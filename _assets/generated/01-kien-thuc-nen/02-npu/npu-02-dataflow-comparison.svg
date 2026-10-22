@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="420" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">So sánh cơ chế luân chuyển dữ liệu: Weight Stationary, Output Stationary và Row Stationary</text>
+<rect x="20" y="52" width="268" height="338" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="20" y="52" width="268" height="42" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<rect x="30" y="59" width="8" height="28" rx="2" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<text x="46" y="70" font-size="11" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Weight Stationary (WS)</text>
+<text x="46" y="85" font-size="8.2" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">W cố định RF | Act ngang | Psum dọc</text>
+<rect x="36" y="102" width="236" height="146" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="56" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="88" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">W_00 giữ</text>
+<text x="88" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">trong RF</text>
+<rect x="148" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="180" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">W_01 giữ</text>
+<text x="180" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">trong RF</text>
+<rect x="56" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="88" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">W_10 giữ</text>
+<text x="88" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">trong RF</text>
+<rect x="148" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="180" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">W_11 giữ</text>
+<text x="180" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">trong RF</text>
+<path d="M30 134 L50 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M120 134 L142 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M212 134 L228 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="234" y="125" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="250" y="135" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M30 190 L50 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M120 190 L142 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M212 190 L228 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="234" y="181" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="250" y="191" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M88 150 L88 168" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M88 206 L88 220" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="66" y="226" width="44" height="18" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="88" y="237" font-size="7.8" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Psum_0</text>
+<path d="M180 150 L180 168" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M180 206 L180 220" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="158" y="226" width="44" height="18" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="180" y="237" font-size="7.8" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Psum_1</text>
+<rect x="306" y="52" width="268" height="338" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="306" y="52" width="268" height="42" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<rect x="316" y="59" width="8" height="28" rx="2" fill="#7C3AED" stroke="#7C3AED" stroke-width="1"/>
+<text x="332" y="70" font-size="11" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Output Stationary (OS)</text>
+<text x="332" y="85" font-size="8.2" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Psum cố định RF | Act ngang | W dọc</text>
+<rect x="322" y="102" width="236" height="146" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="342" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="374" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Y_00 giữ</text>
+<text x="374" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">tích lũy</text>
+<rect x="434" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="466" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Y_01 giữ</text>
+<text x="466" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">tích lũy</text>
+<rect x="342" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="374" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Y_10 giữ</text>
+<text x="374" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">tích lũy</text>
+<rect x="434" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="466" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Y_11 giữ</text>
+<text x="466" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">tích lũy</text>
+<path d="M316 134 L336 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M406 134 L428 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M498 134 L514 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="520" y="125" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="536" y="135" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M316 190 L336 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M406 190 L428 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M498 190 L514 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="520" y="181" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="536" y="191" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M374 102 L374 118" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M374 150 L374 168" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M374 204 L374 220" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<rect x="354" y="226" width="40" height="18" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1.0"/>
+<text x="374" y="237" font-size="7.8" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">w_out</text>
+<path d="M466 102 L466 118" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M466 150 L466 168" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M466 204 L466 220" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<rect x="446" y="226" width="40" height="18" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1.0"/>
+<text x="466" y="237" font-size="7.8" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">w_out</text>
+<rect x="592" y="52" width="268" height="338" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="592" y="52" width="268" height="42" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<rect x="602" y="59" width="8" height="28" rx="2" fill="#059669" stroke="#059669" stroke-width="1"/>
+<text x="618" y="70" font-size="11" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Row Stationary (RS)</text>
+<text x="618" y="85" font-size="8.2" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">1D Conv RF | Tối ưu 3 kiểu tái sử dụng</text>
+<rect x="608" y="102" width="236" height="146" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="628" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="660" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1D-Conv</text>
+<text x="660" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">R0, C0</text>
+<rect x="720" y="118" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="752" y="132" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1D-Conv</text>
+<text x="752" y="143" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">R0, C1</text>
+<rect x="628" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="660" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1D-Conv</text>
+<text x="660" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">R1, C0</text>
+<rect x="720" y="174" width="64" height="32" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.0"/>
+<text x="752" y="188" font-size="8.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1D-Conv</text>
+<text x="752" y="199" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">R1, C1</text>
+<path d="M602 134 L622 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M692 134 L714 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M784 134 L800 134" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="806" y="125" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="822" y="135" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M602 190 L622 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M692 190 L714 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M784 190 L800 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="806" y="181" width="32" height="18" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="822" y="191" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">x_out</text>
+<path d="M660 150 L660 168" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M660 206 L660 220" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="638" y="226" width="44" height="18" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="660" y="237" font-size="7.8" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Psum_0</text>
+<path d="M752 150 L752 168" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M752 206 L752 220" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="730" y="226" width="44" height="18" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="752" y="237" font-size="7.8" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Psum_1</text>
+<text x="34" y="263" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Cơ chế chính:</text>
+<text x="34" y="278" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Trọng số W nạp một lần, đứng yên trong RF.</text>
+<text x="34" y="292" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Kích hoạt x trượt qua các PE cùng hàng.</text>
+<text x="34" y="306" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Psum truyền dọc tích lũy dần theo cột.</text>
+<text x="34" y="324" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Ưu / Nhược điểm:</text>
+<text x="34" y="339" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">+ Tối đa hóa tái sử dụng (reuse) trọng số W.</text>
+<text x="34" y="353" font-size="8.5" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">- Psum phải di chuyển nhiều, tốn bộ đệm.</text>
+<text x="34" y="367" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Đại diện: Google TPU, NVDLA.</text>
+<text x="34" y="381" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Phù hợp lớp có trọng số lớn, batch nhỏ.</text>
+<text x="320" y="263" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Cơ chế chính:</text>
+<text x="320" y="278" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Psum của một pixel Y đứng yên trong PE.</text>
+<text x="320" y="292" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Trọng số và Kích hoạt trượt/broadcast tới.</text>
+<text x="320" y="306" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tích lũy xong mới xuất kết quả ra ngoài.</text>
+<text x="320" y="324" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Ưu / Nhược điểm:</text>
+<text x="320" y="339" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">+ Triệt tiêu hoàn toàn việc di chuyển Psum.</text>
+<text x="320" y="353" font-size="8.5" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">- Cần nạp lại Act và W nhiều lần từ buffer.</text>
+<text x="320" y="367" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Đại diện: ShiDianNao, Layer-Puzzle.</text>
+<text x="320" y="381" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Phù hợp lớp có ofmap lớn, tích lũy sâu.</text>
+<text x="606" y="263" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Cơ chế chính:</text>
+<text x="606" y="278" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tách conv 2D thành các primitive 1D conv.</text>
+<text x="606" y="292" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• 1 hàng filter &amp; 1 hàng ifmap nằm trong RF.</text>
+<text x="606" y="306" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• RF tận dụng cả 3 kiểu reuse: conv, filter, ifmap.</text>
+<text x="606" y="324" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Ưu / Nhược điểm:</text>
+<text x="606" y="339" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">+ Tiết kiệm 1.4× - 2.5× năng lượng so với WS/OS.</text>
+<text x="606" y="353" font-size="8.5" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">- Phần cứng và bộ lập lịch NoC phức tạp hơn.</text>
+<text x="606" y="367" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Đại diện: Eyeriss (Chen 2016).</text>
+<text x="606" y="381" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Cân bằng tối ưu giữa reuse và reduction.</text>
+<text x="10" y="406" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T2 Chen 2016 tr.4-6] [T2 Jouppi 2017 tr.3] [T2 Gao 2023 tr.2]</text>
+</svg>

@@ -146,6 +146,13 @@ Chen 2016 mô tả PE trong bộ tăng tốc dạng spatial architecture như sa
 
 Vậy một PE có ba phần: ALU làm MAC, RF là bộ nhớ cục bộ nhỏ, FIFO điều phối dữ liệu vào ra. RF thường dưới 1 kB mỗi PE [T2 Chen 2016 tr.2]. Paper không nêu rõ một PE làm đúng một MAC mỗi chu kỳ. Chen 2016 chỉ giả định throughput tỷ lệ với số PE đang hoạt động [T2 Chen 2016 tr.7]. Trang này dùng giả định (của trang, suy ra) rằng **một PE hoàn thành một MAC mỗi chu kỳ khi có đủ dữ liệu**, để đếm chu kỳ ở mục 2.3.
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/02-npu/npu-01-pe-mac-structure.svg
+   :align: center
+   :width: 95%
+   :alt: Vi kiến trúc của Processing Element (PE) và đường dữ liệu MAC
+
+   Vi kiến trúc một Processing Element (PE): tập thanh ghi RF, bộ nhân INT8/FP16, bộ tích lũy 32-bit và đường truyền systolic ngang/dọc [T2 Chen 2016 tr.2], [T2 Jouppi 2017 tr.1, tr.3].
+
 2.2 Mảng PE và cách ghép nhiều PE
 ---------------------------------
 
@@ -157,7 +164,7 @@ Một bộ tăng tốc CNN gồm mảng PE, global buffer trên chip và DRAM ng
 
 .. _fig-npu-spatial-arch:
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/eyeriss_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/kien-truc-npu-va-mac/eyeriss-fig1-spatial-architecture-pe.png
    :align: center
    :alt: Sơ đồ khối bộ tăng tốc CNN dạng spatial architecture và phóng to một PE
 
@@ -169,7 +176,7 @@ TPU ghép theo cách khác: một khối nhân ma trận 256x256 MAC nhân cộn
 
 .. _fig-npu-tpu-block:
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/tpu_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/kien-truc-npu-va-mac/tpu-fig1-block-diagram.png
    :align: center
    :alt: Sơ đồ khối của TPU với Matrix Multiply Unit
 

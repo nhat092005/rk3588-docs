@@ -97,7 +97,7 @@ Các số liệu thực nghiệm trên cho thấy những quy luật nhất quá
 
 Đồ thị đường cong đánh đổi giữa độ chính xác và độ trễ (Pareto frontier) trong Hình 8.2 minh họa rõ rệt sự phân hóa này: các mô hình thuần SiLU luôn nằm ở vùng có độ trễ cao nhất, trong khi các mô hình lai do ActNAS tạo ra thiết lập một đường biên Pareto vượt trội hơn hẳn các mô hình sử dụng đơn nhất một hàm kích hoạt [T2 ACTNAS tr.1, 7].
 
-.. figure:: ../../../_assets/img/npu/08_model_design_for_npu/actnas_p1_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/ham-kich-hoat-va-chi-phi-phan-cung/actnas-fig1-activation-latency-map.png
    :align: center
    :alt: Biểu đồ độ trễ và mAP của YOLO5n và YOLO8m với SiLU, ReLU, Hardswish
 

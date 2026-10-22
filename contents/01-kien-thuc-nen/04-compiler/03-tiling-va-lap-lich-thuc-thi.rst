@@ -89,6 +89,13 @@ Ví dụ định lượng về chi phí biên với kernel tích chập :math:`3
 - Nếu chọn tile đầu ra nhỏ kích thước :math:`8 \times 8` (64 phần tử), tile đầu vào cần nạp là :math:`(8 + 2) \times (8 + 2) = 10 \times 10 = 100` phần tử. Số phần tử vùng biên halo là :math:`100 - 64 = 36` phần tử, chiếm tỷ lệ chi phí biên lên tới :math:`36 / 64 \approx 56.25\%`.
 - Nếu chọn tile đầu ra lớn kích thước :math:`32 \times 32` (1024 phần tử), tile đầu vào cần nạp là :math:`(32 + 2) \times (32 + 2) = 34 \times 34 = 1156` phần tử. Vùng halo là :math:`1156 - 1024 = 132` phần tử, tỷ lệ chi phí biên giảm xuống chỉ còn :math:`132 / 1024 \approx 12.89\%`.
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/cmp-01-tiling-spatial-halo.svg
+   :align: center
+   :width: 95%
+   :alt: Phân khối không gian Spatial Tiling và chi phí vùng biên Halo trong Conv 3x3
+
+   Phân khối không gian và vùng đè chồng Halo: cấu trúc một tile mở rộng biên (trái) và sự chồng lấn dữ liệu giữa hai tile kề cận gây đọc lặp DRAM (phải) [T2 BAMB tr.4, tr.8] [T2 LEE24 tr.2].
+
 Sự tồn tại của vùng halo đặt compiler trước hai lựa chọn xử lý đều phát sinh chi phí:
 
 1. **Nạp lặp lại từ DRAM (Redundant memory fetch)**: Mỗi tile tự nạp đầy đủ vùng đệm biên của nó từ bộ nhớ ngoài. Giải pháp này đơn giản về mặt điều khiển nhưng làm tăng tổng lưu lượng đọc từ DRAM do các hàng/cột biên bị nạp lại nhiều lần [T2 BAMB tr.4].
@@ -147,13 +154,13 @@ Biểu diễn mức vòng lặp cho phép compiler hoán đổi trật tự lồ
 
 Bên cạnh 3 kiểu dataflow cổ điển, một số bộ gia tốc tiên tiến áp dụng cơ chế Cố định hàng (Row Stationary - RS) [T2 BAMB tr.2]. Bằng cách phân rã phép tích chập 2 chiều thành chuỗi các phép tính tích chập 1D theo từng hàng, Row Stationary cho phép mỗi PE lưu trữ một hàng trọng số trong thanh ghi cục bộ và lướt qua các hàng của feature map, tối ưu hóa việc tái sử dụng dữ liệu ở cả 3 chiều (trọng số, activation đầu vào và tổng tích lũy psum) ngay trong mạng lưới PE mà không cần truy xuất lại SRAM.
 
-.. figure:: ../../../_assets/img/npu/06_compiler_operators/tvm_p3_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/04-compiler/tiling-va-lap-lich-thuc-thi/tvm-fig3-two-layer-cnn-computational-graph.png
    :align: center
    :alt: Đồ thị tính toán của một CNN hai lớp trong TVM
 
    Hình 6.5a. Đồ thị tính toán của một CNN hai lớp: mỗi nút là một op nhận một hoặc nhiều tensor. Nguồn: [T2 TVM tr.3, Figure 3]
 
-.. figure:: ../../../_assets/img/npu/06_compiler_operators/tvm_p4_fig4.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/04-compiler/tiling-va-lap-lich-thuc-thi/tvm-fig4-operator-fusion-comparison.png
    :align: center
    :alt: So sánh có và không fusion trong TVM
 

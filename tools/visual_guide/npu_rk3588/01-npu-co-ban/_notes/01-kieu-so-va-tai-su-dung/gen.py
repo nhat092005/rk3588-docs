@@ -20,7 +20,7 @@ from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, Fig, run, source  # noqa: 
 
 W = 900
 CALC = "#EAF2FF"      # phep tinh cua bo hinh
-IMG = os.path.abspath(os.path.join(VG, "..", "..", "_assets", "img", "npu", "01_npu_fundamentals"))
+IMG = os.path.abspath(os.path.join(VG, "..", "..", "_assets", "img"))
 C_USE, C_UNUSED, C_WSTALL, C_WSHIFT, C_NONMAT = "#2E7D32", "#A5D6A7", "#C62828", "#EF9A9A", "#BDBDBD"
 
 
@@ -141,7 +141,7 @@ def fig_u2():
 
     # ---- A. spatial architecture ----
     head(f, 52, "A. Spatial architecture (SA) (EYE tr.2)")
-    yb = f.original(10, 64, 400, os.path.join(IMG, "eyeriss_fig1.png"),
+    yb = f.original(10, 64, 400, os.path.join(IMG, "01-kien-thuc-nen/02-npu/kien-truc-npu-va-mac/eyeriss-fig1-spatial-architecture-pe.png"),
                     ["EYE tr.2, Figure 1: hệ tăng tốc CNN gồm SA", "accelerator và off-chip DRAM; phóng to một PE."])
     rect(f, 440, 64, 450, yb - 64, fill="white", stroke="#999999", rx=6)
     txt(f, 452, 84, [

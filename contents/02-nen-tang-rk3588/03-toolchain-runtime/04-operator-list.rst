@@ -119,7 +119,7 @@ Dòng ``多核联合`` xuất hiện ở 59 trong 79 mục của chương 3.2 (�
      - 20
      - Concat, MaxPool, AveragePool, Slice, Split, Where, 12 mục ConvTranspose hợp nhất
 
-Nguồn các giá trị là mục tương ứng trong OPL (ví dụ Add ở PDF 56, Relu ở PDF 83 và 84, Resize ở PDF 87, Div ở PDF 67). Cách chia core và hành vi "fallback to Core0" của chế độ đa lõi được trình bày ở :doc:`../01-phan-cung-npu/03-nhieu-core-va-sram-he-thong`.
+Nguồn các giá trị là mục tương ứng trong OPL (ví dụ Add ở PDF 56, Relu ở PDF 83 và 84, Resize ở PDF 87, Div ở PDF 67). Cách chia core và hành vi "fallback to Core0" của chế độ đa lõi được trình bày ở :doc:`../01-phan-cung-npu/03-che-do-da-loi-va-system-sram`.
 
 2.4 Đổi đích chạy của op
 ------------------------

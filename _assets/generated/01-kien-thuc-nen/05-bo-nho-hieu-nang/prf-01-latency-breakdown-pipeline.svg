@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" width="880" height="480" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="480" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Bóc tách 4 chặng độ trễ trọn gói (End-to-End) và trục thời gian Tuần tự vs Đường ống đa luồng</text>
+<rect x="18" y="42" width="844" height="120" rx="5" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1.3"/>
+<text x="28" y="58" font-size="10.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">CẤU TRÚC 4 CHẶNG ĐỘ TRỄ: T_E2E = T_pre + T_load + T_npu + T_post</text>
+<rect x="28" y="72" width="186" height="76" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="121.0" y="88" font-size="10" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">1. Tiền xử lý (T_pre)</text>
+<text x="121.0" y="108" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Camera, Giải mã JPEG, BGR-&gt;RGB</text>
+<text x="121.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Resize, Letterbox đệm viền, Float</text>
+<path d="M216 110 L232 110" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="234" y="72" width="186" height="76" rx="4" fill="#FFFBEB" stroke="#E65100" stroke-width="1.2"/>
+<text x="327.0" y="88" font-size="10" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">2. Nạp dữ liệu (T_load)</text>
+<text x="327.0" y="108" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Sao chép bộ nhớ / Memory copy</text>
+<text x="327.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Zero-copy dma-buf tiệm cận ~0 ms</text>
+<path d="M422 110 L438 110" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="440" y="72" width="206" height="76" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="543.0" y="88" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">3. Suy luận NPU (T_npu)</text>
+<text x="543.0" y="108" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Mảng systolic parallel PE chạy</text>
+<text x="543.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Conv, MatMul, Activation, Pooling</text>
+<path d="M648 110 L664 110" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="666" y="72" width="186" height="76" rx="4" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1.2"/>
+<text x="759.0" y="88" font-size="10" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">4. Hậu xử lý (T_post)</text>
+<text x="759.0" y="108" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trích xuất tensor, khôi phục tọa độ</text>
+<text x="759.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Lọc Score thresholding, chạy NMS CPU</text>
+<rect x="18" y="176" width="412" height="262" rx="5" fill="#FFF9F9" stroke="#C62828" stroke-width="1.3"/>
+<rect x="28" y="186" width="175" height="22" rx="3" fill="#C62828" stroke="#C62828" stroke-width="1"/>
+<text x="115" y="197" font-size="9.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">THỰC THI TUẦN TỰ (Sequential)</text>
+<text x="213" y="197" font-size="9.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">1 Luồng CPU - NPU bị bỏ rảnh (Idle)</text>
+<text x="34" y="234" font-size="9" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Frame 1:</text>
+<rect x="83" y="222" width="75" height="24" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="120" y="234" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T_pre (12ms)</text>
+<rect x="161" y="222" width="105" height="24" rx="2" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1"/>
+<text x="213" y="234" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T_npu (18ms)</text>
+<rect x="269" y="222" width="85" height="24" rx="2" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1"/>
+<text x="311" y="234" font-size="8.2" font-weight="400" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">T_post (15ms)</text>
+<text x="34" y="266" font-size="9" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Frame 2:</text>
+<rect x="83" y="254" width="271" height="24" rx="2" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="218" y="266" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Chờ tuần tự đến lượt... (NPU hoàn toàn Idle)</text>
+<rect x="357" y="254" width="60" height="24" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="387" y="266" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T_pre</text>
+<rect x="33" y="292" width="382" height="136" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="43" y="308" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính luồng tuần tự đơn giản:</text>
+<text x="53" y="328" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Tổng độ trễ 1 khung hình: T_E2E = 12 + 18 + 15 = 45 ms</text>
+<text x="53" y="348" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Thông lượng tối đa: 1000 / 45 ≈ 22.2 FPS</text>
+<text x="53" y="368" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Tỷ lệ NPU bận: 18 / 45 = 40.0% (Lãng phí 60% năng lực NPU)</text>
+<text x="53" y="388" font-size="8.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• NPU bị nghẽn chờ CPU hoàn tất Pre/Post-processing</text>
+<text x="53" y="408" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Không khai thác được năng lực đa lõi của SoC</text>
+<rect x="450" y="176" width="412" height="262" rx="5" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="460" y="186" width="185" height="22" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="552" y="197" font-size="9.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">ĐƯỜNG ỐNG ĐA LUỒNG (Pipelined)</text>
+<text x="655" y="197" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Gối đầu CPU &amp; NPU song song</text>
+<text x="466" y="232" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Luồng 1 (Pre):</text>
+<rect x="545" y="220" width="80" height="22" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="585" y="231" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Pre F1 (12m)</text>
+<rect x="628" y="220" width="80" height="22" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="668" y="231" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Pre F2 (12m)</text>
+<rect x="711" y="220" width="80" height="22" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
+<text x="751" y="231" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Pre F3 (12m)</text>
+<text x="466" y="258" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Luồng 2 (NPU):</text>
+<rect x="628" y="246" width="100" height="22" rx="2" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="678" y="257" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">NPU F1 (18ms)</text>
+<rect x="731" y="246" width="100" height="22" rx="2" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
+<text x="781" y="257" font-size="8.2" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">NPU F2 (18ms)</text>
+<text x="466" y="284" font-size="8.5" font-weight="700" fill="#7B1FA2" text-anchor="start" dominant-baseline="central">Luồng 3 (Post):</text>
+<rect x="731" y="272" width="90" height="22" rx="2" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1"/>
+<text x="776" y="283" font-size="8.2" font-weight="400" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">Post F1 (15m)</text>
+<rect x="465" y="302" width="382" height="126" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="475" y="318" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính kiến trúc đường ống gối đầu:</text>
+<text x="485" y="336" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Thông lượng bị chặn bởi chặng dài nhất: max(12, 18, 15) = 18 ms</text>
+<text x="485" y="354" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Thông lượng ổn định: 1000 / 18 ≈ 55.6 FPS (Tăng 2.5× thông lượng)</text>
+<text x="485" y="372" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Tỷ lệ NPU bận: tiệm cận ~100% công suất thực tế</text>
+<text x="485" y="390" font-size="8.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Độ trễ 1 frame (E2E) giữ nguyên 45 ms, nhưng mỗi 18 ms xuất 1 kết quả</text>
+<text x="485" y="408" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">• Đòi hỏi hàng đợi buffer trung gian (Thread Queues) giữa các chặng</text>
+<text x="10" y="466" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Jouppi et al. (TPU 2017 tr.1, tr.8), Chen et al. (Eyeriss 2016 tr.8)</text>
+</svg>

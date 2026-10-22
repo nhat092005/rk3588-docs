@@ -133,8 +133,3 @@ Còn thiếu nguồn (unknown)
      - wheel 2.3.2 không có
    * - T2 về thiết kế mạng cho thiết bị có DRAM và NPU
      - "layer fusion reduce DRAM traffic CNN accelerator"."activation memory scheduling NPU edge DRAM bandwidth"
-
-.. |UG232 Figure 8-5| image:: ../../../_assets/img/npu/07_memory_performance/ug232_p140_fig8-5.png
-.. |UG232 Figure 5-5 và 5-6| image:: ../../../_assets/img/npu/07_memory_performance/ug232_p65_fig5-5_fig5-6.png
-.. |MCUNet Figure 7| image:: ../../../_assets/img/npu/07_memory_performance/mcunet_p6_fig7.png
-.. |PhiNets Figure 4| image:: ../../../_assets/img/npu/07_memory_performance/phinets_p8_fig4.png

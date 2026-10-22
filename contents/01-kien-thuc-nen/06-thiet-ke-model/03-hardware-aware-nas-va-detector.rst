@@ -67,7 +67,7 @@ Số liệu từ Bảng 1 của S3NAS [T2 S3NAS tr.5] chứng minh rằng trên 
 
    "the NPU assumed in this paper can execute depth-wise separable convolution (DWConv), squeeze-and-excitation (SE), and h-swish activation function efficiently" [T2 S3NAS tr.2]
 
-.. figure:: ../../../_assets/img/npu/08_model_design_for_npu/s3nas_p6_fig8.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/s3nas-fig8-mixconv-implementations.png
    :align: center
    :alt: Hai cách cài đặt cùng một khối MixConv
 
@@ -111,7 +111,7 @@ Nhóm tác giả nhận định các lớp tích chập chuẩn kích thước :
 
    "Typically a 3×3 convolution is highly optimized on mainstream GPUs and CPUs and it enjoys higher computational density." [T2 Y6 tr.3]
 
-.. figure:: ../../../_assets/img/npu/08_model_design_for_npu/yolov6_p4_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/yolov6-fig3-repblock-repconv-cspstackrep.png
    :align: center
    :alt: YOLOv6 RepBlock lúc train, RepConv lúc suy luận và CSPStackRep Block
 
@@ -159,7 +159,7 @@ Nghiên cứu EDGE tiến hành khảo sát hiệu năng của 9 biến thể YO
 
 Các phép đo được thực hiện qua 100 lần chạy, loại bỏ 10 lần đầu khởi động; độ lệch chuẩn luôn duy trì dưới 1% giá trị trung bình nhờ đường ống thực thi tần số cố định của NPU Rockchip [T2 EDGE tr.5].
 
-.. figure:: ../../../_assets/img/npu/08_model_design_for_npu/edge_p5_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/edge-fig3-yolo-latency-rv1106-rk3568-rk3588.png
    :align: center
    :alt: Độ trễ suy luận trung bình của các model YOLO trên RV1106, RK3568 và RK3588
 
@@ -216,7 +216,7 @@ Tuy nhiên, bảng số liệu thực nghiệm Table 4 (trang 7) lại phản á
 
 Công trình DAHD-YOLO cải tiến mạng YOLOv8 phục vụ bài toán phát hiện hành vi hút thuốc trong các môi trường phức tạp, tích hợp khối tái tham số hóa DBB (Diverse Branch Block) trong khối C2f_DBCA, cơ chế chú ý ECA-FPN, khối AFGCA và đầu DetectDBB [T2 DAHD tr.5, Figure 1].
 
-.. figure:: ../../../_assets/img/npu/08_model_design_for_npu/dahd_p5_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/dahd-fig1-dahd-yolo-architecture.png
    :align: center
    :alt: Kiến trúc DAHD-YOLO
 

@@ -34,7 +34,7 @@ Nền. RKNN-Toolkit2 là bộ công cụ Python chạy trên máy tính. Nó con
 
 .. _fig-rknn-software-stack:
 
-.. figure:: ../../../_assets/img/npu/05_toolchain/ug232_p7_fig1-1.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/toolkit-pc-va-lite2-board/ug232-fig1-1-rknn-software-stack.png
    :align: center
    :alt: Ngăn xếp phần mềm RKNN từ model framework qua RKNN-Toolkit2 đến AI Apps, RKNN API, RKNPU Driver, RKNPU Hardware
 
@@ -135,7 +135,7 @@ Simulator có ba đặc điểm đáng nhớ.
 - Khi không lượng tử hóa, simulator tính bằng FP16 vì RKNPU chưa hỗ trợ FP32. Muốn mô phỏng FP16, build với ``do_quantization=False`` rồi gọi ``init_runtime(target=None)`` [T1 UG232 tr.131].
 - Kết quả không bảo đảm giống board. UG232 viết "The output result of this function may not be consistent with the board end" và khuyến nghị dùng board nối PC hoặc on-board [T1 UG232 tr.171]. Mức lệch cụ thể là unknown (mục 3).
 
-UG232 đặt simulator ở thứ tự đầu của quy trình gỡ lỗi độ chính xác: phải đúng trên simulator rồi mới xét kết quả trên board [T1 UG232 tr.131]. Quy trình đầy đủ ở :doc:`../02-rknn-luong-tu-hoa/03-hybrid-va-accuracy-analysis`.
+UG232 đặt simulator ở thứ tự đầu của quy trình gỡ lỗi độ chính xác: phải đúng trên simulator rồi mới xét kết quả trên board [T1 UG232 tr.131]. Quy trình đầy đủ ở :doc:`../02-rknn-luong-tu-hoa/03-hybrid-quantization-va-accuracy-analysis`.
 
 Board nối PC hoạt động như sau theo UG232. Toolkit2 trao đổi với ``rknn_server`` trên board, gửi model và đầu vào sang board, rồi gọi RKNPU2 C API ở đó, kết quả gửi ngược về PC [T1 UG232 tr.171]. ``rknn_server`` là dịch vụ nền nhận lệnh từ máy tính qua USB và thực thi giao diện runtime tương ứng [T1 UG232 tr.16]. Phiên bản ``rknn_server``, ``librknnrt.so`` và Toolkit2 phải khớp nhau [T1 UG232 tr.17]. Việc khởi động, cập nhật ``rknn_server`` và cấu hình ``adb`` ở :doc:`03-driver-rknpu-va-rknn-server`. Nhật ký chi tiết khi board nối PC chủ yếu sinh ở phía board [T1 UG232 tr.171].
 
@@ -162,7 +162,7 @@ Nền. Runtime là thư viện nạp model và gọi driver NPU để chạy mod
 
 .. _fig-lite2-flow:
 
-.. figure:: ../../../_assets/img/npu/05_toolchain/ug232_p37_fig3-5.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/toolkit-pc-va-lite2-board/ug232-fig3-5-lite2-usage-flow.png
    :align: center
    :alt: Lưu đồ dùng RKNN-Toolkit Lite2: tạo RKNNLite, load_rknn, init_runtime, inference, release
 
@@ -348,4 +348,4 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
      - Ví dụ, changelog và gói trong SDK. Đường dẫn ``examples/...`` tính từ ``3rdparty/rknn-toolkit2/rknn-toolkit2/``. ``CHANGELOG.md``, ``rknn-toolkit-lite2/CHANGELOG.txt`` và ``rknn-toolkit-lite2/packages/`` tính từ ``3rdparty/rknn-toolkit2/``. ``rknnlite/api/rknn_lite.py`` là file nằm trong wheel ``rknn_toolkit_lite2-2.3.2-cp310`` của thư mục ``packages``. Số sau dấu hai chấm là số dòng
      - 26
 
-Số trang UG232 và API232 là số trang PDF, trùng số in. Các Figure 1-1 và Figure 3-5 lấy từ UG232 và nằm ở ``_assets/img/npu/05_toolchain/``.
+Số trang UG232 và API232 là số trang PDF, trùng số in. Các Figure 1-1 và Figure 3-5 lấy từ UG232 và nằm ở ``_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/toolkit-pc-va-lite2-board/``.

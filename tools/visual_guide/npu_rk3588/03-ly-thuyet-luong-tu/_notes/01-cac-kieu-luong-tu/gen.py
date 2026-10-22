@@ -19,7 +19,7 @@ from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THIN, Fig, run, source  # 
 
 W = 900
 CALC = "#EAF2FF"
-IMG = os.path.abspath(os.path.join(VG, "..", "..", "_assets", "img", "npu", "03_quantization_theory"))
+IMG = os.path.abspath(os.path.join(VG, "..", "..", "_assets", "img"))
 
 
 def tier(f):
@@ -120,7 +120,7 @@ def fig_l1():
 
     # ---- C. mixed precision ----
     head(f, 566, "C. Mixed precision: mỗi lớp một số bit (GHOLAMI tr.13, 14)")
-    yb = f.original(10, 580, 520, os.path.join(IMG, "gholami_p13_fig8.png"),
+    yb = f.original(10, 580, 520, os.path.join(IMG, "01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/gholami-fig8-mixed-precision-quantization.png"),
                     ["GHOLAMI tr.13, Figure 8: mỗi lớp chọn 4 hoặc 8 bit,", "cân bằng độ trễ và độ nhạy của lớp."])
     rect(f, 560, 580, 330, yb - 580, fill="white", stroke="#999999", rx=6)
     txt(f, 572, 600, [

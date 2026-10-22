@@ -42,7 +42,7 @@ Cơ chế mô tả như sau. Dữ liệu từ các hướng khác nhau đến c�
 
 Dữ liệu đi vào từ bên trái, trọng số nạp từ phía trên. Một phép MAC 256 phần tử di chuyển qua ma trận như một mặt sóng chéo (diagonal wavefront). Trọng số được nạp trước và có hiệu lực cùng với mặt sóng đi tới, kèm dữ liệu đầu tiên của một khối mới [T2 Jouppi 2017 tr.4].
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/tpu_fig4.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/tpu-fig4-systolic-data-flow.png
    :align: center
    :alt: Dòng dữ liệu systolic của Matrix Multiply Unit
 
@@ -69,11 +69,11 @@ Layer-Puzzle thì dùng mảng systolic với dataflow output stationary [T2 Gao
 
    "It mainly consists of a systolic array that completes the convolution computation, a weight buffer that stores the weight, a unified buffer that stores the input feature maps(ifmaps), and output feature maps(ofmaps)." [T2 Gao 2023 tr.2]
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/lp_fig2.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/lp-fig2-systolic-npu-router.png
    :align: center
    :alt: NPU có systolic array và nhiều NPU nối qua router
 
-   (a) NPU có systolic array, Unified Buffer và Weight Buffer, (b) nhiều NPU nối qua router (R). Nguồn: [T2 Gao 2023 tr.2, Figure 2]
+   Sơ đồ (a) NPU có systolic array, Unified Buffer và Weight Buffer, (b) nhiều NPU nối qua router (R). Nguồn: [T2 Gao 2023 tr.2, Figure 2]
 
 Tổng hợp các điểm do nguồn nêu:
 
@@ -137,7 +137,7 @@ Vì sao có nhiều core? Jung 2023 nêu: multicore NPU phù hợp khi chạy đ
 
    "Multicore design consists of a compute engine and distributed, isolated local memory per core." [T2 Jung 2023 tr.2]
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/jung_fig1.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/jung-fig1-multi-core-npu-soc.png
    :align: center
    :alt: SoC di động có NPU nhiều core
 
@@ -156,7 +156,7 @@ Với lớp convolution, hai hướng chia thông dụng là theo chiều không
 
    "Channel direction partitioning (Figure 5 (b)) produces an output image partitioned along channels." [T2 Jung 2023 tr.4]
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/jung_fig5.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/jung-fig5-conv-partition-two-cores.png
    :align: center
    :alt: Hai cách chia một lớp convolution cho hai core
 

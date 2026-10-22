@@ -245,6 +245,14 @@ Các toán tử phục vụ kiểm tra logic và chuyển đổi kiểu dữ li�
 
 Căn cứ vào danh mục OPL và các tiêu chí hiệu năng của UG232, các khối chức năng trong các kiến trúc detector hiện đại (như YOLOv8 và các biến thể) được đánh giá theo mức độ thân thiện phần cứng.
 
+.. _fig-yolo-05-npu-compatibility-matrix:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/05-yolo-tren-rk3588/yolo-05-npu-compatibility-matrix.svg
+   :align: center
+   :alt: Ma trận tiêu chí thân thiện NPU trên RK3588 theo 3 vùng đánh giá
+
+   Ma trận phân loại mức độ thân thiện NPU trên RK3588: Vùng Xanh (100% NPU), Vùng Vàng (Cần tối ưu), và Vùng Đỏ (Nguy cơ rơi về CPU). Nguồn: [T1 OPL tr.56-107, tr.320-333] [T1 UG232 tr.140-150] [T1 ULT engine/exporter.py:682-688]
+
 4.1 Các khối thân thiện với NPU
 -------------------------------
 

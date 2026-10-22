@@ -83,7 +83,7 @@ Chen 2016 phân loại các dataflow có sẵn theo loại dữ liệu được 
 
 Cái giá của mỗi lựa chọn nằm ở bộ nhớ. WS giữ trọng số trong RF nên psum không phải lúc nào cũng cộng dồn ngay và phải tạm cất ở global buffer [T2 Chen 2016 tr.4]. OS giữ psum trong RF để giảm chi phí cộng dồn, còn phần dùng lại input phải làm ở mức mảng PE [T2 Chen 2016 tr.4] [T2 Chen 2016 tr.5]. NLR không cần RF, dành diện tích cho global buffer [T2 Chen 2016 tr.5]. OS có ba biến thể (SOC-MOP, MOC-MOP, MOC-SOP) tùy cùng lúc xử lý vùng ofmap nào.
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/eyeriss_fig3.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/dataflow-va-phan-cap-bo-nho/eyeriss-fig3-output-stationary-variants.png
    :align: center
    :alt: Ba biến thể output stationary
 
@@ -106,7 +106,7 @@ RS tách convolution nhiều chiều thành các primitive convolution 1 chiều
 
 Mỗi primitive được ánh xạ vào một PE. Cặp hàng filter và hàng ifmap nằm yên trong PE nên có convolutional reuse ở mức RF [T2 Chen 2016 tr.5]. Ánh xạ gồm hai bước: logical mapping (mỗi primitive vào một PE logic) rồi physical mapping (gấp mảng logic cho vừa mảng PE thật), cả hai thực hiện tĩnh trước lúc chạy [T2 Chen 2016 tr.6]. Mỗi tầng bộ nhớ lo một phần của reuse: RF lo mọi loại reuse giữa các primitive được gấp vào cùng PE, array lo phần còn lại trong một tập PE, global buffer lo phần còn sót sau khi gấp [T2 Chen 2016 tr.6].
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/eyeriss_fig5.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/dataflow-va-phan-cap-bo-nho/eyeriss-fig5-1d-convolution-primitive.png
    :align: center
    :alt: Xử lý một primitive convolution 1 chiều trong PE
 
@@ -115,6 +115,13 @@ Mỗi primitive được ánh xạ vào một PE. Cặp hàng filter và hàng i
 Kết quả mà paper nêu (mô phỏng với cấu hình AlexNet, cùng diện tích phần cứng và số PE):
 
    "Experiments using the CNN configurations of AlexNet show that the proposed RS dataflow is more energy efficient than existing dataflows in both convolutional (1.4× to 2.5×) and fully-connected layers (at least 1.3× for batch size larger than 16)." [T2 Chen 2016 tr.1]
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/02-npu/npu-02-dataflow-comparison.svg
+   :align: center
+   :width: 95%
+   :alt: So sánh cơ chế luân chuyển dữ liệu WS, OS và RS trong mảng PE NPU
+
+   So sánh cơ chế luân chuyển dữ liệu: Weight Stationary (WS), Output Stationary (OS) và Row Stationary (RS) [T2 Chen 2016 tr.4-6], [T2 Jouppi 2017 tr.3], [T2 Gao 2023 tr.2].
 
 Giới hạn: kết quả là của AlexNet trong mô hình năng lượng của paper (xem mục 2.2). Không suy ra RS là dataflow tốt nhất cho mọi mạng hay mọi chip.
 
@@ -160,7 +167,7 @@ Paper định lượng năng lượng dịch chuyển dữ liệu bằng cách �
 
 (phương trình (3), [T2 Chen 2016 tr.8]). Hình 8 của paper là ví dụ có tổng 24 lần dùng lại, tách thành a = 1, b = 2, c = 3, d = 4 [T2 Chen 2016 tr.8] [T2 Chen 2016 tr.9].
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/eyeriss_fig8.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/dataflow-va-phan-cap-bo-nho/eyeriss-fig8-data-reuse-four-levels.png
    :align: center
    :alt: Một pixel ifmap hoặc trọng số được dùng lại qua bốn tầng bộ nhớ
 
@@ -168,16 +175,28 @@ Paper định lượng năng lượng dịch chuyển dữ liệu bằng cách �
 
 Bảng dưới thay các bộ (a, b, c, d) khác nhau cùng tích 24 vào phương trình (3) với chi phí 200, 6, 2, 1 (tính bằng script, suy ra). Dòng cuối là mốc so sánh: giả sử mỗi trong 24 lần dùng đều lấy thẳng từ DRAM, tức :math:`24 \times 200`.
 
-.. csv-table:: Chi phí cho một giá trị dùng 24 lần (đơn vị: một MAC)
+.. list-table:: Chi phí cho một giá trị dùng 24 lần (đơn vị: một MAC)
    :header-rows: 1
    :widths: 40 30 30
 
-   Bộ (a, b, c, d),Tổng chi phí,So với mốc 4800
-   "(1, 1, 1, 24): mọi lần dùng ở RF",232,20.7 lần rẻ hơn
-   "(1, 2, 3, 4): ví dụ Hình 8",248,19.4 lần rẻ hơn
-   "(2, 2, 2, 3)",464,10.3 lần rẻ hơn
-   "(2, 3, 2, 2)",484,9.9 lần rẻ hơn
-   Mốc: 24 lần đều từ DRAM,4800,1
+   * - Bộ (a, b, c, d)
+     - Tổng chi phí
+     - So với mốc 4800
+   * - (1, 1, 1, 24): mọi lần dùng ở RF
+     - 232
+     - 20.7 lần rẻ hơn
+   * - (1, 2, 3, 4): ví dụ Hình 8
+     - 248
+     - 19.4 lần rẻ hơn
+   * - (2, 2, 2, 3)
+     - 464
+     - 10.3 lần rẻ hơn
+   * - (2, 3, 2, 2)
+     - 484
+     - 9.9 lần rẻ hơn
+   * - Mốc: 24 lần đều từ DRAM
+     - 4800
+     - 1
 
 Cùng một dữ liệu, dùng lại ở tầng càng gần ALU thì càng rẻ, và chênh lệch giữa các mô hình reuse có thể gấp 20 lần. Đây chính là lý do chọn dataflow ở mục 1.
 
@@ -217,7 +236,7 @@ Phần phẳng của roofline là tốc độ tính tối đa. Phần dốc là 
 
 Từ mô tả này, hiệu năng đạt được (suy ra): :math:`\text{perf} = \min(\text{đỉnh tính toán},\ \text{băng thông} \times \text{OI})`. Điểm giao hai phần là ridge point, ở TPU nằm xa bên phải:
 
-.. figure:: ../../../_assets/img/npu/01_npu_fundamentals/tpu_fig5.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/dataflow-va-phan-cap-bo-nho/tpu-fig5-roofline.png
    :align: center
    :alt: Roofline của một die TPU, thang log-log
 

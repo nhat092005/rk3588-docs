@@ -26,7 +26,7 @@
    :local:
    :depth: 1
 
-Đường đi của một giao dịch bộ nhớ từ NPU (tóm tắt của người viết, ghép từ các mục sau): master NPU qua BIU (nơi đặt QoS), vào interconnect, đến DDR scheduler của kênh, qua một cổng AXI vào DDRCTL, qua DFI sang DDRPHY rồi tới chip DRAM. Giải thích nền: khi nhiều master (CPU, GPU, NPU, màn hình) dùng chung một DRAM, bộ điều khiển phải sắp xếp lại giao dịch để ít đổi hàng, đổi chiều đọc ghi. QoS là cơ chế cho master thời gian thực (như VOP) chen lên trước master chịu trễ (như NPU chạy batch). Trang này chỉ mô tả phần mới của đường đi. Loại DRAM, số kênh và giới hạn cấu hình thực ở :doc:`../04-bo-nho-hieu-nang/01-ddr-tren-rk3588`. Cách NPU dùng System SRAM ở :doc:`03-nhieu-core-va-sram-he-thong`.
+Đường đi của một giao dịch bộ nhớ từ NPU (tóm tắt của người viết, ghép từ các mục sau): master NPU qua BIU (nơi đặt QoS), vào interconnect, đến DDR scheduler của kênh, qua một cổng AXI vào DDRCTL, qua DFI sang DDRPHY rồi tới chip DRAM. Giải thích nền: khi nhiều master (CPU, GPU, NPU, màn hình) dùng chung một DRAM, bộ điều khiển phải sắp xếp lại giao dịch để ít đổi hàng, đổi chiều đọc ghi. QoS là cơ chế cho master thời gian thực (như VOP) chen lên trước master chịu trễ (như NPU chạy batch). Trang này chỉ mô tả phần mới của đường đi. Loại DRAM, số kênh và giới hạn cấu hình thực ở :doc:`../04-bo-nho-hieu-nang/01-ddr-tren-rk3588`. Cách NPU dùng System SRAM ở :doc:`03-che-do-da-loi-va-system-sram`.
 
 .. _sec-npu-interconnect-qos:
 
@@ -308,7 +308,7 @@ Giá trị mặc định là 255 (``Shaper_NbPktMax0``, offset ``0x0008``, ``[7:
 
 Cùng trang còn các giá trị ``Filters_0_opcode = 0xf``, ``Filters_0_status = 0x3``, ``Filters_0_length = 0xf``, ``Filters_0_usemask = 0x7f`` [T1 TRM2 tr.54]. Với NPU1, MID là ``7'h2e`` (bảng mục 1.2). Ánh xạ cột PORT và PROBE ID sang địa chỉ probe ở Table 1-4 là suy ra từ hai bảng, chưa có câu nào của TRM xác nhận, nên trang này không đưa địa chỉ probe cụ thể. Linux có lộ các probe này ra hay không: unknown.
 
-Với idle request, ví dụ của TRM dùng GPU, không có đoạn riêng cho NPU: BIU được yêu cầu idle khi power domain tách khỏi interconnect, do PMU điều khiển [T1 TRM2 tr.52]. Phần PMU của NPU ở :doc:`01-vi-tri-trong-soc-va-nguon-dien`.
+Với idle request, ví dụ của TRM dùng GPU, không có đoạn riêng cho NPU: BIU được yêu cầu idle khi power domain tách khỏi interconnect, do PMU điều khiển [T1 TRM2 tr.52]. Phần PMU của NPU ở :doc:`01-vi-tri-soc-phan-vung-nguon-va-mcu`.
 
 .. _sec-npu-iommu:
 

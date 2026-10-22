@@ -66,20 +66,6 @@ Mâu thuẫn và nhập nhằng đã ghi nhận
      - NAGEL tr.6: công cụ mô phỏng khi train và đánh giá
      - GHOLAMI tr.12: kiểu triển khai suy luận (không phải mâu thuẫn, chỉ khác trọng tâm)
 
-.. |NAGEL Figure 3| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_p5_fig3.png
-.. |GHOLAMI Figure 2| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_fig2.png
-.. |GHOLAMI Figure 3| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_fig3.png
-.. |Y7Q Figure 3| image:: ../../../_assets/img/npu/03_quantization_theory/y7q_fig3.png
-.. |NAGEL Figure 8| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_fig8.png
-.. |NAGEL Figure 4| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_p6_fig4.png
-.. |GHOLAMI Figure 5| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_p9_fig5.png
-.. |GHOLAMI Figure 8| image:: ../../../_assets/img/npu/03_quantization_theory/gholami_p13_fig8.png
-.. |NAGEL Figure 9| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_p18_fig9.png
-.. |QYOLO Figure 1| image:: ../../../_assets/img/npu/03_quantization_theory/qyolo_fig1.png
-.. |QAREP Figure 1| image:: ../../../_assets/img/npu/03_quantization_theory/qarep_fig1.png
-.. |QAREP Figure 4| image:: ../../../_assets/img/npu/03_quantization_theory/qarep_fig4.png
-.. |NAGEL Figure 2| image:: ../../../_assets/img/npu/03_quantization_theory/nagel_p4_fig2.png
-
 .. _mâu-thuẫn-trong-bộ-tài-liệu-232:
 
 Mâu thuẫn trong bộ tài liệu 2.3.2
@@ -167,10 +153,3 @@ Còn thiếu nguồn (unknown)
    * - ``asymmetric_quantized-8`` còn được ``config()`` 2.3.2 chấp nhận. Đóng (T3 PC, 2026-10-10): ``config()`` trả 0 và ``quant_tab`` giống ``w8a8`` trên model thử, thông báo lỗi của ``config()`` không liệt kê tên này trong danh sách hợp lệ
      - Mâu thuẫn 1
      - Không còn
-
-.. |UG232 Figure 6-1| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p120_fig6-1.png
-.. |UG232 Figure 6-2| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p120_fig6-2.png
-.. |UG232 Figure 6-3| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p123_fig6-3.png
-.. |UG232 Figure 6-4| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p124_fig6-4.png
-.. |UG232 Figure 3-2| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p30_fig3-2.png
-.. |UG232 Figure 7-1| image:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p131_fig7-1.png

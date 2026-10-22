@@ -50,6 +50,13 @@ Khi triển khai các mô hình mạng nơ-ron sâu trên phần cứng biên, k
 
 Mối liên hệ giữa độ trễ và thông lượng theo đường ống được phân tích chi tiết tại :doc:`Mục 2.4 của 08-evaluation-metrics </contents/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics>`: trong mô hình thực thi tuần tự, NPU hoàn toàn bị bỏ rảnh (idle) trong suốt thời gian :math:`T_{\text{pre}} + T_{\text{post}}`. Ngược lại, kiến trúc đường ống đa luồng (pipelining) cho phép gối đầu các chặng, giải phóng thông lượng hệ thống đạt tới mức giới hạn của chặng dài nhất.
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/05-bo-nho-hieu-nang/prf-01-latency-breakdown-pipeline.svg
+   :align: center
+   :width: 95%
+   :alt: Bóc tách 4 chặng độ trễ và so sánh dòng thời gian tuần tự với đường ống đa luồng
+
+   Bóc tách 4 chặng độ trễ trọn gói (trên) và đối chiếu dòng thời gian: tuần tự gây lãng phí 60% năng lực NPU (trái) so với đường ống đa luồng đạt bão hòa thông lượng (phải) [T2 Jouppi 2017 tr.1, tr.8] [T2 Chen 2016 tr.8].
+
 2. Phương pháp đo đúng chuẩn
 ============================
 
@@ -151,6 +158,13 @@ Jouppi 2017 mô tả ranh giới này một cách rõ ràng:
    "Without sufficient operational intensity, a program is memory bandwidth-bound and lives under the slanted part of the roofline." [T2 Jouppi 2017 tr.5]
 
 Điểm ngoặt phân định hai vùng (Ridge Point) được xác định bằng công thức :math:`I_{\text{ridge}} = \frac{P_{\text{peak}}}{BW}`. Nếu cường độ hoạt động của một lớp mạng nhỏ hơn :math:`I_{\text{ridge}}`, lớp đó nằm hoàn toàn dưới đường dốc và bị giới hạn bởi băng thông bộ nhớ.
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/05-bo-nho-hieu-nang/prf-02-roofline-model.svg
+   :align: center
+   :width: 95%
+   :alt: Mô hình Roofline phân định vùng nghẽn bộ nhớ và nghẽn tính toán
+
+   Mô hình Roofline: phân định ranh giới giữa vùng nghẽn băng thông bộ nhớ và vùng trần tính toán đỉnh (trái) cùng chiến lược tối ưu hóa tương ứng (phải) [T2 Jouppi 2017 tr.5] [T2 Chen 2016 tr.8].
 
 Để tính toán cường độ hoạt động lý thuyết của một lớp tích chập chuẩn, ta xét số lượng phép tính MAC và lượng dữ liệu cần luân chuyển qua DRAM:
 

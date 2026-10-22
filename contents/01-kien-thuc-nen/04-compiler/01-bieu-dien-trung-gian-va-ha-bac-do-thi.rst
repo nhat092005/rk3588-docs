@@ -49,6 +49,13 @@ Quá trình chuyển đổi một mô hình học sâu từ framework (PyTorch, 
      - Tensorization, phát sinh lệnh vi mã, cấu hình thanh ghi phần cứng
      - [T2 TVM tr.4] [T2 BAMB tr.4]
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/ir-01-three-tier-lowering.svg
+   :align: center
+   :width: 95%
+   :alt: Quá trình hạ bậc 3 tầng biểu diễn trung gian trong AI Compiler
+
+   Quá trình hạ bậc 3 tầng biểu diễn trung gian: từ đồ thị mức cao qua mức vòng lặp đến luồng mã máy phần cứng [T2 TVM tr.3-4] [T2 BAMB tr.4].
+
 1.1 Đồ thị tính toán mức cao (High-level computation graph)
 -----------------------------------------------------------
 

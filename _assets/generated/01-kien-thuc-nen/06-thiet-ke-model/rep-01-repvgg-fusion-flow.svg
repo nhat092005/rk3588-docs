@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="880" height="460" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="460" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Quy trình tái tham số hóa RepVGG: Huấn luyện đa nhánh → Suy luận đơn nhánh (Ding 2021)</text>
+<rect x="20" y="52" width="214" height="314" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.3"/>
+<rect x="20" y="52" width="214" height="32" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<text x="127" y="72" font-size="10.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1. Khi Huấn luyện (Multi-Branch)</text>
+<rect x="34" y="90" width="186" height="24" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.1"/>
+<text x="127" y="102" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Tensor đầu vào M^(1)</text>
+<rect x="62" y="126" width="126" height="28" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.1"/>
+<text x="125" y="137" font-size="8.5" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Conv 3×3 + BN</text>
+<text x="125" y="147" font-size="7.2" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Trích đặc trưng sâu</text>
+<rect x="62" y="162" width="126" height="28" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.1"/>
+<text x="125" y="173" font-size="8.5" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Conv 1×1 + BN</text>
+<text x="125" y="183" font-size="7.2" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Tương quan kênh</text>
+<rect x="62" y="198" width="126" height="28" rx="4" fill="#FFFFFF" stroke="#64748B" stroke-width="1.1"/>
+<text x="125" y="209" font-size="8.5" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">Identity + BN</text>
+<text x="125" y="219" font-size="7.2" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Đường tắt gradient</text>
+<path d="M127 114 L127 120 L38 120 L38 212" fill="none" stroke="#1E5BB8" stroke-width="3.0"/>
+<path d="M38 140 L54 140" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M38 176 L54 176" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M38 212 L54 212" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<rect x="34" y="250" width="186" height="26" rx="3" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
+<text x="127" y="263" font-size="8.8" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Bộ cộng phần tử (+ Element-wise Add)</text>
+<path d="M188 140 L206 140 L206 248" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M188 176 L194 176 L194 248" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M127 228 L127 248" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M127 278 L127 296" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="34" y="298" width="186" height="26" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.1"/>
+<text x="127" y="311" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Đầu ra M^(2) (trước ReLU)</text>
+<text x="26" y="335" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Nhiều nhánh giúp gradient hội tụ tốt.</text>
+<text x="26" y="348" font-size="8" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Tốn thêm SRAM để giữ bản sao M^(1).</text>
+<text x="26" y="360" font-size="8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Phân mảnh toán tử trên NPU [T2 REPVGG].</text>
+<rect x="258" y="52" width="368" height="314" rx="5" fill="#F8FAFC" stroke="#64748B" stroke-width="1.3"/>
+<rect x="258" y="52" width="368" height="32" rx="5" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<text x="442" y="72" font-size="10.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">2. Bốn bước biến đổi toán học offline (Ding 2021)</text>
+<rect x="270" y="92" width="344" height="46" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="278" y="107" font-size="9" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Bước 1: Gộp BN vào từng nhánh Conv &amp; Identity</text>
+<text x="278" y="123" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">W&#x27; = (γ / σ) × W,   b&#x27; = β - (μ × γ / σ)  [T2 REPVGG Eq. 3]</text>
+<rect x="270" y="144" width="344" height="46" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="278" y="159" font-size="9" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Bước 2: Đệm không (Zero-pad) kernel 1×1 thành 3×3</text>
+<text x="278" y="175" font-size="8.3" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">pad(W&#x27;_1x1): Đặt 1×1 vào tâm ma trận 3×3</text>
+<rect x="570" y="149" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="155.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="149" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="155.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="596" y="149" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="155.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="570" y="162" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="168.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="162" width="13" height="13" rx="4" fill="#DBEAFE" stroke="#64748B" stroke-width="0.8"/>
+<text x="589.5" y="168.5" font-size="6.8" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">w&#x27;</text>
+<rect x="596" y="162" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="168.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="570" y="175" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="181.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="175" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="181.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="596" y="175" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="181.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="270" y="196" width="344" height="46" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="278" y="211" font-size="9" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Bước 3: Chuyển nhánh Identity thành kernel 3×3 đơn vị</text>
+<text x="278" y="227" font-size="8.3" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">pad(W&#x27;_id): Tâm = γ_0/σ_0 (nếu i==j), biên = 0</text>
+<rect x="570" y="201" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="207.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="201" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="207.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="596" y="201" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="207.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="570" y="214" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="220.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="214" width="13" height="13" rx="4" fill="#FEF3C7" stroke="#64748B" stroke-width="0.8"/>
+<text x="589.5" y="220.5" font-size="6.8" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="596" y="214" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="220.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="570" y="227" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="233.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="583" y="227" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="233.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="596" y="227" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="233.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="270" y="248" width="344" height="54" rx="3" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2"/>
+<text x="278" y="264" font-size="9" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Bước 4: Cộng đại số toàn bộ trọng số và vector bias</text>
+<text x="278" y="279" font-size="8.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">W_final = W&#x27;_3x3 + pad(W&#x27;_1x1) + pad(W&#x27;_id)</text>
+<text x="278" y="293" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">b_final = b&#x27;_3x3 + b&#x27;_1x1 + b&#x27;_id  (Biến đổi tuyến tính)</text>
+<rect x="570" y="255" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="261.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="583" y="255" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="261.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="596" y="255" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="261.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="570" y="268" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="274.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="583" y="268" width="13" height="13" rx="4" fill="#DCFCE7" stroke="#64748B" stroke-width="0.8"/>
+<text x="589.5" y="274.5" font-size="6.8" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="596" y="268" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="274.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="570" y="281" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="576.5" y="287.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="583" y="281" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="589.5" y="287.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<rect x="596" y="281" width="13" height="13" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="602.5" y="287.5" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">w</text>
+<text x="278" y="318" font-size="8.5" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Tương đương toán học 100% với mạng gốc [T2 REPVGG tr.5].</text>
+<text x="278" y="332" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Quá trình hợp nhất diễn ra hoàn toàn offline trước khi nạp.</text>
+<text x="278" y="346" font-size="8.5" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Triệt tiêu hoàn toàn toán tử Add (+) trong runtime NPU.</text>
+<rect x="648" y="52" width="214" height="314" rx="5" fill="#F8FAFC" stroke="#16A34A" stroke-width="1.3"/>
+<rect x="648" y="52" width="214" height="32" rx="5" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.0"/>
+<text x="755" y="72" font-size="10.5" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">3. Khi Suy luận (Single Conv)</text>
+<rect x="668" y="92" width="174" height="26" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.1"/>
+<text x="755" y="108" font-size="9" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Tensor đầu vào M^(1)</text>
+<path d="M755 118 L755 142" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="666" y="148" width="178" height="76" rx="5" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3"/>
+<text x="755" y="170" font-size="10" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">DUY NHẤT CONV 3×3</text>
+<text x="755" y="186" font-size="8.5" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">W_final (kernel 3×3)</text>
+<text x="755" y="200" font-size="8.5" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">+ b_final (bias 1D)</text>
+<text x="755" y="214" font-size="8.5" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">+ Hàm kích hoạt ReLU</text>
+<path d="M755 224 L755 248" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="668" y="254" width="174" height="26" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.1"/>
+<text x="755" y="270" font-size="9" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Tensor đầu ra M^(2)</text>
+<text x="662" y="302" font-size="9" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">+ Tối ưu bộ nhớ SRAM:</text>
+<text x="662" y="317" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">  Giải phóng ngay M^(1) khi tính xong.</text>
+<text x="662" y="332" font-size="9" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">+ Tăng tốc thông lượng phần cứng:</text>
+<text x="662" y="347" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">  Không overhead khởi động kernel [T2].</text>
+<path d="M234 204 L252 204" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M626 204 L642 204" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="20" y="380" width="840" height="48" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.1"/>
+<text x="32" y="398" font-size="10" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Ý nghĩa then chốt trên NPU vi xử lý biên (Rockchip RK3588):</text>
+<text x="32" y="414" font-size="8.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">NPU hoạt động hiệu quả nhất với các lớp Conv 3×3 tuần tự dày đặc. Tái tham số hóa RepVGG loại bỏ hoàn toàn các toán tử Add và BN rời rạc, tối đa hóa tỷ lệ lấp đầy mảng PE MAC [T2 REPVGG tr.2, Chu 2024 QARepVGG tr.1].</text>
+<text x="10" y="456" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T2 Ding et al. RepVGG 2021 tr.2, tr.5] [T2 Chu et al. QARepVGG 2024 tr.1, tr.5]</text>
+</svg>

@@ -31,7 +31,7 @@ Driver rknpu và rknn_server
 1. Driver rknpu và node trạng thái
 ==================================
 
-Driver rknpu là kernel driver giao tiếp với phần cứng NPU. Runtime (``librknnrt``) trên board gọi xuống driver qua ioctl, phần cứng NPU xem tại :doc:`../01-phan-cung-npu/05-thanh-ghi-va-che-do-cau-hinh`. Mục này trả lời ba việc: driver có phiên bản nào, đọc trạng thái của nó ở đâu, và hai node điều khiển nguồn (``power``, ``delayms``) làm gì.
+Driver rknpu là kernel driver giao tiếp với phần cứng NPU. Runtime (``librknnrt``) trên board gọi xuống driver qua ioctl, phần cứng NPU xem tại :doc:`../01-phan-cung-npu/05-ban-do-thanh-ghi-va-co-che-cau-hinh`. Mục này trả lời ba việc: driver có phiên bản nào, đọc trạng thái của nó ở đâu, và hai node điều khiển nguồn (``power``, ``delayms``) làm gì.
 
 1.1 Phiên bản driver: 0.9.2 hay 0.8.8
 -------------------------------------
@@ -215,7 +215,7 @@ Mặc định ``init_runtime`` có ``target=None`` và chạy trên simulator. K
 3. Luồng submit job trong mã driver
 ===================================
 
-Mục này đọc mã driver 0.9.8 để mô tả đường đi của một job. Mã nằm ở ``3rdparty/rknpu-driver-0.9.8/`` (cây Orange Pi, cùng chuỗi phiên bản 0.9.8 20240828 với cây Rockchip, riêng ``rknpu_job.c`` và ``rknpu_debugger.c`` giống hệt [T1 DRV SOURCE.txt:9-11]). Thứ tự ghi thanh ghi trong ``rknpu_job_subcore_commit_pc`` và xử lý ngắt ở mức bit đã có tại :doc:`../01-phan-cung-npu/05-thanh-ghi-va-che-do-cau-hinh` (mục :ref:`Hai chế độ cấu hình <sec-npu-hai-che-do>` và :ref:`Ngắt <sec-npu-ngat>`), trang này không lặp lại.
+Mục này đọc mã driver 0.9.8 để mô tả đường đi của một job. Mã nằm ở ``3rdparty/rknpu-driver-0.9.8/`` (cây Orange Pi, cùng chuỗi phiên bản 0.9.8 20240828 với cây Rockchip, riêng ``rknpu_job.c`` và ``rknpu_debugger.c`` giống hệt [T1 DRV SOURCE.txt:9-11]). Thứ tự ghi thanh ghi trong ``rknpu_job_subcore_commit_pc`` và xử lý ngắt ở mức bit đã có tại :doc:`../01-phan-cung-npu/05-ban-do-thanh-ghi-va-co-che-cau-hinh` (mục :ref:`Hai chế độ cấu hình <sec-npu-hai-che-do>` và :ref:`Ngắt <sec-npu-ngat>`), trang này không lặp lại.
 
 .. list-table:: Các bước của một job và hàm tương ứng
    :header-rows: 1

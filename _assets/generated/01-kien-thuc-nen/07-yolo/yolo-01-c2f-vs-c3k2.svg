@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 473" width="880" height="473" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="473" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">So sánh kiến trúc khối trích xuất đặc trưng: C2f (YOLOv8) vs C3k2 (YOLO26)</text>
+<rect x="18" y="40" width="412" height="395" rx="5" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="28" y="50" width="150" height="22" rx="3" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="103" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">KHỐI C2F (YOLOv8)</text>
+<text x="188" y="61" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Cross Stage Partial + All-Taps Concat</text>
+<rect x="134" y="78" width="180" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1"/>
+<text x="224.0" y="91" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Input: Tensor (Cin, H, W)</text>
+<path d="M224 104 L224 118" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="114" y="118" width="220" height="28" rx="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="224.0" y="132" font-size="9.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">cv1: Conv 1×1 (Cin -&gt; 2×Cout)</text>
+<path d="M224 146 L224 162" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="144" y="162" width="160" height="24" rx="2" fill="#FEF3C7" stroke="#E65100" stroke-width="1"/>
+<text x="224.0" y="174" font-size="8.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Split thành 2 nửa: y0, y1</text>
+<path d="M168 186 L168 198 L70 198 L70 319 L88 319" fill="none" stroke="#E65100" stroke-width="3.0" marker-end="url(#mE65100t)"/>
+<text x="118" y="190" font-size="8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">y0 (Bypass)</text>
+<path d="M268 186 L268 202" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="188" y="202" width="160" height="34" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="268" y="214" font-size="8.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bottleneck 1 (3×3 Conv)</text>
+<text x="268" y="228" font-size="7.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Conv 3×3 + BN + SiLU</text>
+<path d="M348 219 L374 219 L374 319 L354 319" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="374" y="212" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">b1 (Tap)</text>
+<path d="M268 236 L268 252" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="188" y="252" width="160" height="34" rx="3" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="268" y="264" font-size="8.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bottleneck n (3×3 Conv)</text>
+<text x="268" y="278" font-size="7.8" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Đường tắt residual nội bộ</text>
+<path d="M268 286 L268 306" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="94" y="306" width="260" height="26" rx="3" fill="#FEF3C7" stroke="#E65100" stroke-width="1"/>
+<text x="224.0" y="319" font-size="9.2" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Concat (y0, y1, b1, ..., bn)</text>
+<path d="M224 332 L224 346" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="114" y="346" width="220" height="26" rx="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="224.0" y="359" font-size="9" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">cv2: Conv 1×1 ((2+n)×Cout -&gt; Cout)</text>
+<rect x="33" y="380" width="382" height="46" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="43" y="394" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính C2f: Giữ gradient phong phú qua Concat đa tầng.</text>
+<text x="43" y="410" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Nhược điểm: Bắt buộc đệm (2+n) tensor trung gian, tốn SRAM.</text>
+<rect x="450" y="40" width="412" height="395" rx="5" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="460" y="50" width="160" height="22" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="540" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">KHỐI C3K2 (YOLO26)</text>
+<text x="630" y="61" font-size="9.2" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Khối con tùy biến (Không Tap trung gian)</text>
+<rect x="566" y="78" width="180" height="26" rx="3" fill="white" stroke="#333333" stroke-width="1"/>
+<text x="656.0" y="91" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Input: Tensor (Cin, H, W)</text>
+<path d="M656 104 L656 118" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="546" y="118" width="220" height="28" rx="3" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="656.0" y="132" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">cv1: Conv 1×1 (Cin -&gt; 2×e×Cout)</text>
+<path d="M656 146 L656 162" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="576" y="162" width="160" height="24" rx="2" fill="#FEF3C7" stroke="#E65100" stroke-width="1"/>
+<text x="656.0" y="174" font-size="8.8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Split thành 2 nửa: y0, y1</text>
+<path d="M600 186 L600 198 L502 198 L502 319 L520 319" fill="none" stroke="#E65100" stroke-width="3.0" marker-end="url(#mE65100t)"/>
+<text x="550" y="190" font-size="8" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">y0 (Bypass)</text>
+<path d="M720 186 L720 202" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="606" y="202" width="228" height="84" rx="3" fill="white" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="720" y="214" font-size="8.8" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Chuỗi Module con m (n lần lặp):</text>
+<text x="720" y="228" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">• Khi c3k=False (Tầng nông P3):</text>
+<text x="720" y="240" font-size="7.5" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">  Dùng Bottleneck nhẹ (e=0.25, giảm 50% kênh)</text>
+<text x="720" y="255" font-size="7.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">• Khi c3k=True (Tầng sâu P4, P5):</text>
+<text x="720" y="267" font-size="7.5" font-weight="400" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">  Dùng khối C3k (3× Conv 1×1 + 2× Conv 3×3)</text>
+<text x="720" y="279" font-size="7.2" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">  Tại P5 kết hợp PSABlock (Self-Attention)</text>
+<path d="M720 286 L720 306" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="526" y="306" width="260" height="26" rx="3" fill="#FEF3C7" stroke="#E65100" stroke-width="1"/>
+<text x="656.0" y="319" font-size="9.2" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Concat (y0, m(y1)) [Chỉ đúng 2 tensor]</text>
+<path d="M656 332 L656 346" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="546" y="346" width="220" height="26" rx="3" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="656.0" y="359" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">cv2: Conv 1×1 (2×e×Cout -&gt; Cout)</text>
+<rect x="465" y="380" width="382" height="46" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="475" y="394" font-size="8.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính C3k2: Tùy biến linh hoạt theo độ sâu tầng mạng.</text>
+<text x="475" y="410" font-size="8.2" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Tiết kiệm 37% FLOPs; loại bỏ toàn bộ Tap giúp giải phóng ngay SRAM.</text>
+<text x="10" y="459" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Ultralytics (yolov8.yaml:20-47, yolo26.yaml:22-50), Sapkota et al. (YOLO26 2025 tr.5, tr.17)</text>
+</svg>

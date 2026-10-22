@@ -44,7 +44,7 @@ Trên RK3562, RK3566, RK3568, RK3576, RK3588 và RV1126B có hai nhóm API là g
 
 .. _fig-zero-copy-fig5-5-5-6:
 
-.. figure:: ../../../_assets/img/npu/07_memory_performance/ug232_p65_fig5-5_fig5-6.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/04-bo-nho-hieu-nang/zero-copy-can-le-profiling-api/ug232-fig5-5-fig5-6-general-vs-zero-copy-api.png
    :align: center
    :alt: Luồng xử lý dữ liệu của general API và zero-copy API
 
@@ -66,6 +66,14 @@ Trên RK3562, RK3566, RK3568, RK3576, RK3588 và RV1126B có hai nhóm API là g
    * - Chuyển layout và dequantize output
      - CPU
      - CPU hoặc NPU
+
+.. _fig-rknn-02-zero-copy-vs-general-api:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/04-bo-nho-hieu-nang/rknn-02-zero-copy-vs-general-api.svg
+   :align: center
+   :alt: Cơ chế luân chuyển bộ nhớ giữa General API và Zero-Copy API trên RK3588
+
+   So sánh cơ chế luân chuyển bộ nhớ: General API (2 lần CPU memcpy) vs Zero-Copy API (DMA-BUF trực tiếp) trên RK3588. Nguồn: [T1 UG232 tr.64-68] [T1 OPL tr.335-339]
 
 1.2 Ba cách cấp phát
 --------------------
@@ -282,7 +290,7 @@ Trên chip nhiều core, log có thêm cột ``WorkLoad(0/1/2)-ImproveTherical``
 
 ``DDR Cycles`` là số chu kỳ operator cần để đọc ghi, đã quy đổi sang chu kỳ ở tần số NPU nên so trực tiếp với ``NPU Cycles`` được [T1 UG232 tr.140].
 
-.. figure:: ../../../_assets/img/npu/07_memory_performance/ug232_p140_fig8-5.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/04-bo-nho-hieu-nang/zero-copy-can-le-profiling-api/ug232-fig8-5-per-layer-profiling.png
    :align: center
    :alt: Bảng phân tích hiệu năng từng lớp với cột DDR Cycles và NPU Cycles
 

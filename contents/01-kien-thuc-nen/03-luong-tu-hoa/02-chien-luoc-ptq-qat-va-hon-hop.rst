@@ -111,7 +111,7 @@ Gholami phân biệt static và dynamic quantization theo thời điểm tính r
 
 .. _fig-nagel-pipeline-ptq:
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_fig8.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/nagel-fig8-standard-ptq-pipeline.png
    :align: center
    :alt: Pipeline PTQ chuẩn của Nagel
 
@@ -144,11 +144,11 @@ Mô phỏng chạy bằng phép tính float, đầu vào và đầu ra của kh�
 
 .. _fig-nagel-simulated-quant:
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/nagel_p6_fig4.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/nagel-fig4-on-device-vs-simulated-quantization.png
    :align: center
-   :alt: Suy luận lượng tử hóa trên thiết bị và mô phỏng bằng float
+   :alt: Suy luận lượng tử hóa thật trên thiết bị và mô phỏng bằng float
 
-   (a) Suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8. (b) Mô phỏng bằng phép tính float với các khối quantizer. Nguồn: [T2 Nagel 2021 tr.6, Figure 4]
+   Sơ đồ (a) Suy luận lượng tử hóa thật trên thiết bị: weight INT8, accumulator INT32, requantization sang INT8. (b) Mô phỏng bằng phép tính float với các khối quantizer. Nguồn: [T2 Nagel 2021 tr.6, Figure 4]
 
 "Simulated quantization" có hai ngữ cảnh khác nhau trong hai nguồn. Nagel dùng nó làm công cụ mô phỏng khi train và đánh giá trên phần cứng float [T2 Nagel 2021 tr.6]. Gholami dùng nó cho một cách triển khai suy luận lưu tham số bit thấp nhưng tính bằng phép toán float, trái với integer-only quantization chạy toàn bộ bằng số nguyên [T2 Gholami 2021 tr.12]. Khi viết cần nói rõ đang theo nghĩa nào.
 
@@ -163,11 +163,18 @@ Giải pháp phổ biến là STE, xấp xỉ đạo hàm của phép làm tròn
 
    "Despite the coarse approximation of STE, it often works well in practice, except for ultra low-precision quantization such as binary quantization" [T2 Gholami 2021 tr.9]
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_p9_fig5.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/gholami-fig5-qat-straight-through-estimator.png
    :align: center
    :alt: Quy trình QAT với straight-through estimator
 
    Quy trình QAT: forward qua bộ lượng tử hóa, backward dùng STE như hàm đồng nhất. Nguồn: [T2 Gholami 2021 tr.9, Figure 5]
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/03-luong-tu-hoa/qnt-02-qat-ste-backward.svg
+   :align: center
+   :width: 95%
+   :alt: Cơ chế QAT với FakeQuant ở forward pass và STE ở backward pass
+
+   Cơ chế QAT: mô phỏng lượng tử hóa ở lan truyền thuận và ước lượng gradient STE (d(y)/dx = 1 trong khoảng [α, β]) ở lan truyền ngược [T2 Nagel 2021 tr.6, tr.19], [T2 Gholami 2021 tr.9].
 
 3. Mixed và hybrid precision
 ============================
@@ -185,7 +192,7 @@ Mục tiêu là giữ lớp nhạy và kém hiệu quả ở độ chính xác c
 
 Gholami điểm qua các cách giải: tìm kiếm bằng reinforcement learning hoặc NAS (tốn tài nguyên, nhạy siêu tham số), regularization chu kỳ, và HAWQ dùng độ nhạy bậc hai (Hessian) của mô hình [T2 Gholami 2021 tr.14]. Gholami cũng nhắc lợi ích của lượng tử hóa phụ thuộc phần cứng, nên có hướng hardware-aware dùng bảng tra độ trễ theo lớp và bit-width [T2 Gholami 2021 tr.14].
 
-.. figure:: ../../../_assets/img/npu/03_quantization_theory/gholami_p13_fig8.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/gholami-fig8-mixed-precision-quantization.png
    :align: center
    :alt: Mixed-precision quantization: mỗi lớp 4 hoặc 8 bit
 

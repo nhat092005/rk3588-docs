@@ -69,7 +69,7 @@ Hybrid quantization gồm bốn bước [T1 UG232 tr.123]. Hai bước gọi API
 
 .. _fig-hybrid-step1:
 
-.. figure:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p123_fig6-3.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/hybrid-quantization-va-accuracy-analysis/ug232-fig6-3-hybrid-quantization-step1.png
    :align: center
    :width: 55%
    :alt: Lưu đồ bước 1 của hybrid quantization
@@ -78,7 +78,7 @@ Hybrid quantization gồm bốn bước [T1 UG232 tr.123]. Hai bước gọi API
 
 .. _fig-hybrid-step3:
 
-.. figure:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p124_fig6-4.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/hybrid-quantization-va-accuracy-analysis/ug232-fig6-4-hybrid-quantization-step3.png
    :align: center
    :width: 55%
    :alt: Lưu đồ bước 3 của hybrid quantization
@@ -215,7 +215,7 @@ Ví dụ chính thức mô tả ngắn gọn hơn: ``entire`` là sai số đầ
 
 .. _fig-accuracy-analysis:
 
-.. figure:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p30_fig3-2.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/hybrid-quantization-va-accuracy-analysis/ug232-fig3-2-accuracy-analysis-result.png
    :align: center
    :alt: Bảng kết quả accuracy analysis
 
@@ -242,7 +242,7 @@ Chương 7 của UG232 chia việc điều tra thành hai nhánh. Nguyên tắc 
 
 .. _fig-quy-trinh-7-1:
 
-.. figure:: ../../../_assets/img/npu/04_quantization_rknn/ug232_p131_fig7-1.png
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/hybrid-quantization-va-accuracy-analysis/ug232-fig7-1-accuracy-troubleshooting-flow.png
    :align: center
    :alt: Các bước xử lý lỗi độ chính xác của hãng
 

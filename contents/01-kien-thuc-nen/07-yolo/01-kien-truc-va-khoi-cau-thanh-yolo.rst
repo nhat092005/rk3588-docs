@@ -18,6 +18,8 @@ Dòng mô hình YOLO (You Only Look Once) đã trải qua nhiều bước chuy�
 - YOLOv8 (phát hành năm 2023 bởi Ultralytics) thiết lập chuẩn mực mới cho dòng mạng phát hiện anchor-free: "YOLOv8 (2023) improves convergence and small-object fidelity via a decoupled head and anchor-free design." [T2 UEVOL tr.12]. Mạng sử dụng xương sống (backbone) dựa trên khối C2f và module Spatial Pyramid Pooling - Fast (SPPF) nhằm giảm số lượng tham số nhưng vẫn duy trì trường tiếp nhận phong phú.
 - YOLO26 (phát hành năm 2026 bởi Ultralytics) tái thiết kế toàn diện đường ống suy luận nhằm thu hẹp khoảng cách triển khai trên phần cứng biên (Export Gap). Kiến trúc chuyển đổi từ khối C2f sang C3k2, bổ sung cơ chế chú ý cục bộ (C2PSA), và loại bỏ hoàn toàn module phân phối hộp DFL để đạt thông lượng suy luận ổn định [T2 Y26A tr.5].
 
+.. _91-so-sánh-tổng-quan:
+
 Bảng so sánh kiến trúc, tham số (params), FLOPs, độ trễ lý thuyết
 -----------------------------------------------------------------
 
@@ -83,6 +85,13 @@ Khối trích xuất đặc trưng đa tầng: C2f và C3k2
 
 Cấu trúc Cross Stage Partial (CSP) là nền tảng giúp mạng phân tách dòng truyền đặc trưng thành hai nhánh: một nhánh đi qua các khối biến đổi phi tuyến sâu, nhánh còn lại đi tắt và hội tụ ở cuối module nhằm duy trì gradient ổn định.
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-01-c2f-vs-c3k2.svg
+   :align: center
+   :width: 95%
+   :alt: So sánh kiến trúc khối trích xuất đặc trưng C2f (YOLOv8) và C3k2 (YOLO26)
+
+   So sánh kiến trúc khối trích xuất đặc trưng: C2f (YOLOv8) và C3k2 với các cấu hình c3k, attn (YOLO26) [T1 yolov8.yaml:20-29], [T1 yolo26.yaml:22-50].
+
 Khối C2f trong YOLOv8n:
   - Đầu vào tensor có số kênh :math:`c_{in}` đi qua lớp tích chập :math:`1 \times 1` (`cv1`) để tăng số kênh lên :math:`2 \times c_{out}`.
   - Tensor đầu ra được chia đôi theo trục kênh thành hai phần bằng nhau :math:`y_0` và :math:`y_1` (mỗi phần có :math:`c_{out}` kênh) thông qua phép tách tensor [T1 ultralytics/nn/modules/block.py].
@@ -139,6 +148,8 @@ Một trong những cải tiến kiến trúc đáng chú ý nhất của YOLO26
   - Do chuỗi token ngắn, chi phí tính toán ma trận ma sát :math:`O(N^2)` của tự chú ý tại đây chỉ tiêu tốn phần nhỏ năng lực tính toán nhưng mang lại lợi thế định vị ngữ cảnh toàn cục vượt trội.
   - Khi xuất khẩu sang đồ thị ONNX, hai khối chú ý này tạo ra đúng 4 toán tử ``MatMul`` và 2 toán tử ``Softmax``, hoàn toàn không gây tắc nghẽn thông lượng tổng thể.
 
+.. _924-đầu-detect:
+
 Đầu dự đoán (Detect Head)
 =========================
 
@@ -146,6 +157,13 @@ Một trong những cải tiến kiến trúc đáng chú ý nhất của YOLO26
 
 Phân phối hộp DFL vs Đầu một-một (One-to-one Head)
 --------------------------------------------------
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-02-head-dfl-vs-nms-free.svg
+   :align: center
+   :width: 95%
+   :alt: So sánh cấu trúc đầu dự đoán Detect Head giữa YOLOv8 và YOLO26
+
+   So sánh cấu trúc đầu dự đoán Detect Head: cơ chế DFL và nhánh phụ trợ (YOLOv8) đối chiếu với hồi quy trực tiếp và nhánh một-một NMS-free (YOLO26) [T2 Y26A tr.7-8], [T2 Y26B tr.6-7].
 
 - Hồi quy phân phối DFL (Distribution Focal Loss) trong YOLOv8n:
   - YOLOv8 áp dụng phương pháp hồi quy gián tiếp thông qua phân phối xác suất rời rạc trên 16 bin tọa độ cho mỗi cạnh hộp [T2 UEVOL tr.10].

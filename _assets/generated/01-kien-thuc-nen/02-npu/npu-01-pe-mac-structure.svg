@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 486" width="880" height="486" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="486" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="12.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Vi kiến trúc một Processing Element (PE) và đường dữ liệu MAC (TPU / Eyeriss)</text>
+<rect x="20" y="120" width="135" height="44" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="87" y="136" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Kích hoạt vào x_i</text>
+<text x="87" y="152" font-size="9" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">INT8 / FP16 (từ SRAM)</text>
+<rect x="20" y="198" width="135" height="44" rx="4" fill="#FFFBEB" stroke="#D97706" stroke-width="1.2"/>
+<text x="87" y="214" font-size="10.5" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Trọng số vào w_i</text>
+<text x="87" y="230" font-size="9" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">INT8 / FP16 (DRAM/SRAM)</text>
+<rect x="465" y="18" width="140" height="40" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="535" y="33" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Psum vào (từ PE trên)</text>
+<text x="535" y="47" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">32-bit INT32 / FP32</text>
+<rect x="175" y="68" width="535" height="236" rx="6" fill="#F8FAFC" stroke="#475569" stroke-width="1.5"/>
+<text x="189" y="83" font-size="10.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">PROCESSING ELEMENT (PE)</text>
+<text x="189" y="95" font-size="8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">RF nội bộ + Datapath ALU</text>
+<rect x="195" y="120" width="110" height="44" rx="4" fill="#FFFFFF" stroke="#1E5BB8" stroke-width="1.1"/>
+<text x="250" y="137" font-size="10" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Activation Latch</text>
+<text x="250" y="152" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Thanh ghi 8-bit</text>
+<rect x="195" y="198" width="110" height="44" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.1"/>
+<text x="250" y="215" font-size="10" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Weight RF</text>
+<text x="250" y="230" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">&lt; 1 kB SRAM nội</text>
+<rect x="345" y="180" width="90" height="50" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="1.3"/>
+<text x="390" y="199" font-size="10.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Bộ nhân (*)</text>
+<text x="390" y="215" font-size="8.5" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">8b × 8b → 16b</text>
+<rect x="510" y="130" width="50" height="26" rx="4" fill="#FFFFFF" stroke="#475569" stroke-width="1.1"/>
+<text x="535" y="143" font-size="9" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">MUX</text>
+<rect x="490" y="180" width="90" height="50" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="1.3"/>
+<text x="535" y="199" font-size="10.5" font-weight="700" fill="#0F172A" text-anchor="middle" dominant-baseline="central">Bộ cộng (+)</text>
+<text x="535" y="215" font-size="8.5" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">ALU 32-bit</text>
+<rect x="480" y="248" width="110" height="38" rx="4" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.1"/>
+<text x="535" y="262" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Thanh ghi Psum</text>
+<text x="535" y="275" font-size="8.2" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Tích lũy 32-bit</text>
+<path d="M155 142 L189 142" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M155 220 L189 220" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M305 142 L325 142 L325 195 L339 195" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<path d="M305 220 L339 220" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M435 205 L484 205" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<text x="462" y="195" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">16-bit</text>
+<path d="M305 134 L320 134 L320 104 L527 104" fill="none" stroke="#1E5BB8" stroke-width="3.0"/>
+<path d="M 527 104 A 8 8 0 0 1 543 104 L 724 104" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="420" y="94" font-size="8.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Systolic Forwarding x_i (truyền ngang sang PE kế)</text>
+<rect x="730" y="84" width="130" height="42" rx="4" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.1"/>
+<text x="795" y="99" font-size="10" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Tới PE(r, c+1)</text>
+<text x="795" y="113" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Nhận tiếp x_i</text>
+<path d="M535 58 L535 124" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<path d="M535 156 L535 174" fill="none" stroke="#222222" stroke-width="3.0" marker-end="url(#m222222t)"/>
+<path d="M590 267 L618 267 L618 143 L566 143" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="626" y="205" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Loop OS</text>
+<path d="M535 230 L535 248" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<path d="M535 286 L535 318" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<rect x="465" y="324" width="140" height="40" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.1"/>
+<text x="535" y="339" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tới PE(r+1, c)</text>
+<text x="535" y="353" font-size="8.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Cộng dồn dọc Psum</text>
+<rect x="20" y="380" width="415" height="78" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.1"/>
+<text x="32" y="396" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Đặc tính vi kiến trúc &amp; Năng lượng (Chen 2016, Jouppi 2017):</text>
+<text x="32" y="414" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Kiểu số: Nhân 8-bit integer tốn ít năng lượng &amp; diện tích hơn 6× FP16 [T2 Jouppi tr.1].</text>
+<text x="32" y="429" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Bộ nhớ cục bộ: Register File (RF) &lt; 1 kB tiết kiệm năng lượng ~200× DRAM [T2 Chen tr.8].</text>
+<text x="32" y="444" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Xử lý cục bộ: Giảm thiểu truy cập ngoài chip bằng cách tái sử dụng dữ liệu tại PE.</text>
+<rect x="445" y="380" width="415" height="78" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.1"/>
+<text x="457" y="396" font-size="9.5" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">Cơ chế luân chuyển dữ liệu trong mảng PE (Dataflow):</text>
+<text x="457" y="414" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Weight Stationary (WS): W cố định trong RF, x_i truyền ngang, Psum cộng dồn dọc.</text>
+<text x="457" y="429" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Output Stationary (OS): Psum tích lũy cục bộ trong thanh ghi qua Loop OS.</text>
+<text x="457" y="444" font-size="8.5" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Systolic Array: Các PE chuyển tiếp trực tiếp cho nhau, tiết kiệm băng thông bus.</text>
+<text x="10" y="472" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T2 Chen 2016 tr.2, tr.8] [T2 Jouppi 2017 tr.1, tr.3]</text>
+</svg>

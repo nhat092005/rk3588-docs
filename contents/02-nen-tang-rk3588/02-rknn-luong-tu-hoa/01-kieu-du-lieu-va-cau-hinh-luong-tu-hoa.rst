@@ -75,7 +75,17 @@ Nguồn của bảng: [T1 API232 tr.7]. Cột cuối là suy ra: RK3588 không n
 
 UG232 mô tả hẹp hơn, chỉ nêu một kiểu: INT8 tuyến tính bất đối xứng, mặc định ``asymmetric_quantized-8`` [T1 UG232 tr.22]. Chương lượng tử hóa của UG232 cũng ghi "RKNN-Toolkit2 supports INT8 as the quantization data type." [T1 UG232 tr.121]. Hai tài liệu khác nhau ở tên giá trị (``w8a8`` so với ``asymmetric_quantized-8``) và độ rộng danh sách. Nguồn không giải thích chênh lệch này (unknown. Đã tìm ở: API232 tr.7, UG232 tr.22, 121, 122, từ khóa: ``asymmetric_quantized``, ``w8a8``).
 
-1.2 Thuật toán ``quantized_algorithm``
+Hình dưới là minh họa của hãng cho hai kiểu. Ở kiểu đối xứng, zero-point nằm đúng tâm của dải số nguyên (INT8 thì bằng 0). Ở kiểu bất đối xứng, zero-point tính từ min và max nên thường lệch khỏi tâm [T1 UG232 tr.120].
+
+.. _fig-ug232-doi-xung:
+
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/kieu-du-lieu-va-cau-hinh-luong-tu-hoa/ug232-fig6-1-symmetric-vs-asymmetric.png
+   :align: center
+   :alt: Lượng tử hóa tuyến tính đối xứng và bất đối xứng
+
+   Khoảng số thực ở trên được ánh xạ đều xuống dải số nguyên ở dưới. Đối xứng lấy khoảng từ -max(x) đến max(x), bất đối xứng lấy khoảng từ min(x) đến max(x) (hình in nhãn -min(x)). Nguồn: [T1 UG232 tr.120, Figure 6-1]
+
+1.2Thuật toán ``quantized_algorithm``
 --------------------------------------
 
 Thuật toán quyết định cách chọn khoảng giá trị (min, max) trước khi tính scale và zero-point [T1 UG232 tr.120]. API232 liệt kê bốn giá trị, UG232 chỉ ba.
@@ -119,6 +129,15 @@ Số bin của histogram, cách cắt (clipping) và công thức chi tiết c�
 API232 cho ba giá trị: ``layer``, ``channel`` (mặc định) và ``group{SIZE}``. Với ``group{SIZE}``, mỗi output channel của weight được chia thành các nhóm theo input channel, ``{SIZE}`` là bội của 32 từ 32 đến 256, và chỉ hợp lệ khi ``quantized_dtype = w4a16`` [T1 API232 tr.8]. UG232 chỉ liệt kê ``layer`` và ``channel`` [T1 UG232 tr.22].
 
    "Note: In RKNN-Toolkit2, Per-Channel quantization is only applied to the weights, while the activation values and intermediate values are still quantized using Per-Layer quantization." [T1 UG232 tr.120]
+
+.. _fig-ug232-per-layer-channel:
+
+.. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/kieu-du-lieu-va-cau-hinh-luong-tu-hoa/ug232-fig6-2-per-layer-vs-per-channel.png
+   :align: center
+   :width: 70%
+   :alt: Lượng tử hóa per-layer và per-channel
+
+   Per-layer: các channel dùng chung một cặp (s, z). Per-channel: mỗi channel có cặp riêng (s1, z1), (s2, z2), (s3, z3). Nguồn: [T1 UG232 tr.120, Figure 6-2]
 
 Hệ quả: ``quantized_method`` chỉ đổi cách lượng tử hóa weight. Activation luôn dùng một cặp (scale, zero-point) cho cả tensor. Suy ra: ``group{SIZE}`` không dùng cho RK3588 vì đòi ``w4a16``.
 

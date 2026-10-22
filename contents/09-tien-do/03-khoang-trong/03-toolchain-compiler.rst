@@ -63,7 +63,7 @@ Còn thiếu nguồn (unknown)
 
    * - Câu hỏi
      - Cách kiểm hoặc truy vấn
-   * - Định dạng đầu ra ``rknpu/load``, ngữ nghĩa node ``power``, ``delayms``. Đóng một phần (T1 DRV, T3): xem hai dòng ``Giới hạn`` ở :ref:`Driver rknpu và các node trạng thái <54-driver-rknpu-và-các-node-trạng-thái>`
+   * - Định dạng đầu ra ``rknpu/load``, ngữ nghĩa node ``power``, ``delayms``. Đóng một phần (T1 DRV, T3): xem hai dòng ``Giới hạn`` ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/03-driver-rknpu-va-rknn-server`
      - T3 trên board, mã nguồn kernel Rockchip
    * - Vì sao UG232 không còn nhắc node ``power``, ``freq``, ``volt``. Đóng một phần (T1 DRV): các node này vẫn có trong danh sách node gốc của driver 0.9.8: ``version``, ``load``, ``power``, ``freq``, ``volt``, ``delayms``, ``reset``, và ``mm`` chỉ khi ``CONFIG_ROCKCHIP_RKNPU_SRAM`` (``rknpu_debugger.c:304-316``). ``freq`` đọc ``clk_get_rate(clks[0])``, ghi (khi ``CONFIG_PM_DEVFREQ``) đặt ``ondemand_freq`` rồi gọi ``update_devfreq`` (``rknpu_debugger.c:177-245``).``volt`` đọc ``regulator_get_voltage`` (``rknpu_debugger.c:247-260``). Lý do UG232 không nhắc vẫn ``unknown``, lúc đầu chưa đọc được các node trên board (T3, ``Permission denied``), sau đó đọc được bằng sudo, xem mệnh đề sau. Đóng một phần (T3 board, đọc bằng sudo 2026-10-10, log T3 board 2026-10-10): ``freq`` = 1000000000.``volt`` = 812500, khác 850000 ở dòng ``opp-microvolt`` đầu của OPP 1000 MHz trong DTS, nên board dùng một biến thể điện áp khác (chưa biết biến thể nào).
      - lịch sử commit ``drivers/rknpu``
@@ -77,11 +77,6 @@ Còn thiếu nguồn (unknown)
      - UG232 tr.31 chỉ nói "try to fix the frequency", cơ chế chi tiết chưa có nguồn
    * - Chạy Lite2 trên RK3588S khác RK3588 không
      - T3 (UG232 tr.158 chỉ nói model dùng chung)
-
-.. |UG232 Figure 3-1| image:: ../../../_assets/img/npu/05_toolchain/ug232_p21_fig3-1.png
-.. |UG232 Figure 1-1| image:: ../../../_assets/img/npu/05_toolchain/ug232_p7_fig1-1.png
-.. |UG232 Figure 1-2| image:: ../../../_assets/img/npu/05_toolchain/ug232_p7_fig1-2.png
-.. |UG232 Figure 3-5| image:: ../../../_assets/img/npu/05_toolchain/ug232_p37_fig3-5.png
 
 .. _66-điều-chưa-biết-về-compiler-nội-bộ-của-rockchip:
 
@@ -152,8 +147,3 @@ Mâu thuẫn đã ghi nhận
      - Add(Mul)+activation
      - OPL có AddRelu, MulRelu
      - UG232 tr.142: nằm ở cột kế hoạch tương lai
-
-.. |UG232 Figure 8-7| image:: ../../../_assets/img/npu/06_compiler_operators/ug232_p142_fig8-7_fusion_rules.png
-.. |UG232 Figure 5-1| image:: ../../../_assets/img/npu/06_compiler_operators/ug232_p61_fig5-1_table5-1.png
-.. |TVM Figure 3| image:: ../../../_assets/img/npu/06_compiler_operators/tvm_p3_fig3.png
-.. |TVM Figure 4| image:: ../../../_assets/img/npu/06_compiler_operators/tvm_p4_fig4.png

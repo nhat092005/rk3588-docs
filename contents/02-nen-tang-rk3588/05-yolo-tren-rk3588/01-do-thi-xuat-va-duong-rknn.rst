@@ -69,6 +69,14 @@ Nếu người phát triển cố gắng bật chế độ end-to-end bằng cá
 
 Lý do kỹ thuật nằm ở việc phần cứng NPU của Rockchip không hỗ trợ toán tử sắp xếp và chọn lọc phần tử cực đại (TopK) ở cấp độ nhân tăng tốc. Bảng danh mục toán tử RKNN-Toolkit2 đánh dấu TopK là "Not Supported", và tài liệu OPL chỉ liệt kê TopK trong chương 4 CPU OPs [T1 OPL tr.333]. Do đó, Exporter chủ động tắt nhánh end-to-end đối với RKNN để ngăn chặn đồ thị bị phân rã nghiêm trọng.
 
+.. _fig-yolo-04-rknn-graph-cut:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/05-yolo-tren-rk3588/yolo-04-rknn-graph-cut.svg
+   :align: center
+   :alt: Ranh giới phân tách đồ thị YOLOv8 trên RK3588 giữa NPU và Host CPU
+
+   Ranh giới phân tách đồ thị YOLOv8 trên RK3588: Đồ thị RKNN INT8 chạy trên NPU (Backbone, Neck, Head) và luồng hậu xử lý trên Host CPU (Dequantize, lọc ngưỡng, giải mã anchor, NMS). Nguồn: [T1 ULT engine/exporter.py:682-688] [T1 OPL tr.58-63, tr.330-333]
+
 Quy trình xuất định dạng RKNN hoàn chỉnh diễn ra trong phương thức ``export_rknn`` [T1 ULT engine/exporter.py:1532-1563]:
 
 1. Khống chế phiên bản ONNX opset: ``self.args.opset = min(self.args.opset or 19, 19)`` [T1 ULT engine/exporter.py:1538]. Toolkit RKNN-Toolkit2 phiên bản 2.3.2 yêu cầu opset không vượt quá 19.

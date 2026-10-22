@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 508" width="880" height="508" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="508" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Quá trình hạ bậc 3 tầng biểu diễn trung gian trong AI Compiler (TVM / eIQ Neutron)</text>
+<rect x="14" y="42" width="852" height="120" rx="5" fill="#F0F7FF" stroke="#1E5BB8" stroke-width="1.3"/>
+<rect x="24" y="52" width="68" height="20" rx="3" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="58" y="62" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">TẦNG 1</text>
+<text x="102" y="62" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đồ thị tính toán mức cao (High-Level Graph IR)</text>
+<text x="102" y="78" font-size="9.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Đồ thị có hướng không chu trình (DAG) - Trừu tượng hóa toán tử và shape tensor toàn cục</text>
+<rect x="24" y="90" width="400" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="32" y="101" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đối tượng và dữ liệu thao tác:</text>
+<text x="42" y="116" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Mô hình đầu vào: ONNX / PyTorch / TensorFlow</text>
+<text x="42" y="130" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Toán tử trừu tượng: Conv2D, Add, ReLU, Concat</text>
+<text x="42" y="144" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Tensor đa chiều với shape tĩnh (N, C, H, W)</text>
+<rect x="436" y="90" width="418" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="444" y="101" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tối ưu hóa và chuyển đổi then chốt:</text>
+<text x="454" y="116" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Gộp toán tử (Operator Fusion): Injective + Complex-out</text>
+<text x="454" y="130" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Gấp hằng số (Constant Folding): Gộp BN vào Conv</text>
+<text x="454" y="144" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Lập kế hoạch bộ nhớ tĩnh (Static Memory Planning)</text>
+<rect x="14" y="198" width="852" height="120" rx="5" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="24" y="208" width="68" height="20" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="58" y="218" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">TẦNG 2</text>
+<text x="102" y="218" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Biểu diễn mức vòng lặp (Loop-Level IR / AST)</text>
+<text x="102" y="234" font-size="9.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Vòng lặp lồng nhau (Nested Loops) - Phân tách định nghĩa thuật toán khỏi lịch trình (Schedule)</text>
+<rect x="24" y="246" width="400" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="32" y="257" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đối tượng và dữ liệu thao tác:</text>
+<text x="42" y="272" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Vòng lặp lồng duyệt tensor: for n, c_out, h, w, c_in</text>
+<text x="42" y="286" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Bộ đệm tạm thời (Intermediate buffers)</text>
+<text x="42" y="300" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Đặc tả tính toán khai báo (Tensor Expression)</text>
+<rect x="436" y="246" width="418" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="444" y="257" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tối ưu hóa và chuyển đổi then chốt:</text>
+<text x="454" y="272" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Phân khối (Tiling): Chia nhỏ khớp dung lượng SRAM</text>
+<text x="454" y="286" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Đổi thứ tự vòng lặp (Loop Reordering): Tăng data reuse</text>
+<text x="454" y="300" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Duỗi vòng lặp (Unrolling), Compute-at, Cache Read/Write</text>
+<rect x="14" y="354" width="852" height="120" rx="5" fill="#FFF8F2" stroke="#E65100" stroke-width="1.3"/>
+<rect x="24" y="364" width="68" height="20" rx="3" fill="#E65100" stroke="#E65100" stroke-width="1"/>
+<text x="58" y="374" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">TẦNG 3</text>
+<text x="102" y="374" font-size="12" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Lệnh phần cứng vi mã (Hardware Instructions / ISA)</text>
+<text x="102" y="390" font-size="9.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">Mã máy cụ thể của phần cứng mục tiêu - Điều khiển trực tiếp PE Array, SRAM và kênh DMA</text>
+<rect x="24" y="402" width="400" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="32" y="413" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đối tượng và dữ liệu thao tác:</text>
+<text x="42" y="428" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Thanh ghi tích lũy (PE Accumulators), thanh ghi cấu hình</text>
+<text x="42" y="442" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Địa chỉ vật lý SRAM on-chip và DDR off-chip</text>
+<text x="42" y="456" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Kênh DMA, bộ đếm xung nhịp, cờ ngắt phần cứng</text>
+<rect x="436" y="402" width="418" height="64" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<text x="444" y="413" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tối ưu hóa và chuyển đổi then chốt:</text>
+<text x="454" y="428" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Tensorization: Khớp khối vòng lặp vào lệnh nhân ma trận NPU</text>
+<text x="454" y="442" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Lập lịch DMA: Nạp trước double-buffering ẩn độ trễ DRAM</text>
+<text x="454" y="456" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">•  Phát sinh vi mã (Microcode / Descriptor) nạp lệnh thực thi</text>
+<path d="M440 162 L440 190" fill="none" stroke="#1E5BB8" stroke-width="3.0" marker-end="url(#m1E5BB8t)"/>
+<text x="452.0" y="179" font-size="9" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Hạ bậc đồ thị (Graph Lowering) &amp; Lập lịch thuật toán</text>
+<path d="M440 318 L440 346" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="452.0" y="335" font-size="9" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">Hạ bậc mã máy (Codegen / Tensorization) &amp; Ánh xạ NPU</text>
+<text x="10" y="494" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Chen et al. (TVM, OSDI 2018 tr.3-4), Bamborini et al. (eIQ Neutron 2023 tr.4)</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 513" width="880" height="513" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="513" fill="white"/>
+<rect x="750" y="14" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="25.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">So sánh luồng thực thi Unfused vs Fused: Giảm 66.7% lưu lượng trung chuyển DRAM</text>
+<rect x="18" y="40" width="412" height="436" rx="5" fill="#FFF9F9" stroke="#C62828" stroke-width="1.3"/>
+<rect x="28" y="50" width="145" height="22" rx="3" fill="#C62828" stroke="#C62828" stroke-width="1"/>
+<text x="100" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">UNFUSED (Không gộp)</text>
+<text x="183" y="61" font-size="9.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">3 Kernel độc lập - 6 lần truy cập DRAM</text>
+<rect x="43" y="80" width="362" height="26" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="224.0" y="93" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">DRAM: Tensor đầu vào (200 KB)</text>
+<path d="M224 108 L224 122" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="115" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[1] Đọc</text>
+<rect x="53" y="124" width="342" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="224.0" y="136" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Kernel 1: Tích chập (Conv2D)</text>
+<text x="224.0" y="149" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Tính toán xong phải đẩy kết quả ra DRAM</text>
+<path d="M224 162 L224 176" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="169" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[2] Ghi</text>
+<rect x="43" y="178" width="362" height="26" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="224.0" y="191" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">DRAM: Tensor trung gian 1 (200 KB)</text>
+<path d="M224 206 L224 220" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="213" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[3] Đọc</text>
+<rect x="53" y="222" width="342" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="224.0" y="234" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Kernel 2: Chuẩn hóa BatchNorm / Scale</text>
+<text x="224.0" y="247" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Đọc lại từ DRAM, tính affine rồi lại ghi tiếp</text>
+<path d="M224 260 L224 274" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="267" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[4] Ghi</text>
+<rect x="43" y="276" width="362" height="26" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="224.0" y="289" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">DRAM: Tensor trung gian 2 (200 KB)</text>
+<path d="M224 304 L224 318" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="311" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[5] Đọc</text>
+<rect x="53" y="320" width="342" height="36" rx="4" fill="white" stroke="#333333" stroke-width="1.2"/>
+<text x="224.0" y="332" font-size="10.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Kernel 3: Hàm kích hoạt (ReLU)</text>
+<text x="224.0" y="345" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Cắt ngưỡng max(0, x) rồi ghi kết quả cuối</text>
+<path d="M224 358 L224 372" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
+<text x="232.0" y="365" font-size="8" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central">[6] Ghi</text>
+<rect x="43" y="374" width="362" height="26" rx="3" fill="#FEE2E2" stroke="#C62828" stroke-width="1"/>
+<text x="224.0" y="387" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">DRAM: Tensor đầu ra cuối (200 KB)</text>
+<rect x="33" y="414" width="382" height="50" rx="4" fill="white" stroke="#C62828" stroke-width="1.2"/>
+<text x="224.0" y="429" font-size="9.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Tổng cộng: 3 lần Đọc + 3 lần Ghi = 1,204 KB DRAM</text>
+<text x="224.0" y="447" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Trung chuyển lãng phí: 802,816 bytes (DRAM stall cao)</text>
+<rect x="450" y="40" width="412" height="436" rx="5" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="460" y="50" width="130" height="22" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="525" y="61" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">FUSED (Đã gộp)</text>
+<text x="600" y="61" font-size="9.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">1 Kernel duy nhất - 2 lần truy cập DRAM</text>
+<rect x="475" y="80" width="362" height="24" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="656.0" y="92" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">DRAM: Tensor đầu vào (200 KB)</text>
+<path d="M656 104 L656 120" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="666.0" y="116" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">[1] Đọc duy nhất</text>
+<rect x="470" y="128" width="372" height="218" rx="4" fill="white" stroke="#2E7D32" stroke-width="1.3"/>
+<rect x="478" y="136" width="356" height="20" rx="3" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1"/>
+<text x="656.0" y="146" font-size="9.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">NPU ON-CHIP SRAM &amp; PE ARRAY (KERNEL GỘP)</text>
+<rect x="485" y="160" width="342" height="36" rx="3" fill="#F8FAFC" stroke="#1E5BB8" stroke-width="1"/>
+<text x="656.0" y="171" font-size="9.2" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Bước 1: Constant Folding (Pha Biên Dịch)</text>
+<text x="656.0" y="185" font-size="8.2" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Gấp trước BN vào trọng số Conv: W_fused, b_fused</text>
+<path d="M656 198 L656 212" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="485" y="214" width="342" height="36" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1"/>
+<text x="656.0" y="225" font-size="9.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 2: Mảng PE tính Tích chập (Conv2D)</text>
+<text x="656.0" y="239" font-size="8.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Giá trị tích lũy giữ trọn trên thanh ghi Accumulator</text>
+<path d="M656 252 L656 266" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<rect x="485" y="268" width="342" height="36" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1"/>
+<text x="656.0" y="279" font-size="9.2" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 3: Fused ReLU tại lối ra PE</text>
+<text x="656.0" y="293" font-size="8.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Cắt max(0, x) không tốn thêm chu kỳ xung nhịp riêng</text>
+<text x="656.0" y="328" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">★ Không có bất kỳ byte trung gian nào ghi ra DRAM</text>
+<path d="M656 348 L656 366" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
+<text x="666.0" y="360" font-size="8.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">[2] Ghi duy nhất</text>
+<rect x="475" y="374" width="362" height="26" rx="3" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1"/>
+<text x="656.0" y="387" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">DRAM: Tensor đầu ra cuối (200 KB)</text>
+<rect x="465" y="414" width="382" height="50" rx="4" fill="white" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="656.0" y="429" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Tổng cộng: 1 lần Đọc + 1 lần Ghi = 401 KB (-66.7%)</text>
+<text x="656.0" y="447" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Tiết kiệm 802,816 bytes; Tăng tốc 1.2x - 2.0x (TVM)</text>
+<text x="10" y="499" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Chen et al. (TVM, OSDI 2018 tr.3-4), Lee et al. (IEEE TVLSI 2024 tr.1)</text>
+</svg>
