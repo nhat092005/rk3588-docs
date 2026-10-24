@@ -4,11 +4,17 @@
 Research problem và RQ
 **********************
 
+.. admonition:: Trang này trả lời
+
+   - Hiệu năng suy luận thời gian thực trên Edge NPU phụ thuộc vào những khía cạnh kỹ thuật nào?
+   - Khả năng hỗ trợ toán tử (operator support) và cơ chế phân phối đa nhân của NPU RK3588 cho YOLOv8n ra sao?
+   - Câu hỏi nghiên cứu (Research Question - RQ) trọng tâm của đề tài là gì?
+
 .. admonition:: Tóm tắt
 
    - Research problem: hiệu quả real-time trên Edge NPU phụ thuộc operator support, tensor layout, datatype, memory access, memory copy, compiler optimization, NPU architecture và pre/post-processing overhead.
-   - Trên RK3588, `Convolution` hỗ trợ đa nhân nhưng `Resize` không, và `ConvolutionSwish` tạm chưa; chỉ Conv + ReLU/Clip/LeakyReLU được hỗ trợ.
-   - Build log của model 7 class cũ có 228 op `ConvExSwish`, và cờ `conv_eltwise_activation_fuse = 1` mặc định bật.
+   - Trên RK3588, `Convolution` hỗ trợ đa nhân nhưng `Resize` không, và `ConvolutionSwish` chỉ chưa hỗ trợ đa nhân (vẫn chạy một nhân). Chi tiết từng op ở trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
+   - Build lại model 7 class cũ có 57 op `ConvExSwish` (số 228 trước đây là số dòng log), và cờ `conv_eltwise_activation_fuse = 1` mặc định bật.
    - Trên RK3588 chỉ dùng được `w8a8` (INT8/INT8, mặc định); `w4a8` chưa hỗ trợ.
    - Log gọi op là `ConvExSwish`, tài liệu gọi `ConvolutionSwish`; chưa tài liệu nào xác nhận cùng một op, và cần chạy `eval_perf` ở `CORE_0_1_2` `[chưa kiểm chứng]`.
    - Research Question: giữ PPE detection accuracy tốt nhưng đồng thời cải thiện inference efficiency trên RK3588S NPU.
@@ -59,20 +65,20 @@ Các object detector có thể đạt accuracy tốt, nhưng khi triển khai re
      - Phát hiện thật
      - Nguồn
    * - ``operator support``
-     - ``Convolution`` hỗ trợ đa nhân ("多核联合: 支持"), nhưng **``Resize``** (upsample trong neck YOLO) **không** ("不支持"), và **``ConvolutionSwish``** (Conv + SiLU gộp) **tạm chưa** ("暂不支持"). Chỉ các biến thể Conv + ReLU/Clip/LeakyReLU mới hỗ trợ. YOLOv8 dùng SiLU sau hầu hết lớp conv (228 op ``ConvExSwish`` trong build log của model 7 class cũ)
+     - ``Convolution`` hỗ trợ đa nhân ("多核联合: 支持"), nhưng **``Resize``** (upsample trong neck YOLO) **không** ("不支持"), và **``ConvolutionSwish``** (Conv + SiLU gộp) **tạm chưa hỗ trợ đa nhân** ("暂不支持", mục này ghi ``说明及规格限制同Convolution``). Các biến thể Conv kèm ReLU, Clip, PReLU/LeakyReLU hoặc Add cũng ghi "支持". YOLOv8 dùng SiLU sau 57 trong 64 lớp conv của model 7 class cũ (57 op ``ConvExSwish`` khi build lại)
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`, mục 3.2 RK3588: 3.2.5 Convolution (trang PDF 59), 3.2.17 ConvolutionSwish (trang PDF 63), 3.2.54 Resize (trang PDF 87)
    * - ``compiler optimization``
-     - Operator đã được compiler tự gộp thật: 228 op ``ConvExSwish`` (Conv + SiLU gộp làm 1), cờ ``conv_eltwise_activation_fuse = 1`` mặc định bật
-     - Build log thật của model ``sfchd`` YOLOv8n (model 7 class cũ, cần đo lại sau khi train 5 class), ``tmp/05_training-logs/2026-09-18_sfchd_yolov8n_rknn_build_verbose_loglevel3.log`` (cờ ở dòng 154)
+     - Operator đã được compiler tự gộp thật: 57 op ``ConvExSwish`` (Conv + SiLU gộp làm 1), cờ ``conv_eltwise_activation_fuse = 1`` mặc định bật
+     - Build lại ONNX model ``sfchd`` YOLOv8n 7 class cũ bằng rknn-toolkit2 2.3.2 (FP16). Model 5 class ở FP16 và INT8 cho cùng danh sách op, cách làm ở trang Operator support. Build log gốc (``tmp/05_training-logs/...loglevel3.log``) không còn trên đĩa
    * - ``datatype``
      - Trên RK3588 chỉ dùng được ``w8a8`` (INT8/INT8, mặc định). Các mode khác đều giới hạn chip: ``w4a16`` chỉ RK3576/RV1126B, ``w8a16`` chỉ RK3562, ``w16a16i`` chỉ RV1103/RV1106, ``w4a8`` chưa hỗ trợ
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`, hàm ``config``, tham số ``quantized_dtype``, tr.7
 
-Tài liệu Rockchip thứ 2 cho cùng kết luận về đa nhân: :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
+Tài liệu Rockchip thứ 2 nói về chạy đa nhân (danh sách op khác Operator List ở ``Relu`` đứng riêng và ``Concat``, xem trang Operator support)::download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
 
    "For multi-cores mode (when enabling RKNN_NPU_CORE_0_1 and RKNN_NPU_CORE_0_1_2), the following ops have better acceleration: Conv, DepthwiseConvolution, Add, Concat, Relu, Clip, Relu6, ThresholdedRelu. Prelu, LeakyRelu. Other type of op will fallback to Core0 to continue running."
 
-Lưu ý: log gọi op là ``ConvExSwish``, tài liệu gọi ``ConvolutionSwish``. Hai tên cùng chức năng (Conv + Swish gộp) nhưng không tài liệu nào xác nhận là cùng một op. Cần chạy ``eval_perf`` ở ``CORE_0_1_2`` trên board để xem từng layer thực sự chạy trên core nào ``[chưa kiểm chứng]``.
+Lưu ý: log gọi op là ``ConvExSwish``, tài liệu gọi ``ConvolutionSwish``. Theo cách đọc tên, cả hai đều là Conv gộp Swish, nhưng tên ``ConvExSwish`` không có trong Operator List V2.3.2 và User Guide V2.3.2, và không tài liệu nào xác nhận là cùng một op. Cần chạy ``eval_perf`` ở ``CORE_0_1_2`` trên board để xem từng layer thực sự chạy trên core nào ``[chưa kiểm chứng]``.
 
 Do đó:
 

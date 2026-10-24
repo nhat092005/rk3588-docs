@@ -354,9 +354,205 @@ def fig_per_tensor_vs_per_channel():
     return f
 
 
+# ==============================================================================
+# 3. HÌNH HYBRID QUANTIZATION FLOW (quant-03-hybrid-quantization-flow)
+# ==============================================================================
+def fig_hybrid_quantization_flow():
+    card_h = 304
+    y_top = 44
+    H = 370
+    f = Fig(W, H)
+    tier(f, "T1 RK3588")
+    f.text(14, 22, "Quy trình lượng tử hóa hỗn hợp (Hybrid Quantization) trên RKNN-Toolkit2",
+           size=14, weight=700, fill=DARK)
+
+    card_w = 198
+    c1_x = 16
+    c2_x = 232
+    c3_x = 448
+    c4_x = 664
+
+    # --------------------------------------------------------------------------
+    # PHA 1: PHÂN TÍCH SAI SỐ (ACCURACY ANALYSIS)
+    # --------------------------------------------------------------------------
+    rect(f, c1_x, y_top, card_w, card_h, fill="#F8FAFC", stroke="#3B82F6", sw=1.2, rx=6)
+    rect(f, c1_x, y_top, card_w, 26, fill="#EFF6FF", stroke="#3B82F6", sw=1.0, rx=6)
+    rect(f, c1_x + 8, y_top + 5, 5, 16, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(c1_x + 18, y_top + 14, "Pha 1: Accuracy Analysis", size=9.5, weight=700, fill="#1E40AF")
+
+    f.text(c1_x + 10, y_top + 36, "rknn.accuracy_analysis()", size=8.0, weight=700, fill="#1E3A8A")
+    f.text(c1_x + 10, y_top + 48, "Chạy trên tập ảnh test / calib", size=7.2, fill="#64748B")
+
+    # Box 1: Đối chiếu song song
+    rect(f, c1_x + 10, 98, card_w - 20, 72, fill="#FFFFFF", stroke="#93C5FD", rx=3)
+    f.text(c1_x + 16, 112, "Mô hình đối chiếu song song:", size=7.5, weight=700, fill="#1E40AF")
+    rect(f, c1_x + 16, 118, 70, 18, fill="#EFF6FF", stroke="#3B82F6", rx=2)
+    f.text(c1_x + 51, 130, "Golden FP32/16", size=6.8, weight=700, fill="#1E40AF", anchor="middle")
+    rect(f, c1_x + 92, 118, 70, 18, fill="#F1F5F9", stroke="#64748B", rx=2)
+    f.text(c1_x + 127, 130, "Simulator INT8", size=6.8, weight=700, fill="#334155", anchor="middle")
+    f.text(c1_x + 16, 148, "• So sánh output từng layer", size=7.0, fill="#475569")
+    f.text(c1_x + 16, 160, "• Metric: Cosine Distance & MSE", size=7.0, fill="#475569")
+
+    # Box 2: Báo cáo lỗi
+    rect(f, c1_x + 10, 176, card_w - 20, 72, fill="#FFFFFF", stroke="#CBD5E1", rx=3)
+    f.text(c1_x + 16, 190, "Báo cáo lỗi (snapshot/):", size=7.5, weight=700, fill=DARK)
+    f.text(c1_x + 16, 204, "Layer 0..N-2:", size=7.0, fill="#15803D")
+    f.text(c1_x + card_w - 18, 204, "Cos: 0.998", size=7.0, weight=700, fill="#15803D", anchor="end")
+    f.text(c1_x + 16, 218, "Detect Head 1:", size=7.0, fill="#DC2626")
+    f.text(c1_x + card_w - 18, 218, "Cos: 0.891", size=7.0, weight=700, fill="#DC2626", anchor="end")
+    f.text(c1_x + 16, 232, "Detect Head 2:", size=7.0, fill="#DC2626")
+    f.text(c1_x + card_w - 18, 232, "Cos: 0.884", size=7.0, weight=700, fill="#DC2626", anchor="end")
+    f.text(c1_x + 16, 243, "→ Phát hiện tầng sụt giảm mAP", size=6.8, italic=True, fill="#B91C1C")
+
+    # Box 3: Tiêu chuẩn
+    rect(f, c1_x + 10, 254, card_w - 20, 60, fill="#EFF6FF", stroke="#93C5FD", rx=3)
+    f.text(c1_x + 16, 268, "Tiêu chí đánh giá:", size=7.5, weight=700, fill="#1E40AF")
+    f.text(c1_x + 16, 281, "• Cosine > 0.98: Rất tốt (INT8)", size=7.0, fill="#15803D")
+    f.text(c1_x + 16, 294, "• Cosine < 0.95: Nhạy cảm cao", size=7.0, fill="#DC2626")
+    f.text(c1_x + 16, 306, "• Đọc cột single simulator_error", size=6.8, fill="#64748B")
+
+    # Thẻ tóm tắt đáy
+    rect(f, c1_x + 10, 320, card_w - 20, 22, fill="#EFF6FF", stroke=BLUE, rx=2)
+    f.text(c1_x + card_w / 2, 334, "Định lượng sai số từng tầng", size=7.2, weight=700, fill="#1E40AF", anchor="middle")
+
+    # Mũi tên liên kết 1 -> 2
+    arrow(f, c1_x + card_w, 196, c2_x, 196, color=BLUE, sw=1.5)
+
+    # --------------------------------------------------------------------------
+    # PHA 2: LỌC LAYER NHẠY CẢM
+    # --------------------------------------------------------------------------
+    rect(f, c2_x, y_top, card_w, card_h, fill="#FFFBEB", stroke="#D97706", sw=1.2, rx=6)
+    rect(f, c2_x, y_top, card_w, 26, fill="#FEF3C7", stroke="#D97706", sw=1.0, rx=6)
+    rect(f, c2_x + 8, y_top + 5, 5, 16, fill=ORANGE, stroke=ORANGE, rx=2)
+    f.text(c2_x + 18, y_top + 14, "Pha 2: Lọc Layer nhạy cảm", size=9.5, weight=700, fill="#92400E")
+
+    f.text(c2_x + 10, y_top + 36, "Đọc simulator_error [single]", size=8.0, weight=700, fill="#92400E")
+    f.text(c2_x + 10, y_top + 48, "Xác định điểm nút gây nghẽn mAP", size=7.2, fill="#78350F")
+
+    # Box 1: Đặc tính nhạy cảm
+    rect(f, c2_x + 10, 98, card_w - 20, 72, fill="#FFFFFF", stroke="#FDE68A", rx=3)
+    f.text(c2_x + 16, 112, "Đặc tính nhạy cảm theo khối:", size=7.5, weight=700, fill="#92400E")
+    f.text(c2_x + 16, 125, "• Stem: Dải giá trị đầu vào rộng", size=7.0, fill="#475569")
+    f.text(c2_x + 16, 138, "• Backbone: Dải phân bố ổn định", size=7.0, fill="#15803D")
+    f.text(c2_x + 16, 151, "• Detect Head: Nhạy cảm scale box", size=7.0, fill="#DC2626")
+    f.text(c2_x + 16, 163, "→ Quyết định IoU và phân loại PPE", size=6.8, italic=True, fill="#78350F")
+
+    # Box 2: Nguyên nhân sụt mAP
+    rect(f, c2_x + 10, 176, card_w - 20, 72, fill="#FFFFFF", stroke="#FCD34D", rx=3)
+    f.text(c2_x + 16, 190, "Nguyên nhân sụt giảm mAP:", size=7.5, weight=700, fill="#B45309")
+    f.text(c2_x + 16, 204, "• Lỗi quantization cộng dồn", size=7.0, fill="#475569")
+    f.text(c2_x + 16, 218, "• Activation tại Head phân bố lệch", size=7.0, fill="#DC2626")
+    f.text(c2_x + 16, 232, "• Regression bị trôi tọa độ box", size=7.0, fill="#DC2626")
+    f.text(c2_x + 16, 243, "→ Gây mất phát hiện vật thể nhỏ", size=6.8, italic=True, fill="#991B1B")
+
+    # Box 3: Quy tắc chọn
+    rect(f, c2_x + 10, 254, card_w - 20, 60, fill="#FEF3C7", stroke="#F59E0B", rx=3)
+    f.text(c2_x + 16, 268, "Nguyên tắc chọn layer phục hồi:", size=7.5, weight=700, fill="#92400E")
+    f.text(c2_x + 16, 281, "• Chỉ chọn top 3-5% layer tệ nhất", size=7.0, fill="#15803D")
+    f.text(c2_x + 16, 294, "• Không đưa toàn bộ model về FP16", size=7.0, fill="#B91C1C")
+    f.text(c2_x + 16, 306, "• Giữ nguyên compute layers ở INT8", size=6.8, fill="#475569")
+
+    # Thẻ tóm tắt đáy
+    rect(f, c2_x + 10, 320, card_w - 20, 22, fill="#FEF3C7", stroke=ORANGE, rx=2)
+    f.text(c2_x + card_w / 2, 334, "Chỉ giữ 5-10% layer nhạy cảm", size=7.2, weight=700, fill="#92400E", anchor="middle")
+
+    # Mũi tên liên kết 2 -> 3
+    arrow(f, c2_x + card_w, 196, c3_x, 196, color=ORANGE, sw=1.5)
+
+    # --------------------------------------------------------------------------
+    # PHA 3: TÁCH CẤU HÌNH (.CFG)
+    # --------------------------------------------------------------------------
+    rect(f, c3_x, y_top, card_w, card_h, fill="#FAF5FF", stroke="#9333EA", sw=1.2, rx=6)
+    rect(f, c3_x, y_top, card_w, 26, fill="#F3E8FF", stroke="#9333EA", sw=1.0, rx=6)
+    rect(f, c3_x + 8, y_top + 5, 5, 16, fill="#9333EA", stroke="#9333EA", rx=2)
+    f.text(c3_x + 18, y_top + 14, "Pha 3: Can thiệp cấu hình .cfg", size=9.5, weight=700, fill="#6B21A8")
+
+    f.text(c3_x + 10, y_top + 36, "hybrid_quantization_step1()", size=8.0, weight=700, fill="#6B21A8")
+    f.text(c3_x + 10, y_top + 48, "Sinh .model, .data, .cfg trung gian", size=7.2, fill="#581C87")
+
+    # Box 1: File trung gian
+    rect(f, c3_x + 10, 98, card_w - 20, 72, fill="#FFFFFF", stroke="#D8B4FE", rx=3)
+    f.text(c3_x + 16, 112, "Đầu ra hybrid_step1:", size=7.5, weight=700, fill="#6B21A8")
+    rect(f, c3_x + 16, 118, 146, 16, fill="#F5F3FF", stroke="#C084FC", rx=2)
+    f.text(c3_x + 22, 129, "1. <model>.quantization.cfg", size=6.8, weight=700, fill="#6B21A8")
+    rect(f, c3_x + 16, 137, 70, 16, fill="#F8FAFC", stroke="#CBD5E1", rx=2)
+    f.text(c3_x + 51, 148, "2. .model", size=6.8, fill="#475569", anchor="middle")
+    rect(f, c3_x + 92, 137, 70, 16, fill="#F8FAFC", stroke="#CBD5E1", rx=2)
+    f.text(c3_x + 127, 148, "3. .data", size=6.8, fill="#475569", anchor="middle")
+    f.text(c3_x + 16, 162, "Tách rời pha thống kê & lượng tử", size=6.8, italic=True, fill="#581C87")
+
+    # Box 2: Code giả lập .cfg
+    rect(f, c3_x + 10, 176, card_w - 20, 72, fill="#1E1E2E", stroke="#A855F7", rx=3)
+    f.text(c3_x + 16, 189, "# model.quantization.cfg", size=6.8, fill="#94A3B8")
+    f.text(c3_x + 16, 202, "[custom_quantize_layers]", size=7.0, weight=700, fill="#A855F7")
+    f.text(c3_x + 16, 215, "cv3_head_2: float16", size=7.0, fill="#F43F5E")
+    f.text(c3_x + 16, 228, "cv3_head_3: float16", size=7.0, fill="#F43F5E")
+    f.text(c3_x + 16, 241, "* (mặc định còn lại): int8", size=6.8, fill="#10B981")
+
+    # Box 3: hybrid_step2
+    rect(f, c3_x + 10, 254, card_w - 20, 60, fill="#FFFFFF", stroke="#D8B4FE", rx=3)
+    f.text(c3_x + 16, 268, "hybrid_quantization_step2():", size=7.5, weight=700, fill="#6B21A8")
+    f.text(c3_x + 16, 281, "• Nạp lại .cfg đã cấu hình thủ công", size=7.0, fill="#475569")
+    f.text(c3_x + 16, 294, "• Toolkit2 lượng tử hóa lai 2 miền", size=7.0, fill="#15803D")
+    f.text(c3_x + 16, 306, "• Gọi rknn.export_rknn() ra model", size=6.8, fill="#581C87")
+
+    # Thẻ tóm tắt đáy
+    rect(f, c3_x + 10, 320, card_w - 20, 22, fill="#F3E8FF", stroke="#9333EA", rx=2)
+    f.text(c3_x + card_w / 2, 334, "Tách nhánh INT8 & FP16 linh hoạt", size=7.2, weight=700, fill="#6B21A8", anchor="middle")
+
+    # Mũi tên liên kết 3 -> 4
+    arrow(f, c3_x + card_w, 196, c4_x, 196, color=INK, sw=1.5)
+
+    # --------------------------------------------------------------------------
+    # PHA 4: THỰC THI & ĐÁNH ĐỔI NPU
+    # --------------------------------------------------------------------------
+    rect(f, c4_x, y_top, card_w, card_h, fill="#F0FDF4", stroke="#16A34A", sw=1.2, rx=6)
+    rect(f, c4_x, y_top, card_w, 26, fill="#DCFCE7", stroke="#16A34A", sw=1.0, rx=6)
+    rect(f, c4_x + 8, y_top + 5, 5, 16, fill=GREEN, stroke=GREEN, rx=2)
+    f.text(c4_x + 18, y_top + 14, "Pha 4: Đánh đổi phần cứng", size=9.5, weight=700, fill="#14532D")
+
+    f.text(c4_x + 10, y_top + 36, "export_rknn() -> Board NPU", size=8.0, weight=700, fill="#14532D")
+    f.text(c4_x + 10, y_top + 48, "Phân bổ luồng tính toán trên 3 Core", size=7.2, fill="#166534")
+
+    # Box 1: Phân bổ NPU
+    rect(f, c4_x + 10, 98, card_w - 20, 72, fill="#FFFFFF", stroke="#86EFAC", rx=3)
+    f.text(c4_x + 16, 112, "Phân bổ tài nguyên RKNPU:", size=7.5, weight=700, fill="#14532D")
+    rect(f, c4_x + 16, 118, 146, 16, fill="#DCFCE7", stroke="#16A34A", rx=2)
+    f.text(c4_x + 22, 129, "90-95% Khối lượng: MAC INT8", size=6.8, weight=700, fill="#14532D")
+    rect(f, c4_x + 16, 137, 146, 16, fill="#FEF2F2", stroke="#F87171", rx=2)
+    f.text(c4_x + 22, 148, "5-10% Head nhạy: Cores FP16", size=6.8, weight=700, fill="#991B1B")
+    f.text(c4_x + 16, 162, "Tận dụng trọn vẹn 6 TOPS NPU core", size=6.8, italic=True, fill="#15803D")
+
+    # Box 2: Đánh đổi mAP & Latency
+    rect(f, c4_x + 10, 176, card_w - 20, 72, fill="#FFFFFF", stroke="#86EFAC", rx=3)
+    f.text(c4_x + 16, 190, "Hiệu quả thực nghiệm (YOLO):", size=7.5, weight=700, fill="#14532D")
+    f.text(c4_x + 16, 204, "• Độ chính xác mAP:", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 204, "Phục hồi ~99%", size=7.0, weight=700, fill="#15803D", anchor="end")
+    f.text(c4_x + 16, 218, "• Độ trễ suy luận:", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 218, "Tăng nhẹ 5-15%", size=7.0, weight=700, fill="#D97706", anchor="end")
+    f.text(c4_x + 16, 232, "• Tiết kiệm bộ nhớ:", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 232, "Giảm ~45% DDR", size=7.0, weight=700, fill="#2563EB", anchor="end")
+    f.text(c4_x + 16, 243, "→ Điểm cân bằng Pareto tối ưu", size=6.8, italic=True, fill="#15803D")
+
+    # Box 3: Cảnh báo phần cứng
+    rect(f, c4_x + 10, 254, card_w - 20, 60, fill="#F0FDF4", stroke="#86EFAC", rx=3)
+    f.text(c4_x + 16, 268, "Lưu ý tài liệu hãng [T1 UG232]:", size=7.5, weight=700, fill="#14532D")
+    f.text(c4_x + 16, 281, "• Lớp FP16 trên NPU chạy chậm hơn", size=7.0, fill="#78350F")
+    f.text(c4_x + 16, 294, "• Tránh đưa conv nặng vào FP16", size=7.0, fill="#B91C1C")
+    f.text(c4_x + 16, 306, "• Thích hợp nhất cho lớp cuối", size=6.8, fill="#15803D")
+
+    # Thẻ tóm tắt đáy
+    rect(f, c4_x + 10, 320, card_w - 20, 22, fill="#DCFCE7", stroke="#16A34A", rx=2)
+    f.text(c4_x + card_w / 2, 334, "Tối ưu Pareto: mAP cao, tốc độ tốt", size=7.2, weight=700, fill="#14532D", anchor="middle")
+
+    source(f, y_top + card_h + 2, "[T1 UG232 tr.123-134, Fig. 6-3, 6-4] [T1 API232 tr.20-22] [T1 Gholami survey 2021]")
+    return f
+
+
 FIGURES = [
     ("quant-01-symmetric-vs-asymmetric", fig_symmetric_vs_asymmetric),
     ("quant-02-per-tensor-vs-per-channel", fig_per_tensor_vs_per_channel),
+    ("quant-03-hybrid-quantization-flow", fig_hybrid_quantization_flow),
 ]
 
 if __name__ == "__main__":

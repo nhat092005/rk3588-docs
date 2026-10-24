@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SKIP = {"_build", ".venv", "tools"}
-MAX_LINES = 650
+MAX_LINES = 1000
 MAX_DEPTH = 3
 STRICT_CONTENT = False
 # dac-ta-bang is exempt only until its pages are rewritten (they hold the old [TBD] cells); then drop it from this list

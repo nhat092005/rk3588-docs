@@ -4,6 +4,12 @@
 Bài toán và ứng dụng
 ********************
 
+.. admonition:: Trang này trả lời
+
+   - Bài toán phát hiện PPE công nghiệp gồm những lớp đối tượng nào và yêu cầu real-time ra sao?
+   - Vì sao triển khai detector trên RK3588S NPU là một bài toán nghiên cứu về Hardware-aware Edge AI chứ không dừng lại ở ứng dụng đơn thuần?
+   - Vì sao số lượng tham số và FLOPs lý thuyết không phản ánh chính xác độ trễ thực tế trên phần cứng mục tiêu?
+
 .. admonition:: Tóm tắt
 
    - Bài toán hiện tại là Industrial PPE Detection với 5 class: `person`, `helmet`, `safety_clothes`, `self_clothes`, `head`.

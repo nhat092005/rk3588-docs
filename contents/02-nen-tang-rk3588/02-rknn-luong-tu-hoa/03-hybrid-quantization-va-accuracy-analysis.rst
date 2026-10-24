@@ -67,6 +67,14 @@ Hybrid quantization gồm bốn bước [T1 UG232 tr.123]. Hai bước gọi API
      - Suy luận bằng model RKNN vừa tạo
      - Kết quả suy luận [T1 UG232 tr.125]
 
+.. _fig-quant-hybrid-flow:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/quant-03-hybrid-quantization-flow.svg
+   :align: center
+   :alt: Quy trình 4 pha của Hybrid Quantization trên RKNN-Toolkit2
+
+   Quy trình 4 pha của lượng tử hóa hỗn hợp (Hybrid Quantization): từ phân tích sai số tầng mạng (Accuracy Analysis), định vị layer nhạy cảm, can thiệp file cấu hình trung gian .cfg đến phân bổ mảng MAC INT8 và fallback FP16 trên RKNPU. Nguồn: tổng hợp từ [T1 UG232 tr.123-134, Fig. 6-3, 6-4] [T1 API232 tr.20-22].
+
 .. _fig-hybrid-step1:
 
 .. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/hybrid-quantization-va-accuracy-analysis/ug232-fig6-3-hybrid-quantization-step1.png

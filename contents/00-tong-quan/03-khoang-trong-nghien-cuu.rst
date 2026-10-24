@@ -4,6 +4,12 @@
 Research gap
 ************
 
+.. admonition:: Trang này trả lời
+
+   - Khoảng trống nghiên cứu (Research Gap) giữa các mô hình hiện tại và việc triển khai tối ưu trên NPU RK3588 là gì?
+   - Vì sao nghịch lý FLOPs thấp nhưng NPU suy luận chậm lại xảy ra trên thực tế?
+   - Những đánh đổi giữa độ chính xác và độ trễ khi lượng tử hóa INT8 trên kiến trúc đa lõi RK3588 cần được kiểm chứng ra sao?
+
 .. admonition:: Tóm tắt
 
    - Cách làm đúng là đọc paper, liệt kê limitation, verify trên RK3588S, tìm bottleneck thật rồi mới đặt research question, không chọn kỹ thuật trước.

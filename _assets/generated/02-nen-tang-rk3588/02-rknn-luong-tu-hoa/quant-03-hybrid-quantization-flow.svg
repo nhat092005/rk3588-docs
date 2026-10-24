@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 382" width="880" height="382" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="382" fill="white"/>
+<rect x="750" y="14" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="790.3" y="25.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="14" y="22" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Quy trình lượng tử hóa hỗn hợp (Hybrid Quantization) trên RKNN-Toolkit2</text>
+<rect x="16" y="44" width="198" height="304" rx="6" ry="6" fill="#F8FAFC" stroke="#3B82F6" stroke-width="1.2"/>
+<rect x="16" y="44" width="198" height="26" rx="6" ry="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.0"/>
+<rect x="24" y="49" width="5" height="16" rx="2" ry="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="34" y="58" font-size="9.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Pha 1: Accuracy Analysis</text>
+<text x="26" y="80" font-size="8.0" font-weight="700" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">rknn.accuracy_analysis()</text>
+<text x="26" y="92" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Chạy trên tập ảnh test / calib</text>
+<rect x="26" y="98" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1.2"/>
+<text x="32" y="112" font-size="7.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Mô hình đối chiếu song song:</text>
+<rect x="32" y="118" width="70" height="18" rx="2" ry="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2"/>
+<text x="67" y="130" font-size="6.8" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Golden FP32/16</text>
+<rect x="108" y="118" width="70" height="18" rx="2" ry="2" fill="#F1F5F9" stroke="#64748B" stroke-width="1.2"/>
+<text x="143" y="130" font-size="6.8" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">Simulator INT8</text>
+<text x="32" y="148" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• So sánh output từng layer</text>
+<text x="32" y="160" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Metric: Cosine Distance &amp; MSE</text>
+<rect x="26" y="176" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="32" y="190" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Báo cáo lỗi (snapshot/):</text>
+<text x="32" y="204" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">Layer 0..N-2:</text>
+<text x="196" y="204" font-size="7.0" font-weight="700" fill="#15803D" text-anchor="end" dominant-baseline="central">Cos: 0.998</text>
+<text x="32" y="218" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">Detect Head 1:</text>
+<text x="196" y="218" font-size="7.0" font-weight="700" fill="#DC2626" text-anchor="end" dominant-baseline="central">Cos: 0.891</text>
+<text x="32" y="232" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">Detect Head 2:</text>
+<text x="196" y="232" font-size="7.0" font-weight="700" fill="#DC2626" text-anchor="end" dominant-baseline="central">Cos: 0.884</text>
+<text x="32" y="243" font-size="6.8" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central" font-style="italic">→ Phát hiện tầng sụt giảm mAP</text>
+<rect x="26" y="254" width="178" height="60" rx="3" ry="3" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+<text x="32" y="268" font-size="7.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Tiêu chí đánh giá:</text>
+<text x="32" y="281" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Cosine &gt; 0.98: Rất tốt (INT8)</text>
+<text x="32" y="294" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">• Cosine &lt; 0.95: Nhạy cảm cao</text>
+<text x="32" y="306" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Đọc cột single simulator_error</text>
+<rect x="26" y="320" width="178" height="22" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="115.0" y="334" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Định lượng sai số từng tầng</text>
+<path d="M214 196 L232 196" fill="none" stroke="#1E5BB8" stroke-width="1.5" marker-end="url(#m1E5BB8n)"/>
+<rect x="232" y="44" width="198" height="304" rx="6" ry="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.2"/>
+<rect x="232" y="44" width="198" height="26" rx="6" ry="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.0"/>
+<rect x="240" y="49" width="5" height="16" rx="2" ry="2" fill="#D97706" stroke="#D97706" stroke-width="1.2"/>
+<text x="250" y="58" font-size="9.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Pha 2: Lọc Layer nhạy cảm</text>
+<text x="242" y="80" font-size="8.0" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Đọc simulator_error [single]</text>
+<text x="242" y="92" font-size="7.2" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">Xác định điểm nút gây nghẽn mAP</text>
+<rect x="242" y="98" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1.2"/>
+<text x="248" y="112" font-size="7.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Đặc tính nhạy cảm theo khối:</text>
+<text x="248" y="125" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Stem: Dải giá trị đầu vào rộng</text>
+<text x="248" y="138" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Backbone: Dải phân bố ổn định</text>
+<text x="248" y="151" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">• Detect Head: Nhạy cảm scale box</text>
+<text x="248" y="163" font-size="6.8" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central" font-style="italic">→ Quyết định IoU và phân loại PPE</text>
+<rect x="242" y="176" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.2"/>
+<text x="248" y="190" font-size="7.5" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">Nguyên nhân sụt giảm mAP:</text>
+<text x="248" y="204" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Lỗi quantization cộng dồn</text>
+<text x="248" y="218" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">• Activation tại Head phân bố lệch</text>
+<text x="248" y="232" font-size="7.0" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">• Regression bị trôi tọa độ box</text>
+<text x="248" y="243" font-size="6.8" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central" font-style="italic">→ Gây mất phát hiện vật thể nhỏ</text>
+<rect x="242" y="254" width="178" height="60" rx="3" ry="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
+<text x="248" y="268" font-size="7.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Nguyên tắc chọn layer phục hồi:</text>
+<text x="248" y="281" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chỉ chọn top 3-5% layer tệ nhất</text>
+<text x="248" y="294" font-size="7.0" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Không đưa toàn bộ model về FP16</text>
+<text x="248" y="306" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Giữ nguyên compute layers ở INT8</text>
+<rect x="242" y="320" width="178" height="22" rx="2" ry="2" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
+<text x="331.0" y="334" font-size="7.2" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Chỉ giữ 5-10% layer nhạy cảm</text>
+<path d="M430 196 L448 196" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<rect x="448" y="44" width="198" height="304" rx="6" ry="6" fill="#FAF5FF" stroke="#9333EA" stroke-width="1.2"/>
+<rect x="448" y="44" width="198" height="26" rx="6" ry="6" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.0"/>
+<rect x="456" y="49" width="5" height="16" rx="2" ry="2" fill="#9333EA" stroke="#9333EA" stroke-width="1.2"/>
+<text x="466" y="58" font-size="9.5" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">Pha 3: Can thiệp cấu hình .cfg</text>
+<text x="458" y="80" font-size="8.0" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">hybrid_quantization_step1()</text>
+<text x="458" y="92" font-size="7.2" font-weight="400" fill="#581C87" text-anchor="start" dominant-baseline="central">Sinh .model, .data, .cfg trung gian</text>
+<rect x="458" y="98" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.2"/>
+<text x="464" y="112" font-size="7.5" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">Đầu ra hybrid_step1:</text>
+<rect x="464" y="118" width="146" height="16" rx="2" ry="2" fill="#F5F3FF" stroke="#C084FC" stroke-width="1.2"/>
+<text x="470" y="129" font-size="6.8" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">1. &lt;model&gt;.quantization.cfg</text>
+<rect x="464" y="137" width="70" height="16" rx="2" ry="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="499" y="148" font-size="6.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">2. .model</text>
+<rect x="540" y="137" width="70" height="16" rx="2" ry="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="575" y="148" font-size="6.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">3. .data</text>
+<text x="464" y="162" font-size="6.8" font-weight="400" fill="#581C87" text-anchor="start" dominant-baseline="central" font-style="italic">Tách rời pha thống kê &amp; lượng tử</text>
+<rect x="458" y="176" width="178" height="72" rx="3" ry="3" fill="#1E1E2E" stroke="#A855F7" stroke-width="1.2"/>
+<text x="464" y="189" font-size="6.8" font-weight="400" fill="#94A3B8" text-anchor="start" dominant-baseline="central"># model.quantization.cfg</text>
+<text x="464" y="202" font-size="7.0" font-weight="700" fill="#A855F7" text-anchor="start" dominant-baseline="central">[custom_quantize_layers]</text>
+<text x="464" y="215" font-size="7.0" font-weight="400" fill="#F43F5E" text-anchor="start" dominant-baseline="central">cv3_head_2: float16</text>
+<text x="464" y="228" font-size="7.0" font-weight="400" fill="#F43F5E" text-anchor="start" dominant-baseline="central">cv3_head_3: float16</text>
+<text x="464" y="241" font-size="6.8" font-weight="400" fill="#10B981" text-anchor="start" dominant-baseline="central">* (mặc định còn lại): int8</text>
+<rect x="458" y="254" width="178" height="60" rx="3" ry="3" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1.2"/>
+<text x="464" y="268" font-size="7.5" font-weight="700" fill="#6B21A8" text-anchor="start" dominant-baseline="central">hybrid_quantization_step2():</text>
+<text x="464" y="281" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Nạp lại .cfg đã cấu hình thủ công</text>
+<text x="464" y="294" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Toolkit2 lượng tử hóa lai 2 miền</text>
+<text x="464" y="306" font-size="6.8" font-weight="400" fill="#581C87" text-anchor="start" dominant-baseline="central">• Gọi rknn.export_rknn() ra model</text>
+<rect x="458" y="320" width="178" height="22" rx="2" ry="2" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.2"/>
+<text x="547.0" y="334" font-size="7.2" font-weight="700" fill="#6B21A8" text-anchor="middle" dominant-baseline="central">Tách nhánh INT8 &amp; FP16 linh hoạt</text>
+<path d="M646 196 L664 196" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<rect x="664" y="44" width="198" height="304" rx="6" ry="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
+<rect x="664" y="44" width="198" height="26" rx="6" ry="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.0"/>
+<rect x="672" y="49" width="5" height="16" rx="2" ry="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="682" y="58" font-size="9.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Pha 4: Đánh đổi phần cứng</text>
+<text x="674" y="80" font-size="8.0" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">export_rknn() -&gt; Board NPU</text>
+<text x="674" y="92" font-size="7.2" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">Phân bổ luồng tính toán trên 3 Core</text>
+<rect x="674" y="98" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="680" y="112" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Phân bổ tài nguyên RKNPU:</text>
+<rect x="680" y="118" width="146" height="16" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="686" y="129" font-size="6.8" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">90-95% Khối lượng: MAC INT8</text>
+<rect x="680" y="137" width="146" height="16" rx="2" ry="2" fill="#FEF2F2" stroke="#F87171" stroke-width="1.2"/>
+<text x="686" y="148" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">5-10% Head nhạy: Cores FP16</text>
+<text x="680" y="162" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">Tận dụng trọn vẹn 6 TOPS NPU core</text>
+<rect x="674" y="176" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="680" y="190" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Hiệu quả thực nghiệm (YOLO):</text>
+<text x="680" y="204" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Độ chính xác mAP:</text>
+<text x="844" y="204" font-size="7.0" font-weight="700" fill="#15803D" text-anchor="end" dominant-baseline="central">Phục hồi ~99%</text>
+<text x="680" y="218" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Độ trễ suy luận:</text>
+<text x="844" y="218" font-size="7.0" font-weight="700" fill="#D97706" text-anchor="end" dominant-baseline="central">Tăng nhẹ 5-15%</text>
+<text x="680" y="232" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tiết kiệm bộ nhớ:</text>
+<text x="844" y="232" font-size="7.0" font-weight="700" fill="#2563EB" text-anchor="end" dominant-baseline="central">Giảm ~45% DDR</text>
+<text x="680" y="243" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">→ Điểm cân bằng Pareto tối ưu</text>
+<rect x="674" y="254" width="178" height="60" rx="3" ry="3" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="680" y="268" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Lưu ý tài liệu hãng [T1 UG232]:</text>
+<text x="680" y="281" font-size="7.0" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Lớp FP16 trên NPU chạy chậm hơn</text>
+<text x="680" y="294" font-size="7.0" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Tránh đưa conv nặng vào FP16</text>
+<text x="680" y="306" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Thích hợp nhất cho lớp cuối</text>
+<rect x="674" y="320" width="178" height="22" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="763.0" y="334" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Tối ưu Pareto: mAP cao, tốc độ tốt</text>
+<text x="10" y="368" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 UG232 tr.123-134, Fig. 6-3, 6-4] [T1 API232 tr.20-22] [T1 Gholami survey 2021]</text>
+</svg>

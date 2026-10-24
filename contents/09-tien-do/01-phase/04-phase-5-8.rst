@@ -58,6 +58,7 @@ Phase 6. Bottleneck analysis
 
 - ☐ Trả lời 5 câu hỏi dưới Table K (Guide mục 7)
 - ☐ So ``tier1_int8_CORE_0_layers.json`` với ``tier1_int8_CORE_0_1_2_layers.json`` theo từng layer: op nào không nhanh lên khi thêm core, đồng thời đối chiếu ``ConvExSwish`` với ``ConvolutionSwish`` (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`)
+- ☐ Chạy chuẩn G4 của trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>` trên model đã huấn luyện: phủ đa nhân (A), latency hai phiên ở ``CORE_0`` và ``CORE_0_1_2`` (B), mAP (C). Bản ghi T3 board 2026-10-10 chỉ là tham chiếu vì nhật ký gốc đã bị xóa. Khi board lên: ``make board-check`` rồi ``benchmark-npu``. Lệnh cần sudo (``start_rknn_server.sh``, ``lock_freq.sh``) do người dùng chạy
 - ☐ Op chạy trên CPU: đo thử với model nháp ngày 2026-09-26 thấy ``Transpose`` chạy CPU (590 µs / 20,663 µs), cần kiểm lại trên model thật
 - ☐ So FLOPs (Table E) với latency (Table G) giữa các model (Case C)
 - ☐ Ghi research gap và hướng tối ưu vào ``tmp/02_decisions/``, có số đo làm căn cứ
