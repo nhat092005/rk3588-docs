@@ -3,9 +3,9 @@
 
 Sinh hình vector SVG minh họa:
   1. rknn-02-zero-copy-vs-general-api:
-     So sánh cơ chế quản lý bộ nhớ và luồng dữ liệu:
-     - General API: 2 lần CPU memcpy, CPU chuyển kiểu dữ liệu, tốn băng thông bus DDR.
-     - Zero-Copy API: Bộ đệm chia sẻ DMA-BUF / DRM, 0 lần memcpy, NPU tự tiền xử lý INT8.
+     Trực quan hóa kiến trúc luân chuyển bộ nhớ:
+     - General API: Phân mảnh địa chỉ ảo/vật lý, 2 lần CPU memcpy, tiêu tốn băng thông bus DDR.
+     - Zero-Copy API: Cơ chế chia sẻ vùng nhớ dma-buf/DRM GEM, 0 lần memcpy, RKNPU IOMMU DMA trực tiếp.
 
 Chạy: python3 gen.py [outdir] [--png] [figure-name ...]
 """
@@ -13,9 +13,8 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# docs/tools/figure_gen/02-nen-tang-rk3588/04-bo-nho-hieu-nang -> ../../.. = docs/tools/figure_gen
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
-from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THICK, THIN, Fig, run, source  # noqa: E402
+from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THIN, Fig, run, source  # noqa: E402
 
 DEFAULT_OUTDIR = os.path.abspath(
     os.path.join(
@@ -45,127 +44,159 @@ def arrow(f, x1, y1, x2, y2, color=BLUE, sw=THIN, dashed=False):
 
 
 # ==============================================================================
-# 1. HÌNH ZERO-COPY VS GENERAL API (rknn-02-zero-copy-vs-general-api)
+# 1. HÌNH ZERO-COPY VS GENERAL API (rknn-02-zero-copy-vs-general-api) - VISUAL-FIRST
 # ==============================================================================
 def fig_zero_copy_vs_general():
-    H = 478
+    H = 412
     f = Fig(W, H)
     tier(f, "T1 RK3588")
-    f.text(14, 20, "So sánh cơ chế luân chuyển bộ nhớ: General API vs Zero-Copy API trên RK3588", size=13.5, weight=700, fill=DARK)
+    f.text(14, 22, "Kiến trúc luân chuyển bộ nhớ: General API vs Zero-Copy API trên RK3588",
+           size=14, weight=700, fill=DARK)
 
-    col_w = 415
-    col_h = 358
-    x1 = 20
-    x2 = 445
-    y_card = 46
-
-    # ==========================================================================
-    # CỘT TRÁI: GENERAL API (API THÔNG THƯỜNG - TỐN MEMCPY)
-    # ==========================================================================
-    rect(f, x1, y_card, col_w, col_h, fill="#FFF9F9", stroke=RED, sw=1.3, rx=5)
-    # Header strip
-    rect(f, x1, y_card, col_w, 34, fill="#FFFFFF", stroke=RED, sw=1.0, rx=5)
-    rect(f, x1 + 10, y_card + 7, 8, 20, fill=RED, stroke=RED, sw=1, rx=2)
-    f.text(x1 + 26, y_card + 17, "1. General API: rknn_inputs_set / rknn_outputs_get", size=10.5, weight=700, fill=RED)
-
-    # Bước 1: User Virtual Memory
-    rect(f, x1 + 14, 88, col_w - 28, 30, fill="#FFFFFF", stroke="#CBD5E1", sw=1.1, rx=3)
-    f.text(x1 + col_w // 2, 103, "1. Bộ đệm ứng dụng User (RAM CPU / Virtual Address)", size=8.5, weight=700, fill="#0F172A", anchor="middle")
-
-    # Mũi tên copy lần 1 (CPU memcpy) và nhãn bên cạnh
-    mid1 = x1 + col_w // 2
-    arrow(f, mid1, 118, mid1, 148, color=RED, sw=THIN)
-    f.text(mid1 + 10, 133, "CPU memcpy (Lần 1) + CPU Normalize/Quantize", size=7.8, weight=700, fill=RED)
-
-    # Bước 2: NPU Input Buffer (DRAM cấp riêng)
-    rect(f, x1 + 14, 148, col_w - 28, 30, fill="#FFFFFF", stroke=RED, sw=1.1, rx=3)
-    f.text(x1 + col_w // 2, 163, "2. NPU Input Memory (DDR do Runtime cấp riêng)", size=8.5, weight=700, fill=RED, anchor="middle")
-
-    # Mũi tên DMA vào NPU
-    arrow(f, mid1, 178, mid1, 196, color=INK, sw=THIN)
-    f.text(mid1 + 10, 187, "DMA tải từ DDR vào SRAM", size=7.5, fill="#475569")
-
-    # Bước 3: NPU Core tính toán
-    rect(f, x1 + 14, 196, col_w - 28, 34, fill="#F1F5F9", stroke="#475569", sw=1.2, rx=3)
-    f.text(x1 + col_w // 2, 207, "3. NPU Core RK3588 (Thực thi mô hình INT8 / 1 GHz)", size=8.8, weight=700, fill="#0F172A", anchor="middle")
-    f.text(x1 + col_w // 2, 221, "Tính toán trên mảng MAC; xuất kết quả dạng tensor thô", size=7.5, fill="#64748B", anchor="middle")
-
-    # Mũi tên DMA ra DDR
-    arrow(f, mid1, 230, mid1, 248, color=INK, sw=THIN)
-    f.text(mid1 + 10, 239, "DMA ghi kết quả ra DDR", size=7.5, fill="#475569")
-
-    # Bước 4: NPU Output Buffer (DRAM cấp riêng)
-    rect(f, x1 + 14, 248, col_w - 28, 30, fill="#FFFFFF", stroke=RED, sw=1.1, rx=3)
-    f.text(x1 + col_w // 2, 263, "4. NPU Output Memory (DDR do Runtime cấp riêng)", size=8.5, weight=700, fill=RED, anchor="middle")
-
-    # Mũi tên copy lần 2 (CPU memcpy) và nhãn bên cạnh
-    arrow(f, mid1, 278, mid1, 308, color=RED, sw=THIN)
-    f.text(mid1 + 10, 293, "CPU memcpy (Lần 2) + CPU Dequantize/Layout", size=7.8, weight=700, fill=RED)
-
-    # Bước 5: User Output Buffer
-    rect(f, x1 + 14, 308, col_w - 28, 30, fill="#FFFFFF", stroke="#CBD5E1", sw=1.1, rx=3)
-    f.text(x1 + col_w // 2, 323, "5. User Output Buffer (Ứng dụng nhận kết quả FP32)", size=8.5, weight=700, fill="#0F172A", anchor="middle")
-
-    # Khung đánh giá nhược điểm
-    rect(f, x1 + 14, 344, col_w - 28, 52, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
-    f.text(x1 + 22, 357, "Nhược điểm hiệu năng General API (UG232 tr.64):", size=8.2, weight=700, fill=RED)
-    f.text(x1 + 22, 370, "• Tốn 2 lần CPU memcpy ở mỗi frame, gây nghẽn nhân CPU.", size=7.8, fill="#334155")
-    f.text(x1 + 22, 384, "• Tăng gấp đôi lưu lượng bus DDR do phải trung chuyển bộ đệm.", size=7.8, fill="#334155")
+    card_w = 415
+    card_h = 345
+    x1 = 18
+    x2 = 447
+    y_top = 44
 
     # ==========================================================================
-    # CỘT PHẢI: ZERO-COPY API (BỘ NHỚ CHIA SẺ DMA-BUF - 0 LẦN MEMCPY)
+    # CỘT TRÁI: GENERAL API (2 LẦN MEMCPY TRUNG GIAN QUA CPU)
     # ==========================================================================
-    rect(f, x2, y_card, col_w, col_h, fill="#F0FDF4", stroke=GREEN, sw=1.3, rx=5)
-    # Header strip
-    rect(f, x2, y_card, col_w, 34, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=5)
-    rect(f, x2 + 10, y_card + 7, 8, 20, fill=GREEN, stroke=GREEN, sw=1, rx=2)
-    f.text(x2 + 26, y_card + 17, "2. Zero-Copy API: rknn_create_mem / rknn_set_io_mem", size=10.5, weight=700, fill=GREEN)
+    rect(f, x1, y_top, card_w, card_h, fill="#FFF9F9", stroke="#DC2626", sw=1.3, rx=6)
+    rect(f, x1, y_top, card_w, 26, fill="#FFFFFF", stroke="#DC2626", sw=1.0, rx=6)
+    rect(f, x1 + 8, y_top + 4, 6, 18, fill=RED, stroke=RED, sw=1, rx=2)
+    f.text(x1 + 22, y_top + 14, "A. General API (rknn_inputs_set / rknn_outputs_get)",
+           size=10.5, weight=700, fill="#991B1B")
 
-    # Bước 1: Shared Input DMA-BUF
-    mid2 = x2 + col_w // 2
-    rect(f, x2 + 14, 88, col_w - 28, 48, fill="#FFFFFF", stroke=GREEN, sw=1.2, rx=3)
-    f.text(x2 + 22, 102, "1. Shared Input DMA-BUF (Cấp phát trước bằng DRM / DMA)", size=8.8, weight=700, fill=GREEN)
-    f.text(x2 + 22, 116, "• Camera ISP / Bộ giải mã phần cứng RGA ghi trực tiếp vào buffer này.", size=7.8, fill="#334155")
-    f.text(x2 + 22, 128, "• Liên kết tức thì qua rknn_set_io_mem() | 0 lần memcpy!", size=7.8, weight=700, fill="#1E40AF")
+    bx = x1 + 16
+    bw = card_w - 32
+    mid_x1 = x1 + card_w // 2
 
-    # Mũi tên trực tiếp từ DMA-BUF vào NPU và nhãn bên cạnh
-    arrow(f, mid2, 136, mid2, 170, color=GREEN, sw=THIN)
-    f.text(mid2 + 10, 153, "Direct DMA Read (Đọc thẳng từ DMA-BUF)", size=7.8, weight=700, fill=GREEN)
+    # 1. User Input Buffer
+    y1 = y_top + 34
+    rect(f, bx, y1, bw, 28, fill="#FFFFFF", stroke="#94A3B8", sw=1.1, rx=3)
+    f.text(bx + 10, y1 + 11, "Bộ đệm ứng dụng User (cv::Mat / Virtual RAM)", size=8.5, weight=700, fill=DARK)
+    f.text(bx + 10, y1 + 21, "• Dữ liệu ảnh thô (RGB FP32 hoặc UINT8)", size=7.2, fill="#64748B")
+    rect(f, bx + bw - 58, y1 + 4, 52, 18, fill="#F1F5F9", stroke="#94A3B8", rx=2)
+    f.text(bx + bw - 32, y1 + 13, "User Space", size=7.0, fill="#475569", anchor="middle")
 
-    # Bước 2: NPU Core tự làm tiền xử lý & tính toán
-    rect(f, x2 + 14, 170, col_w - 28, 64, fill="#FFFFFF", stroke=GREEN, sw=1.2, rx=3)
-    f.text(mid2, 184, "2. NPU Core RK3588 (Xử lý toàn bộ trên phần cứng NPU)", size=8.8, weight=700, fill=GREEN, anchor="middle")
-    f.text(x2 + 22, 199, "• Tự động trừ mean, nhân scale (Quantize) bằng phần cứng NPU.", size=8, fill="#166534")
-    f.text(x2 + 22, 213, "• Tính toán 1024 MACs INT8 không phụ thuộc CPU.", size=8, fill="#334155")
-    f.text(x2 + 22, 226, "• Bắt buộc input width căn lề bội số 16 byte [T1 OPL tr.335].", size=7.8, fill="#D97706")
+    # Mũi tên sao chép lần 1 (CPU memcpy)
+    arrow(f, mid_x1, y1 + 28, mid_x1, y1 + 42, color=RED, sw=THIN)
 
-    # Mũi tên trực tiếp từ NPU ra Output DMA-BUF và nhãn bên cạnh
-    arrow(f, mid2, 234, mid2, 268, color=GREEN, sw=THIN)
-    f.text(mid2 + 10, 251, "Direct DMA Write (Ghi thẳng vào DMA-BUF)", size=7.8, weight=700, fill=GREEN)
+    # Thẻ tác vụ CPU lần 1
+    rect(f, bx + 16, y1 + 42, bw - 32, 22, fill="#FEF2F2", stroke=RED, sw=1.0, rx=3)
+    f.text(mid_x1, y1 + 53, "CPU memcpy #1 + Tiền xử lý phần mềm (Chuyển kiểu/Normalize)",
+           size=7.2, weight=700, fill=RED, anchor="middle")
 
-    # Bước 3: Shared Output DMA-BUF
-    rect(f, x2 + 14, 268, col_w - 28, 48, fill="#FFFFFF", stroke=GREEN, sw=1.2, rx=3)
-    f.text(x2 + 22, 282, "3. Shared Output DMA-BUF (Chia sẻ trực tiếp tới VOP / App)", size=8.8, weight=700, fill=GREEN)
-    f.text(x2 + 22, 296, "• NPU xuất tensor trực tiếp vào vùng nhớ đích của bộ hiển thị VOP.", size=7.8, fill="#334155")
-    f.text(x2 + 22, 308, "• Nếu bộ nhớ cacheable: gọi rknn_mem_sync() để đồng bộ cache [T1].", size=7.8, fill="#1E40AF")
+    # 2. Driver Input DMA Buffer
+    y2 = y1 + 78
+    arrow(f, mid_x1, y1 + 64, mid_x1, y2, color=RED, sw=THIN)
+    rect(f, bx, y2, bw, 28, fill="#FFFFFF", stroke=RED, sw=1.1, rx=3)
+    f.text(bx + 10, y2 + 11, "Đệm trung gian NPU Driver (Physical DDR do Runtime cấp)", size=8.5, weight=700, fill=RED)
+    f.text(bx + 10, y2 + 21, "• Vùng nhớ DMA độc lập trong Kernel", size=7.2, fill="#64748B")
+    rect(f, bx + bw - 64, y2 + 4, 58, 18, fill="#FEF2F2", stroke=RED, rx=2)
+    f.text(bx + bw - 35, y2 + 13, "Kernel Space", size=7.0, fill=RED, anchor="middle")
 
-    # Khung đánh giá ưu điểm
-    rect(f, x2 + 14, 324, col_w - 28, 72, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=3)
-    f.text(x2 + 22, 337, "Ưu thế vượt trội của Zero-Copy API (UG232 tr.64):", size=8.2, weight=700, fill=GREEN)
-    f.text(x2 + 22, 350, "+ Triệt tiêu 100% memcpy: Giảm tải CPU từ 50-80% xuống gần 0%.", size=7.8, fill="#166534")
-    f.text(x2 + 22, 363, "+ Tiết kiệm 50% băng thông DDR: Dữ liệu nạp thẳng từ DMA-BUF vào NPU.", size=7.8, fill="#166534")
-    f.text(x2 + 22, 376, "+ Giảm độ trễ I/O: Giảm độ trễ truyền dữ liệu từ 5-15 ms xuống < 0.2 ms.", size=7.8, fill="#166534")
-    f.text(x2 + 22, 388, "+ Ràng buộc: Chỉ gọi được từ C/C++ API (Python wheel không hỗ trợ).", size=7.8, fill="#64748B")
+    # Mũi tên DMA nạp NPU
+    y3 = y2 + 42
+    arrow(f, mid_x1, y2 + 28, mid_x1, y3, color=INK, sw=THIN)
+
+    # 3. NPU Execution Core
+    rect(f, bx, y3, bw, 30, fill="#F1F5F9", stroke=DARK, sw=1.2, rx=3)
+    f.text(mid_x1, y3 + 11, "RKNPU Core (3 Nhân 6 TOPS - 1 GHz)", size=8.5, weight=700, fill=DARK, anchor="middle")
+    f.text(mid_x1, y3 + 22, "Tính toán mảng MAC INT8; xuất tensor thô ra bộ đệm đích", size=7.2, fill="#475569", anchor="middle")
+
+    # Mũi tên DMA xuất DDR
+    y4 = y3 + 44
+    arrow(f, mid_x1, y3 + 30, mid_x1, y4, color=INK, sw=THIN)
+
+    # 4. Driver Output DMA Buffer
+    rect(f, bx, y4, bw, 28, fill="#FFFFFF", stroke=RED, sw=1.1, rx=3)
+    f.text(bx + 10, y4 + 11, "Đệm xuất NPU Driver (Physical DDR do Runtime cấp)", size=8.5, weight=700, fill=RED)
+    f.text(bx + 10, y4 + 21, "• Chứa tensor đầu ra thô của NPU", size=7.2, fill="#64748B")
+
+    # Mũi tên sao chép lần 2
+    arrow(f, mid_x1, y4 + 28, mid_x1, y4 + 42, color=RED, sw=THIN)
+
+    # Thẻ tác vụ CPU lần 2
+    rect(f, bx + 16, y4 + 42, bw - 32, 22, fill="#FEF2F2", stroke=RED, sw=1.0, rx=3)
+    f.text(mid_x1, y4 + 53, "CPU memcpy #2 + Hậu xử lý chuyển kiểu (INT8 → FP32)",
+           size=7.2, weight=700, fill=RED, anchor="middle")
+
+    # 5. User Output Buffer
+    y5 = y4 + 78
+    arrow(f, mid_x1, y4 + 64, mid_x1, y5, color=RED, sw=THIN)
+    rect(f, bx, y5, bw, 28, fill="#FFFFFF", stroke="#94A3B8", sw=1.1, rx=3)
+    f.text(bx + 10, y5 + 11, "Bộ đệm đích User (Ứng dụng nhận mảng kết quả)", size=8.5, weight=700, fill=DARK)
+    f.text(bx + 10, y5 + 21, "• Tốn 2 lần sao chép toàn phần dữ liệu qua CPU", size=7.2, fill="#DC2626")
+
+    # Thẻ đánh giá hiệu năng góc dưới
+    rect(f, bx, y5 + 34, bw, 22, fill="#FEF2F2", stroke="#DC2626", rx=3)
+    f.text(mid_x1, y5 + 45, "Tải CPU: 50% - 80% | Độ trễ I/O: 5 - 15 ms | Tốn 2x băng thông DDR",
+           size=7.6, weight=700, fill="#B91C1C", anchor="middle")
 
     # ==========================================================================
-    # KHỐI KẾT LUẬN DƯỚI CÙNG
+    # CỘT PHẢI: ZERO-COPY API (CHIA SẺ VÙNG NHỚ VẬT LÝ DMA-BUF)
     # ==========================================================================
-    rect(f, 20, 412, 840, 48, fill="#F8FAFC", stroke="#64748B", sw=1.1, rx=4)
-    f.text(32, 424, "Bản chất tối ưu hóa Zero-Copy trên Rockchip RK3588:", size=9.5, weight=700, fill="#0F172A")
-    f.text(32, 439, "• General API tốn 2 lần CPU memcpy và chuyển đổi kiểu ở mỗi khung hình, làm nghẽn băng thông DDR và CPU.", size=8.5, fill="#334155")
-    f.text(32, 452, "• Zero-Copy dùng chung DMA-BUF/DRM giữa Camera/ISP và NPU, NPU tự tiền xử lý INT8, đưa độ trễ I/O về < 0.2 ms [T1 UG232 tr.64, OPL tr.335].", size=8.5, fill="#334155")
+    rect(f, x2, y_top, card_w, card_h, fill="#F0FDF4", stroke="#16A34A", sw=1.3, rx=6)
+    rect(f, x2, y_top, card_w, 26, fill="#FFFFFF", stroke="#16A34A", sw=1.0, rx=6)
+    rect(f, x2 + 8, y_top + 4, 6, 18, fill=GREEN, stroke=GREEN, sw=1, rx=2)
+    f.text(x2 + 22, y_top + 14, "B. Zero-Copy API (rknn_create_mem / rknn_set_io_mem)",
+           size=10.5, weight=700, fill="#15803D")
 
-    source(f, H - 10, "[T1 UG232 tr.64-68, Fig. 5-5, 5-6] [T1 OPL tr.335-339] [T1 rknn_api.h]")
+    bx2 = x2 + 16
+    mid_x2 = x2 + card_w // 2
+
+    # Khối nguồn phần cứng: Camera ISP / RGA
+    zy1 = y_top + 34
+    rect(f, bx2, zy1, bw, 28, fill="#FFFFFF", stroke="#16A34A", sw=1.1, rx=3)
+    f.text(bx2 + 10, zy1 + 11, "Phần cứng đầu vào: Camera ISP / RGA 2D / Bộ giải mã VPU",
+           size=8.5, weight=700, fill="#15803D")
+    f.text(bx2 + 10, zy1 + 21, "• Ghi khung hình trực tiếp bằng DMA phần cứng", size=7.2, fill="#64748B")
+
+    # Mũi tên ghi thẳng vào Shared DMA-BUF
+    arrow(f, mid_x2, zy1 + 28, mid_x2, zy1 + 42, color=GREEN, sw=THIN)
+
+    # KHỐI TRỌNG TÂM: VÙNG NHỚ VẬT LÝ CHIA SẺ SHARED INPUT DMA-BUF
+    zy2 = zy1 + 42
+    rect(f, bx2, zy2, bw, 66, fill="#ECFDF5", stroke="#059669", sw=1.4, rx=4)
+    rect(f, bx2 + 8, zy2 + 5, bw - 16, 18, fill="#FFFFFF", stroke="#059669", rx=2)
+    f.text(mid_x2, zy2 + 14, "Shared Input DMA-BUF (/dev/dma_heap hoặc DRM GEM fd)",
+           size=8.5, weight=700, fill="#047857", anchor="middle")
+
+    f.text(bx2 + 12, zy2 + 33, "• App User: Ánh xạ con trỏ qua mmap(fd) → 0 sao chép", size=7.5, fill="#334155")
+    f.text(bx2 + 12, zy2 + 46, "• NPU Driver: Đăng ký fd qua rknn_set_io_mem() → 0 sao chép", size=7.5, fill="#15803D")
+    f.text(bx2 + 12, zy2 + 58, "• Căn lề địa chỉ vật lý: Bội số 16 byte (stride-aligned)", size=7.2, fill="#64748B")
+
+    # Mũi tên DMA trực tiếp vào RKNPU Core
+    zy3 = zy2 + 80
+    arrow(f, mid_x2, zy2 + 66, mid_x2, zy3, color=GREEN, sw=THIN)
+
+    # NPU Core tự động tiền xử lý & tính toán
+    rect(f, bx2, zy3, bw, 42, fill="#FFFFFF", stroke="#16A34A", sw=1.2, rx=3)
+    f.text(mid_x2, zy3 + 11, "RKNPU Core (Tự động Tiền xử lý + Tính toán phần cứng)",
+           size=8.5, weight=700, fill="#15803D", anchor="middle")
+    f.text(mid_x2, zy3 + 22, "Phần cứng NPU tự trừ mean, nhân scale (Quantize) on-the-fly", size=7.5, fill="#047857", anchor="middle")
+    f.text(mid_x2, zy3 + 33, "Thực thi mạng nơ-ron hoàn toàn độc lập, không tiêu tốn chu kỳ CPU", size=7.2, fill="#64748B", anchor="middle")
+
+    # Mũi tên DMA xuất thẳng ra Shared Output DMA-BUF
+    zy4 = zy3 + 56
+    arrow(f, mid_x2, zy3 + 42, mid_x2, zy4, color=GREEN, sw=THIN)
+
+    # KHỐI VÙNG NHỚ VẬT LÝ CHIA SẺ SHARED OUTPUT DMA-BUF
+    rect(f, bx2, zy4, bw, 56, fill="#ECFDF5", stroke="#059669", sw=1.4, rx=4)
+    rect(f, bx2 + 8, zy4 + 5, bw - 16, 18, fill="#FFFFFF", stroke="#059669", rx=2)
+    f.text(mid_x2, zy4 + 14, "Shared Output DMA-BUF (Chia sẻ trực tiếp tới VOP / App)",
+           size=8.5, weight=700, fill="#047857", anchor="middle")
+    f.text(bx2 + 12, zy4 + 33, "• NPU xuất tensor trực tiếp vào buffer đích của bộ hiển thị VOP", size=7.5, fill="#334155")
+    f.text(bx2 + 12, zy4 + 46, "• Nếu vùng nhớ bật cache: gọi rknn_mem_sync() để đồng bộ", size=7.2, fill="#64748B")
+
+    # Thẻ đánh giá ưu điểm góc dưới
+    rect(f, bx2, y5 + 34, bw, 22, fill="#ECFDF5", stroke="#059669", rx=3)
+    f.text(mid_x2, y5 + 45, "0 lần memcpy | Tải CPU: ~0% | Độ trễ I/O: < 0.2 ms | Băng thông tối ưu",
+           size=7.6, weight=700, fill="#047857", anchor="middle")
+
+    source(f, H - 12, "[T1 UG232 tr.64-68, Fig. 5-5, 5-6] [T1 OPL tr.335-339] [T1 rknn_api.h]")
     return f
 
 

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 382" width="880" height="382" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="382" fill="white"/>
+<rect x="750" y="14" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="790.3" y="25.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="14" y="22" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế ánh xạ lượng tử hóa INT8 trên RKNPU: Symmetric vs Asymmetric</text>
+<rect x="18" y="44" width="415" height="304" rx="6" ry="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="18" y="44" width="415" height="26" rx="6" ry="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="26" y="48" width="6" height="18" rx="2" ry="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="40" y="58" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">A. Lượng tử hóa đối xứng (Symmetric: Z = 0)</text>
+<text x="32" y="80" font-size="8.2" font-weight="700" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">Miền thực FP32 đối xứng qua 0: [-M, +M] với M = max(|x_min|, |x_max|)</text>
+<text x="32" y="92" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">Công thức ánh xạ: q = round(x / S) | S = M / 127 | Z = 0</text>
+<rect x="54" y="122" width="343" height="3" rx="1" ry="1" fill="#64748B" stroke="#64748B" stroke-width="1.2"/>
+<rect x="54" y="116" width="2" height="15" rx="4" ry="4" fill="#DC2626" stroke="#DC2626" stroke-width="1.2"/>
+<text x="54" y="110" font-size="8" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">-M</text>
+<rect x="225.5" y="116" width="2" height="15" rx="4" ry="4" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="225.5" y="110" font-size="8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">0.0 (Float)</text>
+<rect x="397" y="116" width="2" height="15" rx="4" ry="4" fill="#059669" stroke="#059669" stroke-width="1.2"/>
+<text x="397" y="110" font-size="8" font-weight="700" fill="#059669" text-anchor="middle" dominant-baseline="central">+M</text>
+<path d="M225.5 132 L225.5 156" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<text x="233.5" y="146" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">Zero điểm thực trùng khớp 0 điểm nguyên</text>
+<rect x="54" y="166" width="343" height="3" rx="1" ry="1" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<rect x="54" y="160" width="2" height="15" rx="4" ry="4" fill="#DC2626" stroke="#DC2626" stroke-width="1.2"/>
+<text x="54" y="182" font-size="8" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">-127</text>
+<rect x="225.5" y="160" width="2" height="15" rx="4" ry="4" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="225.5" y="182" font-size="8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">q = 0 (INT8)</text>
+<rect x="397" y="160" width="2" height="15" rx="4" ry="4" fill="#059669" stroke="#059669" stroke-width="1.2"/>
+<text x="397" y="182" font-size="8" font-weight="700" fill="#059669" text-anchor="middle" dominant-baseline="central">+127</text>
+<rect x="32" y="194" width="387" height="48" rx="3" ry="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.1"/>
+<text x="225.5" y="207" font-size="8.2" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Biểu thức tích chập phần cứng NPU (Không phát sinh bù Zero):</text>
+<text x="225.5" y="221" font-size="9.2" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">y = S_w · S_x · ∑_{i=0}^{k-1} (w_i · x_i)</text>
+<text x="225.5" y="234" font-size="7.5" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">→ Tính toán thuần túy trên mảng MAC INT8; 0 chu kỳ trễ bù trừ</text>
+<rect x="32" y="248" width="387" height="58" rx="3" ry="3" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.2"/>
+<text x="42" y="261" font-size="8.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Đặc tính phần cứng RKNPU Core:</text>
+<text x="42" y="275" font-size="7.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tiết kiệm triệt để thanh ghi và logic cộng offset.</text>
+<text x="42" y="288" font-size="7.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chuẩn mặc định cho toàn bộ Weight của các mô hình YOLO.</text>
+<text x="42" y="299" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Dải biểu diễn đối xứng [-127, 127] tối ưu hóa cho phân bố Gauss.</text>
+<rect x="32" y="314" width="387" height="20" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="225.5" y="325" font-size="7.5" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Z = 0 → Tối ưu phần cứng tối đa, tốc độ MAC cao nhất</text>
+<rect x="447" y="44" width="415" height="304" rx="6" ry="6" fill="#F8FAFC" stroke="#D97706" stroke-width="1.3"/>
+<rect x="447" y="44" width="415" height="26" rx="6" ry="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.0"/>
+<rect x="455" y="48" width="6" height="18" rx="2" ry="2" fill="#D97706" stroke="#D97706" stroke-width="1"/>
+<text x="469" y="58" font-size="10.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">B. Lượng tử hóa bất đối xứng (Asymmetric / Affine: Z ≠ 0)</text>
+<text x="461" y="80" font-size="8.2" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Miền thực FP32 lệch trục: [x_min, x_max] (ví dụ sau hàm kích hoạt ReLU)</text>
+<text x="461" y="92" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">Công thức ánh xạ: q = round(x / S) + Z | S = (x_max - x_min) / 255 | Z ≠ 0</text>
+<rect x="483" y="122" width="343" height="3" rx="1" ry="1" fill="#64748B" stroke="#64748B" stroke-width="1.2"/>
+<rect x="483" y="116" width="2" height="15" rx="4" ry="4" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="483" y="110" font-size="7.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">x_min = 0.0</text>
+<rect x="654.5" y="116" width="2" height="15" rx="4" ry="4" fill="#475569" stroke="#475569" stroke-width="1.2"/>
+<text x="654.5" y="110" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">3.0</text>
+<rect x="826" y="116" width="2" height="15" rx="4" ry="4" fill="#059669" stroke="#059669" stroke-width="1.2"/>
+<text x="826" y="110" font-size="7.8" font-weight="700" fill="#059669" text-anchor="middle" dominant-baseline="central">x_max = 6.0</text>
+<path d="M483 132 L483 156" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="493" y="146" font-size="7.5" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">x = 0.0 ánh xạ vào Zero-Point Z = -128</text>
+<rect x="483" y="166" width="343" height="3" rx="1" ry="1" fill="#D97706" stroke="#D97706" stroke-width="1.2"/>
+<rect x="483" y="160" width="2" height="15" rx="4" ry="4" fill="#D97706" stroke="#D97706" stroke-width="1.2"/>
+<text x="483" y="182" font-size="7.8" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">q = Z = -128</text>
+<rect x="654.5" y="160" width="2" height="15" rx="4" ry="4" fill="#475569" stroke="#475569" stroke-width="1.2"/>
+<text x="654.5" y="182" font-size="7.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="826" y="160" width="2" height="15" rx="4" ry="4" fill="#059669" stroke="#059669" stroke-width="1.2"/>
+<text x="826" y="182" font-size="7.8" font-weight="700" fill="#059669" text-anchor="middle" dominant-baseline="central">+127</text>
+<rect x="461" y="194" width="387" height="48" rx="3" ry="3" fill="#FFFBEB" stroke="#D97706" stroke-width="1.1"/>
+<text x="654.5" y="207" font-size="8.2" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Biểu thức tích chập phần cứng NPU (Phát sinh số hạng bù):</text>
+<text x="654.5" y="221" font-size="9.2" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">y = S_w · S_x · [ ∑ (w_i · x_i) - Z_x · ∑ w_i ]</text>
+<text x="654.5" y="234" font-size="7.5" font-weight="400" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">→ Cần phần cứng tính thêm tích lũy bù - Z_x ∑ w_i</text>
+<rect x="461" y="248" width="387" height="58" rx="3" ry="3" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2"/>
+<text x="471" y="261" font-size="8.2" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Đặc tính độ chính xác và tính toán phần cứng:</text>
+<text x="471" y="275" font-size="7.8" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Tận dụng trọn vẹn 256 mức rời rạc cho dải phân bố lệch (ReLU, Sigmoid).</text>
+<text x="471" y="288" font-size="7.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tránh lãng phí 128 mức âm vô nghĩa khi dữ liệu luôn dương.</text>
+<text x="471" y="299" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Thường áp dụng cho Activation tensor trong các mạng CNN.</text>
+<rect x="461" y="314" width="387" height="20" rx="2" ry="2" fill="#FFFBEB" stroke="#D97706" stroke-width="1.2"/>
+<text x="654.5" y="325" font-size="7.5" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Z ≠ 0 → Giữ trọn dải động kích hoạt, tốn thêm phép bù offset</text>
+<text x="10" y="368" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 UG232 tr.70-74, Fig. 6-1] [T1 Gholami survey 2021] [T1 Nagel whitepaper 2021]</text>
+</svg>

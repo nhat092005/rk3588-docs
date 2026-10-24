@@ -31,9 +31,11 @@ Các object detector có thể đạt accuracy tốt, nhưng khi triển khai re
 
    operator support → Mức độ NPU hỗ trợ các phép toán của model như Conv, Add, Resize...
 
+   multi-core → Việc chạy model trên 1 hay nhiều nhân NPU (core_mask). Op không hỗ trợ đa nhân sẽ quay về Core0.
+
    tensor layout → Cách tensor được sắp xếp trong memory, ví dụ NCHW/NHWC.
 
-   datatype → Kiểu dữ liệu của model, ví dụ FP32, FP16, INT8.
+   datatype → Kiểu dữ liệu của model. Trên RK3588 lựa chọn thực tế là FP16 và INT8 (w8a8).
 
    memory access → Cách model đọc/ghi dữ liệu từ memory trong lúc inference.
 

@@ -16,6 +16,7 @@ Tài liệu nghiên cứu phát hiện thiết bị bảo hộ cá nhân (PPE) b
    :caption: Nghiên cứu
    :maxdepth: 1
 
+   contents/03-phuong-phap-de-xuat/index
    contents/03-phuong-phap/index
    contents/04-ket-qua/index
 
@@ -54,7 +55,10 @@ Các mục
    * - :doc:`Nền tảng RK3588 </contents/02-nen-tang-rk3588/index>`
      - RK3588S và RKNN cụ thể làm gì: phần cứng NPU, lượng tử hóa, toolchain, bộ nhớ, YOLO trên RKNN?
      - Người cần hiểu chip đích
-   * - :doc:`Phương pháp </contents/03-phuong-phap/index>`
+   * - :doc:`Phương pháp </contents/03-phuong-phap-de-xuat/index>`
+     - Phương pháp ở tầng AI và tầng NPU là gì?
+     - Hội đồng, người đánh giá
+   * - :doc:`Thiết kế thực nghiệm </contents/03-phuong-phap/index>`
      - Dữ liệu, phần cứng, giao thức đánh giá và đặc tả bảng đã khóa như thế nào?
      - Hội đồng, người đánh giá
    * - :doc:`Kết quả </contents/04-ket-qua/index>`
@@ -83,7 +87,7 @@ Thứ tự đọc gợi ý
 ================
 
 - **Muốn hiểu đề tài:** Tổng quan, rồi Kiến thức nền (lý thuyết chung), rồi Nền tảng RK3588 (chip đích).
-- **Muốn kiểm kết quả:** Phương pháp, rồi Kết quả.
+- **Muốn kiểm kết quả:** Thiết kế thực nghiệm, rồi Kết quả.
 - **Muốn kiểm một con số hay một câu:** Bài báo, Tài liệu hãng, Thuật ngữ.
 - **Muốn chạy lại hoặc làm tiếp:** Hướng dẫn, rồi Tiến độ.
 

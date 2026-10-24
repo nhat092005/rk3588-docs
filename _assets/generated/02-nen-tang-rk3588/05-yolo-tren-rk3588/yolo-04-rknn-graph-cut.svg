@@ -1,72 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 512" width="880" height="512" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="512" fill="white"/>
-<text x="14" y="28" font-size="16" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Ranh giới phân tách đồ thị YOLOv8 trên RK3588: NPU Hardware vs Host CPU</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 410" width="880" height="410" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="410" fill="white"/>
 <rect x="750" y="14" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
 <text x="790.3" y="25.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
-<rect x="14" y="48" width="852" height="192" rx="6" ry="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.5"/>
-<text x="28" y="68" font-size="12.5" font-weight="bold" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">1. PHẦN CỨNG NPU RK3588 (Đồ thị RKNN INT8 - Chạy tăng tốc trên 3 lõi NPU 6 TOPS)</text>
-<rect x="28" y="82" width="105" height="110" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
-<text x="36" y="102" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Frame đầu vào</text>
-<text x="36" y="122" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">RGB 640x640x3</text>
-<text x="36" y="140" font-size="9.5" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Zero-Copy DMA</text>
-<text x="36" y="158" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Căn lề 16-byte</text>
-<text x="36" y="176" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">[T1 OPL tr.335]</text>
-<path d="M133 137 L155 137" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="155" y="82" width="148" height="110" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
-<text x="165" y="102" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Backbone CSPDarknet</text>
-<text x="165" y="122" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• CBS (Conv+BN+SiLU)</text>
-<text x="165" y="140" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• C2f / C3k2 residual</text>
-<text x="165" y="158" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• SPPF trích xuất 3 tầng</text>
-<text x="165" y="176" font-size="9" font-weight="bold" fill="#2E7D32" text-anchor="start" dominant-baseline="central">100% NPU [T1 OPL tr.58]</text>
-<path d="M303 137 L325 137" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="325" y="82" width="152" height="110" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
-<text x="335" y="102" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Neck PAN-FPN</text>
-<text x="335" y="122" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Upsample (ConvTrans)</text>
-<text x="335" y="140" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Concat kết nối tắt</text>
-<text x="335" y="158" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• 3 tỷ lệ đặc trưng:</text>
-<text x="343" y="176" font-size="9" font-weight="400" fill="#1D4ED8" text-anchor="start" dominant-baseline="central">P3 (80²), P4 (40²), P5 (20²)</text>
-<path d="M477 137 L499 137" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="499" y="82" width="168" height="110" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
-<text x="509" y="102" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Decoupled Head</text>
-<text x="509" y="122" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Cls: Conv 3x3 + Sigmoid</text>
-<text x="509" y="140" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Reg: Conv 3x3 + 1x1</text>
-<text x="509" y="158" font-size="9.5" font-weight="400" fill="#B45309" text-anchor="start" dominant-baseline="central">• Bọc _NormalizeCoords</text>
-<text x="517" y="176" font-size="8.5" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">(Slice + Div + Concat) [T1]</text>
-<path d="M667 137 L689 137" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="689" y="82" width="165" height="110" rx="4" ry="4" fill="white" stroke="#2563EB" stroke-width="1.4"/>
-<text x="699" y="102" font-size="11" font-weight="bold" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">Tensor thô đầu ra</text>
-<text x="699" y="122" font-size="9" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Kích thước: [1, 4+nc, 8400]</text>
-<text x="699" y="140" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• 4 kênh: Hộp thô xywh</text>
-<text x="699" y="158" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• nc kênh: Logits lớp</text>
-<text x="699" y="176" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• 8400 anchors đa tỷ lệ</text>
-<text x="28" y="226" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Toàn bộ Conv, BN-folding, SiLU, Concat chạy song song trên mảng MAC NPU; không rơi về CPU [T1 OPL tr.58-63].</text>
-<rect x="14" y="248" width="852" height="40" rx="4" ry="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.3" stroke-dasharray="5 3"/>
-<text x="28" y="265" font-size="10.5" font-weight="bold" fill="#B91C1C" text-anchor="start" dominant-baseline="central">RANH GIỚI CẮT ĐỒ THỊ: Ultralytics ép model.end2end = False khi xuất định dạng RKNN [T1 ULT exporter.py:685]</text>
-<text x="28" y="280" font-size="9.5" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">Lý do: NPU RK3588 thiếu nhân phần cứng TopK &amp; GatherElements trong OPL 3.2. Không hỗ trợ NMS nội suy [T1 OPL tr.330-333].</text>
-<path d="M770 288 L770 302" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
-<rect x="14" y="304" width="852" height="108" rx="6" ry="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5"/>
-<text x="28" y="322" font-size="12" font-weight="bold" fill="#92400E" text-anchor="start" dominant-baseline="central">2. HẬU XỬ LÝ TRÊN HOST CPU (ARM Cortex-A76/A55 - Viết bằng C++ / Tối ưu SIMD NEON đa luồng)</text>
-<rect x="28" y="332" width="186" height="68" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
-<text x="38" y="350" font-size="10.5" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Bước 1: Dequantize &amp; Scale</text>
-<text x="38" y="368" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Chuyển INT8 -&gt; FP32</text>
-<text x="38" y="386" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Nhân ngược cỡ ảnh (x640)</text>
-<path d="M214 366 L236 366" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
-<rect x="236" y="332" width="194" height="68" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
-<text x="246" y="350" font-size="10.5" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Bước 2: Lọc ngưỡng Score</text>
-<text x="246" y="368" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• max(cls_score) &gt; conf_thres</text>
-<text x="246" y="386" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Loại bỏ 90-95% anchor rác</text>
-<path d="M430 366 L452 366" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
-<rect x="452" y="332" width="188" height="68" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
-<text x="462" y="350" font-size="10.5" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Bước 3: Giải mã Bbox (Decode)</text>
-<text x="462" y="368" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Nhân bước trượt (stride 8/16/32)</text>
-<text x="462" y="386" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Đổi tâm sang góc [x1, y1, x2, y2]</text>
-<path d="M640 366 L662 366" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
-<rect x="662" y="332" width="192" height="68" rx="4" ry="4" fill="white" stroke="#059669" stroke-width="1.4"/>
-<text x="672" y="350" font-size="10.5" font-weight="bold" fill="#065F46" text-anchor="start" dominant-baseline="central">Bước 4: NMS lọc trùng lặp</text>
-<text x="672" y="368" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Triệt tiêu hộp IoU &gt; 0.45</text>
-<text x="672" y="386" font-size="9.5" font-weight="bold" fill="#2E7D32" text-anchor="start" dominant-baseline="central">-&gt; Hộp phát hiện cuối [N, 6]</text>
-<rect x="14" y="424" width="852" height="54" rx="4" ry="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
-<text x="24" y="442" font-size="11" font-weight="bold" fill="#222222" text-anchor="start" dominant-baseline="central">Bản chất phân chia tính toán YOLO trên Rockchip RK3588:</text>
-<text x="24" y="458" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Mảng systolic NPU chỉ tối ưu cho các phép tính mảng tĩnh (Conv INT8); không có phần cứng tăng tốc cho logic lọc động (TopK/NMS).</text>
-<text x="24" y="471" font-size="9.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thiết kế chuẩn: Cắt đồ thị xuất tensor thô [1, 4+nc, 8400], đưa NMS ra CPU C++ tối ưu NEON đa luồng để đạt 30-60+ FPS [T1 ULT :682-688] [T1 OPL tr.330].</text>
-<text x="10" y="498" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 ULT engine/exporter.py:682-688] [T1 ULT utils/export/engine.py:34-47] [T1 OPL tr.58-63, tr.330-333]</text>
+<text x="14" y="22" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Phân tách đồ thị YOLOv8 trên RK3588: Tăng tốc NPU vs Hậu xử lý CPU</text>
+<rect x="14" y="42" width="852" height="146" rx="6" ry="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="14" y="42" width="852" height="26" rx="6" ry="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="22" y="46" width="6" height="18" rx="2" ry="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="36" y="56" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Phần cứng RKNPU RK3588: Đồ thị nơ-ron INT8 (3 Nhân 6 TOPS - 100% phần cứng)</text>
+<rect x="28" y="76" width="110" height="100" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="83" y="93" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Frame đầu vào</text>
+<text x="83" y="107" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">RGB 640×640×3</text>
+<rect x="36" y="116" width="94" height="20" rx="2" ry="2" fill="#ECFDF5" stroke="#059669" stroke-width="1.2"/>
+<text x="83" y="126" font-size="7.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">DMA Zero-Copy</text>
+<text x="83" y="146" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Căn lề 16 byte</text>
+<text x="83" y="160" font-size="7.2" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">[T1 OPL tr.335]</text>
+<path d="M138 126 L158 126" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="158" y="76" width="185" height="100" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="250" y="93" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Backbone &amp; Neck (PAN-FPN)</text>
+<text x="250" y="107" font-size="8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Conv-Swish + C2f + SPPF</text>
+<rect x="170" y="116" width="48" height="22" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="194" y="127" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">P3 (80²)</text>
+<rect x="226" y="116" width="48" height="22" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="250" y="127" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">P4 (40²)</text>
+<rect x="282" y="116" width="48" height="22" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="306" y="127" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">P5 (20²)</text>
+<text x="250" y="148" font-size="7.5" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">Hợp nhất toán tử (Operator Fusion)</text>
+<text x="250" y="162" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">100% thực thi trên mảng MAC NPU</text>
+<path d="M343 126 L363 126" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="363" y="76" width="180" height="100" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="453" y="93" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Decoupled Head</text>
+<rect x="375" y="104" width="156" height="20" rx="2" ry="2" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="453" y="114" font-size="7.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Nhánh Cls: Conv 3×3 + Sigmoid</text>
+<rect x="375" y="128" width="156" height="20" rx="2" ry="2" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<text x="453" y="138" font-size="7.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Nhánh Reg: Conv 3×3 + 1×1</text>
+<text x="453" y="156" font-size="7.5" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">Bọc _NormalizeCoords</text>
+<text x="453" y="168" font-size="7.2" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central">(Bỏ DFL để tránh chuyển vị CPU)</text>
+<path d="M543 126 L563 126" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
+<rect x="563" y="76" width="290" height="100" rx="4" ry="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.3"/>
+<text x="708" y="93" font-size="9.5" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Tensor thô đầu ra NPU</text>
+<text x="708" y="108" font-size="8.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Shape: [1, 4 + nc, 8400] (8400 anchors)</text>
+<rect x="575" y="118" width="128" height="22" rx="2" ry="2" fill="white" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="639" y="129" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">4 kênh: Box thô [x, y, w, h]</text>
+<rect x="711" y="118" width="130" height="22" rx="2" ry="2" fill="white" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="776" y="129" font-size="7.5" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">nc kênh: Xác suất lớp (Scores)</text>
+<rect x="575" y="146" width="266" height="20" rx="2" ry="2" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2"/>
+<text x="708" y="156" font-size="7.5" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Chứa 8,400 hộp ứng viên dày đặc (Cần lọc và giải mã)</text>
+<rect x="14" y="196" width="852" height="28" rx="4" ry="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="28" y="210" font-size="9" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">✂ RANH GIỚI CẮT ĐỒ THỊ: Ultralytics ép model.end2end = False khi xuất định dạng RKNN [T1 ULT exporter.py:685]</text>
+<text x="585" y="210" font-size="8.5" font-weight="700" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">Lý do: NPU thiếu nhân TopK / GatherElements</text>
+<rect x="14" y="232" width="852" height="146" rx="6" ry="6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.3"/>
+<rect x="14" y="232" width="852" height="26" rx="6" ry="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.0"/>
+<rect x="22" y="236" width="6" height="18" rx="2" ry="2" fill="#D97706" stroke="#D97706" stroke-width="1"/>
+<text x="36" y="246" font-size="10.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">2. Hậu xử lý trên Host CPU (Cortex-A76/A55): Tối ưu SIMD NEON đa luồng C++</text>
+<rect x="28" y="268" width="192" height="100" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="124" y="284" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 1: Dequantize &amp; Scale</text>
+<text x="124" y="300" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• Chuyển INT8 → FP32</text>
+<text x="124" y="314" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• Nhân ngược cỡ ảnh (× 640)</text>
+<rect x="38" y="328" width="172" height="28" rx="2" ry="2" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="124" y="342" font-size="7.8" font-weight="700" fill="#64748B" text-anchor="middle" dominant-baseline="central">Đầu vào: 8,400 anchors</text>
+<path d="M220 318 L240 318" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="240" y="268" width="192" height="100" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="336" y="284" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 2: Lọc ngưỡng Score</text>
+<text x="336" y="300" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• max(cls_score) &gt; conf_thres</text>
+<text x="336" y="314" font-size="7.8" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central">• Loại bỏ 90% - 95% hộp rác</text>
+<rect x="250" y="328" width="172" height="28" rx="2" ry="2" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2"/>
+<text x="336" y="342" font-size="7.8" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Còn lại: ~30 - 80 ứng viên</text>
+<path d="M432 318 L452 318" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="452" y="268" width="192" height="100" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="548" y="284" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 3: Giải mã Bbox (Decode)</text>
+<text x="548" y="300" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• Nhân stride lưới (8, 16, 32)</text>
+<text x="548" y="314" font-size="7.5" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• Đổi tâm [cx, cy, w, h] → [x1, y1, x2, y2]</text>
+<rect x="462" y="328" width="172" height="28" rx="2" ry="2" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="548" y="342" font-size="7.8" font-weight="700" fill="#64748B" text-anchor="middle" dominant-baseline="central">Chuẩn bị tọa độ thực để NMS</text>
+<path d="M644 318 L664 318" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<rect x="664" y="268" width="192" height="100" rx="4" ry="4" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3"/>
+<text x="760" y="284" font-size="9" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">Bước 4: NMS lọc chồng lặp</text>
+<text x="760" y="300" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• Tính IoU giữa các hộp cùng lớp</text>
+<text x="760" y="314" font-size="7.8" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">• Triệt tiêu hộp nếu IoU &gt; 0.45</text>
+<rect x="674" y="328" width="172" height="28" rx="2" ry="2" fill="#ECFDF5" stroke="#059669" stroke-width="1.2"/>
+<text x="760" y="342" font-size="8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Kết quả cuối: [N, 6] hộp chuẩn</text>
+<text x="10" y="396" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 ULT exporter.py:682-688] [T1 OPL tr.58-63, tr.330-333] [T1 UG232 tr.140-150]</text>
 </svg>

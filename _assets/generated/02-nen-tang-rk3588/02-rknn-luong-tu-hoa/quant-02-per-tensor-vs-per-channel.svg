@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 382" width="880" height="382" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="382" fill="white"/>
+<rect x="750" y="14" width="80.6" height="22" rx="11" fill="white" stroke="#1E5BB8" stroke-width="1.8"/>
+<text x="790.3" y="25.5" font-size="13" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T1 RK3588</text>
+<text x="14" y="22" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Phạm vi chia sẻ hệ số Scale lượng tử hóa: Per-Tensor vs Per-Channel</text>
+<rect x="18" y="44" width="415" height="304" rx="6" ry="6" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.3"/>
+<rect x="18" y="44" width="415" height="26" rx="6" ry="6" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.0"/>
+<rect x="26" y="48" width="6" height="18" rx="2" ry="2" fill="#C62828" stroke="#C62828" stroke-width="1"/>
+<text x="40" y="58" font-size="10.5" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">A. Lượng tử hóa theo Tensor (Per-Tensor / Per-Layer)</text>
+<text x="32" y="80" font-size="8.2" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">Toàn bộ khối trọng số 4D W [C_out, C_in, K, K] dùng CHUNG đúng 1 scale S</text>
+<text x="32" y="92" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">S_tensor = max(|W|) / 127 cho toàn bộ các kênh đầu ra</text>
+<rect x="34" y="106" width="72" height="84" rx="3" ry="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="70.0" y="119" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Kênh W_0</text>
+<text x="70.0" y="133" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Dải hẹp:</text>
+<text x="70.0" y="146" font-size="8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">[-0.2, +0.2]</text>
+<rect x="38" y="158" width="64" height="26" rx="2" ry="2" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2"/>
+<text x="70.0" y="168" font-size="6.8" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Chỉ dùng ±2 mức</text>
+<text x="70.0" y="179" font-size="6.5" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Lỗi Underflow</text>
+<rect x="114" y="106" width="72" height="84" rx="3" ry="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="150.0" y="119" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Kênh W_1</text>
+<text x="150.0" y="133" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Dải vừa:</text>
+<text x="150.0" y="146" font-size="8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">[-1.5, +1.5]</text>
+<rect x="118" y="158" width="64" height="26" rx="2" ry="2" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="150.0" y="168" font-size="6.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Dùng ~19 mức</text>
+<text x="150.0" y="179" font-size="6.5" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Độ phân giải kém</text>
+<text x="202" y="146" font-size="14" font-weight="700" fill="#777777" text-anchor="middle" dominant-baseline="central">...</text>
+<rect x="218" y="106" width="100" height="84" rx="3" ry="3" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.3"/>
+<text x="268.0" y="119" font-size="8.2" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">Kênh W_outlier</text>
+<text x="268.0" y="133" font-size="7.5" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">Dải cực đại:</text>
+<text x="268.0" y="146" font-size="8" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central">[-10.0, +10.0]</text>
+<rect x="222" y="158" width="92" height="26" rx="2" ry="2" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.2"/>
+<text x="268.0" y="168" font-size="6.8" font-weight="700" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">Chi phối Scale</text>
+<text x="268.0" y="179" font-size="6.5" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">Dùng trọn 256 mức</text>
+<rect x="32" y="198" width="387" height="42" rx="3" ry="3" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.1"/>
+<text x="225.5" y="212" font-size="8.2" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Đúng 1 Scale chung: S = 10.0 / 127 = 0.0787 cho TẤT CẢ các kênh</text>
+<text x="225.5" y="227" font-size="7.5" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">Kênh W_0 bị nén từ [-0.2, +0.2] vào các mức {-2, -1, 0, 1, 2} → Underflow nặng nề!</text>
+<rect x="32" y="248" width="387" height="58" rx="3" ry="3" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="42" y="261" font-size="8.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Hậu quả thực nghiệm trên mô hình phát hiện (YOLO):</text>
+<text x="42" y="275" font-size="7.8" font-weight="400" fill="#DC2626" text-anchor="start" dominant-baseline="central">• Triệt tiêu các gradient nhỏ và đặc trưng góc cạnh tinh vi.</text>
+<text x="42" y="288" font-size="7.8" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Sụt giảm nghiêm trọng độ chính xác mAP50 và mAP50-95.</text>
+<text x="42" y="299" font-size="7.5" font-weight="400" fill="#1D4ED8" text-anchor="start" dominant-baseline="central">• Không khuyến nghị dùng cho lớp tích chập của Object Detector.</text>
+<rect x="32" y="314" width="387" height="20" rx="2" ry="2" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2"/>
+<text x="225.5" y="325" font-size="7.5" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">1 Scale cho cả khối → Mất mát thông tin ở các kênh dải hẹp</text>
+<rect x="447" y="44" width="415" height="304" rx="6" ry="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3"/>
+<rect x="447" y="44" width="415" height="26" rx="6" ry="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.0"/>
+<rect x="455" y="48" width="6" height="18" rx="2" ry="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="469" y="58" font-size="10.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">B. Lượng tử hóa theo Kênh (Per-Channel - Chuẩn RKNPU)</text>
+<text x="461" y="80" font-size="8.2" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Mỗi kênh đầu ra C_out có một hệ số scale S_c riêng biệt</text>
+<text x="461" y="92" font-size="8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">S_c = max(|W_c|) / 127 tối ưu hóa hoàn hảo cho từng lát cắt trọng số</text>
+<rect x="463" y="106" width="72" height="84" rx="3" ry="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+<text x="499.0" y="119" font-size="8.5" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Kênh W_0</text>
+<text x="499.0" y="133" font-size="8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">[-0.2, +0.2]</text>
+<rect x="467" y="146" width="64" height="18" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="499.0" y="155" font-size="7.0" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">S_0 = 0.0015</text>
+<rect x="467" y="167" width="64" height="18" rx="2" ry="2" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="499.0" y="176" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Trọn 256 mức</text>
+<rect x="543" y="106" width="72" height="84" rx="3" ry="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+<text x="579.0" y="119" font-size="8.5" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Kênh W_1</text>
+<text x="579.0" y="133" font-size="8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">[-1.5, +1.5]</text>
+<rect x="547" y="146" width="64" height="18" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="579.0" y="155" font-size="7.0" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">S_1 = 0.0118</text>
+<rect x="547" y="167" width="64" height="18" rx="2" ry="2" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="579.0" y="176" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Trọn 256 mức</text>
+<text x="631" y="146" font-size="14" font-weight="700" fill="#777777" text-anchor="middle" dominant-baseline="central">...</text>
+<rect x="647" y="106" width="100" height="84" rx="3" ry="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+<text x="697.0" y="119" font-size="8.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Kênh W_outlier</text>
+<text x="697.0" y="133" font-size="8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">[-10.0, +10.0]</text>
+<rect x="651" y="146" width="92" height="18" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="697.0" y="155" font-size="7.0" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">S_c = 0.0787</text>
+<rect x="651" y="167" width="92" height="18" rx="2" ry="2" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+<text x="697.0" y="176" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Trọn 256 mức</text>
+<rect x="461" y="198" width="387" height="42" rx="3" ry="3" fill="#ECFDF5" stroke="#059669" stroke-width="1.1"/>
+<text x="654.5" y="212" font-size="8.2" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Mỗi kênh khai thác tối đa 100% dải biểu diễn INT8 [-127, +127]</text>
+<text x="654.5" y="227" font-size="7.5" font-weight="400" fill="#065F46" text-anchor="middle" dominant-baseline="central">Không bị ảnh hưởng bởi kênh outlier khác → Sai số lượng tử tối thiểu, bảo toàn mAP!</text>
+<rect x="461" y="248" width="387" height="58" rx="3" ry="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+<text x="471" y="261" font-size="8.2" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Cơ chế hỗ trợ phần cứng RKNPU RK3588:</text>
+<text x="471" y="275" font-size="7.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• NPU hỗ trợ nhân Per-Channel Scale trực tiếp trong mảng MAC.</text>
+<text x="471" y="288" font-size="7.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Không làm tăng độ trễ suy luận so với Per-Tensor (Zero Latency Overhead).</text>
+<text x="471" y="299" font-size="7.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chuẩn công nghiệp mặc định trên RKNN-Toolkit2 khi xuất mô hình YOLO.</text>
+<rect x="461" y="314" width="387" height="20" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="654.5" y="325" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Per-Channel: Chuẩn công nghiệp bảo toàn độ chính xác cho YOLO trên RK3588</text>
+<text x="10" y="368" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 UG232 tr.72-76, Fig. 6-2] [T1 Nagel whitepaper 2021] [T1 Q-YOLO 2023]</text>
+</svg>

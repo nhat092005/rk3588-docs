@@ -42,7 +42,15 @@ RK3588 có ba NPU core giống nhau. TRM1 mô tả khả năng ghép như sau:
    "Include triple NPU CORE
    Support triple core co-work, dual core co-work, and work independently" [T1 TRM1 tr.1984]
 
-Datasheet nhắc lại cùng ý và thêm "Multi-task, multi-scenario in parallel" [T1 DS V1.7 pdf 11]. Hình dưới là sơ đồ ba core của TRM1. TRM1 không giải thích bằng chữ các đường nối giữa các core.
+Datasheet nhắc lại cùng ý và thêm "Multi-task, multi-scenario in parallel" [T1 DS V1.7 pdf 11]. Sơ đồ phân vùng 3 core, bus AXI và bộ nhớ System SRAM được tổng hợp trực quan ở :ref:`fig-nhieu-core-arch-vector`. Hình sau đó là sơ đồ ba core gốc từ TRM1 (TRM1 không giải thích bằng chữ các đường nối giữa các core).
+
+.. _fig-nhieu-core-arch-vector:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/01-phan-cung-npu/npu-01-triple-core-architecture.svg
+   :align: center
+   :alt: Sơ đồ kiến trúc 3 lõi RKNPU RK3588, System SRAM 4MB và Bus kết nối DDR
+
+   Kiến trúc 3 lõi NPU RK3588 (6 TOPS INT8), phân bổ Internal Buffer 384KB mỗi core, System SRAM 4MB và bus AXI kết nối tới 4 kênh DDR. Nguồn: tổng hợp từ [T1 TRM1 Ch.34, Ch.36; TRM2 Ch.1-2].
 
 .. _fig-nhieu-core-triple-core:
 

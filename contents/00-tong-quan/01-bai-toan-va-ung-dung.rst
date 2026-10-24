@@ -50,19 +50,25 @@ Có thể hiểu đề tài nằm ở giao của hai phía:
       - person / helmet / head / safety_clothes / self_clothes
       - small objects
       - multi-scale
-      - low-light
+      - lighting and noise (low-light)
       - occlusion
-      - detection accuracy
+      - confusable classes (helmet/head, safety_clothes/self_clothes)
+      - class imbalance
+      - data augmentation, loss, distillation (ứng viên)
+      - input resolution, tiling (ứng viên)
+      - detection accuracy (mAP50 / mAP50-95 / AP per class)
 
                           +
 
    B. Edge AI / Hardware-aware Optimization
       - RK3588S NPU
       - FP16 / INT8
-      - quantization
+      - quantization (PTQ, hybrid)
       - pruning
-      - operator compatibility
-      - latency / FPS / memory
+      - operator compatibility (activation, Resize)
+      - multi-core / multi-thread
+      - pre/post-processing (LetterBox, NMS)
+      - latency / FPS / memory / thermal
       - compiler/runtime behavior
       - accuracy-efficiency trade-off
 

@@ -77,6 +77,14 @@ UG232 mô tả hẹp hơn, chỉ nêu một kiểu: INT8 tuyến tính bất đ�
 
 Hình dưới là minh họa của hãng cho hai kiểu. Ở kiểu đối xứng, zero-point nằm đúng tâm của dải số nguyên (INT8 thì bằng 0). Ở kiểu bất đối xứng, zero-point tính từ min và max nên thường lệch khỏi tâm [T1 UG232 tr.120].
 
+.. _fig-quant-symm-asymm:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/quant-01-symmetric-vs-asymmetric.svg
+   :align: center
+   :alt: Trực quan hóa lượng tử hóa Symmetric và Asymmetric trên RKNPU
+
+   Cơ chế ánh xạ lượng tử hóa INT8: Symmetric (Z = 0, tối ưu mảng MAC NPU không cần cộng offset) và Asymmetric (Z ≠ 0, bảo toàn dải động phân bố lệch như ReLU). Nguồn: [T1 UG232 tr.70-74, Fig. 6-1].
+
 .. _fig-ug232-doi-xung:
 
 .. figure:: ../../../_assets/img/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/kieu-du-lieu-va-cau-hinh-luong-tu-hoa/ug232-fig6-1-symmetric-vs-asymmetric.png
@@ -129,6 +137,14 @@ Số bin của histogram, cách cắt (clipping) và công thức chi tiết c�
 API232 cho ba giá trị: ``layer``, ``channel`` (mặc định) và ``group{SIZE}``. Với ``group{SIZE}``, mỗi output channel của weight được chia thành các nhóm theo input channel, ``{SIZE}`` là bội của 32 từ 32 đến 256, và chỉ hợp lệ khi ``quantized_dtype = w4a16`` [T1 API232 tr.8]. UG232 chỉ liệt kê ``layer`` và ``channel`` [T1 UG232 tr.22].
 
    "Note: In RKNN-Toolkit2, Per-Channel quantization is only applied to the weights, while the activation values and intermediate values are still quantized using Per-Layer quantization." [T1 UG232 tr.120]
+
+.. _fig-quant-per-tensor-channel:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/02-rknn-luong-tu-hoa/quant-02-per-tensor-vs-per-channel.svg
+   :align: center
+   :alt: Trực quan hóa lượng tử hóa Per-Tensor vs Per-Channel
+
+   Phạm vi chia sẻ hệ số scale: Per-Tensor (1 scale toàn khối, dễ bị chi phối bởi outlier) và Per-Channel (mỗi channel 1 scale độc lập, chuẩn bảo toàn mAP cho YOLO trên RKNN). Nguồn: [T1 UG232 tr.72-76, Fig. 6-2].
 
 .. _fig-ug232-per-layer-channel:
 

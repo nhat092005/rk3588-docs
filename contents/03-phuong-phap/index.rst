@@ -1,6 +1,6 @@
-***********
-Phương pháp
-***********
+********************
+Thiết kế thực nghiệm
+********************
 
 Thiết kế đã khóa của nghiên cứu: dữ liệu, phần cứng mục tiêu, giao thức đánh giá và đặc tả các bảng kết quả.
 

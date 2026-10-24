@@ -3,9 +3,9 @@
 
 Sinh hình vector SVG minh họa:
   1. rknn-01-layout-nc1hwc2:
-     Cơ chế biến đổi định dạng dữ liệu NC1HWC2 trên phần cứng NPU Rockchip RK3588:
-     - Tầng 1: Biến đổi hình học từ NCHW logic sang NC1HWC2 vật lý (C2=16, C1=⌈C/C2⌉).
-     - Tầng 2: Ánh xạ 16 byte liên tục vào 16 lane SIMD MAC của NPU Core RK3588.
+     Trực quan hóa cấu trúc bộ nhớ và luồng thực thi phần cứng của định dạng NC1HWC2:
+     - So sánh bố cục bộ nhớ NCHW (Strided Access) vs NC1HWC2 (Contiguous 16-Byte Burst).
+     - Ánh xạ 1 chu kỳ burst trực tiếp vào mảng 16-lane SIMD MAC của RKNPU Core.
 
 Chạy: python3 gen.py [outdir] [--png] [figure-name ...]
 """
@@ -13,9 +13,8 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# docs/tools/figure_gen/02-nen-tang-rk3588/03-toolchain-runtime -> ../../.. = docs/tools/figure_gen
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
-from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THICK, THIN, Fig, run, source  # noqa: E402
+from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THIN, Fig, run, source  # noqa: E402
 
 DEFAULT_OUTDIR = os.path.abspath(
     os.path.join(
@@ -45,153 +44,190 @@ def arrow(f, x1, y1, x2, y2, color=BLUE, sw=THIN, dashed=False):
 
 
 # ==============================================================================
-# 1. HÌNH BIẾN ĐỔI LAYOUT NC1HWC2 (rknn-01-layout-nc1hwc2)
+# 1. HÌNH BIẾN ĐỔI LAYOUT NC1HWC2 (rknn-01-layout-nc1hwc2) - VISUAL-FIRST
 # ==============================================================================
 def fig_layout_nc1hwc2():
-    H = 475
+    H = 376
     f = Fig(W, H)
     tier(f, "T1 RK3588")
-    f.text(14, 20, "Cơ chế biến đổi định dạng Layout NC1HWC2 trên NPU Rockchip RK3588", size=13.5, weight=700, fill=DARK)
+    f.text(14, 22, "Cơ chế biến đổi Layout NC1HWC2 và ánh xạ 16-Lane SIMD MAC trên RKNPU RK3588",
+           size=14, weight=700, fill=DARK)
 
-    col_w = 415
-    col_h = 358
-    x1 = 20
-    x2 = 445
-    y_card = 46
+    # --------------------------------------------------------------------------
+    # KHỐI TRÊN BÊN TRÁI: NCHW LOGICAL (STRIDED MEMORY ACCESS)
+    # --------------------------------------------------------------------------
+    card_w = 415
+    card_h = 172
+    x_left = 18
+    y_top = 44
 
-    # ==========================================================================
-    # CỘT TRÁI: BIẾN ĐỔI HÌNH HỌC TENSOR (NCHW -> NC1HWC2)
-    # ==========================================================================
-    rect(f, x1, y_card, col_w, col_h, fill="#F8FAFC", stroke="#64748B", sw=1.3, rx=5)
-    # Header strip
-    rect(f, x1, y_card, col_w, 34, fill="#FFFFFF", stroke="#64748B", sw=1.0, rx=5)
-    rect(f, x1 + 10, y_card + 7, 8, 20, fill=BLUE, stroke=BLUE, sw=1, rx=2)
-    f.text(x1 + 26, y_card + 17, "1. Biến đổi hình học: NCHW → NC1HWC2 (C2=16)", size=10.5, weight=700, fill="#0F172A")
+    rect(f, x_left, y_top, card_w, card_h, fill="#F8FAFC", stroke="#94A3B8", sw=1.3, rx=6)
+    rect(f, x_left, y_top, card_w, 26, fill="#FFFFFF", stroke="#94A3B8", sw=1.0, rx=6)
+    rect(f, x_left + 8, y_top + 4, 6, 18, fill=RED, stroke=RED, sw=1, rx=2)
+    f.text(x_left + 22, y_top + 14, "A. Bố cục logic NCHW: Truy cập bộ nhớ bị phân tán",
+           size=11, weight=700, fill="#991B1B")
 
-    # Khối 1: Tensor logic ban đầu NCHW
-    rect(f, x1 + 14, 88, col_w - 28, 54, fill="#FFFFFF", stroke="#CBD5E1", sw=1.1, rx=3)
-    f.text(x1 + 24, 102, "Tensor logic NCHW: (N=1, C=13, H=4, W=4)", size=9, weight=700, fill=BLUE)
-    f.text(x1 + 24, 116, "• Kênh C = 13 (không chia hết cho 16)", size=8.2, fill="#334155")
-    f.text(x1 + 24, 129, "• Khoảng cách giữa 2 kênh cùng pixel: H × W = 16 byte (Strided Access)", size=8, fill="#DC2626")
+    # 3 mặt phẳng kênh c0, c1, c12
+    pw, ph = 46, 38
+    p0_y = y_top + 34
 
-    # Mũi tên chuyển đổi giữa Khối 1 và Khối 2 (dùng THIN để thân dài rõ ràng, không lỗi lint)
-    mid_x1 = x1 + 130
-    arrow(f, mid_x1, 142, mid_x1, 164, color=BLUE, sw=THIN)
-    f.text(mid_x1 + 10, 153, "Quy tắc RK3588 (INT8): C2=16, C1=⌈13/16⌉=1", size=8, weight=700, fill=BLUE)
+    # Kênh c0
+    rect(f, x_left + 16, p0_y, pw, ph, fill="#EFF6FF", stroke=BLUE, sw=1.1, rx=2)
+    f.text(x_left + 16 + pw / 2, p0_y + 10, "Kênh c0", size=7.8, weight=700, fill=BLUE, anchor="middle")
+    rect(f, x_left + 22, p0_y + 17, 15, 15, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(x_left + 29.5, p0_y + 24.5, "p0", size=7.2, weight=700, fill="white", anchor="middle")
 
-    # Khối 2: Tensor phần cứng NC1HWC2
-    rect(f, x1 + 14, 164, col_w - 28, 116, fill="#FFFFFF", stroke=BLUE, sw=1.2, rx=3)
-    f.text(x1 + 24, 178, "Tensor phần cứng NC1HWC2: (1, 1, 4, 4, 16)", size=9, weight=700, fill=BLUE)
-    f.text(x1 + 24, 192, "Thứ tự địa chỉ tăng dần: C2 → W → H → C1 → N (C2 đổi nhanh nhất)", size=8, fill="#475569")
+    # Kênh c1
+    rect(f, x_left + 70, p0_y, pw, ph, fill="#EFF6FF", stroke=BLUE, sw=1.1, rx=2)
+    f.text(x_left + 70 + pw / 2, p0_y + 10, "Kênh c1", size=7.8, weight=700, fill=BLUE, anchor="middle")
+    rect(f, x_left + 76, p0_y + 17, 15, 15, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(x_left + 83.5, p0_y + 24.5, "p0", size=7.2, weight=700, fill="white", anchor="middle")
 
-    # Vẽ 16 ô byte đại diện cho khối C2 (387 - 352 = 35px lề chia đôi)
-    cell_w = 22
-    cell_h = 24
-    cell_y = 203
-    cell_x0 = x1 + 20
+    f.text(x_left + 124, p0_y + 20, "...", size=13, weight=700, fill=GRAY, anchor="middle")
 
-    # 13 ô kênh hợp lệ (c_0 .. c_12)
+    # Kênh c12
+    rect(f, x_left + 136, p0_y, pw, ph, fill="#EFF6FF", stroke=BLUE, sw=1.1, rx=2)
+    f.text(x_left + 136 + pw / 2, p0_y + 10, "Kênh c12", size=7.8, weight=700, fill=BLUE, anchor="middle")
+    rect(f, x_left + 142, p0_y + 17, 15, 15, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(x_left + 149.5, p0_y + 24.5, "p0", size=7.2, weight=700, fill="white", anchor="middle")
+
+    f.text(x_left + 196, y_top + 42, "Tensor logic: (1, 13, 4, 4)", size=8.8, weight=700, fill=DARK)
+    f.text(x_left + 196, y_top + 56, "• Bước nhảy 2 kênh: H×W = 16B", size=8.2, fill="#64748B")
+    f.text(x_left + 196, y_top + 69, "• p0 phân tán tại 13 vị trí rời rạc", size=8.2, fill="#DC2626")
+
+    # Thanh RAM tuyến tính NCHW
+    mem_y = y_top + 88
+    f.text(x_left + 16, mem_y - 5, "Dòng địa chỉ DDR vật lý (NCHW):", size=8.2, weight=700, fill=DARK)
+
+    bw = 32
+    bh = 22
+    bx0 = x_left + 16
+
+    rect(f, bx0, mem_y + 2, bw, bh, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(bx0 + bw / 2, mem_y + 2 + bh / 2, "c0[0]", size=7.2, weight=700, fill="white", anchor="middle")
+
+    rect(f, bx0 + 34, mem_y + 2, 46, bh, fill="#E2E8F0", stroke="#94A3B8", rx=2)
+    f.text(bx0 + 57, mem_y + 2 + bh / 2, "c0[1..15]", size=7.2, fill="#475569", anchor="middle")
+
+    rect(f, bx0 + 82, mem_y + 2, bw, bh, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(bx0 + 82 + bw / 2, mem_y + 2 + bh / 2, "c1[0]", size=7.2, weight=700, fill="white", anchor="middle")
+
+    rect(f, bx0 + 116, mem_y + 2, 46, bh, fill="#E2E8F0", stroke="#94A3B8", rx=2)
+    f.text(bx0 + 139, mem_y + 2 + bh / 2, "c1[1..15]", size=7.2, fill="#475569", anchor="middle")
+
+    f.text(bx0 + 172, mem_y + 2 + bh / 2, "...", size=12, weight=700, fill=GRAY, anchor="middle")
+
+    rect(f, bx0 + 188, mem_y + 2, bw, bh, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(bx0 + 188 + bw / 2, mem_y + 2 + bh / 2, "c12[0]", size=7.2, weight=700, fill="white", anchor="middle")
+
+    rect(f, bx0 + 222, mem_y + 2, 46, bh, fill="#E2E8F0", stroke="#94A3B8", rx=2)
+    f.text(bx0 + 245, mem_y + 2 + bh / 2, "c12[1..15]", size=7.2, fill="#475569", anchor="middle")
+
+    # Nhãn cảnh báo hiệu năng
+    rect(f, x_left + 14, mem_y + 32, card_w - 28, 42, fill="#FEF2F2", stroke="#DC2626", sw=1.1, rx=4)
+    f.text(x_left + card_w / 2, mem_y + 46, "13 lần nhảy địa chỉ (Stride = 16 byte) để đọc đủ pixel p0",
+           size=8.5, weight=700, fill="#B91C1C", anchor="middle")
+    f.text(x_left + card_w / 2, mem_y + 61, "Gây phân mảnh bus DDR và lãng phí băng thông nạp dữ liệu",
+           size=8, fill="#7F1D1D", anchor="middle")
+
+    # --------------------------------------------------------------------------
+    # KHỐI TRÊN BÊN PHẢI: NC1HWC2 PHYSICAL (CONTIGUOUS 16-BYTE BURST)
+    # --------------------------------------------------------------------------
+    x_right = 447
+    rect(f, x_right, y_top, card_w, card_h, fill="#F8FAFC", stroke="#059669", sw=1.3, rx=6)
+    rect(f, x_right, y_top, card_w, 26, fill="#FFFFFF", stroke="#059669", sw=1.0, rx=6)
+    rect(f, x_right + 8, y_top + 4, 6, 18, fill=GREEN, stroke=GREEN, sw=1, rx=2)
+    f.text(x_right + 22, y_top + 14, "B. Bố cục vật lý NC1HWC2: Đóng gói cụm 16 byte liên tục",
+           size=11, weight=700, fill="#047857")
+
+    f.text(x_right + 14, y_top + 36, "Quy tắc RKNPU (INT8): C2 = 16, C1 = ⌈13/16⌉ = 1 → Shape (1, 1, 4, 4, 16)",
+           size=8.2, weight=700, fill="#065F46")
+    f.text(x_right + 14, y_top + 49, "Thứ tự địa chỉ trong bộ nhớ: C2 → W → H → C1 → N",
+           size=8, fill="#334155")
+
+    # Vẽ 16 ô byte liền kề nhau
+    cell_w = 23
+    cell_h = 26
+    cell_y = y_top + 59
+    cell_x0 = x_right + 14
+
     for i in range(13):
         cx = cell_x0 + i * cell_w
-        rect(f, cx, cell_y, cell_w, cell_h, fill="#EFF6FF", stroke=BLUE, sw=1.0, rx=2)
-        f.text(cx + cell_w / 2, cell_y + cell_h / 2, f"c{i}", size=7.5, weight=700, fill="#1E40AF", anchor="middle")
+        rect(f, cx, cell_y, cell_w - 2, cell_h, fill="#ECFDF5", stroke="#059669", sw=1.1, rx=2)
+        f.text(cx + (cell_w - 2) / 2, cell_y + 9, f"c{i}", size=7.2, weight=700, fill="#047857", anchor="middle")
+        f.text(cx + (cell_w - 2) / 2, cell_y + 19, "1B", size=6.5, fill="#64748B", anchor="middle")
 
-    # 3 ô kênh đệm zero-padding (c_13 .. c_15)
     for i in range(13, 16):
         cx = cell_x0 + i * cell_w
-        rect(f, cx, cell_y, cell_w, cell_h, fill="#FEF2F2", stroke="#DC2626", sw=1.0, dashed=True, rx=2)
-        f.text(cx + cell_w / 2, cell_y + cell_h / 2, "0", size=7.5, weight=700, fill="#DC2626", anchor="middle")
+        rect(f, cx, cell_y, cell_w - 2, cell_h, fill="#FEF2F2", stroke="#DC2626", sw=1.1, dashed=True, rx=2)
+        f.text(cx + (cell_w - 2) / 2, cell_y + 9, "0", size=7.2, weight=700, fill="#DC2626", anchor="middle")
+        f.text(cx + (cell_w - 2) / 2, cell_y + 19, "pad", size=6.5, fill="#DC2626", anchor="middle")
 
-    # Thanh màu phân định dưới 16 ô (dùng rect thanh mảnh, không mũi tên)
-    rect(f, cell_x0, cell_y + 27, 13 * cell_w, 3, fill=BLUE, stroke=BLUE, sw=1, rx=1)
-    f.text(cell_x0 + (13 * cell_w) / 2, cell_y + 38, "13 byte dữ liệu hợp lệ (Valid Channels)", size=7.5, fill="#1E40AF", anchor="middle")
+    rect(f, cell_x0, cell_y + cell_h + 3, 13 * cell_w - 2, 2, fill=GREEN, stroke=GREEN, rx=1)
+    f.text(cell_x0 + (13 * cell_w) / 2, cell_y + cell_h + 12, "13 kênh hợp lệ",
+           size=7.2, weight=700, fill="#047857", anchor="middle")
 
-    rect(f, cell_x0 + 13 * cell_w + 2, cell_y + 27, 3 * cell_w - 2, 3, fill="#DC2626", stroke="#DC2626", sw=1, rx=1)
-    f.text(cell_x0 + 13 * cell_w + 33, cell_y + 38, "3 byte đệm", size=7.5, fill="#DC2626", anchor="middle")
+    rect(f, cell_x0 + 13 * cell_w, cell_y + cell_h + 3, 3 * cell_w - 2, 2, fill=RED, stroke=RED, rx=1)
+    f.text(cell_x0 + 14.5 * cell_w, cell_y + cell_h + 12, "3B đệm 0",
+           size=7.2, weight=700, fill="#DC2626", anchor="middle")
 
-    f.text(x1 + col_w // 2, cell_y + 53, "→ Trọn 16 byte của cùng pixel (h, w) nằm LIỀN NHAU trong bộ nhớ RAM/SRAM", size=8, weight=700, fill="#0F172A", anchor="middle")
+    rect(f, x_right + 14, cell_y + cell_h + 20, card_w - 28, 48, fill="#F0FDF4", stroke="#059669", sw=1.1, rx=4)
+    f.text(x_right + card_w / 2, cell_y + cell_h + 35, "Đúng 1 chu kỳ đọc Bus Burst 16 byte (128-bit AXI)",
+           size=8.8, weight=700, fill="#047857", anchor="middle")
+    f.text(x_right + card_w / 2, cell_y + cell_h + 51, "Tải trọn vẹn mọi kênh của pixel p0 vào đệm SRAM NPU mà không cần nhảy địa chỉ.",
+           size=8, fill="#065F46", anchor="middle")
 
-    # Khối 3: Đặc tính lưu trữ và định tuyến bộ nhớ
-    rect(f, x1 + 14, 288, col_w - 28, 106, fill="#FFFFFF", stroke="#CBD5E1", sw=1.1, rx=3)
-    f.text(x1 + 24, 303, "Đặc tính vi kiến trúc bộ nhớ NPU RK3588:", size=8.8, weight=700, fill="#0F172A")
-    f.text(x1 + 24, 319, "• Không phân tán: Đọc 16 kênh trong 1 chu kỳ burst bus duy nhất.", size=8.2, fill="#166534")
-    f.text(x1 + 24, 334, "• Định dạng riêng: NC1HWC2 là layout nội bộ chuyên biệt của RKNPU.", size=8.2, fill="#334155")
-    f.text(x1 + 24, 349, "• Bảng quy chuẩn C2: INT8 = 16 | FP16 = 8 | INT16 = 8 [T1 UG152 tr.56].", size=8.2, fill="#1E40AF")
-    f.text(x1 + 24, 364, "• Chip khác: RK3566/RK3568 có C2=8 (INT8) và C2=4 (FP16) [T1 UG232].", size=8.2, fill="#64748B")
+    # --------------------------------------------------------------------------
+    # KHỐI DƯỚI: ÁNH XẠ TRỰC TIẾP VÀO 16-LANE SIMD MAC TRÊN NPU CORE
+    # --------------------------------------------------------------------------
+    y_bot = 226
+    card_h_bot = 140
+    rect(f, x_left, y_bot, W - 36, card_h_bot, fill="#FFFFFF", stroke="#3B82F6", sw=1.4, rx=6)
+    rect(f, x_left, y_bot, W - 36, 26, fill="#EFF6FF", stroke="#3B82F6", sw=1.0, rx=6)
+    rect(f, x_left + 8, y_bot + 4, 6, 18, fill=BLUE, stroke=BLUE, sw=1, rx=2)
+    f.text(x_left + 22, y_bot + 14, "C. Ánh xạ phần cứng: 16 Byte nạp song song vào 16-Lane SIMD MAC (1 Chu kỳ xung nhịp)",
+           size=11, weight=700, fill="#1E40AF")
 
-    # ==========================================================================
-    # CỘT PHẢI: ÁNH XẠ PHẦN CỨNG (16-LANE SIMD MAC)
-    # ==========================================================================
-    rect(f, x2, y_card, col_w, col_h, fill="#F8FAFC", stroke="#64748B", sw=1.3, rx=5)
-    # Header strip
-    rect(f, x2, y_card, col_w, 34, fill="#FFFFFF", stroke="#64748B", sw=1.0, rx=5)
-    rect(f, x2 + 10, y_card + 7, 8, 20, fill=GREEN, stroke=GREEN, sw=1, rx=2)
-    f.text(x2 + 26, y_card + 17, "2. Ánh xạ phần cứng: Nạp vào 16-Lane SIMD MAC", size=10.5, weight=700, fill="#0F172A")
+    # 16 Lane SIMD
+    lane_y = y_bot + 34
+    lw = 47
+    lh = 46
+    lane_x0 = x_left + 16
+    gap = 5
 
-    # Khối 1: Nạp từ SRAM/DDR vào 384KB Internal Buffer
-    rect(f, x2 + 14, 88, col_w - 28, 54, fill="#FFFFFF", stroke="#CBD5E1", sw=1.1, rx=3)
-    f.text(x2 + 24, 102, "Khối CNA (Convolution Neural Accelerator) nạp dữ liệu:", size=9, weight=700, fill=GREEN)
-    f.text(x2 + 24, 116, "• Nạp trọn khối C2 (16 byte) vào Internal Buffer 384KB của Core NPU.", size=8.2, fill="#334155")
-    f.text(x2 + 24, 129, "• Trọng số (Weight) và Kích hoạt (Feature) đều căn chỉnh theo khối C2.", size=8.2, fill="#334155")
+    for i in range(13):
+        lx = lane_x0 + i * (lw + gap)
+        rect(f, lx, lane_y, lw, lh, fill="#F0FDF4", stroke="#16A34A", sw=1.1, rx=3)
+        f.text(lx + lw / 2, lane_y + 11, f"Lane {i}", size=7.2, weight=700, fill="#15803D", anchor="middle")
+        f.text(lx + lw / 2, lane_y + 24, f"x_{i}·w_{i}", size=7.5, weight=700, fill=DARK, anchor="middle")
+        f.text(lx + lw / 2, lane_y + 36, "8b MAC", size=6.8, fill="#64748B", anchor="middle")
 
-    mid_x2 = x2 + 120
-    arrow(f, mid_x2, 142, mid_x2, 164, color=GREEN, sw=THIN)
-    f.text(mid_x2 + 10, 153, "Nạp song song 16 byte vào mảng nhân SIMD", size=8, weight=700, fill=GREEN)
+    for i in range(13, 16):
+        lx = lane_x0 + i * (lw + gap)
+        rect(f, lx, lane_y, lw, lh, fill="#FEF2F2", stroke="#DC2626", sw=1.1, dashed=True, rx=3)
+        f.text(lx + lw / 2, lane_y + 11, f"Lane {i}", size=7.2, weight=700, fill="#DC2626", anchor="middle")
+        f.text(lx + lw / 2, lane_y + 24, "0 · 0", size=7.5, weight=700, fill="#DC2626", anchor="middle")
+        f.text(lx + lw / 2, lane_y + 36, "Idle (Pad)", size=6.8, fill="#DC2626", anchor="middle")
 
-    # Khối 2: Mảng 16-Lane SIMD MAC Multipliers
-    rect(f, x2 + 14, 164, col_w - 28, 116, fill="#F0FDF4", stroke=GREEN, sw=1.2, rx=3)
-    f.text(x2 + 24, 178, "Mảng 16-Lane SIMD Multipliers (1024 MACs INT8 / Core):", size=9, weight=700, fill=GREEN)
+    # Cây cộng gom Psum Adder Tree
+    tree_y = lane_y + lh + 8
+    total_lanes_w = 16 * (lw + gap) - gap
+    rect(f, lane_x0, tree_y, total_lanes_w, 24, fill="#EFF6FF", stroke="#2563EB", sw=1.1, rx=3)
+    f.text(lane_x0 + total_lanes_w / 2, tree_y + 13,
+           "Cây cộng gom 16 phần tử (Adder Tree): Psum = ∑_{i=0}^{12} (x_i · w_i) + 0 → Hoàn tất tích vô hướng trong 1 chu kỳ",
+           size=8.5, weight=700, fill="#1E40AF", anchor="middle")
 
-    # Vẽ 4 cụm đại diện cho 16 lane (Lane 0, Lane 1, ... Lane 12, Lane 13-15)
-    lane_y = 194
-    lane_w = 82
-    lane_h = 34
+    # Thanh trạng thái hiệu suất
+    stat_y = tree_y + 30
+    rect(f, lane_x0, stat_y, 395, 22, fill="#ECFDF5", stroke="#059669", rx=2)
+    f.text(lane_x0 + 197, stat_y + 11, "Hiệu suất tính toán MAC: 13 / 16 Lane hoạt động (81.25%)",
+           size=8.2, weight=700, fill="#047857", anchor="middle")
 
-    # Cụm 1: Lane 0
-    rect(f, x2 + 24, lane_y, lane_w, lane_h, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=3)
-    f.text(x2 + 24 + lane_w / 2, lane_y + 11, "Lane 0 (c0)", size=7.8, weight=700, fill=GREEN, anchor="middle")
-    f.text(x2 + 24 + lane_w / 2, lane_y + 24, "x_0 × w_0", size=8, fill="#0F172A", anchor="middle")
+    rect(f, lane_x0 + 407, stat_y, 419, 22, fill="#FFFBEB", stroke=ORANGE, rx=2)
+    f.text(lane_x0 + 616, stat_y + 11, "Khuyến nghị thiết kế YOLO: Kênh C là bội số của 16 → Đạt đỉnh 100% Lane hữu dụng",
+           size=8.2, weight=700, fill="#B45309", anchor="middle")
 
-    # Cụm 2: Lane 1
-    rect(f, x2 + 116, lane_y, lane_w, lane_h, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=3)
-    f.text(x2 + 116 + lane_w / 2, lane_y + 11, "Lane 1 (c1)", size=7.8, weight=700, fill=GREEN, anchor="middle")
-    f.text(x2 + 116 + lane_w / 2, lane_y + 24, "x_1 × w_1", size=8, fill="#0F172A", anchor="middle")
-
-    # Dấu ... ở giữa
-    f.text(x2 + 210, lane_y + 17, "...", size=14, weight=700, fill="#64748B", anchor="middle")
-
-    # Cụm 3: Lane 12
-    rect(f, x2 + 220, lane_y, lane_w, lane_h, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=3)
-    f.text(x2 + 220 + lane_w / 2, lane_y + 11, "Lane 12 (c12)", size=7.8, weight=700, fill=GREEN, anchor="middle")
-    f.text(x2 + 220 + lane_w / 2, lane_y + 24, "x_12 × w_12", size=8, fill="#0F172A", anchor="middle")
-
-    # Cụm 4: Lane 13-15 (Lãng phí do padding)
-    rect(f, x2 + 312, lane_y, lane_w, lane_h, fill="#FEF2F2", stroke="#DC2626", sw=1.0, dashed=True, rx=3)
-    f.text(x2 + 312 + lane_w / 2, lane_y + 11, "Lane 13..15", size=7.8, weight=700, fill="#DC2626", anchor="middle")
-    f.text(x2 + 312 + lane_w / 2, lane_y + 24, "0 × 0 (Lãng phí)", size=8, fill="#DC2626", anchor="middle")
-
-    # Cây cộng gom Psum (Accumulator)
-    arrow(f, x2 + col_w // 2, lane_y + lane_h, x2 + col_w // 2, lane_y + lane_h + 16, color=GREEN, sw=THIN)
-    rect(f, x2 + 50, lane_y + lane_h + 16, col_w - 100, 22, fill="#FFFFFF", stroke=GREEN, sw=1.0, rx=3)
-    f.text(x2 + col_w // 2, lane_y + lane_h + 27, "Cây cộng gom Accumulator: Psum = ∑ (x_i × w_i) trong 1 chu kỳ", size=8, weight=700, fill=GREEN, anchor="middle")
-
-    # Khối 3: Khuyến nghị tối ưu hóa mô hình từ hãng
-    rect(f, x2 + 14, 288, col_w - 28, 106, fill="#FFFBEB", stroke=ORANGE, sw=1.2, rx=3)
-    f.text(x2 + 24, 303, "Khuyến nghị thiết kế mô hình từ Rockchip (UG232 mục 8.4):", size=8.8, weight=700, fill="#92400E")
-    f.text(x2 + 24, 319, "+ Kênh C chia hết cho 16/32: 100% Lane MAC tính toán, 0 byte lãng phí.", size=8.2, fill="#166534")
-    f.text(x2 + 24, 334, "- Kênh C không chia hết: Phải nhân vô ích với 0, giảm hiệu suất tính toán.", size=8.2, fill="#B91C1C")
-    f.text(x2 + 24, 349, "• Không bắt buộc: Mô hình kênh bất kỳ vẫn chạy đúng nhờ zero-padding.", size=8.2, fill="#334155")
-    f.text(x2 + 24, 364, "• Tối ưu thực tế: Nên thiết kế số kênh là bội số của 16/32 để đạt đỉnh TOPS.", size=8.2, fill="#92400E")
-
-    # ==========================================================================
-    # KHỐI KẾT LUẬN DƯỚI CÙNG (3 dòng rõ ràng, không tràn mép)
-    # ==========================================================================
-    rect(f, 20, 412, 840, 50, fill="#F8FAFC", stroke="#64748B", sw=1.1, rx=4)
-    f.text(32, 424, "Bản chất định dạng NC1HWC2 trên NPU RK3588:", size=9.5, weight=700, fill="#0F172A")
-    f.text(32, 439, "• Biến đổi truy cập bộ nhớ từ phân tán (strided access trên NCHW) thành truy cập cụm tuyến tính 16-byte burst.", size=8.5, fill="#334155")
-    f.text(32, 452, "• Khớp hoàn hảo với chiều rộng vector bus của 3 lõi NPU (mỗi lõi đạt 1024 MACs INT8/chu kỳ tại 1 GHz) [T1 UG232, TRM1].", size=8.5, fill="#334155")
-
-    source(f, H - 10, "[T1 UG232 tr.61, Fig. 5-1, Table 5-1] [T1 UG152 tr.56] [T1 TRM1 tr.1984-1985]")
+    source(f, H - 12, "[T1 UG232 tr.61, Fig. 5-1, Table 5-1] [T1 UG152 tr.56] [T1 TRM1 tr.1984-1985]")
     return f
 
 
