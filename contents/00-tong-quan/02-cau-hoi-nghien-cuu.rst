@@ -13,10 +13,10 @@ Research problem và RQ
 .. admonition:: Tóm tắt
 
    - Research problem: hiệu quả real-time trên Edge NPU phụ thuộc operator support, tensor layout, datatype, memory access, memory copy, compiler optimization, NPU architecture và pre/post-processing overhead.
-   - Trên RK3588, `Convolution` hỗ trợ đa nhân nhưng `Resize` không, và `ConvolutionSwish` chỉ chưa hỗ trợ đa nhân (vẫn chạy một nhân). Chi tiết từng op ở trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
-   - Build lại model 7 class cũ có 57 op `ConvExSwish` (số 228 trước đây là số dòng log), và cờ `conv_eltwise_activation_fuse = 1` mặc định bật.
-   - Trên RK3588 chỉ dùng được `w8a8` (INT8/INT8, mặc định); `w4a8` chưa hỗ trợ.
-   - Log gọi op là `ConvExSwish`, tài liệu gọi `ConvolutionSwish`; chưa tài liệu nào xác nhận cùng một op, và cần chạy `eval_perf` ở `CORE_0_1_2` `[chưa kiểm chứng]`.
+   - Trên RK3588, `Convolution` và các biến thể gộp `ReLU`, `Clip`, `PReLU/LeakyReLU`, `Add` hỗ trợ đa nhân, trong khi `Resize` không hỗ trợ và `ConvolutionSwish` (Conv + SiLU) tạm chưa hỗ trợ đa nhân (vẫn chạy trên một nhân). Chi tiết từng toán tử được phân tích tại trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
+   - Trình biên dịch RKNN tự động tối ưu đồ thị và hợp nhất toán tử (như gộp lớp tích chập với hàm kích hoạt đi kèm) trước khi sinh mã thực thi cho NPU.
+   - Trên RK3588 chỉ dùng được `FP16` và `w8a8` (INT8/INT8, mặc định), còn `w4a8` chưa được hỗ trợ.
+   - Độ trễ của từng tầng trên NPU không chỉ phụ thuộc số chu kỳ tính toán (`NPU Cycles`) mà còn phụ thuộc số chu kỳ chờ đọc và ghi bộ nhớ (`DDR Cycles`).
    - Research Question: giữ PPE detection accuracy tốt nhưng đồng thời cải thiện inference efficiency trên RK3588S NPU.
 
 .. contents:: Trong trang này
@@ -53,32 +53,30 @@ Các object detector có thể đạt accuracy tốt, nhưng khi triển khai re
 
    pre/post-processing overhead → Thời gian ngoài inference, như resize, color conversion, NMS, decode output...
 
-1.2. Bằng chứng thực nghiệm trên nền tảng RK3588
+1.2. Đối chiếu với tài liệu kỹ thuật nền tảng RK3588
 ----------------------------------------------------------------------------------------------------
 
-3 yếu tố dưới đây đã có bằng chứng thật trên chính model/board của project (không phải trích paper ngoài):
+Ba yếu tố dưới đây được quy định trực tiếp trong bộ tài liệu chính thức của Rockchip cho RK3588:
 
 .. list-table::
    :header-rows: 1
 
    * - Yếu tố
-     - Phát hiện thật
+     - Đặc tả trên RK3588
      - Nguồn
    * - ``operator support``
-     - ``Convolution`` hỗ trợ đa nhân ("多核联合: 支持"), nhưng **``Resize``** (upsample trong neck YOLO) **không** ("不支持"), và **``ConvolutionSwish``** (Conv + SiLU gộp) **tạm chưa hỗ trợ đa nhân** ("暂不支持", mục này ghi ``说明及规格限制同Convolution``). Các biến thể Conv kèm ReLU, Clip, PReLU/LeakyReLU hoặc Add cũng ghi "支持". YOLOv8 dùng SiLU sau 57 trong 64 lớp conv của model 7 class cũ (57 op ``ConvExSwish`` khi build lại)
-     - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`, mục 3.2 RK3588: 3.2.5 Convolution (trang PDF 59), 3.2.17 ConvolutionSwish (trang PDF 63), 3.2.54 Resize (trang PDF 87)
+     - ``Convolution`` hỗ trợ đa nhân ("多核联合: 支持"), nhưng **``Resize``** (upsample trong neck YOLO) **không** ("不支持"), và **``ConvolutionSwish``** (Conv + SiLU gộp) **tạm chưa hỗ trợ đa nhân** ("暂不支持", mục này ghi ``说明及规格限制同Convolution``, tức vẫn chạy trên một nhân). Các biến thể Conv kèm ReLU, Clip, PReLU/LeakyReLU hoặc Add đều ghi "支持", trong khi kiến trúc YOLOv8 mặc định dùng hàm kích hoạt SiLU sau các lớp tích chập
+     - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`, mục 3.2 RK3588: 3.2.5 Convolution (trang PDF 59), 3.2.7 đến 3.2.10 (trang PDF 60 đến 61), 3.2.17 ConvolutionSwish (trang PDF 63), 3.2.54 Resize (trang PDF 87)
    * - ``compiler optimization``
-     - Operator đã được compiler tự gộp thật: 57 op ``ConvExSwish`` (Conv + SiLU gộp làm 1), cờ ``conv_eltwise_activation_fuse = 1`` mặc định bật
-     - Build lại ONNX model ``sfchd`` YOLOv8n 7 class cũ bằng rknn-toolkit2 2.3.2 (FP16). Model 5 class ở FP16 và INT8 cho cùng danh sách op, cách làm ở trang Operator support. Build log gốc (``tmp/05_training-logs/...loglevel3.log``) không còn trên đĩa
+     - Trình biên dịch RKNN tự động thực hiện tối ưu hóa đồ thị, loại bỏ các toán tử dư thừa và hợp nhất toán tử (operator fusion, như gộp lớp Conv với hàm kích hoạt đi kèm) để khớp với phần cứng NPU
+     - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, mục 8.4 Graph optimization, tr.140 đến 141
    * - ``datatype``
-     - Trên RK3588 chỉ dùng được ``w8a8`` (INT8/INT8, mặc định). Các mode khác đều giới hạn chip: ``w4a16`` chỉ RK3576/RV1126B, ``w8a16`` chỉ RK3562, ``w16a16i`` chỉ RV1103/RV1106, ``w4a8`` chưa hỗ trợ
+     - Trên RK3588 chỉ dùng được ``FP16`` và ``w8a8`` (INT8/INT8, mặc định). Các chế độ lượng tử hóa khác đều giới hạn theo dòng chip: ``w4a16`` chỉ hỗ trợ RK3576/RV1126B, ``w8a16`` chỉ hỗ trợ RK3562, ``w16a16i`` chỉ hỗ trợ RV1103/RV1106 và ``w4a8`` chưa được hỗ trợ
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`, hàm ``config``, tham số ``quantized_dtype``, tr.7
 
-Tài liệu Rockchip thứ 2 nói về chạy đa nhân (danh sách op khác Operator List ở ``Relu`` đứng riêng và ``Concat``, xem trang Operator support)::download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
+Tài liệu hướng dẫn API của Rockchip cũng nêu rõ cơ chế phân tải khi chạy đa nhân (so sánh chi tiết giữa các tài liệu hãng và kiểm chứng thực nghiệm được trình bày tại trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`): :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
 
    "For multi-cores mode (when enabling RKNN_NPU_CORE_0_1 and RKNN_NPU_CORE_0_1_2), the following ops have better acceleration: Conv, DepthwiseConvolution, Add, Concat, Relu, Clip, Relu6, ThresholdedRelu. Prelu, LeakyRelu. Other type of op will fallback to Core0 to continue running."
-
-Lưu ý: log gọi op là ``ConvExSwish``, tài liệu gọi ``ConvolutionSwish``. Theo cách đọc tên, cả hai đều là Conv gộp Swish, nhưng tên ``ConvExSwish`` không có trong Operator List V2.3.2 và User Guide V2.3.2, và không tài liệu nào xác nhận là cùng một op. Cần chạy ``eval_perf`` ở ``CORE_0_1_2`` trên board để xem từng layer thực sự chạy trên core nào ``[chưa kiểm chứng]``.
 
 Do đó:
 
@@ -90,21 +88,11 @@ Do đó:
 1.3. Nghịch lý chu kỳ bộ nhớ: DDR Cycles so với NPU Cycles
 ----------------------------------------------------------------------------------------------------
 
-Minh hoạ nhẹ trên chính model ``sfchd`` YOLOv8n (model 7 class cũ, cần đo lại sau khi train 5 class; nguồn: build log ``tmp/05_training-logs/2026-09-18_sfchd_yolov8n_rknn_build_verbose_loglevel3.log``, dòng 331, cột ``Cycles(DDR/NPU/Total)`` = ``52317/51200/52317``):
+Theo tài liệu ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (mục 8.2.4 "Analysis of NPU operator performance bottlenecks", tr.140), khi phân tích một toán tử tích chập tốn nhiều thời gian trên NPU, cần đối chiếu ba cột ``DDR Cycles / NPU Cycles / Total Cycles``:
 
-.. list-table::
-   :header-rows: 1
+   "When analyzing the high time-consuming problem of the NPU operator, you can judge whether the theoretical bottleneck of the operator's time-consuming is a bandwidth bottleneck or a computing power bottleneck based on the three columns of DDR Cycles/NPU Cycles/Total Cycles. DDR Cycles refers to the number of cycles required by the operator to read and write. It has been converted into the number of Cycles required at the NPU frequency, so it can be directly compared with the NPU Cycle."
 
-   * - Layer
-     - NPU cycles
-     - DDR cycles
-     - Tỉ lệ DDR/NPU
-   * - ``model.4/cv2/conv``
-     - 51.200
-     - 52.317
-     - **1.022**
-
-NPU cycles là thời gian tính toán, còn DDR cycles là thời gian chờ đọc/ghi RAM. Ở các layer khác NPU cycles luôn cao hơn (tính toán là nút thắt). Riêng layer này DDR cycles cao hơn, cho thấy nút thắt là di chuyển dữ liệu thay vì khối lượng tính toán.
+``NPU Cycles`` phản ánh số chu kỳ tính toán trên mảng MAC, còn ``DDR Cycles`` phản ánh số chu kỳ chờ đọc và ghi dữ liệu từ bộ nhớ RAM (đã quy đổi về cùng xung nhịp NPU). Ở các tầng thông thường, ``NPU Cycles`` lớn hơn ``DDR Cycles`` nên tính toán là nút thắt chính (compute-bound). Ngược lại, ở những tầng có ``DDR Cycles`` vượt ``NPU Cycles``, thời gian di chuyển dữ liệu lớn hơn thời gian tính toán, khiến băng thông bộ nhớ trở thành nút thắt thực sự (memory-bound). Phân tích thực nghiệm hiện tượng này trên từng khối của mô hình dự án được trình bày tại :doc:`Phân tích sâu latency từng khối </contents/03-phuong-phap-de-xuat/03-do-latency-npu/03-phan-tich-sau-latency-tung-khoi>`.
 
 --------------
 
