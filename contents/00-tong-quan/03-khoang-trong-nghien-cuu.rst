@@ -14,7 +14,7 @@ Research gap
 
    - Cách làm đúng là đọc paper, liệt kê limitation, verify trên RK3588S, tìm bottleneck thật rồi mới đặt research question, không chọn kỹ thuật trước.
    - Case A (FP16 còn chậm): S3NAS bỏ bớt SE blocks cho 82.72% top-1 với 11.66ms latency, vừa nhanh hơn vừa chính xác hơn (Table 6, tr.10).
-   - Giả thuyết đổi SiLU sang ReLU hoặc LeakyReLU để multi-core tăng tốc trên Conv, cần đo latency ở `CORE_0_1_2` và mAP, hiện `[chưa kiểm chứng]`.
+   - Hướng thiết kế lại toán tử cho đề tài: thay hàm kích hoạt SiLU của YOLOv8 bằng ReLU hoặc LeakyReLU để tận dụng cơ chế phân đoạn đa nhân trên các lớp tích chập của RK3588, đồng thời đánh giá đánh đổi giữa độ trễ đa nhân và mAP tại chương :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
    - Case B (INT8 giảm accuracy): RKNN-Toolkit2 có `hybrid_quantization_step1` / `hybrid_quantization_step2`, và quantize theo channel đã là mặc định.
    - Case C (FLOPs thấp nhưng NPU chậm): DAHD-YOLO có 21.8 GFLOPs so với 28.4 của YOLOv8s nhưng chỉ 50.2 FPS so với 70.9 FPS trên RK3588 INT8.
    - Chiều ngược lại cũng đúng: ours-M có nhiều parameters và FLOPS hơn EfficientNet-B1 nhưng latency ngắn hơn, nên độ phức tạp không phải chỉ báo trực tiếp của latency.
@@ -131,7 +131,7 @@ Tức bỏ bớt SE blocks (tốn băng thông bộ nhớ, không khai thác t�
 
 Lưu ý: bản thân phép gộp không tốn thêm chi phí lúc inference, nhưng module DBCA đầy đủ của DAHD-YOLO còn kèm attention (CAA). Xem Case C, cả model vẫn chậm hơn YOLOv8s, nên phải đo trên board chứ không suy từ lý thuyết.
 
-Giả thuyết cụ thể cho đề tài (xem bảng :ref:`Research problem đề xuất <21-research-problem-đề-xuất>`): đổi activation SiLU của YOLOv8 sang ReLU hoặc LeakyReLU, vì theo tài liệu Rockchip chỉ Conv + ReLU/Clip/LeakyReLU mới được tăng tốc khi chạy nhiều core, còn Conv + Swish thì không. Cần đo 2 thứ: latency ở ``CORE_0_1_2`` trước và sau khi đổi, và mAP có giảm không (phải train lại) ``[chưa kiểm chứng]``.
+Hướng thiết kế cụ thể đặt ra cho đề tài (từ đặc tả tại bảng :ref:`Research problem đề xuất <21-research-problem-đề-xuất>`): thay hàm kích hoạt SiLU của YOLOv8 sang ReLU hoặc LeakyReLU, vì theo tài liệu Operator List V2.3.2 của Rockchip, các phép tích chập gộp ReLU, Clip hoặc PReLU/LeakyReLU đều hỗ trợ chạy đa nhân trong khi tích chập gộp Swish (``ConvolutionSwish``) tạm chưa hỗ trợ đa nhân. Quy trình kiểm chứng độ trễ đa nhân ở ``CORE_0_1_2`` và đánh giá độ chính xác mAP khi huấn luyện lại mô hình được trình bày chi tiết tại trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
 
 **``lighter detection head``:** :download:`_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf <../../_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf>`, Table 4, tr.12 (mục 3.2 "Different Layers"):
 
@@ -169,7 +169,7 @@ Tức thêm detection layer không tăng accuracy mà còn chậm hơn 27%, ủn
       ↓
    nhưng
       ↓
-   AP_helmet / AP_safety_clothes giảm mạnh
+   AP_Helmet / AP_Vest giảm mạnh
 
 Hướng tối ưu có thể cân nhắc:
 
