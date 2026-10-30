@@ -10,8 +10,8 @@ Trang này phân tích và đối sánh chi tiết kiến trúc giữa hai thế
    :local:
    :depth: 2
 
-So sánh tổng quan YOLOv8n và YOLO26n
-====================================
+1. So sánh YOLOv8n và YOLO26n
+=============================
 
 Dòng mô hình YOLO (You Only Look Once) đã trải qua nhiều bước chuyển dịch kiến trúc quan trọng nhằm cân bằng giữa độ chính xác và thông lượng tính toán thời gian thực:
 
@@ -19,9 +19,6 @@ Dòng mô hình YOLO (You Only Look Once) đã trải qua nhiều bước chuy�
 - YOLO26 (phát hành năm 2026 bởi Ultralytics) tái thiết kế toàn diện đường ống suy luận nhằm thu hẹp khoảng cách triển khai trên phần cứng biên (Export Gap). Kiến trúc chuyển đổi từ khối C2f sang C3k2, bổ sung cơ chế chú ý cục bộ (C2PSA), và loại bỏ hoàn toàn module phân phối hộp DFL để đạt thông lượng suy luận ổn định [T2 Y26A tr.5].
 
 .. _91-so-sánh-tổng-quan:
-
-Bảng so sánh kiến trúc, tham số (params), FLOPs, độ trễ lý thuyết
------------------------------------------------------------------
 
 Bảng dưới đây tổng hợp các đặc tính cấu hình, khối lượng tính toán và độ trễ công bố giữa hai mô hình nano trên tập dữ liệu COCO (kích thước đầu vào chuẩn 640x640 pixel):
 
@@ -80,8 +77,8 @@ Quy ước về số tham số và FLOPs:
   - Trong triển khai thực tế sau khi gộp lớp và loại bỏ nhánh phụ trợ, mô hình chỉ giữ lại 2.4 triệu tham số và tiêu thụ 5.4 tỷ FLOPs [T2 YOFF tr.14]. Ngược lại, YOLOv8n sau fuse đạt 3.2 triệu tham số và tiêu thụ 8.7 tỷ FLOPs [T2 Y26A tr.17, tr.22].
   - Về sai số giữa chú thích trong yaml và phép đo thực: công cụ ``thop`` thường đo ở ảnh nhỏ :math:`32 \times 32` rồi nhân tỷ lệ diện tích :math:`(640/32)^2 = 400`. Tuy nhiên, vì cơ chế Attention có độ phức tạp bậc hai theo diện tích ảnh, Ultralytics quy định tắt cơ chế ước lượng affine này đối với các mô hình chứa module chú ý [T1 ultralytics/utils/torch_utils.py]. Do đó, phép tính trực tiếp trên ảnh 640x640 thật cho ra 5.480 GFLOPs (làm tròn thành 5.5 B hoặc 5.4 B tùy quy ước làm tròn).
 
-Khối trích xuất đặc trưng đa tầng: C2f và C3k2
-==============================================
+2. Khối C2f và C3k2
+===================
 
 Cấu trúc Cross Stage Partial (CSP) là nền tảng giúp mạng phân tách dòng truyền đặc trưng thành hai nhánh: một nhánh đi qua các khối biến đổi phi tuyến sâu, nhánh còn lại đi tắt và hội tụ ở cuối module nhằm duy trì gradient ổn định.
 
@@ -106,8 +103,8 @@ Khối C3k2 trong YOLO26n:
   - Khi tham số ``c3k=True`` (tại các tầng sâu layer 6, 8, 13, 16, 19), module tích hợp khối con ``C3k`` gồm 3 lớp tích chập :math:`1 \times 1` và 2 khối bottleneck :math:`3 \times 3`, tăng cường khả năng trích xuất phi tuyến mà không làm bùng nổ tham số [T1 yolo26.yaml:28-50].
   - Khi tham số ``attn=True`` (tại layer 22 ở đầu ra P5), khối con được thay bằng chuỗi tuần tự gồm ``Bottleneck`` và ``PSABlock``, cho phép đưa cơ chế tự chú ý vào tầng ngữ cảnh cao nhất của neck mà không cần thay đổi giao diện kết nối tổng thể của khối CSP.
 
-Khối kết tập ngữ cảnh không gian: SPPF
-======================================
+3. Khối SPPF
+============
 
 Khối Spatial Pyramid Pooling - Fast (SPPF) có nhiệm vụ tổng hợp thông tin ngữ cảnh đa kích thước vùng tiếp nhận (receptive field) trước khi chuyển đặc trưng từ backbone sang cổ mạng (neck):
 
@@ -122,8 +119,8 @@ Khối Spatial Pyramid Pooling - Fast (SPPF) có nhiệm vụ tổng hợp thôn
   - Trong YOLO26n: cấu hình là ``SPPF([1024, 5, 3, True])`` với cờ ``shortcut=True`` [T1 yolo26.yaml:31]. Khi số kênh đầu vào bằng số kênh đầu ra (:math:`c_1 == c_2`), khối tự động cộng thêm tensor đầu vào vào tensor sau tích chập: :math:`x = x + \text{cv2}(\text{cat}(\dots))`.
   - Phép cộng shortcut này giúp bảo tồn chi tiết biên không gian và cải thiện dòng truyền đạo hàm ngược qua tầng sâu nhất của backbone, hạn chế hiện tượng suy giảm tín hiệu gradient khi truyền qua các toán tử pooling liên tiếp.
 
-Khối chú ý cục bộ: C2PSA, PSABlock, Self-Attention (YOLO26)
-===========================================================
+4. Khối chú ý C2PSA
+===================
 
 Một trong những cải tiến kiến trúc đáng chú ý nhất của YOLO26 là việc tích hợp có chọn lọc cơ chế tự chú ý (Self-Attention) vào mạng tích chập nhằm giải quyết các tình huống đối tượng bị che khuất hoặc có biến dạng phức tạp:
 
@@ -150,13 +147,13 @@ Một trong những cải tiến kiến trúc đáng chú ý nhất của YOLO26
 
 .. _924-đầu-detect:
 
-Đầu dự đoán (Detect Head)
-=========================
+5. Đầu dự đoán
+==============
 
 Đầu dự đoán chịu trách nhiệm chuyển đổi các bản đồ đặc trưng đa tỷ lệ từ neck (P3, P4, P5) thành danh sách hộp giới hạn và xác suất nhãn lớp.
 
-Phân phối hộp DFL vs Đầu một-một (One-to-one Head)
---------------------------------------------------
+5.1 DFL và hồi quy trực tiếp
+----------------------------
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-02-head-dfl-vs-nms-free.svg
    :align: center
@@ -188,10 +185,10 @@ Phân phối hộp DFL vs Đầu một-một (One-to-one Head)
 
     loại bỏ hoàn toàn các toán tử phi tuyến phức tạp trong khâu giải mã hộp [T2 Y26A tr.8].
   - Tham số ``reg_max`` được thiết lập cố định về 1 [T1 yolo26.yaml:10]. Nhánh hộp xuất trực tiếp 4 giá trị số thực đại diện cho khoảng cách tọa độ, biến đổi hàm giải mã thành một phép ánh xạ affine thuần túy tuyến tính, loại bỏ hoàn toàn các toán tử Softmax phức tạp ở đầu ra [T2 Y26A tr.8].
-  - Cấu trúc nhánh phân loại lớp cũng được hiện đại hóa: khi cờ ``legacy=False`` (tự động kích hoạt khi có C3k2), nhánh lớp sử dụng tích hợp tích chập Depthwise Conv :math:`3 \times 3` kết hợp Conv :math:`1 \times 1`, giúp giảm số tham số của riêng phần đầu dự đoán từ 751,519 (ở YOLOv8n) xuống chỉ còn 120,443 tham số (ở YOLO26n đối với bài toán 5 lớp) [T1 ultralytics/nn/modules/head.py].
+  - Cấu trúc nhánh phân loại lớp cũng được hiện đại hóa: khi cờ ``legacy=False`` (tự động kích hoạt khi có C3k2), nhánh lớp sử dụng tích hợp tích chập Depthwise Conv :math:`3 \times 3` kết hợp Conv :math:`1 \times 1`, giúp giảm số tham số của riêng phần đầu dự đoán từ 751,519 (ở YOLOv8n, sau fuse BatchNorm) xuống chỉ còn 120,443 tham số (ở YOLO26n đối với bài toán 5 lớp) [T1 ultralytics/nn/modules/head.py].
 
-Cơ chế NMS-free và điều kiện kích hoạt
---------------------------------------
+5.2 Cơ chế NMS-free
+-------------------
 
 - Bản chất của cơ chế NMS-free:
   - Trong các kiến trúc truyền thống như YOLOv8, quá trình huấn luyện sử dụng chiến lược gán nhãn một-nhiều (one-to-many label assignment), trong đó một đối tượng ground truth được gán cho nhiều anchor lân cận. Hậu quả là ở pha suy luận, mô hình luôn dự đoán nhiều hộp chồng lấn cho cùng một thực thể, bắt buộc phải dùng thuật toán Non-Maximum Suppression (NMS) để triệt tiêu hộp trùng [T2 Y26A tr.7].
@@ -203,8 +200,8 @@ Cơ chế NMS-free và điều kiện kích hoạt
   - Trong quá trình khởi tạo mô hình, đầu ``Detect`` sẽ sao chép cấu trúc nhánh hộp và nhánh lớp thành hai cặp song song: nhánh một-nhiều phụ trợ và nhánh một-một chính thức [T1 ultralytics/nn/modules/head.py].
   - Khi gọi phương thức tối ưu hóa mô hình ``model.fuse()`` cho triển khai, nhánh phụ trợ sẽ bị loại bỏ, chỉ giữ lại nhánh một-một cùng logic lọc hậu kỳ cố định dựa trên hàm ``topk`` mà không sử dụng thuật toán NMS lặp truyền thống [T1 ultralytics/nn/modules/head.py].
 
-Ví dụ số: Đếm tham số và kích thước tensor qua một khối
-=======================================================
+6. Ví dụ đếm tham số một khối
+=============================
 
 Để minh họa sự khác biệt cụ thể giữa hai kiến trúc, xét chi tiết quá trình tính toán và kích thước tensor qua tầng trích xuất đặc trưng layer 2 trong backbone của YOLOv8n (khối C2f) và YOLO26n (khối C3k2) với ảnh đầu vào chuẩn kích thước :math:`(1, 3, 640, 640)`.
 
@@ -217,26 +214,26 @@ Chi tiết khối C2f tại layer 2 của YOLOv8n (đầu vào 32 kênh, đầu 
     - Kích thước tensor đầu ra: :math:`(1, 32, 160, 160)`.
   - Tách tensor: Chia đôi 32 kênh thành hai phần :math:`y_0` kích thước :math:`(1, 16, 160, 160)` và :math:`y_1` kích thước :math:`(1, 16, 160, 160)`.
   - Khối con ``Bottleneck`` (:math:`n=1`):
-    - ``cv1``: Conv2d(16 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 16 \times 3 \times 3 = 2,304`; BN: 32 tham số. Output: :math:`(1, 16, 160, 160)`.
-    - ``cv2``: Conv2d(16 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 16 \times 3 \times 3 = 2,304`; BN: 32 tham số. Output: :math:`(1, 16, 160, 160)`.
+    - ``cv1``: Conv2d(16 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 16 \times 3 \times 3 = 2,304`, BN: 32 tham số. Output: :math:`(1, 16, 160, 160)`.
+    - ``cv2``: Conv2d(16 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 16 \times 3 \times 3 = 2,304`, BN: 32 tham số. Output: :math:`(1, 16, 160, 160)`.
     - Phép cộng đường tắt: :math:`y_1 + \text{out}_{cv2}` tạo ra tensor kích thước :math:`(1, 16, 160, 160)`.
   - Ghép nối đặc trưng: Ghép :math:`y_0`, :math:`y_1` và tensor đầu ra của bottleneck thu được tensor :math:`(1, 48, 160, 160)`.
   - Lớp tích chập đầu ra ``cv2``: Conv2d(48 vào, 32 ra, kernel :math:`1 \times 1`, bias=False) + BN(32).
-    - Trọng số tích chập: :math:`32 \times 48 \times 1 \times 1 = 1,536`; BN: 64 tham số.
+    - Trọng số tích chập: :math:`32 \times 48 \times 1 \times 1 = 1,536`, BN: 64 tham số.
     - Kích thước tensor đầu ra của C2f: :math:`(1, 32, 160, 160)`.
   - Tổng số tham số của khối C2f: :math:`1,024 + 64 + 2,304 + 32 + 2,304 + 32 + 1,536 + 64 = 7,360` tham số (trước khi fuse).
 
 Chi tiết khối C3k2 tại layer 2 của YOLO26n (đầu vào 32 kênh, đầu ra 64 kênh):
-  - Lớp tích chập đầu vào ``cv1``: Conv2d(32 vào, 32 ra, kernel :math:`1 \times 1`, bias=False) + BN(32). Trọng số conv: 1,024; BN: 64 tham số. Tensor ra: :math:`(1, 32, 160, 160)`.
+  - Lớp tích chập đầu vào ``cv1``: Conv2d(32 vào, 32 ra, kernel :math:`1 \times 1`, bias=False) + BN(32). Trọng số conv: 1,024, BN: 64 tham số. Tensor ra: :math:`(1, 32, 160, 160)`.
   - Tách tensor: Chia thành :math:`y_0` kích thước :math:`(1, 16, 160, 160)` và :math:`y_1` kích thước :math:`(1, 16, 160, 160)`.
   - Khối con ``Bottleneck`` với hệ số nén kênh :math:`e=0.25`:
     - Số kênh ẩn trung gian bị thu hẹp còn: :math:`16 \times (0.25 / 0.5) = 8` kênh.
-    - ``cv1``: Conv2d(16 vào, 8 ra, kernel :math:`3 \times 3`, bias=False) + BN(8). Trọng số conv: :math:`8 \times 16 \times 3 \times 3 = 1,152`; BN: 16 tham số. Tensor ra: :math:`(1, 8, 160, 160)`.
-    - ``cv2``: Conv2d(8 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 8 \times 3 \times 3 = 1,152`; BN: 32 tham số. Tensor ra: :math:`(1, 16, 160, 160)`.
+    - ``cv1``: Conv2d(16 vào, 8 ra, kernel :math:`3 \times 3`, bias=False) + BN(8). Trọng số conv: :math:`8 \times 16 \times 3 \times 3 = 1,152`, BN: 16 tham số. Tensor ra: :math:`(1, 8, 160, 160)`.
+    - ``cv2``: Conv2d(8 vào, 16 ra, kernel :math:`3 \times 3`, bias=False) + BN(16). Trọng số conv: :math:`16 \times 8 \times 3 \times 3 = 1,152`, BN: 32 tham số. Tensor ra: :math:`(1, 16, 160, 160)`.
     - Phép cộng đường tắt: :math:`y_1 + \text{out}_{cv2}` tạo ra tensor kích thước :math:`(1, 16, 160, 160)`.
   - Ghép nối đặc trưng: Ghép :math:`y_0`, :math:`y_1` và tensor đầu ra bottleneck thu được tensor :math:`(1, 48, 160, 160)`.
   - Lớp tích chập đầu ra ``cv2``: Conv2d(48 vào, 64 ra, kernel :math:`1 \times 1`, bias=False) + BN(64).
-    - Trọng số tích chập: :math:`64 \times 48 \times 1 \times 1 = 3,072`; BN: 128 tham số.
+    - Trọng số tích chập: :math:`64 \times 48 \times 1 \times 1 = 3,072`, BN: 128 tham số.
     - Kích thước tensor đầu ra của C3k2: :math:`(1, 64, 160, 160)` (tăng gấp đôi kênh so với đầu vào).
   - Tổng số tham số của khối C3k2: :math:`1,024 + 64 + 1,152 + 16 + 1,152 + 32 + 3,072 + 128 = 6,640` tham số (trước khi fuse).
 
@@ -249,8 +246,8 @@ Nhận xét:
   - Mặc dù khối C3k2 tại layer 2 nâng số kênh đặc trưng lên gấp đôi (từ 32 lên 64), tổng số tham số của khối (6,640) vẫn thấp hơn khối C2f (7,360) của YOLOv8n và khối lượng tính toán giảm từ 183.50 MMACs xuống 163.84 MMACs. Sự tối ưu hóa này đến từ cơ chế ép kênh ẩn bên trong bottleneck (:math:`e=0.25`), giúp giảm mạnh số lượng phép tính tích chập :math:`3 \times 3` tốn kém.
   - Sau khi thực hiện fuse tích chập và BatchNorm, khối C2f còn lại :math:`1,024 + 32 + 2,304 + 16 + 2,304 + 16 + 1,536 + 32 = 7,264` tham số gồm trọng số và bias. Khối C3k2 còn lại :math:`1,024 + 32 + 1,152 + 8 + 1,152 + 16 + 3,072 + 64 = 6,520` tham số, minh chứng cho sự tối ưu sâu sắc về mặt kiến trúc phần cứng.
 
-Nguồn tài liệu tham khảo
-========================
+Nguồn
+=====
 
 Các tài liệu kỹ thuật và bài báo hội thảo chính thức được sử dụng để đối chiếu dữ liệu trong trang này:
 

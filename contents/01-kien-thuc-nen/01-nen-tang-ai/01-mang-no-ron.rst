@@ -13,8 +13,7 @@ Mạng nơ-ron
    - Neuron tính tổng có trọng số của các đầu vào rồi cộng bias, ŷ = wᵀx + b [T2 D2L tr.84].
    - MLP là các lớp fully connected xếp chồng, lớp đầu vào không được tính vào số lớp [T2 D2L tr.169].
    - Lan truyền xuôi tính các biến trung gian và đầu ra theo thứ tự từ lớp đầu vào đến lớp đầu ra [T2 D2L tr.180].
-   - Tham số của mạng là trọng số và bias. Ví dụ của sách: 4 đặc trưng và 3 đầu ra cần 12 trọng số và 3 bias [T2 D2L tr.127].
-   - Công thức tổng quát ``d_in * d_out + d_out`` để đếm tham số là ``unknown`` trong sách, trang chỉ suy ra từ ví dụ.
+   - Tham số của mạng là trọng số và bias. Một lớp fully connected có :math:`d_{in}` đầu vào và :math:`d_{out}` đầu ra chứa ma trận trọng số :math:`\mathbf{W} \in \mathbb{R}^{d_{in} \times d_{out}}` và vector bias :math:`\mathbf{b} \in \mathbb{R}^{1 \times d_{out}}`, tương ứng :math:`d_{in} \cdot d_{out} + d_{out}` tham số (ví dụ 4 đặc trưng và 3 đầu ra cần 12 trọng số và 3 bias) [T2 D2L tr.127] [T2 D2L tr.169].
    - Xếp chồng các lớp affine mà không có phi tuyến thì mạng vẫn chỉ là một phép affine [T2 D2L tr.170].
    - Nguồn duy nhất của trang là D2L (T2). Các ví dụ số do trang tự tính và được ghi rõ.
 
@@ -22,8 +21,8 @@ Mạng nơ-ron
    :local:
    :depth: 1
 
-1. Neuron gồm đầu vào, trọng số, bias và tổng có trọng số
-=========================================================
+1. Cấu tạo một neuron
+=====================
 
 Neuron là đơn vị tính toán nhỏ nhất của mạng. Nó nhận một dãy số đầu vào, nhân mỗi số với một trọng số (weight) riêng, cộng các tích lại, rồi cộng thêm một số cố định gọi là bias. Bias (ký hiệu :math:`b`) còn được sách gọi là offset hay intercept, còn trọng số là hệ số nhân của từng đặc trưng đầu vào. [T2 D2L tr.83]
 
@@ -43,14 +42,6 @@ Sách coi hồi quy tuyến tính là mạng một lớp chỉ có một neuron.
 
    "In summary, we can think of linear regression as a single-layer fully connected neural network." [T2 D2L tr.90]
 
-.. _fig-d2l-hoi-quy-mot-lop:
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/d2l-fig-3-1-2-linear-regression-single-layer.png
-   :align: center
-   :alt: Hồi quy tuyến tính là mạng một lớp, d đầu vào x1 đến xd nối với một đầu ra o1
-
-   Hồi quy tuyến tính là mạng một lớp: d đầu vào nối trực tiếp với một đầu ra. Nguồn: [T2 D2L tr.90, Fig. 3.1.2]
-
 .. _fig-cau-truc-neuron:
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/01-mang-no-ron/mnr-1-cau-truc-giai-phau-neuron.svg
@@ -65,8 +56,8 @@ Sách coi hồi quy tuyến tính là mạng một lớp chỉ có một neuron.
 
    y = 0.5 - 2.0 + 0.75 + 0.1 = -0.65
 
-2. Lớp và mạng nhiều lớp (MLP)
-==============================
+2. Lớp và mạng nhiều lớp
+========================
 
 Một lớp (layer) fully connected gồm nhiều neuron. Mỗi neuron nhận toàn bộ đầu ra của lớp phía dưới và có bộ trọng số cùng bias riêng. Các neuron trong lớp ẩn gọi là hidden unit (đơn vị ẩn). Xếp chồng nhiều lớp fully connected lên nhau, đầu ra của lớp này là đầu vào của lớp kế tiếp, ta được mạng nhiều lớp (multilayer perceptron, viết tắt MLP). [T2 D2L tr.167, tr.169]
 
@@ -79,14 +70,6 @@ Một lớp (layer) fully connected gồm nhiều neuron. Mỗi neuron nhận to
 Như vậy khi đếm số lớp của MLP, lớp đầu vào không được tính vì nó không thực hiện phép tính nào. [T2 D2L tr.169]
 
 Ví dụ trong Fig. 5.1.1 của sách: "This MLP has four inputs, three outputs, and its hidden layer contains five hidden units." [T2 D2L tr.169] Ta gọi cấu trúc này là mạng 4-5-3.
-
-.. _fig-d2l-mlp-mot-lop-an:
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/d2l-fig-5-1-1-mlp-hidden-layer.png
-   :align: center
-   :alt: MLP có một lớp ẩn năm đơn vị, bốn đầu vào và ba đầu ra, các lớp nối đầy đủ
-
-   MLP có một lớp ẩn gồm năm hidden unit, bốn đầu vào và ba đầu ra. Nguồn: [T2 D2L tr.169, Fig. 5.1.1]
 
 .. _fig-cau-truc-mang-mlp:
 
@@ -115,8 +98,8 @@ Ví dụ trong Fig. 5.1.1 của sách: "This MLP has four inputs, three outputs,
 
 Bảng tóm tắt cấu trúc mạng 4-5-3 theo mô tả của sách. [T2 D2L tr.169] Mạng này có hai lớp theo cách đếm ở trên.
 
-3. Lan truyền xuôi (forward pass) qua ví dụ số
-==============================================
+3. Lan truyền xuôi
+==================
 
 Lan truyền xuôi (forward propagation hay forward pass) là quá trình tính và lưu các biến trung gian, kể cả đầu ra, theo thứ tự từ lớp đầu vào đến lớp đầu ra. [T2 D2L tr.180]
 
@@ -167,8 +150,8 @@ Phần tử đầu của :math:`\mathbf{z}` là :math:`-1` nên ReLU đưa nó v
 
    Quá trình Lan truyền xuôi (Forward Pass) qua ví dụ số mạng 2-2-1: Đồ thị luồng tín hiệu số (trái) và tiến trình tính toán 3 bước (phải).
 
-4. Tham số của mạng và cách đếm
-===============================
+4. Đếm tham số của mạng
+=======================
 
 Tham số (parameter) của mạng gồm hai loại: trọng số (weight) và bias. Đây là các giá trị mà quá trình huấn luyện đi tìm, sách gọi chung là "model parameters" [T2 D2L tr.84]. Trong ví dụ của sách, một lớp fully connected có hai nhóm tham số, một nhóm trọng số và một nhóm bias [T2 D2L tr.214].
 
@@ -178,13 +161,11 @@ Tham số (parameter) của mạng gồm hai loại: trọng số (weight) và b
 
    "In our case, since we have 4 features and 3 possible output categories, we need 12 scalars to represent the weights (𝑤 with subscripts), and 3 scalars to represent the biases (𝑏 with subscripts)." [T2 D2L tr.127]
 
-Ví dụ trên của sách cho thấy cách đếm: mỗi cặp (đầu vào, đầu ra) có một trọng số (4 × 3 = 12) và mỗi đầu ra có một bias (3). Sách cũng nêu rằng với một lớp fully connected có d đầu vào và q đầu ra thì số tham số và chi phí tính toán có bậc O(dq) [T2 D2L tr.132]. Từ các ví dụ này suy ra cách đếm cho một lớp, được viết dưới dạng công thức bên dưới.
+Ví dụ trên của sách cho thấy cách đếm: mỗi cặp (đầu vào, đầu ra) có một trọng số (4 × 3 = 12) và mỗi đầu ra có một bias (3). Tổng quát hơn, ở mục 5.1.1 sách định nghĩa một lớp fully connected có :math:`d` đầu vào và :math:`h` đầu ra gồm ma trận trọng số :math:`\mathbf{W}^{(1)} \in \mathbb{R}^{d \times h}` và vector bias :math:`\mathbf{b}^{(1)} \in \mathbb{R}^{1 \times h}` [T2 D2L tr.169], với chi phí tính toán và số tham số có bậc :math:`\mathcal{O}(dq)` [T2 D2L tr.132]. Từ kích thước ma trận trọng số và vector bias, tổng số tham số của một lớp là:
 
 .. math::
 
    \text{số tham số của một lớp} = d_{in} \cdot d_{out} + d_{out}
-
-**unknown:** Công thức tổng quát ``d_in * d_out + d_out`` không được sách viết ra, đây chỉ là suy ra từ ví dụ tr.127. Truy vấn tìm nguồn: "number of learnable parameters fully connected layer d_in d_out bias".
 
 **Ví dụ tự tính.** Mạng 4-5-3 ở Fig. 5.1.1 của sách (4 đầu vào, 5 hidden unit, 3 đầu ra) [T2 D2L tr.169]. Sách không nêu tổng số tham số của mạng này.
 
@@ -306,4 +287,4 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
      - :download:`dive_into_deep_learning_2023zhang.pdf <../../../_assets/pdf/papers/00_overview/dive_into_deep_learning_2023zhang.pdf>`
      - 42
 
-Số trang trong nhãn là số trang in trong sách. Số trang PDF bằng số trang in cộng 40. Hai hình D2L ở mục 1 và mục 2 (Fig. 3.1.2 và Fig. 5.1.1) là hình gốc cắt từ trang PDF, lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/mang-no-ron/``, nội dung giữ nguyên.
+Số trang trong nhãn là số trang in trong sách. Số trang PDF bằng số trang in cộng 40.

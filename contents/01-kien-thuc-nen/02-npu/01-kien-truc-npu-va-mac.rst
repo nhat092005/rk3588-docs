@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-*******************************
-Vì sao cần NPU, MAC và PE array
-*******************************
+*************************
+Kiến trúc NPU và mảng MAC
+*************************
 
 .. admonition:: Trang này trả lời
 
@@ -32,8 +32,8 @@ Vì sao cần NPU, MAC và PE array
 
 Câu hỏi này có ba lập luận, mỗi nguồn nêu một lập luận. Trang ghép ba lập luận lại: khối lượng tính rất lớn nhưng đều đặn (mục 1.1), chi phí nằm ở việc di chuyển dữ liệu chứ không phải phép nhân (mục 1.2), và phần cứng chuyên dụng đổi tính linh hoạt lấy hiệu suất (mục 1.3).
 
-1.1 Khối lượng tính của suy luận CNN: đếm MAC
----------------------------------------------
+1.1 Khối lượng MAC của CNN
+--------------------------
 
 MAC (multiply-and-accumulate) là một phép nhân rồi cộng vào tổng. Cách đếm MAC cho tích chập, kèm ví dụ nhỏ, nằm ở :doc:`../01-nen-tang-ai/03-convolution-va-cnn` (mục 4). Ở đây chỉ lấy lại kết quả để đếm cho một mạng thật.
 
@@ -67,8 +67,8 @@ Hai điều rút ra từ bảng. Thứ nhất, hầu hết khối lượng tính
 
 Giới hạn: AlexNet chỉ là ví dụ của paper. Số MAC của YOLO nằm ở khối 07 (:doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`).
 
-1.2 CPU, GPU, NPU khác nhau ở đâu
----------------------------------
+1.2 CPU GPU và NPU khác nhau ở đâu
+----------------------------------
 
 Chen 2016 nêu vấn đề của song song kiểu SIMD/SIMT: phép tính song song được, nhưng băng thông đi kèm làm throughput không tăng tương ứng.
 
@@ -121,8 +121,8 @@ Với thiết bị di động, Jung 2023 nêu thêm ràng buộc diện tích. N
 
 Giới hạn: TPU là ASIC "deployed in datacenters since 2015" [T2 Jouppi 2017 tr.1]. Các tỷ lệ "about 15X - 30X faster" so với GPU và CPU cùng thời [T2 Jouppi 2017 tr.1] và tỷ lệ MAC ở bảng trên là của máy datacenter, không dùng cho NPU biên.
 
-1.3 Đánh đổi của NPU: nhanh nhưng cứng, chỉ chạy được một tập op
-----------------------------------------------------------------
+1.3 Đánh đổi của NPU
+--------------------
 
 Phần cứng càng chuyên biệt thì càng bị ràng buộc. Ba ràng buộc có nguồn:
 
@@ -149,9 +149,9 @@ Vậy một PE có ba phần: ALU làm MAC, RF là bộ nhớ cục bộ nhỏ, 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/02-npu/npu-01-pe-mac-structure.svg
    :align: center
    :width: 95%
-   :alt: Vi kiến trúc của Processing Element (PE) và đường dữ liệu MAC
+   :alt: Vi kiến trúc của Processing Element (PE) và 4 pha thực thi trong một chu kỳ clock
 
-   Vi kiến trúc một Processing Element (PE): tập thanh ghi RF, bộ nhân INT8/FP16, bộ tích lũy 32-bit và đường truyền systolic ngang/dọc [T2 Chen 2016 tr.2], [T2 Jouppi 2017 tr.1, tr.3].
+   Vi kiến trúc một Processing Element (PE) gồm 3 thành phần cốt lõi (pFIFO, Register File < 1 kB, ALU Datapath) và diễn biến 4 pha thực thi trong một chu kỳ clock (Nạp toán hạng -> Nhân số học -> Cộng tích lũy -> Chuyển tiếp Systolic) [T2 Chen 2016 tr.2, tr.7], [T2 Jouppi 2017 tr.1, tr.3].
 
 2.2 Mảng PE và cách ghép nhiều PE
 ---------------------------------
@@ -223,8 +223,8 @@ Hai thiết kế này cho thấy PE không nhất thiết là một MAC trơn. B
 
 Lưu ý: nếu so con số "92 TOPS" với số MAC thì phải nhân đôi (suy ra: 65,536 x 700 MHz x 2 = 91.75 TOPS khớp 92 của paper). Hai chip khác hẳn nhau về quy mô và nằm ở hai công nghệ khác nhau, nên các số này không đại diện cho RK3588. Số MAC, xung nhịp và bộ nhớ của NPU RK3588 xem :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core`.
 
-2.3 Ví dụ số: một lớp conv cần bao nhiêu chu kỳ trên mảng NxN
--------------------------------------------------------------
+2.3 Số chu kỳ của một lớp conv
+------------------------------
 
 Để thấy kích thước mảng ảnh hưởng thế nào, trang dựng một mô hình đếm chu kỳ cho mảng :math:`N \times N` MAC. Mô hình dựa trên cách TPU ánh xạ một lớp conv, như Jouppi 2017 mô tả bằng thuật ngữ của Eyeriss:
 
@@ -262,11 +262,8 @@ Ba nhận xét (đều suy ra từ bảng):
 
 Giới hạn: đây là mô hình minh họa dựa trên cách ánh xạ mà paper TPU nêu cho TPU. Cách NPU RK3588 ánh xạ lớp conv lên mảng MAC là chủ đề của trang phần cứng RK3588, không suy ra từ đây.
 
-3. Thuật ngữ nền cần có trước khi sang dataflow
-===============================================
-
-3.1 Bảng thuật ngữ MAC, PE, psum, reuse
----------------------------------------
+3. Thuật ngữ nền
+================
 
 .. list-table::
    :header-rows: 1
@@ -342,11 +339,11 @@ Số trang là số trang PDF, trùng số in của bài báo gốc. Các con s�
    * - ``Chen 2016``
      - T2
      - :download:`eyeriss_dataflow_2016chen.pdf <../../../_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf>`
-     - 37
+     - 38
    * - ``Jouppi 2017``
      - T2
      - :download:`tpu_datacenter_2017jouppi.pdf <../../../_assets/pdf/papers/01_hardware/tpu_datacenter_2017jouppi.pdf>`
-     - 36
+     - 37
    * - ``Jung 2023``
      - T2
      - :download:`mobile_multicore_npu_2023jung.pdf <../../../_assets/pdf/papers/01_hardware/mobile_multicore_npu_2023jung.pdf>`

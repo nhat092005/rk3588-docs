@@ -19,7 +19,7 @@ Loss và backpropagation
    - Loss của detector gồm loss phân loại, loss hồi quy box và (tùy mô hình) loss objectness, cộng có trọng số [T2 YOLOv6 tr.9]. Họ loss box IoU, GIoU, DIoU, CIoU thêm số hạng phạt vào :math:`1 - \mathrm{IoU}` để có gradient cả khi hai box không giao nhau [T2 GIoU tr.2, T2 DIoU tr.4]. Focal loss giảm trọng số mẫu dễ để xử lý mất cân bằng nền và vật thể [T2 Focal tr.3].
    - Gradient descent cập nhật :math:`x \leftarrow x - \eta \nabla f(x)`. Backpropagation tính gradient theo chiều ngược từ đầu ra về đầu vào bằng quy tắc chuỗi và dùng lại các giá trị trung gian đã lưu ở lượt forward [T2 D2L tr.181, tr.183, tr.486].
    - Ví dụ số 2-2-1 của trang này cho :math:`L = 2`, gradient của :math:`W^{(1)}` hàng 1 bằng 0 vì ReLU chặn, và một bước SGD với :math:`\eta = 0.05` đưa loss xuống :math:`0.0028` [Tự tính, đối chiếu autograd].
-   - Momentum thay gradient bằng trung bình rò rỉ của các gradient trước. Adam kết hợp momentum với co giãn theo bình phương gradient, mặc định theo sách là :math:`\beta_1 = 0.9`, :math:`\beta_2 = 0.999`, :math:`\epsilon = 10^{-6}` và PyTorch 2.4.0 dùng :math:`\epsilon = 10^{-8}` [T2 D2L tr.532, tr.533, T3 torch 2.4.0].
+   - Momentum thay gradient bằng trung bình rò rỉ của các gradient trước. Adam kết hợp momentum với co giãn theo bình phương gradient, mặc định theo sách là :math:`\beta_1 = 0.9`, :math:`\beta_2 = 0.999`, :math:`\epsilon = 10^{-6}` [T2 D2L tr.532, tr.533].
    - Learning rate quá nhỏ làm hội tụ chậm, quá lớn làm vượt quá điểm tối ưu. Scheduler (giảm theo hệ số, cosine) và warmup điều chỉnh learning rate theo thời gian [T2 D2L tr.484, tr.540].
    - Overfitting là khi lỗi huấn luyện thấp hơn hẳn lỗi validation. Weight decay, dropout và tăng cường dữ liệu là các cách giảm overfitting [T2 D2L tr.113, tr.115, tr.119, tr.592].
 
@@ -77,7 +77,7 @@ Sách mô tả đơn vị lặp như sau: một epoch là một lượt đi qua 
    :align: center
    :alt: Chu trình huấn luyện mạng nơ-ron 4 bước khép kín Forward, Loss, Backward, Update
 
-   Chu trình huấn luyện 4 bước khép kín. Lượt forward tính đầu ra và lưu giữ các tensor kích hoạt (:math:`\mathbf{z}, \mathbf{h}`); hàm loss đo độ sai lệch; lượt backward lần ngược đồ thị tính toán áp dụng quy tắc chuỗi để tính gradient; optimizer cập nhật trọng số ngược hướng dốc.
+   Chu trình huấn luyện 4 bước khép kín. Lượt forward tính đầu ra và lưu giữ các tensor kích hoạt (:math:`\mathbf{z}, \mathbf{h}`), hàm loss đo độ sai lệch, lượt backward lần ngược đồ thị tính toán áp dụng quy tắc chuỗi để tính gradient và optimizer cập nhật trọng số ngược hướng dốc.
 
 2. Hàm loss MSE và cross-entropy
 ================================
@@ -155,8 +155,8 @@ Sách nhận xét rằng gradient này giống trường hợp hồi quy, nơi g
 
    So sánh cơ chế toán học giữa MSE (hồi quy) và Cross-Entropy (phân loại). MSE có đạo hàm tuyến tính theo độ lệch, trong khi Cross-Entropy kết hợp cùng Softmax tạo ra đạo hàm dạng xác suất dự đoán trừ nhãn và phạt vô hạn khi dự đoán sai tự tin (:math:`\hat{y}_c \to 0`).
 
-3. Loss của detector cho phân loại và hồi quy box
-=================================================
+3. Loss của detector
+====================
 
 Detector vừa phải nói vật thể thuộc lớp nào, vừa phải đặt box đúng chỗ. Loss vì vậy gồm nhiều thành phần cộng lại. Mục này nêu dạng chung của loss detector và các thành phần phổ biến. Loss cụ thể của từng mô hình YOLO thuộc phần mô hình, không nằm ở trang kiến thức nền này.
 
@@ -169,12 +169,10 @@ Bài YOLOv6 viết loss phát hiện là tổng có trọng số của ba thành
 
    L_{det} = L_{cls} + \lambda L_{reg} + \mu L_{obj}
 
-Trong đó :math:`L_{cls}`, :math:`L_{reg}`, :math:`L_{obj}` là loss phân loại, loss hồi quy và loss objectness (bài ghi object loss là thành phần tùy chọn), :math:`\lambda` và :math:`\mu` là siêu tham số. [T2 YOLOv6 tr.9] Bài DIoU cho một ví dụ về trọng số: để so sánh công bằng giữa các loss IoU, nhóm tác giả cố định trọng số loss hồi quy bằng 5 khi huấn luyện SSD. [T2 DIoU tr.6] Số này là thiết lập thí nghiệm của bài, không phải giá trị chung.
+Trong đó :math:`L_{cls}`, :math:`L_{reg}`, :math:`L_{obj}` là loss phân loại, loss hồi quy và loss objectness (bài ghi object loss là thành phần tùy chọn), :math:`\lambda` và :math:`\mu` là siêu tham số. [T2 YOLOv6 tr.9] Bài DIoU cho một ví dụ về trọng số: để so sánh công bằng giữa các loss IoU, nhóm tác giả cố định trọng số loss hồi quy bằng 5 khi huấn luyện SSD. [T2 DIoU tr.6] Số này là thiết lập thí nghiệm của bài, không phải giá trị chung. Tổ hợp hàm mất mát cụ thể trên YOLOv8 và YOLO26 xem tại :doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo` (mục 5) và :doc:`../07-yolo/02-bien-doi-do-thi-suy-luan` (mục 3.2).
 
-**unknown:** giá trị trọng số loss mặc định của từng họ YOLO dùng trong dự án. Truy vấn tìm nguồn: "ultralytics default hyp box cls dfl loss gain" trong tài liệu hãng, hoặc đọc file cấu hình hyperparameter trong mã nguồn đã dùng để huấn luyện.
-
-3.2 Loss phân loại: từ BCE đến focal loss
------------------------------------------
+3.2 Loss phân loại từ BCE đến focal loss
+----------------------------------------
 
 Với một lớp (nhị phân), cross-entropy viết theo xác suất :math:`p` cho nhãn :math:`y = 1`. Đặt :math:`p_t = p` nếu :math:`y = 1` và :math:`p_t = 1 - p` nếu ngược lại, thì :math:`\mathrm{CE}(p_t) = -\log(p_t)`. [T2 Focal tr.3]
 
@@ -200,8 +198,8 @@ Dòng sau là dạng cân bằng :math:`\alpha` mà tác giả dùng trong thự
 
 Bài nêu :math:`\gamma = 2` và :math:`\alpha = 0.25` cho kết quả tốt nhất trong thí nghiệm RetinaNet của họ. [T2 Focal tr.3, tr.5] Đó là giá trị tinh chỉnh cho một mô hình, không phải quy tắc chung. Bài cũng cho biết mở rộng sang nhiều lớp là "straightforward" nhưng chỉ trình bày dạng nhị phân. [T2 Focal tr.3]
 
-3.3 Loss hồi quy box: họ IoU
-----------------------------
+3.3 Loss hồi quy box họ IoU
+---------------------------
 
 IoU (giao trên hợp, định nghĩa ở trang :doc:`08-evaluation-metrics`) dùng được làm loss dưới dạng :math:`L_{IoU} = 1 - \mathrm{IoU}`. Điểm yếu: khi hai box không giao nhau IoU bằng 0 và không phản ánh hai box cách xa bao nhiêu. [T2 GIoU tr.2]
 
@@ -253,7 +251,7 @@ Bài DIoU nêu lý do dùng khoảng cách tâm thay cho phần trống của GI
    :align: center
    :alt: Hình học các biến thể hàm mất mát Bounding Box trong Object Detection: Họ IoU
 
-   Sự tiến hóa hình học của họ loss bounding box: IoU thuần bị mất gradient khi hai box không giao nhau; GIoU phạt diện tích trống của hộp bao nhỏ nhất :math:`C`; DIoU kéo trực tiếp khoảng cách giữa hai tâm :math:`\rho`; CIoU bổ sung tính nhất quán tỉ lệ cạnh :math:`\alpha v`.
+   Sự tiến hóa hình học của họ loss bounding box: IoU thuần bị mất gradient khi hai box không giao nhau, GIoU phạt diện tích trống của hộp bao nhỏ nhất :math:`C`, DIoU kéo trực tiếp khoảng cách giữa hai tâm :math:`\rho` và CIoU bổ sung tính nhất quán tỉ lệ cạnh :math:`\alpha v`.
 
 .. _fig-diou-giou-buoc-hoi-quy:
 
@@ -263,16 +261,9 @@ Bài DIoU nêu lý do dùng khoảng cách tâm thay cho phần trống của GI
 
    Các bước hồi quy box bằng GIoU loss (hàng trên) và DIoU loss (hàng dưới). Xanh lục là box đích, đen là anchor, xanh dương và đỏ là box dự đoán của GIoU và DIoU. GIoU thường làm box dự đoán to ra để chồng lên box đích, còn DIoU trực tiếp giảm khoảng cách chuẩn hóa giữa hai tâm. Nguồn: [T2 DIoU tr.1, Fig. 1]
 
-Về DFL (Distribution Focal Loss), bài YOLO26 nêu rằng YOLO26 bỏ module DFL khỏi head phát hiện. [T2 YOLO26 tr.6] Trang này không trình bày công thức DFL.
+Về DFL (Distribution Focal Loss), bài YOLO26 nêu rằng YOLO26 bỏ module DFL khỏi head phát hiện. [T2 YOLO26 tr.6] Cơ chế DFL trên YOLOv8 và lý do thay thế bằng giám sát L1 kết hợp ProgLoss trên YOLO26 được trình bày tại :doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo` (mục 5) và :doc:`../07-yolo/02-bien-doi-do-thi-suy-luan` (mục 3.2).
 
-3.4 Liên hệ thực tế khi triển khai NPU RK3588
----------------------------------------------
-
-Trong quy trình triển khai mô hình lên NPU RK3588, toàn bộ các hàm loss phức tạp (Focal Loss, CIoU Loss, DFL) chỉ tồn tại trong giai đoạn huấn luyện (PyTorch) trên máy chủ host. Khi export sang mô hình suy luận RKNN, các nhánh tính loss và gán nhãn ground-truth hoàn toàn bị cắt bỏ (pruned).
-
-Riêng phần đầu ra của mạng (Detection Head), nếu mô hình sử dụng DFL (Distribution Focal Loss như YOLOv8), phép tính tích phân softmax phân bố tọa độ box thường được cấu hình để tách ra chạy trên CPU của SoC RK3588 hoặc fuse thành tensor thô để tránh NPU overhead khi xử lý các toán tử reshape/softmax không tối ưu trên phần cứng fixed-point.
-
-**unknown:** loss box và loss cls chính xác mà từng model YOLO của dự án dùng khi huấn luyện. Trang này chỉ nêu các thành phần chung. Truy vấn tìm nguồn: tài liệu Ultralytics về loss của YOLOv8 và YOLO26, hoặc đọc mã nguồn loss trong phiên bản thư viện đã dùng.
+Hàm loss chỉ dùng lúc huấn luyện. Đồ thị suy luận không chứa nhánh tính loss (xem :doc:`06-huan-luyen-va-suy-luan` mục 1).
 
 4. Gradient và gradient descent
 ===============================
@@ -295,8 +286,8 @@ Hai cách chọn sai :math:`\eta` được sách mô tả. Quá nhỏ thì cập
 
 Sách minh họa bằng các ví dụ :math:`\eta = 0.05`, :math:`0.2` và :math:`1.1` trên hàm một biến. Đó là giá trị ví dụ, không phải giá trị mặc định. [T2 D2L tr.484]
 
-5. Backpropagation qua quy tắc chuỗi và ví dụ số
-================================================
+5. Backpropagation
+==================
 
    "Backpropagation refers to the method of calculating the gradient of neural network parameters. In short, the method traverses the network in reverse order, from the output to the input layer, according to the chain rule from calculus." [T2 D2L tr.181]
 
@@ -314,7 +305,7 @@ Hệ quả thực tế: backward dùng lại các giá trị trung gian đã lư
    :align: center
    :alt: Đồ thị tính toán hai chiều Forward và Backward trên mạng 2-2-1 khớp 100% ví dụ số
 
-   Đồ thị tính toán hai chiều trên mạng 2-2-1 khớp 100% ví dụ số. Lượt forward truyền từ :math:`\mathbf{x}` qua :math:`\mathbf{z}, \mathbf{h}, o` đến :math:`L=2.0`. Lượt backward lần ngược tính gradient từng trạm; tại :math:`z_1 = -1 < 0`, đạo hàm ReLU dập tắt toàn bộ gradient dòng 1 của :math:`W^{(1)}` (hiện tượng Dying ReLU). Bước SGD với :math:`\eta = 0.05` đưa loss xuống :math:`0.0028`.
+   Đồ thị tính toán hai chiều trên mạng 2-2-1 khớp 100% ví dụ số. Lượt forward truyền từ :math:`\mathbf{x}` qua :math:`\mathbf{z}, \mathbf{h}, o` đến :math:`L=2.0`. Lượt backward lần ngược tính gradient từng trạm. Tại :math:`z_1 = -1 < 0`, đạo hàm ReLU dập tắt toàn bộ gradient dòng 1 của :math:`W^{(1)}` (hiện tượng Dying ReLU). Bước SGD với :math:`\eta = 0.05` đưa loss xuống :math:`0.0028`.
 
 5.1 Ví dụ số trên mạng 2-2-1
 ----------------------------
@@ -353,12 +344,10 @@ Một bước SGD với :math:`\eta = 0.05` đổi :math:`W^{(2)}` thành :math:
 5.2 Lớp tích chập
 -----------------
 
-Với mạng có tích chập, framework vẫn áp dụng cùng quy tắc chuỗi cho từng phép toán trên đồ thị. [T2 D2L tr.60] Trang này không viết lại công thức backward của lớp Conv.
+Với mạng có tích chập, framework tự động phân rã và áp dụng cùng quy tắc chuỗi cho từng phép toán trên đồ thị tính toán để tính gradient theo trọng số và theo đầu vào. [T2 D2L tr.60]
 
-**unknown:** công thức gradient của lớp tích chập theo trọng số và theo đầu vào. Truy vấn tìm nguồn: "backward pass convolution layer gradient with respect to weights and input" trong D2L (mục tích chập) hoặc tài liệu CS231n.
-
-6. Bộ tối ưu SGD, momentum và Adam
-==================================
+6. Bộ tối ưu
+============
 
 6.1 SGD và minibatch
 --------------------
@@ -409,34 +398,7 @@ Sách nêu giá trị thường chọn và nhận xét ở dưới. [T2 D2L tr.5
 
    "Typically we pick 𝜖 = 10−6 for a good trade-off between numerical stability and fidelity." [T2 D2L tr.533]
 
-Khi dùng thư viện, mặc định của thư viện có thể khác sách. Kiểm trên môi trường dự án (torch 2.4.0 trong ``.venv``) cho chữ ký hàm như bảng sau. [T3 torch 2.4.0]
-
-.. list-table::
-   :header-rows: 1
-   :widths: 24 22 22 32
-
-   * - Tham số
-     - D2L (Adam)
-     - ``torch.optim.Adam``
-     - ``torch.optim.SGD``
-   * - Learning rate
-     - Không nêu mặc định, ví dụ :math:`0.01` [T2 D2L tr.534]
-     - ``lr=0.001``
-     - ``lr=0.001``
-   * - :math:`\beta_1, \beta_2`
-     - :math:`0.9,\ 0.999`
-     - ``betas=(0.9, 0.999)``
-     - Không có
-   * - :math:`\epsilon`
-     - :math:`10^{-6}`
-     - ``eps=1e-08``
-     - Không có
-   * - Momentum
-     - Không nêu mặc định
-     - Không có
-     - ``momentum=0``
-
-Điểm khác về :math:`\epsilon` giữa sách và thư viện là lý do không nên chép giá trị từ một nguồn sang nguồn khác mà không kiểm.
+Khi dùng thư viện, mặc định của thư viện có thể khác sách, nên không chép giá trị từ nguồn này sang nguồn khác mà không kiểm. Mặc định của ``torch.optim`` trong môi trường dự án nằm ở :doc:`/contents/07-bang-tra/01-ban-do-code`.
 
 .. _fig-quy-dao-toi-uu-hoa:
 
@@ -444,17 +406,10 @@ Khi dùng thư viện, mặc định của thư viện có thể khác sách. Ki
    :align: center
    :alt: Quỹ đạo tối ưu hóa trong không gian hàm mất mát thung lũng SGD, Momentum, Adam
 
-   Quỹ đạo hội tụ của ba thuật toán tối ưu trong bề mặt loss dạng thung lũng hẹp (Ravine): SGD dao động zigzag mạnh giữa hai vách dốc; Momentum tích lũy vận tốc triệt tiêu dao động ngang và lướt dọc đáy; Adam tự thích nghi bước nhảy theo từng chiều giúp tiến thẳng về cực tiểu :math:`\theta^*`.
+   Quỹ đạo hội tụ của ba thuật toán tối ưu trong bề mặt loss dạng thung lũng hẹp (Ravine): SGD dao động zigzag mạnh giữa hai vách dốc, Momentum tích lũy vận tốc triệt tiêu dao động ngang và lướt dọc đáy, còn Adam tự thích nghi bước nhảy theo từng chiều giúp tiến thẳng về cực tiểu :math:`\theta^*`.
 
-6.4 Liên hệ thực tế khi triển khai NPU RK3588
----------------------------------------------
-
-Đối với NPU RK3588, các bộ đệm trạng thái của thuật toán tối ưu (chẳng hạn vector xung lượng :math:`\mathbf{v}_t` trong Momentum, hoặc cả :math:`\mathbf{v}_t` và :math:`\mathbf{s}_t` trong Adam vốn chiếm dung lượng bộ nhớ gấp 2-3 lần kích thước trọng số mô hình) chỉ tồn tại trong bộ nhớ GPU khi huấn luyện.
-
-Quá trình chuyển đổi mô hình PyTorch (``.pt``) sang định dạng RKNN thông qua bộ công cụ RKNN-Toolkit2 chỉ trích xuất duy nhất ma trận trọng số tĩnh cuối cùng :math:`\mathbf{w}^*`, hoàn toàn loại bỏ toàn bộ optimizer state buffer. Điều này giúp mô hình nén gọn tối đa để nạp vào bộ nhớ SRAM/DRAM giới hạn của SoC RK3588 khi suy luận thời gian thực.
-
-7. Learning rate, scheduler, epoch và batch
-===========================================
+7. Learning rate và epoch
+=========================
 
 7.1 Learning rate
 -----------------
@@ -493,10 +448,10 @@ Warmup là giai đoạn đầu tăng dần learning rate. Sách giải thích r�
 
    Tác động của tốc độ học và các chiến lược điều chỉnh: :math:`\eta` quá lớn làm vọt lố phân kỳ, :math:`\eta` quá nhỏ gây hội tụ rùa bò. Chiến lược kết hợp Warmup tuyến tính ở vài epoch đầu cùng Cosine Annealing ở các epoch sau (chuẩn mực trong huấn luyện YOLO) giúp mô hình tránh sốc gradient và hội tụ vào cực tiểu sắc nét.
 
-**unknown:** số bước warmup, hệ số giảm và loại scheduler mà dự án dùng cho YOLO. Sách không đưa giá trị khuyến nghị cho số bước warmup. Truy vấn tìm nguồn: cấu hình huấn luyện (``args.yaml``) của các run trong ``results/`` (T3).
+Sách không đưa giá trị khuyến nghị cho số bước warmup.
 
-7.3 Epoch, iteration và batch
------------------------------
+7.3 Epoch iteration và batch
+----------------------------
 
 Một epoch là một lượt qua toàn bộ tập huấn luyện [T2 D2L tr.105]. Từ định nghĩa epoch và iteration, suy ra với :math:`n` mẫu và batch size :math:`B` thì số lần cập nhật mỗi epoch là :math:`\lceil n / B \rceil`. Ví dụ của sách: batch size 1 trên 1500 mẫu cho 1500 lần cập nhật mỗi epoch. [T2 D2L tr.506]
 
@@ -508,8 +463,8 @@ Minibatch SGD dùng nhóm mẫu thay vì một mẫu. Lý do là hiệu quả t�
 
 Sách tính loss trung bình trên minibatch, nên gradient không cần chia thêm cho batch size. [T2 D2L tr.504] Sách không nêu batch size mặc định hay khuyến nghị.
 
-8. Overfitting, tăng cường dữ liệu và tập validation
-====================================================
+8. Overfitting và cách giảm
+===========================
 
 8.1 Overfitting và validation
 -----------------------------
@@ -529,8 +484,6 @@ Sách tính loss trung bình trên minibatch, nên gradient không cần chia th
    Ảnh hưởng của độ phức tạp mô hình lên underfitting và overfitting. Loss huấn luyện giảm dần, loss tổng quát hóa giảm rồi tăng lại sau điểm tối ưu. Nguồn: [T2 D2L tr.116, Fig. 3.6.1]
 
 Khi dữ liệu ít, sách nêu K-fold cross-validation như một giải pháp. [T2 D2L tr.117] Sách không nêu tỷ lệ chia train và validation.
-
-**unknown:** tỷ lệ chia train, validation, test của các bộ dữ liệu trong dự án. Truy vấn tìm nguồn: ``data/*/DATA_CARD.md`` (T3).
 
 8.2 Weight decay
 ----------------

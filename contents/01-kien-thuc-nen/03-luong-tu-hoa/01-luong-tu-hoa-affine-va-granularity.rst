@@ -319,8 +319,8 @@ Nagel Table 6 (tr.17) cho thấy hiệu ứng trên detector EfficientDet-D1 (CO
 
 Nagel gán mức giảm lớn của per-tensor ở MobileNetV2 và EfficientNet lite cho tích chập depth-wise separable ("This is likely due to the quantization of the depth-wise separable convolutions.") và nói hiệu ứng tương tự ở EfficientDet-D1 và DeeplabV3 [T2 Nagel 2021 tr.17]. Đoạn này không bàn riêng cấu hình W4A8 của EfficientDet-D1.
 
-4.3 Các kiểu khác (per-group)
------------------------------
+4.3 Per-group
+-------------
 
 Nagel nói có công trình chia quantizer theo nhóm weight hoặc activation, mịn hơn per-channel. Độ mịn tăng thường cải thiện độ chính xác nhưng kèm chi phí do accumulator phải cộng các giá trị có scale khác nhau, và phần lớn bộ tăng tốc dấu phẩy tĩnh hiện tại không hỗ trợ [T2 Nagel 2021 tr.5]. Gholami gọi hai mức mịn hơn per-tensor là channelwise và sub-channelwise (groupwise), và xem groupwise là thỏa hiệp giữa độ phân giải và chi phí tính toán [T2 Gholami 2021 tr.7].
 
@@ -409,11 +409,11 @@ Nguồn
    * - ``Nagel 2021``
      - T2
      - :download:`quant_whitepaper_2021nagel.pdf <../../../_assets/pdf/papers/02_quantization/quant_whitepaper_2021nagel.pdf>`
-     - 43
+     - 44
    * - ``Gholami 2021``
      - T2
      - :download:`quantization_survey_2021gholami.pdf <../../../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`
-     - 12
+     - 13
    * - ``Wang 2023``
      - T2
      - :download:`qyolo_ptq_2023wang.pdf <../../../_assets/pdf/papers/02_quantization/qyolo_ptq_2023wang.pdf>`

@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-******************************************
-Systolic array, sparsity và NPU nhiều core
-******************************************
+********************************
+Systolic array và NPU nhiều core
+********************************
 
 .. admonition:: Trang này trả lời
 
@@ -101,21 +101,21 @@ Giới hạn: bảng này gộp từ hai paper, các số chỉ đo trên TPU. K
 2. Sparsity và zero-skipping
 ============================
 
-2.1 Nguồn của số 0 (ReLU, pruning)
-----------------------------------
+2.1 Nguồn của số 0
+------------------
 
 Số 0 trong tính toán có hai nguồn thường gặp. Thứ nhất là activation bằng 0 do hàm ReLU biến giá trị âm thành 0. Jouppi 2017 viết trong phần công trình liên quan rằng Cnvlutin tránh phép nhân khi activation bằng 0, và activation bằng 0 trong "44% of the time", "presumably in part due to ReLU nonlinear function that transforms negative values to zero" [T2 Jouppi 2017 tr.14]. Chữ "presumably" cho thấy đây là suy đoán của paper, không phải đo riêng. Thứ hai là trọng số bị cắt bỏ (pruning). Cùng đoạn đó nêu Efficient Inference Engine có bước đầu giảm số trọng số khoảng 10 lần bằng cách lọc các giá trị rất nhỏ, rồi dùng mã Huffman để nén thêm [T2 Jouppi 2017 tr.14].
 
-Giới hạn: tỷ lệ 44% là số của Cnvlutin cho các mạng của họ, được trích lại trong paper TPU. Tỷ lệ số 0 của một mô hình YOLO cụ thể là unknown (không có trong các paper dùng ở trang này).
+Giới hạn: tỷ lệ 44% là kết quả đo của Cnvlutin trên bộ mạng thử nghiệm của bài báo đó và được trích lại trong paper TPU [T2 Jouppi 2017 tr.14], không phải hằng số chung cho mọi kiến trúc mạng như YOLO.
 
-2.2 Bỏ qua phép tính nhân 0 cần phần cứng gì
---------------------------------------------
+2.2 Phần cứng bỏ qua số 0
+-------------------------
 
 Chen 2016 nêu hai việc phần cứng làm:
 
    "The architecture can also exploit sparsity by (1) only performing data reads and MACs on non-zero values and (2) compressing the data to reduce data movement." [T2 Chen 2016 tr.7]
 
-Paper TPU mô tả cách Eyeriss làm: mã hóa run-length để giảm dung lượng bộ nhớ và tiết kiệm điện bằng cách tránh phép tính khi đầu vào bằng 0 [T2 Jouppi 2017 tr.14]. Như vậy cần ít nhất ba thành phần: nhận biết giá trị 0, mạch bỏ qua đọc và MAC tương ứng, và định dạng nén cho dữ liệu. Chi tiết mạch cụ thể nằm ở tài liệu khác mà Chen 2016 chỉ trích dẫn (trong paper ghi "Details on these techniques are described in [41]", [T2 Chen 2016 tr.7]), nên cơ chế chi tiết là unknown ở trang này.
+Paper TPU mô tả cách Eyeriss làm: mã hóa run-length để giảm dung lượng bộ nhớ và tiết kiệm điện bằng cách tránh phép tính khi đầu vào bằng 0 [T2 Jouppi 2017 tr.14]. Như vậy cần ít nhất ba thành phần: nhận biết giá trị 0, mạch bỏ qua đọc và MAC tương ứng, và định dạng nén cho dữ liệu. Chi tiết thiết kế mạch ở mức cổng logic được Chen 2016 dẫn chiếu sang tài liệu tham khảo [41] ("Details on these techniques are described in [41]", [T2 Chen 2016 tr.7]).
 
 Ngược lại, TPU bỏ qua sparsity:
 
@@ -123,10 +123,14 @@ Ngược lại, TPU bỏ qua sparsity:
 
 Ví dụ số (suy ra): nếu một tỷ lệ z phép nhân có toán hạng bằng 0 và bỏ qua được trọn vẹn thì số MAC phải làm còn :math:`1 - z`, tốc độ tối đa tăng :math:`1 / (1 - z)` lần. Với z = 0.44 thì tối đa 1.79 lần. Paper TPU ghi Cnvlutin cải thiện trung bình 1.4 lần [T2 Jouppi 2017 tr.14], thấp hơn mức tối đa vì còn chi phí để phát hiện và xử lý số 0 (suy ra, paper không nêu lý do). Kết luận chắc chắn duy nhất: bỏ qua 0 chỉ giúp ích khi phần cứng được thiết kế cho nó và khi dữ liệu thật sự thưa.
 
-2.3 RK3588 có hỗ trợ hay không
-------------------------------
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/02-npu/npu-03-sparsity-zero-skipping.svg
+   :align: center
+   :width: 95%
+   :alt: Cơ chế Sparsity và Zero-skipping trong phần cứng bộ tăng tốc AI và NPU
 
-Trang kiến thức nền không kết luận về RK3588. Cơ chế bỏ qua số 0 của NPU RK3588 (nếu có) được mô tả ở trang phần cứng :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core`. Không đồng nhất cơ chế đó với mô tả sparsity trong paper ở trên.
+   Cơ chế Sparsity và Zero-skipping: nguồn gốc dữ liệu thưa (ReLU, pruning), 3 khối phần cứng khai thác sparsity (Zero Detector, Zero-skipping / MAC Gating, nén RLE) và so sánh giữa các kiến trúc (TPU, Eyeriss, RK3588) [T2 Chen 2016 tr.7], [T2 Jouppi 2017 tr.3, tr.14], [T1 TRM1 tr.2006, tr.2055].
+
+Liên hệ RK3588: cơ chế bỏ qua số 0 của NPU RK3588 (nếu có) được mô tả ở trang phần cứng :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core`. Không đồng nhất cơ chế đó với mô tả sparsity trong paper ở trên.
 
 .. _npu-da-core:
 
@@ -136,12 +140,6 @@ Trang kiến thức nền không kết luận về RK3588. Cơ chế bỏ qua s�
 Vì sao có nhiều core? Jung 2023 nêu: multicore NPU phù hợp khi chạy đồng thời nhiều DNN, khi xử lý các mạng cỡ khác nhau, và khi nhà sản xuất cần dòng sản phẩm với số core NPU khác nhau [T2 Jung 2023 tr.2]. Kiến trúc điển hình của họ là mỗi core có compute engine và bộ nhớ cục bộ riêng:
 
    "Multicore design consists of a compute engine and distributed, isolated local memory per core." [T2 Jung 2023 tr.2]
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/jung-fig1-multi-core-npu-soc.png
-   :align: center
-   :alt: SoC di động có NPU nhiều core
-
-   SoC di động với NPU nhiều core (Core 1 đến N nối qua Local Bus, mỗi core có Controller, Local Memory (SPM), Input, Weight, Output Buffer và Compute Engine). Nguồn: [T2 Jung 2023 tr.2, Figure 1]
 
 3.1 Chia việc theo layer
 ------------------------
@@ -155,12 +153,6 @@ Với lớp convolution, hai hướng chia thông dụng là theo chiều không
    "In spatial direction partitioning (Figure 5 (a)), input and output tensors are partitioned in spatial directions, that means images are segmented in half along the height or width." [T2 Jung 2023 tr.4]
 
    "Channel direction partitioning (Figure 5 (b)) produces an output image partitioned along channels." [T2 Jung 2023 tr.4]
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/jung-fig5-conv-partition-two-cores.png
-   :align: center
-   :alt: Hai cách chia một lớp convolution cho hai core
-
-   Hai cách chia một lớp convolution cho hai core: (a) theo chiều không gian, (b) theo chiều kênh. Nguồn: [T2 Jung 2023 tr.4, Figure 5]
 
 Hai cách này khác nhau ở dữ liệu phải nhân bản:
 
@@ -294,15 +286,15 @@ Số trang là số trang PDF. Các con số "suy ra" (1349 chu kỳ, 1.79 lần
    * - ``Chen 2016``
      - T2
      - :download:`eyeriss_dataflow_2016chen.pdf <../../../_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf>`
-     - 8
+     - 9
    * - ``Jouppi 2017``
      - T2
      - :download:`tpu_datacenter_2017jouppi.pdf <../../../_assets/pdf/papers/01_hardware/tpu_datacenter_2017jouppi.pdf>`
-     - 27
+     - 29
    * - ``Jung 2023``
      - T2
      - :download:`mobile_multicore_npu_2023jung.pdf <../../../_assets/pdf/papers/01_hardware/mobile_multicore_npu_2023jung.pdf>`
-     - 30
+     - 28
    * - ``Min 2023``
      - T2
      - :download:`flexer_multi_npu_2023min.pdf <../../../_assets/pdf/papers/01_hardware/flexer_multi_npu_2023min.pdf>`

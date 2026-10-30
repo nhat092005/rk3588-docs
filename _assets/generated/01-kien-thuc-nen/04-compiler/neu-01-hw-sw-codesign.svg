@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 512" width="880" height="512" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="512" fill="white"/>
+<rect x="750" y="12" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="23.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="18" y="22" font-size="13.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Kiến trúc Đồng thiết kế HW/SW trong eIQ Neutron: Compiler CP Solver và NPU Subsystem</text>
+<text x="18" y="36" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Vòng lặp co-design: Bộ giải Quy hoạch Ràng buộc (CP) điều phối Vi kiến trúc đa nhân và TCM [T2 BAMB tr.3-5]</text>
+<rect x="18" y="48" width="416" height="422" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="18" y="48" width="416" height="32" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="26" y="54" width="5" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="36" y="61" font-size="9.6" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">A. eIQ Neutron Compiler: Quy hoạch Ràng buộc (CP Solver)</text>
+<text x="36" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Frontend IR, CP-based Spatial/Temporal Tiling &amp; Layer Fusion [T2 BAMB tr.4]</text>
+<rect x="24" y="86" width="404" height="54" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="86" width="404" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="94" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Frontend: Ingest Đồ thị Mô hình (LiteRT / ONNX IR)</text>
+<rect x="28" y="108" width="54" height="20" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.8"/>
+<text x="55.0" y="118" font-size="6.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Conv2D</text>
+<path d="M83 118 L99 118" fill="none" stroke="#1E5BB8" stroke-width="1.0" marker-end="url(#m1E5BB8n)"/>
+<rect x="100" y="108" width="42" height="20" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.8"/>
+<text x="121.0" y="118" font-size="6.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">ReLU</text>
+<path d="M143 118 L159 118" fill="none" stroke="#1E5BB8" stroke-width="1.0" marker-end="url(#m1E5BB8n)"/>
+<rect x="160" y="108" width="54" height="20" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.8"/>
+<text x="187.0" y="118" font-size="6.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Conv2D</text>
+<path d="M215 118 L231 118" fill="none" stroke="#1E5BB8" stroke-width="1.0" marker-end="url(#m1E5BB8n)"/>
+<rect x="232" y="108" width="38" height="20" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.8"/>
+<text x="251.0" y="118" font-size="6.6" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Add</text>
+<rect x="278" y="108" width="118" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="337" y="118" font-size="6.6" font-weight="400" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">DAG Tensor đa chiều</text>
+<rect x="24" y="146" width="404" height="158" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="146" width="404" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="154" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">2. Mid-End CP Solver: Giải đồng thời 3 Ràng buộc Tối ưu [T2 BAMB tr.4]</text>
+<rect x="28" y="166" width="396" height="36" rx="3" fill="#F0FDF4" stroke="#22C55E" stroke-width="0.8"/>
+<text x="34" y="175" font-size="6.8" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">a) Phân khối Không gian (Spatial Tiling): Chọn Line Parallelism</text>
+<text x="34" y="188" font-size="6.6" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">• Chia outH cho 4 Engine -&gt; Trọng số phát broadcast dùng chung, giảm 4x đọc SRAM [BAMB tr.4]</text>
+<rect x="28" y="206" width="396" height="36" rx="3" fill="#F8FAFC" stroke="#64748B" stroke-width="0.8"/>
+<text x="34" y="215" font-size="6.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">b) Phân khối Thời gian (Temporal Tiling): Cắt lát theo bộ đệm</text>
+<text x="34" y="228" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Ràng buộc cứng: Tổng footprint tile + phụ thuộc &lt;= Dung lượng TCM (1 MiB) [BAMB tr.4, tr.7]</text>
+<rect x="28" y="246" width="396" height="44" rx="3" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="34" y="255" font-size="6.8" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">c) Hợp nhất Lớp (Layer Fusion): Thực thi xen kẽ các lớp</text>
+<text x="34" y="268" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Đẩy thẳng output lớp trước làm input lớp sau trong TCM; triệt tiêu hoàn toàn tràn DRAM</text>
+<text x="34" y="280" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Không xung đột Bank: CP xếp địa chỉ so le cho non-arbitrated TCM (0 stall) [BAMB tr.3]</text>
+<rect x="24" y="310" width="404" height="152" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="310" width="404" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="318" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">3. Backend Codegen: Lập lịch Tách biệt Truy cập - Tính toán (DAE)</text>
+<rect x="28" y="332" width="92" height="24" rx="2" fill="#F0FDF4" stroke="#22C55E" stroke-width="0.8"/>
+<text x="74" y="344" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">Compute Jobs</text>
+<rect x="124" y="332" width="296" height="24" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.7"/>
+<text x="130" y="344" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Gọi C-kernel điều khiển 4 Engine (N=M=16, 2NM op/chu kỳ)</text>
+<rect x="28" y="362" width="92" height="24" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="74" y="374" font-size="6.6" font-weight="700" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">Data-mover Jobs</text>
+<rect x="124" y="362" width="296" height="24" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.7"/>
+<text x="130" y="374" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">DMA strided transfers nạp DRAM &lt;-&gt; TCM và copy TCM-to-TCM</text>
+<rect x="28" y="392" width="92" height="24" rx="2" fill="#FFF7ED" stroke="#FB923C" stroke-width="0.8"/>
+<text x="74" y="404" font-size="6.6" font-weight="700" fill="#C2410C" text-anchor="middle" dominant-baseline="central">Sync Barriers</text>
+<rect x="124" y="392" width="296" height="24" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.7"/>
+<text x="130" y="404" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Rào chắn đồng bộ trạng thái giữa các timestep tick trong MCU</text>
+<rect x="28" y="426" width="396" height="28" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="32" y="435" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Bản chất DAE: DMA nạp trước tile t+1 song song khi Engine tính tile t</text>
+<text x="32" y="446" font-size="6.6" font-weight="400" fill="#065F46" text-anchor="start" dominant-baseline="central">Ẩn hoàn toàn độ trễ bộ nhớ ngoài DRAM sau tính toán! [T2 BAMB tr.4]</text>
+<rect x="446" y="48" width="416" height="422" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3"/>
+<rect x="446" y="48" width="416" height="32" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.0"/>
+<rect x="454" y="54" width="5" height="20" rx="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="464" y="61" font-size="9.6" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">B. eIQ Neutron NPU Subsystem: Mảng Tính toán &amp; TCM</text>
+<text x="464" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">RISC-V MCU, Multi-Banked TCM, 4 Engine Broadcast &amp; Line Parallelism [T2 BAMB tr.3]</text>
+<rect x="452" y="86" width="404" height="54" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="452" y="86" width="404" height="16" rx="3" fill="#DCFCE7" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="458" y="94" font-size="7.2" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">1. Điều khiển &amp; Luân chuyển: RISC-V Controller &amp; DMA Engine</text>
+<rect x="456" y="106" width="194" height="28" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.8"/>
+<text x="462" y="115" font-size="6.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">RISC-V MCU Controller</text>
+<text x="462" y="126" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Dispatch DAE jobs theo tick [BAMB tr.3]</text>
+<rect x="658" y="106" width="194" height="28" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.8"/>
+<text x="664" y="115" font-size="6.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">DMA Engine &amp; Data Mover</text>
+<text x="664" y="126" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Strided transfers DRAM &lt;-&gt; TCM</text>
+<rect x="452" y="146" width="404" height="58" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="452" y="146" width="404" height="16" rx="3" fill="#DCFCE7" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="458" y="154" font-size="7.2" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">2. Tightly Coupled Memory (TCM): 1 MiB SRAM On-chip chia 8 Bank</text>
+<rect x="456" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="478.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 0</text>
+<rect x="506" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="528.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 1</text>
+<rect x="556" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="578.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 2</text>
+<rect x="606" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="628.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 3</text>
+<rect x="656" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="678.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 4</text>
+<rect x="706" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="728.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 5</text>
+<rect x="756" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="778.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 6</text>
+<rect x="806" y="166" width="44" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="828.0" y="176" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Bank 7</text>
+<text x="458" y="195" font-size="6.6" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">Non-arbitrated SRAM: Compiler sắp xếp địa chỉ không xung đột -&gt; Băng thông tối đa, giá thành thấp [BAMB tr.3]</text>
+<rect x="452" y="210" width="404" height="192" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="452" y="210" width="404" height="16" rx="3" fill="#DCFCE7" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="458" y="218" font-size="7.2" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">3. 4 Compute Engines (2 TOPS): Line Parallelism &amp; Shared Broadcast Bus</text>
+<rect x="456" y="232" width="396" height="20" rx="3" fill="#FFFBEB" stroke="#D97706" stroke-width="1.0"/>
+<text x="462" y="242" font-size="6.8" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">Shared Operand Bus (Broadcast): Trọng số W đọc 1 lần từ TCM -&gt; Phát đồng thời cho 4 Engine</text>
+<rect x="456" y="258" width="62" height="24" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+<text x="487" y="270" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Engine 0</text>
+<rect x="522" y="258" width="72" height="24" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.7"/>
+<text x="558" y="270" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dòng outH 0</text>
+<rect x="598" y="258" width="102" height="24" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="649" y="270" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Dot-Product (16x16)</text>
+<rect x="704" y="258" width="78" height="24" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.7"/>
+<text x="743" y="270" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Scratchpad+Act</text>
+<rect x="786" y="258" width="58" height="24" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="0.8"/>
+<text x="815" y="270" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">-&gt; Bank 0</text>
+<rect x="456" y="287" width="62" height="24" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+<text x="487" y="299" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Engine 1</text>
+<rect x="522" y="287" width="72" height="24" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.7"/>
+<text x="558" y="299" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dòng outH 1</text>
+<rect x="598" y="287" width="102" height="24" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="649" y="299" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Dot-Product (16x16)</text>
+<rect x="704" y="287" width="78" height="24" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.7"/>
+<text x="743" y="299" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Scratchpad+Act</text>
+<rect x="786" y="287" width="58" height="24" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="0.8"/>
+<text x="815" y="299" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">-&gt; Bank 1</text>
+<rect x="456" y="316" width="62" height="24" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+<text x="487" y="328" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Engine 2</text>
+<rect x="522" y="316" width="72" height="24" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.7"/>
+<text x="558" y="328" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dòng outH 2</text>
+<rect x="598" y="316" width="102" height="24" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="649" y="328" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Dot-Product (16x16)</text>
+<rect x="704" y="316" width="78" height="24" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.7"/>
+<text x="743" y="328" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Scratchpad+Act</text>
+<rect x="786" y="316" width="58" height="24" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="0.8"/>
+<text x="815" y="328" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">-&gt; Bank 2</text>
+<rect x="456" y="345" width="62" height="24" rx="2" fill="#EFF6FF" stroke="#2563EB" stroke-width="0.8"/>
+<text x="487" y="357" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Engine 3</text>
+<rect x="522" y="345" width="72" height="24" rx="2" fill="#F8FAFC" stroke="#64748B" stroke-width="0.7"/>
+<text x="558" y="357" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Dòng outH 3</text>
+<rect x="598" y="345" width="102" height="24" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="649" y="357" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Dot-Product (16x16)</text>
+<rect x="704" y="345" width="78" height="24" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.7"/>
+<text x="743" y="357" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Scratchpad+Act</text>
+<rect x="786" y="345" width="58" height="24" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="0.8"/>
+<text x="815" y="357" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">-&gt; Bank 3</text>
+<text x="458" y="384" font-size="6.8" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">Bản chất Line Parallelism: 4 Engine tính 4 dòng song song, dùng chung tham số</text>
+<text x="458" y="396" font-size="6.6" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">Ghi kết quả vào 4 Bank TCM riêng biệt -&gt; Không tranh chấp bus dữ liệu! [BAMB tr.4]</text>
+<rect x="452" y="408" width="404" height="54" rx="4" fill="#FFF9F9" stroke="#EF4444" stroke-width="0.9"/>
+<rect x="452" y="408" width="404" height="16" rx="3" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="458" y="416" font-size="7.2" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">4. Bộ nhớ ngoài SoC DRAM (Off-chip DDR - 12 GB/s): Giảm tải tối đa</text>
+<text x="458" y="434" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">• Chỉ nạp trọng số ban đầu và ghi kết quả cuối; hoàn toàn ẩn sau tính toán nhờ DAE</text>
+<text x="458" y="446" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Nhờ HW/SW Co-Design: 100% activation trung gian nằm trong TCM, triệt tiêu nghẽn DRAM!</text>
+<text x="10" y="498" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 BAMB tr.3-5 (Bamberg et al., IEEE Transactions on Computers 2025: eIQ Neutron NPU Architecture &amp; Compiler Co-Design).</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 346" width="880" height="346" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="346" fill="white"/>
+<rect x="750" y="11" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="22.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="18" y="22" font-size="13.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Định dạng Nhãn Ultralytics YOLO và Cơ chế Phân loại Mẫu Dương vs Mẫu Âm</text>
+<rect x="18" y="44" width="415" height="262" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="18" y="44" width="415" height="26" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="26" y="48" width="6" height="18" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="40" y="58" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">A. Cấu trúc File Nhãn Ultralytics &amp; Ánh xạ Class</text>
+<rect x="30" y="78" width="135" height="96" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<path d="M36 164 L159 164" fill="none" stroke="#777777" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="44,110 100,110 100,162 44,162" fill="none" stroke="#1E5BB8" stroke-width="1.4"/>
+<rect x="44" y="100" width="36" height="10" rx="1" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="62" y="105" font-size="6.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">person 0</text>
+<polygon points="56,112 86,112 86,132 56,132" fill="none" stroke="#2E7D32" stroke-width="1.4"/>
+<rect x="58" y="135" width="34" height="11" rx="1" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="75" y="140.5" font-size="6.6" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">helmet 1</text>
+<text x="36" y="88" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ảnh mẫu: 640×640 px</text>
+<rect x="175" y="78" width="246" height="96" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="175" y="78" width="246" height="18" rx="2" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="183" y="87" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">File nhãn: labels/train_001.txt</text>
+<text x="183" y="105" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">5 giá trị / dòng (chuẩn hóa [0.0, 1.0]):</text>
+<text x="183" y="118" font-size="7.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">cls_id   x_center  y_center  width   height</text>
+<text x="183" y="132" font-size="7.0" font-weight="400" fill="#1E5BB8" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">  0      0.4150    0.5500    0.3700  0.6000</text>
+<text x="183" y="146" font-size="7.0" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">  1      0.4150    0.3600    0.2200  0.2100</text>
+<text x="183" y="162" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• x, w chia cho W_ảnh (640); y, h chia cho H_ảnh (640)</text>
+<rect x="30" y="184" width="391" height="48" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="30" y="184" width="391" height="16" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="36" y="192" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Khai báo từ điển danh mục lớp: dataset.yaml</text>
+<text x="36" y="209" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">names: { 0: &#x27;person&#x27;, 1: &#x27;helmet&#x27; }   |   nc: 2</text>
+<text x="36" y="222" font-size="7.0" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• nc (number of classes) = 2; chỉ số lớp hợp lệ: 0 &lt;= class_idx &lt; nc</text>
+<rect x="30" y="242" width="391" height="48" rx="3" fill="#FEF2F2" stroke="#C62828" stroke-width="1.0"/>
+<rect x="30" y="242" width="391" height="16" rx="2" fill="#FEE2E2" stroke="#C62828" stroke-width="1.2"/>
+<text x="36" y="250" font-size="7.2" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">Cơ chế kiểm tra chặn lỗi vượt số lớp (Sanity Check):</text>
+<text x="36" y="267" font-size="7.0" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">assert (lb[:, 0] &lt; nc).all()   -&gt; Nếu class &gt;= nc: quăng ngoại lệ ngắt train</text>
+<text x="36" y="280" font-size="6.8" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central" font-style="italic">Báo lỗi: &quot;Label class 2 exceeds dataset class count 2&quot; [T1 data/utils.py:365]</text>
+<rect x="447" y="44" width="415" height="262" rx="6" fill="#F8FAFC" stroke="#059669" stroke-width="1.3"/>
+<rect x="447" y="44" width="415" height="26" rx="6" fill="#ECFDF5" stroke="#059669" stroke-width="1.0"/>
+<rect x="455" y="48" width="6" height="18" rx="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="469" y="58" font-size="10.5" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">B. Cơ chế Phân loại: Mẫu Dương (Foreground) vs Mẫu Âm (Background)</text>
+<rect x="459" y="78" width="135" height="96" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<text x="465" y="90" font-size="7.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Lưới mẫu đặc trưng (Feature Grid)</text>
+<rect x="463" y="100" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="475.0" y="108.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="488" y="100" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="500.0" y="108.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="513" y="100" width="24" height="16" rx="1" fill="#DCFCE7" stroke="#2E7D32" stroke-width="1.2"/>
+<text x="525.0" y="108.0" font-size="6.8" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">c1</text>
+<rect x="538" y="100" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="550.0" y="108.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="563" y="100" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="575.0" y="108.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="463" y="117" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="475.0" y="125.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="488" y="117" width="24" height="16" rx="1" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="500.0" y="125.0" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">c0</text>
+<rect x="513" y="117" width="24" height="16" rx="1" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="525.0" y="125.0" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">c0</text>
+<rect x="538" y="117" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="550.0" y="125.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="563" y="117" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="575.0" y="125.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="463" y="134" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="475.0" y="142.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="488" y="134" width="24" height="16" rx="1" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="500.0" y="142.0" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">c0</text>
+<rect x="513" y="134" width="24" height="16" rx="1" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="525.0" y="142.0" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">c0</text>
+<rect x="538" y="134" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="550.0" y="142.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="563" y="134" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="575.0" y="142.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="463" y="151" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="475.0" y="159.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="488" y="151" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="500.0" y="159.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="513" y="151" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="525.0" y="159.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="538" y="151" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="550.0" y="159.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="563" y="151" width="24" height="16" rx="1" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="575.0" y="159.0" font-size="6.8" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">bg</text>
+<rect x="604" y="78" width="246" height="96" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="604" y="78" width="246" height="18" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="612" y="87" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Định nghĩa Mẫu Dương vs Mẫu Âm</text>
+<rect x="612" y="100" width="230" height="34" rx="2" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
+<rect x="616" y="104" width="8" height="8" rx="1" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="628" y="108" font-size="7.0" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">Mẫu Dương (Positive / Foreground):</text>
+<text x="616" y="119" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Anchor/pixel nằm trong vật thể (IoU/khoảng cách)</text>
+<text x="616" y="128" font-size="6.8" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">• Gán nhãn: c ∈ {0, 1} (person hoặc helmet)</text>
+<rect x="612" y="136" width="230" height="34" rx="2" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2"/>
+<rect x="616" y="140" width="8" height="8" rx="1" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="628" y="144" font-size="7.0" font-weight="700" fill="#475569" text-anchor="start" dominant-baseline="central">Mẫu Âm (Negative / Background):</text>
+<text x="616" y="155" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Vùng nền trống, không chứa vật thể nào</text>
+<text x="616" y="164" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Gán nhãn: Nền (background, hoặc c* = 0)</text>
+<rect x="459" y="184" width="391" height="48" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="459" y="184" width="391" height="16" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+<text x="465" y="192" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Tác động lên Hàm mất mát (Loss Function Impact):</text>
+<rect x="463" y="203" width="58" height="12" rx="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
+<text x="492" y="209" font-size="6.8" font-weight="700" fill="#166534" text-anchor="middle" dominant-baseline="central">Mẫu Dương</text>
+<text x="527" y="209" font-size="7.0" font-weight="700" fill="#166534" text-anchor="start" dominant-baseline="central">Tính đầy đủ: Loss Tọa độ (L_box + L_dfl) + Loss Phân loại (L_cls)</text>
+<rect x="463" y="217" width="58" height="12" rx="2" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+<text x="492" y="223" font-size="6.8" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">Mẫu Âm</text>
+<text x="527" y="223" font-size="7.0" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">BỎ QUA Loss Tọa độ (L_box = 0); CHỈ tính Loss Phân loại triệt tiêu nền</text>
+<rect x="459" y="242" width="391" height="48" rx="3" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<rect x="459" y="242" width="391" height="16" rx="2" fill="#DBEAFE" stroke="#1E5BB8" stroke-width="1.2"/>
+<text x="465" y="250" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Ý nghĩa thực tế: Vấn đề mất cân bằng mẫu cực đoan (Class Imbalance)</text>
+<text x="465" y="267" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Trong ảnh, mẫu âm (nền) chiếm hàng ngàn pixel/anchor, áp đảo mẫu dương (vài chục).</text>
+<text x="465" y="280" font-size="6.8" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">• Vì vậy detector cần Focal Loss / BCE có trọng số để không bị mẫu nền áp đảo gradient.</text>
+<text x="10" y="332" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T1 ultralytics 8.4.154 data/utils.py:340-365; T2 D2L tr.616; T2 FCOS tr.4.</text>
+</svg>

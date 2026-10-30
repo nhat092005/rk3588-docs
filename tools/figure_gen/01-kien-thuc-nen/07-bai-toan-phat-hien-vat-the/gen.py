@@ -303,6 +303,175 @@ def fig_bounding_box_formats():
 
 
 # ==============================================================================
+# 2b. HÌNH ĐỊNH DẠNG NHÃN VÀ PHÂN LOẠI MẪU DƯƠNG / ÂM (det-2b) - VISUAL-FIRST
+# ==============================================================================
+def fig_label_class_and_samples():
+    """HÌNH 2b: Cấu trúc file nhãn Ultralytics YOLO và Cơ chế phân loại Mẫu Dương vs Mẫu Âm."""
+    W_FIG = 880
+    H_FIG = 350
+    f = Fig(W_FIG, H_FIG)
+    f.tier(W_FIG - 130, 11, "T2 chung")
+
+    f.text(18, 22, "Định dạng Nhãn Ultralytics YOLO và Cơ chế Phân loại Mẫu Dương vs Mẫu Âm",
+           size=13.5, weight=700, fill=DARK)
+
+    card_w = 415
+    card_h = 262
+    y_top = 44
+    x1 = 18
+    x2 = 447
+
+    # ==========================================================================
+    # CỘT TRÁI: PANEL A - CẤU TRÚC FILE NHÃN VÀ ÁNH XẠ CLASS
+    # ==========================================================================
+    rect(f, x1, y_top, card_w, card_h, fill="#F8FAFC", stroke="#2563EB", sw=1.3, rx=6)
+    rect(f, x1, y_top, card_w, 26, fill="#EFF6FF", stroke="#2563EB", sw=1.0, rx=6)
+    rect(f, x1 + 8, y_top + 4, 6, 18, fill=BLUE, stroke=BLUE, rx=2)
+    f.text(x1 + 22, y_top + 14, "A. Cấu trúc File Nhãn Ultralytics & Ánh xạ Class",
+           size=10.5, weight=700, fill="#1E40AF")
+
+    # 1. Khung Ảnh mẫu + File nhãn
+    by = y_top + 34
+    bh = 96
+    iw = 135
+
+    # Ảnh mẫu (640x640)
+    rect(f, x1 + 12, by, iw, bh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    f.line([(x1 + 18, by + 86), (x1 + 12 + iw - 6, by + 86)], GRAY, width=THIN, dashed=True, head=False)
+
+    # Box Person (cls 0) - dùng bbox để tránh cảnh báo EMPTY_SPACE của rect
+    p_x, p_y, p_w, p_h = x1 + 26, by + 32, 56, 52
+    bbox(f, p_x, p_y, p_w, p_h, stroke=BLUE, sw=1.4)
+    rect(f, p_x, p_y - 10, 36, 10, fill=BLUE, stroke=BLUE, rx=1)
+    f.text(p_x + 18, p_y - 5, "person 0", size=6.8, weight=700, fill="white", anchor="middle")
+
+    # Box Helmet (cls 1) - dùng bbox
+    h_x, h_y, h_w, h_h = x1 + 38, by + 34, 30, 20
+    bbox(f, h_x, h_y, h_w, h_h, stroke=GREEN, sw=1.4)
+    rect(f, h_x + 2, h_y + 23, 34, 11, fill=GREEN, stroke=GREEN, rx=1)
+    f.text(h_x + 19, h_y + 28.5, "helmet 1", size=6.6, weight=700, fill="white", anchor="middle")
+
+    # Tiêu đề ảnh đặt sau để tránh lỗi Z-order
+    f.text(x1 + 18, by + 10, "Ảnh mẫu: 640×640 px", size=7.5, weight=700, fill=DARK)
+
+    # File nhãn text
+    fx = x1 + 12 + iw + 10
+    fw = card_w - 24 - iw - 10
+    rect(f, fx, by, fw, bh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    rect(f, fx, by, fw, 18, fill="#F1F5F9", stroke="#CBD5E1", rx=2)
+    f.text(fx + 8, by + 9, "File nhãn: labels/train_001.txt", size=7.2, weight=700, fill=DARK)
+
+    f.text(fx + 8, by + 27, "5 giá trị / dòng (chuẩn hóa [0.0, 1.0]):", size=7.2, weight=700, fill="#1E40AF")
+    f.text(fx + 8, by + 40, "cls_id   x_center  y_center  width   height", size=7.0, mono=True, weight=700, fill=DARK)
+    f.text(fx + 8, by + 54, "  0      0.4150    0.5500    0.3700  0.6000", size=7.0, mono=True, fill=BLUE)
+    f.text(fx + 8, by + 68, "  1      0.4150    0.3600    0.2200  0.2100", size=7.0, mono=True, fill=GREEN)
+    f.text(fx + 8, by + 84, "• x, w chia cho W_ảnh (640); y, h chia cho H_ảnh (640)", size=6.8, fill="#64748B")
+
+    # 2. Khung Từ điển dataset.yaml
+    my = by + bh + 10
+    mw = card_w - 24
+    mh = 48
+    rect(f, x1 + 12, my, mw, mh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    rect(f, x1 + 12, my, mw, 16, fill="#F8FAFC", stroke="#CBD5E1", rx=2)
+    f.text(x1 + 18, my + 8, "Khai báo từ điển danh mục lớp: dataset.yaml", size=7.2, weight=700, fill=DARK)
+    f.text(x1 + 18, my + 25, "names: { 0: 'person', 1: 'helmet' }   |   nc: 2", size=7.2, mono=True, weight=700, fill=DARK)
+    f.text(x1 + 18, my + 38, "• nc (number of classes) = 2; chỉ số lớp hợp lệ: 0 <= class_idx < nc", size=7.0, fill="#475569")
+
+    # 3. Khung Chốt chặn an toàn Sanity Check
+    gy = my + mh + 10
+    gh = 48
+    rect(f, x1 + 12, gy, mw, gh, fill="#FEF2F2", stroke=RED, sw=1.0, rx=3)
+    rect(f, x1 + 12, gy, mw, 16, fill="#FEE2E2", stroke=RED, rx=2)
+    f.text(x1 + 18, gy + 8, "Cơ chế kiểm tra chặn lỗi vượt số lớp (Sanity Check):", size=7.2, weight=700, fill="#991B1B")
+    f.text(x1 + 18, gy + 25, "assert (lb[:, 0] < nc).all()   -> Nếu class >= nc: quăng ngoại lệ ngắt train", size=7.0, mono=True, fill="#7F1D1D")
+    f.text(x1 + 18, gy + 38, 'Báo lỗi: "Label class 2 exceeds dataset class count 2" [T1 data/utils.py:365]', size=6.8, italic=True, fill="#991B1B")
+
+    # ==========================================================================
+    # CỘT PHẢI: PANEL B - PHÂN LOẠI MẪU DƯƠNG VS MẪU ÂM
+    # ==========================================================================
+    rect(f, x2, y_top, card_w, card_h, fill="#F8FAFC", stroke="#059669", sw=1.3, rx=6)
+    rect(f, x2, y_top, card_w, 26, fill="#ECFDF5", stroke="#059669", sw=1.0, rx=6)
+    rect(f, x2 + 8, y_top + 4, 6, 18, fill=GREEN, stroke=GREEN, rx=2)
+    f.text(x2 + 22, y_top + 14, "B. Cơ chế Phân loại: Mẫu Dương (Foreground) vs Mẫu Âm (Background)",
+           size=10.5, weight=700, fill="#047857")
+
+    # 1. Khung Lưới đặc trưng + Định nghĩa
+    gw = 135
+    rect(f, x2 + 12, by, gw, bh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    f.text(x2 + 18, by + 12, "Lưới mẫu đặc trưng (Feature Grid)", size=7.5, weight=700, fill=DARK)
+
+    # Vẽ lưới 5x4
+    gx0, gy0 = x2 + 16, by + 22
+    cw, ch = 24, 16
+    grid_data = [
+        ["bg", "bg", "c1", "bg", "bg"],
+        ["bg", "c0", "c0", "bg", "bg"],
+        ["bg", "c0", "c0", "bg", "bg"],
+        ["bg", "bg", "bg", "bg", "bg"],
+    ]
+    for r_idx in range(4):
+        for c_idx in range(5):
+            cx_pos = gx0 + c_idx * (cw + 1)
+            cy_pos = gy0 + r_idx * (ch + 1)
+            val = grid_data[r_idx][c_idx]
+            if val == "c0":
+                rect(f, cx_pos, cy_pos, cw, ch, fill="#DBEAFE", stroke=BLUE, rx=1)
+                f.text(cx_pos + cw / 2, cy_pos + ch / 2, "c0", size=6.8, weight=700, fill=BLUE, anchor="middle")
+            elif val == "c1":
+                rect(f, cx_pos, cy_pos, cw, ch, fill="#DCFCE7", stroke=GREEN, rx=1)
+                f.text(cx_pos + cw / 2, cy_pos + ch / 2, "c1", size=6.8, weight=700, fill=GREEN, anchor="middle")
+            else:
+                rect(f, cx_pos, cy_pos, cw, ch, fill="#F1F5F9", stroke="#CBD5E1", rx=1)
+                f.text(cx_pos + cw / 2, cy_pos + ch / 2, "bg", size=6.8, fill="#64748B", anchor="middle")
+
+    # Định nghĩa Mẫu Dương / Mẫu Âm
+    rx = x2 + 12 + gw + 10
+    rw = card_w - 24 - gw - 10
+    rect(f, rx, by, rw, bh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    rect(f, rx, by, rw, 18, fill="#F8FAFC", stroke="#CBD5E1", rx=2)
+    f.text(rx + 8, by + 9, "Định nghĩa Mẫu Dương vs Mẫu Âm", size=7.2, weight=700, fill=DARK)
+
+    # Mẫu Dương chip (tăng chiều cao lên 34px)
+    rect(f, rx + 8, by + 22, rw - 16, 34, fill="#F0FDF4", stroke="#16A34A", rx=2)
+    rect(f, rx + 12, by + 26, 8, 8, fill="#DCFCE7", stroke="#16A34A", rx=1)
+    f.text(rx + 24, by + 30, "Mẫu Dương (Positive / Foreground):", size=7.0, weight=700, fill="#166534")
+    f.text(rx + 12, by + 41, "• Anchor/pixel nằm trong vật thể (IoU/khoảng cách)", size=6.8, fill=DARK)
+    f.text(rx + 12, by + 50, "• Gán nhãn: c ∈ {0, 1} (person hoặc helmet)", size=6.8, weight=700, fill="#166534")
+
+    # Mẫu Âm chip (tăng chiều cao lên 34px)
+    rect(f, rx + 8, by + 58, rw - 16, 34, fill="#F8FAFC", stroke="#94A3B8", rx=2)
+    rect(f, rx + 12, by + 62, 8, 8, fill="#F1F5F9", stroke="#94A3B8", rx=1)
+    f.text(rx + 24, by + 66, "Mẫu Âm (Negative / Background):", size=7.0, weight=700, fill="#475569")
+    f.text(rx + 12, by + 77, "• Vùng nền trống, không chứa vật thể nào", size=6.8, fill=DARK)
+    f.text(rx + 12, by + 86, "• Gán nhãn: Nền (background, hoặc c* = 0)", size=6.8, fill="#475569")
+
+    # 2. Bảng Tác động Loss
+    rect(f, x2 + 12, my, mw, mh, fill="#FFFFFF", stroke="#CBD5E1", sw=1.0, rx=3)
+    rect(f, x2 + 12, my, mw, 16, fill="#F8FAFC", stroke="#CBD5E1", rx=2)
+    f.text(x2 + 18, my + 8, "Tác động lên Hàm mất mát (Loss Function Impact):", size=7.2, weight=700, fill=DARK)
+
+    # Row 1 (Mẫu Dương)
+    rect(f, x2 + 16, my + 19, 58, 12, fill="#DCFCE7", stroke="#16A34A", rx=2)
+    f.text(x2 + 45, my + 25, "Mẫu Dương", size=6.8, weight=700, fill="#166534", anchor="middle")
+    f.text(x2 + 80, my + 25, "Tính đầy đủ: Loss Tọa độ (L_box + L_dfl) + Loss Phân loại (L_cls)", size=7.0, weight=700, fill="#166534")
+
+    # Row 2 (Mẫu Âm)
+    rect(f, x2 + 16, my + 33, 58, 12, fill="#F1F5F9", stroke="#94A3B8", rx=2)
+    f.text(x2 + 45, my + 39, "Mẫu Âm", size=6.8, weight=700, fill="#475569", anchor="middle")
+    f.text(x2 + 80, my + 39, "BỎ QUA Loss Tọa độ (L_box = 0); CHỈ tính Loss Phân loại triệt tiêu nền", size=7.0, fill=DARK)
+
+    # 3. Khung Ý nghĩa thực tế
+    rect(f, x2 + 12, gy, mw, gh, fill="#EFF6FF", stroke=BLUE, sw=1.0, rx=3)
+    rect(f, x2 + 12, gy, mw, 16, fill="#DBEAFE", stroke=BLUE, rx=2)
+    f.text(x2 + 18, gy + 8, "Ý nghĩa thực tế: Vấn đề mất cân bằng mẫu cực đoan (Class Imbalance)", size=7.2, weight=700, fill="#1E40AF")
+    f.text(x2 + 18, gy + 25, "• Trong ảnh, mẫu âm (nền) chiếm hàng ngàn pixel/anchor, áp đảo mẫu dương (vài chục).", size=6.8, fill=DARK)
+    f.text(x2 + 18, gy + 38, "• Vì vậy detector cần Focal Loss / BCE có trọng số để không bị mẫu nền áp đảo gradient.", size=6.8, weight=700, fill="#1E40AF")
+
+    source(f, y_top + card_h + 8, "Nguồn: T1 ultralytics 8.4.154 data/utils.py:340-365; T2 D2L tr.616; T2 FCOS tr.4.")
+    return f
+
+
+# ==============================================================================
 # 3. HÌNH ANCHOR-BASED VS ANCHOR-FREE (det-3)
 # ==============================================================================
 def fig_anchor_based_vs_free():
@@ -525,6 +694,7 @@ def fig_nms_and_batched_nms():
 FIGS = [
     ("det-1-bon-tac-vu-thi-giac", fig_four_vision_tasks),
     ("det-2-bounding-box-va-he-toa-do", fig_bounding_box_formats),
+    ("det-2b-dinh-dang-nhan-va-phan-loai-mau", fig_label_class_and_samples),
     ("det-3-anchor-based-vs-anchor-free", fig_anchor_based_vs_free),
     ("det-4-thuat-toan-nms-va-batched-nms", fig_nms_and_batched_nms),
 ]

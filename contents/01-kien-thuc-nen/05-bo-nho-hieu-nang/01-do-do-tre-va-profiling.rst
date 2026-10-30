@@ -13,9 +13,9 @@
 
 .. admonition:: Tóm tắt
 
-   - Độ trễ của ứng dụng AI tại biên gồm 4 chặng: tiền xử lý, nạp dữ liệu, suy luận NPU và hậu xử lý [:doc:`08-evaluation-metrics mục 2.4 </contents/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics>`].
+   - Độ trễ của ứng dụng AI tại biên gồm 4 chặng: tiền xử lý, nạp dữ liệu, suy luận NPU và hậu xử lý. FPS tính theo độ trễ và FPS thông lượng khác nhau khi các chặng chạy gối đầu.
    - Đo lường chuẩn xác đòi hỏi khởi động ấm (warm-up) để nạp bộ nhớ đệm, đo đủ số lần lặp để đánh giá độ biến thiên, và cố định xung nhịp (clock fixing) để loại bỏ nhiễu từ cơ chế điều tốc DVFS và hiện tượng hạ xung nhiệt (thermal throttling).
-   - Báo cáo độ trễ phải dựa trên trung vị (Median / p50) và phân vị đuôi (p95, p99); Jouppi 2017 chứng minh yêu cầu đáp ứng thời gian thực được quyết định bởi phân vị thứ 99 chứ không phải thông lượng trung bình [T2 Jouppi 2017 tr.1] [T2 Jouppi 2017 tr.8].
+   - Báo cáo độ trễ phải dựa trên trung vị (Median / p50) và phân vị đuôi (p95, p99). Jouppi 2017 chứng minh yêu cầu đáp ứng thời gian thực được quyết định bởi phân vị thứ 99 chứ không phải thông lượng trung bình [T2 Jouppi 2017 tr.1] [T2 Jouppi 2017 tr.8].
    - Mô hình Roofline phân định rõ ràng giữa hai vùng: vùng dốc nghẽn băng thông bộ nhớ khi thiếu cường độ hoạt động [T2 Jouppi 2017 tr.5], và vùng phẳng nghẽn tính toán khi bão hòa công suất mảng MAC.
    - Truy cập bộ nhớ ngoài (DRAM) tiêu tốn năng lượng gấp hàng trăm lần so với phép tính MAC trên chip [T2 Chen 2016 tr.8], khiến nghẽn bộ nhớ trở thành nút thắt hàng đầu về cả tốc độ lẫn nhiệt năng trên phần cứng biên.
 
@@ -28,8 +28,8 @@
 
 Khi triển khai các mô hình mạng nơ-ron sâu trên phần cứng biên, khái niệm độ trễ (latency) thường bị nhầm lẫn giữa thời gian suy luận thuần túy của bộ tăng tốc và thời gian đáp ứng trọn gói của toàn bộ ứng dụng. Để đánh giá đúng hiệu năng thực tế, chu trình xử lý phải được bóc tách thành các chặng độc lập.
 
-1.1 Tiền xử lý, nạp dữ liệu, suy luận, hậu xử lý
-------------------------------------------------
+1.1 Bốn chặng độ trễ
+--------------------
 
 Độ trễ trọn gói từ đầu đến cuối (End-to-End Latency: :math:`T_{\text{E2E}}`) của một tác vụ xử lý thị giác máy tính là tổng thời gian thực thi của bốn chặng nối tiếp nhau xuyên suốt các khối phần cứng trong SoC:
 
@@ -48,22 +48,56 @@ Khi triển khai các mô hình mạng nơ-ron sâu trên phần cứng biên, k
 * **Hậu xử lý (:math:`T_{\text{post}}`)**:
   Bao gồm việc trích xuất và biến đổi các tensor đầu ra từ NPU, giải mã tọa độ hộp bao (bounding box decoding), khôi phục độ phân giải gốc, lọc ngưỡng tin cậy (confidence score thresholding) và thuật toán triệt tiêu phi cực đại (Non-Maximum Suppression - NMS). Chặng này phần lớn chạy trên CPU và có tính tuần tự cao.
 
-Mối liên hệ giữa độ trễ và thông lượng theo đường ống được phân tích chi tiết tại :doc:`Mục 2.4 của 08-evaluation-metrics </contents/01-kien-thuc-nen/01-nen-tang-ai/08-evaluation-metrics>`: trong mô hình thực thi tuần tự, NPU hoàn toàn bị bỏ rảnh (idle) trong suốt thời gian :math:`T_{\text{pre}} + T_{\text{post}}`. Ngược lại, kiến trúc đường ống đa luồng (pipelining) cho phép gối đầu các chặng, giải phóng thông lượng hệ thống đạt tới mức giới hạn của chặng dài nhất.
-
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/05-bo-nho-hieu-nang/prf-01-latency-breakdown-pipeline.svg
    :align: center
    :width: 95%
    :alt: Bóc tách 4 chặng độ trễ và so sánh dòng thời gian tuần tự với đường ống đa luồng
 
-   Bóc tách 4 chặng độ trễ trọn gói (trên) và đối chiếu dòng thời gian: tuần tự gây lãng phí 60% năng lực NPU (trái) so với đường ống đa luồng đạt bão hòa thông lượng (phải) [T2 Jouppi 2017 tr.1, tr.8] [T2 Chen 2016 tr.8].
+   Bóc tách 4 chặng độ trễ trọn gói (trên) và đối chiếu dòng thời gian tuần tự (trái) với đường ống đa luồng (phải).
 
-2. Phương pháp đo đúng chuẩn
-============================
+1.2 Độ trễ và thông lượng
+-------------------------
+
+Có hai cách quy độ trễ ra số khung hình mỗi giây, và hai con số này khác nhau.
+
+- **FPS theo độ trễ:** xử lý tuần tự từng ảnh trên một luồng, ảnh sau chỉ bắt đầu khi ảnh trước xong cả bốn chặng.
+
+  .. math::
+
+     \text{FPS}_{\text{latency}} = \frac{1000}{T_{\text{E2E}} \text{ (ms)}}
+
+- **FPS thông lượng:** nhiều luồng gối đầu các chặng cho các ảnh liên tiếp, nên tốc độ ra ảnh chỉ bị giới hạn bởi chặng dài nhất.
+
+  .. math::
+
+     \text{FPS}_{\text{throughput}} = \frac{1000}{\max(T_{\text{pre}}, T_{\text{load}}, T_{\text{npu}}, T_{\text{post}})}
+
+Trong chế độ tuần tự, NPU rảnh trong suốt :math:`T_{\text{pre}} + T_{\text{post}}`. Đường ống đa luồng lấp khoảng rảnh đó.
+
+Ví dụ từ bài DAHD-YOLO, sau khi tác giả dùng thread pool trên RK3588: bản INT8 có thời gian suy luận một ảnh 79.1 ms và đạt 50.2 FPS ở 720P, 43.8 FPS ở 1080P [T2 DAHD tr.18, Table 6]. Nếu tính tuần tự theo độ trễ thì chỉ được 1000 / 79.1, khoảng 12.6 FPS (suy ra).
+
+   "By utilizing a thread pool for acceleration, we optimize the entire detection process through multithreading." [T2 DAHD tr.18]
+
+Văn bản cùng trang ghi bản INT8 chạy đơn luồng mất 0.1162 s mỗi khung hình [T2 DAHD tr.18], nhưng 116.2 ms trong Table 6 thuộc dòng FP16. Vì vậy số đơn luồng của bài chưa chắc (xem :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 5.3).
+
+1.3 Tài nguyên cần theo dõi
+---------------------------
+
+Ngoài độ trễ, một phép đo trên thiết bị biên thường ghi thêm các đại lượng sau. Cách đo cụ thể trên RK3588 nằm ở :doc:`Zero-copy, căn lề và profiling API </contents/02-nen-tang-rk3588/04-bo-nho-hieu-nang/03-zero-copy-can-le-profiling-api>`.
+
+- **RAM tiến trình (VmRSS):** bộ nhớ vật lý mà tiến trình suy luận chiếm.
+- **Bộ nhớ NPU:** phần cho trọng số và phần đệm cho tensor trung gian giữa các lớp.
+- **Tải CPU:** thời gian CPU dùng cho tiền xử lý, hậu xử lý và điều phối NPU.
+- **Phân bổ lớp:** lớp nào chạy trên NPU, lớp nào rơi về CPU. Lớp rơi về CPU làm tăng độ trễ.
+- **Nhiệt độ:** tải nặng kéo dài có thể kích hoạt hạ xung do nhiệt (xem mục 2.4).
+
+2. Cách đo đúng
+===============
 
 Đo đạc hiệu năng trên hệ thống nhúng biên chạy hệ điều hành đòi hỏi quy trình nghiêm ngặt nhằm loại bỏ các yếu tố gây nhiễu phi tất định từ môi trường phần cứng và phần mềm.
 
-2.1 Khởi động ấm (Warm-up)
---------------------------
+2.1 Khởi động ấm
+----------------
 
 Lần chạy đầu tiên của một mô hình nơ-ron (cold start) luôn ghi nhận độ trễ cao bất thường so với các lần chạy sau. Nguyên nhân xuất phát từ hàng loạt chi phí khởi tạo một lần:
 
@@ -75,8 +109,8 @@ Lần chạy đầu tiên của một mô hình nơ-ron (cold start) luôn ghi n
 
 Nếu gộp lần chạy đầu vào tập dữ liệu đo lường, giá trị trung bình sẽ bị thổi phồng, không phản ánh đúng năng lực vận hành ổn định (steady-state). Quy chuẩn đo kiểm bắt buộc phải thực hiện khởi động ấm (warm-up): chạy thử nghiệm từ 10 đến 50 lần lặp độc lập mà không thu thập dữ liệu đo, chờ hệ thống đạt trạng thái cân bằng nhiệt và bộ đệm trước khi kích hoạt đồng hồ đo.
 
-2.2 Số lần lặp lại và độ biến thiên (Variance / Spread)
--------------------------------------------------------
+2.2 Số lần lặp và độ biến thiên
+-------------------------------
 
 Trên các hệ điều hành đa nhiệm như Linux, tiến trình đo đạc luôn chịu ảnh hưởng từ các ngắt phần cứng (hardware interrupts), cơ chế chuyển đổi ngữ cảnh (context switching) của bộ lập lịch (scheduler), và sự cạnh tranh băng thông bus hệ thống từ các ngoại vi khác.
 
@@ -87,8 +121,8 @@ Một phép đo đơn lẻ không mang ý nghĩa kết luận. Để đạt đ�
 
 Độ biến thiên cao là bằng chứng trực tiếp cho thấy hệ thống đang gặp hiện tượng tranh chấp tài nguyên bộ nhớ ngầm hoặc mất ổn định về điều phối tiến trình.
 
-2.3 Báo cáo trung vị (Median) và phân vị (p95/p99) thay vì trung bình đơn thuần
--------------------------------------------------------------------------------
+2.3 Báo cáo trung vị và phân vị
+-------------------------------
 
 Báo cáo giá trị trung bình số học (Arithmetic Mean) là một thiếu sót nghiêm trọng trong đánh giá hệ thống nhúng thời gian thực. Giá trị trung bình che giấu các đỉnh trễ cục bộ (latency spikes) do các ngắt hệ thống đột xuất gây ra.
 
@@ -96,8 +130,8 @@ Trung vị (Median hay p50) là giá trị nằm ở chính giữa phân phối 
 
 Trong các bài toán biên có yêu cầu an toàn nghiêm ngặt (như tự hành, phanh khẩn cấp, giám sát cảnh báo công trường), tham số quyết định chất lượng dịch vụ (QoS / SLA) là độ trễ phân vị đuôi (tail latency):
 
-* **p95**: 95% số lần suy luận hoàn thành trong khoảng thời gian này; chỉ có 5% số lần chạy bị chậm hơn.
-* **p99**: 99% số lần suy luận đáp ứng ngưỡng này; chỉ có 1% trường hợp ngoại lệ chậm nhất.
+* **p95**: 95% số lần suy luận hoàn thành trong khoảng thời gian này, chỉ có 5% số lần chạy bị chậm hơn.
+* **p99**: 99% số lần suy luận đáp ứng ngưỡng này, chỉ có 1% trường hợp ngoại lệ chậm nhất.
 
 Jouppi 2017 khẳng định rằng trong các hệ sinh thái xử lý mô hình nơ-ron, ràng buộc quyết định là độ trễ phân vị thứ 99 chứ không phải thông lượng trung bình:
 
@@ -109,8 +143,8 @@ Jouppi 2017 khẳng định rằng trong các hệ sinh thái xử lý mô hình
 
 Bài báo chỉ ra rằng đối với mô hình MLP0 trên GPU và CPU, khi kích thước batch tăng lên để tối ưu thông lượng thì độ trễ phân vị thứ 99 vượt quá giới hạn 7 ms do ứng dụng quy định, khiến toàn bộ thông lượng tăng thêm đó trở nên vô giá trị vì không đáp ứng được khung thời gian thực thi [T2 Jouppi 2017 tr.8].
 
-2.4 Cố định xung nhịp (Clock fixing) chống nhiễu DVFS
------------------------------------------------------
+2.4 Cố định xung nhịp
+---------------------
 
 Cơ chế Điều chỉnh Điện áp và Tần số Động (Dynamic Voltage and Frequency Scaling - DVFS) trên các SoC biên tự động thay đổi tần số hoạt động của CPU, GPU và NPU nhằm tiết kiệm năng lượng và kiểm soát nhiệt độ chip.
 
@@ -126,61 +160,13 @@ Sự can thiệp tự động của DVFS tạo ra hai sai lệch nghiêm trọng
 
 Một mô hình nơ-ron chạy chậm có thể do năng lực tính toán của nhân xử lý bị quá tải, hoặc do hệ thống không kịp cung cấp dữ liệu qua đường truyền bộ nhớ. Việc xác định đúng nguyên nhân quyết định phương hướng tối ưu hóa mô hình.
 
-3.1 Ứng dụng mô hình Roofline (Compute-bound vs Memory-bound, nối 02-npu/02)
-----------------------------------------------------------------------------
+3.1 Đặt lớp lên roofline
+------------------------
 
-Mô hình Roofline (Jouppi 2017, nền tảng lý thuyết tại :doc:`Roofline và dataflow </contents/01-kien-thuc-nen/02-npu/02-dataflow-va-phan-cap-bo-nho>`) thiết lập mối quan hệ hàm số giữa hiệu năng tính toán tối đa có thể đạt được (Attainable Performance, tính bằng GFLOPS hoặc TOPS) với cường độ hoạt động (Operational Intensity, ký hiệu :math:`I`, tính bằng số phép tính thực hiện trên mỗi byte dữ liệu truy xuất từ DRAM ngoài):
+Roofline chia một lớp vào vùng giới hạn bởi băng thông hoặc vùng giới hạn bởi tính toán, theo số phép tính trên mỗi byte đọc từ DRAM [T2 Jouppi 2017 tr.5]. Định nghĩa, công thức và ví dụ số nằm ở :doc:`Dataflow, phân cấp bộ nhớ và roofline </contents/01-kien-thuc-nen/02-npu/02-dataflow-va-phan-cap-bo-nho>` mục 3.
 
-.. math::
-
-   P_{\text{attainable}} = \min\left(P_{\text{peak}}, \; BW \times I\right)
-
-Trong đó :math:`P_{\text{peak}}` là giới hạn tính toán đỉnh của mảng MAC, và :math:`BW` là băng thông khả dụng của bộ nhớ ngoài.
-
-.. list-table:: So sánh hai vùng giới hạn trong mô hình Roofline
-   :header-rows: 1
-   :widths: 22 38 40
-
-   * - Vùng đặc tính
-     - Giới hạn vật lý
-     - Hệ quả tối ưu hóa
-   * - **Nghẽn bộ nhớ**
-       *(Memory-bound)*
-     - Cường độ hoạt động thấp (:math:`I < I_{\text{ridge}}`). Băng thông bộ nhớ không kịp cung cấp dữ liệu cho các nhân tính toán.
-     - Tăng xung nhịp nhân tính toán không cải thiện độ trễ. Phải tối ưu tái sử dụng dữ liệu, gộp lớp (fusion) hoặc tăng băng thông DDR.
-   * - **Nghẽn tính toán**
-       *(Compute-bound)*
-     - Cường độ hoạt động cao (:math:`I \ge I_{\text{ridge}}`). Mảng nhân tính toán MAC đã hoạt động ở công suất tối đa (:math:`P_{\text{peak}}`).
-     - Tối ưu hóa băng thông bộ nhớ không còn mang lại lợi ích. Phải cắt tỉa mô hình (pruning) hoặc giảm độ sâu/độ rộng mạng.
-
-Jouppi 2017 mô tả ranh giới này một cách rõ ràng:
-
-   "Without sufficient operational intensity, a program is memory bandwidth-bound and lives under the slanted part of the roofline." [T2 Jouppi 2017 tr.5]
-
-Điểm ngoặt phân định hai vùng (Ridge Point) được xác định bằng công thức :math:`I_{\text{ridge}} = \frac{P_{\text{peak}}}{BW}`. Nếu cường độ hoạt động của một lớp mạng nhỏ hơn :math:`I_{\text{ridge}}`, lớp đó nằm hoàn toàn dưới đường dốc và bị giới hạn bởi băng thông bộ nhớ.
-
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/05-bo-nho-hieu-nang/prf-02-roofline-model.svg
-   :align: center
-   :width: 95%
-   :alt: Mô hình Roofline phân định vùng nghẽn bộ nhớ và nghẽn tính toán
-
-   Mô hình Roofline: phân định ranh giới giữa vùng nghẽn băng thông bộ nhớ và vùng trần tính toán đỉnh (trái) cùng chiến lược tối ưu hóa tương ứng (phải) [T2 Jouppi 2017 tr.5] [T2 Chen 2016 tr.8].
-
-Để tính toán cường độ hoạt động lý thuyết của một lớp tích chập chuẩn, ta xét số lượng phép tính MAC và lượng dữ liệu cần luân chuyển qua DRAM:
-
-.. math::
-
-   I = \frac{\text{MACs}}{\text{Bytes}_{\text{input}} + \text{Bytes}_{\text{weights}} + \text{Bytes}_{\text{output}}}
-
-Với một lớp tích chập có kích thước ảnh đầu vào :math:`H \times W`, kênh vào :math:`C_{\text{in}}`, kênh ra :math:`C_{\text{out}}` và kích thước bộ lọc :math:`K \times K`:
-
-* Số phép tính: :math:`\text{MACs} = H \times W \times C_{\text{out}} \times K^2 \times C_{\text{in}}`.
-* Kích thước trọng số: :math:`C_{\text{out}} \times C_{\text{in}} \times K^2` phần tử.
-
-Ở các lớp tích chập chuẩn có số kênh lớn, mỗi phần tử trọng số được tái sử dụng :math:`H \times W` lần trên không gian bản đồ đặc trưng, mang lại cường độ hoạt động rất cao và dễ dàng vượt qua :math:`I_{\text{ridge}}` để đạt vùng nghẽn tính toán. Ngược lại, ở các lớp Depthwise Convolution (:math:`C_{\text{in}} = 1` cho mỗi nhóm), trọng số chỉ được nhân với đúng 1 kênh, dẫn đến cường độ hoạt động sụt giảm nghiêm trọng, đẩy lớp đó rơi sâu vào vùng nghẽn băng thông bộ nhớ.
-
-3.2 Dấu hiệu nhận biết nghẽn băng thông bộ nhớ
-----------------------------------------------
+3.2 Dấu hiệu nghẽn băng thông
+-----------------------------
 
 Trong thực tế profiling trên thiết bị biên, các dấu hiệu nhận biết một mô hình bị nghẽn băng thông bộ nhớ bao gồm:
 
@@ -192,8 +178,8 @@ Trong thực tế profiling trên thiết bị biên, các dấu hiệu nhận b
 
 Khi các lớp mạng có cường độ hoạt động thấp liên tục truy xuất trọng số và activation từ DRAM ngoài, hệ thống sẽ phát sinh lượng nhiệt lớn từ bộ điều khiển bộ nhớ và suy giảm mạnh hiệu suất năng lượng tổng thể.
 
-4. Các sai lầm phổ biến khi đo hiệu năng trên phần cứng biên
-============================================================
+4. Hiểu sai thường gặp
+======================
 
 Quá trình đo đạc và phân tích hiệu năng trên thiết bị biên thường mắc phải các ngộ nhận sau:
 
@@ -238,8 +224,12 @@ Các tài liệu T2 được trích dẫn và đối chiếu trong trang này:
    * - ``Jouppi 2017``
      - T2
      - :download:`tpu_datacenter_2017jouppi.pdf <../../../_assets/pdf/papers/01_hardware/tpu_datacenter_2017jouppi.pdf>`
-     - 5
+     - 9
    * - ``Chen 2016``
      - T2
      - :download:`eyeriss_dataflow_2016chen.pdf <../../../_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf>`
-     - 2
+     - 3
+   * - ``DAHD``
+     - T2
+     - :download:`dahd_yolo_rk3588_2025.pdf <../../../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`
+     - 3
