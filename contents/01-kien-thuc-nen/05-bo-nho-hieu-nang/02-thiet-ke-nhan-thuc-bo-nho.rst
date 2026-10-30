@@ -18,7 +18,7 @@ Thiết kế mạng nhận thức bộ nhớ
    - Bộ nhớ đỉnh (Peak Memory) quyết định ngưỡng sống còn của phần cứng, thường xuất hiện ở các tầng mạng đầu tiên do kích thước không gian lớn, hoặc ở các mô hình phát hiện vật thể đa tỷ lệ do phải lưu giữ activation trung gian cho các nhánh nối tắt [T2 MCU tr.9].
    - Kỹ thuật In-place Depthwise Convolution trong MCUNet giúp cắt giảm bộ nhớ làm việc của lớp depthwise từ 2N xuống N+1 bằng cơ chế tính toán và ghi đè trực tiếp từng kênh [T2 MCU tr.6].
    - PhiNets tách rời ba trục ràng buộc gồm chi phí tính toán, bộ nhớ làm việc và bộ nhớ tham số, cho phép co giãn độc lập RAM qua hệ số :math:`t_0` và Flash qua hệ số :math:`\beta` [T2 PHI tr.1] [T2 PHI tr.8].
-   - MCUNet và PhiNets thực nghiệm trên vi điều khiển bare-metal không có hệ điều hành và không có DRAM [T2 MCU tr.1]; khi chuyển giao sang SoC biên có DRAM và NPU, bài toán chuyển dịch từ giới hạn dung lượng vật lý sang tối ưu băng thông và năng lượng truy cập bộ nhớ ngoài [T2 Chen 2016 tr.8].
+   - MCUNet và PhiNets thực nghiệm trên vi điều khiển bare-metal không có hệ điều hành và không có DRAM [T2 MCU tr.1]. Khi chuyển giao sang SoC biên có DRAM và NPU, bài toán chuyển dịch từ giới hạn dung lượng vật lý sang tối ưu băng thông và năng lượng truy cập bộ nhớ ngoài [T2 Chen 2016 tr.8].
 
 .. contents:: Trong trang này
    :local:
@@ -28,9 +28,6 @@ Thiết kế mạng nhận thức bộ nhớ
 ===============================
 
 Trong các thiết kế mạng nơ-ron truyền thống hướng đến máy chủ hoặc máy tính cá nhân, mối quan tâm hàng đầu thường là số lượng phép tính dấu phẩy động (FLOPs) hoặc độ chính xác Top-1. Tuy nhiên, khi đưa mô hình xuống các thiết bị biên bị giới hạn tài nguyên nghiêm ngặt, dung lượng và hành vi truy xuất bộ nhớ mới là yếu tố quyết định tính khả thi của hệ thống.
-
-1.1 Bộ nhớ làm việc (Activation) và bộ nhớ tham số (Weights)
-------------------------------------------------------------
 
 Bộ nhớ tiêu thụ trong quá trình suy luận của một mạng nơ-ron bao gồm hai thành phần có bản chất vận hành hoàn toàn trái ngược:
 
@@ -51,7 +48,7 @@ Ví dụ minh họa định lượng trên một khối Inverted Residual Bottle
 Tính toán dung lượng bộ nhớ cho khối này ở định dạng số nguyên 8-bit (INT8, 1 byte mỗi phần tử):
 
 * **Bộ nhớ tham số (Weights)**:
-  Lớp 1x1 mở rộng cần :math:`32 \times 192 = 6,144` bytes; lớp Depthwise cần :math:`192 \times 3 \times 3 = 1,728` bytes; lớp chiếu 1x1 cần :math:`192 \times 64 = 12,288` bytes. Tổng bộ nhớ trọng số chỉ vỏn vẹn **20,160 bytes** (:math:`\approx 19.7\text{ KB}`).
+  Lớp 1x1 mở rộng cần :math:`32 \times 192 = 6,144` bytes, lớp Depthwise cần :math:`192 \times 3 \times 3 = 1,728` bytes, và lớp chiếu 1x1 cần :math:`192 \times 64 = 12,288` bytes. Tổng bộ nhớ trọng số chỉ vỏn vẹn **20,160 bytes** (:math:`\approx 19.7\text{ KB}`).
 * **Bộ nhớ làm việc (Activation)**:
   Chỉ riêng tensor trung gian sau lớp mở rộng (:math:`192 \times 112 \times 112`) đã chiếm **2,408,448 bytes** (:math:`\approx 2.30\text{ MB}`).
 
@@ -62,8 +59,8 @@ Như vậy, bộ nhớ làm việc động của một khối đơn lẻ cao g�
 
 Công trình MCUNet (Lin 2020) là một trong những nghiên cứu tiên phong thiết lập phương pháp luận đồng thiết kế giữa kiến trúc mạng nơ-ron (TinyNAS) và engine thực thi siêu nhẹ (TinyEngine) trên các vi điều khiển cấp thấp.
 
-2.1 SRAM giới hạn activation, Flash/DRAM giới hạn model size
-------------------------------------------------------------
+2.1 SRAM và Flash giới hạn gì
+-----------------------------
 
 Lin 2020 chỉ ra sự phân hóa sâu sắc giữa hai tầng lưu trữ trên phần cứng vi điều khiển:
 
@@ -88,8 +85,8 @@ Do đó, một kiến trúc mạng biên tối ưu bắt buộc phải thỏa m�
 
    \text{Bộ nhớ đỉnh (Peak Activation)} \le \text{Dung lượng SRAM}
 
-2.2 Tối ưu bộ nhớ đỉnh (Peak memory)
-------------------------------------
+2.2 Tối ưu bộ nhớ đỉnh
+----------------------
 
 Bộ nhớ đỉnh (Peak Memory) được định nghĩa là dung lượng RAM lớn nhất cần thiết tại thời điểm căng thẳng nhất trong chu trình suy luận của mạng. Đối với một mô hình tuần tự, bộ nhớ đỉnh tại lớp thứ :math:`l` bằng tổng dung lượng của tensor đầu vào và tensor đầu ra của lớp đó:
 
@@ -117,9 +114,6 @@ Bên cạnh tối ưu hóa kiến trúc, kỹ thuật lập lịch bộ nhớ (m
 
 PhiNets (Paissan 2021) mở rộng triết lý nhận thức bộ nhớ bằng cách thiết lập một không gian kiến trúc có thể tùy biến linh hoạt, cho phép tách bạch hoàn toàn các ràng buộc vật lý của thiết bị mục tiêu.
 
-3.1 Tách biệt chi phí tính toán, bộ nhớ làm việc và bộ nhớ tham số
-------------------------------------------------------------------
-
 Các họ mạng kinh điển như MobileNetV2 áp dụng hệ số co giãn độ rộng kênh đồng nhất (width multiplier :math:`\alpha`). Khi giảm :math:`\alpha`, cả số phép tính (MACs), dung lượng trọng số (PM) và bộ nhớ kích hoạt (WM) đều đồng thời suy giảm theo quy luật bậc hai hoặc bậc nhất. Sự ghép nối chặt này khiến mô hình không thể tối ưu khi phần cứng có cấu hình tài nguyên bất cân xứng (ví dụ chip có SRAM rất nhỏ nhưng Flash lớn, hoặc ngược lại).
 
 Đóng góp cốt lõi của PhiNets là tách rời ba tham số ràng buộc này:
@@ -142,8 +136,8 @@ Kiến trúc PhiNets đưa ra các siêu tham số độc lập để điều kh
 
 Sự tách bạch này khắc phục triệt để nhược điểm của phương pháp co giãn hợp chất (Compound Scaling như họ EfficientNet). Trong Compound Scaling, người ta mở rộng đồng loạt độ sâu, độ rộng và độ phân giải theo một hệ số duy nhất với giả định ngầm rằng tài nguyên phần cứng tăng trưởng đồng đều. Nhưng trên các hệ thống nhúng biên, tỷ lệ giữa dung lượng RAM và Flash rất đa dạng và phân mảnh giữa các dòng chip. Việc co giãn ghép cặp khiến mô hình dễ rơi vào tình trạng vừa vặn dung lượng Flash nhưng lại làm tràn SRAM, hoặc ngược lại lãng phí phần lớn Flash vì bị nghẽn ở giới hạn RAM. PhiNets cho phép người kỹ sư khóa cứng ngưỡng RAM tối đa :math:`\text{WM}_{\max}` và Flash tối đa :math:`\text{PM}_{\max}` để sinh ra kiến trúc tối ưu vừa khít phần cứng.
 
-4. Kỹ thuật In-place Depthwise Convolution (giảm peak memory từ 2N xuống N+1)
-=============================================================================
+4. Depthwise tại chỗ
+====================
 
 Trong cấu trúc mạng nơ-ron di động, khối tích chập tách biệt theo chiều sâu (Depthwise Separable Convolution) là thành phần then chốt giúp cắt giảm số lượng phép tính MAC. Tuy nhiên, ở các engine thực thi truyền thống, lớp Depthwise lại là thủ phạm chính gây ra các đỉnh bộ nhớ cục bộ.
 
@@ -191,8 +185,8 @@ Quy trình luân chuyển bộ nhớ chi tiết của In-place Depthwise Convolu
 * **Bước lặp :math:`c` (Từ kênh 1 đến :math:`C-1`)**:
   Quá trình trên được lặp lại tuần tự cho các kênh tiếp theo. Tại bất kỳ thời điểm nào trong toàn bộ chu trình thực thi, phần cứng chỉ cần duy trì tối đa :math:`C + 1` lát cắt trong SRAM thay vì phải cấp phát riêng một vùng nhớ :math:`C` lát cắt mới cho tensor đầu ra.
 
-5. Giới hạn khi chuyển giao sang thiết bị biên có DRAM và NPU
-=============================================================
+5. Giới hạn với thiết bị có DRAM
+================================
 
 Mặc dù các phát hiện từ MCUNet và PhiNets mang lại nền tảng lý thuyết sâu sắc về nhận thức bộ nhớ, việc áp dụng nguyên bản các kết luận này sang các hệ thống SoC biên hiệu năng cao (như các chip tích hợp NPU) đòi hỏi sự cẩn trọng về mặt kỹ thuật.
 
@@ -224,7 +218,7 @@ Các giới hạn cụ thể khi chuyển giao:
 * **Từ giới hạn dung lượng sang giới hạn băng thông**:
   Trên SoC có DRAM, một mạng nơ-ron có activation lớn không bao giờ gặp lỗi thiếu RAM vật lý. Tuy nhiên, việc liên tục nạp và xả các tensor kích hoạt khổng lồ qua bus DDR ngoài chip sẽ bóp nghẹt băng thông hệ thống và tiêu tốn năng lượng gấp hàng trăm lần so với việc tính toán nội bộ trong SRAM [T2 Chen 2016 tr.8]. Do đó, mục tiêu tối ưu bộ nhớ đỉnh trên NPU là để giữ trọn vẹn tensor trung gian bên trong bộ đệm SRAM trên chip, tránh phát sinh lưu lượng DDR ngoài.
 * **Tính khép kín của compiler NPU thương mại**:
-  Kỹ thuật In-place Depthwise được Lin 2020 hiện thực hóa mã nguồn mở trong TinyEngine cho CPU ARM Cortex-M. Trên các SoC biên chuyên dụng, quá trình phân bổ bộ nhớ và gộp lớp (layer fusion) do compiler NPU độc quyền của từng hãng bán dẫn tự động thực hiện. Liệu compiler của Rockchip hay các hãng tương đương có áp dụng cơ chế ghi đè in-place cho lớp depthwise hay không là ``unknown`` (tài liệu SDK không công bố chi tiết thuật toán sinh mã hạ tầng).
+  Kỹ thuật In-place Depthwise được Lin 2020 hiện thực hóa mã nguồn mở trong TinyEngine cho CPU ARM Cortex-M. Trên các SoC biên chuyên dụng, quá trình phân bổ bộ nhớ và gộp lớp (layer fusion) do compiler NPU độc quyền của từng hãng bán dẫn tự động thực hiện. Tài liệu SDK của các trình biên dịch thương mại như Rockchip không công bố chi tiết thuật toán cấp phát bộ nhớ hạ tầng hay việc có áp dụng cơ chế ghi đè tại chỗ (in-place) cho lớp depthwise hay không.
 * **Áp lực bộ nhớ của kiến trúc phát hiện vật thể đa tỷ lệ**:
   Nhận định của Lin 2020 về việc các mạng phát hiện vật thể đa tỷ lệ như YOLO làm tăng vọt bộ nhớ đỉnh [T2 MCU tr.9] hoàn toàn đúng về mặt nguyên lý trên SoC biên. Việc duy trì các bản đồ đặc trưng P3, P4, P5 trong thời gian dài để kết nối mạng kim tự tháp khiến NPU liên tục phải ghi dữ liệu trung gian ra DRAM ngoài, biến các tầng FPN/PANet thành điểm nghẽn lưu lượng chính trong các mô hình thị giác biên.
 * **Chiến lược thiết kế mạng nơ-ron cho SoC biên**:
@@ -248,12 +242,12 @@ Các tài liệu T2 được trích dẫn và đối chiếu trong trang này:
    * - ``MCU``
      - T2
      - :download:`mcunet_2020lin.pdf <../../../_assets/pdf/papers/04_memory/mcunet_2020lin.pdf>`
-     - 6
+     - 10
    * - ``PHI``
      - T2
      - :download:`phinets_edge_2021paissan.pdf <../../../_assets/pdf/papers/04_memory/phinets_edge_2021paissan.pdf>`
-     - 4
+     - 8
    * - ``Chen 2016``
      - T2
      - :download:`eyeriss_dataflow_2016chen.pdf <../../../_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf>`
-     - 1
+     - 2

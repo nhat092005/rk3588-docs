@@ -13,7 +13,7 @@ Tái tham số hóa cấu trúc
 .. admonition:: Tóm tắt
 
    - Tái tham số hóa cấu trúc (structural re-parameterization) duy trì mạng nhiều nhánh lúc huấn luyện nhằm tăng khả năng biểu diễn, sau đó gộp thành một nhánh đơn duy nhất lúc suy luận để tối ưu băng thông bộ nhớ và tốc độ thực thi.
-   - Khối RepVGG kết hợp ba nhánh: Conv 3x3 kèm BN, Conv 1x1 kèm BN và Identity kèm BN; khi suy luận, tham số BN được gộp vào Conv, các kernel 1x1 được đệm không thành 3x3 và cộng dồn thành một lớp Conv 3x3 duy nhất kèm bias [T2 REPVGG tr.5].
+   - Khối RepVGG kết hợp ba nhánh: Conv 3x3 kèm BN, Conv 1x1 kèm BN và Identity kèm BN. Khi suy luận, tham số BN được gộp vào Conv, các kernel 1x1 được đệm không thành 3x3 và cộng dồn thành một lớp Conv 3x3 duy nhất kèm bias [T2 REPVGG tr.5].
    - MobileOne áp dụng tái tham số hóa cho cấu trúc tích chập tách kênh (depthwise và pointwise), đồng thời bổ sung hệ số over-parameterization k nhánh nhằm tăng độ chính xác mà không làm tăng chi phí suy luận [T2 MOBONE tr.4, 5].
    - RepVGG gặp hiện tượng suy giảm độ chính xác nghiêm trọng khi lượng tử hóa INT8 (sụt hơn 20% top-1 ImageNet) do việc cộng ba nhánh có BN riêng rẽ làm bùng nổ phương sai activation và xuất hiện ngoại lai ở trọng số gộp [T2 QAREP tr.1, 5].
    - QARepVGG khắc phục bằng cách loại bỏ BN ở nhánh identity và 1x1, đồng thời đặt một lớp BN duy nhất sau phép cộng ba nhánh, giữ nguyên khả năng gộp thành Conv 3x3 đơn mà vẫn bảo toàn độ chính xác INT8 [T2 QAREP tr.1, 5].
@@ -22,8 +22,8 @@ Tái tham số hóa cấu trúc
    :local:
    :depth: 1
 
-1. Ý tưởng: Nhiều nhánh khi train, một nhánh khi suy luận
-=========================================================
+1. Ý tưởng tái tham số hóa
+==========================
 
 Trong thiết kế mạng nơ-ron tích chập, cấu trúc nhiều nhánh (multi-branch topology) như ResNet hay Inception giúp mô hình huấn luyện ổn định và đạt độ chính xác cao nhờ tạo ra tập hợp vô số các đường truyền gradient ngắn, khắc phục hiện tượng triệt tiêu gradient [T2 REPVGG tr.1, 2]. Tuy nhiên, khi triển khai suy luận trên phần cứng thực tế, kiến trúc nhiều nhánh bộc lộ hai nhược điểm chí mạng:
 
@@ -60,8 +60,8 @@ Sau khi gộp, mô hình suy luận hoàn toàn là một chuỗi tuần tự g�
 2. RepVGG
 =========
 
-2.1 Ba nhánh: Conv 3x3, Conv 1x1, Identity
-------------------------------------------
+2.1 Ba nhánh của khối RepVGG
+----------------------------
 
 Khối xây dựng cơ bản của mạng RepVGG ở giai đoạn huấn luyện bao gồm ba nhánh song song cùng nhận chung một tensor đầu vào :math:`M^{(1)} \in \mathbb{R}^{N \times C_1 \times H_1 \times W_1}` [T2 REPVGG tr.5]:
 
@@ -107,7 +107,7 @@ Lớp BN ở chế độ suy luận áp dụng phép biến đổi affine lên t
 
    \text{bn}(M, \mu, \sigma, \gamma, \beta)_{:,i,:,:} = (M_{:,i,:,:} - \mu_i) \frac{\gamma_i}{\sigma_i} + \beta_i
 
-Do tính chất phân phối tuyến tính của phép tích chập, lớp BN đứng sau Conv có thể được gộp hoàn toàn vào một lớp Conv mới có trọng số :math:`W'` và bias :math:`b'` [T2 REPVGG tr.5]:
+Lớp BN đứng sau Conv được gộp vào một lớp Conv mới có trọng số :math:`W'` và bias :math:`b'` [T2 REPVGG tr.5]. Chứng minh đầy đủ nằm ở :doc:`../01-nen-tang-ai/04-chuan-hoa-va-activation` mục 5.
 
 .. math::
 
@@ -186,8 +186,8 @@ Thực hiện các bước tính toán (kiểm chứng bằng script Python):
 
       b_{\text{final}} = b'^{(3)} + b'^{(1)} + b'^{(0)} = 0.0 + (-2.5) + 0.0 = -2.5
 
-3. MobileOne (Depthwise + Pointwise re-param)
-=============================================
+3. MobileOne
+============
 
 Mặc dù RepVGG gộp được thành tích chập 3x3 đơn nhánh, các lớp tích chập chuẩn (standard convolution) vẫn tiêu tốn lượng tính toán lớn trên thiết bị di động có công suất thấp. Kiến trúc MobileOne kết hợp ý tưởng tái tham số hóa cấu trúc với tích chập tách kênh (depthwise separable convolution) theo phong cách MobileNet-V1 [T2 MOBONE tr.4].
 
@@ -235,13 +235,13 @@ Khi chuyển sang chế độ suy luận, toàn bộ :math:`k+2` nhánh trong kh
      - 0.66
      - 13.04
 
-Theo số đo từ MobileOne Table 9 [T2 MOBONE tr.7], thứ hạng tốc độ giữa các mô hình phụ thuộc chặt chẽ vào thiết bị đo. Trên GPU NVIDIA 1080Ti (với batch 128), RepVGG-B0 nhanh hơn đáng kể so với EfficientNet-B0 (1817 so với 829 mẫu/giây) [T2 REPVGG tr.7]. Tuy nhiên, trên CPU Xeon, GPU 2080Ti và thiết bị di động iPhone 12, RepVGG-B0 lại chậm hơn EfficientNet-B0 và chậm hơn MobileOne-S1 gấp đôi [T2 MOBONE tr.7]. Không có công bố thực nghiệm nào đo RepVGG hay MobileOne trên NPU Rockchip RK3588 (unknown).
+Theo số đo từ MobileOne Table 9 [T2 MOBONE tr.7], thứ hạng tốc độ giữa các mô hình phụ thuộc chặt chẽ vào thiết bị đo. Trên GPU NVIDIA 1080Ti (với batch 128), RepVGG-B0 nhanh hơn đáng kể so với EfficientNet-B0 (1817 so với 829 mẫu/giây) [T2 REPVGG tr.7]. Tuy nhiên, trên CPU Xeon, GPU 2080Ti và thiết bị di động iPhone 12, RepVGG-B0 lại chậm hơn EfficientNet-B0 và chậm hơn MobileOne-S1 gấp đôi [T2 MOBONE tr.7]. Các nghiên cứu gốc của RepVGG và MobileOne hiện chưa công bố số đo thực nghiệm trên NPU Rockchip RK3588.
 
 4. QARepVGG
 ===========
 
-4.1 Vấn đề khi lượng tử hóa RepVGG (phương sai activation, sụt mAP/top-1 INT8)
-------------------------------------------------------------------------------
+4.1 RepVGG khi lượng tử hóa
+---------------------------
 
 Mặc dù RepVGG đạt tốc độ suy luận FP32 rất ấn tượng trên GPU nhờ topo đơn nhánh, mô hình này lại gặp thất bại nghiêm trọng khi lượng tử hóa hậu huấn luyện (Post-Training Quantization - PTQ) sang INT8 [T2 QAREP tr.1]:
 
@@ -262,8 +262,8 @@ Nguyên nhân gốc rễ bắt nguồn từ sự vi phạm hai điều kiện c�
 
    Hình 3.8b. Phương sai activation lớn của RepVGG-A0 (S2): đầu ra của từng nhánh tại lớp 4. Nguồn: [T2 QAREP tr.5, Figure 4]
 
-4.2 Cách khắc phục của QARepVGG (tái cấu trúc BN sau phép cộng)
----------------------------------------------------------------
+4.2 Cách QARepVGG khắc phục
+---------------------------
 
 Để giải quyết triệt để hiện tượng sụt giảm độ chính xác INT8 mà vẫn duy trì ưu thế gộp nhánh lúc suy luận, kiến trúc QARepVGG (Quantization-Aware RepVGG) đề xuất tái cấu trúc vị trí của các lớp Batch Normalization thông qua bốn điều chỉnh (M1 đến M4) [T2 QAREP tr.5]:
 
@@ -319,8 +319,8 @@ Khi chuyển sang chế độ triển khai (deploy mode), ba nhánh không có B
 
 Kết quả từ Bảng 5 của QAREP [T2 QAREP tr.6] khẳng định QARepVGG giải quyết triệt để vấn đề lượng tử hóa của RepVGG, duy trì độ chính xác INT8 chỉ chênh lệch dưới 2% so với bản gốc FP32 mà không phải trả thêm bất kỳ chi phí trễ nào trên phần cứng thực thi.
 
-Nguồn tham khảo
-===============
+Nguồn
+=====
 
 Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong trang này:
 
@@ -335,12 +335,12 @@ Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong tran
    * - ``REPVGG``
      - T2
      - :download:`repvgg_reparam_2021ding.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/repvgg_reparam_2021ding.pdf>`
-     - 9
+     - 21
    * - ``MOBONE``
      - T2
      - :download:`mobileone_reparam_2023vasu.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/mobileone_reparam_2023vasu.pdf>`
-     - 5
+     - 10
    * - ``QAREP``
      - T2
      - :download:`qarepvgg_quant_2024chu.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/qarepvgg_quant_2024chu.pdf>`
-     - 9
+     - 22

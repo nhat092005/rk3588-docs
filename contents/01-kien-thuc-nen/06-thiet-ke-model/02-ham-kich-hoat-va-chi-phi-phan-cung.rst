@@ -13,17 +13,17 @@ Hàm kích hoạt và chi phí phần cứng
 .. admonition:: Tóm tắt
 
    - ReLU vượt trội hoàn toàn về tốc độ so với SiLU và Hardswish trên mọi nền tảng phần cứng được thực nghiệm, nhờ cấu trúc toán học đơn giản và khả năng hợp nhất trực tiếp vào lớp tích chập (operator fusion) [T2 Y6 tr.8].
-   - Trên vi xử lý di động iPhone 12, SiLU có độ trễ cao hơn ReLU khoảng 66% (2.54 ms so với 1.53 ms), trong khi các hàm phi tuyến động như DynamicReLU làm trễ tăng hơn 150 lần do chi phí đồng bộ hóa dữ liệu [T2 MOBONE tr.4]; trên GPU Tesla T4, Conv + ReLU đạt tốc độ cao hơn SiLU 29% (1246 FPS so với 963 FPS) [T2 Y6 tr.9]; trên ba NPU biên, SiLU làm tăng độ trễ từ 20% đến 159% so với ReLU [T2 ACTNAS tr.6].
-   - Đối với NPU thiên về số nguyên INT8, các hàm kích hoạt phi tuyến siêu việt (như SiLU, Swish) đòi hỏi bảng tra cứu Look-Up Table (LUT) hoặc bộ hàm đặc biệt (SFU) gây nghẽn phần cứng; ngược lại, ReLU và ReLU6 được tích hợp thẳng vào bước scale và cắt ngưỡng số nguyên (requantization) mà không tốn thêm chu kỳ truy cập bộ nhớ.
+   - Trên vi xử lý di động iPhone 12, SiLU có độ trễ cao hơn ReLU khoảng 66% (2.54 ms so với 1.53 ms), trong khi các hàm phi tuyến động như DynamicReLU làm trễ tăng hơn 150 lần do chi phí đồng bộ hóa dữ liệu [T2 MOBONE tr.4]. Trên GPU Tesla T4, Conv + ReLU đạt tốc độ cao hơn SiLU 29% (1246 FPS so với 963 FPS) [T2 Y6 tr.9], còn trên ba NPU biên, SiLU làm tăng độ trễ từ 20% đến 159% so với ReLU [T2 ACTNAS tr.6].
+   - Đối với NPU thiên về số nguyên INT8, các hàm kích hoạt phi tuyến siêu việt (như SiLU, Swish) đòi hỏi bảng tra cứu Look-Up Table (LUT) hoặc bộ hàm đặc biệt (SFU) gây nghẽn phần cứng. Ngược lại, ReLU và ReLU6 được tích hợp thẳng vào bước scale và cắt ngưỡng số nguyên (requantization) mà không tốn thêm chu kỳ truy cập bộ nhớ.
    - Chiến lược ActNAS chứng minh tính hiệu quả của thiết kế hàm kích hoạt lai (mixed activation): việc thay thế activation ở hai tầng đầu tiên bằng họ ReLU giúp tiết kiệm tới 58% bộ nhớ trên NPU mà mAP chỉ suy giảm dưới 1% so với mô hình thuần SiLU [T2 ACTNAS tr.7]. Mô hình ActNAS8m.2 đạt tốc độ nhanh hơn 1.66 lần so với bản SiLU mà không làm suy giảm đáng kể độ chính xác [T2 ACTNAS tr.8].
-   - Chi phí thực thi vi kiến trúc chi tiết của SiLU so với ReLU trên các dòng NPU cụ thể (bao gồm NPU Rockchip RK3588) là unknown do các tài liệu chuẩn hiện chưa công bố số đo tách biệt từng toán tử.
+   - Chi phí thực thi vi kiến trúc chi tiết của SiLU so với ReLU trên từng dòng NPU thương mại (bao gồm NPU Rockchip RK3588) chưa được công bố tách biệt theo từng toán tử trong các tài liệu chuẩn.
 
 .. contents:: Trong trang này
    :local:
    :depth: 1
 
-1. Bảng chi phí activation theo phần cứng
-=========================================
+1. Chi phí activation theo phần cứng
+====================================
 
 Cơ sở lý thuyết toán học, công thức đạo hàm và đồ thị phân tích của các hàm kích hoạt phi tuyến phổ biến (ReLU, LeakyReLU, Sigmoid, SiLU, GELU, Hardswish) đã được trình bày chi tiết tại :doc:`/contents/01-kien-thuc-nen/01-nen-tang-ai/04-chuan-hoa-va-activation`. Phần này tập trung khảo sát chi phí độ trễ (latency), thông lượng khung hình (FPS) và mức độ tiêu thụ bộ nhớ khi các hàm kích hoạt này được thực thi trên các kiến trúc phần cứng thực tế.
 
@@ -46,23 +46,23 @@ Khảo sát thực nghiệm từ ba công bố độc lập (MobileOne, YOLOv6 v
    * - iPhone 12 (Core ML)
      - Mạng CNN 30 lớp
      - Batch 1, fp16/fp32
-     - ReLU: 1.53 ms; GELU: 1.63 ms; SE-ReLU: 2.10 ms; SiLU: 2.54 ms; Dynamic Shift-Max: 57.04 ms; DynamicReLU-B: 242.14 ms; DynamicReLU-A: 273.49 ms [T2 MOBONE tr.4]
+     - ReLU: 1.53 ms, GELU: 1.63 ms, SE-ReLU: 2.10 ms, SiLU: 2.54 ms, Dynamic Shift-Max: 57.04 ms, DynamicReLU-B: 242.14 ms, DynamicReLU-A: 273.49 ms [T2 MOBONE tr.4]
    * - Tesla T4 (TensorRT)
      - YOLOv6-N (640x640)
      - Batch 32, FP16
-     - Conv + ReLU: 1246 FPS (34.8% AP); Conv + SiLU: 963 FPS (36.6% AP); RepConv + ReLU: 1233 FPS (35.2% AP); RepConv + SiLU: 971 FPS (36.5% AP) [T2 Y6 tr.9]
+     - Conv + ReLU: 1246 FPS (34.8% AP), Conv + SiLU: 963 FPS (36.6% AP), RepConv + ReLU: 1233 FPS (35.2% AP), RepConv + SiLU: 971 FPS (36.5% AP) [T2 Y6 tr.9]
    * - NPU 1 (Biên)
      - YOLOv8m (640x640)
      - 50 lần đo lấy trung bình
-     - ReLU: 93.17 ms (48.03 mAP); Hardswish: 166.80 ms (48.96 mAP); SiLU: 241.50 ms (48.57 mAP) [T2 ACTNAS tr.6]
+     - ReLU: 93.17 ms (48.03 mAP), Hardswish: 166.80 ms (48.96 mAP), SiLU: 241.50 ms (48.57 mAP) [T2 ACTNAS tr.6]
    * - NPU 2 (Biên)
      - YOLOv8m (640x640)
      - 50 lần đo lấy trung bình
-     - ReLU: 103.73 ms (48.03 mAP); Hardswish: 140.33 ms (48.96 mAP); SiLU: 190.87 ms (48.57 mAP) [T2 ACTNAS tr.6]
+     - ReLU: 103.73 ms (48.03 mAP), Hardswish: 140.33 ms (48.96 mAP), SiLU: 190.87 ms (48.57 mAP) [T2 ACTNAS tr.6]
    * - NPU 3 (Biên)
      - YOLOv8m (640x640)
      - 50 lần đo lấy trung bình
-     - ReLU: 283.40 ms (48.03 mAP); Hardswish: 308.80 ms (48.96 mAP); SiLU: 340.00 ms (48.57 mAP) [T2 ACTNAS tr.6]
+     - ReLU: 283.40 ms (48.03 mAP), Hardswish: 308.80 ms (48.96 mAP), SiLU: 340.00 ms (48.57 mAP) [T2 ACTNAS tr.6]
 
 Các số liệu thực nghiệm trên cho thấy những quy luật nhất quán giữa các lớp phần cứng khác nhau:
 
@@ -103,8 +103,8 @@ Các số liệu thực nghiệm trên cho thấy những quy luật nhất quá
 
    Hình 8.2. Biểu đồ độ trễ và mAP của YOLO5n (NPU1) và YOLO8m (NPU2) với SiLU, ReLU, Hardswish. Hai NPU không nêu tên. Nguồn: [T2 ACTNAS tr.1, Figure 1]
 
-2. Quy tắc chọn activation cho NPU thiên về INT8
-================================================
+2. Chọn activation cho NPU INT8
+===============================
 
 Các bộ tăng tốc xử lý nơ-ron (NPU) trên thiết bị biên thường tập trung tối ưu hóa diện tích đế silicon và hiệu quả năng lượng cho các phép toán số nguyên 8-bit (INT8). Đường ống xử lý tích chập lượng tử hóa thông thường bao gồm:
 
@@ -164,8 +164,8 @@ Bằng cách áp dụng các biến thể ReLU tại các tầng đầu và duy 
 
    "We suggest users adopt RepConv with ReLU in latency-sensitive applications." [T2 Y6 tr.8]
 
-3. Điều chưa biết (unknown: chi phí chi tiết trên các NPU khác nhau)
-====================================================================
+3. Điều chưa biết
+=================
 
 Mặc dù các quy tắc thiết kế chung đã được kiểm chứng trên các nền tảng thử nghiệm, việc áp dụng cụ thể lên từng dòng NPU chuyên dụng vẫn gặp phải các rào cản thông tin:
 
@@ -189,10 +189,10 @@ Mặc dù các quy tắc thiết kế chung đã được kiểm chứng trên c
    - Cấu hình tối ưu hóa đồ thị của trình biên dịch: Trình biên dịch RKNN cung cấp các cấp độ tối ưu hóa đồ thị khác nhau, trong đó các luật gộp toán tử (fusion passes) có thể biến đổi tùy thuộc vào cấu trúc lớp tích chập đứng trước và lớp chuẩn hóa đứng sau.
    - Băng thông truy cập bộ nhớ cục bộ SRAM giữa ba lõi NPU độc lập (Core 0, Core 1, Core 2) khi phải lưu chuyển các bản đồ đặc trưng có độ phân giải lớn.
 
-   Do đó, chi phí chi tiết và mức độ chênh lệch độ trễ chính xác giữa SiLU và ReLU trên NPU RK3588 là unknown. (Đã tìm ở: các bài báo học thuật đo benchmark RK3588, tài liệu nhà sản xuất Rockchip; từ khóa: activation latency, SiLU vs ReLU benchmark, RK3588 NPU operator profiling).
+   Do đó, mức chênh lệch độ trễ vi mô giữa SiLU và ReLU trên NPU RK3588 cần được xác định bằng phép đo profiling thực nghiệm theo từng lớp trên bo mạch đích (xem :doc:`/contents/03-phuong-phap/02-tang-npu/01-operator-support`).
 
-Nguồn tham khảo
-===============
+Nguồn
+=====
 
 Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong trang này:
 
@@ -207,16 +207,16 @@ Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong tran
    * - ``ACTNAS``
      - T2
      - :download:`actnas_yolo_2025sah.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/actnas_yolo_2025sah.pdf>`
-     - 12
+     - 28
    * - ``MOBONE``
      - T2
      - :download:`mobileone_reparam_2023vasu.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/mobileone_reparam_2023vasu.pdf>`
-     - 5
+     - 10
    * - ``Y6``
      - T2
      - :download:`yolov6_hwfriendly_2022li.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/yolov6_hwfriendly_2022li.pdf>`
-     - 4
+     - 9
    * - ``S3NAS``
      - T2
      - :download:`s3nas_npu_aware_2020lee.pdf <../../../_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf>`
-     - 1
+     - 2

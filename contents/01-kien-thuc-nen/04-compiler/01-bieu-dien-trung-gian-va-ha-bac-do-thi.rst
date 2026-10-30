@@ -17,7 +17,7 @@ Biểu diễn trung gian và hạ bậc đồ thị
    - Biểu diễn mức vòng lặp cụ thể hóa việc lặp qua tensor, xác định lịch trình tính toán (tiling, unroll, sắp xếp vòng lặp) theo dung lượng bộ đệm [T2 TVM tr.4].
    - TVM phân tách định nghĩa thuật toán khỏi lịch thực thi và dùng mô hình học máy (AutoTVM) để tự động tìm kiếm cấu hình lịch trình tối ưu [T2 TVM tr.8].
    - eIQ Neutron minh chứng cho phương pháp đồng thiết kế phần cứng và compiler (HW/SW co-design), dùng quy hoạch ràng buộc để đồng thời chia tile và hợp nhất lớp nhằm hạn chế nghẽn DRAM [T2 BAMB tr.4] [T2 BAMB tr.9].
-   - Dung lượng SRAM, băng thông DRAM và tập lệnh phần cứng là cố định; chiến lược fusion, kích thước tile và lập lịch DMA là các quyết định do compiler lựa chọn.
+   - Dung lượng SRAM, băng thông DRAM và tập lệnh phần cứng là cố định, còn chiến lược fusion, kích thước tile và lập lịch DMA là các quyết định do compiler lựa chọn.
 
 .. contents:: Trong trang này
    :local:
@@ -56,8 +56,8 @@ Quá trình chuyển đổi một mô hình học sâu từ framework (PyTorch, 
 
    Quá trình hạ bậc 3 tầng biểu diễn trung gian: từ đồ thị mức cao qua mức vòng lặp đến luồng mã máy phần cứng [T2 TVM tr.3-4] [T2 BAMB tr.4].
 
-1.1 Đồ thị tính toán mức cao (High-level computation graph)
------------------------------------------------------------
+1.1 Đồ thị tính toán mức cao
+----------------------------
 
 Ở tầng trên cùng, mô hình được biểu diễn dưới dạng đồ thị có hướng không chu trình (Directed Acyclic Graph - DAG). Mỗi nút đại diện cho một toán tử tính toán (như tích chập Conv2D, hàm kích hoạt ReLU, hoặc phép cộng Add) và mỗi cạnh đại diện cho luồng phụ thuộc dữ liệu của tensor nhiều chiều.
 
@@ -73,8 +73,8 @@ Trong các tác vụ học sâu thông thường, kích thước đầu vào th�
 
 Các phép tối ưu đồ thị phổ biến bao gồm gộp toán tử (operator fusion), tính toán trước các giá trị tĩnh (constant-folding), lập kế hoạch cấp phát bộ nhớ tĩnh cho tensor trung gian, và chuyển đổi layout dữ liệu giữa các toán tử [T2 TVM tr.3].
 
-1.2 Biểu diễn mức vòng lặp (Loop-level IR)
-------------------------------------------
+1.2 IR mức vòng lặp
+-------------------
 
 Sau khi tối ưu ở cấp đồ thị, từng toán tử (hoặc cụm toán tử đã gộp) phải được hạ bậc (lowering) xuống biểu diễn mức vòng lặp. Tại tầng này, một phép toán trừu tượng như tích chập 4 chiều được cụ thể hóa thành các vòng lặp lồng nhau (nested loops) duyệt qua các trục kích thước: batch (N), kênh xuất (C_out), kênh nhập (C_in), chiều cao (H) và chiều rộng (W) [T2 BAMB tr.4].
 
@@ -86,8 +86,8 @@ Biểu diễn mức vòng lặp (chẳng hạn như cây cú pháp AST trong TVM
 - **Quản lý bộ nhớ đệm**: Chèn các thao tác nạp dữ liệu từ bộ nhớ ngoài vào bộ đệm nội bộ và ghi kết quả trở lại (cache_read, cache_write) [T2 TVM tr.4].
 - **Lồng ghép điểm tính (compute_at)**: Xác định vị trí vòng lặp cụ thể mà tensor trung gian sẽ được tính toán, cho phép tính toán theo từng phần nhỏ ngay trước khi toán tử tiêu thụ cần đến [T2 TVM tr.5].
 
-1.3 Lệnh phần cứng (Hardware instructions)
-------------------------------------------
+1.3 Lệnh phần cứng
+------------------
 
 Ở tầng thấp nhất, compiler hạ bậc biểu diễn mức vòng lặp thành luồng lệnh thực thi thực tế của mục tiêu phần cứng. Tùy thuộc vào kiến trúc vi xử lý, tầng này phát sinh mã máy cho CPU/GPU (qua backend LLVM hoặc CUDA), hoặc chuỗi lệnh cấu hình và điều khiển cho NPU [T2 TVM tr.4] [T2 BAMB tr.4]:
 
@@ -111,12 +111,12 @@ TVM tổ chức quá trình biên dịch thành hai giai đoạn phân định r
    - *Complex-out-fusable*: Toán tử tính toán phức tạp có khả năng gộp các phép toán từng phần tử ở ngõ ra (ví dụ: Conv2D, MatMul).
    - *Opaque*: Toán tử đặc thù không hỗ trợ gộp (ví dụ: Sort).
 
-   Dựa trên phân loại này, TVM áp dụng các quy tắc hợp nhất: nhiều toán tử injective có thể gộp thành một injective mới; toán tử reduction có thể gộp với các injective ở đầu vào; và toán tử complex-out-fusable có thể gộp với các injective ở đầu ra [T2 TVM tr.3]. Kết quả là tạo ra các kernel gộp giúp tăng tốc từ 1.2x đến 2x nhờ giảm số lượt truy cập bộ nhớ ngoài [T2 TVM tr.4].
+   Dựa trên phân loại này, TVM áp dụng các quy tắc hợp nhất: nhiều toán tử injective có thể gộp thành một injective mới, toán tử reduction có thể gộp với các injective ở đầu vào, và toán tử complex-out-fusable có thể gộp với các injective ở đầu ra [T2 TVM tr.3]. Kết quả là tạo ra các kernel gộp giúp tăng tốc từ 1.2x đến 2x nhờ giảm số lượt truy cập bộ nhớ ngoài [T2 TVM tr.4].
 
 2. **Tối ưu cấp toán tử**: TVM sử dụng ngôn ngữ biểu thức tensor khai báo (Tensor Expression). Điểm mấu chốt là sự phân tách giữa đặc tả thuật toán (tính cái gì) và cấu hình lịch trình (tính như thế nào) [T2 TVM tr.4]. Kỹ sư hoặc hệ thống tự động có thể thử nghiệm nhiều lịch trình khác nhau (thay đổi kích thước tile, hoán đổi thứ tự vòng lặp) mà không sợ làm sai lệch kết quả toán học.
 
-2.2 Tự tìm lịch tính toán bằng học máy (Auto-tuning / AutoTVM)
---------------------------------------------------------------
+2.2 AutoTVM
+-----------
 
 Không gian lịch trình (schedule space) cho mỗi toán tử là vô cùng rộng lớn: có hàng triệu cách kết hợp kích thước tile, hệ số duỗi lặp và thứ tự vòng lặp. Phương pháp dò tìm hộp đen truyền thống (blackbox auto-tuning) dựa vào việc chạy thử từng cấu hình trên phần cứng thực tế đòi hỏi số lượng phép đo khổng lồ và rất tốn kém [T2 TVM tr.8].
 
@@ -125,6 +125,13 @@ Không gian lịch trình (schedule space) cho mỗi toán tử là vô cùng r�
    "ML-based cost models strike a balance between auto-tuning and predefined cost modeling" [T2 TVM tr.8]
 
 Mô hình chi phí học máy (thường dùng Gradient Boosted Trees - XGBoost hoặc Tree-RNN) nhận đầu vào là các đặc trưng trích xuất từ cây cú pháp của chương trình vòng lặp (Loop AST) và dự đoán độ trễ thực thi [T2 TVM tr.8] [T2 TVM tr.9]. Hệ thống tìm kiếm (schedule explorer) sử dụng mô hình chi phí này để định hướng không gian tìm kiếm, chỉ chọn lọc những cấu hình có triển vọng nhất để thẩm định trên phần cứng thực tế, giúp tăng tốc độ tìm kiếm lịch trình tối ưu lên nhiều lần [T2 TVM tr.8] [T2 TVM tr.9].
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/tvm-01-optimization-and-autotvm.svg
+   :align: center
+   :width: 95%
+   :alt: Kiến trúc tối ưu hai tầng và cơ chế lập lịch tự động AutoTVM
+
+   Kiến trúc compiler TVM: Tối ưu hai tầng (Cấp đồ thị với 4 nhóm toán tử và Operator Fusion, Cấp toán tử với phân tách Compute và Schedule trong Tensor Expression) và hệ thống lập lịch tự động AutoTVM với mô hình chi phí học máy [T2 TVM tr.3-4, tr.8-9].
 
 3. eIQ Neutron
 ==============
@@ -137,11 +144,18 @@ eIQ Neutron của NXP là một trường hợp nghiên cứu điển hình về
 Thay vì thiết kế phần cứng NPU trước rồi mới xây dựng compiler thích nghi sau, eIQ Neutron áp dụng phương pháp đồng thiết kế phần cứng và phần mềm (HW/SW co-design) [T2 BAMB tr.1] [T2 BAMB tr.9]:
 
 - Phần cứng tích hợp mảng tính toán gần bộ nhớ, vi điều khiển nhẹ kiến trúc RISC-V, bộ điều khiển DMA và các khối bộ nhớ đệm nội bộ (SRAM / Tightly Coupled Memory - TCM) chia theo ngân hàng (banks) [T2 BAMB tr.3].
-- Compiler eIQ Neutron chia thành 3 phần: frontend nhập đồ thị mô hình; mid-end chịu trách nhiệm hạ bậc và tối ưu đồ thị thông qua các kỹ thuật then chốt; backend phát sinh luồng lệnh điều khiển cho vi điều khiển RISC-V và bộ điều khiển DMA [T2 BAMB tr.4]:
+- Compiler eIQ Neutron chia thành 3 phần: frontend nhập đồ thị mô hình, mid-end chịu trách nhiệm hạ bậc và tối ưu đồ thị thông qua các kỹ thuật then chốt, và backend phát sinh luồng lệnh điều khiển cho vi điều khiển RISC-V cùng bộ điều khiển DMA [T2 BAMB tr.4]:
 
    "the mid-end lowers and optimizes the graph through tiling, scheduling, and memory allocation" [T2 BAMB tr.4]
 
 Mid-end của eIQ Neutron sử dụng thuật toán giải quy hoạch ràng buộc (Constraint Programming) để giải đồng thời bài toán phân khối không gian (spatial tiling), phân khối thời gian (temporal tiling) và hợp nhất lớp (layer fusion) nhằm đảm bảo toàn bộ tensor trung gian nằm trọn trong SRAM nội bộ [T2 BAMB tr.4] [T2 BAMB tr.7]. Trong đó, spatial tiling khai thác line parallelism (phân chia tính toán theo từng dòng chiều cao outH) để các engine chia sẻ chung trọng số thông qua cơ chế broadcast [T2 BAMB tr.4].
+
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/neu-01-hw-sw-codesign.svg
+   :align: center
+   :width: 95%
+   :alt: Kiến trúc đồng thiết kế HW/SW của eIQ Neutron
+
+   Kiến trúc đồng thiết kế HW/SW trong eIQ Neutron: Bộ giải quy hoạch ràng buộc (CP Solver) ở tầng compiler mid-end điều phối mảng tính toán NPU 4 engine, bộ nhớ TCM đa ngân hàng và cơ chế phát quảng bá trọng số (weight broadcast) theo dòng không gian [T2 BAMB tr.3-5].
 
 3.2 Bài học tổng quát và giới hạn suy diễn
 ------------------------------------------
@@ -152,10 +166,17 @@ Nghiên cứu về eIQ Neutron mang lại kết luận nền tảng cho việc t
 
 Một bộ xử lý có chỉ số TOPS danh định cao nhưng thiếu sự phối hợp giữa dung lượng SRAM và thuật toán compiler sẽ liên tục bị nghẽn ở băng thông DRAM, dẫn đến hiệu năng thực tế kém hơn một bộ xử lý có TOPS thấp hơn nhưng compiler giữ được dữ liệu tính toán hoàn toàn trong SRAM on-chip [T2 BAMB tr.8] [T2 BAMB tr.9].
 
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/neu-02-effective-vs-peak-tops.svg
+   :align: center
+   :width: 95%
+   :alt: Nghịch lý TOPS danh định và băng thông DRAM
+
+   Nghịch lý TOPS danh định và băng thông DRAM: Đối chiếu giữa NPU rời rạc 11 TOPS bị nghẽn bộ nhớ ngoài và eIQ Neutron 2 TOPS có đồng thiết kế HW/SW giữ dữ liệu trong SRAM on-chip [T2 BAMB tr.1, tr.8-9].
+
 **Giới hạn suy diễn khi áp dụng cho phần cứng khác:** eIQ Neutron được xây dựng dựa trên kiến trúc vi điều khiển RISC-V riêng biệt và trình giải quy hoạch ràng buộc chuyên biệt. Kết cấu này không phản ánh toàn bộ các NPU thương mại khác trên thị trường. Các nền tảng thương mại như Rockchip RK3588 sở hữu cấu trúc phần cứng và chuỗi công cụ RKNN độc quyền, không công bố chi tiết thuật toán bên trong. Các kết luận từ eIQ Neutron chỉ dùng để hiểu nguyên lý co-design, không được tự ý gán thông số hay thuật toán sang SoC khác khi chưa có tài liệu kiểm chứng.
 
-4. Cái gì cố định, cái gì chọn được ở compiler
-==============================================
+4. Phần cố định và phần chọn được
+=================================
 
 Khi triển khai mô hình học sâu lên phần cứng chuyên dụng, ranh giới giữa yếu tố phần cứng cố định và quyền quyết định của compiler/người dùng được phân định rõ:
 
@@ -204,8 +225,8 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``TVM``
      - T2
      - :download:`tvm_compiler_2018chen.pdf <../../../_assets/pdf/papers/03_compiler/tvm_compiler_2018chen.pdf>`
-     - 11
+     - 32
    * - ``BAMB``
      - T2
      - :download:`npu_compiler_codesign_2025bamberg.pdf <../../../_assets/pdf/papers/03_compiler/npu_compiler_codesign_2025bamberg.pdf>`
-     - 10
+     - 29

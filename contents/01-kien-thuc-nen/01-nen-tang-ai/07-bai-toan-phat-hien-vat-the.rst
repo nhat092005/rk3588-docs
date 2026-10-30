@@ -26,8 +26,8 @@ Bài toán phát hiện vật thể
    :local:
    :depth: 1
 
-1. Phân loại, phát hiện và phân đoạn
-====================================
+1. So với phân loại và phân đoạn
+================================
 
 Bài toán phân loại ảnh giả định ảnh có một vật chính và chỉ hỏi vật đó thuộc lớp nào. Khi ảnh có nhiều vật, ta cần biết cả lớp lẫn vị trí của từng vật. Sách gọi tác vụ này là object detection. [T2 D2L tr.606]
 
@@ -78,8 +78,8 @@ Sách còn nêu phân đoạn thể hiện (instance segmentation), cần phân 
 
 Trang này chỉ bàn về phát hiện vật thể, tức đầu ra là danh sách hộp chữ nhật kèm lớp và điểm tin cậy (xem Hình 7.1).
 
-2. Bounding box và các định dạng (xyxy, xywh, chuẩn hóa)
-========================================================
+2. Định dạng bounding box
+=========================
 
 Sách dùng hộp chữ nhật (bounding box) để mô tả vị trí vật thể và nêu hai cách biểu diễn. [T2 D2L tr.607]
 
@@ -136,10 +136,19 @@ Mã kiểm tra còn buộc chỉ số lớp nhỏ hơn số lớp khai báo củ
 
 Ngoài các lớp vật thể còn có lớp nền (background). Trong cách gán nhãn dựa trên anchor, một anchor không được gán hộp nào thì mang lớp "background" và gọi là anchor âm, các anchor còn lại gọi là anchor dương. [T2 D2L tr.616] Với detector không dùng anchor, một vị trí không nằm trong hộp nào thì là mẫu âm với nhãn nền :math:`c^* = 0`. [T2 FCOS tr.4]
 
-Trang này không nêu tên hay số lượng lớp của một bộ dữ liệu cụ thể. Phần định nghĩa lớp, cách gộp lớp và số liệu nằm ở :doc:`../../03-phuong-phap/01-du-lieu/02-class-mapping`.
+.. _fig-det-2b-dinh-dang-nhan-va-phan-loai-mau:
 
-4. Kiến trúc detector gồm backbone, neck và head
-================================================
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/07-bai-toan-phat-hien-vat-the/det-2b-dinh-dang-nhan-va-phan-loai-mau.svg
+   :alt: Cấu trúc file nhãn Ultralytics YOLO và cơ chế phân loại Mẫu Dương vs Mẫu Âm
+   :align: center
+   :width: 75%
+
+   Hình 7.2b: Cấu trúc file nhãn Ultralytics (5 giá trị chuẩn hóa [0, 1]) kèm cơ chế ánh xạ từ điển lớp và nguyên lý phân định Mẫu Dương (Foreground) vs Mẫu Âm (Background) trong quá trình huấn luyện detector [T1 ultralytics data/utils.py:340 đến 365, T2 D2L tr.616, T2 FCOS tr.4].
+
+Trang này không nêu tên hay số lượng lớp của một bộ dữ liệu cụ thể.
+
+4. Ba phần của detector
+=======================
 
 Bài YOLOv6 mô tả detector một giai đoạn gồm ba phần. [T2 YOLOv6 tr.3]
 
@@ -264,12 +273,10 @@ Thay vì lấy anchor làm hộp tham chiếu, detector coi mỗi vị trí trê
 
    Hình 7.3: Cơ chế dự đoán vị trí hộp: Trường phái Anchor-based (dự đoán độ lệch so với anchor mẫu) đối chiếu với Anchor-free (dự đoán điểm và 4 khoảng cách :math:`l, t, r, b` tới 4 cạnh hộp) [T2 D2L tr.609 đến 616, T2 FCOS tr.1 đến 4, T2 Sapkota tr.2 đến 3].
 
-Trong họ YOLO, bài khảo sát Sapkota ghi YOLOv2 đưa vào anchor box [T2 Sapkota tr.2] và YOLOv8 dùng đầu dự đoán tách (decoupled head) kiểu anchor-free (xem Hình 7.3). [T2 Sapkota tr.3] Bài YOLOv6 cũng nêu head có thể thuộc loại anchor-based hoặc anchor-free. [T2 YOLOv6 tr.3]
+Trong họ YOLO, bài khảo sát Sapkota ghi YOLOv2 đưa vào anchor box [T2 Sapkota tr.2] và YOLOv8 dùng đầu dự đoán tách (decoupled head) kiểu anchor-free (xem Hình 7.3). [T2 Sapkota tr.3] Bài YOLOv6 cũng nêu head có thể thuộc loại anchor-based hoặc anchor-free. [T2 YOLOv6 tr.3] Quy tắc gán nhãn dương cụ thể của YOLOv8 (Task-Aligned Assigner - TAL) và YOLO26 (nhánh một-một kèm Small-Target-Aware Label Assignment - STAL) được trình bày tại :doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo` (mục 5) và :doc:`../07-yolo/02-bien-doi-do-thi-suy-luan` (mục 3.2).
 
-**unknown:** quy tắc gán mẫu dương cụ thể của YOLOv8 và YOLO26 (assigner). Trang này chỉ nêu cách gán của anchor-based theo D2L và của FCOS. Truy vấn tìm nguồn: "TaskAlignedAssigner" trong ``ultralytics/utils/tal.py`` (T1) và bài YOLO26 mục nói về STAL.
-
-6. Đầu ra thô và giải mã thành box, score và class
-==================================================
+6. Giải mã đầu ra thô
+=====================
 
 Đầu ra thô của detector không phải danh sách box cuối cùng. Với mỗi ứng viên (một anchor hoặc một vị trí), mạng cho điểm các lớp và tham số của hộp. Bước giải mã đổi các tham số đó thành hộp trong tọa độ ảnh.
 
@@ -304,7 +311,7 @@ Với một hộp dự đoán, mạng cho khả năng của từng lớp. Sách 
 
    "Denoting by 𝑝 the largest predicted likelihood, the class corresponding to this probability is the predicted class for 𝐵. Specifically, we refer to 𝑝 as the confidence (score) of the predicted bounding box 𝐵." [T2 D2L tr.619]
 
-Hình dạng và đơn vị cụ thể của đầu ra thô trên board (số cột, tọa độ theo pixel hay chuẩn hóa) phụ thuộc mô hình và đường xuất. Giá trị của dự án nằm ở :doc:`06-huan-luyen-va-suy-luan` mục 3.
+Hình dạng và đơn vị cụ thể của đầu ra thô trên board (số cột, tọa độ theo pixel hay chuẩn hóa) phụ thuộc mô hình và đường xuất. Giá trị của dự án nằm ở :doc:`/contents/07-bang-tra/01-ban-do-code`.
 
 7. Lọc ngưỡng confidence và NMS
 ===============================
@@ -379,23 +386,25 @@ Cả hai kết quả đã đối chiếu bằng script tự viết và bằng ``
 
 Ví dụ cho thấy hai điều. Thứ nhất, ngưỡng cao hơn loại ít hộp hơn. Thứ hai, thứ tự quan trọng: D có IoU 0.6807 với B, nhưng B đã bị loại ở bước chọn A nên không còn gì để so, D được giữ vì IoU với A chỉ 0.4706.
 
-7.3 NMS và lớp
---------------
+7.3 NMS theo từng lớp
+---------------------
 
-Mô tả thuật toán của sách xét các hộp không phải nền mà không nhắc tách theo lớp. [T2 D2L tr.619] Bản NMS trên board của dự án tách theo lớp bằng cách cộng vào tọa độ hộp một độ lệch tỉ lệ với chỉ số lớp (``MAX_WH``) trước khi tính IoU, nên hai hộp khác lớp không bao giờ bị loại nhau. [T3 ai/board/common.py:115]
+Mô tả thuật toán của sách xét các hộp không phải nền mà không nhắc tách theo lớp. [T2 D2L tr.619] Một cách tách theo lớp là cộng vào tọa độ hộp một độ lệch tỉ lệ với chỉ số lớp trước khi tính IoU, nên hai hộp khác lớp không bao giờ loại nhau. Cách dự án làm trên board nằm ở :doc:`/contents/07-bang-tra/01-ban-do-code`.
 
 .. _fig-det-4-thuat-toan-nms-va-batched-nms:
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/07-bai-toan-phat-hien-vat-the/det-4-thuat-toan-nms-va-batched-nms.svg
-   :alt: Diễn biến thuật toán NMS và kỹ thuật Batched NMS trên RK3588
+   :alt: Diễn biến thuật toán NMS và kỹ thuật Batched NMS
    :align: center
    :width: 75%
 
-   Hình 7.4: Diễn biến thuật toán Non-Maximum Suppression (NMS) trên 4 hộp ứng viên ở hai ngưỡng IoU (0.5 và 0.7) cùng kỹ thuật Batched NMS trên phần cứng RK3588 (cộng độ lệch chỉ số lớp) [T2 D2L tr.619, tr.620, T3 ai/board/common.py:22 đến 25, 115, T1 ultralytics engine/exporter.py:682 đến 688].
+   Hình 7.4: Diễn biến thuật toán Non-Maximum Suppression (NMS) trên 4 hộp ứng viên ở hai ngưỡng IoU (0.5 và 0.7) cùng kỹ thuật Batched NMS (cộng độ lệch chỉ số lớp) [T2 D2L tr.619, tr.620].
 
-7.4 Vì sao YOLO26 vẫn cần NMS khi xuất cho RK3588
--------------------------------------------------
+7.4 Đầu một-một không cần NMS
+-----------------------------
 
-Bài FCOS xếp NMS vào bước hậu xử lý duy nhất của detector anchor-free. [T2 FCOS tr.1] YOLO26 có nhánh ``end2end`` (một-một) không cần NMS. Trong bộ xuất của Ultralytics, nếu định dạng nằm trong nhóm ``rknn``, ``ncnn``, ``executorch``, ``paddle``, ``imx``, ``edgetpu``, ``qnn`` thì nhánh ``end2end`` bị tắt với cảnh báo "This export format does not support end2end models, disabling the end2end branch." [T1 ultralytics 8.4.154 engine/exporter.py:682 đến 688] Vì vậy mô hình xuất sang RKNN dùng nhánh một-nhiều và NMS chạy bên ngoài đồ thị (xem Hình 7.4). Thuật ngữ này trùng với mục ``End-to-end head`` trong ``GLOSSARY.md`` của repo. Lý do tắt theo chú thích mã là "formats without top-k support".
+Bài FCOS xếp NMS vào bước hậu xử lý duy nhất của detector anchor-free. [T2 FCOS tr.1] YOLO26 có nhánh ``end2end`` (một-một) không cần NMS (xem :doc:`../07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`).
 
-Số trang D2L là số trang in (bằng số trang PDF trừ 40). Số trang của YOLOv4, FPN, FCOS, YOLOv6 và Sapkota là số trang PDF. Năm hình trong trang là hình gốc cắt từ trang PDF, nội dung giữ nguyên, lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/bai-toan-phat-hien-vat-the/``: Fig. 14.9.1 và 14.4.2 của D2L, Fig. 2 của YOLOv4, Fig. 1 của FPN và Fig. 1 của FCOS. Bốn hình vector SVG minh họa trực quan lưu ở ``_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/07-bai-toan-phat-hien-vat-the/`` do script ``figure_gen`` sinh. Các nhãn T1 ``ultralytics 8.4.154`` dẫn ``file:dòng`` trong ``.venv`` của dự án.
+Liên hệ RK3588: bộ xuất của Ultralytics tắt nhánh ``end2end`` khi xuất sang RKNN, nên NMS vẫn chạy ngoài đồ thị. Chi tiết ở :doc:`Đồ thị xuất và đường RKNN </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn>`.
+
+Số trang D2L là số trang in (bằng số trang PDF trừ 40). Số trang của YOLOv4, FPN, FCOS, YOLOv6 và Sapkota là số trang PDF. Năm hình trong trang là hình gốc cắt từ trang PDF, nội dung giữ nguyên, lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/bai-toan-phat-hien-vat-the/``: Fig. 14.9.1 và 14.4.2 của D2L, Fig. 2 của YOLOv4, Fig. 1 của FPN và Fig. 1 của FCOS. Năm hình vector SVG minh họa trực quan lưu ở ``_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/07-bai-toan-phat-hien-vat-the/`` do script ``figure_gen`` sinh.

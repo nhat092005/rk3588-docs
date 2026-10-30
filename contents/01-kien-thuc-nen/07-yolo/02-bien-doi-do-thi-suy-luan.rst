@@ -10,44 +10,18 @@ Trang này phân tích mối quan hệ giữa pha huấn luyện và cấu trúc
    :local:
    :depth: 2
 
-Huấn luyện tác động gì lên đồ thị suy luận
-==========================================
+1. Từ đồ thị huấn luyện sang suy luận
+=====================================
 
-Quá trình huấn luyện mô hình học sâu và quá trình suy luận thực tế phục vụ hai mục tiêu hoàn toàn khác nhau, dẫn tới sự phân tách rõ rệt về cấu trúc đồ thị tính toán:
+Các biến đổi chung khi chuyển từ huấn luyện sang suy luận nằm ở trang chủ của từng khái niệm:
 
-- Ranh giới giữa đồ thị huấn luyện và đồ thị suy luận:
-  - Đồ thị huấn luyện (training graph): Chứa đầy đủ các nhánh tính toán phục vụ lan truyền thuận và ngược. Đồ thị này bao gồm các tầng chuẩn hóa động (BatchNorm lưu trữ các thống kê trung bình trượt running mean và phương sai trượt running variance), các phép ngẫu nhiên hóa (Dropout, Data Augmentation), các nhánh dự đoán phụ trợ (auxiliary heads), các hàm tổn thất phức tạp (CIoU, BCE, Focal Loss), và các biến trạng thái của thuật toán tối ưu (momentum buffers, second-order moments).
-  - Đồ thị suy luận (inference graph): Là một đồ thị có hướng không chu trình (DAG) tĩnh, chỉ giữ lại các phép tính tất định cần thiết để biến đổi tensor hình ảnh đầu vào thành tensor dự đoán đầu ra. Mọi thành phần phục vụ tính đạo hàm, cập nhật trọng số và tính hàm mất mát đều bị loại bỏ hoàn toàn nhằm giải phóng bộ nhớ và tối ưu tốc độ xử lý.
+- Hai chế độ ``train`` và ``eval``, gradient, Dropout: :doc:`../01-nen-tang-ai/06-huan-luyen-va-suy-luan`.
+- Gộp BatchNorm vào Conv: :doc:`../01-nen-tang-ai/04-chuan-hoa-va-activation` mục 5.
+- Constant folding và loại nhánh chết: :doc:`../04-compiler/02-toi-uu-do-thi-va-operator-fusion` mục 2.
 
-- Chuyển đổi trạng thái mô hình (Train sang Eval):
-  - Khi chuyển từ chế độ huấn luyện sang suy luận (thông qua lệnh ``model.eval()`` trong PyTorch), các lớp ngẫu nhiên bị vô hiệu hóa hoặc chuyển thành phép đồng nhất (Identity).
-  - Các tham số thống kê của lớp chuẩn hóa BatchNorm2d ngừng cập nhật, chuyển sang sử dụng giá trị kỳ vọng :math:`\mu` và phương sai :math:`\sigma^2` cố định đã học được qua toàn bộ tập dữ liệu huấn luyện.
-  - Các nhánh tính toán gradient bị vô hiệu hóa hoàn toàn (tương đương với bối cảnh ``torch.no_grad()``), cho phép giải phóng toàn bộ bộ nhớ đệm lưu trữ các trạng thái kích hoạt trung gian phục vụ lan truyền ngược.
-  - Kích thước tensor đầu vào thường được cố định từ dạng động đa tỷ lệ (dynamic multi-scale từ 320 đến 640 pixel) thành một kích thước tĩnh duy nhất :math:`(1, 3, 640, 640)` nhằm tạo điều kiện cho trình biên dịch phần cứng cấp phát trước bộ nhớ đệm tĩnh.
+Mục này chỉ nêu phần riêng của YOLO26. Mạng duy trì đồng thời nhánh một-nhiều và nhánh một-một lúc huấn luyện, còn đồ thị suy luận bỏ nhánh phụ trợ một-nhiều:
 
-- Cơ chế toán học của phép gộp lớp (Conv-BN Fusion):
-  - Trong quá trình huấn luyện, lớp tích chập Conv và lớp chuẩn hóa BatchNorm2d hoạt động tuần tự. Với đầu vào :math:`x`, lớp Conv tính :math:`y = W x + b`, sau đó BatchNorm chuẩn hóa theo:
-
-    .. math::
-
-       z = \gamma \cdot \frac{y - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta
-
-    trong đó :math:`\mu` và :math:`\sigma^2` là kỳ vọng và phương sai thống kê qua các batch, còn :math:`\gamma, \beta` là các tham số co giãn và dịch chuyển học được.
-
-  - Khi chuyển sang chế độ suy luận, do :math:`\mu, \sigma^2, \gamma, \beta` đã hội tụ thành các hằng số tĩnh, hai phép biến đổi tuyến tính liên tiếp này được gộp toán học thành một lớp tích chập duy nhất:
-
-    .. math::
-
-       W_{fused} = \frac{\gamma}{\sqrt{\sigma^2 + \epsilon}} W, \quad b_{fused} = \frac{\gamma}{\sqrt{\sigma^2 + \epsilon}} (b - \mu) + \beta
-
-    Phép dung hợp này triệt tiêu hoàn toàn các toán tử BatchNorm trong đồ thị ONNX xuất ra, giúp tiết kiệm đáng kể băng thông truy cập bộ nhớ DRAM và loại bỏ chi phí lưu trữ các tensor trung gian giữa Conv và BN.
-
-- Các biến đổi đồ thị khi chuyển sang pha suy luận:
-  - Cắt tỉa nhánh phụ trợ (Auxiliary Branch Pruning): Trong các kiến trúc huấn luyện nâng cao như YOLO26, mạng duy trì đồng thời nhánh một-nhiều và nhánh một-một. Khi chuyển sang suy luận, tác giả khẳng định: "Parameter counts and FLOPs denote the fused inference architecture, which merges Conv/BatchNorm layers and removes the auxiliary one-to-many detection head used during training." [T2 Y26A tr.17]. Nhánh phụ trợ bị cắt bỏ hoàn toàn để tinh gọn đồ thị.
-  - Khóa hằng số (Constant Folding): Các giá trị siêu tham số và ma trận trọng số được cố định thành các hằng số tĩnh, giúp bộ biên dịch phần cứng dễ dàng lập lịch bộ nhớ và phân bổ đệm SRAM.
-  - Tách bỏ nhánh tính toán hàm mất mát: Toàn bộ các toán tử phục vụ tính toán loss như phép tạo lưới anchor, so khớp nhãn ground truth, và tính sai lệch IoU đều bị cắt đứt khỏi đồ thị xuất khẩu.
-  - Tối ưu hóa thứ tự tensor và loại bỏ phép chuyển vị (Transpose Optimization): Các framework huấn luyện PyTorch mặc định định dạng bộ nhớ NCHW, trong khi nhiều kiến trúc NPU phần cứng biên ưa chuộng định dạng NHWC để tối ưu hóa việc nạp dữ liệu vào mảng PE. Quá trình tối ưu hóa đồ thị suy luận thường sắp xếp lại các phép chuyển vị nhằm giảm thiểu số lần hoán vị trục tensor giữa các tầng liền kề.
-  - Khử bỏ các toán tử vô hiệu (Dead Code Elimination): Các nhánh tính toán hoặc biến trung gian chỉ phục vụ mục đích kiểm thử (logging, trích xuất đặc trưng trung gian) trong quá trình huấn luyện đều bị loại bỏ triệt để, đảm bảo đồ thị chỉ chứa đường dẫn tối thiểu từ input đến output.
+   "Parameter counts and FLOPs denote the fused inference architecture, which merges Conv/BatchNorm layers and removes the auxiliary one-to-many detection head used during training." [T2 Y26A tr.17]
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-03-train-to-infer-pipeline.svg
    :align: center
@@ -82,19 +56,12 @@ Quá trình huấn luyện mô hình học sâu và quá trình suy luận thự
      - Hoàn toàn không tác động
      - Cập nhật trọng số tĩnh trong checkpoint, bị gỡ khi export [T2 Y26B tr.7]
 
-Bỏ DFL và tích hợp nhánh một-một (One-to-one Head)
-==================================================
+2. Bỏ DFL và dùng nhánh một-một
+===============================
 
 Sự biến đổi đồ thị rõ rệt nhất giữa YOLOv8 và YOLO26 nằm ở việc tái cấu trúc đầu dự đoán (Detect Head), tác động trực tiếp đến tính khả thi và độ trễ khi triển khai trên phần cứng biên.
 
-Bãi bỏ module phân phối hộp DFL:
-  - Trong YOLOv8, việc ước lượng tọa độ hộp biên dựa trên cơ chế Distribution Focal Loss đòi hỏi mạng phải xuất ra 16 kênh phân phối xác suất rời rạc cho mỗi cạnh hộp [T2 UEVOL tr.10]. Cấu trúc này tạo ra trong đồ thị suy luận các cụm toán tử phức tạp:
-    1. Toán tử ``Reshape`` và ``Transpose`` để tổ chức lại tensor đầu ra từ kích thước đa kênh thành cấu trúc ma trận thuận tiện cho tính toán phân phối xác suất.
-    2. Toán tử ``Softmax`` áp dụng trên từng đoạn 16 bin tọa độ để chuyển đổi các giá trị logit thô thành phân phối xác suất hợp lệ.
-    3. Toán tử tích vô hướng hoặc Conv :math:`1 \times 1` nhân phân phối xác suất với vector hằng số :math:`[0, 1, \dots, 15]` nhằm thu được kỳ vọng tọa độ khoảng cách.
-  - Tác động tiêu cực của DFL trên phần cứng: Các toán tử Softmax yêu cầu tính toán hàm mũ và phép chia dấu phẩy động liên tục trên hàng ngàn điểm ảnh (8,400 anchor ở độ phân giải 640x640), gây khó khăn lớn cho việc lượng tử hóa số nguyên: "On specialized edge hardware (NPUs and DSPs), these Softmax layers are notoriously difficult to quantize and often become the primary latency bottleneck [30]." [T2 Y26A tr.8].
-  - Trong YOLO26, module DFL bị loại bỏ hoàn toàn: "One of the most significant architectural simplifications in YOLO26 is the removal of the Distribution Focal Loss (DFL) module" [T2 Y26B tr.6]. Mô hình quay trở lại chiến lược hồi quy trực tiếp: "YOLO26 reverts to a Direct Regression Strategy, removing this module entirely (see Fig. 4)." [T2 Y26A tr.8].
-  - Hệ quả trên đồ thị: Đầu ra tọa độ hộp của YOLO26 là một phép chiếu affine thuần túy qua lớp tích chập với số kênh ra bằng 4 (tương ứng tham số cấu hình ``reg_max=1``) [T1 yolo26.yaml:10]. Đồ thị suy luận trở nên hoàn toàn tuyến tính, không còn các toán tử Softmax phân mảnh, cho phép bộ biên dịch dung hợp các lớp tính toán một cách tối ưu và tạo điều kiện thuận lợi cho việc lượng tử hóa INT8 thuần số nguyên.
+Cấu trúc đầu DFL của YOLOv8, đầu hồi quy trực tiếp của YOLO26 và cơ chế nhánh một-một nằm ở :doc:`01-kien-truc-va-khoi-cau-thanh-yolo` mục 5. Mục này chỉ xét thay đổi trên đồ thị suy luận.
 
 So sánh luồng giải mã tọa độ hộp trên đồ thị:
   - Đường ống giải mã của YOLOv8:
@@ -118,15 +85,11 @@ Tác động đến lượng tử hóa số nguyên (INT8 Quantization):
   - Mỗi kênh hộp của YOLO26 chỉ cần xác định một cặp tham số lượng tử hóa :math:`(S, Z)` tĩnh thông qua phương pháp hiệu chuẩn phân kỳ KL (Kullback-Leibler) hoặc MSE trên tập dữ liệu đại diện. Điều này giúp loại bỏ hoàn toàn hiện tượng bão hòa hoặc sai số tràn số thường gặp khi lượng tử hóa các hàm phi tuyến tính như Softmax.
 
 Tích hợp nhánh một-một và cơ chế NMS-free:
-  - Ở các mô hình truyền thống, cơ chế gán nhãn một-nhiều khiến đồ thị suy luận luôn tạo ra nhiều hộp chồng lấn, buộc phải ghép thêm thuật toán Non-Maximum Suppression (NMS) ở khâu hậu kỳ để lọc bỏ hộp dư thừa [T2 Y26A tr.7]. NMS có độ phức tạp thuật toán biến thiên theo số lượng đối tượng trong ảnh, gây dao động độ trễ và khó thực thi hiệu quả trên các nhân tính toán song song tĩnh của NPU.
-  - YOLO26 áp dụng cơ chế huấn luyện đối sánh một-một: "By redesigning the prediction head to support one-to-one label assignment [24], the model learns to output a single, definitive box per object instance during training." [T2 Y26A tr.7].
-  - Nhờ cơ chế này, mô hình học được cách dự đoán chính xác một hộp giới hạn duy nhất cho mỗi đối tượng: "YOLO26 fundamentally redesigns the prediction head to produce direct, non-redundant bounding box predictions without the need for NMS" [T2 Y26B tr.7].
-  - Hệ quả kiến trúc: Đồ thị suy luận đạt được tính chất thời gian thực đơn định (deterministic latency), triệt tiêu hoàn toàn sự phụ thuộc vào các thuật toán NMS hậu kỳ: "By removing the computational burden of DFL and adopting a native one-to-one prediction head, YOLO26 achieves deterministic inference times" [T2 Y26A tr.5].
   - Cơ chế lọc hậu kỳ tĩnh: Khi xuất mô hình với cờ ``end2end: True`` [T1 yolo26.yaml:9], khâu hậu kỳ chỉ bao gồm việc nhân ngưỡng tin cậy và trích chọn :math:`K` dự đoán hàng đầu thông qua hàm ``topk`` cố định (như 100 hoặc 300 đối tượng) [T1 ultralytics/nn/modules/head.py]. Các toán tử này có khối lượng tính toán cố định và hoàn toàn độc lập với mật độ vật thể trong cảnh quay.
   - Đánh giá độ chính xác: Trên tập dữ liệu COCO val, nhánh một-một của YOLO26n đạt 40.1% mAP (theo đánh giá end-to-end), trong khi nhánh một-nhiều khi dùng NMS truyền thống đạt 40.9% mAP [T2 YOFF tr.14]. Sự chênh lệch 0.8% mAP là mức đánh đổi hợp lý để đổi lấy khả năng thực thi thời gian thực ổn định và đơn giản hóa đồ thị triển khai.
 
-Các cải tiến chỉ ở pha huấn luyện không đổi đồ thị suy luận (ProgLoss, STAL, MuSGD)
-===================================================================================
+3. Cải tiến chỉ ở pha huấn luyện
+================================
 
 Bên cạnh các thay đổi về cấu trúc mạng, YOLO26 giới thiệu ba kỹ thuật huấn luyện đột phá nhằm cải thiện độ chính xác và tốc độ hội tụ mà hoàn toàn không làm phát sinh thêm bất kỳ chi phí tính toán hay thay đổi nào trong đồ thị suy luận ONNX xuất ra.
 
@@ -156,26 +119,23 @@ Bên cạnh các thay đổi về cấu trúc mạng, YOLO26 giới thiệu ba k
   - Hiệu quả huấn luyện: MuSGD giúp mô hình đạt độ chính xác cao hơn với số lượng epoch ít hơn (giảm từ 600 epoch xuống còn 500 epoch trên tập COCO), rút ngắn chu kỳ huấn luyện và tiết kiệm năng lượng tính toán [T2 YOFF tr.12].
   - Tính chất đối với đồ thị suy luận: Sau khi hoàn thành huấn luyện, bộ tối ưu hóa MuSGD được giải phóng khỏi bộ nhớ, chỉ còn lại các giá trị trọng số tĩnh được lưu trong tệp mô hình. Đồ thị suy luận không chứa bất kỳ dấu vết nào của thuật toán tối ưu.
 
-Điều chưa biết (unknown: hành vi suy luận cụ thể trên các runtime độc quyền)
-============================================================================
+4. Điều chưa biết
+=================
 
 Mặc dù các tài liệu công bố chính thức đã chứng minh ưu thế lý thuyết của kiến trúc YOLO26 trên môi trường GPU và CPU chuẩn, việc ứng dụng mô hình này trên các bộ xử lý thần kinh biên (Edge NPU) vẫn tồn tại các điểm chưa được làm sáng tỏ trong y văn:
 
 - Sự đánh đổi giữa nhánh một-một và nhánh một-nhiều sau lượng tử hóa INT8:
-  - unknown. Đã tìm ở: YOFF tr.14, Y26A tr.8, Y26B tr.5, từ khóa: "NPU runtime", "INT8 quantization degradation", "proprietary compiler".
   - Hiện tại, các tài liệu T2 mới chỉ cung cấp số liệu so sánh mAP giữa nhánh một-một (40.1%) và một-nhiều (40.9%) ở độ chính xác số thực FP32 trên GPU máy chủ [T2 YOFF tr.14]. Mức độ suy giảm độ chính xác khi lượng tử hóa INT8 (PTQ/QAT) đối với nhánh một-một nhạy cảm trên các trình biên dịch NPU độc quyền của từng hãng sản xuất chip vẫn chưa được công bố bằng thực nghiệm độc lập.
 
 - Mức độ tối ưu hóa phần cứng cho các toán tử Pointwise Self-Attention:
-  - unknown. Đã tìm ở: YOFF tr.11, Y26A tr.22, từ khóa: "attention NPU acceleration", "MatMul fusion", "SRAM buffer allocation".
   - Mặc dù cơ chế Attention trong C2PSA và C3k2 chỉ hoạt động trên lưới :math:`20 \times 20` (400 token) nhằm hạn chế FLOPs, khả năng các trình biên dịch NPU độc quyền có dung hợp hiệu quả toán tử ``MatMul`` và ``Softmax`` vào bộ nhớ đệm SRAM trên chip hay không phụ thuộc hoàn toàn vào kiến trúc nội bộ của từng bộ tăng tốc.
   - Thao tác hoán vị trục bộ nhớ (transpose và reshape) cần thiết cho Attention có nguy cơ phá vỡ luồng truyền dữ liệu liên tục (streaming dataflow) vốn được tối ưu hóa cho các toán tử tích chập truyền thống trên phần cứng NPU.
 
 - Khả năng tương thích của nhánh gán nhãn một-một trên các pipeline suy luận lai:
-  - unknown. Đã tìm ở: YOFF tr.6, Y26A tr.5, từ khóa: "hybrid inference pipeline", "raw output export", "NPU driver postprocessing".
   - Các tài liệu T2 tập trung vào đường suy luận end-to-end trên nền tảng PyTorch/TensorRT. Tuy nhiên, khi triển khai trên các hệ thống nhúng thực tế, việc xuất toàn bộ đầu dự đoán lên NPU hay chỉ xuất các tensor đặc trưng thô để CPU xử lý hậu kỳ là một quyết định kiến trúc phụ thuộc vào năng lực của từng driver phần cứng. Vấn đề khảo sát thực nghiệm và các điểm nghẽn chuyển đổi cụ thể của YOLO trên vi xử lý Rockchip RK3588 được trình bày chi tiết tại chuyên đề :doc:`../../02-nen-tang-rk3588/05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn`.
 
-Nguồn tài liệu tham khảo
-========================
+Nguồn
+=====
 
 Các tài liệu kỹ thuật và bài báo hội thảo chính thức được sử dụng để đối chiếu dữ liệu trong trang này:
 
@@ -199,10 +159,6 @@ Các tài liệu kỹ thuật và bài báo hội thảo chính thức được 
      - T2
      - :download:`yolo26_arch_2025sapkota.pdf <../../../_assets/pdf/papers/09_yolo_architecture/yolo26_arch_2025sapkota.pdf>`
      - Sapkota et al. (2025), khảo sát cấu trúc mạng và tối ưu hóa phần cứng
-   * - ``UEVOL``
-     - T2
-     - :download:`ultralytics_yolo_evolution_2025sapkota.pdf <../../../_assets/pdf/papers/09_yolo_architecture/ultralytics_yolo_evolution_2025sapkota.pdf>`
-     - Sapkota et al. (2025), tổng quan tiến trình tiến hóa họ mạng Ultralytics
    * - ``T1``
      - T1
      - Tệp cấu hình ``yolo26.yaml`` và mã nguồn Ultralytics

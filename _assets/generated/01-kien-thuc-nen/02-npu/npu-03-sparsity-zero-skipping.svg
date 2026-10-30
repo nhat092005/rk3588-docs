@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 510" width="880" height="510" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="510" fill="white"/>
+<defs><marker id="mD97706n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#D97706"/></marker></defs>
+<rect x="750" y="12" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="23.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="18" y="22" font-size="13.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế Sparsity và Zero-skipping trong Phần cứng Bộ tăng tốc AI / NPU</text>
+<text x="18" y="36" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Nguồn dữ liệu thưa (ReLU/Pruning), 3 khối phần cứng khai thác và đánh đổi kiến trúc [Chen 2016, Jouppi 2017]</text>
+<rect x="18" y="48" width="246" height="420" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="18" y="48" width="246" height="32" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<rect x="26" y="54" width="5" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="36" y="61" font-size="9.6" font-weight="700" fill="#0F172A" text-anchor="start" dominant-baseline="central">A. Nguồn Dữ liệu Thưa (Sparsity)</text>
+<text x="36" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Hai nguồn phát sinh số 0 trong suy luận</text>
+<rect x="24" y="86" width="234" height="134" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="86" width="234" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="94" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Activation Sparsity (Hàm kích hoạt)</text>
+<text x="30" y="110" font-size="6.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">ReLU biến toàn bộ giá trị âm thành 0:</text>
+<text x="30" y="122" font-size="6.8" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">f(x) = max(0, x)</text>
+<rect x="28" y="132" width="42" height="15" rx="2" fill="#F1F5F9" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="49.0" y="139.5" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-1.4</text>
+<rect x="73" y="132" width="42" height="15" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="94.0" y="139.5" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.7</text>
+<rect x="118" y="132" width="42" height="15" rx="2" fill="#F1F5F9" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="139.0" y="139.5" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-0.8</text>
+<rect x="163" y="132" width="42" height="15" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="184.0" y="139.5" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+2.3</text>
+<rect x="208" y="132" width="42" height="15" rx="2" fill="#F1F5F9" stroke="#94A3B8" stroke-width="0.8"/>
+<text x="229.0" y="139.5" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-0.5</text>
+<path d="M121 148 L121 163" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<text x="129.0" y="155.5" font-size="6.6" font-weight="700" fill="#1E5BB8" text-anchor="start" dominant-baseline="central">ReLU -&gt; biến âm thành 0</text>
+<rect x="28" y="165" width="42" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="49.0" y="172.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.0</text>
+<rect x="73" y="165" width="42" height="15" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="94.0" y="172.5" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.7</text>
+<rect x="118" y="165" width="42" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="139.0" y="172.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.0</text>
+<rect x="163" y="165" width="42" height="15" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="184.0" y="172.5" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+2.3</text>
+<rect x="208" y="165" width="42" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="229.0" y="172.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0.0</text>
+<rect x="28" y="186" width="226" height="26" rx="3" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="0.8"/>
+<text x="32" y="193" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">• Cnvlutin: 44% activation bằng 0</text>
+<text x="32" y="204" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">  (do ReLU biến âm thành 0) [Jouppi 2017]</text>
+<rect x="24" y="226" width="234" height="136" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="226" width="234" height="16" rx="3" fill="#F0FDF4" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="234" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">2. Weight Sparsity (Cắt tỉa trọng số)</text>
+<text x="30" y="250" font-size="6.8" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">Lọc bỏ trọng số nhỏ (|w| &lt; ngưỡng theta):</text>
+<rect x="36" y="260" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="47.0" y="266.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.9</text>
+<rect x="60" y="260" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="71.0" y="266.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-0.1</text>
+<rect x="84" y="260" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="95.0" y="266.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.4</text>
+<rect x="36" y="275" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="47.0" y="281.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-0.0</text>
+<rect x="60" y="275" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="71.0" y="281.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+1.8</text>
+<rect x="84" y="275" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="95.0" y="281.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.0</text>
+<rect x="36" y="290" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="47.0" y="296.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.3</text>
+<rect x="60" y="290" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="71.0" y="296.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-0.0</text>
+<rect x="84" y="290" width="22" height="13" rx="1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="0.7"/>
+<text x="95.0" y="296.5" font-size="6.6" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-1.2</text>
+<path d="M112 281.5 L134 281.5" fill="none" stroke="#2E7D32" stroke-width="1.2" marker-end="url(#m2E7D32n)"/>
+<text x="123" y="273.5" font-size="6.6" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Prune</text>
+<rect x="140" y="260" width="22" height="13" rx="1" fill="#ECFDF5" stroke="#10B981" stroke-width="0.7"/>
+<text x="151.0" y="266.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.9</text>
+<rect x="164" y="260" width="22" height="13" rx="1" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.7"/>
+<text x="175.0" y="266.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace"> 0  </text>
+<rect x="188" y="260" width="22" height="13" rx="1" fill="#ECFDF5" stroke="#10B981" stroke-width="0.7"/>
+<text x="199.0" y="266.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.4</text>
+<rect x="140" y="275" width="22" height="13" rx="1" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.7"/>
+<text x="151.0" y="281.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace"> 0  </text>
+<rect x="164" y="275" width="22" height="13" rx="1" fill="#ECFDF5" stroke="#10B981" stroke-width="0.7"/>
+<text x="175.0" y="281.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+1.8</text>
+<rect x="188" y="275" width="22" height="13" rx="1" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.7"/>
+<text x="199.0" y="281.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace"> 0  </text>
+<rect x="140" y="290" width="22" height="13" rx="1" fill="#ECFDF5" stroke="#10B981" stroke-width="0.7"/>
+<text x="151.0" y="296.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+0.3</text>
+<rect x="164" y="290" width="22" height="13" rx="1" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.7"/>
+<text x="175.0" y="296.5" font-size="6.6" font-weight="700" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace"> 0  </text>
+<rect x="188" y="290" width="22" height="13" rx="1" fill="#ECFDF5" stroke="#10B981" stroke-width="0.7"/>
+<text x="199.0" y="296.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-1.2</text>
+<text x="48" y="313" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Ma trận Dense</text>
+<text x="150" y="313" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Ma trận Sparse (Thưa)</text>
+<rect x="28" y="320" width="226" height="36" rx="3" fill="#ECFDF5" stroke="#34D399" stroke-width="0.8"/>
+<text x="32" y="328" font-size="6.8" font-weight="700" fill="#065F46" text-anchor="start" dominant-baseline="central">• EIE: giảm trọng số ~10 lần nhờ pruning,</text>
+<text x="32" y="339" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">  kết hợp mã hóa Huffman nén [Jouppi 2017]</text>
+<text x="32" y="349" font-size="6.6" font-weight="400" fill="#059669" text-anchor="start" dominant-baseline="central" font-style="italic">  (áp dụng trên AlexNet / VGG-16)</text>
+<rect x="24" y="368" width="234" height="94" rx="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="30" y="379" font-size="7.0" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Đặc tính đại số của số 0 trong MAC:</text>
+<text x="30" y="394" font-size="6.8" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tích số: 0 x W = 0  hoặc  A x 0 = 0</text>
+<text x="30" y="408" font-size="6.8" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tích lũy: Psum_mới = Psum_cũ + 0 = Psum_cũ</text>
+<text x="30" y="423" font-size="6.8" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">=&gt; Bỏ qua MAC không làm đổi kết quả!</text>
+<text x="30" y="442" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-style="italic">Lưu ý: Tỷ lệ 0 của YOLO cụ thể là unknown</text>
+<rect x="270" y="48" width="318" height="420" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="270" y="48" width="318" height="32" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="278" y="54" width="5" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="288" y="61" font-size="9.6" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">B. 3 Khối Phần cứng Khai thác Sparsity</text>
+<text x="288" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Vi kiến trúc nhận diện, bỏ qua và nén dữ liệu [Chen 2016]</text>
+<rect x="276" y="86" width="306" height="78" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="276" y="86" width="306" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="282" y="94" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Zero Detector (Mạch nhận biết số 0)</text>
+<rect x="282" y="112" width="58" height="24" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.0"/>
+<text x="311" y="119" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Feature A</text>
+<text x="311" y="129" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">(hoặc W)</text>
+<path d="M340 124 L358 124" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<rect x="358" y="110" width="102" height="28" rx="3" fill="#F8FAFC" stroke="#444444" stroke-width="1.0"/>
+<text x="409" y="119" font-size="6.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Zero Detector</text>
+<text x="409" y="130" font-size="6.6" font-weight="400" fill="#2563EB" text-anchor="middle" dominant-baseline="central">So sánh A == 0 ?</text>
+<path d="M460 117 L484 117" fill="none" stroke="#2E7D32" stroke-width="1.2" marker-end="url(#m2E7D32n)"/>
+<rect x="484" y="108" width="88" height="16" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="528" y="116" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">!=0: Thực thi MAC</text>
+<path d="M460 131 L484 131" fill="none" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<rect x="484" y="125" width="88" height="16" rx="2" fill="#FEF2F2" stroke="#C62828" stroke-width="0.8"/>
+<text x="528" y="133" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">==0: Bỏ qua / Gate</text>
+<text x="282" y="151" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Kiểm tra bit dữ liệu trước khi phát lệnh đọc bộ nhớ và cấp xung clock</text>
+<rect x="276" y="170" width="306" height="144" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="276" y="170" width="306" height="16" rx="3" fill="#ECFDF5" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="282" y="178" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">2. Zero-skipping Execution &amp; Clock Gating</text>
+<rect x="282" y="194" width="74" height="20" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="0.9"/>
+<text x="319" y="204" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Nạp W từ RF</text>
+<path d="M356 204 L374 204" fill="none" stroke="#1E5BB8" stroke-width="1.1" marker-end="url(#m1E5BB8n)"/>
+<rect x="374" y="194" width="84" height="20" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.9"/>
+<text x="416" y="204" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">ALU MAC (* +)</text>
+<path d="M458 204 L476 204" fill="none" stroke="#2E7D32" stroke-width="1.1" marker-end="url(#m2E7D32n)"/>
+<rect x="476" y="194" width="94" height="20" rx="2" fill="#DCFCE7" stroke="#2E7D32" stroke-width="0.9"/>
+<text x="523" y="204" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">Psum += A * W</text>
+<rect x="282" y="220" width="74" height="20" rx="2" fill="#FEF2F2" stroke="#C62828" stroke-width="0.9"/>
+<text x="319" y="230" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Skip nạp W</text>
+<path d="M356 230 L374 230" fill="none" stroke="#C62828" stroke-width="1.1" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<rect x="374" y="220" width="84" height="20" rx="2" fill="#FEF2F2" stroke="#C62828" stroke-width="0.9"/>
+<text x="416" y="230" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Clock Gating ALU</text>
+<path d="M458 230 L476 230" fill="none" stroke="#777777" stroke-width="1.1" marker-end="url(#m777777n)"/>
+<rect x="476" y="220" width="94" height="20" rx="2" fill="#F8FAFC" stroke="#777777" stroke-width="0.9"/>
+<text x="523" y="230" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Psum giữ nguyên</text>
+<rect x="280" y="246" width="298" height="58" rx="3" fill="#F0FDF4" stroke="#22C55E" stroke-width="0.8"/>
+<text x="284" y="254" font-size="6.8" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">Hai lợi ích phần cứng theo Chen 2016 tr.7:</text>
+<text x="284" y="266" font-size="6.6" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">1. Memory Skip: Chỉ đọc dữ liệu khác 0, tránh nạp W thừa</text>
+<text x="284" y="278" font-size="6.6" font-weight="400" fill="#166534" text-anchor="start" dominant-baseline="central">2. MAC Gating: Tắt xung clock ALU khi nhân 0, triệt tiêu</text>
+<text x="284" y="291" font-size="6.6" font-weight="400" fill="#14532D" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">   công suất chuyển mạch động (P_dyn = alpha * C * V^2 * f)</text>
+<rect x="276" y="320" width="306" height="142" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="276" y="320" width="306" height="16" rx="3" fill="#FFFBEB" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="282" y="328" font-size="7.2" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">3. Sparse Data Compression (Mã hóa RLE)</text>
+<text x="282" y="344" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Dữ liệu thưa chưa nén (8 phần tử = 8 giá trị):</text>
+<rect x="284" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="301.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="320" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="337.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="356" y="354" width="34" height="15" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="373.0" y="361.5" font-size="6.6" font-weight="700" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">+5</text>
+<rect x="392" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="409.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="428" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="445.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="464" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="481.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="500" y="354" width="34" height="15" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="517.0" y="361.5" font-size="6.6" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">0</text>
+<rect x="536" y="354" width="34" height="15" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="553.0" y="361.5" font-size="6.6" font-weight="700" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">-3</text>
+<path d="M409 370 L409 385" fill="none" stroke="#D97706" stroke-width="1.2" marker-end="url(#mD97706n)"/>
+<text x="417.0" y="377.5" font-size="6.6" font-weight="700" fill="#D97706" text-anchor="start" dominant-baseline="central">Mã hóa Run-Length (RLE)</text>
+<rect x="294" y="387" width="126" height="17" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="357" y="395.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">(run=2 zeros, val=+5)</text>
+<rect x="428" y="387" width="126" height="17" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="491" y="395.5" font-size="6.6" font-weight="400" fill="#047857" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">(run=4 zeros, val=-3)</text>
+<rect x="280" y="409" width="298" height="36" rx="3" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="284" y="417" font-size="6.8" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Tác dụng nén phần cứng [Chen 2016 tr.7, Jouppi 2017 tr.14]:</text>
+<text x="284" y="428" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Giảm dung lượng SRAM và DRAM cần lưu trữ</text>
+<text x="284" y="438" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Giảm lưu lượng truyền qua mạng NoC / bus kết nối</text>
+<rect x="596" y="48" width="266" height="420" rx="6" fill="#F8FAFC" stroke="#64748B" stroke-width="1.2"/>
+<rect x="596" y="48" width="266" height="32" rx="6" fill="#FFFFFF" stroke="#64748B" stroke-width="1.0"/>
+<rect x="604" y="54" width="5" height="20" rx="2" fill="#7C3AED" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="614" y="61" font-size="9.6" font-weight="700" fill="#4C1D95" text-anchor="start" dominant-baseline="central">C. So sánh Kiến trúc &amp; Đánh đổi</text>
+<text x="614" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">TPU vs Eyeriss vs RK3588 &amp; Giới hạn [Jouppi, TRM]</text>
+<rect x="602" y="86" width="254" height="186" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="602" y="86" width="254" height="16" rx="3" fill="#F5F3FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="608" y="94" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="start" dominant-baseline="central">1. 3 Hướng Tiếp cận Kiến trúc</text>
+<rect x="606" y="106" width="246" height="42" rx="3" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="610" y="115" font-size="6.8" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">Google TPU v1: Bỏ qua Sparsity</text>
+<text x="610" y="126" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central" font-style="italic">&#x27;Omitted for time-to-deploy reasons&#x27; [Jouppi tr.3]</text>
+<text x="610" y="137" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Ma trận dày, tính đủ 0xW, thông lượng cố định</text>
+<rect x="606" y="152" width="246" height="42" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="610" y="161" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">MIT Eyeriss: Khai thác toàn diện</text>
+<text x="610" y="172" font-size="6.6" font-weight="400" fill="#065F46" text-anchor="start" dominant-baseline="central">Tích hợp RLE + Zero-gating + Skip MAC</text>
+<text x="610" y="183" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Tiết kiệm năng lượng PE và giảm lưu lượng NoC</text>
+<rect x="606" y="198" width="246" height="68" rx="3" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="610" y="207" font-size="6.8" font-weight="700" fill="#1D4ED8" text-anchor="start" dominant-baseline="central">Rockchip RK3588: CNA FC Zero-skipping</text>
+<text x="610" y="218" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="start" dominant-baseline="central" font-style="italic">&#x27;Feature=0 -&gt; weight is not fetched&#x27; [TRM1 tr.2006]</text>
+<text x="610" y="230" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Bật qua cna_fc_con0/1/2, conv_mode=3, bypass BS</text>
+<text x="610" y="243" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">[Unknown]: MAC array có clock gating hay không</text>
+<text x="610" y="255" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">(TRM không khẳng định bỏ phép nhân trong lõi)</text>
+<rect x="602" y="278" width="254" height="184" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="602" y="278" width="254" height="16" rx="3" fill="#F5F3FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="608" y="286" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="start" dominant-baseline="central">2. Tốc độ Tăng tốc: Lý thuyết vs Thực tế</text>
+<rect x="606" y="298" width="246" height="32" rx="3" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="0.8"/>
+<text x="610" y="307" font-size="6.6" font-weight="400" fill="#5B21B6" text-anchor="start" dominant-baseline="central">Công thức Speedup lý thuyết (z = tỷ lệ zero):</text>
+<text x="729.0" y="320" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="middle" dominant-baseline="central">Speedup = 1 / (1 - z)</text>
+<rect x="606" y="334" width="246" height="46" rx="3" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="610" y="344" font-size="6.6" font-weight="700" fill="#334155" text-anchor="start" dominant-baseline="central">Với z = 44% (Cnvlutin [Jouppi 2017]):</text>
+<text x="610" y="356" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="start" dominant-baseline="central">• Lý thuyết tối đa: 1 / (1 - 0.44) = 1.79x</text>
+<text x="610" y="368" font-size="6.6" font-weight="700" fill="#D97706" text-anchor="start" dominant-baseline="central">• Thực tế Cnvlutin: đạt trung bình 1.40x</text>
+<text x="608" y="390" font-size="6.6" font-weight="700" fill="#475569" text-anchor="start" dominant-baseline="central">Lý do thực tế thấp hơn (Overhead phần cứng):</text>
+<text x="608" y="402" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Chi phí trễ nhận diện số 0 và giải nén RLE</text>
+<text x="608" y="414" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Mất cân bằng tải (workload imbalance) giữa PE</text>
+<rect x="606" y="424" width="246" height="32" rx="3" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="610" y="434" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">Kết luận: Bỏ qua 0 chỉ có lợi khi phần cứng</text>
+<text x="610" y="446" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">được thiết kế cho nó và dữ liệu đủ thưa!</text>
+<text x="10" y="496" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 Chen 2016 tr.7 (Eyeriss Sparsity &amp; RLE); T2 Jouppi 2017 tr.3, tr.14 (TPU Dense, Cnvlutin, EIE); T1 TRM1 tr.2006, tr.2055 (RK3588 CNA).</text>
+</svg>

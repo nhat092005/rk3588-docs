@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 510" width="880" height="510" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="510" fill="white"/>
+<defs><marker id="mD97706n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#D97706"/></marker></defs>
+<rect x="750" y="12" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="23.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="18" y="22" font-size="13.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Kiến trúc Compiler TVM: Tối ưu Hai Tầng và Lập lịch Tự động AutoTVM</text>
+<text x="18" y="36" font-size="7.5" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Phân loại toán tử, Operator Fusion, phân tách Compute/Schedule và mô hình chi phí ML [Chen et al., OSDI 2018]</text>
+<rect x="18" y="48" width="416" height="420" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
+<rect x="18" y="48" width="416" height="32" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
+<rect x="26" y="54" width="5" height="20" rx="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
+<text x="36" y="61" font-size="9.6" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">A. Hai Tầng Tối ưu: Cấp Đồ thị &amp; Cấp Toán tử</text>
+<text x="36" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">4 nhóm toán tử, Operator Fusion và phân tách Compute vs Schedule [T2 TVM tr.3-4]</text>
+<rect x="24" y="86" width="404" height="196" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="86" width="404" height="16" rx="3" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="94" font-size="7.2" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Tối ưu Cấp Đồ thị &amp; 4 Nhóm Toán tử (Operator Fusion)</text>
+<rect x="28" y="108" width="96" height="28" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="76.0" y="116" font-size="6.6" font-weight="700" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">Injective (1-1)</text>
+<text x="76.0" y="127" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">ReLU, Add, BiasAdd</text>
+<rect x="127" y="108" width="96" height="28" rx="2" fill="#FEF3C7" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="175.0" y="116" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">Reduction (Gom)</text>
+<text x="175.0" y="127" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">Sum, Max pooling</text>
+<rect x="226" y="108" width="96" height="28" rx="2" fill="#F3E8FF" stroke="#A855F7" stroke-width="0.8"/>
+<text x="274.0" y="116" font-size="6.6" font-weight="700" fill="#7E22CE" text-anchor="middle" dominant-baseline="central">Complex-out-fusable</text>
+<text x="274.0" y="127" font-size="6.6" font-weight="400" fill="#6B21A8" text-anchor="middle" dominant-baseline="central">Conv2D, MatMul</text>
+<rect x="325" y="108" width="96" height="28" rx="2" fill="#F1F5F9" stroke="#64748B" stroke-width="0.8"/>
+<text x="373.0" y="116" font-size="6.6" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">Opaque (Khó gộp)</text>
+<text x="373.0" y="127" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Sort, toán tử đặc thù</text>
+<text x="30" y="149" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Chưa gộp (Unfused): 3 kernel riêng biệt, tensor trung gian qua DRAM:</text>
+<rect x="30" y="156" width="76" height="20" rx="2" fill="#F3E8FF" stroke="#A855F7" stroke-width="0.9"/>
+<text x="68" y="166" font-size="6.6" font-weight="700" fill="#7E22CE" text-anchor="middle" dominant-baseline="central">Conv2D [Complex]</text>
+<path d="M106 166 L128 166" fill="none" stroke="#C62828" stroke-width="1.1" marker-end="url(#mC62828n)"/>
+<rect x="128" y="156" width="78" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.9"/>
+<text x="167" y="166" font-size="6.6" font-weight="400" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">BiasAdd [Injective]</text>
+<path d="M206 166 L228 166" fill="none" stroke="#C62828" stroke-width="1.1" marker-end="url(#mC62828n)"/>
+<rect x="228" y="156" width="68" height="20" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.9"/>
+<text x="262" y="166" font-size="6.6" font-weight="400" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">ReLU [Injective]</text>
+<rect x="304" y="156" width="118" height="20" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="363" y="166" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">3 lần đọc/ghi DRAM nghẽn bus!</text>
+<text x="30" y="189" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Đã gộp (Fused): 1 kernel hợp nhất, dữ liệu giữ trọn trong thanh ghi/SRAM:</text>
+<rect x="30" y="196" width="266" height="22" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="1.2"/>
+<text x="163" y="207" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Fused Kernel: [ Conv2D + BiasAdd + ReLU ]</text>
+<rect x="304" y="196" width="118" height="22" rx="2" fill="#F0FDF4" stroke="#22C55E" stroke-width="0.8"/>
+<text x="363" y="203.5" font-size="6.8" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">Tăng tốc 1.2x - 2.0x</text>
+<text x="363" y="212.5" font-size="6.6" font-weight="400" fill="#166534" text-anchor="middle" dominant-baseline="central">Triệt tiêu ghi bộ nhớ ngoài</text>
+<rect x="28" y="224" width="396" height="46" rx="3" fill="#EFF6FF" stroke="#3B82F6" stroke-width="0.8"/>
+<text x="32" y="232" font-size="6.8" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Quy tắc hợp nhất toán tử của TVM [T2 TVM tr.3]:</text>
+<text x="32" y="244" font-size="6.6" font-weight="400" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">• Injective + Injective -&gt; Injective mới  |  Reduction + Injective đầu vào -&gt; Gộp</text>
+<text x="32" y="256" font-size="6.6" font-weight="400" fill="#1E3A8A" text-anchor="start" dominant-baseline="central">• Complex-out-fusable (Conv2D) gộp toàn bộ toán tử Injective ở ngõ ra thành 1 kernel duy nhất</text>
+<rect x="24" y="288" width="404" height="174" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="24" y="288" width="404" height="16" rx="3" fill="#F0FDF4" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="30" y="296" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">2. Tối ưu Cấp Toán tử: Phân tách Compute vs Schedule (Tensor Expression)</text>
+<rect x="28" y="310" width="194" height="78" rx="3" fill="#F8FAFC" stroke="#64748B" stroke-width="0.9"/>
+<text x="34" y="320" font-size="6.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Compute: Tính CÁI GÌ (Thuật toán)</text>
+<text x="34" y="332" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Khai báo toán học thuần túy (Bất biến):</text>
+<rect x="34" y="339" width="182" height="22" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.7"/>
+<text x="125.0" y="350" font-size="6.6" font-weight="700" fill="#1E40AF" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">C[i,j] = sum_k(A[i,k] * B[k,j])</text>
+<text x="34" y="370" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Không phụ thuộc phần cứng</text>
+<text x="34" y="380" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Bảo đảm tính đúng đắn toán học</text>
+<rect x="228" y="310" width="194" height="78" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="0.9"/>
+<text x="234" y="320" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Schedule: Tính NHƯ THẾ NÀO (Lịch trình)</text>
+<text x="234" y="332" font-size="6.6" font-weight="400" fill="#065F46" text-anchor="start" dominant-baseline="central">Biến đổi vòng lặp theo phần cứng mục tiêu:</text>
+<text x="234" y="345" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Tiling / Split: Chia khối ma trận vào SRAM</text>
+<text x="234" y="357" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Reorder / Unroll: Tối ưu thanh ghi &amp; cache</text>
+<text x="234" y="369" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Vectorize: Lệnh SIMD đa chiều</text>
+<text x="234" y="381" font-size="6.6" font-weight="700" fill="#065F46" text-anchor="start" dominant-baseline="central">• Tensorize: Lệnh phần cứng GEMM/Systolic</text>
+<rect x="28" y="394" width="396" height="60" rx="3" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.8"/>
+<text x="32" y="403" font-size="6.8" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Bản chất cốt lõi của Tensor Expression [T2 TVM tr.4]:</text>
+<text x="32" y="415" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Phân tách rạch ròi: Cùng 1 biểu thức Compute có hàng triệu Schedule khác nhau</text>
+<text x="32" y="427" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Tự do thử nghiệm hoán đổi thứ tự lặp, tile kích thước mà KHÔNG sợ làm sai lệch kết quả!</text>
+<text x="32" y="441" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central">-&gt; Mở đường cho hệ thống tự động tìm kiếm lịch trình (Auto-tuning / AutoTVM).</text>
+<rect x="446" y="48" width="416" height="420" rx="6" fill="#F8FAFC" stroke="#7C3AED" stroke-width="1.3"/>
+<rect x="446" y="48" width="416" height="32" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.0"/>
+<rect x="454" y="54" width="5" height="20" rx="2" fill="#7C3AED" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="464" y="61" font-size="9.6" font-weight="700" fill="#5B21B6" text-anchor="start" dominant-baseline="central">B. AutoTVM: Lập lịch Tự động bằng Học máy</text>
+<text x="464" y="72" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">Không gian lịch trình khổng lồ và vòng lặp học máy khép kín [T2 TVM tr.8-9]</text>
+<rect x="452" y="86" width="404" height="90" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="452" y="86" width="404" height="16" rx="3" fill="#F5F3FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="458" y="94" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="start" dominant-baseline="central">1. Thách thức: Bùng nổ Không gian Lịch trình (Schedule Space)</text>
+<rect x="456" y="108" width="194" height="62" rx="3" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="462" y="117" font-size="6.8" font-weight="700" fill="#B91C1C" text-anchor="start" dominant-baseline="central">Không gian hàng triệu cấu hình:</text>
+<text x="462" y="129" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">• Tổ hợp: Tile size x Loop order x Unroll</text>
+<text x="462" y="141" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="start" dominant-baseline="central">• Blackbox Auto-tuning: Đo từng cấu hình</text>
+<text x="462" y="153" font-size="6.6" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">  trên bo mạch thật -&gt; Quá chậm, bất khả thi!</text>
+<rect x="656" y="108" width="194" height="62" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8"/>
+<text x="662" y="117" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Giải pháp TVM: Học máy định hướng:</text>
+<text x="662" y="129" font-size="6.6" font-weight="700" fill="#065F46" text-anchor="start" dominant-baseline="central">• ML-based Cost Model (XGBoost/Tree-RNN)</text>
+<text x="662" y="141" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Dự đoán độ trễ từ cây cú pháp Loop AST</text>
+<text x="662" y="153" font-size="6.6" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chỉ đo phần cứng với cấu hình hứa hẹn!</text>
+<rect x="452" y="182" width="404" height="154" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0"/>
+<rect x="452" y="182" width="404" height="16" rx="3" fill="#F5F3FF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="458" y="190" font-size="7.2" font-weight="700" fill="#6D28D9" text-anchor="start" dominant-baseline="central">2. Vòng lặp Khép kín Tự động Tối ưu (Closed-Loop ML Tuning)</text>
+<rect x="456" y="206" width="114" height="40" rx="3" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.0"/>
+<text x="513.0" y="216" font-size="6.8" font-weight="700" fill="#1D4ED8" text-anchor="middle" dominant-baseline="central">[1] Schedule Explorer</text>
+<text x="513.0" y="227" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Genetic Search / SA</text>
+<text x="513.0" y="236" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Sinh cấu hình ứng viên</text>
+<path d="M570 226 L588 226" fill="none" stroke="#1E5BB8" stroke-width="1.2" marker-end="url(#m1E5BB8n)"/>
+<rect x="588" y="206" width="118" height="40" rx="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.0"/>
+<text x="647.0" y="216" font-size="6.8" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">[2] Loop AST Features</text>
+<text x="647.0" y="227" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">Trích đặc trưng vòng lặp</text>
+<text x="647.0" y="236" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="middle" dominant-baseline="central">Memory footprint, stride</text>
+<path d="M706 226 L724 226" fill="none" stroke="#D97706" stroke-width="1.2" marker-end="url(#mD97706n)"/>
+<rect x="724" y="206" width="118" height="40" rx="3" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.0"/>
+<text x="783.0" y="216" font-size="6.8" font-weight="700" fill="#7E22CE" text-anchor="middle" dominant-baseline="central">[3] ML Cost Model</text>
+<text x="783.0" y="227" font-size="6.6" font-weight="700" fill="#6B21A8" text-anchor="middle" dominant-baseline="central">XGBoost / Tree-RNN</text>
+<text x="783.0" y="236" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Dự đoán độ trễ cực nhanh</text>
+<path d="M783 246 L783 262" fill="none" stroke="#222222" stroke-width="1.2" marker-end="url(#m222222n)"/>
+<text x="777.0" y="254" font-size="6.6" font-weight="700" fill="#7C3AED" text-anchor="end" dominant-baseline="central">Top-K</text>
+<rect x="676" y="262" width="174" height="35" rx="3" fill="#ECFDF5" stroke="#10B981" stroke-width="1.2"/>
+<text x="763.0" y="271" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">[4] Đo Thực Tế Trên Hardware</text>
+<text x="763.0" y="281" font-size="6.6" font-weight="400" fill="#065F46" text-anchor="middle" dominant-baseline="central">Target Device: CPU / GPU / NPU</text>
+<text x="763.0" y="289" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Biên dịch &amp; đo thời gian thực tế</text>
+<path d="M676 279.5 L513 279.5" fill="none" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<path d="M513 279.5 L513 246" fill="none" stroke="#C62828" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#mC62828n)"/>
+<rect x="484" y="268.5" width="172" height="22" rx="2" fill="#FEF2F2" stroke="#EF4444" stroke-width="0.8"/>
+<text x="570" y="275" font-size="6.6" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Phản hồi: Thời gian đo thực tế</text>
+<text x="570" y="284" font-size="6.6" font-weight="400" fill="#7F1D1D" text-anchor="middle" dominant-baseline="central">huấn luyện lại mô hình chi phí ML</text>
+<rect x="456" y="303" width="396" height="22" rx="3" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="0.8"/>
+<text x="460" y="310" font-size="6.8" font-weight="700" fill="#5B21B6" text-anchor="start" dominant-baseline="central">Ưu thế cốt lõi của ML Cost Model [T2 TVM tr.8]:</text>
+<text x="460" y="319" font-size="6.6" font-weight="400" fill="#6D28D9" text-anchor="start" dominant-baseline="central">Càng đo nhiều mô hình càng chính xác; loại bỏ 99% cấu hình tồi trước khi đo!</text>
+<rect x="452" y="342" width="404" height="120" rx="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.9"/>
+<text x="458" y="354" font-size="7.0" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">3. Đánh đổi &amp; Giá trị Thực tiễn của TVM [Chen 2018]:</text>
+<text x="458" y="369" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tốc độ hội tụ: Nhanh hơn 2x - 10x so với auto-tuning hộp đen không có ML</text>
+<text x="458" y="383" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Hiệu năng Kernel: Đạt 85% - 105% so với thư viện viết tay của chuyên gia (cuDNN)</text>
+<text x="458" y="397" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Tính di động (Portability): 1 codebase thống nhất cho CPU, GPU và NPU chuyên dụng</text>
+<text x="458" y="413" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Cơ chế Tensorization: Ánh xạ vòng lặp vào lệnh ma trận phần cứng (GEMM/Systolic)</text>
+<text x="458" y="431" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-style="italic">Ranh giới: RK3588 dùng RKNN toolkit kín, không công bố có dùng ML cost model hay không</text>
+<text x="458" y="445" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-style="italic">Các kỹ thuật TVM dùng để hiểu nguyên lý chung, không gán trực tiếp cho RKNN</text>
+<text x="10" y="496" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 TVM tr.3-4 (Chen et al., OSDI 2018: Graph/Op Optimization &amp; Fusion); T2 TVM tr.8-9 (AutoTVM ML Cost Model &amp; Loop AST).</text>
+</svg>

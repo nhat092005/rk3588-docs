@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-********************************************
-Chiến lược lượng tử hóa: PTQ, QAT và hỗn hợp
-********************************************
+***********************
+Chiến lược lượng tử hóa
+***********************
 
 .. admonition:: Trang này trả lời
 
@@ -17,7 +17,7 @@ Chiến lược lượng tử hóa: PTQ, QAT và hỗn hợp
    - Các cách chọn range gồm min-max, MSE, cross-entropy, dựa trên BN, percentile và KL divergence. Min-max nhạy với outlier [T2 Nagel 2021 tr.9] [T2 Gholami 2021 tr.6].
    - Nagel khuyến nghị 500 đến 1000 ảnh không nhãn làm tập calibration, Q-YOLO dùng 1500 ảnh COCO train2017. Hai số này là điều kiện thí nghiệm, không phải quy tắc chung [T2 Nagel 2021 tr.16] [T2 Wang 2023 tr.8].
    - QAT thêm khối quantizer vào đồ thị tính toán lúc train, cần dữ liệu có nhãn và thêm siêu tham số. STE xấp xỉ đạo hàm của làm tròn bằng 1 [T2 Nagel 2021 tr.19].
-   - Mixed precision giữ lớp nhạy cảm ở độ chính xác cao hơn. Không nguồn nào đo cấu hình này trên detector, và chi phí chuyển kiểu giữa lớp là unknown.
+   - Mixed precision giữ các lớp nhạy cảm ở độ chính xác cao hơn. Trên YOLOv6-S (v1.0), giữ 6 lớp nhạy nhất ở float (Partial QAT) nâng độ chính xác lên 42.3% AP so với 42.1% AP của Full QAT, đánh đổi thông lượng giảm nhẹ từ 528 FPS xuống 503 FPS [T2 Y6 tr.7] [T2 Y6 tr.12].
 
 .. contents:: Trong trang này
    :local:
@@ -30,8 +30,8 @@ Chiến lược lượng tử hóa: PTQ, QAT và hỗn hợp
 
 Nagel nói PTQ không cần hoặc cần ít dữ liệu, ít chỉnh siêu tham số và không train đầu cuối, nên gần như dùng được qua một lời gọi API [T2 Nagel 2021 tr.9]. Bước nền tảng là tìm range cho từng quantizer, tức :math:`q_{min}` và :math:`q_{max}` trong công thức ở :doc:`01-luong-tu-hoa-affine-va-granularity`. Gholami gọi quá trình này là calibration [T2 Gholami 2021 tr.5].
 
-1.1 Chọn range: min-max, percentile, entropy
---------------------------------------------
+1.1 Chọn khoảng giá trị
+-----------------------
 
 Nagel nhấn mạnh sự đánh đổi giữa clipping và rounding error khi chọn range, và các phương pháp thường tối ưu hàm chi phí cục bộ thay vì loss của task, vì PTQ cần nhanh và không train đầu cuối [T2 Nagel 2021 tr.9]. Dữ liệu cần cho từng loại tensor:
 
@@ -120,7 +120,7 @@ Gholami phân biệt static và dynamic quantization theo thời điểm tính r
 Không nên viết "chỉ activation cần dữ liệu calibration" tuyệt đối. Trong pipeline của Nagel, AdaRound dùng dữ liệu để tối ưu weight, còn khi không có dữ liệu thì dùng bias correction [T2 Nagel 2021 tr.16].
 
 1.2 Cần bao nhiêu dữ liệu calibration
---------------------------------------
+-------------------------------------
 
    "Usually, between 500 and 1000 unlabeled images are sufficient as a calibration set." [T2 Nagel 2021 tr.16]
 
@@ -135,8 +135,8 @@ Nagel nêu lý do dùng QAT khi PTQ chưa đủ, nhất là với activation t�
 
    "QAT models the quantization noise source (see section 2.3) during training. This allows the model to find more optimal solutions than post-training quantization. However, the higher accuracy comes with the usual costs of neural network training, i.e., longer training times, need for labeled data and hyper-parameter search." [T2 Nagel 2021 tr.19]
 
-2.1 Simulated quantization (fake-quant)
----------------------------------------
+2.1 Fake-quant
+--------------
 
    "we introduce quantizer blocks in the compute graph to induce quantization effects." [T2 Nagel 2021 tr.6]
 
@@ -202,17 +202,15 @@ Ví dụ thực hành trong bài về YOLO: Q-YOLO giữ lớp vào và lớp ra
 
    "The input and output layers of the model are more sensitive to the loss of accuracy. In order to maintain the overall performance of the model, the original accuracy of these layers is usually retained. We also follow this practice." [T2 Wang 2023 tr.9]
 
-Chưa có nguồn nào trong bộ T2 đã kiểm đo cấu hình mixed-precision trên mô hình detection. Unknown. Đã tìm ở: Nagel, Gholami, Wang (Q-YOLO), Baghbanbashi (YOLOv7 quantization), từ khóa: "mixed precision", "mixed". Bài YOLOv7 có thử trộn các granularity khác nhau trong một mô hình (Table II, "Mix of 4 options" và "Mix of 3 options", tr.4) nhưng đó là trộn granularity ở cùng 4 bit, không phải trộn bit-width [T2 Baghbanbashi 2024 tr.4].
+Trên mô hình phát hiện vật thể YOLOv6-S (v1.0), nhóm tác giả phân tích độ nhạy từng lớp và chọn 6 lớp nhạy cảm nhất để giữ ở tính toán dấu phẩy động (float), áp dụng lượng tử hóa cho các lớp còn lại (Partial QAT) [T2 Y6 tr.6] [T2 Y6 tr.7]. Kết quả thực nghiệm trong Table 16 cho thấy cấu hình kết hợp RepOptimizer, Partial QAT và chưng cất theo kênh (CW Distill) đạt 42.3% AP so với 42.1% AP của Full QAT [T2 Y6 tr.12]. Ngoài ra, bài YOLOv7 cũng thử nghiệm trộn các mức độ chia nhỏ (granularity) khác nhau trong cùng một mô hình ở mức 4 bit (Table II, "Mix of 4 options" và "Mix of 3 options") [T2 Baghbanbashi 2024 tr.4].
 
 3.2 Chi phí chuyển đổi kiểu giữa các lớp
 ----------------------------------------
 
-Nguồn T2 không nêu chi phí chuyển kiểu số giữa hai lớp kề nhau có bit-width khác nhau. Unknown. Đã tìm ở: Nagel, Gholami, từ khóa: "conversion", "cast", "switch", "mixed". Gholami chỉ nói chung rằng lợi ích tăng tốc của lượng tử hóa phụ thuộc phần cứng với nhiều yếu tố như bộ nhớ trên chip, băng thông và cache [T2 Gholami 2021 tr.14].
+Khi pha trộn nhiều kiểu số hoặc tham số lượng tử hóa khác nhau trong cùng một đồ thị, hệ thống phát sinh chi phí chuyển đổi trên đường dữ liệu. Với phép cộng element-wise và phép ghép kênh (concatenation), lưới lượng tử hóa của hai nhánh có thể không trùng nhau nên cần thêm bước tái lượng tử hóa (requantization), hoặc phải tối ưu mạng để hai nhánh dùng chung tham số [T2 Nagel 2021 tr.8]. Trên phần cứng thực tế, việc giữ một số lớp nhạy cảm ở float trong cấu hình Partial QAT làm thông lượng của YOLOv6-S giảm từ 528 FPS (Full QAT) xuống 503 FPS (Partial QAT) trên GPU Tesla T4 [T2 Y6 tr.12], và lợi ích tăng tốc tổng thể phụ thuộc trực tiếp vào bộ nhớ trên chip, băng thông cùng bộ nhớ đệm của từng kiến trúc phần cứng [T2 Gholami 2021 tr.14]. Cách RKNN-Toolkit2 thực hiện hybrid quantization và đo lợi hại trên NPU nằm ở :doc:`../../02-nen-tang-rk3588/02-rknn-luong-tu-hoa/03-hybrid-quantization-va-accuracy-analysis`.
 
-Điều gần nhất nguồn nêu là requantization khi hai nhánh có tham số lượng tử hóa khác nhau: với phép cộng element-wise và concatenation, lưới lượng tử hóa của hai nhánh có thể không trùng nên cần thêm bước requantization, hoặc tối ưu mạng để hai nhánh dùng chung tham số [T2 Nagel 2021 tr.8]. Cách RKNN-Toolkit2 làm hybrid quantization và đo lợi hại trên NPU nằm ở :doc:`../../02-nen-tang-rk3588/02-rknn-luong-tu-hoa/03-hybrid-quantization-va-accuracy-analysis`.
-
-4. Khi nào chọn cái nào: bảng quyết định
-========================================
+4. Bảng quyết định
+==================
 
 Bảng dưới là tổng hợp của trang này từ các khẳng định ở trên (suy ra), không phải khuyến nghị nguyên văn của một nguồn.
 
@@ -279,11 +277,11 @@ Nguồn
    * - ``Nagel 2021``
      - T2
      - :download:`quant_whitepaper_2021nagel.pdf <../../../_assets/pdf/papers/02_quantization/quant_whitepaper_2021nagel.pdf>`
-     - 37
+     - 38
    * - ``Gholami 2021``
      - T2
      - :download:`quantization_survey_2021gholami.pdf <../../../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`
-     - 21
+     - 22
    * - ``Wang 2023``
      - T2
      - :download:`qyolo_ptq_2023wang.pdf <../../../_assets/pdf/papers/02_quantization/qyolo_ptq_2023wang.pdf>`
@@ -292,3 +290,7 @@ Nguồn
      - T2
      - :download:`quant_yolov7_2024.pdf <../../../_assets/pdf/papers/02_quantization/quant_yolov7_2024.pdf>`
      - 1
+   * - ``Y6``
+     - T2
+     - :download:`yolov6_hwfriendly_2022li.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/yolov6_hwfriendly_2022li.pdf>`
+     - 6

@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-*************************************
-Kỹ thuật tiling và lập lịch thực thi
-*************************************
+***************************
+Tiling và lập lịch thực thi
+***************************
 
 .. admonition:: Trang này trả lời
 
@@ -19,7 +19,7 @@ Kỹ thuật tiling và lập lịch thực thi
    - Với kernel tích chập lớn hơn 1x1, vùng trường tiếp nhận chồng lấn (halo) buộc hệ thống phải chịu chi phí nạp dư dữ liệu biên từ DRAM hoặc trao đổi giữa các bộ đệm [T2 BAMB tr.4] [T2 BAMB tr.8].
    - Hoán đổi thứ tự vòng lặp (loop reordering) quyết định chiến lược tái sử dụng dữ liệu: cố định trọng số (Weight Stationary), cố định activation (Input Stationary), hoặc cố định tổng tích lũy (Output Stationary) [T2 TVM tr.4].
    - Kỹ thuật fused-layer trên NPU đa nhân giảm dung lượng đỉnh bộ nhớ đệm, mở ra khả năng song song hóa nhiều workload đồng thời [T2 LEE24 tr.1] [T2 LEE24 tr.6].
-   - Thuật toán tiling và chính sách phân bổ core thực tế của NPU RK3588 không được công bố (unknown); số liệu tăng tốc trong TVM được đo trên GPU Titan X, không thể gán trực tiếp cho RK3588 [T2 TVM tr.4] [T2 LENS tr.1].
+   - Thuật toán tiling và chính sách phân bổ core nội bộ của NPU RK3588 thuộc trình biên dịch thương mại đóng và không được công bố trong tài liệu SDK, đồng thời số liệu tăng tốc trong TVM được đo trên GPU Titan X nên không gán trực tiếp cho RK3588 [T2 TVM tr.4] [T2 LENS tr.1].
 
 .. contents:: Trong trang này
    :local:
@@ -28,7 +28,7 @@ Kỹ thuật tiling và lập lịch thực thi
 1. Tiling theo dung lượng buffer
 ================================
 
-Trong mọi kiến trúc vi xử lý mạng nơ-ron (NPU), hệ thống nhớ luôn được tổ chức theo cấu trúc phân cấp nghiêm ngặt: bộ nhớ ngoài DRAM có dung lượng lớn (hàng Gigabyte) nhưng băng thông hạn chế và tiêu tốn năng lượng cao; trong khi các khối bộ nhớ đệm trên chip (SRAM, TCM hoặc Feature Map buffer) có băng thông cực lớn và độ trễ thấp nhưng dung lượng rất hữu hạn [T2 LEE24 tr.2] [T2 BAMB tr.3].
+Trong mọi kiến trúc vi xử lý mạng nơ-ron (NPU), hệ thống nhớ luôn được tổ chức theo cấu trúc phân cấp nghiêm ngặt: bộ nhớ ngoài DRAM có dung lượng lớn (hàng Gigabyte) nhưng băng thông hạn chế và tiêu tốn năng lượng cao, trong khi các khối bộ nhớ đệm trên chip (SRAM, TCM hoặc Feature Map buffer) có băng thông cực lớn và độ trễ thấp nhưng dung lượng rất hữu hạn [T2 LEE24 tr.2] [T2 BAMB tr.3].
 
 1.1 Chia tensor thành tile
 --------------------------
@@ -55,7 +55,7 @@ Trong mọi kiến trúc vi xử lý mạng nơ-ron (NPU), hệ thống nhớ lu
      - Chia dòng tính toán (:math:`outH`), cho phép chia sẻ trọng số chung giữa các đơn vị PE qua cơ chế broadcast [T2 BAMB tr.4].
    * - Phân khối theo kênh (Channel Tiling)
      - Kênh nhập :math:`C_{in}` hoặc kênh xuất :math:`C_{out}`
-     - Chia nhỏ số lượng bộ lọc trọng số; đòi hỏi tích lũy từng phần (partial sums) khi lặp qua các kênh ngõ vào.
+     - Chia nhỏ số lượng bộ lọc trọng số, đòi hỏi tích lũy từng phần (partial sums) khi lặp qua các kênh ngõ vào.
    * - Phân khối thời gian (Temporal Tiling)
      - Thứ tự xử lý các khối theo thời gian
      - Điều phối thời điểm nạp và giải phóng tile trong SRAM, kết hợp chặt chẽ với kỹ thuật gộp lớp [T2 BAMB tr.5] [T2 BAMB tr.7].
@@ -72,13 +72,13 @@ Về mặt mã nguồn mức thấp, kỹ thuật loop tiling biến đổi mộ
 
 Việc lựa chọn kích thước tile đòi hỏi sự cân bằng nghiêm ngặt giữa nhiều yếu tố:
 
-- **Đánh đổi kích thước tile**: Nếu chọn tile quá lớn, dữ liệu sẽ tràn bộ đệm SRAM buộc hệ thống phải ghi tràn ra DRAM; nếu chọn tile quá nhỏ, số lượng tile tăng lên khiến trọng số phải bị đọc đi đọc lại nhiều lần từ DRAM cho mỗi tile, gây lãng phí băng thông bộ nhớ ngoài [T2 LEE24 tr.2].
+- **Đánh đổi kích thước tile**: Nếu chọn tile quá lớn, dữ liệu sẽ tràn bộ đệm SRAM buộc hệ thống phải ghi tràn ra DRAM. Ngược lại, nếu chọn tile quá nhỏ, số lượng tile tăng lên khiến trọng số phải bị đọc đi đọc lại nhiều lần từ DRAM cho mỗi tile, gây lãng phí băng thông bộ nhớ ngoài [T2 LEE24 tr.2].
 - **Cơ chế đệm kép (Double buffering / Ping-pong)**: Để che giấu độ trễ truyền dữ liệu qua DMA, compiler thường chia bộ đệm SRAM thành hai nửa đối xứng (ping-pong banks). Trong khi mảng PE đang tính toán trên khối dữ liệu thứ :math:`k`, bộ điều khiển DMA đồng thời nạp khối dữ liệu thứ :math:`k+1` từ DRAM vào nửa còn lại [T2 BAMB tr.5]. Cơ chế này đòi hỏi dung lượng bộ đệm khả dụng cho mỗi tile bị giảm đi một nửa so với tổng dung lượng vật lý của SRAM.
 - **Ràng buộc căn lề phần cứng (Hardware Alignment Constraints)**: Các đơn vị tính toán vector hoặc mảng systolic thường yêu cầu kích thước tile phải là bội số của số lượng đơn vị tính toán song song (ví dụ: 8, 16 hoặc 32 phần tử) [T2 TVM tr.4] [T2 BAMB tr.4]. Khi kích thước thực tế của tensor không chia hết cho kích thước tile chuẩn, compiler buộc phải chèn thêm phần tử đệm (zero-padding). Việc này làm phát sinh các phép tính nhân cộng vô ích trên các giá trị 0 ở khối biên, làm suy giảm hiệu suất tính toán thực tế của mảng PE.
-- **Tận dụng truyền khối DRAM (Burst transfers)**: Tỷ lệ khung hình của tile (:math:`t_w` so với :math:`t_h`) ảnh hưởng trực tiếp đến hiệu quả truy cập DRAM. Định dạng bố trí bộ nhớ (NCHW hoặc NHWC) quyết định chiều nào có các phần tử nằm liên tục trên không gian địa chỉ. Trong định dạng NCHW, các điểm ảnh trải theo chiều rộng :math:`W` nằm liên tục trong bộ nhớ; do đó, phân khối theo dòng chiều cao :math:`H` (line parallelism) bảo toàn toàn bộ dòng quét :math:`W` liên tục, cho phép bộ điều khiển DMA kích hoạt các chuỗi đọc khối burst tối đa băng thông [T2 BAMB tr.4]. Ngược lại, nếu cắt lát dọc theo :math:`W`, mỗi dòng chỉ nạp một đoạn ngắn có bước nhảy (stride), làm giảm hiệu suất truyền dẫn của bus bộ nhớ.
+- **Tận dụng truyền khối DRAM (Burst transfers)**: Tỷ lệ khung hình của tile (:math:`t_w` so với :math:`t_h`) ảnh hưởng trực tiếp đến hiệu quả truy cập DRAM. Định dạng bố trí bộ nhớ (NCHW hoặc NHWC) quyết định chiều nào có các phần tử nằm liên tục trên không gian địa chỉ. Trong định dạng NCHW, các điểm ảnh trải theo chiều rộng :math:`W` nằm liên tục trong bộ nhớ, do đó phân khối theo dòng chiều cao :math:`H` (line parallelism) bảo toàn toàn bộ dòng quét :math:`W` liên tục, cho phép bộ điều khiển DMA kích hoạt các chuỗi đọc khối burst tối đa băng thông [T2 BAMB tr.4]. Ngược lại, nếu cắt lát dọc theo :math:`W`, mỗi dòng chỉ nạp một đoạn ngắn có bước nhảy (stride), làm giảm hiệu suất truyền dẫn của bus bộ nhớ.
 
-1.2 Chi phí biên (halo)
------------------------
+1.2 Chi phí vùng halo
+---------------------
 
 Khi áp dụng tiling không gian trên các lớp tích chập có kích thước kernel lớn hơn :math:`1 \times 1` (chẳng hạn :math:`3 \times 3` hoặc :math:`5 \times 5`), một vấn đề kỹ thuật cố hữu xuất hiện là sự chồng lấn của trường tiếp nhận (receptive field overlap) giữa các tile lân cận [T2 BAMB tr.4] [T2 BAMB tr.8].
 
@@ -105,8 +105,8 @@ Cần phân biệt rõ giữa padding ở biên mô hình và halo giữa các t
 
 Khi hợp nhất nhiều lớp tích chập liên tiếp (fused-convolution layers), vùng halo bị khuếch đại lũy tiến qua từng lớp (receptive field mở rộng liên tục: từ 3 lên 5, 7 qua 3 lớp tích chập :math:`3 \times 3`), khiến tỷ lệ chi phí biên trên tổng khối lượng tính toán tăng vọt nếu kích thước tile ban đầu quá nhỏ [T2 LEE24 tr.2] [T2 BAMB tr.8].
 
-2. Thứ tự vòng lặp và tái sử dụng dữ liệu (Data reuse)
-======================================================
+2. Thứ tự vòng lặp và reuse
+===========================
 
 Toán tử tích chập trên tensor 4 chiều về bản chất được định nghĩa bằng một khối gồm 7 vòng lặp lồng nhau duyệt qua các trục kích thước [T2 TVM tr.4] [T2 BAMB tr.4]:
 
@@ -176,8 +176,8 @@ Trong TVM, quá trình biến đổi vòng lặp được trừu tượng hóa q
 
 Kỹ thuật hợp nhất không dừng lại ở việc gộp các toán tử đơn giản (như Conv + ReLU), mà mở rộng sang việc thực thi xen kẽ nhiều lớp tích chập liên tiếp (layer fusion hoặc fused-layer execution) [T2 BAMB tr.7] [T2 LEE24 tr.1].
 
-3.1 Cấu hình fused tìm bằng tìm kiếm / heuristic
-------------------------------------------------
+3.1 Tìm cấu hình fused-layer
+----------------------------
 
 Mục tiêu cốt lõi của layer fusion là xử lý dữ liệu theo từng khối xuyên suốt qua hai hay nhiều lớp tích chập liên tiếp:
 
@@ -198,6 +198,8 @@ Tuy nhiên, việc ghép nhiều lớp làm phát sinh hiện tượng mức ti�
 3.2 Chia việc giữa các core
 ---------------------------
 
+Mục này xét việc chia core từ phía compiler. Cách phần cứng chia lớp và chi phí đồng bộ nằm ở :doc:`../02-npu/03-systolic-array-va-kien-truc-da-loi` mục 3.
+
 Trên các bộ gia tốc AI đa nhân (multi-core NPU), compiler chịu trách nhiệm phân chia khối lượng công việc giữa các core sao cho cân bằng tải và tối ưu hóa việc chia sẻ dữ liệu [T2 BAMB tr.4] [T2 LEE24 tr.1]:
 
 - **Song song hóa theo dòng không gian (Line Parallelism)**: Chia các dòng chiều cao ngõ ra (:math:`outH`) cho các core hoặc compute engine khác nhau [T2 BAMB tr.4]:
@@ -209,8 +211,8 @@ Trên các bộ gia tốc AI đa nhân (multi-core NPU), compiler chịu trách 
 - **Chi phí đồng bộ rào chắn (Barrier Synchronization Overhead)**: Khi phân chia các tile của cùng một lớp cho nhiều core xử lý song song, các core phải đợi nhau tại điểm rào chắn (barrier) trước khi chuyển sang lớp kế tiếp. Nếu một core hoàn thành sớm hơn các core còn lại do khối lượng tính toán ở mép biên nhỏ hơn, core đó buộc phải nhàn rỗi (idle), làm giảm hệ số tăng tốc lý thuyết của hệ thống đa nhân [T2 BAMB tr.4] [T2 LEE24 tr.2].
 - **Đồng thời đa tác vụ (Multi-workload execution)**: Bằng cách áp dụng lịch trình fused-layer tối ưu để cắt giảm dung lượng đỉnh của bộ nhớ đệm trên chip, compiler giải phóng phần không gian SRAM còn trống để nạp và thực thi song song một mạng nơ-ron khác trên core kế bên. Thực nghiệm của Lee et al. chứng minh cơ chế này giúp tăng 32% hiệu năng tổng thể so với thực thi tuần tự [T2 LEE24 tr.6].
 
-4. Giới hạn khi áp cho RK3588: thuật toán tiling thật là unknown
-================================================================
+4. Giới hạn của các nguồn
+=========================
 
 Các mô hình và kết quả phân tích trong trang này được đúc kết từ các công trình học thuật tiêu biểu (TVM, eIQ Neutron, nghiên cứu DATE 2024 của Lee et al.):
 
@@ -223,11 +225,8 @@ Các mô hình và kết quả phân tích trong trang này được đúc kết
       "the compilers of commercial NPUs apply graph optimizations in unpredictable ways." [T2 LENS tr.1]
 
      Những thay đổi nhỏ về kích thước shape hoặc batch size có thể kích hoạt các chiến lược phân khối và hợp nhất hoàn toàn khác nhau từ phía compiler, dẫn đến độ trễ phi tuyến tính giữa các hình dạng tensor khác nhau [T2 LENS tr.1] [T2 LENS tr.2].
-2. **Hiện trạng thuật toán trên Rockchip RK3588**:
-   - Đối với SoC Rockchip RK3588, thuật toán chia tile cụ thể (cách chọn kích thước :math:`t_h, t_w, t_c`), cơ chế đệm vùng halo, và chính sách phân bổ tính toán giữa 3 core NPU vật lý hoàn toàn không được nhà sản xuất công bố chi tiết trong tài liệu chính thức (``unknown``). Đã tìm trong: *RK3588 TRM Part 1 & Part 2*, *Rockchip RKNPU User Guide RKNN SDK v2.3.2*, và *Rockchip RKNPU Quick Start Guide*, với các từ khóa: `tiling`, `tile size`, `halo`, `buffer split`.
-   - NPU RK3588 trang bị bộ nhớ đệm nội bộ 384 KB cho mỗi core NPU (tổng 1,152 KB trên 3 core), cùng khả năng truy cập vùng System SRAM 4 MB của SoC. Tuy nhiên, việc công cụ biên dịch `rknn-toolkit2` phân chia tile như thế nào để vừa vặn trong 384 KB này hay sử dụng System SRAM cho feature map là quy trình khép kín nội bộ.
-   - Compiler thương mại `rknn-toolkit2` hoạt động như một hộp đen tối ưu tự động; người dùng không có cờ lệnh can thiệp trực tiếp vào kích thước tile hay cấu trúc vòng lặp ở mức thấp. Vì vậy, việc ước lượng hiệu năng không thể chỉ dựa vào số lượng MAC lý thuyết mà bắt buộc phải dựa trên đo đạc thực nghiệm bằng công cụ profiling của hãng.
-   - Để tìm hiểu cấu trúc phần cứng của 3 core NPU, dung lượng bộ đệm nội bộ 384 KB mỗi core, và thanh ghi điều khiển đa core trên RK3588, xem tài liệu phần cứng tương ứng: :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/03-che-do-da-loi-va-system-sram`.
+
+Liên hệ RK3588: thuật toán chia tile và chia việc giữa 3 core của ``rknn-toolkit2`` thuộc trình biên dịch đóng và không được công bố trong tài liệu hãng (xem :doc:`/contents/09-tien-do/03-khoang-trong/03-toolchain-compiler`). Phần cứng 3 core và bộ nhớ đệm nằm ở :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/03-che-do-da-loi-va-system-sram`.
 
 Nguồn
 =====
@@ -245,16 +244,16 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``TVM``
      - T2
      - :download:`tvm_compiler_2018chen.pdf <../../../_assets/pdf/papers/03_compiler/tvm_compiler_2018chen.pdf>`
-     - 7
+     - 15
    * - ``LEE24``
      - T2
      - :download:`fused_layer_multiworkload_2024lee.pdf <../../../_assets/pdf/papers/03_compiler/fused_layer_multiworkload_2024lee.pdf>`
-     - 11
+     - 20
    * - ``BAMB``
      - T2
      - :download:`npu_compiler_codesign_2025bamberg.pdf <../../../_assets/pdf/papers/03_compiler/npu_compiler_codesign_2025bamberg.pdf>`
-     - 17
+     - 37
    * - ``LENS``
      - T2
      - :download:`npu_compiler_scheduling_2026.pdf <../../../_assets/pdf/papers/03_compiler/npu_compiler_scheduling_2026.pdf>`
-     - 1
+     - 4

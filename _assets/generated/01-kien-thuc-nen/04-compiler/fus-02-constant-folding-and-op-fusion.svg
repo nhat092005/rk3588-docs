@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 506" width="880" height="506" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="880" height="506" fill="white"/>
+<rect x="750" y="12" width="73.2" height="22" rx="11" fill="white" stroke="#2E7D32" stroke-width="1.8"/>
+<text x="786.6" y="23.5" font-size="13" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">T2 chung</text>
+<text x="14" y="20" font-size="13.0" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Cơ chế Constant Folding và Gộp Toán Tử Tĩnh ở Pha Biên Dịch (Compile-Time)</text>
+<text x="14" y="34" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">Phát hiện nhánh tính toán bất biến, thực thi trước (pre-compute) và tinh giản đồ thị suy luận [Chen 2018 TVM, Bamberg 2025]</text>
+<rect x="18" y="46" width="414" height="430" rx="5" fill="#FAFAFA" stroke="#C62828" stroke-width="1.2"/>
+<rect x="448" y="46" width="414" height="430" rx="5" fill="#FAFAFA" stroke="#2E7D32" stroke-width="1.2"/>
+<rect x="18" y="46" width="414" height="30" rx="5" fill="#FFFFFF" stroke="#C62828" stroke-width="1.0"/>
+<rect x="26" y="51" width="5" height="20" rx="2" fill="#C62828" stroke="#C62828" stroke-width="1"/>
+<text x="36" y="57" font-size="9.6" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">A. ĐỒ THỊ GỐC TRƯỚC TỐI ƯU (CHƯA FOLDING)</text>
+<text x="36" y="68" font-size="6.8" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">Chứa nhiều node hằng số tĩnh, biến đổi layout và nhánh dư thừa phát sinh khi train</text>
+<rect x="448" y="46" width="414" height="30" rx="5" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.0"/>
+<rect x="456" y="51" width="5" height="20" rx="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
+<text x="466" y="57" font-size="9.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">B. ĐỒ THỊ SAU CONSTANT FOLDING (RUNTIME GRAPH)</text>
+<text x="466" y="68" font-size="6.8" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Compiler tính sẵn 1 lần lúc biên dịch (Offline), triệt tiêu hoàn toàn runtime overhead</text>
+<rect x="24" y="82" width="402" height="124" rx="4" fill="#FFF9F9" stroke="#F87171" stroke-width="0.9"/>
+<text x="32" y="93" font-size="7.2" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">1. Gấp Batch Normalization vào Conv (Trước tối ưu)</text>
+<rect x="32" y="102" width="56" height="32" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="60" y="111" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Input X</text>
+<text x="60" y="123" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">Tensor động</text>
+<path d="M88 118 L104 118" fill="none" stroke="#222222" stroke-width="1.0" marker-end="url(#m222222n)"/>
+<rect x="104" y="102" width="86" height="32" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="0.8"/>
+<text x="147" y="111" font-size="6.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Conv2D</text>
+<text x="147" y="123" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">W tĩnh, b tĩnh</text>
+<path d="M190 118 L206 118" fill="none" stroke="#222222" stroke-width="1.0" marker-end="url(#m222222n)"/>
+<rect x="206" y="102" width="64" height="32" rx="2" fill="#FEE2E2" stroke="#C62828" stroke-width="0.8"/>
+<text x="238" y="111" font-size="6.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">Temp Y</text>
+<text x="238" y="123" font-size="6.6" font-weight="400" fill="#991B1B" text-anchor="middle" dominant-baseline="central">Ghi ra DRAM</text>
+<path d="M270 118 L286 118" fill="none" stroke="#C62828" stroke-width="1.0" marker-end="url(#mC62828n)"/>
+<rect x="286" y="102" width="132" height="32" rx="2" fill="#FEE2E2" stroke="#C62828" stroke-width="0.8"/>
+<text x="352" y="111" font-size="6.8" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">BatchNorm (4 hằng số)</text>
+<text x="352" y="123" font-size="6.6" font-weight="400" fill="#991B1B" text-anchor="middle" dominant-baseline="central">μ, σ², γ, β tĩnh</text>
+<rect x="32" y="140" width="386" height="58" rx="3" fill="#FFFFFF" stroke="#FECACA" stroke-width="0.8"/>
+<text x="38" y="150" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Lúc train: μ, σ² cập nhật liên tục qua từng batch dữ liệu.</text>
+<text x="38" y="162" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Lúc suy luận: Toàn bộ 4 tham số BN đều cố định (không đổi theo input).</text>
+<text x="38" y="174" font-size="6.6" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central">• Nhược điểm chưa gộp: Tốn thêm 1 kernel, tính lặp lại phép chia affine.</text>
+<text x="38" y="186" font-size="6.6" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central">• Hậu quả: Ghi/đọc tensor tạm Y ra bộ nhớ ngoài làm trễ pipeline.</text>
+<rect x="454" y="82" width="402" height="124" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.9"/>
+<text x="462" y="93" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">1. Conv đã Hấp thụ BatchNorm: W_fused và b_fused [T2 TVM tr.3]</text>
+<rect x="462" y="102" width="64" height="32" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="494" y="111" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Input X</text>
+<text x="494" y="123" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">DRAM/SRAM</text>
+<path d="M526 118 L544 118" fill="none" stroke="#2E7D32" stroke-width="1.2" marker-end="url(#m2E7D32n)"/>
+<rect x="544" y="102" width="196" height="32" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="1.0"/>
+<text x="642" y="111" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Conv2D (W_fused, b_fused)</text>
+<text x="642" y="123" font-size="6.6" font-weight="700" fill="#059669" text-anchor="middle" dominant-baseline="central">Node BatchNorm biến mất 100%!</text>
+<path d="M740 118 L758 118" fill="none" stroke="#2E7D32" stroke-width="1.2" marker-end="url(#m2E7D32n)"/>
+<rect x="758" y="102" width="90" height="32" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="803" y="111" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Output Z</text>
+<text x="803" y="123" font-size="6.6" font-weight="400" fill="#059669" text-anchor="middle" dominant-baseline="central">Đặc trưng mới</text>
+<rect x="462" y="140" width="386" height="58" rx="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="0.8"/>
+<text x="468" y="150" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Trọng số gộp: W_fused = W · [ γ / √(σ² + ε) ]</text>
+<text x="468" y="162" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Bias gộp: b_fused = (b - μ) · [ γ / √(σ² + ε) ] + β</text>
+<text x="468" y="174" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Compiler tính trước 1 lần duy nhất trên máy phát triển (host/compile-time).</text>
+<text x="468" y="186" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Hiệu quả: Tiết kiệm 100% thời gian chạy BN; triệt tiêu tensor tạm Y.</text>
+<rect x="24" y="212" width="402" height="108" rx="4" fill="#FFFBEB" stroke="#FDE68A" stroke-width="0.9"/>
+<text x="32" y="223" font-size="7.2" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">2. Phép biến đổi Layout &amp; Hình học (Trước tối ưu)</text>
+<rect x="32" y="232" width="88" height="30" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="0.8"/>
+<text x="76" y="241" font-size="6.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Weight W</text>
+<text x="76" y="253" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">NCHW (FP32)</text>
+<path d="M120 247 L138 247" fill="none" stroke="#222222" stroke-width="1.0" marker-end="url(#m222222n)"/>
+<rect x="138" y="232" width="150" height="30" rx="2" fill="#FFFBEB" stroke="#D97706" stroke-width="0.8"/>
+<text x="213" y="241" font-size="6.8" font-weight="700" fill="#B45309" text-anchor="middle" dominant-baseline="central">Toán tử Transpose / Reshape</text>
+<text x="213" y="253" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="middle" dominant-baseline="central">Đổi layout lúc khởi động/chạy</text>
+<path d="M288 247 L306 247" fill="none" stroke="#222222" stroke-width="1.0" marker-end="url(#m222222n)"/>
+<rect x="306" y="232" width="112" height="30" rx="2" fill="#FFFFFF" stroke="#444444" stroke-width="0.8"/>
+<text x="362" y="241" font-size="6.8" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Layout NC1HWC2</text>
+<text x="362" y="253" font-size="6.6" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Nạp vào NPU PE</text>
+<rect x="32" y="268" width="386" height="44" rx="3" fill="#FFFFFF" stroke="#FDE68A" stroke-width="0.8"/>
+<text x="38" y="279" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Trọng số mô hình xuất từ PyTorch thường ở định dạng NCHW.</text>
+<text x="38" y="291" font-size="6.6" font-weight="400" fill="#B45309" text-anchor="start" dominant-baseline="central">• Nếu không folding: Runtime phải gọi kernel Transpose hoặc lệnh memcpy.</text>
+<text x="38" y="303" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central">• Lãng phí: Gây trễ khởi động mô hình (load time) và cấp phát bộ nhớ thừa.</text>
+<rect x="454" y="212" width="402" height="108" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.9"/>
+<text x="462" y="223" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">2. Gấp Layout Tĩnh vào File Nhị Phân (Offline Packing) [T2 BAMB tr.5]</text>
+<rect x="462" y="232" width="196" height="30" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="560" y="241" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">W_packed (Format NC1HWC2)</text>
+<text x="560" y="253" font-size="6.6" font-weight="400" fill="#059669" text-anchor="middle" dominant-baseline="central">Đã đóng gói sẵn trong file .rknn</text>
+<path d="M658 247 L688 247" fill="none" stroke="#2E7D32" stroke-width="1.2" marker-end="url(#m2E7D32n)"/>
+<text x="673" y="256" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">DMA</text>
+<rect x="688" y="232" width="160" height="30" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="0.8"/>
+<text x="768" y="241" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">NPU SRAM / Core Buffer</text>
+<text x="768" y="253" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">PE đọc trực tiếp, 0 memcpy</text>
+<rect x="462" y="268" width="386" height="44" rx="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="0.8"/>
+<text x="468" y="279" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Compiler thực hiện toàn bộ Transpose, Reshape, Flatten trước khi ghi file.</text>
+<text x="468" y="291" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Định dạng bộ nhớ khớp 100% với cấu trúc phần cứng NPU (NC1HWC2).</text>
+<text x="468" y="303" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Lợi ích: Triệt tiêu hoàn toàn toán tử Transpose; nạp tức thời qua kênh DMA.</text>
+<rect x="24" y="326" width="402" height="108" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="0.9"/>
+<text x="32" y="337" font-size="7.2" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">3. Tính toán Hệ số Động &amp; Nhánh Chết (Trước tối ưu)</text>
+<rect x="32" y="346" width="186" height="30" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="125" y="355" font-size="6.8" font-weight="400" fill="#475569" text-anchor="middle" dominant-baseline="central">Hệ số Float32: S_x · S_w / S_y</text>
+<text x="125" y="367" font-size="6.6" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Chia số thực lặp lại mỗi frame</text>
+<rect x="226" y="346" width="192" height="30" rx="2" fill="#FFF1F2" stroke="#FCA5A5" stroke-width="0.8"/>
+<text x="322" y="355" font-size="6.8" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">Nhánh chết (Dropout / Aux Head)</text>
+<text x="322" y="367" font-size="6.6" font-weight="400" fill="#991B1B" text-anchor="middle" dominant-baseline="central">Không nối ra Output dự đoán</text>
+<rect x="32" y="382" width="386" height="44" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.8"/>
+<text x="38" y="393" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Giữ phép tính Float32 đòi hỏi NPU kích hoạt ALU FP đắt đỏ hoặc nghẽn CPU.</text>
+<text x="38" y="405" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Nhánh dead-code làm tăng kích thước model file và chiếm RAM vô ích.</text>
+<text x="38" y="417" font-size="6.6" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Trạng thái: Đồ thị cồng kềnh, phân mảnh tài nguyên phần cứng.</text>
+<rect x="454" y="326" width="402" height="108" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="0.9"/>
+<text x="462" y="337" font-size="7.2" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">3. Fixed-point Folding &amp; Dead Code Elimination [T2 TVM tr.3]</text>
+<rect x="462" y="346" width="186" height="30" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.8"/>
+<text x="555" y="355" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Multiplier M_0 (INT32) &amp; Shift n</text>
+<text x="555" y="367" font-size="6.6" font-weight="400" fill="#059669" text-anchor="middle" dominant-baseline="central">Tính sẵn 1 lần ở pha lượng tử hóa</text>
+<rect x="656" y="346" width="192" height="30" rx="2" fill="#FFFFFF" stroke="#10B981" stroke-width="0.8" stroke-dasharray="5 3"/>
+<text x="752" y="355" font-size="6.8" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Cắt tỉa 100% Nhánh Chết</text>
+<text x="752" y="367" font-size="6.6" font-weight="400" fill="#059669" text-anchor="middle" dominant-baseline="central">Triệt tiêu hoàn toàn khỏi đồ thị</text>
+<rect x="462" y="382" width="386" height="44" rx="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="0.8"/>
+<text x="468" y="393" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Chuyển đổi toàn bộ tỷ lệ scale thành phép nhân nguyên và dịch bit siêu tốc.</text>
+<text x="468" y="405" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Dead code elimination thu nhỏ kích thước file nhị phân, tiết kiệm RAM runtime.</text>
+<text x="468" y="417" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Trạng thái: Đồ thị suy luận tinh giản tối đa, chỉ tính dữ liệu động.</text>
+<rect x="24" y="438" width="402" height="34" rx="3" fill="#FFF1F2" stroke="#F87171" stroke-width="0.8"/>
+<text x="32" y="448" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">Tổng kết Chưa Folding: Tốn nhiều kernel gọi riêng, overhead bộ nhớ lớn</text>
+<text x="32" y="461" font-size="6.6" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">Runtime gánh chịu các phép tính hằng số lặp lại ở mọi frame ảnh suy luận.</text>
+<rect x="454" y="438" width="402" height="34" rx="3" fill="#F0FDF4" stroke="#10B981" stroke-width="0.8"/>
+<text x="462" y="448" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">Tổng kết Sau Folding: Đồ thị suy luận tối giản tuyệt đối, 0 overhead tĩnh</text>
+<text x="462" y="461" font-size="6.6" font-weight="400" fill="#065F46" text-anchor="start" dominant-baseline="central">Toàn bộ hằng số tính trước ở máy build; NPU tập trung 100% cho tính toán động.</text>
+<text x="10" y="492" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 TVM tr.3 (Chen et al., OSDI 2018: Constant folding &amp; graph simplification); T2 BAMB tr.5 (Bamberg et al., 2025: Static layout transforms &amp; NPU weight packing).</text>
+</svg>

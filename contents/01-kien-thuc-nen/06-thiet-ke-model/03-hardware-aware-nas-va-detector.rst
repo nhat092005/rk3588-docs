@@ -1,22 +1,20 @@
 :tocdepth: 1
 
-*************************************
-Hardware-aware NAS và detector tối ưu
-*************************************
+******************************
+Hardware-aware NAS và detector
+******************************
 
 .. admonition:: Trang này trả lời
 
    - Tìm kiếm kiến trúc nơ-ron nhận biết phần cứng (Hardware-aware NAS) sử dụng những chỉ số nào và kết quả có chuyển giao được giữa các NPU không?
    - Các detector hiện đại như YOLOv6 tối ưu hóa cấu trúc tích chập, nhánh rẽ và đầu giải mã như thế nào cho phần cứng?
-   - Các nghiên cứu thực nghiệm trên SoC Rockchip RK3588 (EDGE benchmark, DAHD-YOLO) cho thấy điều gì về tương quan giữa FLOPs, độ phức tạp kiến trúc và độ trễ thực tế?
 
 .. admonition:: Tóm tắt
 
    - Hardware-aware NAS giải quyết sự lệch pha giữa FLOPs lý thuyết và độ trễ thực tế trên phần cứng: S3NAS sử dụng bộ ước lượng độ trễ xây dựng trên bộ mô phỏng chu kỳ chính xác của NPU MIDAP [T2 S3NAS tr.1, 4], trong khi ActNAS tìm kiếm hàm kích hoạt tối ưu theo từng tầng trên đồ thị YOLO [T2 ACTNAS tr.1, 2].
-   - Kết quả tối ưu hóa từ NAS phụ thuộc chặt chẽ vào đặc tính vi kiến trúc của phần cứng đích và có khả năng chuyển giao rất thấp sang các bộ tăng tốc khác [T2 ACTNAS tr.8]. Chưa có công trình NAS công khai nào nhắm tới NPU Rockchip (unknown).
-   - YOLOv6 tối ưu hóa cho phần cứng công nghiệp thông qua cấu trúc EfficientRep Backbone dùng khối RepBlock (lúc train) gộp thành RepConv (lúc suy luận); với các mô hình lớn hơn, khối CSPStackRep kết hợp kết nối tắt CSP để cân bằng giữa độ chính xác và dung lượng tính toán [T2 Y6 tr.4]. Đồng thời, YOLOv6 loại bỏ Distribution Focal Loss (DFL) ở các mô hình nhỏ để triệt tiêu chi phí hồi quy hộp bao quá mức [T2 Y6 tr.5].
-   - Nghiên cứu benchmark EDGE trên RK3588 chứng minh hiện tượng nghịch lý: YOLO11n có FLOPs thấp nhất (6.5 GFLOPS) nhưng lại có độ trễ INT8 cao nhất (30.71 ms so với 24.88 ms của YOLOv8n và 21.7 ms của YOLOv5n), cho thấy các cải tiến cấu trúc như C3k2 hay C2f tạo ra chi phí phụ trợ chưa tối ưu trên NPU [T2 EDGE tr.4, 5, 7].
-   - DAHD-YOLO sửa đổi kiến trúc YOLOv8 bằng cách đưa vào khối tái tham số hóa DBB và cơ chế chú ý trên RK3588, nhưng kết quả thực nghiệm ở INT8 cho thấy mô hình cải tiến chạy chậm hơn đáng kể so với baseline (79.1 ms so với 56.3 ms) do độ phức tạp cấu trúc tăng cao [T2 DAHD Table 6, tr.20], kèm theo nhiều điểm bất nhất số liệu nội bộ.
+   - Kết quả tối ưu hóa từ NAS phụ thuộc chặt chẽ vào đặc tính vi kiến trúc của phần cứng đích và có khả năng chuyển giao rất thấp sang các bộ tăng tốc khác [T2 ACTNAS tr.8]. Các công bố học thuật hiện tại chưa có công trình NAS nào nhắm trực tiếp tới NPU Rockchip.
+   - YOLOv6 tối ưu hóa cho phần cứng công nghiệp thông qua cấu trúc EfficientRep Backbone dùng khối RepBlock (lúc train) gộp thành RepConv (lúc suy luận), còn với các mô hình lớn hơn, khối CSPStackRep kết hợp kết nối tắt CSP để cân bằng giữa độ chính xác và dung lượng tính toán [T2 Y6 tr.4]. Đồng thời, YOLOv6 loại bỏ Distribution Focal Loss (DFL) ở các mô hình nhỏ để triệt tiêu chi phí hồi quy hộp bao quá mức [T2 Y6 tr.5].
+   - Trên RK3588, bài EDGE thấy FLOPs thấp không đồng nghĩa độ trễ thấp: YOLO11n có FLOPs thấp nhất nhưng độ trễ INT8 cao nhất trong ba bản nano [T2 EDGE tr.4, tr.7].
 
 .. contents:: Trong trang này
    :local:
@@ -27,8 +25,8 @@ Hardware-aware NAS và detector tối ưu
 
 Trong tối ưu hóa mô hình học sâu, số lượng phép tính dấu phẩy động (FLOPs) hoặc số lượng tham số (Parameters) thường được sử dụng làm thước đo hiệu năng tính toán. Tuy nhiên, trên các bộ xử lý chuyên dụng NPU, độ trễ thực tế không tỷ lệ thuận với FLOPs do chi phí truy cập bộ nhớ (MAC), băng thông truyền dữ liệu giữa DRAM và SRAM nội bộ, cùng mức độ lấp đầy mảng nhân chập (MAC array utilization) đóng vai trò chi phối. Phương pháp tìm kiếm kiến trúc nơ-ron nhận biết phần cứng (Hardware-aware Neural Architecture Search - HW-NAS) đưa độ trễ đo đạc trực tiếp hoặc độ trễ ước lượng từ bộ mô phỏng vào hàm mục tiêu tối ưu nhằm sinh ra kiến trúc khớp với vi cấu trúc phần cứng.
 
-1.1 S3NAS (Bộ ước lượng độ trễ NPU, DWConv vs Fused Conv)
----------------------------------------------------------
+1.1 S3NAS
+---------
 
 Công trình S3NAS (Lee và cộng sự, 2020) phát triển một framework tìm kiếm kiến trúc siêu mạng (supernet-based NAS) tối ưu hóa riêng cho bộ xử lý nơ-ron:
 
@@ -75,8 +73,8 @@ Số liệu từ Bảng 1 của S3NAS [T2 S3NAS tr.5] chứng minh rằng trên 
 
 Hình 8.3 minh họa rõ ràng hiện tượng này: cùng một khối MixConv với cùng số lượng FLOPs nhưng khi sắp xếp các toán tử con và luồng dữ liệu khác nhau, độ trễ ước lượng trên NPU có sự phân hóa đáng kể do chi phí chuyển kênh và lưu trữ trung gian [T2 S3NAS tr.6].
 
-1.2 ActNAS (Tìm kiếm activation tối ưu theo tầng)
--------------------------------------------------
+1.2 ActNAS
+----------
 
 Khác với các phương pháp NAS truyền thống can thiệp vào cấu trúc kênh và số tầng, ActNAS tập trung vào bài toán tối ưu hóa hàm kích hoạt phi tuyến theo từng lớp riêng lẻ trên đồ thị YOLO [T2 ACTNAS tr.1, 2]:
 
@@ -98,10 +96,10 @@ Tuy nhiên, nghiên cứu ActNAS cũng chỉ ra ranh giới nghiêm ngặt về 
 
    "We can see that both NPU aware models provide highest speedup on these devices but very low speedup on other devices." [T2 ACTNAS tr.8]
 
-Mô hình được tối ưu hóa cho NPU đích đạt tốc độ cao nhất trên phần cứng đó, nhưng khi chuyển giao sang các NPU của hãng khác thì hệ số tăng tốc suy giảm rõ rệt. Hiện tại, chưa có công bố chuẩn nào thực hiện NAS trực tiếp trên vi xử lý Rockchip RK3588 (unknown).
+Mô hình được tối ưu hóa cho NPU đích đạt tốc độ cao nhất trên phần cứng đó, nhưng khi chuyển giao sang các NPU của hãng khác thì hệ số tăng tốc suy giảm rõ rệt. Trong các tài liệu chuẩn hiện tại, chưa có công bố nào thực hiện NAS trực tiếp trên vi xử lý Rockchip RK3588.
 
-2. Detector thiết kế cho phần cứng (YOLOv6 RepBlock / RepConv / CSPStackRep)
-============================================================================
+2. Detector thiết kế theo phần cứng
+===================================
 
 Mô hình phát hiện đối tượng YOLOv6 được thiết kế với mục tiêu thu hẹp khoảng cách phần cứng (hardware gap) giữa nghiên cứu học thuật và môi trường phục vụ công nghiệp thực tế [T2 Y6 tr.2]:
 
@@ -146,108 +144,10 @@ Trong các thử nghiệm triệt tiêu trên GPU Tesla T4 [T2 Y6 Table 4, tr.9]
 
    "We suggest users adopt RepConv with ReLU in latency-sensitive applications." [T2 Y6 tr.8]
 
-3. Các nghiên cứu trên chip Rockchip (EDGE benchmark YOLOv5/v8/11 trên RK3588, DAHD-YOLO DBB, phân tích điểm bất nhất và giới hạn)
-==================================================================================================================================
+Liên hệ RK3588: bài EDGE đo trên RK3588 thấy YOLO11n có FLOPs thấp nhất nhưng độ trễ INT8 cao nhất trong ba bản nano [T2 EDGE tr.4, tr.7]. Số đo YOLO trên RK3588 trong các bài báo nằm ở :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 5.
 
-Trong khi các bài báo kiến trúc như YOLOv6 chủ yếu đo lường trên GPU Tesla T4, một số công trình học thuật gần đây đã tiến hành đo đạc thực nghiệm trực tiếp trên vi xử lý Rockchip RK3588.
-
-**1. Khảo sát Benchmark toàn diện từ công trình EDGE (Kong và cộng sự, 2026)**
-
-Nghiên cứu EDGE tiến hành khảo sát hiệu năng của 9 biến thể YOLO (v5, v8, v11 ở các kích cỡ nano, small, medium) trên ba SoC của Rockchip gồm RV1106, RK3568 và RK3588 [T2 EDGE tr.4, 5]:
-
-   "All deployments used the original FP32 PyTorch weights; no model was retrained, fine-tuned, pruned, or structurally modified beyond quantization." [T2 EDGE tr.4]
-
-Các phép đo được thực hiện qua 100 lần chạy, loại bỏ 10 lần đầu khởi động; độ lệch chuẩn luôn duy trì dưới 1% giá trị trung bình nhờ đường ống thực thi tần số cố định của NPU Rockchip [T2 EDGE tr.5].
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/edge-fig3-yolo-latency-rv1106-rk3568-rk3588.png
-   :align: center
-   :alt: Độ trễ suy luận trung bình của các model YOLO trên RV1106, RK3568 và RK3588
-
-   Hình 8.4b. Độ trễ suy luận trung bình của các model YOLO trên RV1106, RK3568 và RK3588 với ảnh 640x640. Nguồn: [T2 EDGE tr.5, Fig. 3]
-
-.. list-table:: So sánh thông số kiến trúc và độ trễ INT8 trên NPU RK3588 (Đo ở ảnh 640x640)
-   :header-rows: 1
-   :widths: 18 16 16 16 18 16
-
-   * - Mô hình
-     - Tham số (M)
-     - GFLOPS
-     - mAP (%)
-     - Độ trễ AUTO (ms)
-     - Độ trễ C0_1_2 (ms)
-   * - YOLOv5n
-     - 2.6
-     - 7.7
-     - 34.3
-     - 21.70
-     - 21.07
-   * - YOLOv8n
-     - 3.2
-     - 8.7
-     - 37.3
-     - 24.88
-     - 25.33
-   * - YOLO11n
-     - 2.6
-     - 6.5
-     - 39.5
-     - 30.71
-     - 31.27
-
-Từ Bảng 2 và Bảng 4 của công trình EDGE [T2 EDGE tr.4, 7], ta nhận thấy một hiện tượng nghịch lý:
-
-- **FLOPs thấp nhưng trễ cao**: YOLO11n có số lượng phép tính lý thuyết thấp nhất (chỉ 6.5 GFLOPS so với 8.7 của v8n và 7.7 của v5n), nhưng thời gian suy luận trên NPU RK3588 lại cao nhất (30.71 ms so với 24.88 ms của v8n và 21.7 ms của v5n).
-- **Nguyên nhân kiến trúc**: Nhóm tác giả EDGE đưa ra nhận định [T2 EDGE tr.5]:
-
-   "Instead, latency correlated more closely with model accuracy (mAP), suggesting that architectural innovations (e.g., C2f in YOLOv8, C3k2 in YOLO11) introduce additional computational overheads that do not map efficiently onto NPUs." [T2 EDGE tr.5]
-
-Cần lưu ý rằng đây là giả thuyết phân tích của nhóm tác giả EDGE, bài báo không thực hiện phép đo vi mô phân tách từng khối C2f hoặc C3k2 trên NPU.
-
-- **Khả năng đáp ứng thời gian thực (Real-time Feasibility)**:
-  Bài báo phân tích tính khả thi thời gian thực theo các ngưỡng 25 FPS (40 ms), 30 FPS (33.3 ms) và 50 FPS (20 ms) [T2 EDGE tr.5]. Trên RK3588 ở độ phân giải 640x640, toàn bộ các mô hình nano (v5n 21.7 ms, v8n 24.88 ms, v11n 30.71 ms) đều đạt ngưỡng 30 FPS, nhưng không mô hình nào đạt ngưỡng 50 FPS (20 ms). Ngược lại, các mô hình quy mô medium (v5m, v8m, v11m) có độ trễ từ 58 ms đến hơn 90 ms, không thể đáp ứng tần số khung hình camera giám sát tiêu chuẩn nếu không hạ độ phân giải hoặc áp dụng kỹ thuật cắt tỉa [T2 EDGE tr.5, 7].
-
-- **Điểm bất nhất nội bộ trong công trình EDGE**: Tại trang 6, bài báo nêu rằng với mô hình YOLOv5n, sự khác biệt giữa cấu hình đơn lõi và đa lõi là dưới 5% (21.5 ms so với 20.5 ms) và đưa ra kết luận khái quát:
-
-   "For larger models, the gains were similarly modest or even negligible" [T2 EDGE tr.6]
-
-Tuy nhiên, bảng số liệu thực nghiệm Table 4 (trang 7) lại phản ánh điều ngược lại: ở YOLOv5s, độ trễ giảm từ 34.42 ms (lõi C0) xuống 27.95 ms (chế độ C0_1_2); ở YOLOv5m, độ trễ giảm từ 69.61 ms xuống 58.34 ms (chế độ ALL); ở YOLO11s, cấu hình tự động AUTO đạt 41.25 ms, nhanh hơn rõ rệt so với 52.47 ms ở lõi đơn C0 [T2 EDGE Table 4]. Lời văn khái quát của EDGE mâu thuẫn trực tiếp với các số liệu chi tiết trong bảng của chính họ.
-
-**2. Khảo sát mô hình cải tiến DAHD-YOLO (Sensors 2025)**
-
-Công trình DAHD-YOLO cải tiến mạng YOLOv8 phục vụ bài toán phát hiện hành vi hút thuốc trong các môi trường phức tạp, tích hợp khối tái tham số hóa DBB (Diverse Branch Block) trong khối C2f_DBCA, cơ chế chú ý ECA-FPN, khối AFGCA và đầu DetectDBB [T2 DAHD tr.5, Figure 1].
-
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/dahd-fig1-dahd-yolo-architecture.png
-   :align: center
-   :alt: Kiến trúc DAHD-YOLO
-
-   Hình 8.4c. Kiến trúc DAHD-YOLO (xây trên YOLOv8, thêm C2f_DBCA, ECA-FPN, DetectDBB, AFGCA). Nguồn: [T2 DAHD tr.5, Figure 1]
-
-Thực nghiệm triển khai trên bo mạch Orange Pi 5 Plus trang bị RK3588 (sử dụng nhóm luồng tăng tốc đa lõi) cung cấp các kết quả đối chiếu tại Bảng 6 [T2 DAHD Table 6, tr.18]:
-
-- **Mô hình gốc YOLOv8s**: Ở chế độ INT8, đạt 56.3 ms độ trễ, thông lượng 70.9 FPS (ở độ phân giải 720P) và 73.0% mAP50.
-- **Mô hình cải tiến DAHD-YOLO**: Ở chế độ INT8, đạt 79.1 ms độ trễ, thông lượng 50.2 FPS (720P) và 74.36% mAP50.
-
-Nghiên cứu DAHD ghi nhận chi tiết về độ trễ trên ảnh 720P [T2 DAHD tr.18]:
-
-   "single image with a resolution of 1280 × 720 reaches 79.1 ms" [T2 DAHD tr.18]
-
-Kết quả thực nghiệm trên NPU RK3588 cho thấy một thực tế rõ ràng: mặc dù việc đưa vào các khối tái tham số hóa DBB và cơ chế chú ý giúp tăng nhẹ độ chính xác mAP50 (từ 73.0% lên 74.36%), tốc độ suy luận của mô hình ở INT8 lại bị suy giảm nghiêm trọng (độ trễ tăng từ 56.3 ms lên 79.1 ms, thông lượng giảm 29.2% từ 70.9 FPS xuống 50.2 FPS). Tác giả bài báo thừa nhận [T2 DAHD tr.20]:
-
-   "The model's increased structural complexity has resulted in a decline in inference speed." [T2 DAHD tr.20]
-
-Về khía cạnh tiêu thụ năng lượng, công trình DAHD ghi nhận bo mạch Orange Pi 5 Plus trang bị RK3588 chỉ tiêu thụ dưới 10 W (từ 6 W đến 9 W) trong toàn bộ quá trình thực thi đa luồng, thấp hơn rất nhiều so với mức tiêu thụ khoảng 200 W của nền tảng máy tính gắn card đồ họa RTX 3070 [T2 DAHD tr.18]. Điều này khẳng định lợi thế vượt trội về hiệu suất năng lượng của bộ xử lý NPU nhúng, ngay cả khi cấu trúc mô hình chưa đạt điểm tối ưu tuyệt đối về độ trễ.
-
-**3. Phân tích các điểm bất nhất và giới hạn của nghiên cứu DAHD-YOLO**
-
-Khi thẩm định dữ liệu từ bài báo DAHD-YOLO, có nhiều điểm mâu thuẫn số liệu nội bộ cần lưu ý:
-
-1. **Nghịch lý giữa độ trễ và thông lượng ở FP16**: Trong Table 6 (trang 18), ở chế độ FP16, DAHD-YOLO được báo cáo có thời gian suy luận là 116.2 ms (nhanh hơn mức 131.9 ms của YOLOv8s), nhưng thông lượng khung hình FPS ở 720P lại ghi 26.9 FPS (chậm hơn mức 32.9 FPS của YOLOv8s). Hai chỉ số này mâu thuẫn trực tiếp với nhau về mặt logic tính toán.
-2. **Nhầm lẫn giữa FP16 và INT8 trong văn bản**: Tại trang 18, văn bản ghi: "the INT8 optimized model's single-thread inference time per frame is 0.1162 s", trong khi trong Table 6 giá trị 116.2 ms lại thuộc về dòng cấu hình FP16, còn cấu hình INT8 có thời gian là 79.1 ms.
-3. **Mâu thuẫn giá trị mAP50 giữa các bảng**: Tại Table 6, độ chính xác mAP50 của YOLOv8s và DAHD-YOLO lần lượt là 73.6% và 78.76%. Tuy nhiên, trong bảng thử nghiệm triệt tiêu (Ablation Study, Table 4 trang 16), baseline YOLOv8s lại ghi 80.9% và DAHD-YOLO đạt 86.0% mà không có lời giải thích về sự khác biệt tập dữ liệu kiểm thử.
-4. **Không bóc tách được yếu tố thành phần**: DAHD-YOLO thay đổi đồng thời nhiều thành phần kiến trúc (C2f_DBCA, ECA-FPN, AFGCA, Wise-PIoU, DetectDBB), do đó không thể bóc tách định lượng xem sự suy giảm tốc độ trên NPU RK3588 bắt nguồn từ phép tái tham số hóa DBB hay do các khối chú ý phân mảnh gây ra.
-
-Nguồn tham khảo
-===============
+Nguồn
+=====
 
 Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong trang này:
 
@@ -262,20 +162,16 @@ Các tài liệu nghiên cứu chuẩn (Tier 2) được trích dẫn trong tran
    * - ``S3NAS``
      - T2
      - :download:`s3nas_npu_aware_2020lee.pdf <../../../_assets/pdf/papers/06_nas/s3nas_npu_aware_2020lee.pdf>`
-     - 7
+     - 15
    * - ``ACTNAS``
      - T2
      - :download:`actnas_yolo_2025sah.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/actnas_yolo_2025sah.pdf>`
-     - 6
+     - 11
    * - ``Y6``
      - T2
      - :download:`yolov6_hwfriendly_2022li.pdf <../../../_assets/pdf/papers/08_npu_friendly_arch/yolov6_hwfriendly_2022li.pdf>`
-     - 7
+     - 20
    * - ``EDGE``
      - T2
      - :download:`edgesoc_benchmark_2026kong.pdf <../../../_assets/pdf/papers/05_rk3588/edgesoc_benchmark_2026kong.pdf>`
-     - 6
-   * - ``DAHD``
-     - T2
-     - :download:`dahd_yolo_rk3588_2025.pdf <../../../_assets/pdf/papers/05_rk3588/dahd_yolo_rk3588_2025.pdf>`
-     - 5
+     - 2

@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-***********************
+**********************
 Tensor và kiểu dữ liệu
-***********************
+**********************
 
 .. admonition:: Trang này trả lời
 
@@ -13,8 +13,8 @@ Tensor và kiểu dữ liệu
    - Tensor là mảng giá trị số có nhiều trục, bậc của tensor là số trục: scalar bậc 0, vector bậc 1, ma trận bậc 2 [T2 D2L tr.30] [T2 D2L tr.43].
    - D2L ghi thứ tự trục của ảnh theo nhiều cách (height, width, channel ở tr.44, channel, height, width ở tr.135, batch đứng đầu ở tr.137). Trang chọn quy ước NCHW.
    - Channel dùng cho hai việc: kênh màu của ảnh và kênh đặc trưng (feature map) của đầu ra lớp tích chập [T2 D2L tr.252] [T2 D2L tr.238].
-   - NCHW và channels last cùng shape, khác stride: tensor 10×3×32×32 có stride (3072, 1024, 32, 1) và (3072, 1, 96, 3) [T1 PTMF]. Nguồn không nêu NHWC có phải là tên khác của channels last (``unknown``).
-   - Số bit: FP32 là (1, 8, 23), FP16 là (1, 5, 10), BFLOAT16 là (1, 8, 7) [T2 BF16 tr.4]. Số byte mỗi phần tử không có trong nguồn đã kiểm (``unknown``), trang tự tính bằng số bit chia 8.
+   - NCHW và channels last cùng shape, khác stride: tensor 10×3×32×32 có stride (3072, 1024, 32, 1) và (3072, 1, 96, 3) [T1 PTMF]. Tài liệu PTMF gọi bố cục lưu theo từng điểm ảnh này là channels last, còn RKNNAPI gọi bố cục kênh đứng cuối là NHWC [T1 RKNNAPI pdf 11].
+   - Số bit: FP32 là (1, 8, 23), FP16 là (1, 5, 10), BFLOAT16 là (1, 8, 7) [T2 BF16 tr.4]. Quy đổi theo đơn vị 1 byte = 8 bit cho kích thước mỗi phần tử lần lượt là 4 byte, 2 byte, 2 byte và 1 byte (với INT8).
    - FP16 gần một nửa bộ nhớ nhưng dải hẹp hơn FP32 [T2 MIXP tr.1] [T2 MIXP tr.2]. BFLOAT16 giữ dải như FP32 [T2 BF16 tr.1].
    - Hai chỗ nguồn tự mâu thuẫn: mantissa của BFLOAT16 (8 bit trong văn bản, 7 trong Table 1) và INT8 "từ 1 đến 255" trong bài tập D2L khác với NAGEL.
 
@@ -22,8 +22,8 @@ Tensor và kiểu dữ liệu
    :local:
    :depth: 1
 
-1. Tensor từ vô hướng, vector, ma trận đến tensor nhiều chiều
-=============================================================
+1. Tensor và số chiều
+=====================
 
 Tensor là một mảng các giá trị số, có thể có nhiều trục (axis). Bậc của tensor (order hoặc rank) được định nghĩa chính xác bằng số lượng trục của nó. Khi dữ liệu chỉ cần một trục, tensor được gọi là vector. Khi có hai trục, tensor được gọi là ma trận. Từ ba trục trở lên thì không dùng tên riêng nữa, mà gọi chung là tensor bậc k (k-th order tensor) [T2 D2L tr.30] [T2 D2L tr.31].
 
@@ -87,11 +87,11 @@ Shape của tensor là bộ số thể hiện độ dài theo từng trục tư�
 * **Scalar (Bậc 0)**: Một đại lượng đo vô hướng, không có trục tọa độ không gian. Ví dụ: giá trị hàm mất mát (loss = 0.28), ngưỡng phân loại độ tin cậy (confidence threshold = 0.25).
 * **Vector (Bậc 1)**: Dãy giá trị trải dọc theo 1 chiều. Ví dụ: tọa độ một hộp bao vật thể ``[x1, y1, x2, y2]`` gồm 4 phần tử, hoặc vector đặc trưng embedding của ảnh.
 * **Ma trận (Bậc 2)**: Bảng số hai chiều gồm hàng và cột. Ví dụ: một bức ảnh xám 1 kênh độ phân giải 640×640 có shape ``(640, 640)``, hoặc ma trận trọng số của lớp fully connected.
-* **Tensor 3 chiều (Bậc 3)**: Xếp chồng nhiều ma trận 2D theo trục kênh (channel). Ví dụ: một ảnh màu RGB có 3 kênh Đỏ, Lục, Lam với shape ``(3, 640, 640)``; hoặc bản đồ đặc trưng (feature map) ở đầu ra lớp tích chập.
+* **Tensor 3 chiều (Bậc 3)**: Xếp chồng nhiều ma trận 2D theo trục kênh (channel). Ví dụ: một ảnh màu RGB có 3 kênh Đỏ, Lục, Lam với shape ``(3, 640, 640)``, hoặc bản đồ đặc trưng (feature map) ở đầu ra lớp tích chập.
 * **Tensor 4 chiều (Bậc 4)**: Gom nhiều tensor 3 chiều theo trục batch. Ví dụ: một mini-batch gồm 4 ảnh đưa vào NPU RK3588 có shape ``(4, 3, 640, 640)`` theo chuẩn NCHW.
 
-1.1 Cơ chế cắt lát (Slicing) và lập chỉ mục đa trục
----------------------------------------------------
+1.1 Cắt lát và lập chỉ mục
+--------------------------
 
 Khi thao tác với tensor trong các framework lập trình và runtime biên dịch mô hình, việc trích xuất dữ liệu con tuân theo hai quy tắc nền tảng:
 
@@ -112,8 +112,8 @@ Ba thao tác cắt lát thông dụng nhất:
 * **Tách riêng một kênh màu (Channel slice)**: Cú pháp ``img[0, :, :]`` cố định chỉ số channel tại kênh 0 (kênh Đỏ). Bậc giảm từ 3D ``(3, H, W)`` xuống ma trận 2D ``(H, W)``.
 * **Trích xuất vector màu của một pixel**: Cú pháp ``img[:, h, w]`` cố định tọa độ không gian tại vị trí ``(h, w)`` và lấy toàn bộ các kênh. Bậc giảm từ 3D ``(3, H, W)`` xuống vector 1D ``(3,)`` biểu diễn vector màu sắc ``[R, G, B]`` của điểm ảnh đó.
 
-2. Shape của ảnh gồm batch, channel, height và width
-====================================================
+2. Shape của tensor ảnh
+=======================
 
 Một ảnh là tensor bậc 3 với các trục ứng với height, width và channel. Một tập ảnh được biểu diễn bằng tensor bậc 4, trong đó các ảnh khác nhau được đánh chỉ số theo trục đầu tiên [T2 D2L tr.44]. Trục đầu tiên này là trục batch.
 
@@ -151,8 +151,8 @@ Ví dụ tự tính:
 * Một ảnh màu 3×32×32 (channel, height, width) có 3·32·32 = 3072 phần tử. Mỗi channel có 32·32 = 1024 phần tử.
 * Batch ảnh xám ``[64, 1, 32, 32]`` có 64·1·32·32 = 65 536 phần tử.
 
-3. Channel là gì (kênh màu RGB, kênh đặc trưng)
-===============================================
+3. Kênh màu và kênh đặc trưng
+=============================
 
 Channel (kênh) là trục thể hiện nhiều lớp giá trị cùng nằm ở một vị trí không gian [T2 D2L tr.44]. Từ "channel" được dùng cho hai việc, và hai việc này không phải một.
 
@@ -190,9 +190,7 @@ Tài liệu PyTorch định nghĩa bố cục channels last như một cách kh�
 
    "For example, 10x3x16x16 batch in Channels last format will have strides equal to (768, 1, 48, 3)." [T1 PTMF]
 
-Tài liệu PTMF chỉ dùng chữ "channels last" và "NCHW", không có chuỗi "NHWC" [T1 PTMF]. Vì vậy trang này không khẳng định PTMF gọi bố cục đó là NHWC.
-
-**unknown:** NHWC có phải là tên gọi tương ứng của channels last trong PyTorch hay không, nguồn đã kiểm không nêu. Truy vấn tìm nguồn: "NHWC channels last memory format PyTorch".
+Tài liệu PTMF dùng thuật ngữ "channels last" và "NCHW" để mô tả định dạng bộ nhớ giữ nguyên thứ tự trục của tensor 4 chiều nhưng đặt kênh làm chiều dày đặc nhất [T1 PTMF].
 
 Với tensor 10×3×32×32 (N, C, H, W), PTMF in ra stride của bố cục NCHW liên tục là (3072, 1024, 32, 1). Sau khi chuyển sang channels last, shape vẫn là (10, 3, 32, 32) và stride là (3072, 1, 96, 3) [T1 PTMF]. Shape không đổi, chỉ có stride đổi.
 
@@ -219,7 +217,7 @@ Cùng một phần tử nằm ở vị trí 2081 trong bố cục NCHW và ở v
 Hình trên trực quan hóa sự khác biệt giữa hai bố cục trên một mini-tensor mẫu 3D có shape ``(C=3, H=2, W=2)`` gồm 12 phần tử:
 
 * Ở bố cục **NCHW (Planar)**: Toàn bộ ma trận của kênh Đỏ được xếp trước, tiếp đến kênh Lục, rồi đến kênh Lam. Nhảy giữa các kênh cần bước nhảy lớn (stride = 4).
-* Ở bố cục **NHWC / Channels-last (Interleaved)**: Dữ liệu được lưu theo từng pixel; các kênh màu của cùng một điểm ảnh nằm kế tiếp nhau trong RAM (stride của kênh bằng 1). Cách sắp xếp này đặt toàn bộ các kênh của một pixel liền nhau trong RAM.
+* Ở bố cục **NHWC / Channels-last (Interleaved)**: Dữ liệu được lưu theo từng pixel, các kênh màu của cùng một điểm ảnh nằm kế tiếp nhau trong RAM (stride của kênh bằng 1). Cách sắp xếp này đặt toàn bộ các kênh của một pixel liền nhau trong RAM.
 
 Chỉ riêng với RKNN-Toolkit2, tài liệu của hãng dùng tên "nchw" và "nhwc" cho layout của dữ liệu vào và đặt mặc định là NHWC. Đây là quy ước của công cụ này, nguồn không nói gì về framework khác:
 
@@ -231,12 +229,10 @@ Chỉ riêng với RKNN-Toolkit2, tài liệu của hãng dùng tên "nchw" và 
 
 Phần layout riêng của RKNN được trình bày ở trang :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2`.
 
-5. Kiểu số FP32, FP16 và INT8, số byte mỗi phần tử
-==================================================
+5. Kiểu số và số byte mỗi phần tử
+=================================
 
-Mỗi phần tử của tensor được lưu bằng một kiểu số. Các nguồn mô tả kiểu số bằng số bit. Với kiểu float, bảng so sánh của bài BFLOAT16 ghi bộ ba (s, e, m) là số bit dấu, số bit mũ và số bit mantissa [T2 BF16 tr.4]. Với INT8, các nguồn lượng tử hóa nêu bit-width b = 8 và lưới số nguyên tương ứng [T2 NAGEL tr.4] [T2 NAGEL tr.5] [T2 GHOLAMI tr.5].
-
-**unknown:** số byte mỗi phần tử của FP32, FP16 và INT8, không có trong nguồn đã kiểm nào. Truy vấn tìm nguồn: "FP32 4 bytes FP16 2 bytes INT8 1 byte tensor element size". Trang này tự tính bằng số bit chia 8 (1 byte bằng 8 bit).
+Mỗi phần tử của tensor được lưu bằng một kiểu số. Các nguồn mô tả kiểu số bằng số bit. Với kiểu float, bảng so sánh của bài BFLOAT16 ghi bộ ba (s, e, m) là số bit dấu, số bit mũ và số bit mantissa [T2 BF16 tr.4]. Với INT8, các nguồn lượng tử hóa nêu bit-width b = 8 và lưới số nguyên tương ứng [T2 NAGEL tr.4] [T2 NAGEL tr.5] [T2 GHOLAMI tr.5]. Từ độ rộng bit, quy đổi theo đơn vị cơ bản 1 byte = 8 bit cho kích thước lưu trữ của từng phần tử: 32 bit tương ứng 4 byte, 16 bit tương ứng 2 byte và 8 bit tương ứng 1 byte.
 
 Bảng của bài BFLOAT16 ghi mantissa của FP16 là 10, trùng với bài Mixed Precision Training [T2 BF16 tr.4] [T2 MIXP tr.3]:
 
@@ -298,7 +294,7 @@ Chú thích: các ô "Tổng bit" của ba kiểu float là phép cộng s + e +
    :align: center
    :alt: Cấu trúc phân bổ bit và đánh đổi kiểu dữ liệu FP32, FP16, BFLOAT16 và INT8
 
-   Cấu trúc phân bổ bit và đánh đổi: So sánh các trường Sign, Exponent, Mantissa giữa FP32, FP16, BFLOAT16 và INT8; sự đánh đổi giữa dải động (Dynamic Range) và độ chính xác; ý nghĩa tối ưu phần cứng trên NPU RK3588.
+   Cấu trúc phân bổ bit và đánh đổi: So sánh các trường Sign, Exponent, Mantissa giữa FP32, FP16, BFLOAT16 và INT8, sự đánh đổi giữa dải động (Dynamic Range) và độ chính xác cùng ý nghĩa tối ưu phần cứng trên NPU RK3588.
 
 Ví dụ tự tính: một batch ảnh xám theo D2L có shape [64, 1, 32, 32] [T2 D2L tr.136], gồm 64·1·32·32 = 65 536 phần tử. Bộ nhớ cần cho riêng phần tử:
 
@@ -339,7 +335,7 @@ Các kiểu số của trang chia thành hai họ. Họ số thực dấu phẩy
      - Theo MIXP, trên GPU đời gần đây [T2 MIXP tr.1].
    * - FP16
      - Cập nhật trọng số FP16 làm mất 80% độ chính xác tương đối.
-     - Ví dụ rủi ro trong mục 3.1 của MIXP [T2 MIXP tr.3]. Mô hình đo cụ thể: unknown.
+     - Ví dụ thực nghiệm trong mục 3.1 của MIXP trên mô hình nhận dạng tiếng Quan Thoại (Mandarin speech model) huấn luyện 20 epoch với khoảng 800 giờ dữ liệu âm thanh [T2 MIXP tr.3].
    * - BF16
      - Dải giá trị biểu diễn giống FP32, và chuyển đổi qua lại với FP32 đơn giản.
      - Theo BF16, trong ngữ cảnh huấn luyện [T2 BF16 tr.1].
@@ -416,8 +412,8 @@ Bảng dưới gom các hiểu sai dễ gặp khi đọc về kiểu số và b�
      - Hai kiểu có bit format khác nhau: FP16 là (1, 5, 10), BFLOAT16 là (1, 8, 7). Max Normal của FP16 là 6.55e4, của BFLOAT16 là 3.38e38. BF16 viết: "the range of values it can represent is the same as that of IEEE 754 floating-point format (FP32)". Cả hai cộng ra 16 bit (trang tự tính từ Table 1).
      - [T2 BF16 tr.4], [T2 BF16 tr.1]
    * - NHWC và NCHW là hai dữ liệu khác nhau
-     - Cùng một tensor, chỉ khác cách xếp trong bộ nhớ. PTMF in ra shape giữ nguyên (10, 3, 32, 32) cho cả hai, còn stride là (3072, 1024, 32, 1) với NCHW liên tục và (3072, 1, 96, 3) với channels last. PTMF dùng chữ "channels last" và không có chữ "NHWC". Việc coi NHWC là tên khác của channels last: unknown theo PTMF.
-     - [T1 PTMF]
+     - Cùng một tensor, chỉ khác cách xếp trong bộ nhớ. PTMF in ra shape giữ nguyên (10, 3, 32, 32) cho cả hai, còn stride là (3072, 1024, 32, 1) với NCHW liên tục và (3072, 1, 96, 3) với channels last. PTMF dùng thuật ngữ "channels last", còn RKNNAPI dùng "NHWC" cho bố cục kênh đứng cuối.
+     - [T1 PTMF], [T1 RKNNAPI pdf 11]
    * - INT8 không có số 0, chỉ từ 1 đến 255
      - Câu này là tiền đề của một bài tập trong D2L, không phải định nghĩa kỹ thuật: "INT8 is a very limited format consisting of nonzero numbers from 1 to 255." NAGEL định nghĩa lưới số nguyên không dấu là {0, …, 2^b − 1}, gồm số 0, và hình 3 vẽ nhãn 0 và 255 cho không dấu, nhãn -128 và 127 cho có dấu. Câu của D2L không khớp với định nghĩa của NAGEL.
      - [T2 D2L tr.147], [T2 NAGEL tr.4], [T2 NAGEL tr.5]
@@ -444,7 +440,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``D2L``
      - T2
      - :download:`dive_into_deep_learning_2023zhang.pdf <../../../_assets/pdf/papers/00_overview/dive_into_deep_learning_2023zhang.pdf>`
-     - 47
+     - 51
    * - ``MIXP``
      - T2
      - :download:`mixed_precision_training_2018micikevicius.pdf <../../../_assets/pdf/papers/02_quantization/mixed_precision_training_2018micikevicius.pdf>`
@@ -462,12 +458,12 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
      - :download:`quantization_survey_2021gholami.pdf <../../../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`
      - 9
    * - ``PTMF``
-     - T2
+     - T1
      - :download:`pytorch_docs_channels_last_memory_format.html <../../../_assets/pdf/papers/04_memory/pytorch_docs_channels_last_memory_format.html>`
      - 8
    * - ``RKNNAPI``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 2
+     - 4
 
 Số trang của D2L là số trang in, bằng số trang PDF trừ 40. Số trang của MIXP và BF16 theo thứ tự trang của PDF. Số trang của RKNNAPI là chỉ số trang PDF. PTMF là tài liệu PyTorch dạng trang web nên không có số trang. Ba hình trong trang là hình gốc của nguồn, cắt từ trang PDF và lưu ở ``_assets/img/01-kien-thuc-nen/01-nen-tang-ai/tensor-va-kieu-du-lieu/``: Figure 3 của NAGEL (trang 5, mục 5), Figure 7 của GHOLAMI (trang 12, mục 6) và Figure 1 của MIXP (trang 3, mục 6). Năm hình đồ họa ở các mục 1, 3, 4 và 5 được sinh bởi công cụ ``docs/tools/figure_gen/01-kien-thuc-nen/02-tensor-va-kieu-du-lieu/gen.py`` và lưu tại ``_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/02-tensor-va-kieu-du-lieu/``.

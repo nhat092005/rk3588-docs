@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-*************************************
-Dataflow, phân cấp bộ nhớ và roofline
-*************************************
+***************************
+Dataflow và phân cấp bộ nhớ
+***************************
 
 .. admonition:: Trang này trả lời
 
@@ -31,8 +31,8 @@ Dataflow, phân cấp bộ nhớ và roofline
 
 Dataflow là quy tắc quyết định dữ liệu nào nằm yên ở đâu và dữ liệu nào chạy qua mảng PE. Nó quyết định số lần phải đọc lại cùng một dữ liệu từ bộ nhớ xa. Trang này dùng thuật ngữ của Chen 2016 (ifmap, ofmap, filter, psum), xem bảng thuật ngữ ở :doc:`01-kien-truc-npu-va-mac`.
 
-1.1 Reuse và psum accumulation: hai thứ cần tối ưu cùng lúc
------------------------------------------------------------
+1.1 Reuse và cộng dồn psum
+--------------------------
 
 Chen 2016 nêu hai vấn đề khi xử lý lớp CONV và FC. Thứ nhất, nếu mọi MAC đọc dữ liệu thẳng từ DRAM thì cần băng thông cao và tốn năng lượng. Thứ hai, các MAC song song sinh ra nhiều psum, tốn chỗ lưu và tốn năng lượng đọc ghi nếu không cộng dồn ngay [T2 Chen 2016 tr.3]. Vấn đề thứ nhất giảm được nhờ ba kiểu dùng lại dữ liệu [T2 Chen 2016 tr.3] [T2 Chen 2016 tr.4]:
 
@@ -59,8 +59,8 @@ Vấn đề thứ hai giải bằng cách xếp lịch phép tính để psum đ
 
 Lý do là các MAC dùng chung một trọng số hay một pixel ifmap thì cho ra psum của những pixel ofmap khác nhau, nên chúng không cộng được với nhau. Vì vậy dataflow phải cân bằng cả hai. Ngoài ra lớp FC không có convolutional reuse [T2 Chen 2016 tr.3], và hình dạng các lớp khác nhau nên phần cứng cần lập trình được để ánh xạ [T2 Chen 2016 tr.4].
 
-1.2 Weight stationary, output stationary
-----------------------------------------
+1.2 Weight và output stationary
+-------------------------------
 
 Chen 2016 phân loại các dataflow có sẵn theo loại dữ liệu được giữ yên ("stationary") [T2 Chen 2016 tr.4] [T2 Chen 2016 tr.5]:
 
@@ -93,8 +93,8 @@ Các dataflow này có trong thực tế. Ví dụ Layer-Puzzle chọn OS cho ki
 
    "we adopt the commonly used output stationary as the dataflow for this paper." [T2 Gao 2023 tr.2]
 
-1.3 Row stationary của Eyeriss và vì sao được đề xuất
------------------------------------------------------
+1.3 Row stationary của Eyeriss
+------------------------------
 
 Động cơ của RS là các dataflow cũ chỉ tối ưu một phần:
 
@@ -125,18 +125,15 @@ Kết quả mà paper nêu (mô phỏng với cấu hình AlexNet, cùng diện 
 
 Giới hạn: kết quả là của AlexNet trong mô hình năng lượng của paper (xem mục 2.2). Không suy ra RS là dataflow tốt nhất cho mọi mạng hay mọi chip.
 
-1.4 Dataflow của NPU RK3588
----------------------------
-
-Trang kiến thức nền này không xét RK3588. Phần cứng NPU RK3588 xem :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core`.
+Liên hệ RK3588: phần cứng NPU RK3588 xem :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core`.
 
 .. _npu-phan-cap-bo-nho:
 
-2. Hệ phân cấp bộ nhớ và chi phí năng lượng
-===========================================
+2. Phân cấp bộ nhớ và năng lượng
+================================
 
-2.1 Các tầng: register file, buffer trên chip, DRAM
----------------------------------------------------
+2.1 Các tầng bộ nhớ
+-------------------
 
    "Overall, the system provides four levels of storage hierarchy for data accesses, including DRAM, global buffer, array (inter-PE communication) and RF. Accessing data from a different level also implies a different energy cost, with the highest cost at DRAM and the lowest cost at RF." [T2 Chen 2016 tr.2]
 
@@ -200,14 +197,14 @@ Bảng dưới thay các bộ (a, b, c, d) khác nhau cùng tích 24 vào phươ
 
 Cùng một dữ liệu, dùng lại ở tầng càng gần ALU thì càng rẻ, và chênh lệch giữa các mô hình reuse có thể gấp 20 lần. Đây chính là lý do chọn dataflow ở mục 1.
 
-2.3 Vì sao giảm truy cập DRAM là mục tiêu chính
------------------------------------------------
+2.3 Vì sao cần giảm truy cập DRAM
+---------------------------------
 
 Có hai lý do trong nguồn. Một là năng lượng: DRAM đắt nhất trong bảng (200x). Hai là bản chất khối lượng trọng số: mỗi mô hình trong benchmark của TPU cần từ 5M đến 100M trọng số, nên truy cập tốn nhiều thời gian và năng lượng, và cách giảm là dùng lại cùng trọng số cho một batch nhiều mẫu độc lập:
 
    "To amortize the access costs, the same weights are reused across a batch of independent examples during inference or training, which improves performance." [T2 Jouppi 2017 tr.2]
 
-Hai giới hạn cần nhớ. Một, số 200x lấy từ chip 65 nm và cấu hình bộ nhớ của Eyeriss. Việc áp dụng tỷ lệ này cho SoC hiện đại là unknown (chưa có nguồn). Hai, năng lượng và băng thông là hai chuyện khác nhau. Chen 2016 cho rằng độ trễ dữ liệu có thể che bằng prefetching, double buffering, caching, pipelining:
+Hai giới hạn cần nhớ. Một, hệ số 200 lần được đo trên tiến trình 65 nm và cấu hình bộ nhớ riêng của chip Eyeriss [T2 Chen 2016 tr.2], nên không áp dụng nguyên con số tuyệt đối này cho mọi SoC hiện đại. Hai, năng lượng và băng thông là hai chuyện khác nhau. Chen 2016 cho rằng độ trễ dữ liệu có thể che bằng prefetching, double buffering, caching, pipelining:
 
    "Therefore, data movement is not expected to impact overall throughput significantly." [T2 Chen 2016 tr.8]
 
@@ -227,8 +224,8 @@ Jouppi 2017 dùng mô hình Roofline từ tính toán hiệu năng cao (HPC). Gi
 
 Trong ví dụ của trang, operational intensity (OI) = số MAC trên mỗi byte trọng số đọc từ bộ nhớ (suy ra). Với trọng số INT8 (1 byte) và batch B, mỗi trọng số của lớp CONV được dùng :math:`B \cdot E^2` lần, nên :math:`\text{OI} = B \cdot E^2`. Với lớp FC, :math:`\text{OI} = B`. Cột "MAC mỗi trọng số" ở bảng của :doc:`01-kien-truc-npu-va-mac` chính là OI ở B = 1.
 
-3.2 Hai vùng: bị giới hạn bởi băng thông, bị giới hạn bởi tính toán
--------------------------------------------------------------------
+3.2 Vùng băng thông và vùng tính toán
+-------------------------------------
 
 Phần phẳng của roofline là tốc độ tính tối đa. Phần dốc là băng thông nhân operational intensity, vì (FLOPS/sec) / (FLOPS/Byte) = Bytes/sec [T2 Jouppi 2017 tr.5]:
 
@@ -242,8 +239,8 @@ Từ mô tả này, hiệu năng đạt được (suy ra): :math:`\text{perf} = 
 
    Roofline của một die TPU, thang log-log. Chú thích hình: ridge point ở 1350 operation trên mỗi byte trọng số. Nguồn: [T2 Jouppi 2017 tr.6, Figure 5]
 
-3.3 Ví dụ số: đặt một lớp conv lên roofline
--------------------------------------------
+3.3 Ví dụ đặt lớp conv lên roofline
+-----------------------------------
 
 Thông số TPU lấy từ Table 2: 700 MHz, 34 GB/s, 92 TOPS [T2 Jouppi 2017 tr.5], 65,536 MAC [T2 Jouppi 2017 tr.1]. Bước suy ra:
 
@@ -268,8 +265,8 @@ Bảng dưới đặt các lớp AlexNet lên roofline này, giả sử trọng 
 
 Đọc bảng: lớp CONV có OI lớn nhờ convolutional reuse nên dễ chạm đỉnh tính toán. Lớp FC chỉ chạm đỉnh khi batch cỡ 1350, nên với suy luận một ảnh nó nằm sâu trong vùng băng thông. Đây là cơ chế đằng sau câu của paper rằng MLP và LSTM bị giới hạn bộ nhớ.
 
-3.4 Giới hạn của kết luận: chỉ đúng cho 6 ứng dụng của TPU
-----------------------------------------------------------
+3.4 Giới hạn của kết luận
+-------------------------
 
    "the MLPs and LSTMs are memory bound, and CNNs are computation bound." [T2 Jouppi 2017 tr.6]
 
@@ -317,12 +314,12 @@ Số trang là số trang PDF. Các số MAC, chi phí năng lượng theo bộ 
    * - ``Chen 2016``
      - T2
      - :download:`eyeriss_dataflow_2016chen.pdf <../../../_assets/pdf/papers/01_hardware/eyeriss_dataflow_2016chen.pdf>`
-     - 44
+     - 46
    * - ``Jouppi 2017``
      - T2
      - :download:`tpu_datacenter_2017jouppi.pdf <../../../_assets/pdf/papers/01_hardware/tpu_datacenter_2017jouppi.pdf>`
-     - 19
+     - 20
    * - ``Gao 2023``
      - T2
      - :download:`layer_puzzle_multicore_2023gao.pdf <../../../_assets/pdf/papers/01_hardware/layer_puzzle_multicore_2023gao.pdf>`
-     - 1
+     - 2
