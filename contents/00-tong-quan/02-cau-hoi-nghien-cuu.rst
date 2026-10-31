@@ -13,7 +13,7 @@ Research problem và RQ
 .. admonition:: Tóm tắt
 
    - Research problem: hiệu quả real-time trên Edge NPU phụ thuộc operator support, tensor layout, datatype, memory access, memory copy, compiler optimization, NPU architecture và pre/post-processing overhead.
-   - Trên RK3588, `Convolution` và các biến thể gộp `ReLU`, `Clip`, `PReLU/LeakyReLU`, `Add` hỗ trợ đa nhân, trong khi `Resize` không hỗ trợ và `ConvolutionSwish` (Conv + SiLU) tạm chưa hỗ trợ đa nhân (vẫn chạy trên một nhân). Chi tiết từng toán tử được phân tích tại trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`.
+   - Trên RK3588, `Convolution` và các biến thể gộp `ReLU`, `Clip`, `PReLU/LeakyReLU`, `Add` hỗ trợ đa nhân, trong khi `Resize` không hỗ trợ và `ConvolutionSwish` (Conv + SiLU) tạm chưa hỗ trợ đa nhân (vẫn chạy trên một nhân). Chi tiết từng toán tử được phân tích tại trang :doc:`Operator support </contents/03-phuong-phap/02-tang-npu/01-operator-support>`.
    - Trình biên dịch RKNN tự động tối ưu đồ thị và hợp nhất toán tử (như gộp lớp tích chập với hàm kích hoạt đi kèm) trước khi sinh mã thực thi cho NPU.
    - Trên RK3588 chỉ dùng được `FP16` và `w8a8` (INT8/INT8, mặc định), còn `w4a8` chưa được hỗ trợ.
    - Độ trễ của từng tầng trên NPU không chỉ phụ thuộc số chu kỳ tính toán (`NPU Cycles`) mà còn phụ thuộc số chu kỳ chờ đọc và ghi bộ nhớ (`DDR Cycles`).
@@ -74,7 +74,7 @@ Ba yếu tố dưới đây được quy định trực tiếp trong bộ tài l
      - Trên RK3588 chỉ dùng được ``FP16`` và ``w8a8`` (INT8/INT8, mặc định). Các chế độ lượng tử hóa khác đều giới hạn theo dòng chip: ``w4a16`` chỉ hỗ trợ RK3576/RV1126B, ``w8a16`` chỉ hỗ trợ RK3562, ``w16a16i`` chỉ hỗ trợ RV1103/RV1106 và ``w4a8`` chưa được hỗ trợ
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`, hàm ``config``, tham số ``quantized_dtype``, tr.7
 
-Tài liệu hướng dẫn API của Rockchip cũng nêu rõ cơ chế phân tải khi chạy đa nhân (so sánh chi tiết giữa các tài liệu hãng và kiểm chứng thực nghiệm được trình bày tại trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>`): :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
+Tài liệu hướng dẫn API của Rockchip cũng nêu rõ cơ chế phân tải khi chạy đa nhân (so sánh chi tiết giữa các tài liệu hãng và kiểm chứng thực nghiệm được trình bày tại trang :doc:`Operator support </contents/03-phuong-phap/02-tang-npu/01-operator-support>`): :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`, trang PDF 27, nguyên văn:
 
    "For multi-cores mode (when enabling RKNN_NPU_CORE_0_1 and RKNN_NPU_CORE_0_1_2), the following ops have better acceleration: Conv, DepthwiseConvolution, Add, Concat, Relu, Clip, Relu6, ThresholdedRelu. Prelu, LeakyRelu. Other type of op will fallback to Core0 to continue running."
 
@@ -92,7 +92,7 @@ Theo tài liệu ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_
 
    "When analyzing the high time-consuming problem of the NPU operator, you can judge whether the theoretical bottleneck of the operator's time-consuming is a bandwidth bottleneck or a computing power bottleneck based on the three columns of DDR Cycles/NPU Cycles/Total Cycles. DDR Cycles refers to the number of cycles required by the operator to read and write. It has been converted into the number of Cycles required at the NPU frequency, so it can be directly compared with the NPU Cycle."
 
-``NPU Cycles`` phản ánh số chu kỳ tính toán trên mảng MAC, còn ``DDR Cycles`` phản ánh số chu kỳ chờ đọc và ghi dữ liệu từ bộ nhớ RAM (đã quy đổi về cùng xung nhịp NPU). Ở các tầng thông thường, ``NPU Cycles`` lớn hơn ``DDR Cycles`` nên tính toán là nút thắt chính (compute-bound). Ngược lại, ở những tầng có ``DDR Cycles`` vượt ``NPU Cycles``, thời gian di chuyển dữ liệu lớn hơn thời gian tính toán, khiến băng thông bộ nhớ trở thành nút thắt thực sự (memory-bound). Phân tích thực nghiệm hiện tượng này trên từng khối của mô hình dự án được trình bày tại :doc:`Phân tích sâu latency từng khối </contents/03-phuong-phap-de-xuat/03-do-latency-npu/03-phan-tich-sau-latency-tung-khoi>`.
+``NPU Cycles`` phản ánh số chu kỳ tính toán trên mảng MAC, còn ``DDR Cycles`` phản ánh số chu kỳ chờ đọc và ghi dữ liệu từ bộ nhớ RAM (đã quy đổi về cùng xung nhịp NPU). Ở các tầng thông thường, ``NPU Cycles`` lớn hơn ``DDR Cycles`` nên tính toán là nút thắt chính (compute-bound). Ngược lại, ở những tầng có ``DDR Cycles`` vượt ``NPU Cycles``, thời gian di chuyển dữ liệu lớn hơn thời gian tính toán, khiến băng thông bộ nhớ trở thành nút thắt thực sự (memory-bound). Phân tích thực nghiệm hiện tượng này trên từng khối của mô hình dự án được trình bày tại :doc:`Phân tích sâu latency từng khối </contents/03-phuong-phap/03-do-latency-npu/03-phan-tich-sau-latency-tung-khoi>`.
 
 --------------
 
