@@ -78,7 +78,7 @@ Ví dụ từ bài DAHD-YOLO, sau khi tác giả dùng thread pool trên RK3588:
 
    "By utilizing a thread pool for acceleration, we optimize the entire detection process through multithreading." [T2 DAHD tr.18]
 
-Văn bản cùng trang ghi bản INT8 chạy đơn luồng mất 0.1162 s mỗi khung hình [T2 DAHD tr.18], nhưng 116.2 ms trong Table 6 thuộc dòng FP16. Vì vậy số đơn luồng của bài chưa chắc (xem :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 5.3).
+Văn bản cùng trang ghi bản INT8 chạy đơn luồng mất 0.1162 s mỗi khung hình [T2 DAHD tr.18], nhưng 116.2 ms trong Table 6 thuộc dòng FP16. Vì vậy số đơn luồng của bài chưa chắc (xem :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 2.3).
 
 1.3 Tài nguyên cần theo dõi
 ---------------------------

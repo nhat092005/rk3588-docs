@@ -99,9 +99,7 @@ Khối xây dựng cơ bản của mạng RepVGG ở giai đoạn huấn luyện
 
 Quá trình hợp nhất khối RepVGG thành một lớp Conv 3x3 duy nhất kèm vector bias được thực hiện tuần tự qua bốn bước toán học:
 
-**Bước 1: Gộp Batch Normalization vào lớp tích chập đứng trước**
-
-Lớp BN ở chế độ suy luận áp dụng phép biến đổi affine lên từng kênh đầu ra :math:`i` (:math:`1 \le i \le C_2`):
+- **Bước 1: Gộp Batch Normalization vào lớp tích chập đứng trước**. Lớp BN ở chế độ suy luận áp dụng phép biến đổi affine lên từng kênh đầu ra :math:`i` (:math:`1 \le i \le C_2`):
 
 .. math::
 
@@ -113,17 +111,11 @@ Lớp BN đứng sau Conv được gộp vào một lớp Conv mới có trọng
 
    W'_{i,:,:,:} = \frac{\gamma_i}{\sigma_i} W_{i,:,:,:}, \quad b'_i = \beta_i - \frac{\mu_i \gamma_i}{\sigma_i}
 
-**Bước 2: Chuyển đổi nhánh Identity thành lớp Conv 1x1**
+- **Bước 2: Chuyển đổi nhánh Identity thành lớp Conv 1x1**. Nhánh Identity được biểu diễn tương đương dưới dạng một lớp Conv 1x1 với trọng số là ma trận đơn vị :math:`W^{(0)} \in \mathbb{R}^{C_2 \times C_1 \times 1 \times 1}`, trong đó :math:`W^{(0)}_{i,j,0,0} = 1` nếu :math:`i = j` và bằng :math:`0` nếu :math:`i \ne j`. Sau đó, lớp BN của nhánh identity được gộp vào kernel đơn vị này theo đúng công thức ở Bước 1 [T2 REPVGG tr.5].
 
-Nhánh Identity được biểu diễn tương đương dưới dạng một lớp Conv 1x1 với trọng số là ma trận đơn vị :math:`W^{(0)} \in \mathbb{R}^{C_2 \times C_1 \times 1 \times 1}`, trong đó :math:`W^{(0)}_{i,j,0,0} = 1` nếu :math:`i = j` và bằng :math:`0` nếu :math:`i \ne j`. Sau đó, lớp BN của nhánh identity được gộp vào kernel đơn vị này theo đúng công thức ở Bước 1 [T2 REPVGG tr.5].
+- **Bước 3: Đệm không cho các kernel 1x1 về kích thước 3x3**. Hai kernel 1x1 thu được sau khi gộp BN (từ nhánh 1x1 và nhánh identity) được đệm không (zero-padding) xung quanh để đạt kích thước không gian :math:`3 \times 3`. Giá trị trọng số 1x1 được đặt chính xác vào tâm của ma trận :math:`3 \times 3` (tọa độ hàng 1, cột 1 theo chỉ số từ 0) [T2 REPVGG tr.5].
 
-**Bước 3: Đệm không cho các kernel 1x1 về kích thước 3x3**
-
-Hai kernel 1x1 thu được sau khi gộp BN (từ nhánh 1x1 và nhánh identity) được đệm không (zero-padding) xung quanh để đạt kích thước không gian :math:`3 \times 3`. Giá trị trọng số 1x1 được đặt chính xác vào tâm của ma trận :math:`3 \times 3` (tọa độ hàng 1, cột 1 theo chỉ số từ 0) [T2 REPVGG tr.5].
-
-**Bước 4: Cộng dồn trọng số và bias**
-
-Kernel :math:`3 \times 3` cuối cùng và vector bias cuối cùng là tổng số học của các thành phần đã quy đổi từ cả ba nhánh [T2 REPVGG tr.5]:
+- **Bước 4: Cộng dồn trọng số và bias**. Kernel :math:`3 \times 3` cuối cùng và vector bias cuối cùng là tổng số học của các thành phần đã quy đổi từ cả ba nhánh [T2 REPVGG tr.5]:
 
 .. math::
 

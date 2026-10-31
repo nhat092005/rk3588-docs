@@ -18,8 +18,6 @@ Dòng mô hình YOLO (You Only Look Once) đã trải qua nhiều bước chuy�
 - YOLOv8 (phát hành năm 2023 bởi Ultralytics) thiết lập chuẩn mực mới cho dòng mạng phát hiện anchor-free: "YOLOv8 (2023) improves convergence and small-object fidelity via a decoupled head and anchor-free design." [T2 UEVOL tr.12]. Mạng sử dụng xương sống (backbone) dựa trên khối C2f và module Spatial Pyramid Pooling - Fast (SPPF) nhằm giảm số lượng tham số nhưng vẫn duy trì trường tiếp nhận phong phú.
 - YOLO26 (phát hành năm 2026 bởi Ultralytics) tái thiết kế toàn diện đường ống suy luận nhằm thu hẹp khoảng cách triển khai trên phần cứng biên (Export Gap). Kiến trúc chuyển đổi từ khối C2f sang C3k2, bổ sung cơ chế chú ý cục bộ (C2PSA), và loại bỏ hoàn toàn module phân phối hộp DFL để đạt thông lượng suy luận ổn định [T2 Y26A tr.5].
 
-.. _91-so-sánh-tổng-quan:
-
 Bảng dưới đây tổng hợp các đặc tính cấu hình, khối lượng tính toán và độ trễ công bố giữa hai mô hình nano trên tập dữ liệu COCO (kích thước đầu vào chuẩn 640x640 pixel):
 
 .. list-table:: So sánh đặc tính kiến trúc và hiệu năng lý thuyết giữa YOLOv8n và YOLO26n
@@ -144,8 +142,6 @@ Một trong những cải tiến kiến trúc đáng chú ý nhất của YOLO26
   - Ở độ phân giải đầu vào chuẩn 640x640, tầng P5 có tỷ lệ thu nhỏ 32 lần, cho kích thước lưới không gian là :math:`20 \times 20`, tương ứng chuỗi chỉ có 400 token.
   - Do chuỗi token ngắn, chi phí tính toán ma trận ma sát :math:`O(N^2)` của tự chú ý tại đây chỉ tiêu tốn phần nhỏ năng lực tính toán nhưng mang lại lợi thế định vị ngữ cảnh toàn cục vượt trội.
   - Khi xuất khẩu sang đồ thị ONNX, hai khối chú ý này tạo ra đúng 4 toán tử ``MatMul`` và 2 toán tử ``Softmax``, hoàn toàn không gây tắc nghẽn thông lượng tổng thể.
-
-.. _924-đầu-detect:
 
 5. Đầu dự đoán
 ==============

@@ -144,7 +144,7 @@ Trong các thử nghiệm triệt tiêu trên GPU Tesla T4 [T2 Y6 Table 4, tr.9]
 
    "We suggest users adopt RepConv with ReLU in latency-sensitive applications." [T2 Y6 tr.8]
 
-Liên hệ RK3588: bài EDGE đo trên RK3588 thấy YOLO11n có FLOPs thấp nhất nhưng độ trễ INT8 cao nhất trong ba bản nano [T2 EDGE tr.4, tr.7]. Số đo YOLO trên RK3588 trong các bài báo nằm ở :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 5.
+Liên hệ RK3588: bài EDGE đo trên RK3588 thấy YOLO11n có FLOPs thấp nhất nhưng độ trễ INT8 cao nhất trong ba bản nano [T2 EDGE tr.4, tr.7]. Số đo YOLO trên RK3588 trong các bài báo nằm ở :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 2.
 
 Nguồn
 =====

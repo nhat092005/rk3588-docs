@@ -20,8 +20,6 @@
    :local:
    :depth: 2
 
-.. _11-nhom-ai-quality:
-
 1. Độ đo chất lượng
 ===================
 
@@ -275,8 +273,6 @@ Khi quan sát kết quả thực nghiệm trên các tập dữ liệu thực t�
 
 Nguồn gốc sai số và vì sao detector nhạy với lượng tử hóa nằm ở :doc:`../03-luong-tu-hoa/03-phan-tich-sai-so-va-dac-thu-yolo`.
 
-.. _12-nhom-hardware-performance:
-
 2. Độ đo phần cứng
 ==================
 
@@ -294,8 +290,6 @@ Một mô hình có mAP cao nhưng chạy quá chậm hoặc vượt bộ nhớ 
      - :doc:`../05-bo-nho-hieu-nang/02-thiet-ke-nhan-thuc-bo-nho` mục 1
    * - Độ trễ bốn chặng, FPS, tài nguyên cần theo dõi
      - :doc:`../05-bo-nho-hieu-nang/01-do-do-tre-va-profiling` mục 1
-
-.. _13-bang-tong-hop-metrics:
 
 3. Bảng tổng hợp
 ================
@@ -364,8 +358,6 @@ Một mô hình có mAP cao nhưng chạy quá chậm hoặc vượt bộ nhớ 
      - AI Quality
      - [0, 1]
      - Mức suy hao độ chính xác khi lượng tử hóa từ FP32 xuống INT8
-
-.. _14-nguon-tham-khao:
 
 Nguồn
 =====

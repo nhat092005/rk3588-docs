@@ -302,9 +302,7 @@ Vì ở chế độ suy luận, cả hai toán tử đều là các phép biến
 
    Kỹ thuật Conv-BN Folding: Gộp trọng số và thống kê của lớp BatchNorm vào ma trận trọng số và bias của lớp Conv, triệt tiêu hoàn toàn toán tử BN lúc suy luận trên NPU.
 
-**Chứng minh công thức gộp:**
-
-Xét một kênh đầu ra của lớp Conv với trọng số :math:`\mathbf{W}` và bias :math:`\mathbf{b}` (nếu có). Đầu ra tại kênh này là :math:`\mathbf{z} = \mathbf{W} * \mathbf{x} + \mathbf{b}`. Tầng BN áp dụng lên :math:`\mathbf{z}` với các giá trị suy luận cố định :math:`\mu, \sigma^2, \gamma, \beta`:
+**Chứng minh công thức gộp**: xét một kênh đầu ra của lớp Conv với trọng số :math:`\mathbf{W}` và bias :math:`\mathbf{b}` (nếu có). Đầu ra tại kênh này là :math:`\mathbf{z} = \mathbf{W} * \mathbf{x} + \mathbf{b}`. Tầng BN áp dụng lên :math:`\mathbf{z}` với các giá trị suy luận cố định :math:`\mu, \sigma^2, \gamma, \beta`:
 
 .. math::
 

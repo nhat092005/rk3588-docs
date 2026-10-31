@@ -149,7 +149,7 @@ Sai số lớn nhất là 0.0043, nhỏ hơn s/2 = 0.0073 đúng như giới h�
 
 **Symmetric signed** (z = 0, đoạn đối xứng quanh 0): ``s = max|x|/127 = 0.019685``, ``x_int = [-61, -18, 0, 21, 91, 127]``, ``x^ = [-1.2008, -0.3543, 0.0000, 0.4134, 1.7913, 2.5000]``, sai số lớn nhất 0.0087. Cùng 8 bit nhưng bước nhảy 0.0197 lớn hơn 0.0145 vì đoạn đối xứng [-2.50, 2.50] rộng hơn đoạn dữ liệu thực [-1.20, 2.50].
 
-**Hai biến thể làm thay đổi sai số**:
+**Hai biến thể làm thay đổi sai số** trên cùng dữ liệu gốc:
 
 .. list-table::
    :header-rows: 1

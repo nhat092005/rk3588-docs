@@ -114,13 +114,15 @@ Các bộ tăng tốc xử lý nơ-ron (NPU) trên thiết bị biên thường 
 
 Trong đó :math:`q_{\text{acc}}` là giá trị tích lũy số nguyên 32-bit từ mảng nhân chập (MAC array), :math:`M` là hệ số tỉ lệ requantization, và :math:`z_{\text{out}}` là zero-point. Trong quy trình này, việc lựa chọn hàm kích hoạt ảnh hưởng trực tiếp đến kiến trúc phần cứng:
 
-**1. Hợp nhất hoàn toàn vào khâu Requantization (Operator Fusion)**
+2.1 Hợp nhất hoàn toàn vào khâu Requantization (Operator Fusion)
+----------------------------------------------------------------
 
 Hàm ReLU được định nghĩa là :math:`\max(0, x)`. Khi chuyển đổi sang không gian số nguyên lượng tử hóa, phép toán này hoàn toàn tương đương với việc gán giá trị ngưỡng cắt dưới :math:`q_{\min} = z_{\text{out}}` ngay trong bộ cắt ngưỡng số nguyên của phần cứng. Trong trường hợp lượng tử hóa đối xứng (symmetric quantization) với :math:`z_{\text{out}} = 0`, phép cắt dưới đơn giản là chặn các giá trị âm về mức 0. Bộ phần cứng NPU không cần bổ sung bất kỳ mạch logic phụ trợ nào, không làm tăng chu kỳ xung nhịp và không phải chuyển dữ liệu ra bộ nhớ đệm trung gian SRAM/DRAM [T2 Y6 tr.8].
 
 Đối với hàm ReLU6 (:math:`\min(\max(0, x), 6)`), ngưỡng cắt trên được thiết lập trực tiếp là :math:`q_{\max} = \text{quantize}(6.0)`. Do cả hai ngưỡng đều được kiểm soát trực tiếp bởi bộ hạn chế số nguyên có sẵn trong bộ gom tích lũy MAC, ReLU và ReLU6 đạt hiệu quả thực thi cao nhất trên mọi NPU INT8.
 
-**2. Chi phí của các hàm phi tuyến siêu việt (SiLU, GELU, Swish)**
+2.2 Chi phí của các hàm phi tuyến siêu việt (SiLU, GELU, Swish)
+---------------------------------------------------------------
 
 Các hàm kích hoạt như SiLU (:math:`x \cdot \frac{1}{1 + e^{-x}}`) hoặc GELU chứa phép tính hàm mũ số thực và phép chia. Mạch phần cứng INT8 không thể thực hiện trực tiếp phép tính này trên các thanh ghi số nguyên. Để hỗ trợ, NPU buộc phải sử dụng một trong ba cơ chế xử lý:
 
@@ -128,7 +130,8 @@ Các hàm kích hoạt như SiLU (:math:`x \cdot \frac{1}{1 + e^{-x}}`) hoặc G
 - **Tách đồ thị thành các toán tử cơ bản**: Tách SiLU thành phép tính Sigmoid và Mul. Khi tách rời, tensor trung gian phải được ghi ra SRAM rồi đọc lại vào bộ tính toán, gây bùng nổ chi phí truy cập bộ nhớ (Memory Access Cost - MAC) và làm tăng điện năng tiêu thụ.
 - **Bộ hàm đặc biệt (SFU - Special Function Unit)**: Một số vi kiến trúc trang bị mạch SFU để xấp xỉ chuỗi Taylor hoặc đa thức mảnh. Tuy nhiên, số lượng bộ SFU thường rất ít so với số lượng nhân MAC, dẫn đến hiện tượng nghẽn cổ chai tính toán (computational bottleneck).
 
-**3. Hardswish như giải pháp dung hòa và giới hạn tính tương thích**
+2.3 Hardswish như giải pháp dung hòa và giới hạn tính tương thích
+-----------------------------------------------------------------
 
 Nhằm khắc phục nhược điểm của Swish trên thiết bị biên, MobileNet-V3 đề xuất hàm Hardswish thay thế đoạn hàm mũ bằng đường tuyến tính từng phần [T2 MOBONE tr.3]:
 
@@ -144,7 +147,8 @@ Tuy nhiên, Vasu và các cộng sự chỉ ra rằng giải pháp này không p
 
    "MobileNet-V3 [30], introduces an optimized activation function - Hard-Swish for a specific platform. However, scaling such functions to different platforms may be difficult. Therefore, our design uses basic operators that are already available across different platforms." [T2 MOBONE tr.3]
 
-**4. Đánh giá proxy không chi phí và quy tắc cấu trúc lai từ ActNAS**
+2.4 Đánh giá proxy không chi phí và quy tắc cấu trúc lai từ ActNAS
+------------------------------------------------------------------
 
 Để tìm kiếm hàm kích hoạt tối ưu theo từng tầng mà không tiêu tốn tài nguyên tính toán cho việc huấn luyện lại hàng trăm mô hình, ActNAS sử dụng chỉ số đánh giá không chi phí huấn luyện (Zero-Cost Proxy NWOT - Neural Wire Odds Table) [T2 ACTNAS tr.2, 3]:
 
