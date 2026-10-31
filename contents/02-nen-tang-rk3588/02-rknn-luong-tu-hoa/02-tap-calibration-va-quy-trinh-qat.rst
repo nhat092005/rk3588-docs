@@ -19,7 +19,7 @@ Tập dữ liệu chuẩn hóa và quy trình QAT
    - ``do_quantization=False`` với model float không lượng tử hóa mà đổi weight từ float32 sang float16. Với model đã lượng tử hóa thì dùng tham số lượng tử hóa có sẵn trong model [T1 UG232 tr.165].
    - QAT chỉ nên cân nhắc khi PTQ của RKNN và hybrid quantization đều không đạt yêu cầu [T1 UG232 tr.126].
    - Với PyTorch, RKNN hỗ trợ model QAT sinh từ giao diện FX (``prepare_qat_fx``) [T1 UG232 tr.127]. ``qconfig`` cần ``reduce_range=False`` và ``qscheme=torch.per_channel_affine`` [T1 UG232 tr.128].
-   - Chọn calibration set riêng cho miền hẹp (ví dụ phát hiện PPE) thì unknown. Đã tìm ở: UG232 tr.122, tr.134, tr.158-159, API232 tr.8, tr.14, từ khóa: ``calibration``, ``quantization data``, ``scene``.
+   - Tài liệu hãng quy định nguyên tắc chọn tập calibration phủ đủ các phân bố dữ liệu thực tế [T1 UG232 tr.122], không đặt tỷ lệ mẫu cứng cho từng bài toán miền hẹp.
 
 .. contents:: Trong trang này
    :local:
@@ -80,7 +80,7 @@ Ví dụ model ba input, hai mẫu (theo ví dụ của hãng) [T1 UG232 tr.158]
 
 Lượng bộ nhớ cũng cần tính trước. Hãng ghi rằng trong lúc lượng tử hóa, toolkit cấp phát bộ nhớ hệ thống theo phân vùng, có thể khiến chương trình bị kill hoặc treo. Cách xử lý được nêu là tăng RAM hoặc swap [T1 UG232 tr.165].
 
-Điều chưa có trong nguồn: cách resize cụ thể (stretch hay letterbox, kiểu nội suy), layout và dtype chấp nhận của ``.npy``, và việc mean/std có áp lên ``.npy`` hay không. Tất cả là unknown. Đã tìm ở: UG232 tr.122, tr.132, tr.158, tr.165, API232 tr.14, từ khóa: ``resize``, ``npy``, ``letterbox``, ``interpolation``. Suy ra: vì chưa biết toolkit có letterbox hay không, ảnh calibration nên được tiền xử lý giống hệt đường inference thật rồi lưu ``.npy``.
+Tài liệu hãng chỉ ghi rằng ảnh khác kích thước sẽ được toolkit tự resize (có thể làm đổi thông tin ảnh) và khuyên dùng ảnh đúng kích thước hoặc tệp ``.npy`` khớp shape input của model [T1 UG232 tr.158, tr.165]. Do tài liệu không nêu thuật toán nội suy hay letterbox khi tự resize, ảnh calibration nên được tiền xử lý giống hệt đường inference thật rồi lưu ``.npy``.
 
 .. _calibration-so-anh:
 
@@ -126,7 +126,7 @@ API232 nói tương tự cho ``normal``: "with more data, the accuracy may not b
 - Kiểm tra tập đã chọn: lượng tử hóa thử bằng đúng một ảnh (dataset chỉ một dòng) rồi inference trên ảnh đó. Nếu độ chính xác trên ảnh đơn tăng rõ rệt thì tập cũ có thể chưa tối ưu và nên chọn lại ảnh sát cảnh triển khai hơn [T1 UG232 tr.134]. Nếu cải thiện không rõ, vấn đề có thể không nằm ở dataset [T1 UG232 tr.134].
 - Nếu ban đầu chỉ dùng một ảnh, thử tăng lên khoảng 20 đến 200 ảnh [T1 UG232 tr.134].
 
-Cách chọn cho miền hẹp như PPE (tỷ lệ lớp, ảnh âm, số ảnh mỗi lớp) là unknown. Đã tìm ở: UG232 tr.122, tr.133-134, tr.159, API232 tr.8, tr.14, từ khóa: ``scene``, ``distribution``, ``categories``, ``calibration set``. Bước tiếp theo khi lượng tử hóa kém được trình bày ở :doc:`03-hybrid-quantization-va-accuracy-analysis`.
+Tài liệu hãng dừng ở nguyên tắc phủ phân bố cảnh thực tế ở trên [T1 UG232 tr.122, tr.133-134]. Bước tiếp theo khi lượng tử hóa kém được trình bày ở :doc:`03-hybrid-quantization-va-accuracy-analysis`.
 
 
 .. _qat-va-build-fp16:
@@ -173,8 +173,8 @@ Lý do hãng đưa ra để không dùng QAT mặc định là cần thêm mã h
 
 Hai điều kiện là: PTQ của RKNN không đạt yêu cầu độ chính xác (kiểm tra theo chương 7), và hybrid quantization của RKNN không đạt yêu cầu về độ chính xác hoặc hiệu năng [T1 UG232 tr.126]. Chương 7 cũng lặp lại thứ tự này: nếu sau hybrid vẫn thiếu chính xác, hoặc đủ chính xác nhưng hiệu năng không đạt vì hybrid, thì cân nhắc QAT [T1 UG232 tr.135]. Quy trình xử lý lỗi độ chính xác đầy đủ nằm ở :doc:`03-hybrid-quantization-va-accuracy-analysis`.
 
-2.2 Cấu hình QAT cho RKNPU (PyTorch)
-------------------------------------
+2.2 Cấu hình QAT trong PyTorch
+------------------------------
 
 RKNN hỗ trợ model lượng tử hóa sinh từ giao diện FX của PyTorch, cụ thể ``prepare_qat_fx`` và các giao diện đi kèm [T1 UG232 tr.127]. Với Paddle và TensorFlow, hãng chỉ đưa link tài liệu chính thức [T1 UG232 tr.127]. Ví dụ của hãng dành cho ``1.10 <= torch <= 1.13`` [T1 UG232 tr.127] và hiệu chỉnh ``qconfig`` ở hai chỗ:
 
@@ -212,8 +212,8 @@ Với PyTorch, Conv và Linear có weight được lượng tử hóa theo luậ
 
 Hãng còn ghi hai kinh nghiệm: cấu hình QAT nên chỉnh theo đặc điểm phần cứng (tham chiếu mục 2.2), và tham số lượng tử hóa lưu trong model có thể không phải tham số dùng thật khi inference (ví dụ sigmoid), nên RKNN-Toolkit2 điều chỉnh các tham số này lúc chuyển đổi để kết quả gần inference PyTorch hơn [T1 UG232 tr.130].
 
-2.4 Build FP16 (không lượng tử hóa)
------------------------------------
+2.4 Build FP16 không lượng tử hóa
+---------------------------------
 
 Khi ``do_quantization=False`` với model float, toolkit không lượng tử hóa:
 
@@ -257,7 +257,7 @@ Hai lưu ý khi dùng model QAT:
 - ``rknn.accuracy_analysis(..., target=None)`` gọi trên model gốc là QAT sẽ lỗi [T1 API232 tr.22]. Chi tiết công cụ này ở :doc:`03-hybrid-quantization-va-accuracy-analysis`.
 - Kết quả PyTorch và RKNN có thể khác nhau nếu PyTorch chưa đặt ``engine='qnnpack'``. Hãng giải thích inference của RKNN gần với qnnpack hơn [T1 UG232 tr.176].
 
-Phần cấu hình QAT cho Paddle và TensorFlow ngoài việc dẫn link tài liệu chính thức: unknown. Đã tìm ở: UG232 tr.126-130, từ khóa: ``Paddle``, ``TensorFlow``, ``QAT``.
+Với Paddle và TensorFlow, UG232 chỉ dẫn link tới tài liệu QAT chính thức của hai framework đó mà không đưa cấu hình ``qconfig`` riêng như PyTorch [T1 UG232 tr.127].
 
 
 4. Hiểu sai thường gặp
@@ -306,7 +306,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 74
+     - 78
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`

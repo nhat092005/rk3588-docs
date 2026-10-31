@@ -24,8 +24,6 @@
    :local:
    :depth: 1
 
-.. _94-đồ-thị-xuất-và-đường-rknn:
-
 1. Đường xuất ONNX và RKNN
 ==========================
 
@@ -86,6 +84,8 @@ Quy trình xuất định dạng RKNN hoàn chỉnh diễn ra trong phương th�
 5. Chuyển giao tệp ONNX sang hàm ``onnx2rknn`` [T1 ULT utils/export/rknn.py:16-84].
 
 Hàm ``onnx2rknn`` tiến hành khởi tạo đối tượng RKNN, cấu hình các tham số tiền xử lý chuẩn hóa bao gồm giá trị trung bình ``mean_values=[[0, 0, 0]]`` và độ lệch chuẩn ``std_values=[[255, 255, 255]]`` (tương đương phép chia giá trị pixel cho 255.0 để ánh xạ về đoạn [0.0, 1.0]) [T1 ULT utils/export/rknn.py:74]. Sau đó, toolkit thực hiện nạp mô hình qua ``load_onnx``, xây dựng đồ thị qua ``build`` (với cờ ``do_quantization=True`` khi có dữ liệu cân chỉnh), và xuất ra tệp nhị phân ``.rknn`` cùng tệp siêu dữ liệu ``metadata.yaml``.
+
+Các bước convert và tham số của ``rknn.build`` nằm ở :doc:`../03-toolchain-runtime/01-luong-onnx-sang-rknn`.
 
 2. Chuẩn hóa tọa độ với _NormalizeCoords
 ========================================
@@ -148,8 +148,8 @@ Tuy nhiên, việc chèn khối này làm thay đổi cấu trúc đồ thị ON
 
 Sự kết hợp giữa các tham số dòng lệnh trong lệnh ``export`` của Ultralytics tạo ra các biến thể đồ thị ONNX khác nhau trước khi được chuyển tiếp cho compiler RKNN.
 
-3.1 format="onnx" so với format="rknn"
---------------------------------------
+3.1 Xuất bằng format onnx và rknn
+---------------------------------
 
 Khi người dùng chạy lệnh ``yolo export format=onnx``, Exporter không bọc khối ``_NormalizeCoords`` vì định dạng ONNX tiêu chuẩn thường được thiết kế để chạy trực tiếp trên các runtime FP32/FP16 (như ONNX Runtime). Ngược lại, khi chạy ``yolo export format=rknn quantize=8``, khối chuẩn hóa tọa độ được kích hoạt.
 
@@ -215,8 +215,8 @@ Bảng dưới đây thống kê số lượng toán tử trong đồ thị ONNX
 
 Quan sát bảng trên cho thấy đường xuất RKNN lượng tử hóa hoàn toàn tương đồng với đường ONNX chuẩn ở toàn bộ các tầng trích xuất đặc trưng chính, và chỉ sai khác chính xác ở 3 loại toán tử phục vụ việc chuẩn hóa tọa độ đầu ra (thêm 1 Div, 1 Concat, và 2 Slice).
 
-3.2 Opset 12 so với 19 và vai trò của onnxslim
-----------------------------------------------
+3.2 Opset 12 và 19 cùng onnxslim
+--------------------------------
 
 Phiên bản opset và cờ tối ưu hóa đồ thị ``simplify`` tạo ra sự phân hóa lớn về độ phức tạp của đồ thị tính toán:
 
@@ -271,8 +271,8 @@ Nguồn
    * - ``ULT``
      - T1
      - Mã nguồn thư viện Ultralytics (engine/exporter.py, utils/export/engine.py, utils/export/rknn.py, cfg/default.yaml)
-     - 16
+     - 32
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
-     - 1
+     - 2

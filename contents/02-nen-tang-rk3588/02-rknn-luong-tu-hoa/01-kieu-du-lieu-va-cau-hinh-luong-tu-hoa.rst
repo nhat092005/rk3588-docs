@@ -13,12 +13,12 @@ Kiểu dữ liệu và cấu hình lượng tử hóa
 .. admonition:: Tóm tắt
 
    - Trong tài liệu API, chỉ ``w8a8`` không ghi giới hạn chip, các kiểu ``w4a16``, ``w8a16``, ``w16a16i``, ``w16a16i_dfp`` ghi chip khác và ``w4a8`` ghi "Not supported yet" [T1 API232 tr.7].
-   - UG232 nói hẹp hơn: chỉ hỗ trợ INT8 tuyến tính bất đối xứng, mặc định ``asymmetric_quantized-8`` [T1 UG232 tr.22] [T1 UG232 tr.122]. Hai tài liệu không mâu thuẫn về ý nghĩa nhưng khác tên giá trị.
+   - UG232 còn giữ tên cũ ``asymmetric_quantized-8`` từ Toolkit1/2.0 [T1 UG232 tr.22, tr.122], trong khi chữ ký thật của ``rknn.config()`` ở bản 2.3.2 đặt mặc định ``quantized_dtype='w8a8'`` [T1 API232 tr.7].
    - Thuật toán chọn khoảng lượng tử hóa: ``normal`` (mặc định), ``mmse``, ``kl_divergence``. ``gdq`` chỉ hợp lệ với ``w4a16`` và ``w8a16`` [T1 API232 tr.8].
    - Per-channel chỉ áp dụng cho weight, activation luôn per-layer [T1 UG232 tr.120]. Mặc định ``quantized_method`` là ``channel`` [T1 API232 tr.8].
    - ``mean_values``, ``std_values`` được gộp vào model và ảnh calibration được chuẩn hóa trước khi lượng tử hóa [T1 UG232 tr.22] [T1 UG232 tr.132]. ``quant_img_RGB2BGR`` chỉ có tác dụng lúc đọc ảnh calibration [T1 API232 tr.7].
    - Khi không lượng tử hóa, simulator tính bằng FP16 vì RKNPU không hỗ trợ FP32 [T1 UG232 tr.131].
-   - Mặc định ``do_quantization`` là ``True`` theo API232 và ``False`` theo UG232 [T1 API232 tr.14] [T1 UG232 tr.122]. Nên luôn truyền tường minh.
+   - Chữ ký thật của ``rknn.build()`` đặt mặc định ``do_quantization=True`` (khớp API232 tr.14, trong khi UG232 tr.122 ghi nhầm ``'False'``) [T1 API232 tr.14] [T1 UG232 tr.122]. Nên luôn truyền tường minh.
 
 .. contents:: Trong trang này
    :local:
@@ -26,13 +26,13 @@ Kiểu dữ liệu và cấu hình lượng tử hóa
 
 .. _kieu-thuat-toan-luong-tu-hoa:
 
-1. Kiểu và thuật toán lượng tử hóa RK3588 hỗ trợ
-================================================
+1. Kiểu và thuật toán được hỗ trợ
+=================================
 
 Nền. Lượng tử hóa đổi số thực sang số nguyên bằng scale và zero-point. Phần lý thuyết (công thức affine, đối xứng và bất đối xứng, granularity) nằm ở :doc:`../../01-kien-thuc-nen/03-luong-tu-hoa/01-luong-tu-hoa-affine-va-granularity` và không nhắc lại ở đây. Trang này chỉ trả lời toolkit của Rockchip cho chọn những gì.
 
-1.1 Kiểu dữ liệu ``quantized_dtype``
-------------------------------------
+1.1 Kiểu dữ liệu quantized_dtype
+--------------------------------
 
 API232 liệt kê sáu giá trị cho ``quantized_dtype`` và gắn mỗi giá trị với chip được hỗ trợ:
 
@@ -73,7 +73,7 @@ API232 liệt kê sáu giá trị cho ``quantized_dtype`` và gắn mỗi giá t
 
 Nguồn của bảng: [T1 API232 tr.7]. Cột cuối là suy ra: RK3588 không nằm trong danh sách chip của năm giá trị còn lại, còn ``w8a8`` chỉ loại trừ RK2118. API232 không có câu nào nói thẳng "RK3588 hỗ trợ w8a8".
 
-UG232 mô tả hẹp hơn, chỉ nêu một kiểu: INT8 tuyến tính bất đối xứng, mặc định ``asymmetric_quantized-8`` [T1 UG232 tr.22]. Chương lượng tử hóa của UG232 cũng ghi "RKNN-Toolkit2 supports INT8 as the quantization data type." [T1 UG232 tr.121]. Hai tài liệu khác nhau ở tên giá trị (``w8a8`` so với ``asymmetric_quantized-8``) và độ rộng danh sách. Nguồn không giải thích chênh lệch này (unknown. Đã tìm ở: API232 tr.7, UG232 tr.22, 121, 122, từ khóa: ``asymmetric_quantized``, ``w8a8``).
+UG232 mô tả hẹp hơn, chỉ nêu một kiểu: INT8 tuyến tính bất đối xứng, mặc định ``asymmetric_quantized-8`` [T1 UG232 tr.22] ("RKNN-Toolkit2 supports INT8 as the quantization data type." [T1 UG232 tr.121]). Tên ``asymmetric_quantized-8`` là tên kế thừa từ Toolkit1 (trong tài liệu so sánh API với Toolkit1, ``asymmetric_quantized-8`` của Toolkit2 được đối chiếu với ``asymmetric_affine-u8`` của Toolkit1), còn trong mã ``rknn/api/rknn.py`` của wheel 2.3.2 giá trị mặc định của ``quantized_dtype`` là ``'w8a8'`` khớp với [T1 API232 tr.7].
 
 Hình dưới là minh họa của hãng cho hai kiểu. Ở kiểu đối xứng, zero-point nằm đúng tâm của dải số nguyên (INT8 thì bằng 0). Ở kiểu bất đối xứng, zero-point tính từ min và max nên thường lệch khỏi tâm [T1 UG232 tr.120].
 
@@ -93,8 +93,8 @@ Hình dưới là minh họa của hãng cho hai kiểu. Ở kiểu đối xứn
 
    Khoảng số thực ở trên được ánh xạ đều xuống dải số nguyên ở dưới. Đối xứng lấy khoảng từ -max(x) đến max(x), bất đối xứng lấy khoảng từ min(x) đến max(x) (hình in nhãn -min(x)). Nguồn: [T1 UG232 tr.120, Figure 6-1]
 
-1.2Thuật toán ``quantized_algorithm``
---------------------------------------
+1.2 Thuật toán quantized_algorithm
+----------------------------------
 
 Thuật toán quyết định cách chọn khoảng giá trị (min, max) trước khi tính scale và zero-point [T1 UG232 tr.120]. API232 liệt kê bốn giá trị, UG232 chỉ ba.
 
@@ -127,12 +127,10 @@ Thuật toán quyết định cách chọn khoảng giá trị (min, max) trư�
 
    "The gdq quantization algorithm is only valid at w4a16 and w8a16, which can effectively improve the weight accuracy of the w4a16 and w8a16." [T1 API232 tr.8]
 
-Suy ra: ``w4a16`` và ``w8a16`` không dùng cho RK3588 (mục 1.1) nên ``gdq`` cũng không dùng được trên RK3588. Ba thuật toán còn lại là phạm vi thực tế.
+Suy ra: ``w4a16`` và ``w8a16`` không dùng cho RK3588 (mục 1.1) nên ``gdq`` cũng không dùng được trên RK3588. Ba thuật toán ``normal``, ``mmse`` và ``kl_divergence`` là phạm vi thực tế trên RK3588 (tài liệu hãng chỉ nêu nguyên lý chọn khoảng ở bảng trên và không công bố số bin histogram nội bộ) [T1 UG232 tr.120-121] [T1 API232 tr.8].
 
-Số bin của histogram, cách cắt (clipping) và công thức chi tiết của ba thuật toán là unknown. Đã tìm ở: UG232 tr.119 đến 121 (công thức là hình ảnh, không có text), API232 tr.8, từ khóa: ``bin``, ``clip``, ``percentile``.
-
-1.3 Granularity ``quantized_method``
-------------------------------------
+1.3 Granularity quantized_method
+--------------------------------
 
 API232 cho ba giá trị: ``layer``, ``channel`` (mặc định) và ``group{SIZE}``. Với ``group{SIZE}``, mỗi output channel của weight được chia thành các nhóm theo input channel, ``{SIZE}`` là bội của 32 từ 32 đến 256, và chỉ hợp lệ khi ``quantized_dtype = w4a16`` [T1 API232 tr.8]. UG232 chỉ liệt kê ``layer`` và ``channel`` [T1 UG232 tr.22].
 
@@ -255,11 +253,11 @@ Hai tài liệu mâu thuẫn ở mặc định của ``do_quantization``:
 
    "do_quantization: Specify whether to enable quantization, with the default value being 'False'." [T1 UG232 tr.122]
 
-API232 ghi "do_quantization: Whether to quantize the model. The default value is True." [T1 API232 tr.14]. UG232 tr.131 và tr.133 đều gọi ``rknn.build()`` với ``do_quantization`` đặt tường minh. Nguồn không cho biết giá trị mặc định nào đúng với bản 2.3.2 (unknown. Đã tìm ở: API232 tr.14, 15, UG232 tr.122, 131, 133, từ khóa: ``do_quantization``). Cách an toàn là truyền giá trị tường minh.
+API232 ghi "do_quantization: Whether to quantize the model. The default value is True." [T1 API232 tr.14]. Chữ ký hàm ``build(self, do_quantization=True, ...)`` trong ``rknn/api/rknn.py`` của wheel 2.3.2 xác nhận giá trị mặc định thực tế là ``True`` (dòng ở UG232 tr.122 là lỗi biên tập tài liệu). UG232 tr.131 và tr.133 đều gọi ``rknn.build()`` với ``do_quantization`` đặt tường minh.
 
 Về cỡ tập calibration, API232 khuyến nghị theo từng thuật toán (mục 1.2), UG232 nói chung 20 đến 200 ảnh và cho biết tăng số ảnh làm lâu hơn nhưng chưa chắc chính xác hơn [T1 UG232 tr.122]. Cách chuẩn bị file và chọn ảnh xem :doc:`02-tap-calibration-va-quy-trinh-qat`. Hybrid thủ công và ``auto_hybrid`` xem :doc:`03-hybrid-quantization-va-accuracy-analysis`.
 
-Nhóm này còn tham số ``quantize_weight``: khi ``do_quantization`` là ``False``, lượng tử hóa một phần weight để giảm kích thước file, mặc định ``False`` [T1 API232 tr.9]. UG232 mô tả tương tự cho khóa YAML cùng tên [T1 UG232 tr.27]. Tham số ``quantized_hybrid_level`` không có trong API232 và UG232 (unknown. Đã tìm ở: api232, ug232, từ khóa: ``quantized_hybrid_level``).
+Nhóm này còn tham số ``quantize_weight``: khi ``do_quantization`` là ``False``, lượng tử hóa một phần weight để giảm kích thước file, mặc định ``False`` [T1 API232 tr.9]. UG232 mô tả tương tự cho khóa YAML cùng tên [T1 UG232 tr.27]. Ngoài ra chữ ký ``rknn.config()`` trong ``rknn/api/rknn.py`` còn có tham số ``quantized_hybrid_level=0`` nhưng cả API232 lẫn UG232 đều không liệt kê tham số này.
 
 2.3 Nhóm tham số tối ưu
 -----------------------
@@ -390,11 +388,11 @@ Số trang là số trang PDF, trùng số in với API232 và UG232. Với OPL,
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 51
+     - 54
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 40
+     - 45
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`

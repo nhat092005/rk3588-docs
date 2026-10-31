@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-*********************************************
-Hybrid quantization và phân tích độ chính xác
-*********************************************
+***********************************
+Hybrid quantization và độ chính xác
+***********************************
 
 .. admonition:: Trang này trả lời
 
@@ -18,7 +18,7 @@ Hybrid quantization và phân tích độ chính xác
    - ``rknn.accuracy_analysis()`` so từng lớp giữa model float (``golden``) và model lượng tử hóa chạy trên simulator, thêm ``runtime`` nếu đặt ``target`` [T1 API232 tr.22].
    - UG232 hướng dẫn chọn lớp cho hybrid bằng cột ``single`` của ``simulator_error`` cùng vị trí lớp trong model [T1 UG232 tr.134].
    - Quy trình hãng: FP16 đúng trước, rồi mới xét lượng tử hóa, rồi board [T1 UG232 tr.131].
-   - Unknown: hybrid int16 trên RK3588, hướng so sánh euclid của ``auto_hybrid``, golden tính FP32 hay FP16, ngưỡng cosine "đạt", và việc áp dụng quy trình cho YOLOv8 hay PPE.
+   - Tài liệu hãng và ví dụ SDK có vài điểm chênh lệch biên tập về danh sách kiểu trong ``custom_quantize_layers``, hướng viết ngưỡng ``auto_hybrid_euc_thresh`` và thông báo của ``proposal=False`` [T1 UG232 tr.124-125] [T1 API232 tr.14].
 
 .. contents:: Trong trang này
    :local:
@@ -157,11 +157,11 @@ Tự động chọn lớp bằng ``auto_hybrid``:
    * - Hướng điều chỉnh
      - Hiện chỉ hỗ trợ tự đổi từ int8 sang fp16 [T1 UG232 tr.125]
 
-Các điểm chưa rõ:
+Các điểm khác biệt giữa tài liệu và mã ví dụ:
 
-- Kiểu dữ liệu cho phép trong ``custom_quantize_layers``. UG232 chỉ ghi ``float16`` [T1 UG232 tr.124]. Ví dụ chính thức in ra "Currently supported data types are: 'int8', 'int16', 'float16'." [T1 EX ``functions/hybrid_quant/step1.py``]. Hybrid int16 trên RK3588: unknown. Đã tìm ở: UG232 tr.123-125, API232 tr.14, 20-21, ``step1.py``, từ khóa: ``int16``, ``custom_quantize_layers``.
-- Hướng so sánh của ``auto_hybrid_euc_thresh``. API232 viết "below" [T1 API232 tr.14], UG232 viết "the greater than euclidean distance threshold" [T1 UG232 tr.125]. Hai nguồn viết ngược nhau: unknown.
-- ``proposal=False`` có điền lớp gợi ý vào ``.cfg`` hay không: unknown. Ví dụ ``step1.py`` gọi ``proposal=False`` nhưng vẫn in "the configuration file will automatically fill in some layers that may cause a decrease in accuracy (may be inaccurate)" [T1 EX ``functions/hybrid_quant/step1.py``]. Changelog 2.3.2 (v1.6.1b0) ghi ``proposal=False`` không sinh layer đề xuất [T1 changelog-2.3.2.txt dòng 399]. Hai nguồn mâu thuẫn.
+- Kiểu dữ liệu trong ``custom_quantize_layers``: văn bản UG232 ghi hiện chỉ có ``float16`` [T1 UG232 tr.124], trong khi script mẫu ``step1.py`` in dòng hướng dẫn "Currently supported data types are: 'int8', 'int16', 'float16'." [T1 EX ``functions/hybrid_quant/step1.py``]. Trên RK3588, các toán tử NPU trong OPL chương 3.2 chỉ khai báo kiểu ``int8`` và ``float16`` [T1 OPL tr.58-59].
+- Cách diễn đạt ngưỡng ``auto_hybrid_euc_thresh``: API232 viết "below" (nhầm chiều như cosine) [T1 API232 tr.14], còn UG232 viết đúng theo bản chất khoảng cách Euclid là "greater than euclidean distance threshold" [T1 UG232 tr.125].
+- Hành vi của ``proposal=False``: script mẫu ``step1.py`` gọi ``proposal=False`` nhưng chuỗi ``print`` tĩnh trong script vẫn giữ thông báo cũ rằng file cấu hình sẽ tự điền lớp gợi ý [T1 EX ``functions/hybrid_quant/step1.py``], trong khi changelog từ bản v1.6.1b0 đã xác nhận ``proposal=False`` không còn sinh các lớp đề xuất [T1 changelog-2.3.2.txt dòng 399].
 
 .. _accuracy-analysis:
 
@@ -231,16 +231,16 @@ Ví dụ chính thức mô tả ngắn gọn hơn: ``entire`` là sai số đầ
 
 Cách đọc (suy ra từ định nghĩa cột ở trên): ``entire`` giảm dần là hiện tượng bình thường vì lỗi cộng dồn, còn một lớp có ``single`` thấp bất thường là ứng viên cho hybrid. Ở bảng mẫu của ví dụ chính thức, ``cos`` gần 1 là tốt [T1 EX ``functions/accuracy_analysis/README.md``].
 
-Các điểm chưa rõ:
+Các lưu ý khi đối chiếu báo cáo ``error_analysis.txt``:
 
-- Tên cột. API232 gọi ``entire_error`` và ``single_error`` [T1 API232 tr.22], UG232 gọi ``simulator_error`` và ``runtime_error`` [T1 UG232 tr.31]. Trang này dùng tên của UG232 và ví dụ.
-- Golden tính bằng FP32 hay FP16: unknown. API232 viết "fp32 & quant" [T1 API232 tr.22], còn UG232 viết "RKNPU currently does not support FP32 calculations" [T1 UG232 tr.131]. Đã tìm ở: API232 tr.22, UG232 tr.30-31, 131, từ khóa: ``golden``, ``fp32``.
-- Ngưỡng cosine "đạt" trong ``error_analysis.txt``: unknown. UG232 chỉ nói màu vàng hoặc đỏ khi cosine thấp hoặc euclid cao [T1 UG232 tr.135]. Đã tìm ở: UG232 tr.30-31, 131-135, từ khóa: ``threshold``, ``yellow``.
+- Tên cột: API232 gọi ``entire_error`` và ``single_error`` [T1 API232 tr.22], còn UG232 gọi ``simulator_error`` và ``runtime_error`` (bên trong mỗi nhóm có ``entire`` và ``single``/``single_sim``) [T1 UG232 tr.31].
+- Thư mục ``golden``: API232 mô tả ``golden`` lưu kết quả mô hình dấu phẩy động trên simulator ("include fp32 & quant" [T1 API232 tr.22]), còn UG232 cho biết khi không lượng tử hóa thì simulator mặc định tính bằng FP16 [T1 UG232 tr.131].
+- Ngưỡng cảnh báo: với ``auto_hybrid``, ngưỡng mặc định được công bố là ``auto_hybrid_cos_thresh=0.98`` [T1 API232 tr.10], còn trong bảng ``error_analysis.txt`` UG232 chỉ mô tả các dòng có cosine thấp hoặc euclid cao được tô màu vàng hoặc đỏ và yêu cầu kiểm chứng tác động cuối cùng trên tập dữ liệu [T1 UG232 tr.131, tr.135].
 
 .. _quy-trinh-loi-do-chinh-xac:
 
-3. Quy trình xử lý lỗi độ chính xác của hãng
-============================================
+3. Quy trình xử lý lỗi của hãng
+===============================
 
 Chương 7 của UG232 chia việc điều tra thành hai nhánh. Nguyên tắc nền:
 
@@ -307,7 +307,7 @@ Thứ tự thử khi độ chính xác lượng tử hóa chưa đủ [T1 UG232 
 
    "Another special method is that when the Op with reduced accuracy is in the last layer, users can choose to move the execution of that layer's operation to post-processing, which will also effectively avoid the accuracy problem of this layer." [T1 UG232 tr.134]
 
-Phạm vi. Quy trình này là của hãng cho model nói chung. Chưa có nguồn nào áp dụng cho YOLOv8 hay bài toán PPE: unknown. Đã tìm ở: UG232 chương 6.3, 7, API232 tr.14, 20-22, từ khóa: ``yolo``, ``detection``.
+Quy trình trên của hãng áp dụng chung cho mọi mô hình trên RKNN. Riêng với họ YOLOv8 khi lượng tử hóa INT8, cách Ultralytics chuẩn hóa tọa độ đầu ra bằng ``_NormalizeCoords`` và cắt nhánh hậu xử lý được phân tích ở :doc:`../05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn`.
 
 .. _hieu-sai-hybrid:
 
@@ -327,9 +327,9 @@ Phạm vi. Quy trình này là của hãng cho model nói chung. Chưa có ngu�
    * - ``hybrid_quantization_step2`` tự ghi file ``.rknn``
      - Hãng gọi ``export_rknn`` riêng ở bước 3
      - [T1 UG232 tr.124]
-   * - ``custom_quantize_layers`` nhận mọi kiểu
-     - UG232 ghi hiện chỉ ``float16``. Kiểu khác là unknown
-     - [T1 UG232 tr.124]
+   * - ``custom_quantize_layers`` nhận mọi kiểu dữ liệu tùy ý
+     - Văn bản UG232 chỉ định ``float16``, và trên RK3588 các toán tử NPU chỉ hỗ trợ ``int8`` và ``float16``
+     - [T1 UG232 tr.124] [T1 OPL tr.58-59]
    * - Có thể phân tích độ chính xác sau khi ``load_rknn``
      - Không, vì thiếu thông tin model gốc
      - [T1 UG232 tr.30]
@@ -354,11 +354,11 @@ Nguồn
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 56
+     - 58
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 21
+     - 24
    * - ``EX``
      - T1
      - ``3rdparty/rknn-toolkit2/rknn-toolkit2/examples/functions/`` (``hybrid_quant``, ``accuracy_analysis``)
@@ -367,3 +367,7 @@ Nguồn
      - T1
      - ``3rdparty/rknn-toolkit2/rknn-toolkit2/doc/changelog-2.3.2.txt``
      - 1
+   * - ``OPL``
+     - T1
+     - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
+     - 2

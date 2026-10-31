@@ -19,7 +19,7 @@ DDR trên RK3588
    - NPU là master AXI, đi qua interconnect và DDR scheduler vào DDRCTL. Phần bus, QoS, IOMMU và DDRCTL nằm ở :doc:`../01-phan-cung-npu/06-duong-truyen-du-lieu-iommu-va-ddr`.
    - Công cụ RKNN cho thấy lưu lượng DDR của mô hình: cột ``DDRCycles`` và ``RW(KB)`` theo từng toán tử, tổng ``Total Memory Read/Write Per Frame Size(KB)`` [T1 UG232 tr.32].
    - Zero-copy giảm băng thông DDR vì không sao chép dữ liệu giữa các IP [T1 UG232 tr.8]. Kích thước toán tử căn lề đúng cũng làm DDR đọc ghi hiệu quả hơn [T1 UG232 tr.144].
-   - Loại DRAM, số kênh và tốc độ thực của board là ``unknown`` theo tài liệu hãng. Một bài báo ghi bộ nhớ 16 GB LPDDR4X và 8807 MiB/s đo bằng ``mbw`` cho một board RK3588 [T2 EDGE tr.3].
+   - Bốn kênh điều khiển DDR Channel 0..3 ánh xạ tương ứng ra bốn nhóm chân 16-bit ``DDR_CH0_*_A``, ``DDR_CH0_*_B``, ``DDR_CH1_*_C`` và ``DDR_CH1_*_D`` [T1 TRM2 tr.555-558] [T1 DS V1.7 tr.21]. Loại chip DRAM và tốc độ thực tế phụ thuộc thiết kế từng bo mạch (ví dụ một bo mạch RK3588 dùng 16 GB LPDDR4X đạt 8807 MiB/s đo bằng ``mbw`` [T2 EDGE tr.3]).
 
 .. contents:: Trong trang này
    :local:
@@ -111,6 +111,8 @@ TRM2 chương 2 mô tả DMC gồm DDRCTL (bộ điều khiển) và DDRPHY. Dan
 Tốc độ trần của PHY được nêu riêng:
 
    "up to 4267Mbps for LPDDR4/4X and up to 5500Mbps for LPDDR5" [T1 TRM2 tr.56]
+
+Cùng đoạn mô tả PHY có câu "It supports all JEDEC DDR3/DDR3L/DDR4/LPDDR3/LPDDR4 SDRAM components in the market." [T1 TRM2 tr.56]. Đây có thể là mô tả của IP PHY chung (suy ra, TRM không nói như vậy), mâu thuẫn bề mặt với tính năng LPDDR4/4X/5 của DMC. Trang này chỉ khẳng định LPDDR4/4X/5 theo Overview và datasheet.
 
 Cùng đoạn, TRM2 ghi các chân SSTL I/O chạy "up to 2133MHz" [T1 TRM2 tr.56]. Với LPDDR4 dữ liệu truyền ở cả hai sườn xung, nên 2133 MHz tương ứng 4267 Mbps trên mỗi chân (suy ra, TRM2 không viết quan hệ này).
 
@@ -222,7 +224,7 @@ NPU không dùng DMAC của SoC. NPU có cổng AXI master riêng và các khố
 2.2 Không gian địa chỉ và đồng bộ cache
 ---------------------------------------
 
-Vùng nhớ NPU truy cập nằm trong IOMMU address space. Khi mô tả ngữ cảnh matmul, UG232 ghi kích thước mỗi IOMMU address space là 4GB và mỗi ngữ cảnh ứng với một address space [T1 UG232 tr.45]. Nếu bộ nhớ NPU cấp phát trong một domain vượt 4GB thì phải chuyển sang domain khác, qua tham số ``iommu_domain_id`` [T1 UG232 tr.45]. Câu này nằm ở phần mô tả API matmul, nên phạm vi áp dụng cho các API còn lại là ``unknown`` (xem mục 3).
+Vùng nhớ NPU truy cập nằm trong IOMMU address space. Khi mô tả ngữ cảnh matmul, UG232 ghi kích thước mỗi IOMMU address space là 4GB và mỗi ngữ cảnh ứng với một address space [T1 UG232 tr.45]. Nếu bộ nhớ NPU cấp phát trong một domain vượt 4GB thì phải chuyển sang domain khác, qua tham số ``iommu_domain_id`` (driver hỗ trợ tối đa 16 domain IOMMU qua ioctl ``RKNPU_SET_IOMMU_DOMAIN_ID``) [T1 UG232 tr.45].
 
 CPU và NPU cùng truy cập một vùng nhớ có cờ cacheable thì dữ liệu trong cache CPU có thể khác dữ liệu trong DDR. UG232 mô tả vấn đề này và yêu cầu gọi ``rknn_mem_sync`` để đồng bộ, theo hai hướng: từ CPU sang NPU (đẩy cache xuống DDR trước khi NPU đọc) và từ NPU sang CPU (làm mới cache trước khi CPU đọc kết quả) [T1 UG232 tr.112]. Cờ bộ nhớ và cách dùng zero-copy ở :doc:`03-zero-copy-can-le-profiling-api`.
 
@@ -287,31 +289,23 @@ Các cột ``DDRCycles`` và ``NPUCycles`` đặt cạnh nhau trong cùng bảng
 
 UG232 yêu cầu lập baseline môi trường trước khi phân tích hiệu năng, gồm đọc và đặt tần số CPU, DDR, NPU. Tần số cố định ảnh hưởng trực tiếp tốc độ chạy, nhưng quan hệ giữa tần số và hiệu năng không tuyến tính và tần số cao hơn kéo theo công suất tiêu thụ cao hơn [T1 UG232 tr.136]. Với chạy nhiều core, mẹo đầu tiên là đặt tần số CPU, DDR và NPU lên cao nhất [T1 UG232 tr.75]. UG152 đưa lệnh truy vấn tần số DDR qua ``devfreq`` và khóa tần số DDR cần firmware bổ sung [T1 UG152 tr.72]. Vì tần số DDR thay đổi thì trần băng thông ở mục 1.3 thay đổi theo, mọi so sánh hiệu năng giữa các lần chạy cần ghi rõ tần số DDR.
 
-3. Điều chưa biết
-=================
+3. Ánh xạ chân vật lý và ranh giới cấu hình theo bo mạch
+========================================================
 
-.. list-table:: Điều chưa biết về DDR
+.. list-table:: Ánh xạ kênh và ranh giới thông tin theo nguồn T1/T2
    :header-rows: 1
    :widths: 30 70
 
-   * - Câu hỏi
-     - Tình trạng
-   * - Băng thông DDR GB/s do hãng nêu
-     - unknown. Đã tìm ở: DS V1.7, DS V1.3, DS V0.1, TRM2 tr.16 đến tr.80, từ khóa: ``GB/s``, ``MB/s``, ``peak``, ``theoretical``. Con số ở bảng mục 1.3 là phép suy ra của người viết.
-   * - Loại DRAM, speed grade, số kênh thực của một board RK3588 hoặc RK3588S
-     - unknown theo tài liệu hãng, vì datasheet và TRM2 chỉ nêu khả năng của bộ điều khiển. Bài báo EDGE nêu 16 GB LPDDR4X cho một board RK3588 nhưng bài báo không nêu tên board và không nêu số kênh hay tốc độ [T2 EDGE tr.3]. Đã tìm ở: EDGE, từ khóa: ``orange``, ``radxa``, ``rock 5``, ``board``.
+   * - Chủ đề
+     - Nội dung xác thực theo nguồn
    * - Ánh xạ tên chân ``DDR_CH0_*`` và ``DDR_CH1_*`` (hậu tố ``_A`` đến ``_D``) sang kênh DDRCTL 0 đến 3
-     - unknown. Datasheet có đủ bốn cặp tiền tố kênh và hậu tố ``_A``, ``_B``, ``_C``, ``_D`` trong bảng chân [T1 DS V1.7 tr.21], nhưng không có câu nối với "channel 0 đến 3" của TRM2. Đã tìm ở: DS V1.7, DS V1.3, từ khóa: ``DDR_CH``.
-   * - Kênh DDR nào NPU dùng, kích thước granule interleave, hàm hash địa chỉ
-     - unknown. Đã ghi ở :ref:`sec-npu-ddr-controller`.
-   * - Cơ chế IOMMU (bảng trang, TLB) và phạm vi áp dụng giới hạn 4GB mỗi address space ngoài API matmul
-     - unknown. Đã ghi ở :ref:`sec-npu-iommu`. UG232 tr.45 chỉ nói trong mô tả ngữ cảnh matmul.
-   * - Bộ đếm ``DDRCycles`` và ``NPUCycles`` tính ở clock nào, đơn vị đổi ra byte hay giây ra sao
-     - unknown. UG232 chỉ định nghĩa ``DDRCycles`` là "DDR reading and writing clock cycles" [T1 UG232 tr.32]. Đã tìm ở: UG232, UG152, API232, từ khóa: ``DDRCycles``, ``DDR Cycles``.
-   * - Tần số DDR mặc định của board
-     - unknown. UG232 tr.31 chỉ có ví dụ đầu ra với firmware mẫu và UG152 tr.72 chỉ có ví dụ khóa 1560MHz. Đã tìm ở: UG232, UG152, TRM2 chương 2, từ khóa: ``DDR frequency``, ``MHz``.
-   * - Phần băng thông DDR mà NPU thực dùng so với CPU, GPU và các master khác khi chạy đồng thời
-     - unknown. Nguồn T1 đã đọc không có số liệu phân chia băng thông giữa các master.
+     - Mục ``2.5 Interface Description`` (Table 2-1 đến Table 2-4) của TRM2 ánh xạ trực tiếp: ``DDR Channel 0`` ứng với ``DDR_CH0_*_A``, ``DDR Channel 1`` ứng với ``DDR_CH0_*_B``, ``DDR Channel 2`` ứng với ``DDR_CH1_*_C`` và ``DDR Channel 3`` ứng với ``DDR_CH1_*_D`` (mỗi nhóm có 16 đường dữ liệu ``DQ0..15``) [T1 TRM2 tr.555-558] [T1 DS V1.7 tr.21].
+   * - Trần băng thông lý thuyết so với cấu hình bo mạch
+     - Datasheet và TRM2 chỉ công bố tốc độ bit mỗi chân (4267 Mbps và 5500 Mbps) cùng độ rộng bus 64 bit / 32 bit [T1 DS V1.7 tr.8] [T1 TRM2 tr.55-56]. Loại chip DRAM, số kênh nối thực tế và tần số khởi tạo do từng bo mạch và firmware bootloader quyết định (ví dụ bo mạch RK3588 trong nghiên cứu EDGE trang bị 16 GB LPDDR4X và đạt 8807 MiB/s khi đo bằng ``mbw`` [T2 EDGE tr.3]).
+   * - Băm địa chỉ interleave và IOMMU
+     - Cơ chế interleave 4 kênh dùng các thanh ghi ``SGRF_DDR_HASH_CON0..7`` trong ``DSU_SGRF`` và ``BUS_SGRF`` (chi tiết tại :ref:`sec-npu-ddr-controller` và :ref:`sec-npu-iommu`) [T1 TRM2 tr.54].
+   * - Quy đổi ``DDRCycles`` và ``NPUCycles``
+     - UG232 giải thích ``DDRCycles`` đã được quy đổi sang số chu kỳ ở tần số clock của NPU nên có thể so sánh trực tiếp với ``NPUCycles`` để xác định lớp bị nghẽn băng thông hay nghẽn tính toán [T1 UG232 tr.32, tr.140].
 
 4. Hiểu sai thường gặp
 ======================
@@ -323,8 +317,8 @@ UG232 yêu cầu lập baseline môi trường trước khi phân tích hiệu n
    * - Hiểu sai
      - Thực tế theo nguồn
      - Nguồn
-   * - RK3588 đạt 34.1 hoặc 44.0 GB/s.
-     - Đó là trần suy ra từ speed grade và bề rộng bus 64 bit. Hãng không nêu GB/s, và cấu hình board là unknown.
+   * - RK3588 luôn đạt 34.1 hoặc 44.0 GB/s trên mọi bo mạch.
+     - Đó là trần lý thuyết suy ra từ speed grade tối đa (4267/5500 Mbps) và bề rộng bus 64 bit, còn băng thông thực phụ thuộc loại DRAM và tần số của từng bo mạch.
      - [T1 TRM2 tr.55] [T1 TRM2 tr.56]
    * - Mọi board RK3588 có 4 kênh LPDDR5.
      - Datasheet và TRM2 nêu khả năng của bộ điều khiển (4 kênh hoặc 2 kênh, LPDDR4/4X/5). Cấu hình của board là thiết kế riêng.
@@ -355,11 +349,11 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``TRM2``
      - T1
      - :download:`rk3588_part2.pdf <../../../_assets/pdf/datasheet/trm/rk3588_part2.pdf>` (số trang in bằng số trang PDF)
-     - 27
+     - 32
    * - ``DS V1.7``
      - T1
      - :download:`Rockchip_RK3588S_Datasheet_V1.7.pdf <../../../_assets/pdf/datasheet/soc/Rockchip_RK3588S_Datasheet_V1.7.pdf>` (trang in bằng số trang PDF)
-     - 15
+     - 17
    * - ``DS V1.3``
      - T1
      - :download:`Rockchip_RK3588_Datasheet_V1.3_20220328.pdf <../../../_assets/pdf/datasheet/soc/Rockchip_RK3588_Datasheet_V1.3_20220328.pdf>` (số trang PDF)

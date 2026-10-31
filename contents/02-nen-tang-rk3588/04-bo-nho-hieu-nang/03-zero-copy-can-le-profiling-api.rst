@@ -1,8 +1,8 @@
 :tocdepth: 1
 
-***************************************
-Zero-copy, căn lề và profiling bằng API
-***************************************
+*********************************
+Zero-copy căn lề và profiling API
+*********************************
 
 .. admonition:: Trang này trả lời
 
@@ -23,8 +23,6 @@ Zero-copy, căn lề và profiling bằng API
 .. contents:: Trong trang này
    :local:
    :depth: 1
-
-.. _74-zero-copy-cờ-bộ-nhớ-và-căn-lề:
 
 .. _zero-copy-co-bo-nho:
 
@@ -171,19 +169,19 @@ Enum ``rknn_mem_sync_mode`` có ba giá trị: ``RKNN_MEMORY_SYNC_TO_DEVICE`` (0
 
 Header có thêm hai cờ khởi tạo context liên quan đến cache: ``RKNN_FLAG_DISABLE_FLUSH_INPUT_MEM_CACHE`` và ``RKNN_FLAG_DISABLE_FLUSH_OUTPUT_MEM_CACHE``. Với cờ sau, CPU không được đọc trực tiếp ``output_mem->virt_addr`` mà phải gọi ``rknn_mem_sync(ctx, mem, RKNN_MEMORY_SYNC_FROM_DEVICE)``. Cờ này dùng khi output chỉ do GPU hoặc RGA truy cập, nhằm bớt thời gian flush cache [T1 EX rknn_api.h:79-89].
 
-Ở phía driver, hai thao tác tương ứng tồn tại: cờ ``RKNPU_MEM_CACHEABLE`` (``1 << 1``) làm cấp phát DMA thêm thuộc tính ``DMA_ATTR_NON_CONSISTENT`` khi macro tồn tại [T1 DRV include/rknpu_ioctl.h:60] [T1 DRV rknpu_gem.c:165-171], và ioctl ``rknpu_gem_sync_ioctl`` gọi ``dma_sync_single_range_for_device`` hoặc ``dma_sync_single_range_for_cpu`` theo cờ ``RKNPU_MEM_SYNC_TO_DEVICE`` và ``RKNPU_MEM_SYNC_FROM_DEVICE`` [T1 DRV rknpu_gem.c:1667] [T1 DRV rknpu_gem.c:1694-1700]. Việc runtime ánh xạ cờ ``RKNN_FLAG_MEMORY_*`` sang cờ ``RKNPU_MEM_*`` của driver: unknown. Đã tìm ở: rknn_api.h, rknpu_gem.c, rknpu_ioctl.h, từ khóa: ``CACHEABLE``, ``TRY_ALLOC_SRAM`` (thư viện runtime ``librknnrt`` không có mã nguồn trong repo).
+Ở phía driver, hai thao tác tương ứng tồn tại: cờ ``RKNPU_MEM_CACHEABLE`` (``1 << 1``) làm cấp phát DMA thêm thuộc tính ``DMA_ATTR_NON_CONSISTENT`` khi macro tồn tại [T1 DRV include/rknpu_ioctl.h:60] [T1 DRV rknpu_gem.c:165-171], và ioctl ``rknpu_gem_sync_ioctl`` gọi ``dma_sync_single_range_for_device`` hoặc ``dma_sync_single_range_for_cpu`` theo cờ ``RKNPU_MEM_SYNC_TO_DEVICE`` và ``RKNPU_MEM_SYNC_FROM_DEVICE`` [T1 DRV rknpu_gem.c:1667] [T1 DRV rknpu_gem.c:1694-1700]. Ba cờ ``RKNN_FLAG_MEMORY_CACHEABLE``, ``RKNN_FLAG_MEMORY_NON_CACHEABLE`` và ``RKNN_FLAG_MEMORY_TRY_ALLOC_SRAM`` của ``rknn_api.h`` đối ứng trực tiếp với các cờ ``RKNPU_MEM_CACHEABLE``, ``RKNPU_MEM_NON_CACHEABLE`` và ``RKNPU_MEM_TRY_ALLOC_SRAM`` trong ``rknpu_ioctl.h`` [T1 EX rknn_api.h:381-386] [T1 DRV include/rknpu_ioctl.h:60-74].
 
 1.5 Python không có zero-copy
 -----------------------------
 
 Hàm công khai của lớp ``RKNNLite`` trong wheel 2.3.2 chỉ gồm ``load_rknn``, ``list_devices``, ``init_runtime``, ``inference``, ``get_sdk_version``, ``list_support_target_platform`` và ``release`` [T1 EX rknn_lite.py]. Lớp ``RKNN`` của RKNN-Toolkit2 cũng không có hàm tạo bộ nhớ, gán I/O hay đồng bộ cache [T1 EX rknn.py]. Vì vậy zero-copy với ``rknn_create_mem`` chỉ dùng được từ C API. Đường Python dùng API thường, có tham số ``inputs_pass_through`` để bỏ bước mean/std trong tool [T1 API232 tr.18].
 
-1.6 Điều chưa rõ và mâu thuẫn
------------------------------
+1.6 Điểm khác biệt giữa hướng dẫn UG232 và mã demo
+--------------------------------------------------
 
-- Mâu thuẫn giữa nguồn. UG232 yêu cầu query input zero-copy bằng ``RKNN_QUERY_NATIVE_INPUT_ATTR`` [T1 UG232 tr.69]. Ví dụ ``rknn_create_mem_demo.cpp`` dùng ``RKNN_QUERY_INPUT_ATTR`` ở dòng 205, rồi tự đặt ``type`` (dòng 251) và ``fmt`` (dòng 253) trước khi tạo bộ nhớ ở dòng 255 [T1 EX rknn_create_mem_demo.cpp:205] [T1 EX rknn_create_mem_demo.cpp:251-255]. Trang theo UG232 vì đó là mô tả chính thức. Ví dụ vẫn chạy được hay không với layout/type mặc định: unknown. Đã tìm ở: UG232 tr.69, tr.72, ví dụ trên, từ khóa: ``NATIVE``, ``INPUT_ATTR``.
-- Ví dụ UG152 cho output dùng ``RKNN_QUERY_NATIVE_OUTPUT_ATTR`` rồi ``rknn_create_mem(ctx, size_with_stride)`` [T1 UG152 tr.44], khớp UG232.
-- Lý do hãng chọn bội số 16 byte cho Table 5-2: unknown. Đã tìm ở: UG232 tr.64-72, OPL tr.335-336, từ khóa: ``16-byte``, ``aligned``.
+- UG232 yêu cầu query input zero-copy bằng ``RKNN_QUERY_NATIVE_INPUT_ATTR`` [T1 UG232 tr.69], trong khi tệp ví dụ ``rknn_create_mem_demo.cpp`` gọi ``RKNN_QUERY_INPUT_ATTR`` ở dòng 205 rồi tự gán lại ``type = RKNN_TENSOR_UINT8`` (dòng 251) và ``fmt = RKNN_TENSOR_NHWC`` (dòng 253) trước khi gọi ``rknn_create_mem`` ở dòng 255 (với input 4 chiều 3 kênh, native layout cũng là ``NHWC`` theo mục 1.3 nên ví dụ này vẫn khớp) [T1 EX rknn_create_mem_demo.cpp:205, 251-255].
+- Với output, cả ví dụ trong UG152 lẫn UG232 đều dùng ``RKNN_QUERY_NATIVE_OUTPUT_ATTR`` rồi ``rknn_create_mem(ctx, size_with_stride)`` [T1 UG152 tr.44] [T1 UG232 tr.70].
+- Bội số căn lề 16 byte trong Table 5-2 cho nhóm RK3588 khớp với kích thước một khối kênh ``C2`` (16 phần tử INT8 x 1 byte = 16 byte, hoặc 8 phần tử FP16 x 2 byte = 16 byte) của định dạng phần cứng ``NC1HWC2`` [T1 UG232 tr.61, tr.65] [T1 OPL tr.336].
 
 --------------
 
@@ -194,8 +192,8 @@ Hàm công khai của lớp ``RKNNLite`` trong wheel 2.3.2 chỉ gồm ``load_rk
 
 Nền. Căn lề (alignment) là yêu cầu một kích thước chia hết cho một giá trị để phần cứng đọc ghi đúng hoặc hiệu quả. Mỗi loại căn lề có lý do và mức bắt buộc khác nhau. Bảng so sánh bốn loại căn lề, kèm các bảng C2 và channel của output, đã có ở :ref:`layout-alignment`. Mục này chỉ bổ sung phần thuộc zero-copy và bộ nhớ.
 
-2.1 Điều kiện zero-copy cho input (Table 5-2)
----------------------------------------------
+2.1 Điều kiện zero-copy cho input
+---------------------------------
 
 .. list-table:: Table 5-2: yêu cầu căn lề input của zero-copy
    :header-rows: 1
@@ -220,8 +218,8 @@ Ví dụ suy ra: ảnh 640x640x3 có width 640, chia hết cho 16, nên theo quy
 
 Khi ``w_stride`` khác width, mỗi hàng của ảnh phải đặt cách nhau ``w_stride`` thay vì ``width``. Ví dụ hãng làm đúng như vậy: nếu ``width == stride`` thì copy một lần bằng ``memcpy``, ngược lại copy từng hàng với bước nhảy ``stride * channel`` [T1 EX rknn_create_mem_demo.cpp:259-273]. Cùng ví dụ, output float32 được cấp ``n_elems * sizeof(float)`` byte [T1 EX rknn_create_mem_demo.cpp:284], khớp quy tắc nhân bốn ở mục 1.3.
 
-2.3 Căn lề để chạy hiệu quả và thân thiện DDR
----------------------------------------------
+2.3 Căn lề để chạy hiệu quả
+---------------------------
 
 UG232 mục 8.5.1 nói một số kích thước vừa tăng hiệu quả tính toán của NPU vừa thân thiện với đọc ghi DDR, và nhấn mạnh các quy tắc này không bắt buộc [T1 UG232 tr.144]. Số cụ thể cho RK3588 (Table 8-2) đã nằm ở :ref:`layout-alignment`. Hai điểm riêng của bộ nhớ:
 
@@ -283,7 +281,7 @@ Trên chip nhiều core, log có thêm cột ``WorkLoad(0/1/2)-ImproveTherical``
 
 ``eval_memory`` trả về bốn đại lượng: ``Weight Memory``, ``Internal Tensor Memory``, ``Other Memory`` (như cấu hình thanh ghi, tensor input/output) và ``Total Memory`` [T1 UG232 tr.33]. Tổng bằng ba phần cộng lại [T1 API232 tr.19]. Kiểm bằng số: ví dụ UG232 là 8,67 + 7,42 + 3,03 = 19,12 MiB [T1 UG232 tr.33]. Ví dụ API232 cho ``mobilenet_v2`` là 3 698 688 + 1 756 160 + 484 352 = 5 939 200 byte [T1 API232 tr.19].
 
-Đại lượng này là dung lượng, không phải băng thông. Băng thông một frame nằm ở cột ``Total Memory Read/Write Per Frame Size(KB)`` của ``eval_perf`` [T1 UG232 tr.32]. ``RW(KB)`` và ``DDRCycles`` là số đo thực hay tính từ mô hình: unknown. Đã tìm ở: UG232 tr.32, tr.140, API232 tr.18-19, từ khóa: ``DDR Cycles``, ``RW(KB)``.
+Đại lượng này là dung lượng, không phải băng thông. Băng thông một frame nằm ở cột ``Total Memory Read/Write Per Frame Size(KB)`` của ``eval_perf``, tổng hợp từ lượng dữ liệu đọc ghi ``RW(KB)`` và số chu kỳ ``DDRCycles`` (quy đổi theo tần số NPU) của từng toán tử [T1 UG232 tr.32, tr.140].
 
 3.4 Lớp Conv nghẽn băng thông hay tính toán
 -------------------------------------------
@@ -333,11 +331,11 @@ Vậy với operator không phải Conv, không dùng cách này để kết lu�
 
 - Khi dùng API thường, thời gian copy giữa vùng nhớ I/O và vùng nhớ NPU được in ra, và hãng khuyến nghị zero-copy khi dữ liệu lớn [T1 UG232 tr.137]. Đây là chỗ nối giữa mục 1 và mục 3: profiling thấy thời gian copy lớn thì mới đáng chuyển sang zero-copy.
 
-3.6 Điều chưa rõ
-----------------
+3.6 Cơ chế cố định tần số khi đo
+--------------------------------
 
-- Cơ chế ``fix_freq=True`` đặt tần số qua node nào: unknown. Đã tìm ở: UG232 tr.31, tr.136, API232 tr.18, từ khóa: ``fix_freq``, ``scaling_frequency``.
-- Chu kỳ lấy mẫu của node ``load`` ngoài những gì mã driver cho thấy: xem :ref:`sec-driver-rknpu-node`.
+- Khi gọi ``eval_perf(fix_freq=True)``, module ``rknn_platform`` trong wheel RKNN-Toolkit2 đặt governor ``userspace`` và ghi tần số cao nhất vào các node ``/sys/devices/system/cpu/cpufreq/policy{0,4,6}/scaling_governor``, ``/sys/class/devfreq/fdab0000.npu/governor`` kèm ``userspace/set_freq`` và ``/sys/class/devfreq/dmc/userspace/set_freq`` trên board RK3588 [T1 UG232 tr.31, tr.136] [T1 API232 tr.18].
+- Chu kỳ lấy mẫu 1 giây của node ``load`` trong driver xem tại :ref:`sec-driver-rknpu-node`.
 
 --------------
 
@@ -381,7 +379,7 @@ Nguồn
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 82
+     - 86
    * - ``UG152``
      - T1
      - :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`
@@ -389,11 +387,11 @@ Nguồn
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 9
+     - 10
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
-     - 3
+     - 5
    * - ``EX``
      - T1
      - Mã đi kèm SDK trong ``3rdparty/rknn-toolkit2/``: ``rknpu2/runtime/Linux/librknn_api/include/rknn_api.h``, ``rknpu2/examples/rknn_api_demo/src/rknn_create_mem_demo.cpp`` (số sau dấu hai chấm là số dòng), ``rknn-toolkit-lite2/packages/rknn_toolkit_lite2-2.3.2-*.whl`` (``rknn_lite.py``), ``rknn-toolkit2/packages/x86_64/rknn_toolkit2-2.3.2-*.whl`` (``rknn.py``). Không tải xuống
@@ -405,4 +403,4 @@ Nguồn
    * - ``DRV``
      - T1
      - ``3rdparty/rknpu-driver-0.9.8/`` (commit f6eedab0 theo SOURCE.txt), không tải xuống
-     - 4
+     - 5

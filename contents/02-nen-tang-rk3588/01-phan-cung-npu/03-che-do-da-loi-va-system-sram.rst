@@ -16,11 +16,11 @@ Chế độ đa lõi và bộ nhớ System SRAM
    - TRM1 ghi NPU có ba core, hỗ trợ ba core cùng làm việc, hai core cùng làm việc và chạy độc lập [T1 TRM1 tr.1984].
    - Thanh ghi ``nn_mode`` có các mode 32x32, 64x32, 96x32, 32x64, 32x96. TRM1 chỉ ghi "target for multicore mode" và không gắn mode nào với dual hay triple [T1 TRM1 tr.2001].
    - Người dùng chọn core bằng ``core_mask`` (AUTO, CORE_0, CORE_1, CORE_2, CORE_0_1, CORE_0_1_2) [T1 UG152 tr.26] [T1 UG232 tr.74].
-   - Ở chế độ nhiều core, op ngoài danh sách Conv, Add, Concat, Relu... "will fallback to Core0" [T1 UG152 tr.27]. Chia theo khối lượng tính thì có [T1 UG232 tr.75], chia theo chiều tensor thì unknown.
+   - Ở chế độ nhiều core, op ngoài danh sách Conv, Add, Concat, Relu... "will fallback to Core0" [T1 UG152 tr.27]. Chia theo khối lượng tính được log qua tỷ lệ phần trăm mỗi core [T1 UG232 tr.75], còn chiều tách tensor do bộ biên dịch đóng gói sẵn trong ``subcore_task`` [T1 DRV include/rknpu_ioctl.h:241-279].
    - Trong driver 0.9.8, AUTO chọn lõi có ít task nhất và chạy job trên một lõi [T1 DRV rknpu_job.c:508-538].
    - SoC có 1MB System SRAM, 956KB cấp được cho các IP, đã hỗ trợ cấp cho RKNPU, tối đa 956KB và căn 4K [T1 SRAM-zh dòng 11] [T1 SRAM-zh dòng 38].
    - Vùng 0xFF000000~0xFF0FFFFF gồm bốn block 256KB [T1 TRM1 tr.1965]. DTS của repo giao toàn bộ vùng 956KB cho hai decoder, node NPU không có ``rockchip,sram`` [T1 DTS dòng 6868-6881].
-   - Độ trễ và băng thông SRAM nhìn từ NPU, ý nghĩa cửa sổ ``FD600000`` và lý do 956KB thay vì 1024KB đều là unknown.
+   - TRM1 chỉ công bố giao diện 4 cổng AXI Slave 256-bit với arbiter Round-Robin cho System SRAM và không nêu số chu kỳ trễ hoặc băng thông nhìn từ NPU [T1 TRM1 tr.1965].
 
 .. contents:: Trong trang này
    :local:
@@ -34,8 +34,8 @@ Chế độ đa lõi và bộ nhớ System SRAM
 
 Khi một chip có nhiều đơn vị tính giống nhau, có hai cách dùng chúng: mỗi đơn vị chạy một job riêng (chạy độc lập), hoặc nhiều đơn vị cùng làm một job bằng cách chia khối lượng tính (co-work). Cách thứ hai cần thêm việc chia, đồng bộ và chia sẻ bộ nhớ. Phần nền về chia việc nhiều core xem :doc:`../../01-kien-thuc-nen/02-npu/03-systolic-array-va-kien-truc-da-loi`. Trang này chỉ nêu điều tài liệu RK3588 ghi.
 
-1.1 Các chế độ 1, 2, 3 core
----------------------------
+1.1 Ba chế độ theo số core
+--------------------------
 
 RK3588 có ba NPU core giống nhau. TRM1 mô tả khả năng ghép như sau:
 
@@ -50,7 +50,7 @@ Datasheet nhắc lại cùng ý và thêm "Multi-task, multi-scenario in paralle
    :align: center
    :alt: Sơ đồ kiến trúc 3 lõi RKNPU RK3588, System SRAM 4MB và Bus kết nối DDR
 
-   Kiến trúc 3 lõi NPU RK3588 (6 TOPS INT8), phân bổ Internal Buffer 384KB mỗi core, System SRAM 4MB và bus AXI kết nối tới 4 kênh DDR. Nguồn: tổng hợp từ [T1 TRM1 Ch.34, Ch.36; TRM2 Ch.1-2].
+   Kiến trúc 3 lõi NPU RK3588 (6 TOPS INT8), phân bổ Internal Buffer 384KB mỗi core, System SRAM và bus AXI kết nối tới 4 kênh DDR. Nguồn: tổng hợp từ [T1 TRM1 tr.1965, tr.1984].
 
 .. _fig-nhieu-core-triple-core:
 
@@ -175,9 +175,9 @@ Log mẫu của hãng có cột ``WorkLoad(0/1/2)-ImproveTherical``, ví dụ ``
    * - Có chia theo khối lượng tính không?
      - Có. Mỗi lớp được chia theo tỷ lệ phần trăm khối lượng tính giữa các core [T1 UG232 tr.75]
    * - Chia theo chiều nào của tensor (không gian, kênh, batch)?
-     - unknown (xem mục 2.3)
+     - Do bộ biên dịch và runtime đóng gói vào ``subcore_task[5]``, không công bố chiều tách cụ thể trong tài liệu T1 [T1 DRV include/rknpu_ioctl.h:241-279]
    * - Mode ``nn_mode`` nào ứng với dual, triple?
-     - unknown (xem mục 2.3)
+     - TRM1 chỉ ghi "target for multicore mode" và liệt kê các cấu hình 64x32, 96x32, 32x64, 32x96 [T1 TRM1 tr.2001]
 
 Về chế độ AUTO, hai nguồn nói hai mức khác nhau. Hãng mô tả "select the idle core" [T1 UG152 tr.26]. Mã driver 0.9.8 chọn lõi có ``task_num`` nhỏ nhất (so sánh bằng ``>``, nên hòa thì lấy lõi số nhỏ), đặt ``core_mask`` về mask của lõi đó và ``use_core_num = 1`` [T1 DRV rknpu_job.c:508-538]. Nghĩa là trong driver này AUTO chạy một job trên đúng một lõi. Đây là bằng chứng từ mã, không phải câu của hãng.
 
@@ -253,11 +253,7 @@ Ví dụ DTS của hãng (rút gọn) cấp toàn bộ 956KB cho NPU và gắn v
 
 Nguồn: [T1 SRAM-zh dòng 44-56] [T1 UG232 tr.106] [T1 UG232 tr.107].
 
-Phía API: ``total_sram_size`` ("Only for RK3588, memory size of SRAM reserved for NPU") và ``free_sram_size`` ("Only for RK3588, the current available SRAM") [T1 UG152 tr.49]. Cờ ``RKNN_FLAG_ENABLE_SRAM`` trong ``rknn_init()`` cấp "as much memory as possible" từ SRAM của hệ thống làm Internal Tensor memory [T1 UG232 tr.107]. Biến môi trường ``RKNN_INTERNAL_MEM_TYPE=sram#256`` hay ``RKNN_WEIGHT_MEM_TYPE=sram#128`` ở [T1 SRAM-zh dòng 87-103]. Cách cấu hình và khi nào đáng dùng xem :doc:`../04-bo-nho-hieu-nang/02-sram-cho-npu`.
-
-Điều kiện dùng khác nhau giữa hai tài liệu. SRAM-zh ghi runtime ">=1.3.4b14", UG232 ghi "librknnrt.so ... version >=1.6.0". Cả hai cùng yêu cầu driver từ 0.8.0 trở lên và ``CONFIG_ROCKCHIP_RKNPU_SRAM=y`` [T1 UG232 tr.106] [T1 UG232 tr.107] [T1 SRAM-zh 21-22].
-
-Phía driver 0.9.8 (bằng chứng từ mã): đọc ``rockchip,sram`` bằng ``of_parse_phandle``, không có node thì ``sram_size = 0`` [T1 DRV rknpu_drv.c:1146-1190]. Cấp SRAM cho GEM cần ``CONFIG_ROCKCHIP_RKNPU_SRAM`` và cờ ``RKNPU_MEM_TRY_ALLOC_SRAM`` bằng ``1 << 8`` [T1 DRV include/rknpu_ioctl.h:74], dùng ở [T1 DRV rknpu_gem.c:720-721]. Hai ioctl ``RKNPU_GET_TOTAL_SRAM_SIZE`` (22) và ``RKNPU_GET_FREE_SRAM_SIZE`` (23) [T1 DRV include/rknpu_ioctl.h:133-134].
+Cờ API, biến môi trường, điều kiện runtime và đường cấp SRAM trong driver nằm ở :doc:`../04-bo-nho-hieu-nang/02-sram-cho-npu` mục 1. Hai ioctl ``RKNPU_GET_TOTAL_SRAM_SIZE`` (22) và ``RKNPU_GET_FREE_SRAM_SIZE`` (23) có ở [T1 DRV include/rknpu_ioctl.h:133-134].
 
 2.2 Chia sẻ với thành phần khác
 -------------------------------
@@ -295,25 +291,25 @@ Chia sẻ giữa các rknn context cũng có quy tắc riêng:
 
 Nếu một context chưa dùng hết SRAM thì phần còn lại các context khác dùng được [T1 UG232 tr.108].
 
-2.3 Điều chưa biết
-------------------
+2.3 Giới hạn thông tin trong tài liệu hãng
+------------------------------------------
 
 .. list-table::
    :header-rows: 1
    :widths: 30 70
 
    * - Mục
-     - Kết quả
+     - Ranh giới thông tin theo nguồn T1
    * - Chia theo chiều nào của tensor
-     - unknown. Đã tìm ở: TRM1, driver 0.9.8, DTS, UG152, UG232, API232, từ khóa: ``task_start``, ``subcore_task``, ``split``, ``partition``, ``granularity``, ``task segmentation``. Driver chỉ nhận ``subcore_task``. UG232 chỉ nói "calculation amount" và "granularity of NPU multi-core task allocation", không có số. Compiler và runtime là ``.so`` ngoài driver
-   * - ``nn_mode`` nào là dual, triple
-     - unknown. Đã tìm ở: TRM1, driver, DTS, UG152, UG232, API232, từ khóa: ``nn_mode``, ``co-work``, ``dual core``, ``triple core``. Chỉ có bảng giá trị và câu "target for multicore mode"
-   * - Độ trễ và băng thông của System SRAM nhìn từ NPU
-     - unknown. Đã tìm ở: TRM1 chương 34, UG232 mục 5.7, SRAM-zh, 5 datasheet, từ khóa: ``latency``, ``bandwidth``, ``GB/s``, ``cycle``. Chương 34 chỉ ghi "four AXI Slave interfaces with 256 bits data bus width" và arbiter Round-Robin [T1 TRM1 tr.1965], không có số cho NPU
-   * - Ý nghĩa cửa sổ ``SYSTEM_SRAM`` ``FD600000`` (1MB)
-     - unknown. Đã tìm ở: TRM1, DTS, driver, ``docs/contents``, UG152, UG232, 5 datasheet, từ khóa: ``FD600000``. Chỉ có hàng trong bảng Address Mapping [T1 TRM1 tr.18]
-   * - Vì sao 956KB thay vì 1024KB
-     - unknown. Đã tìm ở: mọi nguồn trên, từ khóa: ``956``, ``0xef000``, ``security mode``. Chỉ có câu datasheet "part of space is addressed only in security mode" [T1 DS V1.7 pdf 10] [T1 DS V0.1 pdf 10] [T1 DS V1.3 pdf 9], không câu nào nối hai điều này
+     - Driver chỉ nhận danh sách ``subcore_task`` đã chia sẵn [T1 DRV include/rknpu_ioctl.h:241-279]. UG232 chỉ mô tả tỷ lệ "calculation amount" và "granularity of NPU multi-core task allocation" mà không nêu chiều tách tensor [T1 UG232 tr.75]
+   * - ``nn_mode`` trong chế độ đa lõi
+     - TRM1 liệt kê các cấu hình 32x32, 64x32, 96x32, 32x64, 32x96 kèm câu "target for multicore mode" và không quy định ánh xạ cứng sang dual hay triple [T1 TRM1 tr.2001]
+   * - Giao diện và hiệu năng System SRAM
+     - Chương 34 mô tả kiến trúc "four AXI Slave interfaces with 256 bits data bus width" và arbiter Round-Robin [T1 TRM1 tr.1965], không công bố số chu kỳ trễ hoặc băng thông nhìn từ NPU
+   * - Hai hàng ``SYSTEM_SRAM`` trong bảng địa chỉ
+     - Bảng Address Mapping liệt kê cả ``FF000000`` (1MB, dùng trong Chương 34 và DTS) và một hàng ``FD600000`` (1MB) mà không thuyết minh thêm [T1 TRM1 tr.18-19, tr.1965]
+   * - Khoảng 68KB ngoài vùng 956KB cấp cho IP
+     - Vùng cấp cho các IP trong DTS là ``0xFF001000..0xFF0F0000`` (956KB) [T1 UG232 tr.108]. Datasheet ghi "part of space is addressed only in security mode" [T1 DS V1.7 pdf 10] [T1 DS V0.1 pdf 10] [T1 DS V1.3 pdf 9]
 
 3. Hiểu sai thường gặp
 ======================
@@ -344,8 +340,8 @@ Nếu một context chưa dùng hết SRAM thì phần còn lại các context k
      - Buffer 384KB nằm trong core (``384KBx3 internal buffer``). System SRAM thuộc SoC, 1MB, dùng chung nhiều IP
      - [T1 TRM1 tr.1984] [T1 TRM1 tr.1965]
    * - Bật SRAM luôn rút ngắn thời gian suy luận
-     - UG232 ghi có thể ảnh hưởng thời gian suy luận. Số đo cụ thể: unknown
-     - [T1 UG232 tr.106]
+     - Mục đích chính là giảm áp lực băng thông DDR và có thể ảnh hưởng nhất định tới thời gian suy luận tùy mô hình
+     - [T1 SRAM-zh dòng 12] [T1 UG232 tr.106]
 
 Nguồn
 =====
@@ -363,7 +359,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``TRM1``
      - T1
      - :download:`rk3588_part1.pdf <../../../_assets/pdf/datasheet/trm/rk3588_part1.pdf>`
-     - 27
+     - 31
    * - ``DS V1.7``
      - T1
      - :download:`Rockchip_RK3588S_Datasheet_V1.7.pdf <../../../_assets/pdf/datasheet/soc/Rockchip_RK3588S_Datasheet_V1.7.pdf>`
@@ -379,11 +375,11 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG152``
      - T1
      - :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`
-     - 8
+     - 7
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 24
+     - 23
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
@@ -395,6 +391,6 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``SRAM-zh``
      - T1
      - :doc:`SRAM usage (zh) </contents/06-tai-lieu-hang/04-sram-usage>`
-     - 11
+     - 10
 
 Số trang TRM1, UG152, UG232, API232, DS V1.7 và DS V0.1 là số trang PDF, trùng số in. DS V1.3 không có số trang in nên ``pdf N`` là số trang PDF. Dòng của ``SRAM-zh`` là số dòng trong ``04-sram-usage.rst``. Hai hình lấy từ TRM1 và nằm ở ``_assets/img/02-nen-tang-rk3588/01-phan-cung-npu/nhieu-core-va-sram-he-thong/``.

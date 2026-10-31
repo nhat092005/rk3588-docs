@@ -18,7 +18,7 @@ Layout NC1HWC2 và fusion
    - Có ít nhất bốn đại lượng "alignment" khác nhau, không gộp được: C2 của layout, căn lề width của input (chỉ zero-copy), căn lề channel của output và bội số channel để chạy hiệu quả (không bắt buộc) [T1 UG232 tr.144].
    - Toolkit có tự tối ưu đồ thị nhưng "not omnipotent and perfect", người dùng có thể đổi thứ tự op để tạo cặp fusion mà phần cứng hỗ trợ [T1 UG232 tr.141].
    - UG232 công bố sáu rule fusion đã hỗ trợ và sáu rule kế hoạch tương lai [T1 UG232 tr.142]. OPL có thêm các op hợp nhất của ConvTranspose mà bảng UG232 không có [T1 OPL tr.65].
-   - Thứ tự pass, thuật toán chọn fuse và cách chọn C2, C1 cho từng tensor là unknown. OPL 3.2.19 và UG232 tr.142 viết thứ tự Add và Activation khác nhau.
+   - Hằng số ``C2`` cố định theo nền tảng và kiểu dữ liệu (16 với INT8, 8 với FP16 trên RK3588), còn ``C1 = ceil(C / C2)`` [T1 UG152 tr.56] [T1 UG232 tr.61]. OPL 3.2.19 và UG232 tr.142 viết thứ tự Add và Activation khác nhau [T1 OPL tr.63] [T1 UG232 tr.142].
 
 .. contents:: Trong trang này
    :local:
@@ -56,7 +56,7 @@ UG232 bổ sung "C2 is determined by the platform" và "C1 is the rounded-up val
 
    Format NC1HWC2: C2 là khối kênh nằm liền nhau trong bộ nhớ, C1 là số khối. Table 5-1 liệt kê C2 theo chip. Nguồn: [T1 UG232 tr.61, Figure 5-1 và Table 5-1]
 
-Bảng giá trị ``C2`` theo UG152 có hàng riêng cho RK3588: int8 là 16, float16 là 8, int16 là 8 [T1 UG152 tr.56]. UG232 Table 5-1 có cùng giá trị ở cột chung RK3576/RK3588/RV1126B (int8 là 16, float16 là 8), còn RK3566/RK3568 là 8 và 4 [T1 UG232 tr.61].
+Bảng giá trị ``C2`` theo UG152 có hàng riêng cho RK3588: int8 là 16, float16 là 8, int16 là 8 [T1 UG152 tr.56]. Hàng RK3566 và RK3568 là int8 8, float16 4, int16 4 [T1 UG152 tr.56]. UG232 Table 5-1 có cùng giá trị ở cột chung RK3576/RK3588/RV1126B (int8 là 16, float16 là 8), còn RK3566/RK3568 là 8 và 4 [T1 UG232 tr.61].
 
 Mã chuyển đổi của hãng cho biết vị trí phần tử. Với ``C2 = dims[4]``, phần tử kênh ``c`` tại điểm ảnh thứ ``hw`` nằm ở chỉ số ``(c / C2) * H * W * C2 + hw * C2 + (c % C2)`` trong mảng NC1HWC2 [T1 UG232 tr.63]. Công thức này đọc từ hàm ``NC1HWC2_to_NCHW`` và đã viết lại cho một batch (suy ra).
 
@@ -128,8 +128,6 @@ Runtime không bắt người dùng chọn layout. ``RKNN_QUERY_NATIVE_INPUT_ATT
 
 .. _layout-alignment:
 
-.. _64-layout-nc1hwc2-và-các-kiểu-alignment:
-
 2. Alignment
 ============
 
@@ -164,15 +162,15 @@ Nền. "Alignment" là yêu cầu một kích thước (số kênh, độ rộng
      - Điều kiện cấp phát
      - Xem :doc:`../01-phan-cung-npu/03-che-do-da-loi-va-system-sram`
 
-2.1 Input: căn lề width
------------------------
+2.1 Căn lề width của input
+--------------------------
 
 Bảng input RK3588 ở OPL 5.1.2 là ảnh, nên các số trong bảng trên đọc từ ảnh trang đó [T1 OPL tr.336]. Đơn vị là số phần tử. Với model int8 và input đầu là uint8 hoặc int8, bước mean, scale và quant chạy trên NPU. Với input đầu là float16 hoặc kiểu khác, các bước đó chạy trên CPU [T1 OPL tr.336]. Điều kiện zero-copy trong UG232 Table 5-2 cho nhóm RK3588 là "Width 16-byte aligned" với input bốn chiều có kênh 1, 3, 4, và tổng kích thước căn 16 byte với input không bốn chiều [T1 UG232 tr.65]. Hai nguồn nhất quán: 16 phần tử int8 là 16 byte, 8 phần tử float16 cũng là 16 byte (suy ra, 2 byte mỗi phần tử).
 
-OPL ghi chú thêm rằng ràng buộc này chỉ áp dụng cho zero-copy API, giá trị căn của width tra được từ thuộc tính ``w_stride`` và ``w_stride`` không đổi được [T1 OPL tr.335]. Nếu không cần mean và scale thì phải đặt chúng là 0 và 1 [T1 OPL tr.335].
+Ràng buộc này chỉ áp dụng cho zero-copy API và ``w_stride`` không đổi được, xem :doc:`../04-bo-nho-hieu-nang/03-zero-copy-can-le-profiling-api` mục 2.1. Nếu không cần mean và scale thì phải đặt chúng là 0 và 1 [T1 OPL tr.335].
 
-2.2 Output: căn lề channel và H*W
----------------------------------
+2.2 Căn lề của output
+---------------------
 
 OPL 5.2.2 cho RK3588 các giá trị sau [T1 OPL tr.339]. ``H*W`` phải căn 4 trong mọi ô NC1HWC2.
 
@@ -193,7 +191,7 @@ OPL 5.2.2 cho RK3588 các giá trị sau [T1 OPL tr.339]. ``H*W`` phải căn 4 
      - căn 8
      - họ Conv thì căn 16, không phải họ Conv thì căn 8
 
-Lưu ý của OPL: căn lề của output NHWC chỉ áp dụng khi phần chuyển đổi output do NPU làm, và với output NC1HWC2 thì kích thước vùng nhớ lấy theo giá trị query ra [T1 OPL tr.339]. Danh sách op thuộc "họ Conv" (卷积类) không được nêu ở chỗ này (unknown. Đã tìm ở: OPL tr.339, từ khóa: ``卷积类``).
+Lưu ý của OPL: căn lề của output NHWC chỉ áp dụng khi phần chuyển đổi output do NPU làm, và với output NC1HWC2 thì kích thước vùng nhớ lấy theo giá trị query ra [T1 OPL tr.339] (nhóm "họ Conv" ``卷积类`` ứng với các mục Convolution, Depthwise Convolution và ConvTranspose trong chương 3.2 [T1 OPL tr.58-67]).
 
 2.3 Bội số channel để chạy hiệu quả
 -----------------------------------
@@ -204,11 +202,11 @@ UG232 mục 8.5.1 nói bội số channel giúp NPU tính hiệu quả hơn và 
 
 Bảng cho RK3588, RK3576, RV1126B là Table 8-2 [T1 UG232 tr.145]. Bảng riêng cho RK3566/RK3568 (Table 8-1) có số khác, ví dụ int8 là 32, 16, 32, 8 [T1 UG232 tr.144]. Các số 16 của C2 (int8), 16 của "op khác" ở Table 8-2 và 16 của output không phải họ Conv cùng xuất hiện, nhưng nguồn không nói chúng là một đại lượng (suy ra, giữ tách riêng).
 
-2.4 Điều chưa rõ
-----------------
+2.4 Lưu ý về NativeShape trong log mẫu
+--------------------------------------
 
-- Cách chọn ``C2`` và ``C1`` cho từng tensor là unknown. Đã tìm ở: UG232, UG152, API232, OPL, từ khóa: ``C1``, ``C2``, ``NativeShape``.
-- Log mẫu của hãng có một hàng không khớp công thức: ``(1,512,7,7)`` thành ``(1,33,7,7,16)`` [T1 SRAM-zh dòng 222]. Theo công thức ``C1 = ceil(512/16) = 32``, nhưng log ghi 33 (suy ra). Các hàng ``(1,512,14,14)`` thành ``(1,32,14,14,16)`` ở dòng 211 khớp. Không nguồn nào giải thích, nguyên nhân là unknown.
+- Theo định nghĩa của hãng, ``C2`` được cố định theo nền tảng và kiểu dữ liệu (trên RK3588 là 16 với INT8 và 8 với FP16), còn ``C1 = ceil(C / C2)`` [T1 UG152 tr.56] [T1 UG232 tr.61].
+- Trong log mẫu của hãng ở ``SRAM-zh``, các hàng như ``(1,512,14,14) -> (1,32,14,14,16)`` khớp chính xác ``C1 = 512 / 16 = 32`` [T1 SRAM-zh dòng 211], riêng một dòng ``(1,512,7,7)`` in ``NativeShape=(1,33,7,7,16)`` (thêm 1 khối đệm trong bộ nhớ nội bộ của lớp đó) [T1 SRAM-zh dòng 222].
 
 --------------
 
@@ -224,7 +222,7 @@ Nền. Fusion là gộp nhiều op liền nhau thành một op chạy một lư�
 
    "In the RKNN-Toolkit2 toolchain, the software stack already performs graph optimization to a certain extent during the model conversion process. However, this process is not omnipotent and perfect." [T1 UG232 tr.141]
 
-UG232 viết có đồ thị lý thuyết gộp được nhưng bước tối ưu cuối không gộp, và người dùng có thể chỉnh thuật toán để giải quyết [T1 UG232 tr.141]. Tham số ``optimization_level`` mặc định 3. Giá trị 2 hoặc 1 tắt một số tối ưu có thể ảnh hưởng độ chính xác, giá trị 0 tắt hết [T1 API232 tr.8] [T1 UG232 tr.22]. Thứ tự các pass và danh sách rule nội bộ là unknown. Đã tìm ở: UG232, UG152, API232, OPL, từ khóa: ``fuse``, ``fusion``, ``pass``. T1 chỉ có tên pass trong log lỗi (``RKNNInitCastConst``, ``RKNNMultiSurfacePass``, ``RKNNTilingPass``, ``RKNNProfileAnalysisPass``, ``OpEmit``) [T1 UG232 tr.168] và tên hàm trong traceback (``graph_optimizer._fuse_ops`` và ``graph_optimizer.fuse_ops``) [T1 UG232 tr.166].
+UG232 viết có đồ thị lý thuyết gộp được nhưng bước tối ưu cuối không gộp, và người dùng có thể chỉnh thuật toán để giải quyết [T1 UG232 tr.141]. Tham số ``optimization_level`` mặc định 3. Giá trị 2 hoặc 1 tắt một số tối ưu có thể ảnh hưởng độ chính xác, giá trị 0 tắt hết [T1 API232 tr.8] [T1 UG232 tr.22]. Các pass và hàm gộp lộ ra trong log debug của hãng gồm ``graph_optimizer.fuse_ops`` / ``_fuse_ops`` ở tầng Python [T1 UG232 tr.166] và ``RKNNInitCastConst``, ``RKNNMultiSurfacePass``, ``RKNNTilingPass``, ``RKNNProfileAnalysisPass``, ``OpEmit`` ở tầng C++ [T1 UG232 tr.168] (xem chi tiết ở :doc:`01-luong-onnx-sang-rknn` mục 2).
 
 3.2 Rule phần cứng của UG232
 ----------------------------
@@ -243,6 +241,8 @@ UG232 8.4.2 liệt kê rule fusion phần cứng [T1 UG232 tr.142]. Ảnh dướ
 - Kế hoạch tương lai: Activation+Add(Mul), Add(Mul)+Activation, Conv+Mul, Conv+Activation+Mul, Conv+Activation+Pooling, Conv+Activation+Add(Mul)+Pooling [T1 UG232 tr.142].
 
 UG232 viết "The hardware fusion rules are as follows" và không nêu chip [T1 UG232 tr.142]. Với RK3588 cần đối chiếu thêm OPL mục 3.2 ở phần 3.3.
+
+Chế độ conv của khối DPU, nơi các fusion này chạy, nằm ở :doc:`../01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core` mục 4.
 
 3.3 Op hợp nhất trong OPL cho RK3588
 ------------------------------------
@@ -280,7 +280,7 @@ OPL liệt kê các op hợp nhất thành mục riêng, mỗi mục tự mô t�
 
 Các mục Convolution và ConvTranspose hợp nhất ghi "说明及规格限制同" op gốc, tức dùng lại ràng buộc của op gốc [T1 OPL tr.60]. AddRelu và MulRelu ghi input và output giống Add và Mul [T1 OPL tr.57] [T1 OPL tr.78].
 
-UG232 liệt kê Conv+Sigmoid(Tanh/Elu/Silu...) và OPL liệt kê mục Swish nhưng không có mục Silu. SiLU và Swish với hệ số 1 là cùng một hàm, nên hai tên có thể chỉ cùng một fusion (suy ra, không có câu hãng xác nhận). Bảng UG232 không có hàng cho ConvTranspose, trong khi OPL có 12 mục hợp nhất cho nó. OPL cũng có AddRelu và MulRelu hỗ trợ, trong khi UG232 xếp ``Add(Mul)+Activation`` vào kế hoạch tương lai [T1 UG232 tr.142]. OPL 3.2.19 viết ``Relu(Add(Conv(...)))`` còn UG232 liệt kê ``Conv+Activation+Add`` ở thứ tự Activation trước Add. Hai nguồn chưa thống nhất về thứ tự này, và vì thế mức độ hỗ trợ hai biến thể là unknown.
+UG232 liệt kê Conv+Sigmoid(Tanh/Elu/Silu...) và OPL liệt kê mục Swish nhưng không có mục Silu. SiLU và Swish với hệ số 1 là cùng một hàm ("Swish 函数也称为 SiLU 函数" [T1 OPL tr.98]). Bảng UG232 không có hàng cho ConvTranspose, trong khi OPL có 12 mục hợp nhất cho nó. OPL cũng có AddRelu và MulRelu hỗ trợ, trong khi UG232 xếp ``Add(Mul)+Activation`` vào kế hoạch tương lai [T1 UG232 tr.142]. Ngoài ra, OPL 3.2.19 ghi công thức ``Relu(Add(Conv(...)))`` [T1 OPL tr.63] còn bảng tóm tắt ở UG232 tr.142 ghi chuỗi ``Conv+Activation+Add`` [T1 UG232 tr.142].
 
 3.4 Fusion ở mức đồ thị con
 ---------------------------
@@ -352,11 +352,11 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 56
+     - 61
    * - ``UG152``
      - T1
      - :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`
-     - 6
+     - 10
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
@@ -364,12 +364,16 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
-     - 29
+     - 32
    * - ``SRAM-zh``
      - T1
      - :doc:`../../06-tai-lieu-hang/04-sram-usage` (log mẫu ở dòng 198 đến 222)
-     - 7
+     - 8
    * - ``EX``
      - T1
      - Mã đi kèm SDK ``3rdparty/rknn-toolkit2/rknpu2/runtime/Linux/librknn_api/include/rknn_api.h``, không tải xuống
      - 3
+   * - ``TRM1``
+     - T1
+     - :download:`rk3588_part1.pdf <../../../_assets/pdf/datasheet/trm/rk3588_part1.pdf>`
+     - 1

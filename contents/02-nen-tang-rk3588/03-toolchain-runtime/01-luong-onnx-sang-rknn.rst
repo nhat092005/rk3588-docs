@@ -18,7 +18,7 @@ Luồng ONNX sang RKNN
    - Sơ đồ phần mềm của toolkit có hai khối tối ưu: Graph Optimizer (Const Fold, OP Fuse, OP Convert) và Compiler (OP Fuse, Tiling, Memory Planning, RKNN Generator) [T1 UG232 tr.7, Figure 1-2].
    - Tên hàm và tên pass thật lộ ra trong log lỗi: ``fold_constant``, ``fuse_ops``, ``RKNNTilingPass``, ``OpEmit`` và vài tên khác [T1 UG232 tr.166] [T1 UG232 tr.168] [T1 UG232 tr.169].
    - ``optimization_level`` mặc định là 3. Mức 2 và 1 tắt một số rule, mức 0 tắt tất cả [T1 API232 tr.8].
-   - Danh sách đầy đủ pass, thứ tự chạy và rule nào tắt ở từng mức: unknown (mục 3).
+   - Các pass nội bộ của compiler được đóng gói trong thư viện nhị phân của toolkit và chỉ lộ một phần qua sơ đồ khối, log debug và changelog [T1 UG232 tr.7, tr.166-169].
 
 .. contents:: Trong trang này
    :local:
@@ -131,6 +131,8 @@ Công cụ ``rknn_convert`` bọc các lời gọi trên, đọc file YAML và n
 
 File YAML khai báo ``platform: onnx``, ``model_file_path``, ``quantize``, ``dataset`` và khối ``configs`` ánh xạ sang ``rknn.config()`` [T1 UG232 tr.26] [T1 UG232 tr.27].
 
+Đường xuất ONNX của Ultralytics cho YOLO và cờ ``end2end`` nằm ở :doc:`../05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn`.
+
 .. _onnx-rknn-cac-pass-da-biet:
 
 2. Các pass đã biết
@@ -213,8 +215,8 @@ UG232 nhấn mạnh toolkit không tự làm hết:
 
 Cùng chương, UG232 đưa các cách chỉnh tay: đổi op không chạy NPU thành op chạy được, đổi thứ tự ``Transpose`` và ``Clip`` để ``Conv + Clip`` gộp được, gộp các ``Reshape`` hoặc ``Transpose`` liên tiếp [T1 UG232 tr.141] [T1 UG232 tr.142] [T1 UG232 tr.143].
 
-2.3 Điều khiển bằng ``optimization_level``
-------------------------------------------
+2.3 Điều khiển bằng optimization_level
+--------------------------------------
 
    "By modifying the model optimization level, you can turn off some or all of the optimization rules used in the model conversion process. The default value of this parameter is 3, and all optimization options are turned on." [T1 API232 tr.8]
 
@@ -232,7 +234,7 @@ Cùng chương, UG232 đưa các cách chỉnh tay: đổi op không chạy NPU 
      - Tắt một số rule có thể ảnh hưởng độ chính xác. Hai tác dụng cụ thể: ``Resize`` chạy CPU, và từ bản v1.3.4b5 tắt gộp ``Conv + Add``
      - [T1 UG232 tr.176] [T1 EX changelog-2.3.2.txt:957-958]
    * - 1
-     - Cùng câu mô tả với mức 2 ("some optimization options that may affect the accuracy of some models"). Rule cụ thể: unknown
+     - Cùng câu mô tả với mức 2 ("some optimization options that may affect the accuracy of some models"), tài liệu API không tách danh sách rule riêng giữa mức 1 và mức 2
      - [T1 API232 tr.8]
    * - 0
      - Tắt mọi tối ưu
@@ -276,29 +278,27 @@ Một dấu vết khác: Toolkit1 từng có các công tắc ``deconv_merge``, 
 
 .. _onnx-rknn-dieu-chua-ro:
 
-3. Điều chưa rõ
-===============
+3. Ranh giới thông tin của tài liệu hãng
+========================================
 
 .. list-table::
    :header-rows: 1
    :widths: 32 68
 
-   * - Câu hỏi
-     - Trạng thái
-   * - Danh sách đầy đủ pass của tầng Python và C++, thứ tự và điều kiện chạy
-     - unknown. Đã tìm ở: UG232, API232, OPL, ``changelog-2.3.2.txt``, ``CHANGELOG.md``, từ khóa: ``pass``, ``graph_optimizer``, ``fuse_ops``, ``fold_constant``, ``Pass``
+   * - Chủ đề
+     - Ranh giới thông tin theo nguồn T1
+   * - Danh sách pass của tầng Python và C++
+     - Tài liệu chỉ công bố sơ đồ khối ở Figure 1-2 và các tên pass/hàm xuất hiện trong log lỗi ở mục 2.1 [T1 UG232 tr.7, tr.166-169]
    * - Thuật toán của Tiling, Memory Planning, OP Convert, OpEmit
-     - unknown. Đã tìm ở: UG232 tr.7 và tr.168, từ khóa: ``Tiling``, ``Memory Planning``, ``OP Convert``. Chỉ có tên khối trong hình và dòng log
-   * - Rule nào bị tắt ở ``optimization_level`` 1, và rule nào khác bị tắt ở mức 2 ngoài hai tác dụng ở mục 2.3
-     - unknown. Đã tìm ở: API232 tr.8, UG232 tr.22, tr.27, tr.133, tr.176, ``changelog-2.3.2.txt``, từ khóa: ``optimization_level``
-   * - ``global_fuse`` là cờ hay tham số nào
-     - unknown. Chỉ xuất hiện một lần ở ``changelog-2.3.2.txt:103``. Đã tìm ở: UG232, API232, ``CHANGELOG.md``, từ khóa: ``global_fuse``
-   * - Các rule trong cột "future plans" của UG232 tr.142 (ví dụ ``Conv + Mul``) đã có ở 2.3.2 chưa
-     - unknown. Đã tìm ở: ``CHANGELOG.md``, ``changelog-2.3.2.txt``, OPL mục 3.2, từ khóa: ``Conv+Mul``, ``Activation+Add``, ``Pooling``. Không dòng nào ghi trạng thái các rule này
-   * - Phiên bản ONNX hỗ trợ
-     - Ba con số khác nhau, chưa nguồn nào phân xử. API232 ghi ONNX ``1.7.0 ~1.17.0`` cho toolkit 2.3.2 [T1 API232 tr.5]. UG232 ghi khuyến nghị ``1.7.0~1.10.0`` [T1 UG232 tr.21]. Changelog ghi hỗ trợ opset 12 đến 19 từ v1.6.0 [T1 EX CHANGELOG.md:71] và danh sách op ghi opset 19 [T1 OPSUP:4]. Hai con số đầu là phiên bản gói ``onnx``, hai con số sau là opset, nên không nhất thiết mâu thuẫn (suy ra)
+     - Nằm trong thư viện biên dịch đóng gói sẵn, tài liệu chỉ nêu tên khối trong Figure 1-2 và log ``RKNNTilingPass`` / ``OpEmit`` [T1 UG232 tr.7, tr.168]
+   * - Chi tiết từng mức ``optimization_level``
+     - API232 dùng chung mô tả cho mức 1 và mức 2 [T1 API232 tr.8]. Hai rule cụ thể của mức 2 được xác nhận ở mục 2.3 là đưa ``Resize`` về CPU và tắt gộp ``Conv + Add`` [T1 UG232 tr.176] [T1 EX changelog-2.3.2.txt:957-958]
+   * - Cơ chế ``global_fuse`` và bảng "future plans"
+     - Tên ``global_fuse`` xuất hiện trong dòng sửa lỗi ``Add + Relu`` của changelog [T1 EX changelog-2.3.2.txt:103], còn các tổ hợp ở cột "future plans" của Figure 8-7 chưa có mục riêng trong OPL 3.2 [T1 UG232 tr.142]
+   * - Phiên bản ONNX và opset hỗ trợ
+     - API232 ghi gói ``onnx`` ``1.7.0 ~1.17.0`` cho toolkit 2.3.2 [T1 API232 tr.5] (UG232 còn giữ khuyến nghị cũ ``1.7.0~1.10.0`` [T1 UG232 tr.21]), còn về opset thì changelog và bảng op xác nhận hỗ trợ đến opset 19 [T1 EX CHANGELOG.md:71] [T1 OPSUP:4]
    * - Ví dụ nạp ONNX trong UG232
-     - Mục "ONNX loading" ở UG232 tr.24 in lại dòng ``rknn.load_tflite(model='./mobilenet_v1.tflite')`` thay vì ``load_onnx``. Coi là lỗi chép của tài liệu và dùng ví dụ ở API232 tr.12 và tr.13 (suy ra)
+     - Mục "ONNX loading" ở UG232 tr.24 in nhầm dòng ``rknn.load_tflite(model='./mobilenet_v1.tflite')`` thay vì ``load_onnx`` (ví dụ đúng nằm ở [T1 API232 tr.12-13])
 
 4. Hiểu sai thường gặp
 ======================
@@ -342,11 +342,11 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 57
+     - 62
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 16
+     - 18
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`. Số trang là số trang PDF
@@ -354,7 +354,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``EX``
      - T1
      - Ví dụ và changelog trong SDK. ``examples/...`` và ``changelog-2.3.2.txt`` (trong ``doc/``) tính từ ``3rdparty/rknn-toolkit2/rknn-toolkit2/``. ``CHANGELOG.md`` nằm ở ``3rdparty/rknn-toolkit2/``. Số sau dấu hai chấm là số dòng
-     - 25
+     - 27
    * - ``OPSUP``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/RKNNToolKit2_OP_Support-2.3.2.md``

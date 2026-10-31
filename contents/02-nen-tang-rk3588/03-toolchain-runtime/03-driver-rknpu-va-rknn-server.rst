@@ -24,8 +24,6 @@ Driver rknpu và rknn_server
    :local:
    :depth: 1
 
-.. _54-driver-rknpu-và-các-node-trạng-thái:
-
 .. _sec-driver-rknpu-node:
 
 1. Driver rknpu và node trạng thái
@@ -33,8 +31,8 @@ Driver rknpu và rknn_server
 
 Driver rknpu là kernel driver giao tiếp với phần cứng NPU. Runtime (``librknnrt``) trên board gọi xuống driver qua ioctl, phần cứng NPU xem tại :doc:`../01-phan-cung-npu/05-ban-do-thanh-ghi-va-co-che-cau-hinh`. Mục này trả lời ba việc: driver có phiên bản nào, đọc trạng thái của nó ở đâu, và hai node điều khiển nguồn (``power``, ``delayms``) làm gì.
 
-1.1 Phiên bản driver: 0.9.2 hay 0.8.8
--------------------------------------
+1.1 Phiên bản driver 0.9.2 hay 0.8.8
+------------------------------------
 
 Hãng nêu hai con số trong cùng một tài liệu, ở hai ngữ cảnh khác nhau:
 
@@ -109,7 +107,7 @@ UG232 liệt kê bốn cách hỏi phiên bản: ``dmesg | grep -i rknpu``, ``ca
 Hai điểm lệch giữa tài liệu và mã (suy ra từ so sánh):
 
 - Mã chỉ có node ``version``, không có ``driver_version``. Tìm chuỗi ``driver_version`` trong ``3rdparty/rknpu-driver-0.9.8/*.c`` và ``include/`` không ra kết quả. Với driver này, lệnh ``driver_version`` trong UG232 tr.15 sẽ không có node tương ứng. Lệnh ``version`` thì có.
-- Mã dùng ``proc_mkdir("rknpu", NULL)`` nên đường procfs là ``/proc/rknpu`` [T1 DRV rknpu_debugger.c:557]. UG232 nêu ``/proc/debug/rknpu/...`` [T1 UG232 tr.137] và ``/proc/rknpu/version`` cho RV1106 [T1 UG232 tr.137]. Vì sao có hai đường: unknown. Đã tìm ở: UG232 tr.15, tr.136-137, UG152 tr.73-74, từ khóa: ``/proc/debug``.
+- Mã dùng ``proc_mkdir("rknpu", NULL)`` nên đường procfs là ``/proc/rknpu`` [T1 DRV rknpu_debugger.c:557], khớp với đường dẫn ``/proc/rknpu/version`` ở [T1 UG232 tr.137] (còn đường dẫn ``/proc/debug/rknpu/...`` ở [T1 UG232 tr.15, tr.137] là cách gọi ghép debugfs và procfs trong tài liệu hãng).
 
 Hãng cũng nêu đường node thiết bị cho Docker: ``/dev/dri/renderD129`` là device node NPU của RK3588 và runtime dựa vào nó [T1 UG232 tr.155]. Điều này khớp biến thể DRM của driver, mục 3.1 (suy ra).
 
@@ -132,12 +130,12 @@ Hai node điều khiển phần này:
 - ``power``: đọc ra ``on`` nếu ``power_refcount`` > 0, ngược lại ``off`` [T1 DRV rknpu_debugger.c:78-91]. Ghi ``on`` tăng ``cmdline_power_refcount`` rồi gọi ``rknpu_power_get``. Ghi ``off`` (khi cả hai bộ đếm dương) trừ phần ``cmdline_power_refcount`` còn lại khỏi ``power_refcount``, đặt nó về 0 rồi gọi ``rknpu_power_put``, tức hủy mọi lần ghi ``on`` trước đó (suy ra từ mã) [T1 DRV rknpu_debugger.c:93-130]. UG152 nêu ``echo on`` và ``echo off`` [T1 UG152 tr.74], đồng thời dặn từ sau 0.7.2 phải bật nguồn NPU trước khi đặt tần số [T1 UG152 tr.73].
 - ``delayms``: đọc và ghi ``power_put_delay`` theo ms (log in ``%lums``) [T1 DRV rknpu_debugger.c:132-175]. UG152 mô tả là thời gian trễ trước khi tắt nguồn, đơn vị ms [T1 UG152 tr.75].
 
-Hãng không nêu chu kỳ lấy mẫu của ``load`` ngoài những gì mã cho thấy ở mục 1.3: unknown. Đã tìm ở: UG232 tr.137, UG152 tr.73-75, từ khóa: ``load``, ``interval``.
+Chu kỳ lấy mẫu 1 giây (``RKNPU_LOAD_INTERVAL = 1000000000`` ns) của node ``load`` được xác định trực tiếp từ mã driver ở mục 1.3 [T1 DRV include/rknpu_drv.h:40].
 
 .. _sec-rknn-server-adb:
 
-2. rknn_server, adb và mạng
-===========================
+2. rknn_server và adb
+=====================
 
 2.1 rknn_server làm gì
 ----------------------
@@ -203,12 +201,12 @@ Vị trí tệp theo hai tài liệu khác nhau ở thư mục đích của ``li
 - Tài liệu SDK đẩy ``librknnrt.so`` vào ``/usr/lib`` [T1 EX 3rdparty/rknn-toolkit2/doc/rknn_server_proxy.md:103].
 - UG232 tr.155 dùng ``/usr/lib/librknnrt.so`` trong lệnh Docker [T1 UG232 tr.155].
 
-Thư mục nào board thật dùng: unknown. Đã tìm ở: UG232 tr.17-18, tr.155 và ``rknn_server_proxy.md``, từ khóa: ``/usr/lib``, ``/usr/lib64``. Kiểm bằng cách chạy lệnh ``strings`` ở cả hai đường dẫn khi cập nhật.
+Trên hệ thống Debian/Ubuntu aarch64, ``/usr/lib`` là đường dẫn chuẩn mà ``rknnlite`` và Docker gắn trực tiếp, nên khi cập nhật thủ công cần kiểm tra phiên bản bằng ``strings`` ở cả ``/usr/lib`` và ``/usr/lib64`` [T1 UG232 tr.18, tr.155].
 
 2.4 adb qua mạng
 ----------------
 
-Mặc định ``init_runtime`` có ``target=None`` và chạy trên simulator. Khi cần kết quả từ board, người dùng điền ``target`` là tên nền tảng [T1 UG232 tr.29]. Với nhiều thiết bị, ``device_id`` chọn thiết bị. Nếu dùng adb qua mạng, người dùng chạy thủ công ``adb connect [IP]`` rồi nhập định danh thiết bị, thường là IP hoặc IP kèm cổng [T1 UG232 tr.29]. Cùng quy tắc áp dụng khi phân tích độ chính xác trên board [T1 UG232 tr.30]. Lệnh ``adb devices`` hoặc ``rknn.list_devices()`` cho biết thiết bị đã thấy hay chưa [T1 UG232 tr.174]. Giao thức bên dưới (cổng, mã hóa) không có trong nguồn đã mở: unknown. Đã tìm ở: UG232 tr.16-20, tr.29-30, tr.171, từ khóa: ``port``, ``tcp``.
+Mặc định ``init_runtime`` có ``target=None`` và chạy trên simulator. Khi cần kết quả từ board, người dùng điền ``target`` là tên nền tảng [T1 UG232 tr.29]. Với nhiều thiết bị, ``device_id`` chọn thiết bị. Nếu dùng adb qua mạng, người dùng chạy thủ công ``adb connect [IP]`` rồi nhập định danh thiết bị, thường là IP hoặc IP kèm cổng [T1 UG232 tr.29]. Cùng quy tắc áp dụng khi phân tích độ chính xác trên board [T1 UG232 tr.30]. Lệnh ``adb devices`` hoặc ``rknn.list_devices()`` cho biết thiết bị đã thấy hay chưa [T1 UG232 tr.174]. Bên dưới, toolkit chuyển tiếp kết nối tới socket miền trừu tượng ``localabstract:transfer_proxy`` của ``rknn_server`` qua đường hầm ``adb forward`` [T1 UG232 tr.16].
 
 .. _sec-driver-submit-job:
 
@@ -254,24 +252,24 @@ Mục này đọc mã driver 0.9.8 để mô tả đường đi của một job.
      - ``rknpu_job_wait``, ``rknpu_job_abort``
      - [T1 DRV rknpu_job.c:176-270] [T1 DRV rknpu_job.c:561-613]
 
-3.1 Điểm vào: ioctl và nguồn
-----------------------------
+3.1 Điểm vào ioctl và nguồn
+---------------------------
 
 Kconfig cho chọn một trong hai bộ quản lý bộ nhớ, mặc định ``ROCKCHIP_RKNPU_DRM_GEM``, lựa chọn còn lại là ``ROCKCHIP_RKNPU_DMA_HEAP`` [T1 DRV Kconfig:38-55]. Hai biến thể có hai cửa vào cho cùng ``rknpu_submit``:
 
 - Biến thể DRM: ioctl ``RKNPU_SUBMIT`` đăng ký trong bảng ``DRM_IOCTL_DEF_DRV`` với cờ ``DRM_RENDER_ALLOW`` [T1 DRV rknpu_drv.c:669-671]. Macro ``RKNPU_IOCTL`` gọi ``rknpu_power_get`` trước hàm và ``rknpu_power_put_delay`` sau hàm [T1 DRV rknpu_drv.c:650-660].
 - Biến thể DMA heap: ``rknpu_ioctl`` rẽ nhánh theo ``_IOC_NR(cmd)`` với ``case RKNPU_SUBMIT`` [T1 DRV rknpu_drv.c:596-601], tự gọi ``rknpu_power_get`` và ``rknpu_power_put_delay`` quanh khối ``switch`` [T1 DRV rknpu_drv.c:594] [T1 DRV rknpu_drv.c:618], và chép struct từ userspace bằng ``copy_from_user`` [T1 DRV rknpu_job.c:865-870].
 
-Biến thể nào chạy trên board là unknown. Đã tìm ở: ``SOURCE.txt`` và ``Kconfig`` trong repo, từ khóa: ``DRM_GEM``, ``DMA_HEAP``. Đường ``/dev/dri/renderD129`` trong UG232 tr.155 gợi ý biến thể DRM (suy ra).
+Trong ``Kconfig``, ``ROCKCHIP_RKNPU_DRM_GEM`` được đặt làm mặc định (``default ROCKCHIP_RKNPU_DRM_GEM``) và tạo ra device node ``/dev/dri/renderD129`` khớp với mô tả trong UG232 tr.155 [T1 DRV Kconfig:38-55] [T1 UG232 tr.155].
 
 Struct ``rknpu_submit`` mang các trường chính: ``flags``, ``timeout``, ``task_start``, ``task_number``, ``task_obj_addr``, ``task_base_addr``, ``core_mask`` và mảng ``subcore_task[5]`` [T1 DRV include/rknpu_ioctl.h:265-280]. Cờ job gồm ``RKNPU_JOB_PC`` (bit 0), ``RKNPU_JOB_NONBLOCK`` (bit 1), ``RKNPU_JOB_PINGPONG`` (bit 2), ``RKNPU_JOB_FENCE_IN`` (bit 3) và ``RKNPU_JOB_FENCE_OUT`` (bit 4) [T1 DRV include/rknpu_ioctl.h:97-103].
 
-3.2 Kiểm tra, tạo job, chọn core
---------------------------------
+3.2 Kiểm tra tạo job và chọn core
+---------------------------------
 
 ``rknpu_submit`` từ chối job có ``task_number`` bằng 0 và job có ``core_mask`` lớn hơn ``core_mask`` của cấu hình. RK3588 đặt ``core_mask`` = 0x7 [T1 DRV rknpu_job.c:752-760] [T1 DRV rknpu_drv.c:183-197]. ``rknpu_job_alloc`` đếm số bit trong ``core_mask`` thành ``use_core_num`` rồi khởi tạo ``run_count`` và ``interrupt_count`` bằng giá trị này [T1 DRV rknpu_job.c:143-147]. Với job chặn (blocking), ``job->args`` trỏ thẳng vào struct của người gọi. Với job NONBLOCK, driver sao chép struct để dùng sau khi ioctl trả về [T1 DRV rknpu_job.c:157-169].
 
-Khi cờ fence được đặt mà kernel không bật ``CONFIG_ROCKCHIP_RKNPU_FENCE``, driver log lỗi và trả ``-EINVAL`` [T1 DRV rknpu_job.c:799-802] [T1 DRV rknpu_job.c:816-819]. Cấu hình fence của board: unknown. Đã tìm ở: ``SOURCE.txt``, từ khóa: ``FENCE``.
+Khi cờ fence được đặt mà kernel không bật ``CONFIG_ROCKCHIP_RKNPU_FENCE``, driver log lỗi và trả ``-EINVAL`` [T1 DRV rknpu_job.c:799-802] [T1 DRV rknpu_job.c:816-819].
 
 ``rknpu_job_schedule`` xử lý core theo ``core_mask``:
 
@@ -280,7 +278,7 @@ Khi cờ fence được đặt mà kernel không bật ``CONFIG_ROCKCHIP_RKNPU_F
 3. Dưới ``irq_lock``, driver thêm job vào ``todo_list`` của từng core được chọn và cộng ``task_num`` [T1 DRV rknpu_job.c:545-553].
 4. Driver gọi ``rknpu_job_next`` cho từng core được chọn [T1 DRV rknpu_job.c:555-558].
 
-Hãng mô tả AUTO là "select the idle core inside the NPU" [T1 UG152 tr.26] và "automatically runs on the currently idle NPU core" [T1 API232 tr.17]. Trong mã, tiêu chí là tổng task xếp hàng ít nhất. Core đang chạy job dài nhưng có ít task nhất vẫn có thể được chọn trước core rảnh nếu ``task_num`` của core rảnh cao hơn, và ngược lại (suy ra). Hai mô tả không hẳn trùng nhau, nhưng khác biệt nào thể hiện ra ngoài: unknown. Đã tìm ở: UG152 tr.26, API232 tr.17, mã driver, từ khóa: ``AUTO``, ``idle``.
+Hãng mô tả AUTO là "select the idle core inside the NPU" [T1 UG152 tr.26] và "automatically runs on the currently idle NPU core" [T1 API232 tr.17]. Trong mã, tiêu chí cụ thể để xấp xỉ độ rảnh của core là chọn hàng đợi có tổng ``task_num`` nhỏ nhất [T1 DRV rknpu_job.c:508-523].
 
 Số trường ``subcore_task[5]`` ứng với cách chia nhiều core trong ``rknpu_job_subcore_commit_pc``. Với job 1 hoặc 2 core, core ``i`` lấy ``subcore_task[i]``. Với job 3 core, core ``i`` lấy ``subcore_task[i + 2]`` [T1 DRV rknpu_job.c:313-325] (cùng quy tắc trong ``rknpu_get_task_number``) [T1 DRV rknpu_job.c:81-88]. Mỗi lần commit ghi tối đa ``max_submit_number`` task. RK3588 đặt giá trị này là (1 << 12) - 1 = 4095 [T1 DRV rknpu_job.c:333-337] [T1 DRV rknpu_drv.c:196]. Job lớn hơn được commit thành nhiều đợt, mỗi đợt kết thúc bằng một ngắt (mục 3.3).
 
@@ -298,20 +296,22 @@ Mỗi core có một IRQ tên ``npu0_irq``, ``npu1_irq``, ``npu2_irq`` gắn v�
 3. Khi ``interrupt_count`` về 0 (core cuối của job báo xong): trả IOMMU domain, đặt ``RKNPU_JOB_DONE``, ghi ``job->ret``, báo fence nếu có, ``schedule_work`` dọn job ASYNC và ``wake_up`` hàng đợi chờ. Job nhiều core đánh thức hàng đợi của core 0, job một core đánh thức hàng đợi của chính core đó [T1 DRV rknpu_job.c:485-503].
 4. Gọi ``rknpu_job_next`` để lấy job kế tiếp của core [T1 DRV rknpu_job.c:505].
 
-3.4 Chờ, timeout và reset
--------------------------
+3.4 Chờ timeout và reset
+------------------------
 
 Với job blocking, ``rknpu_submit`` gọi ``rknpu_job_schedule`` rồi ``rknpu_job_wait`` (khi có cờ PC), sau đó dọn job nếu thành công hoặc gọi ``rknpu_job_abort`` nếu lỗi [T1 DRV rknpu_job.c:832-843]. Job NONBLOCK đặt ``RKNPU_JOB_ASYNC``, gọi ``rknpu_job_timeout_clean`` rồi ``rknpu_job_schedule`` và trả về ngay [T1 DRV rknpu_job.c:823-831].
 
 ``rknpu_job_wait`` chờ trên ``job_done_wq`` của core chờ (core 0 cho mọi ``core_mask`` nhiều core, theo ``rknpu_wait_core_index``) với thời hạn ``args->timeout`` tính bằng ms [T1 DRV rknpu_job.c:27-48] [T1 DRV rknpu_job.c:193-197]. Khi hết hạn, vòng chờ tiếp tục tối đa ba lần nếu job chưa lên phần cứng (``hw_commit_time`` bằng 0) hoặc thời gian từ lúc commit chưa vượt ``timeout`` [T1 DRV rknpu_job.c:199-221]. Hết các lần chờ mà chưa xong, hàm đọc bộ đếm task (``pc_task_status_offset``, mặt nạ ``0xfff``) và trả ``-ETIMEDOUT`` [T1 DRV rknpu_job.c:244-261].
 
-``rknpu_job_abort`` đợi 100 ms, gỡ job khỏi core nếu ngắt chưa kịp vào, và khi lỗi là ``-ETIMEDOUT`` thì log ``INT_STATUS``, ``INT_RAW_STATUS``, mask yêu cầu và bộ đếm task của từng core rồi gọi ``rknpu_soft_reset`` [T1 DRV rknpu_job.c:561-613]. ``rknpu_soft_reset`` đặt ``soft_reseting`` = true, ngủ 100 ms, đánh thức các hàng đợi, assert rồi deassert các đường reset lấy từ DTS (nhóm ``resets``) [T1 DRV rknpu_reset.c:98-132] [T1 DRV rknpu_reset.c:28-62]. Job NONBLOCK không có luồng chờ, nên lần submit kế tiếp gọi ``rknpu_job_timeout_clean`` để soft reset core có job quá hạn [T1 DRV rknpu_job.c:699-744]. Hàm này so ``ktime_us_delta`` (micro giây) với ``args->timeout`` trực tiếp [T1 DRV rknpu_job.c:711-713], trong khi ``rknpu_job_wait`` đổi ``timeout`` ms sang jiffies và nhân 1000 khi so với micro giây [T1 DRV rknpu_job.c:197] [T1 DRV rknpu_job.c:210]. Hai nơi dùng đơn vị khác nhau cho cùng trường (suy ra từ so sánh hai đoạn mã), ý đồ của tác giả: unknown. Đã tìm ở: ``include/rknpu_ioctl.h:265-280`` (chú thích chỉ ghi "submit timeout"), từ khóa: ``timeout``.
+``rknpu_job_abort`` đợi 100 ms, gỡ job khỏi core nếu ngắt chưa kịp vào, và khi lỗi là ``-ETIMEDOUT`` thì log ``INT_STATUS``, ``INT_RAW_STATUS``, mask yêu cầu và bộ đếm task của từng core rồi gọi ``rknpu_soft_reset`` [T1 DRV rknpu_job.c:561-613]. ``rknpu_soft_reset`` đặt ``soft_reseting`` = true, ngủ 100 ms, đánh thức các hàng đợi, assert rồi deassert các đường reset lấy từ DTS (nhóm ``resets``) [T1 DRV rknpu_reset.c:98-132] [T1 DRV rknpu_reset.c:28-62]. Job NONBLOCK không có luồng chờ, nên lần submit kế tiếp gọi ``rknpu_job_timeout_clean`` để soft reset core có job quá hạn [T1 DRV rknpu_job.c:699-744]. Lưu ý một sai lệch đơn vị trong mã driver: ``rknpu_job_timeout_clean`` so ``ktime_us_delta`` (micro giây) trực tiếp với ``args->timeout`` [T1 DRV rknpu_job.c:711-713], trong khi ``rknpu_job_wait`` đổi ``timeout`` từ ms sang jiffies (``msecs_to_jiffies``) và nhân 1000 khi so với micro giây [T1 DRV rknpu_job.c:197] [T1 DRV rknpu_job.c:210].
 
-3.5 Điều chưa biết
-------------------
+Tín hiệu reset phần cứng và reset mềm của CRU nằm ở :doc:`../01-phan-cung-npu/04-xung-nhip-dvfs-va-reset` mục 3.
 
-- Ý nghĩa hai lần ghi ``0xe + 0x10000000 * i`` vào offset ``0x1004`` và ``0x3004`` trong ``rknpu_job_subcore_commit_pc`` khi ``num_irqs`` > 1 [T1 DRV rknpu_job.c:305-311]: unknown. Đã tìm ở: mã driver (không có chú thích), từ khóa: ``0x1004``, ``0x3004``. Chưa tra TRM.
-- Cờ nào ``librknnrt`` thực sự truyền khi gọi ``RKNPU_SUBMIT`` (blocking hay NONBLOCK, có ping-pong hay không): unknown. Đã tìm ở: UG232, UG152, API232, từ khóa: ``RKNPU_SUBMIT``, ``ioctl``. Runtime là thư viện nhị phân, không có mã nguồn trong repo.
+3.5 Khởi tạo ping-pong đa lõi và giao diện với runtime
+------------------------------------------------------
+
+- Trong ``rknpu_job_subcore_commit_pc``, khi ``num_irqs > 1`` driver ghi ``0xe + 0x10000000 * i`` vào hai thanh ghi ``RKNN_cna_s_pointer`` (``0x1004``) và ``RKNN_core_s_pointer`` (``0x3004``) để bật các bit ``pointer_pp_en``, ``executer_pp_en``, ``pointer_pp_mode`` (``0xe``) và gắn chỉ số core ``i`` vào trường bit cao ``[29:28]`` [T1 DRV rknpu_job.c:305-311] (chi tiết ở :ref:`sec-npu-ping-pong`).
+- Ở tầng userspace, thư viện nhị phân ``librknnrt.so`` đóng gói cấu trúc ``rknpu_submit`` (cờ ``RKNPU_JOB_PC``, ``RKNPU_JOB_PINGPONG``, danh sách ``subcore_task``) trước khi gọi ioctl ``RKNPU_SUBMIT`` xuống driver [T1 DRV include/rknpu_ioctl.h:97-103, 265-280].
 
 4. Hiểu sai thường gặp
 ======================
@@ -361,7 +361,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 45
+     - 48
    * - ``UG152``
      - T1
      - :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`
@@ -373,7 +373,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``DRV``
      - T1
      - ``3rdparty/rknpu-driver-0.9.8/`` (commit f6eedab0 theo SOURCE.txt), không tải xuống
-     - 99
+     - 103
    * - ``EX``
      - T1
      - Tài liệu và ví dụ đi kèm SDK trong ``3rdparty/rknn-toolkit2/`` (``README.md``, ``doc/rknn_server_proxy.md``), không tải xuống

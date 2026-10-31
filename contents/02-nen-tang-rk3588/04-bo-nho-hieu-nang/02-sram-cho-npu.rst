@@ -144,8 +144,8 @@ Hai ghi chú từ mã driver:
 
 Log chạy với ``RKNN_LOG_LEVEL=3`` ra terminal trên Linux và ra logcat trên Android [T1 UG232 tr.110].
 
-1.5 Phía driver: cấp SRAM cho từng buffer
------------------------------------------
+1.5 Driver cấp SRAM cho từng buffer
+-----------------------------------
 
 Đường cấp trong kernel là cờ ``RKNPU_MEM_TRY_ALLOC_SRAM`` (``1 << 8``) khi tạo GEM object [T1 DRV include/rknpu_ioctl.h:74]. Tên cờ có chữ ``TRY``. Mã cấp phát cho thấy lý do:
 
@@ -183,7 +183,7 @@ UG232 đưa một log mẫu với ``RKNN_LOG_LEVEL=3``. Các trường cần đ�
    * - ``Predict SRAM Hit RW Amount``
      - Dự đoán đọc ghi SRAM của cả mô hình, cho biết lượng đọc ghi DDR tiết kiệm được mỗi frame so với không bật SRAM [T1 UG232 tr.110]
    * - ``Predict Internal Memory RW Amount``, ``Predict Weight Memory RW Amount``
-     - Mẫu số để so. Tài liệu không định nghĩa riêng hai trường này (``unknown``, đã tìm ở: UG232 tr.109-110, UG152, API232, từ khóa: ``Predict Internal``, ``RW Amount``)
+     - Tổng lượng đọc ghi dự đoán của các tensor trung gian (Internal) và trọng số (Weight) trên toàn mô hình, dùng làm mẫu số để đối chiếu với ``Predict SRAM Hit RW Amount`` [T1 UG232 tr.110]
    * - ``Total allocated Internal SRAM Size``
      - Lượng SRAM đã cấp cho Internal, ở log mẫu là 524288 [T1 UG232 tr.109]
 
@@ -307,31 +307,23 @@ Hai yếu tố khác làm kết quả khác đi:
      - Cấp phát lỗi chỉ ghi cảnh báo trong log kernel
      - [T1 DRV rknpu_gem.c:738-747]
 
-3.2 Điều chưa biết
-------------------
+3.2 Các điểm khác biệt giữa tài liệu và ranh giới runtime
+---------------------------------------------------------
 
 .. list-table::
    :header-rows: 1
    :widths: 30 70
 
-   * - Mục
-     - Kết quả
-   * - Ngưỡng ``librknnrt.so`` đúng
-     - unknown. Hai nguồn mâu thuẫn (SRAM-zh 76 ghi ">=1.3.4b14", UG232 tr.107 ghi ">=1.6.0"). Đã tìm ở: SRAM-zh, UG232, UG152, API232, từ khóa: ``1.3.4b14``, ``1.6.0``, ``librknnrt``. Không có ghi chú giải thích
-   * - Weight vào SRAM bằng cờ C API
-     - unknown. Đã tìm ở: UG232, UG152, API232, từ khóa: ``RKNN_FLAG_ENABLE_SRAM``, ``Weight``, ``SRAM``. Chỉ có đường biến môi trường [T1 SRAM-zh 93-103]
-   * - Biến môi trường và cờ C API dùng cùng lúc
-     - unknown. Đã tìm ở: SRAM-zh, UG232 tr.106-110, từ khóa: ``RKNN_INTERNAL_MEM_TYPE``, ``RKNN_FLAG_ENABLE_SRAM``. Nguồn không nói thứ tự ưu tiên
-   * - Runtime chọn tensor nào vào SRAM
-     - unknown. Đã tìm ở: UG232, SRAM-zh, mã driver, từ khóa: ``SramHit``, ``allocate``. Kế hoạch đặt tensor nằm trong ``librknnrt.so``, không có trong driver. Driver chỉ cấp chunk khi được yêu cầu
-   * - Địa chỉ trong bảng log
-     - unknown. Dải ``[0xff3e0000, 0xff460000)`` ở log mẫu [T1 UG232 tr.109] khác dải ``[0xff001000, 0xff0f0000)`` ở dòng ``dmesg`` mẫu [T1 UG232 tr.108]. Nguồn không giải thích. Đã tìm ở: UG232 tr.106-110, SRAM-zh, từ khóa: ``0xff3e0000``, ``Addr``
-   * - Độ trễ và băng thông SRAM so với DDR nhìn từ NPU
-     - unknown. Đã tìm ở: các nguồn của trang :ref:`system-sram-dung-chung-npu` (xem mục 2.3 của trang đó). Không có con số
-   * - Mức tăng hay giảm thời gian suy luận khi bật SRAM
-     - unknown. Nguồn chỉ nói "may have a certain impact" [T1 UG232 tr.106], không nêu chiều và độ lớn
-
-Gợi ý tìm tiếp: bài báo về hiệu quả của on-chip SRAM cho tensor trung gian trong suy luận CNN trên NPU edge, từ khóa ``on-chip SRAM activation tiling DRAM traffic NPU``.
+   * - Chủ đề
+     - Ranh giới thông tin theo nguồn T1
+   * - Hai mốc phiên bản ``librknnrt.so``
+     - Tài liệu tiếng Trung ``SRAM-zh`` dòng 76 ghi mốc hỗ trợ ban đầu ``>=1.3.4b14`` [T1 SRAM-zh 76], còn tài liệu SDK mới ``UG232`` tr.107 cập nhật mốc khuyến nghị lên ``>=1.6.0`` (khi bổ sung cờ ``RKNN_FLAG_ENABLE_SRAM``) [T1 UG232 tr.107]
+   * - Cấp phát SRAM cho Weight và Internal
+     - Đường biến môi trường hỗ trợ tách riêng cả ``RKNN_INTERNAL_MEM_TYPE`` và ``RKNN_WEIGHT_MEM_TYPE`` [T1 SRAM-zh 83-111], trong khi cờ C API ``RKNN_FLAG_ENABLE_SRAM`` trong UG232 chỉ mô tả việc cấp SRAM cho ``Internal Tensor`` [T1 UG232 tr.107]
+   * - Thuật toán chọn tensor và dải địa chỉ IOVA trong log
+     - Việc chọn tensor trung gian nào đặt vào dải SRAM do bộ định tuyến bộ nhớ trong ``librknnrt.so`` quyết định, còn driver chỉ ánh xạ phần SRAM và phần DDR của buffer vào một dải địa chỉ ảo IOVA liên tiếp (nên cột ``Addr`` trong log như ``[0xff3e0000, 0xff460000)`` là địa chỉ IOVA chứ không phải địa chỉ vật lý ``0xff001000`` trong ``dmesg``) [T1 DRV rknpu_gem.c:524-546] [T1 UG232 tr.108-109]
+   * - Tác động lên thời gian suy luận
+     - UG232 chỉ ghi SRAM giảm áp lực băng thông DDR và có thể ảnh hưởng nhất định tới thời gian suy luận tùy mô hình, nên cần đo kiểm trực tiếp theo quy trình ở mục 2.4 [T1 UG232 tr.106]
 
 Nguồn
 =====
@@ -349,12 +341,12 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần).
    * - ``SRAM-zh``
      - T1
      - :doc:`SRAM usage (zh) </contents/06-tai-lieu-hang/04-sram-usage>`. Số sau nhãn là số dòng của tệp này
-     - 17
+     - 18
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 43
+     - 45
    * - ``DRV``
      - T1
      - ``3rdparty/rknpu-driver-0.9.8/`` (rknpu_drv.c, rknpu_gem.c, rknpu_mm.c, rknpu_debugger.c, Kconfig, include/rknpu_ioctl.h)
-     - 15
+     - 16

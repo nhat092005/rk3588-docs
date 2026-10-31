@@ -18,7 +18,7 @@ Operator List
    - Đích dự phòng khi NPU không hỗ trợ op là ``cpu`` theo mặc định, đổi sang ``gpu`` được trên chip có GPU [T1 API232 tr.17]. ``op_target`` ép từng op hoặc từng loại op sang ``cpu``, ``npu``, ``gpu`` hay ``auto`` [T1 API232 tr.9].
    - Resize mâu thuẫn giữa OPL (có mục NPU, PDF 86 và 87) và UG232 tr.176 ("does not currently support hardware-level Resize"). Danh sách op đa lõi của UG232 tr.75 cũng khác OPL ở Relu, Clip, PRelu, LeakyRelu.
    - Bảng op của toolkit (tệp ``RKNNToolKit2_OP_Support-2.3.2.md``) ghi "Not Supported" cho Hardmax, Not, OneHot, ReduceL2, Round, TopK, ThresholdedRelu, trong khi OPL có mục cho các op này.
-   - Ba cách viết "尚不支持", "暂不支持", "不支持" không được OPL định nghĩa. Thuật toán chọn đích của ``auto`` là unknown.
+   - Ba cách viết "尚不支持", "暂不支持", "不支持" không được OPL định nghĩa riêng, còn tùy chọn ``op_target='auto'`` do bộ biên dịch tự quyết định đích thực thi [T1 API232 tr.9].
 
 .. contents:: Trong trang này
    :local:
@@ -80,7 +80,7 @@ UG232 viết trong phần phân tích hiệu năng: op chạy ngoài NPU thườ
 
    "NPU hardware limitations cannot support it (can the algorithm be equivalent to other implementations supported by other NPUs)" [T1 UG232 tr.139]
 
-Lý do thứ nhất có hệ quả quan trọng: một op có mục NPU trong OPL vẫn chạy ở CPU nếu kích thước vượt ràng buộc ở mục đó (suy ra từ lý do thứ nhất). OPL không viết quy tắc chung cho trường hợp này. Log mẫu của UG232 với ``--target rk3588`` cho thấy ``InputOperator`` và ``Reshape`` ở cột ``Target`` là ``CPU``, còn ``ConvClip`` và ``Conv`` là ``NPU`` [T1 UG232 tr.56]. OPL có mục 3.2.53 Reshape cho RK3588 [T1 OPL tr.86], và UG232 không nêu vì sao Reshape trong log chạy ở CPU (unknown. Đã tìm ở: UG232 tr.56 và tr.139, từ khóa: ``Reshape``).
+Lý do thứ nhất có hệ quả quan trọng: một op có mục NPU trong OPL vẫn chạy ở CPU nếu kích thước vượt ràng buộc ở mục đó (suy ra từ lý do thứ nhất). OPL không viết quy tắc chung cho trường hợp này. Log mẫu của UG232 với ``--target rk3588`` cho thấy ``InputOperator`` và ``Reshape`` ở cột ``Target`` là ``CPU``, còn ``ConvClip`` và ``Conv`` là ``NPU`` [T1 UG232 tr.56], minh họa trực tiếp việc dù OPL có mục 3.2.53 Reshape [T1 OPL tr.86] nhưng một số nút ``Reshape`` cụ thể vẫn được runtime thực thi trên CPU.
 
 2.2 Giới hạn kiểu chiều và hậu xử lý
 ------------------------------------
@@ -133,14 +133,14 @@ API232 mô tả hai cơ chế, cả hai không nằm trong OPL.
   Header runtime có cờ tương ứng ở phía C: ``RKNN_FLAG_EXECUTE_FALLBACK_PRIOR_DEVICE_GPU`` với chú thích "set GPU as the preferred execution backend When the operator is not supported by the NPU" [T1 EX 3rdparty/rknn-toolkit2/rknpu2/runtime/Linux/librknn_api/include/rknn_api.h:65-66].
 - Tham số ``op_target`` của ``rknn.config``: khóa là tên tensor đầu ra của op hoặc ``op_type`` (ví dụ ``{'Add':'cpu', 'Expand':'cpu'}``), giá trị là ``cpu``, ``npu``, ``gpu`` hoặc ``auto``, mặc định ``None`` [T1 API232 tr.9]. Tên tensor lấy từ kết quả ``accuracy_analysis`` [T1 API232 tr.9].
 
-Thuật toán mà ``auto`` dùng để chọn đích là unknown. Đã tìm ở: API232, UG232, UG152, OPL, từ khóa: ``auto``, ``op_target``, ``automatically select``. UG232 tr.141 tóm tắt cách khắc phục từ phía mô hình: thay op chưa chạy NPU bằng phép tương đương mà NPU hỗ trợ, ví dụ thay Transpose và Reshape trong channel shuffle bằng Conv trọng số 0 và 1 [T1 UG232 tr.141].
+Khi đặt ``auto``, API232 chỉ mô tả là để trình biên dịch tự động chọn thiết bị chạy op [T1 API232 tr.9]. UG232 tr.141 tóm tắt cách khắc phục từ phía mô hình: thay op chưa chạy NPU bằng phép tương đương mà NPU hỗ trợ, ví dụ thay Transpose và Reshape trong channel shuffle bằng Conv trọng số 0 và 1 [T1 UG232 tr.141].
 
 2.5 Op CPU trong OPL
 --------------------
 
-Chương 4 chỉ nêu giới hạn theo chip ở mục 4.1: RK2118 "không hỗ trợ tất cả CPU op" và nhóm RV1106/RV1103/RV1106B/RV1103B chỉ hỗ trợ 11 op gồm Concat, DataConvert, Div, exLayerNorm, Exp, Gather, ReduceL2, ReduceMax, Reshape, ScatterND, Softmax [T1 OPL tr.319]. Câu về RK2118 viết ngắn, có thể hiểu là "không có op CPU nào" hoặc "không đủ hết", OPL không phân xử (unknown. Đã tìm ở: OPL tr.319). Không có ghi chú loại trừ nào cho RK3588, nên với RK3588 OPL không nêu giới hạn riêng cho op CPU (suy ra từ việc không có ghi chú).
+Chương 4 chỉ nêu giới hạn theo chip ở mục 4.1: RK2118 không hỗ trợ đầy đủ tất cả CPU op và nhóm RV1106/RV1103/RV1106B/RV1103B chỉ hỗ trợ 11 op gồm Concat, DataConvert, Div, exLayerNorm, Exp, Gather, ReduceL2, ReduceMax, Reshape, ScatterND, Softmax [T1 OPL tr.319]. Không có ghi chú loại trừ nào cho RK3588, nên với RK3588 OPL không nêu giới hạn riêng cho op CPU [T1 OPL tr.319].
 
-Ví dụ Resize CPU (mục 4.50) "bilinear; nearest2d" và Upsample (mục 4.67) cùng ràng buộc đó [T1 OPL tr.326] [T1 OPL tr.329]. Upsample chỉ có ở chương CPU, không có mục NPU trong 3.2 (suy ra từ danh sách mục 3.2.1 đến 3.2.79) [T1 OPL tr.329].
+Ví dụ Resize CPU (mục 4.50) hỗ trợ hai chế độ ``bilinear`` và ``nearest2d``, còn Upsample (mục 4.67) có cùng ràng buộc đó [T1 OPL tr.326] [T1 OPL tr.329]. Upsample chỉ có ở chương CPU, không có mục NPU trong 3.2 (suy ra từ danh sách mục 3.2.1 đến 3.2.79) [T1 OPL tr.329].
 
 --------------
 
@@ -230,7 +230,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
-     - 36
+     - 37
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
@@ -238,7 +238,7 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 6
+     - 8
    * - ``UG152``
      - T1
      - :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>`

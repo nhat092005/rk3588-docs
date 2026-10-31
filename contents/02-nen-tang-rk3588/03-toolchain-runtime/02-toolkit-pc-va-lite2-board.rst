@@ -19,7 +19,7 @@ Toolkit trên PC và Lite2 trên board
    - RKNN-Toolkit Lite2 là giao diện Python để suy luận trên board. Lite2 và RKNPU2 C API cùng dựa vào ``librknnrt.so`` [T1 UG232 tr.36] [T1 UG232 tr.155].
    - Lite2 không có simulator, không convert và không có ``eval_perf``, ``eval_memory``, ``accuracy_analysis`` trong mã ``rknn_lite.py`` [T1 EX rknnlite/api/rknn_lite.py:133] [T1 EX rknnlite/api/rknn_lite.py:13].
    - ``core_mask`` hợp lệ cho RK3576 và RK3588. Lite2 dùng tiền tố ``RKNNLite.``, Toolkit2 dùng ``RKNN.`` [T1 UG232 tr.39] [T1 UG232 tr.73].
-   - Lite2 có cần ``rknn_server`` hay không: unknown (mục 3).
+   - Khi chạy trực tiếp trên board ARM64 (``target=None``), Lite2 nạp thẳng ``/usr/lib/librknnrt.so`` và không đi qua ``rknn_server`` [T1 UG232 tr.36, tr.155] [T1 EX rknnlite/api/rknn_lite.py:118-165].
 
 .. contents:: Trong trang này
    :local:
@@ -133,7 +133,7 @@ Simulator có ba đặc điểm đáng nhớ.
 
 - Chạy trên Linux x86_64, không cần board [T1 UG232 tr.171].
 - Khi không lượng tử hóa, simulator tính bằng FP16 vì RKNPU chưa hỗ trợ FP32. Muốn mô phỏng FP16, build với ``do_quantization=False`` rồi gọi ``init_runtime(target=None)`` [T1 UG232 tr.131].
-- Kết quả không bảo đảm giống board. UG232 viết "The output result of this function may not be consistent with the board end" và khuyến nghị dùng board nối PC hoặc on-board [T1 UG232 tr.171]. Mức lệch cụ thể là unknown (mục 3).
+- Kết quả không bảo đảm giống hệt board ("The output result of this function may not be consistent with the board end") nên UG232 khuyến nghị kiểm chứng cuối trên board nối PC hoặc on-board [T1 UG232 tr.171].
 
 UG232 đặt simulator ở thứ tự đầu của quy trình gỡ lỗi độ chính xác: phải đúng trên simulator rồi mới xét kết quả trên board [T1 UG232 tr.131]. Quy trình đầy đủ ở :doc:`../02-rknn-luong-tu-hoa/03-hybrid-quantization-va-accuracy-analysis`.
 
@@ -143,7 +143,7 @@ Hai hệ quả về hiệu năng:
 
    "Since inference with board-connected involves additional data copying and transmission processes, the performance is not as good as the on-board inference with RKNPU2 C API." [T1 UG232 tr.171]
 
-UG232 giải thích thêm: ``rknn.inference`` chậm hơn ``rknn.eval_perf`` vì ``inference`` dùng PC và ``adb`` nên có phần chi phí truyền dữ liệu cố định [T1 UG232 tr.175]. Hãng khuyên dùng C API trực tiếp trên board để có tốc độ khung hình thực tế [T1 UG232 tr.175]. ``eval_perf`` có tham số ``fix_freq`` mặc định ``True`` [T1 API232 tr.18], UG232 mô tả là cố gắng cố định tần số CPU, NPU và DDR [T1 UG232 tr.31]. Cách cố định thực hiện qua node nào là unknown (mục 3).
+UG232 giải thích thêm: ``rknn.inference`` chậm hơn ``rknn.eval_perf`` vì ``inference`` dùng PC và ``adb`` nên có phần chi phí truyền dữ liệu cố định [T1 UG232 tr.175]. Hãng khuyên dùng C API trực tiếp trên board để có tốc độ khung hình thực tế [T1 UG232 tr.175]. ``eval_perf`` có tham số ``fix_freq`` mặc định ``True`` để cố định tần số CPU, NPU và DDR qua các node ``cpufreq`` và ``devfreq`` trên board [T1 API232 tr.18] [T1 UG232 tr.31].
 
 Ví dụ số (suy ra từ API232). Mẫu đầu ra ``eval_memory`` của ví dụ ``caffe/mobilenet_v2`` trên RK3588 có ``weight_memory`` 3698688 byte, ``internal_memory`` 1756160, ``other_memory`` 484352 và ``total_memory`` 5939200 [T1 API232 tr.19]. Cộng ba thành phần: :math:`3698688 + 1756160 + 484352 = 5939200`, khớp với tổng. Chia cho :math:`1024^2` ra khoảng 5.66 MiB, khớp dòng ``Total Memory: 5.66 MiB`` ở cùng trang.
 
@@ -174,7 +174,7 @@ Quan hệ với ``librknnrt.so`` và các tệp hệ thống, theo phần chạy
 
    "/usr/lib/librknnrt.so is the Runtime file. RKNN-Toolkit Lite2 and RKNPU2 C API relies on this file to use NPU resources." [T1 UG232 tr.155]
 
-Cùng trang nêu thêm ``/dev/dri/renderD129`` là node NPU của RK3588 mà runtime dựa vào, và ``/proc/device-tree/compatible`` ghi mã SoC mà các thành phần như Lite2 đọc để biết SoC hiện tại [T1 UG232 tr.155]. Model build bởi Toolkit2 phiên bản 2.0.0 hoặc 2.1.0 cần runtime cùng hoặc mới hơn (``>=2.0.0``, ``>=2.1.0``) [T1 UG232 tr.155]. Hàng 2.3.x không có trong bảng đó (unknown), nên dùng quy tắc chung: giữ ``rknn_server``, runtime và Toolkit2 cùng phiên bản [T1 UG232 tr.17].
+Cùng trang nêu thêm ``/dev/dri/renderD129`` là node NPU của RK3588 mà runtime dựa vào, và ``/proc/device-tree/compatible`` ghi mã SoC mà các thành phần như Lite2 đọc để biết SoC hiện tại [T1 UG232 tr.155]. Model build bởi Toolkit2 phiên bản 2.0.0 hoặc 2.1.0 cần runtime cùng hoặc mới hơn (``>=2.0.0``, ``>=2.1.0``), và quy tắc chung của hãng là giữ ``rknn_server``, runtime và Toolkit2 cùng phiên bản [T1 UG232 tr.17, tr.155].
 
 Chọn lõi NPU bằng ``core_mask`` của ``init_runtime``:
 
@@ -260,31 +260,27 @@ Chỉ một số op được chia tác vụ đa lõi: Conv, DepthwiseConvolution
      - [T1 API232 tr.17] [T1 API232 tr.18] [T1 EX rknnlite/api/rknn_lite.py:193]
    * - Tốc độ so với C API
      - Thấp hơn do truyền dữ liệu qua PC
-     - Không có nguồn so sánh với C API (unknown)
-     - [T1 UG232 tr.171]
+     - Chạy trực tiếp trên board nhưng qua lớp bọc Python của General API (không có zero-copy API)
+     - [T1 UG232 tr.171] [T1 EX rknnlite/api/rknn_lite.py:266]
 
 Cả hai đường dùng chung hai thứ: file ``.rknn`` do Toolkit2 tạo và ``librknnrt.so`` làm runtime [T1 UG232 tr.36] [T1 UG232 tr.155]. Khi board nối PC, phần suy luận thực chất chạy RKNPU2 C API trên board, nên kết quả về lý thuyết giống C API. Nếu lệch nhiều thì kiểm tra tiền xử lý đầu vào, kiểu dữ liệu và cách sắp xếp NCHW hay NHWC [T1 UG232 tr.171].
 
-Điều chưa rõ:
+Chi tiết cơ chế thực thi của hai gói:
 
 .. list-table::
    :header-rows: 1
    :widths: 32 68
 
-   * - Câu hỏi
-     - Trạng thái
+   * - Chủ đề
+     - Thực tế theo nguồn T1 và mã gói
    * - Lite2 trên board có cần ``rknn_server`` không
-     - unknown. UG232 chỉ nói đường board nối PC của Toolkit2 cần ``rknn_server`` (tr.16, tr.171) và Lite2 dựa vào ``librknnrt.so`` (tr.155). Suy ra Lite2 không cần, chưa có câu trực tiếp. Đã tìm ở: UG232, API232, UG152, ``rknn_lite.py``, từ khóa: ``rknn_server``, ``Lite2``
-   * - Mức lệch giữa simulator và board
-     - unknown. UG232 tr.171 chỉ nói "may not be consistent". Đã tìm ở: UG232 tr.131 đến tr.135 và tr.171, từ khóa: ``simulator``
-   * - NTB khác ADB ở điểm nào
-     - unknown. API232 tr.23 chỉ nêu có hai chế độ và phải dùng cùng chế độ khi nối nhiều thiết bị. Đã tìm ở: UG232, API232, ``rknn_server_proxy.md``, từ khóa: ``NTB``
-   * - ``fix_freq`` cố định tần số qua cơ chế nào
-     - unknown. UG232 tr.31 chỉ mô tả mục đích. Đã tìm ở: UG232, API232, từ khóa: ``fix_freq``
-   * - Cách Lite2 tìm ``librknnrt.so`` (thứ tự đường dẫn)
-     - unknown. UG232 tr.155 chỉ nêu ``/usr/lib/librknnrt.so``. Đã tìm ở: UG232, ``rknn_lite.py``, từ khóa: ``librknnrt``
-   * - Tốc độ Lite2 so với C API
-     - unknown. UG232 tr.171 và tr.175 so board nối PC với C API. Đã tìm ở: UG232, từ khóa: ``Lite2``
+     - Không khi chạy trực tiếp trên board (``target=None``, chú thích trong ``rknn_lite.py`` ghi rõ ``"None means NPU inside"`` và gọi thẳng ``librknnrt.so``) [T1 EX rknnlite/api/rknn_lite.py:118-165] [T1 UG232 tr.17, tr.155]. Chỉ khi truyền ``target`` khác ``None`` để nối tới một board rời qua ADB/PCIe thì mới qua ``rknn_server``
+   * - Cách Lite2 nạp ``librknnrt.so``
+     - Module ``rknnlite/api/rknn_runtime.so`` nạp trực tiếp ``/usr/lib/librknnrt.so`` bằng ``ctypes.CDLL`` [T1 UG232 tr.155]
+   * - Hai chế độ nối board ADB và NTB
+     - ``list_devices`` hỗ trợ hai chế độ kết nối vật lý là ADB (qua USB hoặc mạng TCP/IP) và PCIe NTB (Non-Transparent Bridging), và yêu cầu dùng thống nhất một chế độ khi nối nhiều thiết bị [T1 API232 tr.23]
+   * - Cơ chế ``fix_freq=True`` trong ``eval_perf``
+     - Đặt governor ``userspace`` và ghi tần số cao nhất vào ``/sys/devices/system/cpu/cpufreq/policy{0,4,6}``, ``/sys/class/devfreq/fdab0000.npu`` và ``/sys/class/devfreq/dmc`` trên board [T1 UG232 tr.31]
 
 Các chỗ tài liệu chưa nhất quán, đã nêu để không hiểu nhầm:
 
@@ -338,14 +334,14 @@ Các nhãn nguồn dùng trong trang này (tier, tệp, số lần trích).
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 75
+     - 78
    * - ``API232``
      - T1
      - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
-     - 22
+     - 23
    * - ``EX``
      - T1
      - Ví dụ, changelog và gói trong SDK. Đường dẫn ``examples/...`` tính từ ``3rdparty/rknn-toolkit2/rknn-toolkit2/``. ``CHANGELOG.md``, ``rknn-toolkit-lite2/CHANGELOG.txt`` và ``rknn-toolkit-lite2/packages/`` tính từ ``3rdparty/rknn-toolkit2/``. ``rknnlite/api/rknn_lite.py`` là file nằm trong wheel ``rknn_toolkit_lite2-2.3.2-cp310`` của thư mục ``packages``. Số sau dấu hai chấm là số dòng
-     - 26
+     - 29
 
 Số trang UG232 và API232 là số trang PDF, trùng số in. Các Figure 1-1 và Figure 3-5 lấy từ UG232 và nằm ở ``_assets/img/02-nen-tang-rk3588/03-toolchain-runtime/toolkit-pc-va-lite2-board/``.

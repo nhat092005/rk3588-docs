@@ -20,12 +20,11 @@ Op của YOLOv8 trên RKNN
    - Nhánh phân loại của Head kết thúc bằng Sigmoid [T1 OPL tr.95], trong khi nhánh hồi quy hộp chứa khối DFL gồm Reshape [T1 OPL tr.86], Softmax theo trục channel/width [T1 OPL tr.88-89] và Conv 1x1 [T1 OPL tr.58].
    - Toán tử Transpose trong khối DFL rơi về CPU do các chiều tensor vượt quá ngưỡng tham số hoán vị p=8192 quy định trong OPL [T1 OPL tr.93-95].
    - Các toán tử phục vụ lọc hộp end-to-end NMS gồm TopK và GatherElements hoàn toàn không có mục NPU trong chương 3.2 của OPL mà chỉ tồn tại ở chương 4 CPU OPs [T1 OPL tr.330, tr.333].
+   - MatMul tổng quát chỉ có mục CPU và chỉ chạy trên NPU khi khớp ``exMatMul`` hoặc được gộp thành ``exSDPAttention`` [T1 OPL tr.102, tr.104, tr.324]. Depthwise Conv có mục NPU nhưng cần căn 64 kênh INT8 [T1 UG232 tr.145].
 
 .. contents:: Trong trang này
    :local:
    :depth: 1
-
-.. _62-các-op-của-detector-kiểu-yolov8-trên-rk3588:
 
 1. Bảng op theo từng khối chức năng
 ===================================
@@ -164,13 +163,36 @@ Khối Neck và Head đảm nhận việc tái tạo thông tin không gian và 
      - Rơi về CPU
      - Vi phạm giới hạn kích thước hoán vị p=8192 [T1 OPL tr.93]
 
+1.3 Op khác có mục NPU
+----------------------
+
+Các op sau cũng có mục NPU trong OPL chương 3.2 và xuất hiện trong YOLOv8 hoặc biến thể:
+
+- Tích chập theo chiều sâu (Depthwise Convolution, mục 3.2.6): kích thước nhân ``kernel_h, kernel_w ∈ [1, 8]`` và độ giãn nở ``dilations_h, dilations_w ∈ [1, 32]`` [T1 OPL tr.59-60]. Đa lõi "支持". Bội số channel INT8 là 64 và hiệu suất thực tế thấp hơn Conv thường theo UG232 [T1 UG232 tr.145-147], xem :ref:`layout-alignment`.
+- Phép nhân theo phần tử (Mul, mục 3.2.41): hỗ trợ broadcasting kiểu Numpy, đa lõi "支持" [T1 OPL tr.77].
+- Phép trừ (Sub, mục 3.2.60): chỉ hỗ trợ khi tensor thứ hai có dạng ``[b, c, 1, 1]`` hoặc là scalar, đa lõi "不支持" [T1 OPL tr.91-92].
+- Phép chia (Div, mục 3.2.33): chỉ hỗ trợ FP16, không hỗ trợ đa lõi [T1 OPL tr.67].
+- Trích xuất tensor con (Slice, mục 3.2.55): chỉ chạy trên NPU khi ``steps == [1, 1, 1, 1]`` [T1 OPL tr.88].
+- Attention chuyên dụng (exSDPAttention, mục 3.2.78): hỗ trợ Scaled Dot-Product Attention trên NPU với ``channel ∈ (0, 8192]`` [T1 OPL tr.104-105]. Tham số ``enable_flash_attention`` của ``rknn.config`` gộp chuỗi chú ý thành op này [T1 API232 tr.10] [T1 OPL tr.104].
+
+1.4 Mức thân thiện của từng khối
+--------------------------------
+
+.. _fig-yolo-05-npu-compatibility-matrix:
+
+.. figure:: ../../../_assets/generated/02-nen-tang-rk3588/05-yolo-tren-rk3588/yolo-05-npu-compatibility-matrix.svg
+   :align: center
+   :alt: Ma trận tiêu chí thân thiện NPU trên RK3588 theo 3 vùng đánh giá
+
+   Ma trận phân loại mức độ thân thiện NPU trên RK3588: Vùng Xanh (100% NPU), Vùng Vàng (Cần tối ưu), và Vùng Đỏ (Nguy cơ rơi về CPU). Nguồn: [T1 OPL tr.56-107, tr.320-333] [T1 UG232 tr.140-150] [T1 ULT engine/exporter.py:682-688]
+
 2. Op rơi về CPU và nguyên nhân
 ===============================
 
 Mặc dù phần lớn đồ thị YOLOv8 thực thi trọn vẹn trên NPU, một số toán tử cấu trúc nhất định bị compiler đẩy về chạy trên CPU của SoC. Hiện tượng rơi về CPU (CPU fallback) tạo ra sự gián đoạn luồng dữ liệu, phát sinh chi phí sao chép bộ nhớ và đồng bộ hóa qua lại giữa NPU và CPU [T1 UG232 tr.139].
 
-2.1 Toán tử Transpose và ràng buộc hoán vị trục
------------------------------------------------
+2.1 Transpose và ràng buộc hoán vị
+----------------------------------
 
 Toán tử hoán vị trục Transpose được định nghĩa tại mục 3.2.62 của OPL với bảng điều kiện ràng buộc hết sức khắt khe theo từng cấu hình tham số hoán vị ``perm`` [T1 OPL tr.93-95]:
 
@@ -192,8 +214,8 @@ Trong đồ thị ONNX xuất từ PyTorch, trước khi đưa qua lớp Softmax
 
 Giá trị tích chiều 134400 này vượt xa ngưỡng trần ``p = 8192`` quy định trong mục 3.2.62 [T1 OPL tr.93]. Do vượt quá dung lượng thanh ghi hoán vị và bộ đệm phần cứng nội bộ của NPU, compiler RKNN không thể tạo mã lệnh NPU cho node Transpose này và bắt buộc phải chuyển toán tử sang thực thi trên CPU máy host [T1 UG232 tr.139].
 
-2.2 Các toán tử TopK và GatherElements trong NMS
-------------------------------------------------
+2.2 TopK và GatherElements trong NMS
+------------------------------------
 
 Khi người phát triển cố gắng triển khai mô hình theo mô hình end-to-end (nhúng trực tiếp bước hậu xử lý NMS vào đồ thị mạng), hàng loạt toán tử phi tuyến phức tạp được chèn vào đồ thị. Các toán tử này hoàn toàn không có sự hỗ trợ của phần cứng NPU:
 
@@ -231,7 +253,7 @@ Khi người phát triển cố gắng triển khai mô hình theo mô hình end
    * - TopK
      - Nhánh NMS (End-to-End)
      - 4.96 (chỉ có CPU)
-     - NPU không có khối phần cứng sắp xếp; OPSUP ghi Not Supported [T1 OPL tr.333]
+     - NPU không có khối phần cứng sắp xếp và OPSUP ghi Not Supported [T1 OPL tr.333]
    * - GatherElements
      - Nhánh NMS (End-to-End)
      - 4.75 (chỉ có CPU)
@@ -246,6 +268,13 @@ Khi người phát triển cố gắng triển khai mô hình theo mô hình end
      - NPU chỉ hỗ trợ kiểu dữ liệu số nguyên 8-bit và dấu phẩy động 16-bit [T1 OPL tr.320]
 
 Do đó, việc duy trì cấu hình chuẩn (xuất tensor thô không có NMS nội suy) và loại bỏ các bước hoán vị trục không cần thiết trong Head là giải pháp tối ưu để đảm bảo 100% đồ thị được xử lý trọn vẹn trên NPU.
+
+2.3 Op khác không có mục NPU
+----------------------------
+
+- MatMul: chương 3.2 của OPL không có mục NPU tổng quát. MatMul chỉ có mục CPU 4.33 ghi "无限制" [T1 OPL tr.324]. Mục NPU duy nhất liên quan là ``exMatMul`` (mục 3.2.76), yêu cầu ma trận A có dạng ``[b, k, 1, n]`` với ``k ∈ (0, 8192]`` [T1 OPL tr.102]. MatMul không khớp ``exMatMul`` và không được gộp thành ``exSDPAttention`` thì rơi về CPU [T1 OPL tr.102, tr.104, tr.324].
+- Cast (mục CPU 4.7): kiểu đích được hỗ trợ gồm ``float32``, ``int8``, ``int32`` và ``float16`` [T1 OPL tr.320]. OPL không hỗ trợ đích ``int64`` trên NPU.
+- ``Shape``, ``ConstantOfShape``, ``Unsqueeze`` không có mục trong cả chương 3.2 lẫn chương 4 của OPL. UG232 ghi các op này biểu diễn bước tính hình dạng động và bị compiler loại bỏ tĩnh bằng gấp hằng số (``_fold_constant remove nodes``) trước khi sinh đồ thị thực thi [T1 UG232 tr.167].
 
 3. Hiểu sai thường gặp
 ======================
@@ -287,8 +316,16 @@ Nguồn
    * - ``OPL``
      - T1
      - :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`
-     - 27
+     - 85
    * - ``UG232``
      - T1
      - ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (SDK trong repo chính)
-     - 4
+     - 11
+   * - ``API232``
+     - T1
+     - :download:`01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf <../../../_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf>`
+     - 1
+   * - ``ULT``
+     - T1
+     - Mã nguồn thư viện Ultralytics (``engine/exporter.py``)
+     - 1
