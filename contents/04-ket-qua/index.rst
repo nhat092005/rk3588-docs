@@ -65,5 +65,3 @@ Tình trạng hiện tại của ``results/sfchd_5class/`` (commit ``0489831``, 
      - ``table_L_resource.md``
      - 4
      - chưa
-
-Cột, cách đo và nơi sinh của từng bảng nằm ở :doc:`/contents/03-phuong-phap/03-dac-ta-bang/index`.

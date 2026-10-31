@@ -126,7 +126,7 @@ Tối ưu hóa mô hình và Lượng tử hóa
    * - 2
      - FLOPs / MACs
      - Floating-point Operations / Multiply-Accumulate operations
-     - Ước lượng khối lượng tính toán lý thuyết, KHÔNG đồng nghĩa với latency thật trên NPU (mục 1). Ultralytics tính GFLOPs = MACs × 2 (:ref:`Model Complexity <52-model-complexity>`)
+     - Ước lượng khối lượng tính toán lý thuyết, KHÔNG đồng nghĩa với latency thật trên NPU (mục 1). Ultralytics tính GFLOPs = MACs × 2
    * - 3
      - PTQ
      - Post-Training Quantization
@@ -188,7 +188,7 @@ Phần mềm và Phần cứng RKNPU Rockchip
    * - 1
      - FPS
      - Frames Per Second
-     - Số ảnh xử lý được mỗi giây. Có 2 loại không so trực tiếp được với nhau: FPS_latency và Throughput FPS (:ref:`Hardware Performance <53-hardware-performance>`)
+     - Số ảnh xử lý được mỗi giây. Có 2 loại không so trực tiếp được với nhau: FPS_latency và Throughput FPS
    * - 2
      - P50 / P95
      - Percentile 50 (trung vị) / Percentile 95
@@ -196,8 +196,8 @@ Phần mềm và Phần cứng RKNPU Rockchip
    * - 3
      - VmRSS / VmHWM
      - RAM thật (Resident Set Size) process đang dùng / mức cao nhất từng dùng
-     - Đọc từ ``/proc/<pid>/status`` trên Linux. Man page ``proc_pid_status(5)`` ghi về VmHWM: *"This value is inaccurate"*, nên lấy mẫu VmRSS liên tục (:ref:`Resource & Energy <54-resource--energy>`)
+     - Đọc từ ``/proc/<pid>/status`` trên Linux. Man page ``proc_pid_status(5)`` ghi về VmHWM: *"This value is inaccurate"*, nên lấy mẫu VmRSS liên tục
    * - 4
      - Golden test
      - Bài test đối chiếu với số liệu đã lưu
-     - Chạy evaluator trên 1 bộ ảnh và 1 model cố định. Nếu ra số khác số đã lưu nghĩa là code evaluator vừa bị đổi (:ref:`Evaluation Protocol v1 <50-evaluation-protocol-v1>`)
+     - Chạy evaluator trên 1 bộ ảnh và 1 model cố định. Nếu ra số khác số đã lưu nghĩa là code evaluator vừa bị đổi

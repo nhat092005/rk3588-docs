@@ -13,12 +13,15 @@ Operator support
 .. admonition:: Tóm tắt
 
    - Phạm vi gồm SiLU, Resize, toàn bộ op của YOLOv8n và cổng khả thi bốn bước (T1, T2, T3 PC, T3 board).
-   - ``ConvolutionSwish`` chỉ không hỗ trợ đa nhân (vẫn chạy một nhân), ``Resize`` không hỗ trợ đa nhân [T1].
+   - ``ConvolutionSwish`` chỉ không hỗ trợ đa nhân (vẫn chạy một nhân) [T1 OPL tr.63], ``Resize`` không hỗ trợ đa nhân [T1 OPL tr.87].
    - Build lại YOLOv8n 5 class (FP16 và INT8, rknn-toolkit2 2.3.2, cùng danh sách op ở hai dtype): model SiLU có 57 op ``ConvExSwish`` (số 228 trong tài liệu cũ là số dòng log), model ReLU có 51 ``ConvRelu`` và 6 ``ConvReluAdd`` [T3 PC].
-   - Theo T1, ``ConvExSwish`` không đa nhân dù ánh xạ vào mục nào. Đổi sang ReLU đưa ít nhất 90.9% cycles ước tính của compiler (build INT8) vào op có đa nhân, 9.1% (``ConvReluAdd``) chưa biết [T1, T3 PC].
-   - Hai node Resize dùng ``coordinate_transformation_mode = asymmetric``, giá trị không nằm trong ba giá trị Operator List liệt kê, nhưng compiler vẫn xếp chúng lên NPU. Đổi sang giá trị được liệt kê cho bảng layer giống hệt, chưa rõ nguyên nhân [T1, T3 PC].
-   - Guide SDK V2.3.2 và Operator List V2.3.2 khác nhau về ``Relu`` đứng riêng và ``Concat`` [T1].
-   - Bản ghi T3 board ngày 2026-10-10 (model trọng số ngẫu nhiên, nhật ký gốc đã bị xóa): ``ConvExSwish`` chỉ chạy lõi 0, ``ConvRelu`` và ``ConvReluAdd`` chia ba lõi, ReLU nhanh hơn khoảng 8% ở ba lõi [T3 board, ghi nhận]. Chưa có mAP của model đã huấn luyện. Bài báo ``edgesoc_benchmark`` báo đa nhân trên RK3588 chỉ lợi nhỏ [T2] và không kiểm tra activation.
+   - Theo T1, ``ConvExSwish`` không đa nhân dù ánh xạ vào mục nào. Đổi sang ReLU đưa ít nhất 90.9% cycles ước tính của compiler (build INT8) vào op có đa nhân, 9.1% (``ConvReluAdd``) chưa biết [T1 OPL tr.63] [T1 OPL tr.98] [T3 PC].
+   - Hai node Resize dùng ``coordinate_transformation_mode = asymmetric``, giá trị không nằm trong ba giá trị Operator List liệt kê, nhưng compiler vẫn xếp chúng lên NPU. Đổi sang giá trị được liệt kê cho bảng layer giống hệt, chưa rõ nguyên nhân [T1 OPL tr.87] [T3 PC].
+   - Guide SDK V2.3.2 và Operator List V2.3.2 khác nhau về ``Relu`` đứng riêng và ``Concat`` [T1 UG232 tr.75] [T1 OPL tr.84].
+   - Bản ghi T3 board ngày 2026-10-10 (model trọng số ngẫu nhiên, nhật ký gốc đã bị xóa): ``ConvExSwish`` chỉ chạy lõi 0, ``ConvRelu`` và ``ConvReluAdd`` chia ba lõi, ReLU nhanh hơn khoảng 8% ở ba lõi [T3 board, ghi nhận]. Bài báo ``edgesoc_benchmark`` báo đa nhân trên RK3588 chỉ lợi nhỏ [T2 EDGE tr.6] và không kiểm tra activation.
+   - Cập nhật 2026-10-31: G4 đã chạy theo chuẩn trên model đã huấn luyện (ReLU seed 0, 1 seed). Điều kiện A đạt (97.6% cycles ước tính chia nhiều nhân), B đạt (``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.6%), C không đạt (AP50-95 giảm 3.51 điểm, AP NoHelmet giảm 4.94 điểm trên ``css_test`` INT8). Nhãn: Loại. Chi tiết ở :doc:`10-ket-qua-g4`.
+   - Cập nhật 2026-10-31: ba biến thể activation cũng đã chạy qua G1 đến G4 (LeakyReLU, ReLU6, ReLU 200 epoch, mỗi cái 1 seed), kết quả và nhãn ở :doc:`12-ket-qua-bien-the-activation`.
+   - Cập nhật 2026-10-31: mức rơi INT8 so với FP16 (khoảng 13 điểm AP50-95) đã được khoanh vùng: công thức giữ FP16 nhánh giải mã box lấy lại gần hết khoảng cách mà không tốn latency (1 seed mỗi model, P2 chưa duyệt, :doc:`13-ket-qua-luong-tu-hoa`). Nhãn G4 của ReLU không đổi.
 
 .. contents:: Trong trang này
    :local:
@@ -27,7 +30,7 @@ Operator support
 1. Phạm vi và quy tắc bằng chứng
 ================================
 
-Phạm vi gồm SiLU, Resize và toàn bộ op của YOLOv8n. "Hỗ trợ" nghĩa là RKNN compiler xếp op lên NPU, "đa nhân" nghĩa là chạy với ``RKNN_NPU_CORE_0_1`` hoặc ``RKNN_NPU_CORE_0_1_2``. Op không có hỗ trợ đa nhân vẫn chạy, nhưng trên một nhân: layer hiển thị ``100.0%/0.0%/0.0%`` (SDK User Guide V2.3.2, trang PDF 75).
+Phạm vi gồm SiLU, Resize và toàn bộ op của YOLOv8n. "Hỗ trợ" nghĩa là RKNN compiler xếp op lên NPU, "đa nhân" nghĩa là chạy với ``RKNN_NPU_CORE_0_1`` hoặc ``RKNN_NPU_CORE_0_1_2``. Một layer hiển thị ``100.0%/0.0%/0.0%`` khi tải quá nhỏ hoặc khi op chưa có phân đoạn đa nhân trong driver [T1 UG232 tr.75]. Với op chưa hỗ trợ, API guide V1.5.2 ghi "Other type of op will fallback to Core0 to continue running", tức op vẫn chạy trên Core0 [T1 UG152 tr.27].
 
 .. list-table::
    :header-rows: 1
@@ -46,16 +49,16 @@ Phạm vi gồm SiLU, Resize và toàn bộ op của YOLOv8n. "Hỗ trợ" nghĩ
      - Đã chạy (FP16 và INT8 cho model 5 class SiLU và ReLU, FP16 cho model 7 class cũ)
    * - T3 board
      - Đo ``eval_perf``, latency và mAP trên board
-     - Có bản ghi 2026-10-10 (model trọng số ngẫu nhiên, nhật ký gốc đã bị xóa). Chưa đo model đã huấn luyện
+     - Đã đo model đã huấn luyện ngày 2026-10-31 (:doc:`10-ket-qua-g4`). Bản ghi 2026-10-10 (model trọng số ngẫu nhiên, nhật ký gốc đã bị xóa) chỉ ghi lại
 
-Mọi khẳng định trong trang có thẻ tier trong ngoặc vuông, ví dụ [T1]. Mục không có tier là "chưa biết". Ba từ trạng thái 暂不支持, 尚不支持 và 不支持 không được Operator List định nghĩa (đã tìm ở trang PDF 1 đến 107, không thấy định nghĩa). Trang coi cả ba là "không hỗ trợ đa nhân" và không xếp hạng giữa chúng.
+Mọi khẳng định trong trang có thẻ tier và nguồn trong ngoặc vuông, ví dụ [T1 OPL tr.63]. Mã nguồn được nêu ở danh sách ngay dưới. Mục không có tier là "chưa biết". Ba từ trạng thái 暂不支持, 尚不支持 và 不支持 không được Operator List định nghĩa (đã tìm ở trang PDF 1 đến 107, không thấy định nghĩa). Trang coi cả ba là "không hỗ trợ đa nhân" và không xếp hạng giữa chúng.
 
 Nguồn và đường dẫn:
 
-- :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`, chương 3.2 RK3588 (trang PDF 56 đến 107).
-- ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (178 trang, nằm ngoài ``docs/``).
-- :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>` (75 trang).
-- :download:`edgesoc_benchmark_2026kong.pdf <../../../_assets/pdf/papers/05_rk3588/edgesoc_benchmark_2026kong.pdf>` (Scientific Reports 2026, 16:5875).
+- :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf>`, chương 3.2 RK3588 (trang PDF 56 đến 107). Mã thẻ: ``OPL``.
+- ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (178 trang, nằm ngoài ``docs/``). Mã thẻ: ``UG232``.
+- :download:`02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf <../../../_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf>` (75 trang). Mã thẻ: ``UG152``.
+- :download:`edgesoc_benchmark_2026kong.pdf <../../../_assets/pdf/papers/05_rk3588/edgesoc_benchmark_2026kong.pdf>` (Scientific Reports 2026, 16:5875). Mã thẻ: ``EDGE``.
 
 Mọi số trang trong trang này là trang PDF. Với chương 3.2 của Operator List, trang in = trang PDF - 6.
 
@@ -78,7 +81,7 @@ Cổng áp dụng cho mọi op hoặc thay đổi kiến trúc ứng viên, theo
      - Op có mục trong Operator List chương 3.2 RK3588 không, dtype int8/float16 thỏa không, ràng buộc thuộc tính thỏa không
      - Có mục và ràng buộc thỏa
      - Không có mục hoặc vi phạm ràng buộc
-     - Operator List V2.3.2, chương 3.2. Dòng ``多核联合`` chỉ được ghi lại, không chặn, vì op không đa nhân vẫn chạy một nhân
+     - Operator List V2.3.2, chương 3.2. Dòng ``多核联合`` chỉ được ghi lại, không chặn, vì op không đa nhân vẫn chạy trên Core0 [T1 UG152 tr.27]
    * - G2
      - T2
      - Bài báo trong repo có đo op này trên NPU nào, SoC nào
@@ -90,15 +93,15 @@ Cổng áp dụng cho mọi op hoặc thay đổi kiến trúc ứng viên, theo
      - Build model ở INT8 (dtype triển khai), FP16 làm tham chiếu, đọc bảng từng layer (cột ``OpType``, ``Target``)
      - Không có op mới có ``Target`` CPU so với baseline
      - Có op mới có ``Target`` CPU
-     - Pipeline ``ai/automation/export_npu.py`` (INT8, 300 ảnh calibration của protocol v1), ép ``RKNN(verbose=True)`` để in bảng layer. FP16: 5 lệnh ở mục 5.1
+     - Pipeline ``ai/automation/export_npu.py`` (INT8, calibration theo bảng tham số bên dưới), ép ``RKNN(verbose=True)`` để in bảng layer. FP16: 5 lệnh ở mục 5.1
    * - G4
      - T3 board
      - Chạy ``rknn.init_runtime(target='rk3588', device_id=..., perf_debug=True)`` rồi ``rknn.eval_perf()`` ở ``CORE_0`` và ``CORE_0_1_2``, đọc cột ``WorkLoad(0/1/2)-ImproveTherical``, đo latency và mAP
      - Đạt cả ba điều kiện A, B, C bên dưới
      - Không đạt một trong ba điều kiện
-     - SDK User Guide V2.3.2, trang 74 đến 75. Latency lấy ở phiên ``init_runtime`` mặc định, ``WorkLoad`` lấy ở phiên ``perf_debug=True`` (Evaluation Protocol v1). Trạng thái hiện tại: có bản ghi một phần (mục 3.6), chưa chạy theo chuẩn
+     - SDK User Guide V2.3.2, trang 74 đến 75. Latency và ``WorkLoad`` lấy ở hai phiên riêng (xem bảng tham số). Trạng thái hiện tại: đã chạy theo chuẩn ngày 2026-10-31, kết quả ở :doc:`10-ket-qua-g4`. Bản ghi một phần 2026-10-10 ở mục 3.6 chỉ ghi lại
 
-Chuẩn của G4:
+Tham số chuẩn của G3 và G4:
 
 .. list-table::
    :header-rows: 1
@@ -111,15 +114,23 @@ Chuẩn của G4:
    * - B. Latency
      - Median của 5 lần ``eval_perf`` cho mỗi ``core_mask``, lặp ở hai phiên ``init_runtime``. ``CORE_0_1_2`` được coi là nhanh hơn khi giảm ít nhất 5% và mức giảm lớn hơn chênh lệch median giữa hai phiên
    * - C. mAP
-     - AP50-95 giảm tối đa 1.0 điểm phần trăm so với model SiLU cùng dtype và cùng seed. ``AP head`` và ``AP self_clothes`` mỗi lớp cũng giảm tối đa 1.0 điểm phần trăm
+     - AP50-95 giảm tối đa 1.0 điểm phần trăm so với model SiLU cùng dtype và cùng seed. ``AP NoHelmet`` và ``AP Vest`` (hai class ít mẫu nhất) mỗi lớp cũng giảm tối đa 1.0 điểm phần trăm
    * - dtype
      - INT8 (``w8a8``) là dtype kết luận, FP16 chỉ để tham chiếu
    * - Seed
-     - Kết quả seed 42 ghi nhãn "tạm". Kết luận cuối cần seed 42, 43 và 44
+     - Chỉ chạy seed 0, mọi kết quả ghi nhãn "1 seed" vì chưa có std
    * - ``core_mask``
-     - ``CORE_0`` và ``CORE_0_1_2``. Kế hoạch Phase 4 (``contents/09-tien-do/01-phase/03-phase-4.rst``) đã đo tầng 1 ở ``CORE_0``, ``CORE_0_1`` và ``CORE_0_1_2``, nên chuẩn này không đòi đo thêm
+     - ``CORE_0`` và ``CORE_0_1_2``, tức một nhân so với ba nhân. ``CORE_0_1`` không bắt buộc
+   * - Hai phiên đo
+     - Latency lấy ở phiên ``init_runtime`` không bật ``perf_debug``, ``WorkLoad`` lấy ở phiên ``perf_debug=True``, mỗi ``core_mask`` chạy riêng. SDK User Guide V2.3.2 trang 177 [T1 UG232 tr.177]: "some debugging code will be added, and some parallel mechanisms may be disabled, so the time-consuming is more than when perf_debug=False". Vì vậy latency không lấy từ phiên debug. Do debug có thể tắt một số cơ chế song song, điều kiện A (WorkLoad) chỉ là chỉ báo, điều kiện B (latency ở phiên không debug) mới quyết định có tăng tốc hay không
+   * - Calibration (G3, INT8)
+     - 300 ảnh train, mỗi class ít nhất 20 ảnh, seed 0, LetterBox 640 lưu PNG. Dùng cùng tập cho mọi model được so, để khác biệt INT8 không đến từ calibration
+   * - Đo mAP
+     - AP50-95 trên split test, cùng evaluator và cùng tham số NMS cho hai model được so. Chi tiết evaluator không đổi kết quả so sánh tương đối miễn là giống nhau
+   * - Hai class nhạy
+     - ``NoHelmet`` (2317 instance train) và ``Vest`` (3033) là hai class ít mẫu nhất, ba class còn lại từ 3145 (``Helmet``) đến 9532 (``Person``) (đếm từ labels của ``data/ppe5`` ngày 2026-10-25, ``data/ppe5/DATA_CARD.md``). Trên split test ``NoHelmet`` chỉ có 41 instance nên AP của lớp này dao động mạnh
 
-Nhãn kết luận cho một ứng viên: "Giữ" khi qua G1 đến G4, "Loại" khi trượt ở một bước, "Chưa biết" khi chưa chạy hết các bước. Trạng thái hiện tại của ứng viên đổi SiLU sang ReLU: G1 qua một phần (``ConvRelu`` ánh xạ được sang ``ConvolutionRelu``, ``ConvReluAdd`` chưa có mục cùng tên), G2 ghi nhận (không có bằng chứng T2 về activation), G3 qua ở INT8 và FP16 (mục 3.2), G4 có bản ghi T3 board cho điều kiện A và B trên model trọng số ngẫu nhiên (mục 3.6), chưa theo chuẩn hai phiên, và điều kiện C (mAP) chưa đo. Nhãn: Chưa biết.
+Nhãn kết luận cho một ứng viên: "Giữ" khi qua G1 đến G4, "Loại" khi trượt ở một bước, "Chưa biết" khi chưa chạy hết các bước. Trạng thái hiện tại của ứng viên đổi SiLU sang ReLU (cập nhật 2026-10-31): G1 qua một phần (``ConvRelu`` ánh xạ được sang ``ConvolutionRelu``, ``ConvReluAdd`` chưa có mục cùng tên, đã tìm lại toàn bộ T1 ngày 2026-10-31 và vẫn không thấy), G2 ghi nhận (không có bằng chứng T2 về activation trên RK3588), G3 qua ở INT8 và FP16 (mục 3.2, và bảng build của model đã huấn luyện), G4 đã chạy theo chuẩn trên model đã huấn luyện: điều kiện A đạt, B đạt, C không đạt (:doc:`10-ket-qua-g4`). Nhãn: Loại (1 seed, trượt ở C). Đính chính 2026-10-31: câu "Nhãn: Chưa biết" và các câu "chưa đo mAP" ở các mục dưới đây là trạng thái trước ngày đó.
 
 Baseline của G3: ở cả build INT8 và FP16, các layer có ``Target`` CPU chỉ gồm ``InputOperator``, ``Transpose`` (ID 103 ở model SiLU, ID 97 ở model ReLU) và ``OutputOperator``.
 
@@ -137,12 +148,12 @@ G2 không dừng ứng viên vì bài báo chỉ đo latency của cả model v�
 3.1. Câu hỏi và giả thuyết
 --------------------------
 
-Giả thuyết: đổi SiLU của YOLOv8 sang ReLU hoặc LeakyReLU để Conv chạy đa nhân. Giả thuyết này cần đo latency ở ``CORE_0_1_2`` và mAP. Đây là giả thuyết, chưa phải kết quả, Bài báo T2 trong repo không kiểm tra nó. Bản ghi T3 board của dự án (mục 3.6) có số đo trên model trọng số ngẫu nhiên, chưa có mAP.
+Giả thuyết: đổi SiLU của YOLOv8 sang ReLU hoặc LeakyReLU để Conv chạy đa nhân. Giả thuyết này cần đo latency ở ``CORE_0_1_2`` và mAP. Đây là giả thuyết, chưa phải kết quả. Bài báo T2 trong repo không kiểm tra nó. Bản ghi T3 board của dự án (mục 3.6) có số đo trên model trọng số ngẫu nhiên, chưa có mAP. Đính chính 2026-10-31: G4 đã đo trên model đã huấn luyện, kết quả ở :doc:`10-ket-qua-g4`.
 
 3.2. SiLU nằm ở đâu trong model
 -------------------------------
 
-Hai model 5 class đã train: SiLU (``sfchd_5class_yolov8n_baseline_100ep_s42``) và ReLU (``sfchd_5class_yolov8n_relu_100ep_s42``), cùng nằm trong ``ai/automation/runs``. Repo không lưu ONNX của hai run này, nên ONNX được export lại từ ``weights/best.pt`` bằng ``YOLO(...).export(format="onnx", imgsz=640, opset=19)`` (cùng lệnh ``export_onnx`` trong ``ai/core/rknn/baseline.py``). Sau đó build FP16 bằng rknn-toolkit2 2.3.2, target ``rk3588`` [T3 PC]. Build INT8 dùng pipeline ``export_npu.py`` (300 ảnh calibration của protocol v1, seed 42) và cho cùng số dòng bảng layer, cùng OpType, cùng op có ``Target`` CPU với FP16 [T3 PC].
+Bảng op dưới đây lập từ hai model 5 class train trên dataset SFCHD cũ: SiLU (``sfchd_5class_yolov8n_baseline_100ep_s42``) và ReLU (``sfchd_5class_yolov8n_relu_100ep_s42``). Hai run này và dataset SFCHD đã bị xóa khỏi repo. Bài toán hiện tại là ppe5 (``Helmet``, ``NoHelmet``, ``NoVest``, ``Vest``, ``Person``). ONNX của run ``ppe5_yolov8n_baseline_100ep_s0`` (``weights/best.onnx``) có 233 node, opset 19, output ``[1, 9, 8400]`` và đúng số node theo từng OpType như mục 5.2 (kiểm tra bằng onnx 2026-10-30, chưa build lại RKNN từ ONNX này) [T3 PC]. Với hai run SFCHD cũ, repo không lưu ONNX, nên ONNX được export lại từ ``weights/best.pt`` bằng ``YOLO(...).export(format="onnx", imgsz=640, opset=19)`` (cùng lệnh ``export_onnx`` trong ``ai/core/rknn/baseline.py``). Sau đó build FP16 bằng rknn-toolkit2 2.3.2, target ``rk3588`` [T3 PC]. Build INT8 dùng pipeline ``export_npu.py`` (300 ảnh calibration theo bảng tham số ở mục 2) và cho cùng số dòng bảng layer, cùng OpType, cùng op có ``Target`` CPU với FP16 [T3 PC]. Ngày 2026-10-31 model ReLU đã huấn luyện trên ppe5 (``ppe5_yolov8n_relu_100ep_s0``) được build INT8 và FP16 và cho 113 dòng với 51 ``ConvRelu``, 6 ``ConvReluAdd`` và ngoài ``InputOperator`` và ``OutputOperator`` chỉ ``Transpose`` ở CPU, khớp bảng dưới (:doc:`10-ket-qua-g4` mục 2.2) [T3 PC].
 
 .. list-table::
    :header-rows: 1
@@ -222,7 +233,7 @@ API guide V1.5.2, ``docs/_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_
    * - ``ConvReluAdd``
      - không có mục cùng tên
      - chưa biết
-     - Operator List có ``ConvolutionAddRelu`` (3.2.19), tính ``Relu(Add(Conv(Input0), Input1))``. Chưa xác nhận hai op cùng phép tính
+     - Operator List có ``ConvolutionAddRelu`` (3.2.19), tính ``Relu(Add(Conv(Input0), Input1))``. Chưa xác nhận hai op cùng phép tính. Bảng WorkLoad đo ngày 2026-10-31: 6 trên 6 dòng ``ConvReluAdd`` chia ba nhân (:doc:`10-ket-qua-g4` mục 3), đó là kết quả đo, không phải mục T1
    * - ``Conv``
      - ``Convolution`` (3.2.5)
      - 支持
@@ -295,7 +306,7 @@ Cùng bài, trang PDF 7: "YOLO11m achieved 93.7 ms in single-core mode and 95.5 
 
 Bản ghi T3 board ngày 2026-10-10 nằm trong ``contents/09-tien-do/03-khoang-trong/05-thiet-ke-model.rst`` và ``06-yolo.rst`` [T3 board, ghi nhận]. Điều kiện: YOLOv8n trọng số ngẫu nhiên ``nc=5``, INT8, 640x640, toolkit 2.3.2, RK3588S, NPU 1 GHz, ``eval_perf`` với ``fix_freq=True``. Ở ``CORE_0_1_2``, 57 lớp ``ConvExSwish`` đều có WorkLoad 100%/0%/0% (chỉ lõi 0), còn 51 ``ConvRelu`` và 6 ``ConvReluAdd`` được chia ba lõi (khoảng 35%/32.5%/32.5%). Model ReLU nhanh hơn ``CORE_0`` khoảng 8% khi dùng ba lõi (13.969 ms xuống 12.854 ms ở ``relu_opt3``, 13.955 ms xuống 12.801 ms ở ``relu_noadd``), model SiLU không khác biệt ngoài độ trải. Bản ghi có hai lượt đo, lượt 2 loại biến nhiễu do ghép ``Add``.
 
-Giới hạn của bản ghi: nhật ký gốc ``04_debug-logs/2026-10-10_t3-board-silu-resize`` đã bị xóa, nên các số này không kiểm lại được và chỉ còn dưới dạng bản ghi trong docs. Bản ghi khớp với build PC ở mục 3.2 (57 ``ConvExSwish``, 51 ``ConvRelu``, 6 ``ConvReluAdd``). Model chưa huấn luyện nên không có mAP. Đối chiếu với chuẩn G4, phần này là suy ra từ bản ghi và build INT8 (mục 3.5), không phải đo mới: điều kiện A thỏa vì ``ConvRelu`` và ``ConvReluAdd`` chiếm 95.8% cycles ước tính (5431517 trên 5666717). Điều kiện B: mức giảm khoảng 8% lớn hơn 5%, chưa đối chiếu với chênh lệch giữa hai phiên. Điều kiện C chưa đo.
+Giới hạn của bản ghi: nhật ký gốc ``04_debug-logs/2026-10-10_t3-board-silu-resize`` đã bị xóa, nên các số này không kiểm lại được và chỉ còn dưới dạng bản ghi trong docs. Bản ghi khớp với build PC ở mục 3.2 (57 ``ConvExSwish``, 51 ``ConvRelu``, 6 ``ConvReluAdd``). Model chưa huấn luyện nên không có mAP. Đối chiếu với chuẩn G4, phần này là suy ra từ bản ghi và build INT8 (mục 3.5), không phải đo mới: điều kiện A thỏa vì ``ConvRelu`` và ``ConvReluAdd`` chiếm 95.8% cycles ước tính (5431517 trên 5666717). Điều kiện B: mức giảm khoảng 8% lớn hơn 5%, chưa đối chiếu với chênh lệch giữa hai phiên. Điều kiện C chưa đo. Đính chính 2026-10-31: C đã đo và B đã đo theo chuẩn hai phiên trên model đã huấn luyện, xem bảng dưới và :doc:`10-ket-qua-g4`.
 
 .. list-table::
    :header-rows: 1
@@ -305,17 +316,17 @@ Giới hạn của bản ghi: nhật ký gốc ``04_debug-logs/2026-10-10_t3-boa
      - Trạng thái
      - Cách giải quyết
    * - ``ConvExSwish`` chạy đa nhân theo T1
-     - Không (cả hai mục ứng viên). Bản ghi T3 board: 100%/0%/0%
-     - Đo lại với model đã huấn luyện (G4)
+     - Không (cả hai mục ứng viên). Bản ghi T3 board: 100%/0%/0%. Đã đo lại 2026-10-31: 57 trên 57 dòng 100%/0%/0%
+     - Đã làm (G4, :doc:`10-ket-qua-g4` mục 3)
    * - Phần cycles ước tính ở op đa nhân sau khi đổi sang ReLU
-     - Ít nhất 90.9% (INT8) theo T1, còn 9.1% chưa biết theo T1. Bản ghi T3 board: ``ConvReluAdd`` chia ba lõi
-     - T1 không có mục cùng tên, dựa vào bản ghi T3 board
+     - Ít nhất 90.9% (INT8) theo T1, còn 9.1% chưa biết theo T1. Đã đo 2026-10-31: 97.6% (``ConvReluAdd`` chia ba nhân)
+     - T1 không có mục cùng tên, kết quả là phép đo T3 (:doc:`10-ket-qua-g4` mục 3)
    * - Đổi SiLU sang ReLU mở khóa tăng tốc đa nhân
-     - Có ghi nhận: ReLU nhanh hơn khoảng 8% ở ba lõi (model trọng số ngẫu nhiên)
-     - Đo lại theo chuẩn B với model đã huấn luyện (G4)
+     - Đã đo 2026-10-31 (ReLU 1 seed): ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.6%, model SiLU 2.9%
+     - Đã làm theo chuẩn B (:doc:`10-ket-qua-g4` mục 4)
    * - Chi phí mAP của việc đổi activation
-     - Chưa biết
-     - G4
+     - Đã đo 2026-10-31 (INT8, ``css_test``, 1 seed): AP50-95 giảm 3.51 điểm, AP NoHelmet giảm 4.94 điểm, AP Vest tăng 0.14 điểm. Không đạt C
+     - Đã làm (:doc:`10-ket-qua-g4` mục 5)
 
 4. Resize
 =========
@@ -355,7 +366,7 @@ Nguồn: :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../
 
 Hai op Resize trong bản build đều scale 2 lần (xem mục 4.3), nên theo shape thì thỏa giới hạn bội số nguyên từ 2 đến 8.
 
-Thuộc tính của hai node ONNX ``/model.10/Resize`` và ``/model.13/Resize`` (đọc từ ``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx`` bằng onnx 1.18.0) [T3 PC]:
+Thuộc tính của hai node ONNX ``/model.10/Resize`` và ``/model.13/Resize`` (đọc từ ``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx`` bằng onnx 1.18.0, model 7 class, run đã xóa khỏi repo. Hai model 5 class export lại cho cùng ba giá trị) [T3 PC]:
 
 .. list-table::
    :header-rows: 1
@@ -433,13 +444,13 @@ Mọi phương án thay thế đều chưa thử [chưa đo]. Tài liệu API V1
      - Bản build T3 PC, mục 4.3
    * - Resize chạy đa nhân
      - không
-     - Operator List, trang PDF 87 [T1]
+     - Operator List, trang PDF 87 [T1 OPL tr.87]
    * - Resize có kéo chậm ``CORE_0_1_2``
-     - chưa biết
-     - G4: đọc WorkLoad của ID 46 và 54 cùng latency
+     - Đã đo 2026-10-31: hai dòng Resize WorkLoad 100%/0%/0% và thời gian dòng trong bảng ``perf_debug`` nằm trong vòng 0.5 µs so với ``CORE_0``. Ảnh hưởng lên latency tổng chưa đo trực tiếp
+     - :doc:`10-ket-qua-g4` mục 3. ID đổi theo model, chọn theo tên op
    * - Vì sao ``asymmetric`` và ``nearest_mode = floor`` vẫn lên NPU
-     - chưa biết (build giống hệt khi dùng giá trị được liệt kê)
-     - Đọc tài liệu compiler, và so số học hai bản trên board
+     - chưa biết (build giống hệt khi dùng giá trị được liệt kê). Đã tìm lại toàn bộ T1 và T2 ngày 2026-10-31, không có văn bản giải thích (:doc:`10-ket-qua-g4` mục 7)
+     - Đọc logic compiler (chưa làm), và so số học hai bản trên board
 
 5. Toàn bộ op của YOLOv8n
 =========================
@@ -447,14 +458,14 @@ Mọi phương án thay thế đều chưa thử [chưa đo]. Tài liệu API V1
 5.1. Nguồn và phạm vi
 ---------------------
 
-Bảng ở mục 5.2 lấy từ model SiLU 5 class (run ``sfchd_5class_yolov8n_baseline_100ep_s42``): ONNX 233 node, opset 19, output ``[1, 9, 8400]``, bảng layer 119 dòng. Model 7 class cũ (``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx``, output ``[1, 11, 8400]``) cho đúng danh sách op này. Danh sách op của model ReLU nằm ở mục 3.2.
+Bảng ở mục 5.2 lấy từ model SiLU 5 class train trên SFCHD cũ (run ``sfchd_5class_yolov8n_baseline_100ep_s42``, đã xóa khỏi repo), ONNX của model ppe5 hiện tại cho cùng số node: ONNX 233 node, opset 19, output ``[1, 9, 8400]``, bảng layer 119 dòng. Model 7 class cũ (``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx``, output ``[1, 11, 8400]``) cho đúng danh sách op này. Danh sách op của model ReLU nằm ở mục 3.2.
 
 Bảng lấy từ bản build FP16 (bản INT8 cho cùng 119 dòng, cùng OpType và Target), rknn-toolkit2 2.3.2, target ``rk3588``, ``librknnc version: 2.3.2 (e045de294f@2025-04-07T19:48:25)``. Build log gốc mà các trang cũ trích dẫn không còn tồn tại, trang này thay bằng build lại. Script ``build_fp16.py`` gồm 5 lệnh: ``RKNN(verbose=True)``, ``config(target_platform="rk3588")``, ``load_onnx``, ``build(do_quantization=False)``, ``release``.
 
 5.2. Bảng đối chiếu từng op
 ---------------------------
 
-Mỗi dòng là một OpType trong bảng layer của RKNN (119 dòng, 15 OpType). Target lấy từ bảng này [T3 PC]. Trạng thái đa nhân lấy từ Operator List V2.3.2 [T1].
+Mỗi dòng là một OpType trong bảng layer của RKNN (119 dòng, 15 OpType). Target lấy từ bảng này [T3 PC]. Trạng thái đa nhân lấy từ Operator List V2.3.2 [T1 OPL].
 
 .. list-table::
    :header-rows: 1
@@ -462,7 +473,7 @@ Mỗi dòng là một OpType trong bảng layer của RKNN (119 dòng, 15 OpType
 
    * - Op (RKNN, số lớp, Target)
      - Mục Operator List
-     - ``多核联合`` [T1] (trang PDF)
+     - ``多核联合`` [T1 OPL] (trang PDF)
      - Ghi chú compiler
    * - ``ConvExSwish`` (57, NPU)
      - không có tên này trong list, xem mục 3.4
@@ -540,19 +551,19 @@ Số dòng RKNN khác số node ONNX do các pass của compiler: 57 cặp Sigmo
      - Tình trạng trong nguồn
      - Thời gian chiếm
    * - Concat
-     - Operator List không có dòng ``多核联合``, chỉ có ``axis ∈ {0, 1, 2, 3}`` (trang 58). Cả hai guide đều liệt kê Concat là op đa nhân
-     - chưa đo
+     - Operator List không có dòng ``多核联合``, chỉ có ``axis ∈ {0, 1, 2, 3}`` (trang 58). Cả hai guide đều liệt kê Concat là op đa nhân. Đo 2026-10-31: 15 trên 17 dòng chia ba nhân
+     - 8.6% tổng thời gian dòng ở ``CORE_0`` (SiLU, chế độ ``perf_debug``)
    * - Split
-     - Không có dòng ``多核联合``, chỉ có ``axis ∈ {0, 1, 2, 3}`` (trang 91)
-     - chưa đo
+     - Không có dòng ``多核联合``, chỉ có ``axis ∈ {0, 1, 2, 3}`` (trang 91). Đo 2026-10-31: 0 trên 9 dòng chia
+     - 3.2%
    * - MaxPool
-     - Không có dòng ``多核联合``. Ràng buộc ``kernel_h ∈ (0, 7]``, ``kernel_w ∈ (0, 7]`` và ``ceil_mode`` ghi ``不支持`` (trang 79)
-     - chưa đo
+     - Không có dòng ``多核联合``. Ràng buộc ``kernel_h ∈ (0, 7]``, ``kernel_w ∈ (0, 7]`` và ``ceil_mode`` ghi ``不支持`` (trang 79). Đo 2026-10-31: 0 trên 3 dòng chia
+     - 0.4%
    * - ConvExSwish
-     - Tên không có trong Operator List và guide SDK V2.3.2
-     - chưa đo
+     - Tên không có trong Operator List và guide SDK V2.3.2. Đo 2026-10-31: 0 trên 57 dòng chia
+     - 62.6%
 
-Slice không xuất hiện trong bảng per-layer của RKNN. Các op Sub, Reshape, Transpose, Sigmoid, exSoftmax13 và Resize có trạng thái không đa nhân rõ ràng trong Operator List và nằm ở neck và detection head. Chưa có nguồn nào chứa thời gian từng lớp, nên phần thời gian của chúng là chưa đo.
+Slice không xuất hiện trong bảng per-layer của RKNN. Các op Sub, Reshape, Transpose, Sigmoid, exSoftmax13 và Resize có trạng thái không đa nhân rõ ràng trong Operator List và nằm ở neck và detection head. Thời gian từng lớp có trong bản ghi T3 board ở ``contents/09-tien-do/03-khoang-trong/06-yolo.rst`` cho một số model, trang này không đối chiếu các số đó. Cột thời gian lấy từ phép đo 2026-10-31 (trung vị hai phiên ``CORE_0``, tổng thời gian dòng của chế độ ``perf_debug``, mô tả chứ không phải latency).
 
 5.4. Việc cần làm để đóng bảng
 ------------------------------
@@ -566,9 +577,9 @@ Slice không xuất hiện trong bảng per-layer của RKNN. Các op Sub, Resha
      - Kết quả cần có
    * - Chạy trên board ở ``CORE_0_1_2`` để điền WorkLoad cho cả 119 dòng
      - ``eval_perf`` với ``perf_debug=True``
-     - Cột ``WorkLoad(0/1/2)-ImproveTherical`` đầy đủ
+     - Cột ``WorkLoad(0/1/2)-ImproveTherical`` đầy đủ (đã làm 2026-10-31)
 
-Bản ghi T3 board 2026-10-10 chỉ nêu ``ConvExSwish``, ``ConvRelu`` và ``ConvReluAdd``. Các op còn lại của bảng chưa có WorkLoad được ghi nhận.
+Bản ghi T3 board 2026-10-10 chỉ nêu ``ConvExSwish``, ``ConvRelu`` và ``ConvReluAdd``. Đính chính 2026-10-31: WorkLoad của cả 119 dòng ở ``CORE_0_1_2`` (model SiLU) và 113 dòng (model ReLU) đã đo, tổng hợp theo loại op ở :doc:`10-ket-qua-g4` mục 3.
 
 6. Mâu thuẫn, điểm chưa biết và đặc tả đo T3
 ============================================
@@ -599,7 +610,7 @@ Cách đọc (không phải nguồn): trong graph CNN, ReLU thường được g
 
 Với model ReLU 5 class, bảng layer không có ``Relu`` đứng riêng (57 ``Relu`` ONNX gộp thành 51 ``ConvRelu`` và 6 ``ConvReluAdd``, mục 3.2), nên mâu thuẫn về ``Relu`` không ảnh hưởng hai model đang xét [T3 PC].
 
-Trang này dùng Operator List cho trạng thái từng op vì tài liệu này có dòng riêng cho từng op. Hai guide chỉ dùng để đối chiếu. Về cách mô tả op không chia được đa nhân: chỉ guide API V1.5.2 trang 27 có cụm "Other type of op will fallback to Core0 to continue running." Guide SDK V2.3.2 trang 75 mô tả cùng hiệu ứng bằng một lớp hiện ``100.0%/0.0%/0.0%`` và "so this layer runs on a single core".
+Trang này dùng Operator List cho trạng thái từng op vì tài liệu này có dòng riêng cho từng op. Hai guide chỉ dùng để đối chiếu. Về cách mô tả op không chia được đa nhân: chỉ guide API V1.5.2 trang 27 có cụm "Other type of op will fallback to Core0 to continue running." Guide SDK V2.3.2 trang 75 nêu hiện tượng lớp hiện ``100.0%/0.0%/0.0%`` với hai nguyên nhân (tải quá nhỏ, hoặc op chưa phân đoạn đa nhân), và chỉ nguyên nhân đầu có câu "so this layer runs on a single core".
 
 6.2. Bảng điểm chưa biết
 ------------------------
@@ -612,17 +623,17 @@ Trang này dùng Operator List cho trạng thái từng op vì tài liệu này 
      - Trạng thái
      - Cái gì giải quyết
    * - ``ConvExSwish`` có phải op tên ``ConvolutionSwish`` trong Operator List
-     - chưa biết, nhưng kết luận T1 không phụ thuộc cách ánh xạ (mục 3.4). Bản ghi T3 board: 100%/0%/0%
-     - T3: ``eval_perf`` với ``perf_debug=True`` ở ``CORE_0_1_2``, đọc WorkLoad của các lớp ConvExSwish
+     - chưa biết, nhưng kết luận T1 không phụ thuộc cách ánh xạ (mục 3.4). Bản ghi T3 board: 100%/0%/0%. Đo 2026-10-31: 57 trên 57 dòng 100%/0%/0%
+     - Đã làm: ``eval_perf`` với ``perf_debug=True`` ở ``CORE_0_1_2`` (:doc:`10-ket-qua-g4`). Việc ``ConvExSwish`` có phải ``ConvolutionSwish`` vẫn chưa biết
    * - Đổi SiLU sang ReLU hoặc LeakyReLU có mở khóa tăng tốc đa nhân cho model đã huấn luyện không
-     - có ghi nhận khoảng 8% trên model trọng số ngẫu nhiên, chưa có mAP
-     - T3: latency ở ``CORE_0`` và ``CORE_0_1_2``, model SiLU và ReLU, kèm mAP
+     - Đã đo 2026-10-31 (1 seed): ReLU ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.6%, mAP thấp hơn (AP50-95 giảm 3.51 điểm), nhãn Loại
+     - Đã làm (:doc:`10-ket-qua-g4`)
    * - Concat, Split, Slice, MaxPool có chạy đa nhân không
-     - chưa biết (Operator List không có dòng, Concat được hai guide liệt kê là đa nhân)
-     - T3: cột WorkLoad
+     - Đã đo 2026-10-31 (Operator List không có dòng, Concat được hai guide liệt kê là đa nhân): Concat 15 trên 17 dòng chia, Split 0 trên 9, MaxPool 0 trên 3. Slice không có trong bảng layer
+     - Đã làm: cột WorkLoad (:doc:`10-ket-qua-g4` mục 3)
    * - Trạng thái đa nhân của ``ConvReluAdd`` (6 lớp ở model ReLU)
-     - chưa biết theo T1 (không có mục cùng tên). Bản ghi T3 board: chia ba lõi
-     - T3: cột WorkLoad của model đã huấn luyện
+     - chưa biết theo T1 (không có mục cùng tên, đã tìm lại 2026-10-31). Đo: 6 trên 6 dòng chia ba nhân trên model đã huấn luyện
+     - Đã làm: cột WorkLoad của model đã huấn luyện
    * - Khác biệt khi compile INT8 so với FP16
      - Đã biết: cùng danh sách op và cùng op có ``Target`` CPU ở model SiLU và ReLU, cycles khác (mục 3.5) [T3 PC]
      - Không áp dụng
@@ -636,7 +647,7 @@ Trang này dùng Operator List cho trạng thái từng op vì tài liệu này 
 6.3. Đặc tả đo T3 board
 -----------------------
 
-Cách đo theo Evaluation Protocol v1 (``contents/03-phuong-phap/02-giao-thuc/02-bon-nhom-metric.rst``, tầng 1): latency lấy ở phiên ``init_runtime`` mặc định, bảng từng layer lấy ở phiên ``perf_debug=True``. Evaluation Protocol v1 mô tả cách đo và không ghi ngưỡng quyết định. Ngưỡng G4 ở mục 2 là tiêu chí phân tích của trang này, ``core_mask`` tầng 1 lấy từ kế hoạch Phase 4. Trang này không nhắc lại các giá trị khác của protocol.
+Cách đo theo bảng tham số ở mục 2: mỗi ``core_mask`` chạy hai phiên ``init_runtime``, một phiên không bật ``perf_debug`` cho latency, một phiên ``perf_debug=True`` cho WorkLoad.
 
 .. list-table::
    :header-rows: 1
@@ -645,7 +656,7 @@ Cách đo theo Evaluation Protocol v1 (``contents/03-phuong-phap/02-giao-thuc/02
    * - Mục
      - Giá trị
    * - Model cần đo
-     - YOLOv8n SiLU, YOLOv8n ReLU hoặc LeakyReLU, đều 5 class, đã train xong (``best.pt`` có sẵn). Hai run là ``sfchd_5class_yolov8n_baseline_100ep_s42`` và ``sfchd_5class_yolov8n_relu_100ep_s42`` trong ``ai/automation/runs``
+     - YOLOv8n SiLU và YOLOv8n ReLU hoặc LeakyReLU, đều 5 class ppe5. Model SiLU đã train xong: ``ppe5_yolov8n_baseline_100ep_s0`` trong ``ai/automation/runs`` (``best.pt`` có sẵn). Model ReLU ``ppe5_yolov8n_relu_100ep_s0`` đã train ngày 2026-10-31 (đính chính: trước ngày đó chưa có)
    * - Target
      - ``rk3588``
    * - dtype
@@ -659,8 +670,8 @@ Cách đo theo Evaluation Protocol v1 (``contents/03-phuong-phap/02-giao-thuc/02
    * - Cột cần đọc
      - ``WorkLoad(0/1/2)-ImproveTherical`` và ``Target``
    * - Số liệu cần ghi
-     - latency (ms), mAP, ``AP head``, ``AP self_clothes``, workload của từng lớp ConvExSwish hoặc ConvRelu
+     - latency (ms), mAP, ``AP NoHelmet``, ``AP Vest``, workload của từng lớp ConvExSwish hoặc ConvRelu
    * - Kết quả hiện tại
-     - có bản ghi một phần ở mục 3.6, chưa đo model đã huấn luyện
+     - đã đo model đã huấn luyện ngày 2026-10-31, kết quả ở :doc:`10-ket-qua-g4`. Bản ghi một phần ở mục 3.6 chỉ ghi lại
 
-Kết quả đo được ghi vào Table K và Table M trong trang contents/03-phuong-phap/03-dac-ta-bang.
+Kết quả đo ở :doc:`10-ket-qua-g4`.

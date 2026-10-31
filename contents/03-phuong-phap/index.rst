@@ -1,13 +1,12 @@
-********************
-Thiết kế thực nghiệm
-********************
+***********
+Phương pháp
+***********
 
-Thiết kế đã khóa của nghiên cứu: dữ liệu, phần cứng mục tiêu, giao thức đánh giá và đặc tả các bảng kết quả.
+Phương pháp theo hai tầng: tầng trên là AI, tầng dưới là NPU. Nhóm thứ ba là nghiên cứu đo latency trên NPU, làm nền cho các quyết định ở tầng NPU.
 
 .. toctree::
    :maxdepth: 1
 
-   01-du-lieu/index
-   01-phan-cung-muc-tieu
-   02-giao-thuc/index
-   03-dac-ta-bang/index
+   01-tang-ai/index
+   02-tang-npu/index
+   03-do-latency-npu/index

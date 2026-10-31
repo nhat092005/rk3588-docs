@@ -16,3 +16,8 @@ Tầng dưới: NPU.
    07-compiler-optimization
    08-npu-architecture
    09-pre-post-processing
+   10-ket-qua-g4
+   11-ket-qua-da-nhan
+   12-ket-qua-bien-the-activation
+   13-ket-qua-luong-tu-hoa
+   14-quy-trinh-tai-lap
