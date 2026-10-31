@@ -6,7 +6,7 @@ Phase 2-3: train và quant
 
 .. admonition:: Tóm tắt
 
-   - Phase 2 train YOLOv8n và YOLOv8s seed 42 trên sfchd_5class và sfchd_shel5k. Tất cả mục kiểm trong phase này chưa đánh dấu xong.
+   - Phase 2 train YOLOv8n và YOLOv8s seed 0 trên sfchd_5class và sfchd_shel5k. Tất cả mục kiểm trong phase này chưa đánh dấu xong.
    - Chọn dataset theo Table D (mAP50-95 trên sfchd_test, AP head, self_clothes), ghi vào tmp/02_decisions/, và ghi rõ quyết định dựa trên 1 seed.
    - Phase 3 trả lời Case B: quantize mất bao nhiêu accuracy và class nào mất nhiều nhất. Các mục kiểm của phase này cũng chưa xong.
    - Accuracy của .rknn chỉ đo được trên board vì simulator của RKNN-Toolkit2 không chạy file nạp bằng load_rknn (API Reference mục 2.7, trang PDF 16).
@@ -17,7 +17,7 @@ Phase 2-3: train và quant
 Phase 2. Train baseline YOLOv8n/s
 =================================
 
-**Mục tiêu:** accuracy FP32 của baseline (seed 42) trên cả 2 lựa chọn dataset.
+**Mục tiêu:** accuracy FP32 của baseline (seed 0) trên cả 2 lựa chọn dataset.
 
 **Lệnh:**
 
@@ -26,7 +26,7 @@ Phase 2. Train baseline YOLOv8n/s
    make phase2 DATASET=sfchd_5class
    make phase2 DATASET=sfchd_shel5k
 
-Mỗi lệnh: train YOLOv8n và YOLOv8s seed 42 (2 run), kiểm chéo evaluator trên run YOLOv8n, rồi ``make tables``.
+Mỗi lệnh: train YOLOv8n và YOLOv8s seed 0 (2 run), kiểm chéo evaluator trên run YOLOv8n, rồi ``make tables``.
 
 - ☐ ``phase2`` xong cho ``sfchd_5class``
 - ☐ ``phase2`` xong cho ``sfchd_shel5k``
@@ -50,7 +50,7 @@ Phase 3. Quantization FP16 / INT8
 
 **Lệnh:** ``make phase3 DATASET=<ds>``
 
-Với mỗi run của dataset (2 run): export FP16, export INT8 (300 ảnh calibration), complexity, evaluate ONNX, evaluate RKNN FP16, evaluate RKNN INT8, rồi chạy ``make tables``. ``evaluate BACKEND=rknn`` tự chép model và ảnh lên board, chạy inference ở board (``ai/board/infer_dump.py``), chép output về và tính NMS, AP trên PC (:ref:`AI Quality <51-ai-quality>`), mất khoảng 1–2 phút mỗi lần.
+Với mỗi run của dataset (2 run): export FP16, export INT8 (300 ảnh calibration), complexity, evaluate ONNX, evaluate RKNN FP16, evaluate RKNN INT8, rồi chạy ``make tables``. ``evaluate BACKEND=rknn`` tự chép model và ảnh lên board, chạy inference ở board (``ai/board/infer_dump.py``), chép output về và tính NMS, AP trên PC, mất khoảng 1–2 phút mỗi lần.
 
 - ☐ ``phase3`` xong
 - ☐ ``eval/onnx_fp32_*.json`` lệch ``pt_fp32`` không quá 0.001 (ONNX export đúng)

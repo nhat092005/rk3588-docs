@@ -9,7 +9,7 @@ Phase 5-8: tối ưu
    - Phase 5 thêm YOLO11n/s bằng model, config và sửa `MODELS` trong `ai/automation/pipeline.py`. Tiêu chí xong là có dòng YOLO11 ở D–L hoặc ghi rõ lý do loại.
    - Phase 6 tìm bottleneck bằng số đo từ `table_K_layers.md`. Hiện tượng `Transpose` chạy CPU (590 µs / 20,663 µs) chỉ thấy trên model nháp, cần kiểm lại trên model thật.
    - Phase 7 có các candidate: structured pruning, SiLU sang ReLU / LeakyReLU, `op_target`, mixed precision, lighter head và input resolution. Mục `op_target` hiện là `NotImplementedError`.
-   - Phase 7 train 1 seed (42), kết luận ghi rõ "1 seed", và chênh lệch phải được xác nhận lớn hơn std ở Phase 10.
+   - Phase 7 train 1 seed (0) và kết luận ghi rõ "1 seed".
    - Phase 8 chạy các dòng Baseline, A, B, C, D của Table M, vẽ Figure 3 (Pareto) và Figure 5, và trả lời 4 câu hỏi dưới Table M.
 
 .. contents:: Trong trang này
@@ -21,7 +21,7 @@ Phase 5-8: tối ưu
 Phase 5. Multi-model YOLO11n/s
 ==============================
 
-**Mục tiêu:** không phụ thuộc vào 1 họ model (:ref:`Model comparison <61-model-comparison>`).
+**Mục tiêu:** không phụ thuộc vào 1 họ model.
 
 **Điều kiện:** Phase 2–4 chạy trọn với YOLOv8.
 
@@ -58,7 +58,7 @@ Phase 6. Bottleneck analysis
 
 - ☐ Trả lời 5 câu hỏi dưới Table K (Guide mục 7)
 - ☐ So ``tier1_int8_CORE_0_layers.json`` với ``tier1_int8_CORE_0_1_2_layers.json`` theo từng layer: op nào không nhanh lên khi thêm core, đồng thời đối chiếu ``ConvExSwish`` với ``ConvolutionSwish`` (:ref:`Research problem đề xuất <21-research-problem-đề-xuất>`)
-- ☐ Chạy chuẩn G4 của trang :doc:`Operator support </contents/03-phuong-phap-de-xuat/02-tang-npu/01-operator-support>` trên model đã huấn luyện: phủ đa nhân (A), latency hai phiên ở ``CORE_0`` và ``CORE_0_1_2`` (B), mAP (C). Bản ghi T3 board 2026-10-10 chỉ là tham chiếu vì nhật ký gốc đã bị xóa. Khi board lên: ``make board-check`` rồi ``benchmark-npu``. Lệnh cần sudo (``start_rknn_server.sh``, ``lock_freq.sh``) do người dùng chạy
+- ☐ Chạy chuẩn G4 của trang :doc:`Operator support </contents/03-phuong-phap/02-tang-npu/01-operator-support>` trên model đã huấn luyện: phủ đa nhân (A), latency hai phiên ở ``CORE_0`` và ``CORE_0_1_2`` (B), mAP (C). Bản ghi T3 board 2026-10-10 chỉ là tham chiếu vì nhật ký gốc đã bị xóa. Khi board lên: ``make board-check`` rồi ``benchmark-npu``. Lệnh cần sudo (``start_rknn_server.sh``, ``lock_freq.sh``) do người dùng chạy
 - ☐ Op chạy trên CPU: đo thử với model nháp ngày 2026-09-26 thấy ``Transpose`` chạy CPU (590 µs / 20,663 µs), cần kiểm lại trên model thật
 - ☐ So FLOPs (Table E) với latency (Table G) giữa các model (Case C)
 - ☐ Ghi research gap và hướng tối ưu vào ``tmp/02_decisions/``, có số đo làm căn cứ
@@ -99,10 +99,10 @@ Phase 7. Proposed optimization
 Candidate cần train lại: thêm model + config như Phase 5 rồi chạy ``make phase2/3/4``. Candidate không train lại: thêm bước export mới vào ``pipeline.py`` phase3.
 
 - ☐ Viết code cho candidate được chọn
-- ☐ Train 1 seed (42), chạy đủ phase 3–4. Phần kết luận ghi rõ "1 seed" (quy tắc seed, mục 7)
+- ☐ Train 1 seed (0), chạy đủ phase 3–4. Phần kết luận ghi rõ "1 seed" (quy tắc seed, mục 7)
 - ☐ Table J
 
-**Tiêu chí xong:** có model đề xuất tốt hơn baseline trên RK3588S (1 seed), và xác nhận chênh lệch lớn hơn std ở Phase 10.
+**Tiêu chí xong:** có model đề xuất tốt hơn baseline trên RK3588S (1 seed).
 
 --------------
 

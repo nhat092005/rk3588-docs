@@ -98,7 +98,7 @@ Câu hỏi đã đóng, còn mở và mâu thuẫn giữa nguồn
    * - 8
      - Vì sao yaml YOLO26n ghi 6.1 GFLOPs còn ``get_flops`` ra 6.240
      - Đã đóng
-     - thop ở 32x32 nhân (640/32)^2 cho 6.117 (:ref:`So sánh tổng quan <91-so-sánh-tổng-quan>`), nguyên nhân chênh với ``get_flops`` là suy luận
+     - thop ở 32x32 nhân (640/32)^2 cho 6.117 (:doc:`Kiến trúc và khối cấu thành YOLO <../../01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`), nguyên nhân chênh với ``get_flops`` là suy luận
    * - 9
      - Vì sao YOLO26n chậm hơn dù ít FLOPs
      - **Còn mở**
@@ -160,7 +160,7 @@ Việc tiếp theo
      - Việc
      - Điều kiện hoàn thành
    * - 1
-     - [STRIKEOUT:Kiểm độc lập lượt ba] xong 2026-10-11: đã sửa đường RKNN thật có thêm ``_NormalizeCoords`` (:ref:`Đồ thị xuất và đường RKNN <94-đồ-thị-xuất-và-đường-rknn>`), dòng trích ``exporter.py``, điều kiện zero-copy của OPL §5.1, mask của số depthwise và attention, số ``Concat`` chia ba lõi (:ref:`Phép đo T3 board của YOLO26n (đường xuất thật, trọng số ngẫu nhiên) <955-phép-đo-t3-board-của-yolo26n-đường-xuất-thật-trọng-số-ngẫu-nhiên>`), điều kiện ô 9.8 số 1
+     - [STRIKEOUT:Kiểm độc lập lượt ba] xong 2026-10-11: đã sửa đường RKNN thật có thêm ``_NormalizeCoords`` (:doc:`Đồ thị xuất và đường RKNN <../../02-nen-tang-rk3588/05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn>`), dòng trích ``exporter.py``, điều kiện zero-copy của OPL §5.1, mask của số depthwise và attention, số ``Concat`` chia ba lõi (:ref:`Phép đo T3 board của YOLO26n (đường xuất thật, trọng số ngẫu nhiên) <955-phép-đo-t3-board-của-yolo26n-đường-xuất-thật-trọng-số-ngẫu-nhiên>`), điều kiện ô 9.8 số 1
      - Xong
    * - 2
      - Giai đoạn huấn luyện (:ref:`Câu hỏi đã đóng, còn mở và mâu thuẫn giữa nguồn <98-câu-hỏi-đã-đóng-còn-mở-và-mâu-thuẫn-giữa-nguồn>` số 4 và 11, lần đầu dừng ở epoch 51/100 ngày 2026-10-10 theo yêu cầu người dùng, chạy lại từ 2026-10-11): huấn luyện YOLO26n 5 lớp từ ``yolo26n.pt`` (seed 42, 100 epoch, cùng bộ dữ liệu và evaluator protocol v1 với baseline YOLOv8n, khoảng 2.3 giờ trên RTX 3050 4 GB theo lần chạy YOLOv8n), xuất INT8 với 300 ảnh calibration, đo mAP FP32 so INT8 và độ trễ
@@ -168,6 +168,18 @@ Việc tiếp theo
    * - 3
      - Chỉ sau bước 2 mới đưa khuyến nghị chọn model và sửa đổi kiến trúc
      - Khuyến nghị gắn với số đo trên dữ liệu PPE, không với số trong paper
+
+Huấn luyện và triển khai của dự án
+==================================
+
+Các câu hỏi dưới đây chuyển từ mục Kiến thức nền ngày 2026-10-31. Câu trả lời cần đọc cấu hình hoặc chạy đo trên dự án (T3).
+
+- **unknown:** batch size huấn luyện của từng run. Truy vấn tìm nguồn: ``args.yaml`` hoặc ``config.yaml`` trong ``ai/automation/runs/<run_id>/``.
+- **unknown:** kiểu dữ liệu huấn luyện (FP32 hay mixed precision). Truy vấn tìm nguồn: trường ``amp`` hoặc ``half`` trong ``config.yaml`` của run.
+- **unknown:** số bước warmup, hệ số giảm và loại scheduler dùng cho YOLO. Truy vấn tìm nguồn: ``args.yaml`` của các run trong ``results/``.
+- **unknown:** tỷ lệ chia train, validation, test của các bộ dữ liệu. Truy vấn tìm nguồn: ``data/*/DATA_CARD.md``.
+- **unknown:** mức lệch số liệu giữa suy luận PyTorch trên PC và suy luận RKNN trên board của các run hiện có. Truy vấn tìm nguồn: ``results/<ds>/table_*.md``.
+- Thay SiLU bằng ReLU: bản ReLU của YOLOv8n chia đều ba lõi và giảm khoảng 35% độ trễ [T3 LOG 2026-10-10]. Số này trùng phạm vi 29 đến 39% ở mục "Số đo T3 ban đầu chưa tái kiểm" bên dưới.
 
 Số đo T3 ban đầu chưa tái kiểm
 ==============================

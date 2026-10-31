@@ -7,8 +7,8 @@ Runbook
 .. admonition:: Tóm tắt
 
    - Runbook có 13 bước chạy từ trên xuống, trong đó cột "Kết quả đúng" là thứ cần thấy trước khi sang bước sau.
-   - `make phase2/3/4/10` bỏ qua bước đã có file kết quả, dừng ở lỗi đầu tiên và kết thúc bằng `make tables`.
-   - Phase 2 train baseline seed 42 mất khoảng 17 giờ GPU cho cả 2 dataset, còn Phase 3 chỉ cần ssh tới board.
+   - `make phase2/3/4` bỏ qua bước đã có file kết quả, dừng ở lỗi đầu tiên và kết thúc bằng `make tables`.
+   - Phase 2 train baseline seed 0 mất khoảng 17 giờ GPU cho cả 2 dataset, còn Phase 3 chỉ cần ssh tới board.
    - Phase 4 cần `start_rknn_server.sh` (bước 4) và `lock_freq.sh lock` (bước 9) trước. Tầng 1 FP16 mất khoảng 30 phút/model.
    - Sau bước 10 chạy `lock_freq.sh unlock` để governor về `ondemand`, và đọc `results/<ds>/SOURCES.md` sau mỗi phase để mục "Errors" ghi `none`.
 
@@ -36,7 +36,7 @@ Tổng quan
      - Không
      - -
    * - 2
-     - Train baseline YOLOv8n/s, seed 42
+     - Train baseline YOLOv8n/s, seed 0
      - ``make phase2 DATASET=<ds>``
      - Không
      - A, B, D
@@ -75,13 +75,8 @@ Tổng quan
      - code viết ở Phase 9
      - Có
      - -
-   * - 10
-     - Chốt số liệu: seed 43, 44 cho model chính
-     - ``make phase10 DATASET=<ds> MODELS=...``
-     - Có
-     - D, F, J, M (mean ± std)
 
-``make phase2/3/4/10`` chạy lần lượt mọi bước của phase, **bỏ qua bước đã có file kết quả**, dừng ở lỗi đầu tiên, và kết thúc bằng ``make tables``. Bị ngắt (mất điện, lỗi mạng) thì sửa lỗi rồi chạy lại đúng lệnh đó.
+``make phase2/3/4`` chạy lần lượt mọi bước của phase, **bỏ qua bước đã có file kết quả**, dừng ở lỗi đầu tiên, và kết thúc bằng ``make tables``. Bị ngắt (mất điện, lỗi mạng) thì sửa lỗi rồi chạy lại đúng lệnh đó.
 
 --------------
 
@@ -121,7 +116,7 @@ Chạy từ trên xuống. Cột "Kết quả đúng" là thứ cần thấy tr�
      - ``GOLDEN TEST PASSED``, ``PARSERS OK``
    * - 6
      - ``make phase2 DATASET=sfchd_5class``\ \ ``make phase2 DATASET=sfchd_shel5k``
-     - Train baseline seed 42 (khoảng 17 giờ GPU cho cả 2)
+     - Train baseline seed 0 (khoảng 17 giờ GPU cho cả 2)
      - ``phase2 complete``, đồng thời ``results/<ds>/table_D_fp32.md`` đủ 2 dòng
    * - 7
      - Chọn dataset, ghi vào ``tmp/02_decisions/``
@@ -147,9 +142,5 @@ Chạy từ trên xuống. Cột "Kết quả đúng" là thứ cần thấy tr�
      - Đọc ``results/<ds>/SOURCES.md``
      - Sau mỗi phase
      - Mục "Errors" ghi ``none``
-   * - 13
-     - ``make phase10 DATASET=<ds> MODELS=yolov8n_baseline,<model đề xuất>``
-     - Cuối đề tài, sau Phase 7–9
-     - ``phase10 complete``, đồng thời Table D, F có mean ± std cho các model chính
 
 Phase 5–9 dùng lại đúng các lệnh trên cho model mới (xem từng phase).

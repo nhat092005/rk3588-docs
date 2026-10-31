@@ -2,7 +2,7 @@
 Phase và checklist
 ******************
 
-Mục tiêu, checklist và tiêu chí xong của Phase 0 đến 10.
+Mục tiêu, checklist và tiêu chí xong của Phase 0 đến 9.
 
 .. toctree::
    :maxdepth: 1
