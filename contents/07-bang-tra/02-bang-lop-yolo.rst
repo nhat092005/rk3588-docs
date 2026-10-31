@@ -339,7 +339,3 @@ YOLO26n
      - 
 
 Tổng hợp của file này: lớp ``Detect`` của YOLOv8n chiếm 2.965 trên 8.087 GFLOPs (khoảng 37%), trong khi ``Detect`` của YOLO26n chiếm 0.435 trên 5.314 (khoảng 8%). Phần lớn mức giảm FLOPs của YOLO26n so với YOLOv8n nằm ở đầu. Ngoài đầu, hai model gần nhau (YOLOv8n còn lại 5.122, YOLO26n còn lại 4.879 GFLOPs).
-
---------------
-
-.. _94-đồ-thị-xuất-và-đường-rknn:
