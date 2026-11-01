@@ -391,7 +391,7 @@ Nguồn: [T3 ``measure.py``], cộng theo lớp từ bảng ở mục 3.
 
 Ba nhận xét rút ra từ số đo:
 
-- Head có ít tham số hơn backbone gần một nửa nhưng chi phí tính toán gần bằng. Lý do là Conv 3×3 của head chạy trên lưới lớn: riêng mức P3 (80×80) chạy 6400 vị trí. Tính theo công thức, mức P3 của head tiêu tốn :math:`6400 \cdot (64 \cdot 64 \cdot 9 \cdot 4 + 64 \cdot 64 + 64 \cdot 5) = 0.972` GMACs hay 1.944 GFLOPs, khoảng hai phần ba (65.6%) GFLOPs của head. Con số này tính từ công thức trong ``gen.py``, chưa đo riêng theo mức.
+- Head có ít tham số hơn backbone gần một nửa nhưng chi phí tính toán gần bằng. Lý do là Conv 3×3 của head chạy trên lưới lớn: riêng mức P3 (80×80) chạy 6400 vị trí. Tính theo công thức, mức P3 của head tiêu tốn :math:`6400 \cdot (64 \cdot 64 \cdot 9 \cdot 4 + 64 \cdot 64 + 64 \cdot 5) = 0.972` GMACs hay 1.944 GFLOPs, khoảng hai phần ba (65.6%) GFLOPs của head. Đo bằng hook Conv2d trong ``measure.py`` (2 FLOP mỗi MAC), GFLOPs của head theo mức là: P3 1.944 (65.6%), P4 0.722 (24.3%), P5 0.298 (10.1%), Conv 1×1 của DFL 0.001 (0.04%), tổng 2.965; số P3 khớp phép tính theo công thức.
 - Hai lớp C2f ×2 của backbone (L4, L6) mỗi lớp 0.629 GFLOPs, cao nhất trong các lớp backbone. L21 (neck, 493,056 tham số) là lớp nhiều tham số nhất ngoài head nhưng chỉ 0.393 GFLOPs vì chạy ở lưới 20×20.
 - Đổi ``nc`` chỉ ảnh hưởng head. Backbone cộng neck có 2,259,536 tham số ở cả ``nc=5`` và ``nc=80``. Head là 752,287 (``nc=5``) và 897,664 (``nc=80``), tổng 3,157,200 khớp con số ghi trong yaml [T1 yolov8.yaml:11] [T3 ``measure.py``]. Ở ``nc=80``, ``c3`` lên 80 nên nhánh lớp rộng hơn.
 
@@ -402,13 +402,16 @@ Chạy ``measure.py`` nạp ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/
 
 Trọng số khởi tạo là ``yolov8n.pt`` (COCO), không phải kiến trúc khác: log huấn luyện ghi "Transferred 322/355 items from pretrained weights" [T3 ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/logs/train_20261026-004322.log``:38]. Kiểm trên model dựng từ yaml, các tensor không nạp được đều thuộc nhánh cls của head (``cv3``), vì checkpoint COCO có ``c3 = 80`` nên shape khác ``c3 = 64`` ở ``nc=5``. Log chỉ ghi tổng 322/355, nên danh sách chính xác của 33 tensor còn lại chưa đối chiếu từng cái.
 
-Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu.yaml``) thay SiLU bằng ReLU và giữ nguyên mọi shape. Tệp ghi rõ chỉ thêm ``scale`` và ``activation`` so với ``yolov8.yaml`` bản 8.4.154 [T1 ``ai/models/yolov8n_relu.yaml``]. Mọi số tham số và GFLOPs trong trang áp dụng cho cả hai. Cách chúng khác nhau về độ chính xác và độ trễ chưa đo, nằm ở các chương so sánh.
+Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu.yaml``) thay SiLU bằng ReLU và giữ nguyên mọi shape. Tệp ghi rõ chỉ thêm ``scale`` và ``activation`` so với ``yolov8.yaml`` bản 8.4.154 [T1 ``ai/models/yolov8n_relu.yaml``]. Mọi số tham số và GFLOPs trong trang áp dụng cho cả hai. Kết quả so sánh độ chính xác và độ trễ nằm ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` và :doc:`../04-tang-npu-ket-qua/02-ket-qua-bien-the-activation`.
 
-9. Việc chưa làm
-================
+9. Liên kết sang tầng NPU và tái lập
+====================================
 
-- Latency từng khối đã được đo trên RK3588 (INT8, ``CORE_0``). Kết quả và độ tin cậy ở :doc:`../03-do-latency-npu/02-ket-qua-latency-tung-khoi`, phân tích sâu ở :doc:`../03-do-latency-npu/03-phan-tich-sau-latency-tung-khoi`, dao động latency ở :doc:`../03-do-latency-npu/04-cac-muc-do-tre` và :doc:`../03-do-latency-npu/05-thu-ghim-cpu-va-ngat`, kế hoạch đo ở :doc:`../03-do-latency-npu/01-ke-hoach-do`. Số GFLOPs ở trang này vẫn là khối lượng tính toán lý thuyết (chỉ đếm Conv2d), không phải thời gian chạy. Bảng hỗ trợ từng toán tử trên NPU nằm ở :doc:`../02-tang-npu/01-operator-support`.
+- Số GFLOPs ở trang này chỉ là khối lượng tính toán lý thuyết (chỉ đếm Conv2d), không phải thời gian chạy. Latency từng khối đã được đo trên RK3588 (INT8, ``CORE_0``): kế hoạch đo ở :doc:`../02-tang-npu-nen-do/01-ke-hoach-do`, kết quả và độ tin cậy ở :doc:`../02-tang-npu-nen-do/02-ket-qua-latency-tung-khoi`, phân tích sâu ở :doc:`../02-tang-npu-nen-do/03-phan-tich-sau-latency-tung-khoi`, dao động latency ở :doc:`../02-tang-npu-nen-do/04-cac-muc-do-tre` và :doc:`../02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat`. Bảng hỗ trợ từng toán tử trên NPU nằm ở :doc:`../03-tang-npu-don-bay/01-operator-support`.
+- Số liệu và hình trong trang chỉ tính cho ``nc=5``. Đổi ``nc`` chỉ làm đổi head: Conv 1×1 cuối của nhánh cls luôn đổi, và khi ``nc > 64`` thì ``c3 = max(64, min(nc, 100))`` tăng nên hai Conv 3×3 của nhánh đó cũng rộng ra (mục 6.1, 7). Muốn tái lập hình cho ``nc`` khác, sửa ``NC`` trong ``gen.py`` và ``nc=5`` trong ``measure.py``, chạy ``measure.py``, dán hai mảng ``MEASURED_*`` vào ``gen.py``, rồi chạy lại ``gen.py``.
+
+10. Việc chưa làm
+=================
+
 - Các phép ngoài Conv2d mới được đếm số phần tử đầu ra (``measure.py``, ảnh 640×640): BatchNorm2d 13,619,200 (57 lớp), SiLU 13,619,200 (57 lớp), MaxPool2d 153,600 (3 lớp), Upsample 1,228,800 (2 lớp). Chưa quy ra FLOPs vì số FLOPs mỗi phần tử là quy ước chưa có nguồn. Add, Concat, Split và Mul chưa đếm. Chênh 0.109 giữa cách đếm này và ``get_flops`` chưa được giải thích.
-- GFLOPs của head theo mức đã đo bằng hook Conv2d trong ``measure.py`` (2 FLOP mỗi MAC): P3 1.944 (65.6%), P4 0.722 (24.3%), P5 0.298 (10.1%), Conv 1×1 của DFL 0.001 (0.04%), tổng 2.965. Số P3 khớp phép tính theo công thức ở mục 7.
-- Số liệu và hình chỉ đúng cho ``nc=5``. Đổi ``nc`` chỉ làm đổi head: Conv 1×1 cuối của nhánh cls luôn đổi, và khi ``nc > 64`` thì ``c3 = max(64, min(nc, 100))`` tăng nên hai Conv 3×3 của nhánh đó cũng rộng ra (mục 6.1, 7). Muốn có hình cho ``nc`` khác, sửa ``NC`` trong ``gen.py`` và ``nc=5`` trong ``measure.py``, chạy ``measure.py``, dán hai mảng ``MEASURED_*`` vào ``gen.py``, rồi chạy lại ``gen.py``.
 - Chưa so yaml trong ultralytics 8.4.154 với bản YOLOv8n phát hành gốc năm 2023. "Chuẩn" ở đây nghĩa là chuẩn theo cấu hình hiện hành của Ultralytics, đã khớp con số 3,157,200 tham số ghi trong chính yaml đó [T1 yolov8.yaml:11].
