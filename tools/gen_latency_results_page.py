@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sinh các trang 02 đến 05 của nhóm docs "Đo latency trên NPU" (03-phuong-phap/03-do-latency-npu) từ kết quả đo, không gõ tay số.
+"""Sinh các trang 02 đến 06 và 08 của nhóm docs "Nền đo NPU" (03-phuong-phap/02-tang-npu-nen-do) và trang 04-do-chinh-xac-int8-do-latency của nhóm "Kết quả đo NPU" từ kết quả đo, không gõ tay số.
 
 Đọc ../results/{latency_per_block,layer_analysis,onboard}_<run>_int8_CORE_0.json và ../ai/automation/runs/<run>/bench/.
 Chạy từ gốc repo chính:  .venv/bin/python docs/tools/gen_latency_results_page.py
@@ -14,8 +14,9 @@ REPO = Path(__file__).resolve().parents[2]
 RUN = "ppe5_yolov8n_baseline_100ep_s0"
 BENCH = REPO / "ai" / "automation" / "runs" / RUN / "bench"
 RES = REPO / "results"
-OUTDIR = REPO / "docs" / "contents" / "03-phuong-phap" / "03-do-latency-npu"
-NAMES = {"02": "02-ket-qua-latency-tung-khoi.rst", "03": "03-phan-tich-sau-latency-tung-khoi.rst", "04": "04-cac-muc-do-tre.rst", "05": "05-thu-ghim-cpu-va-ngat.rst", "06": "06-co-che-cac-muc-do-tre.rst", "07": "07-giao-thuc-p2-va-do-mo-rong.rst"}
+OUTDIR = REPO / "docs" / "contents" / "03-phuong-phap" / "02-tang-npu-nen-do"
+OUTDIR_KQ = REPO / "docs" / "contents" / "03-phuong-phap" / "04-tang-npu-ket-qua"
+NAMES = {"02": "02-ket-qua-latency-tung-khoi.rst", "03": "03-phan-tich-sau-latency-tung-khoi.rst", "04": "04-cac-muc-do-tre.rst", "05": "05-thu-ghim-cpu-va-ngat.rst", "06": "06-co-che-cac-muc-do-tre.rst", "07": "08-ket-qua-p2-va-do-mo-rong.rst", "07b": "04-do-chinh-xac-int8-do-latency.rst"}
 
 A = json.loads((RES / f"latency_per_block_{RUN}_int8_CORE_0.json").read_text())
 L = json.loads((RES / f"layer_analysis_{RUN}_int8_CORE_0.json").read_text())
@@ -207,9 +208,9 @@ assert len(_first) == 5 and all(_first)  # text: the first call is lower in all 
 
 docs = {"02": [], "03": [], "04": [], "05": []}
 w = docs["02"].append
-w("""****************************
-Kết quả latency từng khối
-****************************
+w("""*****************
+Latency từng khối
+*****************
 
 .. admonition:: Trang này trả lời
 
@@ -222,7 +223,7 @@ w(f""".. admonition:: Tóm tắt
    - Latency không phải một con số. Qua ``eval_perf`` từ PC, trung vị các phiên là {', '.join(f(x['npu_latency_ms'], 2) for x in [b2] + b3)} ms (B2 và ba phiên B3), và {', '.join(f(s['median'], 2) for s in e1['sessions'])} ms (hai phiên E1). Đo ngay trên board bằng C API (không qua đường truyền), ba đợt 1000 lần chạy liên tiếp có trung vị {', '.join(f(hot[str(n)]['median'] / 1000, 2) for n in (1, 2, 3))} ms, từng lần chạy từ {f(min(min(v) for v in hot_csv.values()), 1)} đến {f(max(max(v) for v in hot_csv.values()), 1)} ms. Cổng A5 (chênh giữa các phiên không quá 5%) không đạt: {pct(S['latency_gap'], 2)}.
    - Vì sao latency dao động và các giả thuyết đã kiểm nằm ở :doc:`04-cac-muc-do-tre`, thí nghiệm ghim CPU và ngắt NPU ở :doc:`05-thu-ghim-cpu-va-ngat`, phân tích từng dòng (Conv, op khác Conv, DFL, hằng số mỗi dòng) ở :doc:`03-phan-tich-sau-latency-tung-khoi`.
    - Tỉ lệ thời gian giữa các khối ổn định hơn latency tuyệt đối. Giữa năm nguồn (``eval_perf`` B3, B2 và ba cách tính trên board), tỉ lệ một khối từ 2% thời gian trở lên chênh tối đa {f(share_pp, 1)} điểm phần trăm. Khối Detect (L22) chiếm {pct(l22['share'], 1)} ({pct(l22['b2_share'], 1)} ở B2), backbone L0 đến L9 chiếm {pct(bb_share, 1)} (cộng khối trong từng lần gọi rồi lấy trung vị, như bảng 1).
-   - Cổng chấp nhận: {', '.join(x['code'] for x in A['checks'] if x['ok'])} đạt, {', '.join(x['code'] for x in A['checks'] if not x['ok'])} không đạt. FP16 chưa chạy theo giao thức gốc vì cổng A8 của INT8 không đạt (đã chạy dưới P2 ngày 2026-10-31, :doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 6).
+   - Cổng chấp nhận: {', '.join(x['code'] for x in A['checks'] if x['ok'])} đạt, {', '.join(x['code'] for x in A['checks'] if not x['ok'])} không đạt. FP16 chưa chạy theo giao thức gốc vì cổng A8 của INT8 không đạt (đã chạy dưới P2 ngày 2026-10-31, :doc:`08-ket-qua-p2-va-do-mo-rong`, mục 6).
 
 .. contents:: Trong trang này
    :local:
@@ -259,15 +260,15 @@ Quan sát (T3 board, ``results/latency_per_block_*.md``, ``results/onboard_*.md`
 
 - Cùng một ``.rknn``, cùng tần số khoá, trung vị các phiên ``eval_perf`` lệch nhau {pct(S['latency_gap'], 2)} giữa B3 phiên 1, 2 và 3. Cổng A5 yêu cầu không quá 5%, không đạt.
 - Hai nguồn đo khác nhau về bản chất và mức của chúng không trùng nhau. ``eval_perf`` lấy thời gian từ phần cứng board [T1 API232 tr.18], còn thời gian trên board là đồng hồ CPU quanh ``rknn_run``. Ở chương trình C, ``wall_us`` và ``RKNN_QUERY_PERF_RUN`` bằng nhau trong 5 µs ở mọi lần chạy ({O['hot_wall_equals_perf_run']}), nên số này gồm cả phần driver. Quan hệ giữa hai nguồn chưa biết. Thử giãn nhịp chạy C API (X3) cho kết quả "chưa kết luận" về việc nhịp gọi có giải thích chênh lệch hay không (:doc:`06-co-che-cac-muc-do-tre`, mục 4).
-- Tổng debug ở B2 ({f(b2['debug_total_us'] / 1000, 2)} ms) thấp hơn latency ({f(b2['npu_latency_ms'], 2)} ms). Ở B3 tổng debug là {', '.join(f(r['debug_total_us'] / 1000, 2) for r in b3)} ms, cao hơn latency. Hãng ghi ``perf_debug=True`` làm thời gian lớn hơn [T1 UG232 tr.177]. Quan sát ở B2 ngược câu đó, nguyên nhân chưa biết (trên LAN, tổng debug thấp hơn latency ở 4/10 phiên không ghim và 0/10 phiên ghim, :doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 3), và câu của hãng có thể nói về đại lượng khác (chưa kiểm).
+- Tổng debug ở B2 ({f(b2['debug_total_us'] / 1000, 2)} ms) thấp hơn latency ({f(b2['npu_latency_ms'], 2)} ms). Ở B3 tổng debug là {', '.join(f(r['debug_total_us'] / 1000, 2) for r in b3)} ms, cao hơn latency. Hãng ghi ``perf_debug=True`` làm thời gian lớn hơn [T1 UG232 tr.177]. Quan sát ở B2 ngược câu đó, nguyên nhân chưa biết (trên LAN, tổng debug thấp hơn latency ở 4/10 phiên không ghim và 0/10 phiên ghim, :doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3), và câu của hãng có thể nói về đại lượng khác (chưa kiểm).
 - Cần báo latency như một khoảng kèm số mẫu và nguồn. Với model này ở ``CORE_0`` INT8, các nguồn trên cho trung vị từ {f(min(statistics.median(hot_csv[n]) for n in hot_csv), 1)} đến {f(max(r['npu_latency_ms'] for r in b3), 1)} ms và từng lần chạy từ {f(min(min(v) for v in hot_csv.values()), 1)} đến {f(max(max(v) for v in hot_csv.values()), 1)} ms.
 """)
 
 # ---------------------------------------------------------------- 3
 w = docs["04"].append
-w(f"""**********************
-Các mức độ trễ của NPU
-**********************
+w(f"""**************
+Các mức độ trễ
+**************
 
 .. admonition:: Trang này trả lời
 
@@ -278,7 +279,7 @@ Các mức độ trễ của NPU
 
    - Dao động có cấu trúc: độ trễ tập trung ở ba mức chính (còn {n_trans} lần chạy, {pct(n_trans / len(all_hot), 0)}, nằm giữa mức nhanh và mức giữa), trung vị {f(mid['fast'], 2)}, {f(mid['mid'], 2)} và {f(mid['slow'], 2)} ms, cách nhau {f(E2['gap_us']['mid_minus_fast'] / 1000, 2)} ms và {f(E2['gap_us']['slow_minus_mid'] / 1000, 2)} ms. Mỗi lần chạy có {f(E2['irq_per_run'], 0)} ngắt NPU, nên mỗi khoảng cách ứng với khoảng {f(E2['gap_us_per_interrupt']['mid_minus_fast'], 0)} µs mỗi ngắt (chỉ là kiểm tra nhất quán, không phải cơ chế).
    - NPU khởi động nguội: không ủng hộ (nghỉ 2 và 10 giây giữa các lần chạy cho trung vị {f(gap['gap2s']['median'] / 1000, 2)} và {f(gap['gap10s']['median'] / 1000, 2)} ms, không chạm mức chậm). Xung nhịp hoặc băng thông DDR đổi: không ủng hộ (hệ số theo cycles của Conv giữ ở {f(min(v['slope'] for v in fits.values()), 3)} đến {f(max(v['slope'] for v in fits.values()), 3)}). Bộ đếm ``cpuidle``: chưa kết luận. Vị trí CPU và ngắt NPU được kiểm riêng ở :doc:`05-thu-ghim-cpu-va-ngat`.
-   - Trong một phiên ``eval_perf`` (E1), trung vị hai phiên chỉ lệch {pct(e1['session_median_gap'], 2)} nhưng mỗi phiên trải {pct(min(s_['range'] for s_ in e1['sessions']), 0)} đến {pct(max(s_['range'] for s_ in e1['sessions']), 0)}. Lần gọi đầu thấp hơn các lần sau ở cả 5 phiên latency qua relay. Đính chính ngày 2026-10-31: trên LAN, 10 phiên mỗi giao thức cho kết quả \"không ổn định\" (:doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 3).
+   - Trong một phiên ``eval_perf`` (E1), trung vị hai phiên chỉ lệch {pct(e1['session_median_gap'], 2)} nhưng mỗi phiên trải {pct(min(s_['range'] for s_ in e1['sessions']), 0)} đến {pct(max(s_['range'] for s_ in e1['sessions']), 0)}. Lần gọi đầu thấp hơn các lần sau ở cả 5 phiên latency qua relay. Đính chính ngày 2026-10-31: trên LAN, 10 phiên mỗi giao thức cho kết quả \"không ổn định\" (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3).
 
 Kết quả latency và tỉ lệ từng khối nằm ở :doc:`02-ket-qua-latency-tung-khoi`. Phân tích sâu từng khối nằm ở :doc:`03-phan-tich-sau-latency-tung-khoi`. Thí nghiệm ghim CPU và ngắt NPU (E2 đến E2e) nằm ở :doc:`05-thu-ghim-cpu-va-ngat`. Quy ước nhãn, dùng cho trang này và :doc:`05-thu-ghim-cpu-va-ngat`: "ủng hộ", "không ủng hộ" hoặc "chưa kết luận". Không có nhãn nào ở đây là kết luận về cơ chế.
 
@@ -314,9 +315,9 @@ w(f"""
 Nghỉ 2 và 10 giây giữa các lần chạy (trong cùng một tiến trình) không làm lần chạy chậm hơn: trung vị {f(gap['gap2s']['median'] / 1000, 2)} và {f(gap['gap10s']['median'] / 1000, 2)} ms, nằm trong mức giữa, và lần chạy đầu sau nghỉ 10 giây là {f(gap['gap10s']['values'][0] / 1000, 2)} ms. Hai điều kiện này cũng không bao giờ chạm mức chậm. **Nhãn: không ủng hộ** giả thuyết khởi động nguội gây mức chậm (nghỉ lâu không chậm hơn).
 """)
 w = docs["05"].append
-w(f"""************************
-Thử ghim CPU và ngắt NPU
-************************
+w(f"""********************
+Ghim CPU và ngắt NPU
+********************
 
 .. admonition:: Trang này trả lời
 
@@ -496,7 +497,7 @@ w(table(["Phiên", "Trung vị (ms)", "Nhỏ nhất", "Lớn nhất", "Khoảng"
         [8, 12, 10, 10, 10, 8, 12, 16, 16]))
 sp = e1["sampler"]
 w(f"""
-Chênh trung vị giữa hai phiên chỉ {pct(e1['session_median_gap'], 2)} nhưng trong mỗi phiên giá trị trải {pct(max(s['range'] for s in e1['sessions']), 0)}, và {pct(e1['low_mode_share'], 1)} trong 40 lần gọi nằm dưới 19.0 ms (trung vị {f(e1['low_mode_median'], 3)} ms), phần còn lại có trung vị {f(e1['high_mode_median'], 3)} ms. Tần số in ra ở mọi lần gọi giống nhau. Bộ lấy mẫu ({sp['rows']} dòng trong {sp['seconds']:.0f} giây) cho thấy tần số, governor và nhiệt độ ({f(sp['soc_mC'][0] / 1000, 1)} đến {f(sp['soc_mC'][1] / 1000, 1)} °C) không đổi. Lần gọi đầu của hai phiên E1 là {', '.join(f(s['first'], 2) for s in e1['sessions'])} ms, thấp hơn trung vị các lần sau ({', '.join(f(s['rest_median'], 2) for s in e1['sessions'])} ms). Ở B3, latency của lần gọi đầu cũng thấp hơn trung vị các lần sau ở cả ba phiên (mục 4.2), nên lần gọi đầu thấp hơn ở cả 5 phiên latency qua relay. Điều này chưa giải thích được. Trên LAN (X4, ngày 2026-10-31) hiện tượng không lặp lại ổn định (:doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 3). Hãng không có khuyến nghị warm-up cho ``eval_perf`` (không tìm thấy trong UG232 và API232).
+Chênh trung vị giữa hai phiên chỉ {pct(e1['session_median_gap'], 2)} nhưng trong mỗi phiên giá trị trải {pct(max(s['range'] for s in e1['sessions']), 0)}, và {pct(e1['low_mode_share'], 1)} trong 40 lần gọi nằm dưới 19.0 ms (trung vị {f(e1['low_mode_median'], 3)} ms), phần còn lại có trung vị {f(e1['high_mode_median'], 3)} ms. Tần số in ra ở mọi lần gọi giống nhau. Bộ lấy mẫu ({sp['rows']} dòng trong {sp['seconds']:.0f} giây) cho thấy tần số, governor và nhiệt độ ({f(sp['soc_mC'][0] / 1000, 1)} đến {f(sp['soc_mC'][1] / 1000, 1)} °C) không đổi. Lần gọi đầu của hai phiên E1 là {', '.join(f(s['first'], 2) for s in e1['sessions'])} ms, thấp hơn trung vị các lần sau ({', '.join(f(s['rest_median'], 2) for s in e1['sessions'])} ms). Ở B3, latency của lần gọi đầu cũng thấp hơn trung vị các lần sau ở cả ba phiên (mục 4.2), nên lần gọi đầu thấp hơn ở cả 5 phiên latency qua relay. Điều này chưa giải thích được. Trên LAN (X4, ngày 2026-10-31) hiện tượng không lặp lại ổn định (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3). Hãng không có khuyến nghị warm-up cho ``eval_perf`` (không tìm thấy trong UG232 và API232).
 """)
 
 w = docs["02"].append
@@ -534,9 +535,9 @@ w(table(["OpType", "Số dòng", "B3 (µs)", "Tỉ lệ", "Lệch giữa các ph
 
 # ---------------------------------------------------------------- 5
 w = docs["03"].append
-w(f"""*******************************
-Phân tích sâu latency từng khối
-*******************************
+w(f"""***********************
+Phân tích sâu từng khối
+***********************
 
 .. admonition:: Trang này trả lời
 
@@ -608,14 +609,14 @@ w("""
 w(table(["Phiên", "Latency lần gọi đầu (ms)", "Latency trung vị các lần sau (ms)", "Tổng debug lần đầu (ms)", "Tổng debug trung vị các lần sau (ms)"],
         [[i + 1, f(x["latency_first"], 3), f(x["latency_rest_median"], 3), f(x["debug_first"] / 1000, 3), f(x["debug_rest_median"] / 1000, 3)] for i, x in enumerate(L["first_vs_rest"])], [8, 18, 22, 22, 26]))
 w("""
-Latency của lần gọi đầu thấp hơn trung vị các lần sau ở cả ba phiên B3 (và ở hai phiên E1, mục 4.1). Tổng debug thì không đồng nhất: lần đầu thấp hơn ở phiên 1 và 2, cao hơn một chút ở phiên 3. Chỉ năm phiên latency, nên không đủ dữ liệu để kết luận có hiệu ứng warm-up hay nguyên nhân của nó. Đính chính ngày 2026-10-31: X4 chạy 10 phiên mỗi giao thức trên LAN, lần gọi đầu thấp hơn các lần sau không ổn định ở cả hai giao thức (:doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 3). Hãng không có khuyến nghị warm-up trong tài liệu, chỉ ví dụ ``rknn_benchmark.cpp`` chạy 5 lần làm nóng trước khi đo (``3rdparty/rknn-toolkit2/rknpu2/examples/rknn_benchmark/src/rknn_benchmark.cpp:415-431``) [T1 mã nguồn].
+Latency của lần gọi đầu thấp hơn trung vị các lần sau ở cả ba phiên B3 (và ở hai phiên E1, mục 4.1). Tổng debug thì không đồng nhất: lần đầu thấp hơn ở phiên 1 và 2, cao hơn một chút ở phiên 3. Chỉ năm phiên latency, nên không đủ dữ liệu để kết luận có hiệu ứng warm-up hay nguyên nhân của nó. Đính chính ngày 2026-10-31: X4 chạy 10 phiên mỗi giao thức trên LAN, lần gọi đầu thấp hơn các lần sau không ổn định ở cả hai giao thức (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3). Hãng không có khuyến nghị warm-up trong tài liệu, chỉ ví dụ ``rknn_benchmark.cpp`` chạy 5 lần làm nóng trước khi đo (``3rdparty/rknn-toolkit2/rknpu2/examples/rknn_benchmark/src/rknn_benchmark.cpp:415-431``) [T1 mã nguồn].
 """)
 w = docs["03"].append
 w(f"""
 6. Điều chưa biết
 =================
 
-- Nguyên nhân của hằng số mỗi dòng ở chế độ debug và vì sao nó khác nhau giữa các phiên (mục 5). X4 đo được liên hệ với việc ghim lõi: dưới P2 hằng số khoảng 5 µs và chênh 0.3 µs giữa 10 phiên, không ghim thì 8 đến 52 µs (:doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 3). Nguyên nhân vẫn chưa biết.
+- Nguyên nhân của hằng số mỗi dòng ở chế độ debug và vì sao nó khác nhau giữa các phiên (mục 5). X4 đo được liên hệ với việc ghim lõi: dưới P2 hằng số khoảng 5 µs và chênh 0.3 µs giữa 10 phiên, không ghim thì 8 đến 52 µs (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3). Nguyên nhân vẫn chưa biết.
 - Vì sao Conv lớn gần ước tính cycles còn Conv nhỏ lệch xa (mục 1). Nguồn hãng chỉ nói hiệu suất MAC phụ thuộc kích thước: "The utilization rate decreases when the Height * Width of the output Tensor < 16." [T1 UG232 tr.147], không nói chi phí cố định mỗi lớp. Phân tích lại dữ liệu B3 (X10, quy tắc ``bench/analysis_x10/rule.txt`` viết trước khi tính, ngưỡng 20% là số mới, chưa qua người dùng duyệt): {_x10['n_small'] - 1} trên {_x10['n_small']} dòng Conv nhỏ khớp mô hình thời gian = a × ước tính + b trong 20%, riêng dòng ``model.6/cv1`` đo {f(_x10_l6['time_us'], 0)} µs so với dự đoán {f(_x10_l6['predicted_us'], 0)} µs, nên "chưa kết luận". Vẫn chưa biết. Từ khóa đề xuất: "NPU per-layer launch overhead small convolution", "RKNN layer scheduling overhead".
 - Vì sao tỉ lệ thời gian của backbone cao hơn tỉ lệ GFLOPs còn neck và head thấp hơn (mục 4). X10 bỏ hằng số mỗi dòng ra khỏi tỉ lệ thời gian: khoảng cách của backbone đổi từ {f(_x10['stages']['backbone L0-L9']['gap_before'], 3)} thành {f(_x10['stages']['backbone L0-L9']['gap_after'], 3)}, neck từ {f(_x10['stages']['neck L10-L21']['gap_before'], 3)} thành {f(_x10['stages']['neck L10-L21']['gap_after'], 3)}, head từ {f(_x10['stages']['head L22']['gap_before'], 3)} thành {f(_x10['stages']['head L22']['gap_after'], 3)}, nên "chưa kết luận". Trong các nguồn đã tìm (UG232, API232, RKNNRT, tài liệu operator, bài báo ``edgesoc_benchmark_2026kong.pdf``, xem ``tmp/2026-10-31_latency-sources-facts.md``, câu hỏi Q8), không có câu nào nói thời gian NPU của Concat, Split, Add không theo FLOPs. Vẫn chưa biết.
 
@@ -649,7 +650,7 @@ Cách đọc. A5 và A8 không đạt, kể cả khi chỉ xét ba phiên B3. C�
 =============================
 
 - Quan hệ giữa thời gian ``eval_perf`` (từ phần cứng) và thời gian ``rknn_run`` trên board (gồm driver), vì hai nguồn cho mức khác nhau.
-- ``CORE_0_1_2``, FP16 và độ chính xác sau INT8 đã đo ngày 2026-10-31 dưới giao thức P2 trên LAN (:doc:`07-giao-thuc-p2-va-do-mo-rong`). Số liệu vẫn chỉ cho một model (một seed) trên một board.
+- ``CORE_0_1_2``, FP16 và độ chính xác sau INT8 đã đo ngày 2026-10-31 dưới giao thức P2 trên LAN (:doc:`08-ket-qua-p2-va-do-mo-rong`). Số liệu vẫn chỉ cho một model (một seed) trên một board.
 
 6. Nguồn
 ========
@@ -726,7 +727,7 @@ Kết quả theo quy tắc của từng thí nghiệm nằm ở Tóm tắt và m
 
 - Mức nhanh ổn định đạt ở bảy ô đã thử của E2d, gồm ô (4, 4). Ở ô (4, 4), cả {len(_c44)} khối của E2b, E2c, E2d và E2e không có lần chạy chậm nào. Trên đường C API, trung vị các khối của ô này từ {f(min(b['median'] for b in _c44_capi), 2)} đến {f(max(b['median'] for b in _c44_capi), 2)} ms, độ lệch chuẩn tối đa {f(sorted(b['std_ms'] for b in _c44_capi)[-2], 3)} ms trừ một khối của E2d ({f(max(b['std_ms'] for b in _c44_capi), 3)} ms).
 
-X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao thức P2): cổng A5 và A8 đạt, còn giao thức gốc chạy lại trên LAN thì không (:doc:`07-giao-thuc-p2-va-do-mo-rong`, mục 2). Điều kiện đo đề xuất cho các phép so sánh sau này (đề xuất của người viết trang này, chưa phải giao thức đã duyệt): ghim tiến trình đo (hoặc ``rknn_server``) và cả ba ngắt NPU vào CPU4, dừng ``irqbalance`` trong lúc đo, rồi khôi phục. Căn cứ: ô (4, 4) không có lần chạy chậm ở cả bốn thí nghiệm E2b đến E2e và đạt mức nhanh ở cả hai đường đo. Điều này nhất quán với hướng dẫn của hãng gắn ứng dụng và ngắt NPU vào lõi CPU lớn [T1 UG232 tr.75], nhưng hướng dẫn đó viết cho chạy đa nhân (mục 1), còn mọi phép đo ở đây là ``CORE_0``, và nó không giải thích cơ chế. Giới hạn: một board, E2b đến E2e chạy trong cùng một lần khởi động (uptime ghi ở ``bench/onboard_e2b/runtime_facts.txt`` và ở dòng trạng thái đầu ``progress.txt`` của E2c, E2d, E2e), governor của NPU và DDR ở E2e khác E2d (cùng tần số), và ở ô (4, 4) đường ``eval_perf`` lệch {f(E2E['comparison']['s4i4']['diff_ms'], 2)} ms so với đường C API. Dùng điều kiện này để đo lại A5 và A8 sẽ là một giao thức mới, không làm cổng A8 gốc đạt.
+X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao thức P2): cổng A5 và A8 đạt, còn giao thức gốc chạy lại trên LAN thì không (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 2). Điều kiện đo đề xuất cho các phép so sánh sau này (đề xuất của người viết trang này, chưa phải giao thức đã duyệt): ghim tiến trình đo (hoặc ``rknn_server``) và cả ba ngắt NPU vào CPU4, dừng ``irqbalance`` trong lúc đo, rồi khôi phục. Căn cứ: ô (4, 4) không có lần chạy chậm ở cả bốn thí nghiệm E2b đến E2e và đạt mức nhanh ở cả hai đường đo. Điều này nhất quán với hướng dẫn của hãng gắn ứng dụng và ngắt NPU vào lõi CPU lớn [T1 UG232 tr.75], nhưng hướng dẫn đó viết cho chạy đa nhân (mục 1), còn mọi phép đo ở đây là ``CORE_0``, và nó không giải thích cơ chế. Giới hạn: một board, E2b đến E2e chạy trong cùng một lần khởi động (uptime ghi ở ``bench/onboard_e2b/runtime_facts.txt`` và ở dòng trạng thái đầu ``progress.txt`` của E2c, E2d, E2e), governor của NPU và DDR ở E2e khác E2d (cùng tần số), và ở ô (4, 4) đường ``eval_perf`` lệch {f(E2E['comparison']['s4i4']['diff_ms'], 2)} ms so với đường C API. Dùng điều kiện này để đo lại A5 và A8 sẽ là một giao thức mới, không làm cổng A8 gốc đạt.
 
 8. Điều chưa biết và giới hạn
 =============================
@@ -890,16 +891,15 @@ assert X5["all_realized"]
 _m = X4["masks"]
 docs["07"] = []
 w = docs["07"].append
-_t07 = "Giao thức P2 và đo mở rộng"
+_t07 = "Kết quả đo theo P2"
 w(f"""{"*" * len(_t07)}
 {_t07}
 {"*" * len(_t07)}
 
 .. admonition:: Trang này trả lời
 
-   - Nếu ghim ``rknn_server`` và ngắt NPU vào CPU4 (giao thức P2), cổng A5 và A8 có đạt không, so với giao thức gốc chạy lại trên LAN (P1-LAN)?
+   - Nếu ghim ``rknn_server`` và ngắt NPU vào CPU4 (giao thức P2, định nghĩa ở :doc:`07-giao-thuc-p2-p3`), cổng A5 và A8 có đạt không, so với giao thức gốc chạy lại trên LAN (P1-LAN)?
    - Lần gọi ``eval_perf`` đầu tiên, hằng số mỗi dòng ở chế độ debug, ``CORE_0`` so với ``AUTO`` và ``CORE_0_1_2``, mức log, giá trị đầu vào và trọng số có làm đổi thời gian không?
-   - Độ chính xác của chính mô hình INT8 được đo latency là bao nhiêu, và mức giảm so với FP32 đi theo lượng tử hóa hay theo đường suy luận?
 
 .. admonition:: Tóm tắt
 
@@ -909,7 +909,7 @@ w(f"""{"*" * len(_t07)}
    - ``AUTO`` so với ``CORE_0``: {_m['AUTO']['verdict']} (hiệu {f(_m['AUTO']['diff_vs_core0_ms'], 2)} ms). ``CORE_0_1_2`` so với ``CORE_0``: {_m['CORE_0_1_2']['verdict']} (hiệu {f(_m['CORE_0_1_2']['diff_vs_core0_ms'], 2)} ms). Mức log: {X4['log']['True']['verdict']}.
    - Giá trị đầu vào: {X5['inputs_verdict']}. Trọng số: {X5['weights_verdict']}.
 
-Kết quả vị trí E2 đến E2e nằm ở :doc:`05-thu-ghim-cpu-va-ngat`, cơ chế ở :doc:`06-co-che-cac-muc-do-tre`, cổng gốc ở :doc:`02-ket-qua-latency-tung-khoi` (mục 4).
+Kết quả vị trí E2 đến E2e nằm ở :doc:`05-thu-ghim-cpu-va-ngat`, cơ chế ở :doc:`06-co-che-cac-muc-do-tre`, cổng gốc ở :doc:`02-ket-qua-latency-tung-khoi` (mục 4). Độ chính xác của đúng file INT8 được đo latency ở :doc:`../04-tang-npu-ket-qua/04-do-chinh-xac-int8-do-latency`.
 
 .. contents:: Trong trang này
    :local:
@@ -918,7 +918,7 @@ Kết quả vị trí E2 đến E2e nằm ở :doc:`05-thu-ghim-cpu-va-ngat`, c�
 1. Hai giao thức trên LAN
 =========================
 
-Mỗi phiên là lệnh ``benchmark_npu.py`` của kế hoạch (một phiên latency 5 lần ``eval_perf`` với ``perf_debug=False`` và một phiên từng lớp 5 lần với ``perf_debug=True``), chạy trên LAN trực tiếp. P1-LAN giữ điều kiện gốc (không ghim, ``irqbalance`` chạy). P2 ghim mọi luồng ``rknn_server`` và ba dòng ngắt NPU vào CPU4, ``irqbalance`` dừng. Hai giao thức chạy xen kẽ từng phiên, nghỉ 45 giây giữa các phiên (số mới, chưa qua người dùng duyệt). Một tiến trình root trên board (CPU7) đổi chế độ theo yêu cầu và ghi mỗi giây danh sách CPU được phép của từng luồng ``rknn_server``. Phiên 1 đến 3 của mỗi giao thức dùng cho cổng (mã và ngưỡng 5%, 10% của ``aggregate_layers.py`` không đổi), phiên 4 đến 10 dùng cho các câu hỏi khác. Quy tắc: ``bench/onboard_x4/rule.txt``, viết trước dữ liệu.
+Mỗi phiên là lệnh ``benchmark_npu.py`` của kế hoạch (một phiên latency 5 lần ``eval_perf`` với ``perf_debug=False`` và một phiên từng lớp 5 lần với ``perf_debug=True``), chạy trên LAN trực tiếp. P1-LAN giữ điều kiện gốc (không ghim, ``irqbalance`` chạy). P2 là giao thức đã được người dùng duyệt ngày 2026-11-01, cách đặt ghim, helper và khôi phục ở :doc:`07-giao-thuc-p2-p3` (mục 2). Hai giao thức chạy xen kẽ từng phiên, nghỉ 45 giây giữa các phiên (số 45 giây là số mới của thí nghiệm này, chưa qua người dùng duyệt). Phiên 1 đến 3 của mỗi giao thức dùng cho cổng (mã và ngưỡng 5%, 10% của ``aggregate_layers.py`` không đổi), phiên 4 đến 10 dùng cho các câu hỏi khác. Quy tắc: ``bench/onboard_x4/rule.txt``, viết trước dữ liệu.
 """)
 assert _p1["gates"]["A5"] is False and _p1["gates"]["A8"] is False and all(_p2["gates"].values())
 assert all(r["level"] == "fast" for r in _p2["sessions"]) and X4["u10"].startswith("ghim lõi thu hẹp")
@@ -932,7 +932,7 @@ w(table(["Cổng", "P1-LAN (không ghim)", "P2 (ghim CPU4)"], [[k, "đạt" if _
 w(f"""
 Đọc theo bảng 2 × 2 viết trước trong quy tắc: A5 "{X4['gate_reading']['A5']}", A8 "{X4['gate_reading']['A8']}". Trung vị latency của 10 phiên P2 nằm trong {f(min(r['latency_ms'] for r in _p2['sessions']), 3)} đến {f(max(r['latency_ms'] for r in _p2['sessions']), 3)} ms, cả 10 ở mức nhanh. 10 phiên P1-LAN có {sum(1 for r in _p1['sessions'] if r['level'] == 'slow')} phiên mức chậm, {sum(1 for r in _p1['sessions'] if r['level'] == 'mid')} phiên mức giữa và {sum(1 for r in _p1['sessions'] if r['level'] == 'fast')} phiên mức nhanh (trung vị {f(min(r['latency_ms'] for r in _p1['sessions']), 2)} đến {f(max(r['latency_ms'] for r in _p1['sessions']), 2)} ms), tức các phiên rơi vào các mức khác nhau. Điều này khớp với giải thích "lấy mẫu mức" cho việc A5 gốc không đạt (:doc:`04-cac-muc-do-tre`, mục 1), nay có số đo hỗ trợ (kết quả 2 × 2 cùng phân loại mức của từng phiên). Vì A5 và A8 của P2 đạt, theo kế hoạch FP16 được chạy dưới P2 (mục 6).
 
-Phiên P2 được tính là thực hiện đúng khi mọi dòng log mỗi giây của tiến trình trên board trong khung phiên ở chế độ ghim và không có luồng nào ngoài CPU4, và ít nhất 99% ngắt NPU của phiên ở CPU4. Cả 20 phiên benchmark thực hiện đúng. Log chỉ lấy mẫu mỗi giây, nên vi phạm ngắn hơn khoảng 1 giây có thể không thấy (một vi phạm như vậy đã được thấy ở phiên log, mục 4).
+Điều kiện để một phiên P2 được tính là thực hiện đúng ở :doc:`07-giao-thuc-p2-p3` (mục 3). Cả 20 phiên benchmark thực hiện đúng. Log chỉ lấy mẫu mỗi giây, nên vi phạm ngắn hơn khoảng 1 giây có thể không thấy (một vi phạm như vậy đã được thấy ở phiên log, mục 4).
 
 3. Lần gọi đầu, hằng số mỗi dòng, tổng debug
 ============================================
@@ -956,7 +956,7 @@ w(table(["Thiết lập", "Trung vị các phiên (ms)", "Hiệu so với tham c
         [16, 26, 14, 24, 22]))
 w(f"""
 - ``AUTO`` (U16): {_m['AUTO']['verdict']}. Mọi phiên ``AUTO`` chỉ dùng dòng ngắt 36 (một nhân), như ``CORE_0``.
-- ``CORE_0_1_2`` (U22): {_m['CORE_0_1_2']['verdict']}, hiệu {f(_m['CORE_0_1_2']['diff_vs_core0_ms'], 2)} ms ({pct(_m['CORE_0_1_2']['diff_vs_core0_ms'] / statistics.median(_m['CORE_0']['session_medians']), 1)}), đo dưới P2 với cả ba dòng ngắt ở CPU4. Đây là số đo latency, không phải kết luận về đa nhân (cổng G4 và chiến lược S1 đến S3 thuộc giai đoạn 2, :doc:`../02-tang-npu/02-multi-core`).
+- ``CORE_0_1_2`` (U22): {_m['CORE_0_1_2']['verdict']}, hiệu {f(_m['CORE_0_1_2']['diff_vs_core0_ms'], 2)} ms ({pct(_m['CORE_0_1_2']['diff_vs_core0_ms'] / statistics.median(_m['CORE_0']['session_medians']), 1)}), đo dưới P2 với cả ba dòng ngắt ở CPU4. Đây là số đo latency, không phải kết luận về đa nhân (cổng G4 và chiến lược S1 đến S3 thuộc giai đoạn 2, :doc:`../03-tang-npu-don-bay/02-multi-core`).
 - Mức log (U19): chưa kết luận, vì một phiên tham chiếu ``verbose=False`` có một giây thấy một luồng ``rknn_server`` ngoài CPU4 (``bench/onboard_x4/analysis_note.txt``). Số đo mô tả: trung vị hai mức log gần như bằng nhau.
 
 5. Giá trị đầu vào và trọng số
@@ -988,33 +988,69 @@ FP16 chậm hơn INT8 {f(X8['fp16_minus_int8_ms'], 2)} ms, gấp {f(X8['fp16_ove
 w(table(["Khối", "Tỉ lệ INT8", "Tỉ lệ FP16"], [[b, pct(v["int8"], 1), pct(v["fp16"], 1)] for b, v in X8["block_shares"].items()], [12, 16, 16]))
 w(f"""
 Đây là số đo latency. Việc giữ hay bỏ FP16 không được quyết ở đây.
+""")
+docs["07b"] = []
+w7 = docs["07b"].append
+_t07b = "Độ chính xác INT8 của file đo"
+w7(f"""{"*" * len(_t07b)}
+{_t07b}
+{"*" * len(_t07b)}
 
-7. Độ chính xác của mô hình INT8
-================================
+.. admonition:: Trang này trả lời
+
+   - Độ chính xác của chính mô hình INT8 được đo latency là bao nhiêu, và mức giảm so với FP32 đi theo lượng tử hóa hay theo đường suy luận?
+
+.. admonition:: Tóm tắt
+
+   - Trên ``css_test`` (82 ảnh, một seed), mAP50-95 của INT8 thấp hơn FP32 {f(-X7['sets']['css_test']['diff_pp']['map50_95'], 2)} điểm phần trăm.
+   - X7b: FP16 qua RKNNLite chênh {f(_x7b['css_test']['d16_pp'], 2)} điểm phần trăm so với FP32, INT8 chênh {f(_x7b['css_test']['d8_pp'], 2)}. Theo quy tắc: **{_x7b['verdict']}** (các số 0.25 và 0.75 của quy tắc là số mới, chưa qua người dùng duyệt).
+   - Nguyên nhân bên trong của mức giảm vẫn chưa biết (mục 2).
+
+Latency của đúng file INT8 này ở :doc:`../02-tang-npu-nen-do/02-ket-qua-latency-tung-khoi`. Chẩn đoán lượng tử hóa ở :doc:`05-ket-qua-luong-tu-hoa`.
+
+.. contents:: Trong trang này
+   :local:
+   :depth: 1
+
+1. Kết quả chấm điểm
+====================
 
 X7 chấm chính file INT8 được đo latency (sha256 ``a501f94e``), suy luận bằng RKNNLite trên board, chấm điểm trên PC bằng cùng mã và cùng ngưỡng tin cậy với bản FP32 (Evaluation Protocol v1, ``ai/core/evaluator.py``). Quy tắc ``bench/eval_x7/rule.txt``: chỉ báo số, không áp ngưỡng nào (ngưỡng 1.0 pp mAP đã duyệt thuộc cổng G4, giai đoạn 2).
 """)
-w(table(["Tập", "Số ảnh", "Chỉ số", "INT8", "FP32", "Chênh (điểm %)"],
+w7(table(["Tập", "Số ảnh", "Chỉ số", "INT8", "FP32", "Chênh (điểm %)"],
         [[s, v["n_images"], k, f(v["int8"][k], 4), f(v["fp32"][k], 4), f"{v['diff_pp'][k]:+.2f}"] for s, v in X7["sets"].items() for k in ("precision", "recall", "map50", "map50_95")],
         [14, 8, 14, 12, 12, 14]))
-w(f"""
+w7(f"""
 Trên ``css_test``, mAP50-95 của INT8 thấp hơn FP32 {f(-X7['sets']['css_test']['diff_pp']['map50_95'], 2)} điểm phần trăm. Phép so này gộp cả hai khác biệt: lượng tử hóa và đường suy luận (RKNNLite trên board so với PyTorch trên PC). X7b tách chúng bằng cách chấm mô hình FP16 qua đúng đường RKNNLite (``bench/eval_x7b/rule.txt``, viết trước, các số 0.25 và 0.75 là số mới, chưa qua người dùng duyệt): trên ``css_test``, FP16 qua RKNNLite có mAP50-95 {f(_x7b['css_test']['fp16_rknn_map50_95'], 4)}, chênh {f(_x7b['css_test']['d16_pp'], 2)} điểm phần trăm so với FP32, còn INT8 chênh {f(_x7b['css_test']['d8_pp'], 2)}. Theo quy tắc: **{_x7b['verdict']}**. Trên ``ppe2286_ext`` (mô tả) FP16 qua RKNNLite chênh {f(_x7b['ppe2286_ext']['d16_pp'], 2)} và INT8 chênh {f(_x7b['ppe2286_ext']['d8_pp'], 2)}. ``css_test`` chỉ có 82 ảnh và một seed. Mức giảm do lượng tử hóa là phát biểu về kết quả đo, nguyên nhân bên trong lượng tử hóa (hiệu chuẩn hay lớp nhạy) chưa được kiểm. Từ khóa đề xuất: "RKNN INT8 accuracy drop YOLOv8 quantization calibration".
 
-8. Điều chưa biết và giới hạn
+2. Điều chưa biết và giới hạn
+=============================
+
+- Nguyên nhân bên trong của mức giảm INT8 (hiệu chuẩn, lớp nhạy, hay phân phối dữ liệu hiệu chuẩn): X7b chỉ cho biết mức giảm đi theo lượng tử hóa, không đi theo đường suy luận RKNNLite (U28). Cập nhật 2026-10-31 (giai đoạn 2): chẩn đoán lượng tử hóa đã khoanh vùng công thức lấy lại gần hết mức rơi (giữ FP16 nhánh giải mã box), xem :doc:`05-ket-qua-luong-tu-hoa`. Nguyên nhân bên trong vẫn chưa biết.
+
+3. Nguồn
+========
+
+- T3 board và PC: ``results/eval_x7_*``, ``ai/automation/runs/{RUN}/bench/eval_x7/``, ``ai/automation/runs/{RUN}/eval/``. Mã: ``ai/automation/analyze_x7.py``.
+""")
+
+w = docs["07"].append
+w(f"""
+7. Điều chưa biết và giới hạn
 =============================
 
 - Mức log (U19): chưa kết luận (mục 4).
 - Vì sao hằng số mỗi dòng ở chế độ debug gần như không đổi dưới P2 mà dao động khi không ghim (liên hệ đo được, nguyên nhân chưa biết).
-- Nguyên nhân bên trong của mức giảm INT8 (hiệu chuẩn, lớp nhạy, hay phân phối dữ liệu hiệu chuẩn): X7b chỉ cho biết mức giảm đi theo lượng tử hóa, không đi theo đường suy luận RKNNLite (U28). Cập nhật 2026-10-31 (giai đoạn 2): chẩn đoán lượng tử hóa đã khoanh vùng công thức lấy lại gần hết mức rơi (giữ FP16 nhánh giải mã box), xem :doc:`../02-tang-npu/13-ket-qua-luong-tu-hoa`. Nguyên nhân bên trong vẫn chưa biết.
-- P2 là giao thức mới chạy trên LAN, chưa qua người dùng duyệt làm giao thức chính. Mọi số ở trang này là một board, một lần khởi động, một mô hình.
+- P2 là giao thức mới chạy trên LAN, được người dùng duyệt nguyên trạng ngày 2026-11-01 (hạn chế ở :doc:`07-giao-thuc-p2-p3` mục 6). Mọi số ở trang này là một board, một lần khởi động, một mô hình.
 
-9. Nguồn
+8. Nguồn
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.177).
-- T3 board và PC: ``results/onboard_x4_*``, ``results/latency_per_block_*_p1lan.*``, ``results/latency_per_block_*_p2.*``, ``results/onboard_x5_*``, ``results/onboard_x8_*``, ``results/latency_per_block_*_x8.*``, ``results/eval_x7_*``, ``ai/automation/runs/{RUN}/bench/onboard_x4/``, ``onboard_x5/``, ``onboard_x8/``, ``eval_x7/``, ``ai/automation/runs/{RUN}/eval/``. Mã: ``ai/automation/analyze_x4.py``, ``analyze_x5.py``, ``analyze_x7.py``, ``analyze_x8.py``, ``aggregate_layers.py`` (tham số ``--bench-subdir`` và ``--tag``), ``benchmark_npu.py`` (tham số ``--out-subdir``).
+- T3 board và PC: ``results/onboard_x4_*``, ``results/latency_per_block_*_p1lan.*``, ``results/latency_per_block_*_p2.*``, ``results/onboard_x5_*``, ``results/onboard_x8_*``, ``results/latency_per_block_*_x8.*``, ``ai/automation/runs/{RUN}/bench/onboard_x4/``, ``onboard_x5/``, ``onboard_x8/``. Mã: ``ai/automation/analyze_x4.py``, ``analyze_x5.py``, ``analyze_x8.py``, ``aggregate_layers.py`` (tham số ``--bench-subdir`` và ``--tag``), ``benchmark_npu.py`` (tham số ``--out-subdir``).
 """)
 
 for k, parts in docs.items():
-    (OUTDIR / NAMES[k]).write_text("\n".join(parts) + "\n", encoding="utf-8")
-    print(f"wrote {NAMES[k]} ({len((OUTDIR / NAMES[k]).read_text().splitlines())} lines)")
+    _d = OUTDIR_KQ if k == "07b" else OUTDIR
+    (_d / NAMES[k]).write_text("\n".join(parts) + "\n", encoding="utf-8")
+    print(f"wrote {NAMES[k]} ({len((_d / NAMES[k]).read_text().splitlines())} lines)")

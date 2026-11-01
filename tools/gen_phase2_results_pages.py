@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sinh hai trang kết quả giai đoạn 2 của Tầng NPU từ kết quả đo, không gõ tay số:
-10-ket-qua-g4.rst (cổng G4 SiLU sang ReLU) và 11-ket-qua-da-nhan.rst (S1, S2, S3).
+04-tang-npu-ket-qua/01-ket-qua-g4.rst (cổng G4 SiLU sang ReLU) và 03-ket-qua-da-nhan.rst (S1, S2, S3), kèm 02, 05, 06 của nhóm đó.
 
 Đọc ../results/{g4_latency_workload,eval_g4,thr_p3}.json, onboard_x4 (AUTO) và export_int8.json của các run.
 Chạy từ gốc repo chính:  .venv/bin/python docs/tools/gen_phase2_results_pages.py
@@ -12,7 +12,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 RES = REPO / "results"
 RUNS = REPO / "ai" / "automation" / "runs"
-OUTDIR = REPO / "docs" / "contents" / "03-phuong-phap" / "02-tang-npu"
+OUTDIR = REPO / "docs" / "contents" / "03-phuong-phap" / "04-tang-npu-ket-qua"
 SILU, RELU = "ppe5_yolov8n_baseline_100ep_s0", "ppe5_yolov8n_relu_100ep_s0"
 
 G = json.loads((RES / "g4_latency_workload.json").read_text())
@@ -35,6 +35,12 @@ assert EXP[RELU]["calibration"]["png_md5"] == EXP_S[1]["calibration"]["png_md5"]
 assert len(set(OWN_S1["calibration"]["images"]) & set(EXP[SILU]["calibration"]["images"])) == 30
 assert C["gate_c"]["css_test|fp16"]["diff_pp"]["map50_95"] < 0 and C["gate_c"]["css_test|fp32"]["diff_pp"]["map50_95"] < 0
 assert T["m12"]["verdict"] == "hơn" and T["m13"]["verdict"] == "không đáng giữ" and T["m3"]["verdict"] == "không phân biệt được"
+
+
+# facts of the 06-quy-trinh-tai-lap bullets about the int8h5 wiring (2026-11-01)
+_h5 = [json.loads((RUNS / f"ppe5_yolov8n_baseline_100ep_s{k}" / "eval" / "rknn_int8h5_css_test.json").read_text())["map50_95"] for k in (0, 1, 2)]
+assert f"{100 * sum(_h5) / 3:.2f}" == "50.38"
+assert json.loads((RUNS / SILU / "bench" / "tier1_int8h5_CORE_0.json").read_text())["npu_latency_ms"] == 20.513
 
 
 def f(x, d=1):
@@ -78,12 +84,12 @@ n8 = nz["css_test|int8"]
 LABEL_A = {"silu": ga["silu"], "relu": ga["relu"]}
 pages = {}
 
-# ------------------------------------------------------------------ page 10
+# ------------------------------------------------------------------ 01-ket-qua-g4
 P = []
 w = P.append
-w(f"""***********************************
-Kết quả cổng G4 (SiLU sang ReLU)
-***********************************
+w(f"""****************
+Cổng G4 cho ReLU
+****************
 
 .. admonition:: Trang này trả lời
 
@@ -99,9 +105,9 @@ Kết quả cổng G4 (SiLU sang ReLU)
    - Mức giảm mAP 1.0 điểm nằm trong nhiễu giữa seed của baseline SiLU: AP50-95 INT8 của seed 0, 1, 2 trải {f(n8['map50_95']['range'], 2)} điểm trên ``css_test``. ReLU seed 0, 1, 2 (thêm ngày 2026-10-31 theo duyệt của người dùng) trải {f(rn['map50_95']['range'], 2)} điểm, AP50-95 trung bình của ReLU thấp hơn của SiLU {f(-rn['map50_95']['mean_diff'], 2)} điểm, lớn hơn cả hai khoảng trải. Cả 3 seed ReLU đều trượt cổng C so với SiLU cùng số seed. Nhãn của cổng vẫn tính theo seed 0 so với seed 0 như đã duyệt.
    - Hai danh sách hiệu chuẩn INT8 cũ của seed 0 và seed 1 chỉ trùng 30 trên 300 ảnh vì sampler phụ thuộc ``PYTHONHASHSEED``. Mọi model INT8 so sánh ở trang này dùng đúng danh sách của seed 0.
    - Trong bảng WorkLoad: 6 trên 6 lớp ``ConvReluAdd`` chia ba nhân. Operator List không có mục cùng tên. 57 trên 57 lớp ``ConvExSwish`` chỉ chạy nhân 0. ``Resize``, ``Split`` và ``MaxPool`` chỉ chạy nhân 0.
-   - Điều kiện chạy latency là giao thức P2 của nhóm Đo latency trên NPU, chưa qua người dùng duyệt làm giao thức chính. Mọi số là một board, một lần chạy xen kẽ, một seed.
+   - Điều kiện chạy latency là giao thức P2 của nhóm Nền đo NPU, đã được người dùng duyệt nguyên trạng ngày 2026-11-01 (hạn chế ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3` mục 6). Mọi số là một board, một lần chạy xen kẽ, một seed.
 
-Tiêu chuẩn của cổng ở :doc:`01-operator-support` (mục 2). Kết quả đa nhân S1, S2, S3 ở :doc:`11-ket-qua-da-nhan`. Mọi số INT8 ở trang này dùng công thức lượng tử hóa mặc định của Ultralytics. Trang :doc:`13-ket-qua-luong-tu-hoa` cho thấy công thức ``h5`` (giữ FP16 nhánh giải mã box) lấy lại gần hết mức rơi INT8 so với FP16 và không tốn latency (một lần đo dưới P2 chưa duyệt), cổng C của ReLU dưới ``h5`` vẫn không đạt.
+Tiêu chuẩn của cổng ở :doc:`../03-tang-npu-don-bay/01-operator-support` (mục 2). Kết quả đa nhân S1, S2, S3 ở :doc:`03-ket-qua-da-nhan`. Mọi số INT8 ở trang này dùng công thức lượng tử hóa mặc định của Ultralytics. Trang :doc:`05-ket-qua-luong-tu-hoa` cho thấy công thức ``h5`` (giữ FP16 nhánh giải mã box) lấy lại gần hết mức rơi INT8 so với FP16 và không tốn latency (một lần đo dưới P2), cổng C của ReLU dưới ``h5`` vẫn không đạt.
 
 .. contents:: Trong trang này
    :local:
@@ -117,7 +123,7 @@ w(table(["Model", "Run", "INT8 sha256 (8 ký tự đầu)", "FP16 sha256 (8 ký 
 w(f"""
 ReLU huấn luyện 100 epoch trên ppe5 (``ai/automation/configs/ppe5_yolov8n_relu.yaml``, seed 0). So ``args.yaml`` của hai run, chỉ khác ``model`` (yaml ReLU thay ``yolov8n.pt``), ``pretrained`` (``yolov8n.pt`` nạp vào model yaml thay ``true``) và tên, đường dẫn run, mọi tham số huấn luyện khác giống nhau. Kiến trúc là ``ai/models/yolov8n_relu.yaml`` (``activation: nn.ReLU()``) khởi tạo từ trọng số ``yolov8n.pt`` của SiLU, nhật ký ghi ``Transferred 322/355 items from pretrained weights``. Baseline cũng khởi tạo từ ``yolov8n.pt``. Kết quả của cổng ghi nhãn "1 seed" (seed 0), ReLU seed 1 và 2 chỉ để mô tả nhiễu (mục 5).
 
-Đo latency chạy một lần xen kẽ 16 phiên dưới giao thức P2 (ghim ``rknn_server`` và ba ngắt NPU vào CPU4, dừng ``irqbalance``, tần số khóa), thứ tự SiLU, ReLU lần lượt ở ``CORE_0``, ``CORE_0_1``, ``CORE_0_1_2``, ``AUTO``, lặp lại hai vòng cùng thứ tự, nghỉ 45 giây. Mỗi phiên là 5 lần ``eval_perf`` không bật ``perf_debug`` (latency) rồi 5 lần với ``perf_debug=True`` (bảng từng lớp). Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước (``bench/onboard_g4b/rule.txt``). P2 và các quy tắc kèm theo chưa qua người dùng duyệt.
+Đo latency chạy một lần xen kẽ 16 phiên dưới giao thức P2 (ghim ``rknn_server`` và ba ngắt NPU vào CPU4, dừng ``irqbalance``, tần số khóa), thứ tự SiLU, ReLU lần lượt ở ``CORE_0``, ``CORE_0_1``, ``CORE_0_1_2``, ``AUTO``, lặp lại hai vòng cùng thứ tự, nghỉ 45 giây. Mỗi phiên là 5 lần ``eval_perf`` không bật ``perf_debug`` (latency) rồi 5 lần với ``perf_debug=True`` (bảng từng lớp). Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước (``bench/onboard_g4b/rule.txt``). P2 đã được người dùng duyệt nguyên trạng ngày 2026-11-01. Các ngưỡng số mới của quy tắc này không được nêu riêng trong câu trả lời nên không coi là đã duyệt.
 
 Hiệu chuẩn INT8: danh sách hiệu chuẩn của seed 0 (300 ảnh, mỗi class có mặt trong ít nhất 157 ảnh) được sao nguyên cho ReLU và cho baseline seed 1 và 2. Bằng chứng giống hệt là ``stems_md5`` ``{EXP[RELU]['calibration']['stems_md5']}`` và ``png_md5`` ``{EXP[RELU]['calibration']['png_md5']}`` (md5 của tên ảnh đã sắp và của sha256 các tệp PNG), cùng thứ tự tên ảnh trong ``dataset.txt`` khớp từng dòng. Không dùng md5 của ``dataset.txt`` vì tệp này chứa đường dẫn tuyệt đối có tên run.
 
@@ -153,7 +159,7 @@ Vì ``ConvReluAdd`` không có mục cùng tên trong T1, G1 vẫn ở trạng t
 2.2. G3: bảng build INT8
 ------------------------
 
-Bảng layer của build INT8 (rknn-toolkit2 2.3.2) của model ReLU đã huấn luyện có {ga['relu']['build_rows']} dòng, các dòng có ``Target`` CPU chỉ gồm ``InputOperator``, ``Transpose`` và ``OutputOperator``. Build FP16 cũng {G['g3']['relu']['fp16_rows']} dòng với cùng ba op CPU. Model SiLU có {ga['silu']['build_rows']} dòng với cùng ba op CPU. Hai model có cùng tổng cycles ước tính ({ga['relu']['build_total_cycles']}). Kết quả: **G3 qua** cho ReLU (không có op mới rơi về CPU). Danh sách op của ReLU khớp bảng đã ghi ở :doc:`01-operator-support` mục 3.2 (51 ``ConvRelu``, 6 ``ConvReluAdd``).
+Bảng layer của build INT8 (rknn-toolkit2 2.3.2) của model ReLU đã huấn luyện có {ga['relu']['build_rows']} dòng, các dòng có ``Target`` CPU chỉ gồm ``InputOperator``, ``Transpose`` và ``OutputOperator``. Build FP16 cũng {G['g3']['relu']['fp16_rows']} dòng với cùng ba op CPU. Model SiLU có {ga['silu']['build_rows']} dòng với cùng ba op CPU. Hai model có cùng tổng cycles ước tính ({ga['relu']['build_total_cycles']}). Kết quả: **G3 qua** cho ReLU (không có op mới rơi về CPU). Danh sách op của ReLU khớp bảng đã ghi ở :doc:`../03-tang-npu-don-bay/01-operator-support` mục 3.2 (51 ``ConvRelu``, 6 ``ConvReluAdd``).
 
 3. Điều kiện A: phủ đa nhân
 ===========================
@@ -270,19 +276,19 @@ w(table(["Bước", "Kết quả", "Nhãn bước"], [
     ["G4 C", f"AP50-95 {pm(cs['diff_pp']['map50_95'])}, AP NoHelmet {pm(cs['diff_pp']['NoHelmet'])}, AP Vest {pm(cs['diff_pp']['Vest'])} điểm (mục 5)", "không đạt"],
 ], [10, 70, 20]))
 w("""
-Nhãn: **Loại** (ReLU, seed 0 theo chuẩn, trượt ở điều kiện C của G4, cả 3 seed ReLU đều trượt khi so với SiLU cùng seed). Ứng viên dừng ở bước đầu tiên không qua theo tiêu chuẩn. Điều kiện A và B đạt cho thấy ReLU nhanh hơn rõ rệt, và đó là phép đo đúng như đã ghi, nhưng không thay đổi nhãn vì cổng yêu cầu cả ba điều kiện. Nhãn này không nói ReLU không bao giờ dùng được, chỉ nói bản huấn luyện này (100 epoch, khởi tạo từ trọng số SiLU, 1 seed) không đạt ngưỡng mAP đã duyệt. Các biến thể LeakyReLU, ReLU6 và ReLU 200 epoch đã chạy và ở :doc:`12-ket-qua-bien-the-activation`.
+Nhãn: **Loại** (ReLU, seed 0 theo chuẩn, trượt ở điều kiện C của G4, cả 3 seed ReLU đều trượt khi so với SiLU cùng seed). Ứng viên dừng ở bước đầu tiên không qua theo tiêu chuẩn. Điều kiện A và B đạt cho thấy ReLU nhanh hơn rõ rệt, và đó là phép đo đúng như đã ghi, nhưng không thay đổi nhãn vì cổng yêu cầu cả ba điều kiện. Nhãn này không nói ReLU không bao giờ dùng được, chỉ nói bản huấn luyện này (100 epoch, khởi tạo từ trọng số SiLU, 1 seed) không đạt ngưỡng mAP đã duyệt. Các biến thể LeakyReLU, ReLU6 và ReLU 200 epoch đã chạy và ở :doc:`02-ket-qua-bien-the-activation`.
 
 7. Điều chưa biết
 =================
 """)
 w(table(["Việc", "Trạng thái", "Đã tìm hoặc đo gì"], [
     ["``ConvReluAdd`` có mục đa nhân trong T1", "chưa biết theo T1", "Operator List V2.3.2 và mọi văn bản T1 (mục 2.1). Hành vi đo: chia ba nhân"],
-    ["Vì sao ``asymmetric`` với ``nearest_mode = floor`` vẫn lên NPU (G7)", "chưa biết", "Operator List tr.86 đến 87 chỉ nêu giới hạn. Trong gói toolkit có chuỗi tên pass ``_p_convert_resize_to_deconv`` và thông báo ``Resize [{}] convert to Deconvolution for inference speedup, but may cause result driftting.``, chưa đọc logic nên chưa biết điều kiện kích hoạt"],
-    ["Vì sao Reshape 8 nút ONNX thành 7 dòng RKNN và Slice thành Split (G10)", "chưa biết", "Không có giải thích văn bản trong T1 hoặc T2. Chỉ thấy tên pass trong binary (``_p_remove_reshape_after_concat``, ``_p_replace_parallel_slice_by_split``)"],
-    ["Mâu thuẫn Relu và Concat giữa Operator List và hai guide (G11)", "chưa biết", "Không tài liệu T1 nào khác giải quyết (changelog, header). Bảng đo cho thấy 15 trên 17 ``Concat`` chia"],
+    ["Vì sao ``asymmetric`` với ``nearest_mode = floor`` vẫn lên NPU (G7)", "chưa biết (đo thêm 2026-11-01: thuộc tính bị bỏ qua ở micro model, :doc:`08-so-muc-chua-biet` mục 2)", "Operator List tr.86 đến 87 chỉ nêu giới hạn. Trong gói toolkit có chuỗi tên pass ``_p_convert_resize_to_deconv`` và thông báo ``Resize [{}] convert to Deconvolution for inference speedup, but may cause result driftting.``, chưa đọc logic nên chưa biết điều kiện kích hoạt"],
+    ["Vì sao Reshape 8 nút ONNX thành 7 dòng RKNN và Slice thành Split (G10)", "ĐO (mô tả, 2026-11-01, :doc:`08-so-muc-chua-biet` mục 3). Vì sao: chưa biết", "Không có giải thích văn bản trong T1 hoặc T2. Chỉ thấy tên pass trong binary (``_p_remove_reshape_after_concat``, ``_p_replace_parallel_slice_by_split``)"],
+    ["Mâu thuẫn Relu và Concat giữa Operator List và hai guide (G11)", "ĐO ở micro model (2026-11-01, :doc:`08-so-muc-chua-biet` mục 4). Tài liệu nào đúng: chưa biết", "Không tài liệu T1 nào khác giải quyết (changelog, header). Bảng đo cho thấy 15 trên 17 ``Concat`` chia"],
     ["Vì sao ``CORE_0`` của ReLU nhanh hơn SiLU", "chưa biết", "Mục 4 chỉ mô tả tỉ lệ thời gian dòng"],
     ["Nhiễu seed của ReLU", "ĐO", "Ba seed (mục 5): khoảng trải AP50-95 INT8 trên ``css_test`` là " + f(rn["map50_95"]["range"], 2) + " điểm"],
-    ["Kết quả của P2 so với giao thức chính", "chưa biết", "P2 chưa qua người dùng duyệt làm giao thức chính"],
+    ["Kết quả của P2 so với giao thức chính", "chưa biết", "P2 đã được người dùng duyệt nguyên trạng ngày 2026-11-01, kết quả của P2 so với giao thức gốc chưa đo thêm"],
 ], [34, 18, 48]))
 w("""
 8. Nguồn
@@ -294,18 +300,18 @@ w("""
 - Quy tắc viết trước dữ liệu: ``bench/onboard_g4b/rule.txt``, ``bench/eval_g4/rule.txt``.
 - Tổng hợp tìm nguồn: ``results/phase2_source_facts.md``.
 """)
-pages["10-ket-qua-g4.rst"] = "\n".join(P)
+pages["01-ket-qua-g4.rst"] = "\n".join(P)
 
-# ------------------------------------------------------------------ page 11
+# ------------------------------------------------------------------ 03-ket-qua-da-nhan
 P = []
 w = P.append
 cfg = T["configs"]
 m12, m13, m3, m14 = T["m12"], T["m13"], T["m3"], T["m14"]
 x4 = X4["masks"]
 assert x4["AUTO"]["irq_lines_per_session"] and all(x == {"36": 315, "37": 0, "38": 0} for x in x4["AUTO"]["irq_lines_per_session"])
-w(f"""****************************
-Kết quả đa nhân (S1, S2, S3)
-****************************
+w(f"""*******
+Đa nhân
+*******
 
 .. admonition:: Trang này trả lời
 
@@ -315,13 +321,13 @@ Kết quả đa nhân (S1, S2, S3)
 
 .. admonition:: Tóm tắt
 
-   - S1 trên SiLU: ``CORE_0_1_2`` nhanh hơn ``CORE_0`` chỉ {f(gb['silu|CORE_0_1_2']['drop_pct'], 1)}% và ``CORE_0_1`` {f(gb['silu|CORE_0_1']['drop_pct'], 1)}%, dưới ngưỡng 5%. Latency một frame dùng ``CORE_0``. Với ReLU mức giảm là {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}% nhưng ReLU đã bị loại ở cổng G4 (:doc:`10-ket-qua-g4`).
+   - S1 trên SiLU: ``CORE_0_1_2`` nhanh hơn ``CORE_0`` chỉ {f(gb['silu|CORE_0_1_2']['drop_pct'], 1)}% và ``CORE_0_1`` {f(gb['silu|CORE_0_1']['drop_pct'], 1)}%, dưới ngưỡng 5%. Latency một frame dùng ``CORE_0``. Với ReLU mức giảm là {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}% nhưng ReLU đã bị loại ở cổng G4 (:doc:`01-ket-qua-g4`).
    - S2 (ba context): {f(cfg['T5']['fps'], 1)} FPS, so với {f(cfg['T3']['fps'], 1)} FPS của cấu hình một context tốt nhất ({m12['best']}), tăng {f(m12['gain_pct'], 1)}%, lớn hơn khoảng trải {f(m12['larger_spread'], 2)} FPS. Kết quả: hơn.
    - S3 (pipeline): {f(cfg['T6']['fps'], 1)} FPS so với {f(cfg['T5']['fps'], 1)} FPS của S2, tăng {f(m13['gain_pct'], 1)}%, dưới ngưỡng 5%. CPU trung bình của tiến trình {f(m13['cpu_t6'], 1)}% so với {f(m13['cpu_t5'], 1)}%. Kết quả: không đáng giữ (với {m13['workers']['pre']} luồng pre và {m13['workers']['post']} luồng post theo công thức đã viết trước).
    - Ba tiến trình ({f(cfg['T7']['fps'], 1)} FPS) so với ba luồng ({f(cfg['T5']['fps'], 1)} FPS): khác {pm(m3['diff_pct'], 1)}%, không phân biệt được trong độ trải. Phép đo chẩn đoán này không nói vì sao.
-   - Giao thức P3 của S2 và S3 là giao thức mới (ngắt NPU 36, 37, 38 lần lượt ở CPU4, CPU5, CPU6, tiến trình đo ở CPU4 đến CPU7, ``irqbalance`` dừng), chưa qua người dùng duyệt. S1 chạy dưới P2 của nhóm Đo latency trên NPU, cũng chưa duyệt. Mọi số là một board, một model, một seed.
+   - Giao thức P3 của S2 và S3 là giao thức mới (ngắt NPU 36, 37, 38 lần lượt ở CPU4, CPU5, CPU6, tiến trình đo ở CPU4 đến CPU7, ``irqbalance`` dừng), đã được người dùng duyệt ngày 2026-11-01. S1 chạy dưới P2 của nhóm Nền đo NPU, cũng đã được người dùng duyệt ngày 2026-11-01. Mọi số là một board, một model, một seed.
 
-Cổng G4 và workload từng loại op ở :doc:`10-ket-qua-g4`. Tiêu chí 5% và 3 lần chạy độc lập ở :doc:`02-multi-core` (mục 5.2).
+Cổng G4 và workload từng loại op ở :doc:`01-ket-qua-g4`. Tiêu chí 5% và 3 lần chạy độc lập ở :doc:`../03-tang-npu-don-bay/02-multi-core` (mục 5.2).
 
 .. contents:: Trong trang này
    :local:
@@ -332,17 +338,17 @@ Cổng G4 và workload từng loại op ở :doc:`10-ket-qua-g4`. Tiêu chí 5% 
 
 """)
 w(table(["Phép đo", "Giao thức", "Model", "Chi tiết"], [
-    ["S1 latency", "P2 (như nhóm Đo latency trên NPU)", f"SiLU seed 0 INT8 (sha ``{sha8(SILU)}``) và ReLU seed 0 INT8 (``{sha8(RELU)}``)", "16 phiên xen kẽ, cùng lần chạy với cổng G4 (:doc:`10-ket-qua-g4` mục 1)"],
+    ["S1 latency", "P2 (như nhóm Nền đo NPU)", f"SiLU seed 0 INT8 (sha ``{sha8(SILU)}``) và ReLU seed 0 INT8 (``{sha8(RELU)}``)", "16 phiên xen kẽ, cùng lần chạy với cổng G4 (:doc:`01-ket-qua-g4` mục 1)"],
     ["S1 throughput, S2, S3, chẩn đoán", "P3 (mới)", f"SiLU seed 0 INT8 (``{sha8(SILU)}``)", "``bench_throughput_rep.py`` trên board, 3 lần chạy độc lập mỗi cấu hình, 1238 frame, 20 frame warm-up mỗi context"],
 ], [18, 22, 36, 44]))
 w(f"""
 Chọn SiLU cho S2 và S3 vì mỗi context chạy một nhân, nên việc op activation có đa nhân hay không không tham gia. ReLU không đo ở S2 và S3 (chưa biết).
 
-Về điều kiện chung ở :doc:`02-multi-core` mục 5.2: sổ tay SDK khuyên gắn ứng dụng và ngắt NPU vào cùng một lõi CPU lớn [T1 UG232 tr.75]. P3 không làm vậy: ba dòng ngắt ở ba lõi lớn khác nhau (CPU4, CPU5, CPU6) và ứng dụng chạy trên cả CPU4 đến CPU7, vì ba context chạy song song và dồn tất cả vào một CPU sẽ làm các context tranh nhau CPU, không đo được S2 và S3. Nên P3 lệch khỏi khuyến nghị đó, và nhãn S2, S3 mang điều kiện này. S1 dưới P2 theo khuyến nghị (ngắt và ``rknn_server`` cùng CPU4).
+Về điều kiện chung ở :doc:`../03-tang-npu-don-bay/02-multi-core` mục 5.2: sổ tay SDK khuyên gắn ứng dụng và ngắt NPU vào cùng một lõi CPU lớn [T1 UG232 tr.75]. P3 không làm vậy: ba dòng ngắt ở ba lõi lớn khác nhau (CPU4, CPU5, CPU6) và ứng dụng chạy trên cả CPU4 đến CPU7, vì ba context chạy song song và dồn tất cả vào một CPU sẽ làm các context tranh nhau CPU, không đo được S2 và S3. Nên P3 lệch khỏi khuyến nghị đó, và nhãn S2, S3 mang điều kiện này. S1 dưới P2 theo khuyến nghị (ngắt và ``rknn_server`` cùng CPU4).
 
 P3 vì sao tách khỏi P2: P2 dồn ``rknn_server`` và cả ba ngắt vào CPU4, dự kiến sẽ tuần tự hóa ba context và một pipeline vào một CPU (chưa đo). Harness cũ ``bench_throughput.py`` chạy ``RKNNLite`` trực tiếp trên board, không đi qua ``rknn_server``, nên tiến trình giữ P2 không bao phủ. P3 gồm: dừng ``irqbalance``, ngắt 36 vào CPU4, 37 vào CPU5, 38 vào CPU6 (đặt một lần bởi ``p3_hold.sh``, khôi phục và đọc lại cuối lần chạy), tiến trình đo chạy dưới ``taskset -c 4-7``, tần số khóa, ``rknn_server`` không đụng. Một run thực hiện đúng P3 khi mỗi dòng ngắt có ít nhất 99% số ngắt ở CPU được gán, affinity của tiến trình nằm trong CPU4 đến CPU7, tần số báo khóa và nhật ký helper ghi ``irqbalance`` không chạy cùng ba affinity không đổi. Cả {len(T['runs'])} run thực hiện đúng. Ở các run ba context (T5, T6, T7) cả ba dòng ngắt 36, 37, 38 đều có số ngắt lớn hơn 0, ít nhất {min(cfg[c]['irq_line_min'] for c in ('T5', 'T6', 'T7'))} mỗi dòng, mỗi dòng ở CPU được gán.
 
-Harness mới sửa các giới hạn của harness cũ ở :doc:`02-multi-core` mục 3.3: mỗi lần gọi là một tiến trình độc lập (khởi tạo lại context), lặp ba lần, ghi ``T_pre``, ``T_npu``, ``T_post`` từng frame, ghi RSS, nhiệt độ, tần số và ngắt theo CPU, và warm-up chạy qua 20 ảnh đầu thay vì một frame. Tập ảnh là ``data/ppe5/processed/images/test``, chỉ có {T['runs'][0]['cached_images']} ảnh nên bộ nhớ đệm giữ {T['runs'][0]['cached_images']} ảnh (không phải 200).
+Harness mới sửa các giới hạn của harness cũ ở :doc:`../03-tang-npu-don-bay/02-multi-core` mục 3.3: mỗi lần gọi là một tiến trình độc lập (khởi tạo lại context), lặp ba lần, ghi ``T_pre``, ``T_npu``, ``T_post`` từng frame, ghi RSS, nhiệt độ, tần số và ngắt theo CPU, và warm-up chạy qua 20 ảnh đầu thay vì một frame. Tập ảnh là ``data/ppe5/processed/images/test``, chỉ có {T['runs'][0]['cached_images']} ảnh nên bộ nhớ đệm giữ {T['runs'][0]['cached_images']} ảnh (không phải 200).
 
 2. S1: một context chia nhân
 ============================
@@ -350,12 +356,12 @@ Harness mới sửa các giới hạn của harness cũ ở :doc:`02-multi-core`
 2.1. Latency dưới P2
 --------------------
 
-Số liệu và quy tắc ở :doc:`10-ket-qua-g4` mục 4. Với SiLU:
+Số liệu và quy tắc ở :doc:`01-ket-qua-g4` mục 4. Với SiLU:
 """)
 w(table(["Mask", "Trung vị (ms)", "Giảm so với CORE_0 (%)", "Chênh hai phiên lớn nhất (ms)", "Kết quả"],
         [["``CORE_0``", f(cond['silu|CORE_0']['median'], 3), "-", "-", "-"]] + [[f"``{k}``", f(cond[f'silu|{k}']['median'], 3), f(gb[f'silu|{k}']['drop_pct'], 2), f(gb[f'silu|{k}']['gap_ms'], 3), gb[f'silu|{k}']['verdict']] for k in ("CORE_0_1", "CORE_0_1_2")], [16, 16, 22, 28, 18]))
 w(f"""
-Cả hai mask đa nhân đều dưới ngưỡng 5%. Theo quy tắc ở :doc:`02-multi-core` (mục 5.3, bước 1) S1 bị loại cho trục latency của SiLU, và latency một frame dùng ``CORE_0``. Độ phủ (điều kiện A) của SiLU là {pct(max(ga['silu']['coverage_per_session']), 1)} (:doc:`10-ket-qua-g4` mục 3). Với ReLU, ``CORE_0_1`` giảm {f(gb['relu|CORE_0_1']['drop_pct'], 1)}% và ``CORE_0_1_2`` giảm {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}%, đạt B (ReLU bị loại ở C).
+Cả hai mask đa nhân đều dưới ngưỡng 5%. Theo quy tắc ở :doc:`../03-tang-npu-don-bay/02-multi-core` (mục 5.3, bước 1) S1 bị loại cho trục latency của SiLU, và latency một frame dùng ``CORE_0``. Độ phủ (điều kiện A) của SiLU là {pct(max(ga['silu']['coverage_per_session']), 1)} (:doc:`01-ket-qua-g4` mục 3). Với ReLU, ``CORE_0_1`` giảm {f(gb['relu|CORE_0_1']['drop_pct'], 1)}% và ``CORE_0_1_2`` giảm {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}%, đạt B (ReLU bị loại ở C).
 
 2.2. Throughput một context dưới P3
 -----------------------------------
@@ -375,7 +381,7 @@ Quy tắc viết trước: cấu hình một context tốt nhất là cấu hìn
 w(table(["Cấu hình", "FPS ba lần chạy", "FPS trung vị", "Khoảng trải", "CPU trung bình của tiến trình (%)"],
         [[cfg[c]["label"], " / ".join(f(x, 2) for x in cfg[c]["fps_runs"]), f(cfg[c]["fps"], 2), f(cfg[c]["spread"], 2), f(cfg[c]["cpu_pct"], 1)] for c in ("T1", "T4", "T5")], [28, 30, 14, 14, 24]))
 w(f"""
-S2 (T5) so với cấu hình một context tốt nhất ({m12['best']}): tăng {f(m12['gain_fps'], 2)} FPS ({f(m12['gain_pct'], 1)}%), lớn hơn khoảng trải {f(m12['larger_spread'], 2)} FPS. Kết quả: **hơn**. So với ``CORE_0`` (T1) tăng {f(100 * (cfg['T5']['fps'] / cfg['T1']['fps'] - 1), 1)}%. Hai context (T4) đạt {f(cfg['T4']['fps'], 1)} FPS. Đây là số đo T3 board, cơ chế (hàng đợi riêng từng nhân của driver, :doc:`02-multi-core` mục 3.1) là cơ sở đã ghi chưa phải kết quả đã chứng minh.
+S2 (T5) so với cấu hình một context tốt nhất ({m12['best']}): tăng {f(m12['gain_fps'], 2)} FPS ({f(m12['gain_pct'], 1)}%), lớn hơn khoảng trải {f(m12['larger_spread'], 2)} FPS. Kết quả: **hơn**. So với ``CORE_0`` (T1) tăng {f(100 * (cfg['T5']['fps'] / cfg['T1']['fps'] - 1), 1)}%. Hai context (T4) đạt {f(cfg['T4']['fps'], 1)} FPS. Đây là số đo T3 board, cơ chế (hàng đợi riêng từng nhân của driver, :doc:`../03-tang-npu-don-bay/02-multi-core` mục 3.1) là cơ sở đã ghi chưa phải kết quả đã chứng minh.
 
 Bộ nhớ (mô tả): RSS của tiến trình sau khi khởi tạo context là {f(m14['t1_after_init'], 1)} MiB với một context và {f(m14['t5_after_init'], 1)} MiB với ba context, tức khoảng {f(m14['per_added_context'], 1)} MiB mỗi context thêm. Đây là RSS của tiến trình Python, không gồm bộ nhớ NPU do driver cấp.
 
@@ -403,35 +409,58 @@ Chênh {pm(m3['diff_fps'], 2)} FPS ({pm(m3['diff_pct'], 1)}%), dưới 5% nên k
 6. AUTO chọn nhân nào
 =====================
 
-Trong lần đo P2 ở nhóm Đo latency trên NPU (``onboard_x4``), bốn phiên ``AUTO`` đều có số ngắt ``{{36: 315, 37: 0, 38: 0}}`` mỗi phiên, giống ``CORE_0``, còn ``CORE_0_1_2`` có ``{{36: 385, 37: 145, 38: 145}}``. Trong chuỗi một context chạy lần lượt, ``AUTO`` đã chạy trên cùng dòng ngắt với ``CORE_0`` ở cả 4 phiên. Driver chọn lõi có hàng đợi ngắn nhất và lấy chỉ số thấp nhất khi hòa [T1 DRV rknpu_job.c:508-538], sổ tay nói "idle core" [T1 UG232 tr.73]. Với mô tả của driver thì một job một lúc ra nhân 0. Sổ tay không nêu cách chọn khi mọi lõi đều rảnh, nên phép đo này không phân biệt được hai mô tả. Trong phép đo mới ở :doc:`10-ket-qua-g4`, ``AUTO`` so với ``CORE_0`` chênh {pm(G['auto_vs_core0']['silu']['diff_ms'], 3)} ms ở SiLU và {pm(G['auto_vs_core0']['relu']['diff_ms'], 3)} ms ở ReLU.
+Trong lần đo P2 ở nhóm Nền đo NPU (``onboard_x4``), bốn phiên ``AUTO`` đều có số ngắt ``{{36: 315, 37: 0, 38: 0}}`` mỗi phiên, giống ``CORE_0``, còn ``CORE_0_1_2`` có ``{{36: 385, 37: 145, 38: 145}}``. Trong chuỗi một context chạy lần lượt, ``AUTO`` đã chạy trên cùng dòng ngắt với ``CORE_0`` ở cả 4 phiên. Driver chọn lõi có hàng đợi ngắn nhất và lấy chỉ số thấp nhất khi hòa [T1 DRV rknpu_job.c:508-538], sổ tay nói "idle core" [T1 UG232 tr.73]. Với mô tả của driver thì một job một lúc ra nhân 0. Sổ tay không nêu cách chọn khi mọi lõi đều rảnh, nên phép đo này không phân biệt được hai mô tả. Trong phép đo mới ở :doc:`01-ket-qua-g4`, ``AUTO`` so với ``CORE_0`` chênh {pm(G['auto_vs_core0']['silu']['diff_ms'], 3)} ms ở SiLU và {pm(G['auto_vs_core0']['relu']['diff_ms'], 3)} ms ở ReLU.
 
 7. Nhãn và điều chưa biết
 =========================
 """)
 w(table(["Chiến lược", "Nhãn", "Số liệu", "Điều kiện"], [
-    ["S1 (SiLU, latency)", "Loại", f"``CORE_0_1_2`` giảm {f(gb['silu|CORE_0_1_2']['drop_pct'], 1)}%, ``CORE_0_1`` giảm {f(gb['silu|CORE_0_1']['drop_pct'], 1)}%", "1 seed, P2 chưa duyệt"],
-    ["S1 (ReLU, latency)", "không áp dụng (ReLU bị loại ở G4 C)", f"``CORE_0_1_2`` giảm {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}%", "1 seed, P2 chưa duyệt"],
-    ["S2 (throughput)", "Giữ", f"{f(cfg['T5']['fps'], 1)} FPS, tăng {f(m12['gain_pct'], 1)}% so với một context tốt nhất", "1 seed, P3 chưa duyệt và lệch khỏi khuyến nghị gắn ngắt NPU vào cùng một lõi lớn (UG232 tr.75), một model"],
-    ["S3 (throughput)", "Loại", f"{f(cfg['T6']['fps'], 1)} FPS, tăng {f(m13['gain_pct'], 1)}% so với S2", "1 seed, P3 chưa duyệt (như S2), một công thức số worker"],
+    ["S1 (SiLU, latency)", "Loại", f"``CORE_0_1_2`` giảm {f(gb['silu|CORE_0_1_2']['drop_pct'], 1)}%, ``CORE_0_1`` giảm {f(gb['silu|CORE_0_1']['drop_pct'], 1)}%", "1 seed, dưới P2"],
+    ["S1 (ReLU, latency)", "không áp dụng (ReLU bị loại ở G4 C)", f"``CORE_0_1_2`` giảm {f(gb['relu|CORE_0_1_2']['drop_pct'], 1)}%", "1 seed, dưới P2"],
+    ["S2 (throughput)", "Giữ", f"{f(cfg['T5']['fps'], 1)} FPS, tăng {f(m12['gain_pct'], 1)}% so với một context tốt nhất", "1 seed, dưới P3 (đã duyệt ngày 2026-11-01), lệch khỏi khuyến nghị gắn ngắt NPU vào cùng một lõi lớn (UG232 tr.75), một model"],
+    ["S3 (throughput)", "Loại", f"{f(cfg['T6']['fps'], 1)} FPS, tăng {f(m13['gain_pct'], 1)}% so với S2", "1 seed, dưới P3 (như S2), một công thức số worker"],
 ], [24, 32, 50, 36]))
 w("""
 Các điểm đa nhân còn lại và trạng thái sau giai đoạn này:
 """)
 w(table(["Mã", "Câu hỏi", "Trạng thái", "Đã tìm hoặc đo gì"], [
-    ["M1", "Quy tắc chia job đa nhân của ``librknnrt``", "chưa biết", "Mã nguồn thư viện không có trong repo. Bảng WorkLoad cho thấy phần trăm chia từng lớp (ví dụ 35.0%/32.5%/32.5%) nhưng quy tắc chưa suy ra"],
-    ["M2", "``ALL`` trong Table 4 của Kong 2026 là chế độ nào", "chưa biết", "Bài báo không định nghĩa ``ALL``, không nêu tên cờ ``core_mask``, dữ liệu theo yêu cầu từ tác giả (Data availability, tr.11). ``RKNN_NPU_CORE_ALL = 0xffff`` được header ghi là chọn nhân theo nền tảng [T1 rknn_api.h:253]. Chưa đo ``ALL``"],
+    ["M1", "Quy tắc chia job đa nhân của ``librknnrt``", "chưa biết (mẫu chia mô tả 2026-11-01, :doc:`08-so-muc-chua-biet` mục 5)", "Mã nguồn thư viện không có trong repo. Bảng WorkLoad cho thấy phần trăm chia từng lớp (ví dụ 35.0%/32.5%/32.5%) nhưng quy tắc chưa suy ra"],
+    ["M2", "``ALL`` trong Table 4 của Kong 2026 là chế độ nào", "ĐO một phần (2026-11-01, :doc:`08-so-muc-chua-biet` mục 6): ``NPU_CORE_ALL`` chia như ``CORE_0_1_2``. Nghĩa trong bài: chưa biết", "Bài báo không định nghĩa ``ALL``, không nêu tên cờ ``core_mask``, dữ liệu theo yêu cầu từ tác giả (Data availability, tr.11). ``RKNN_NPU_CORE_ALL = 0xffff`` được header ghi là chọn nhân theo nền tảng [T1 rknn_api.h:253]. ``ALL`` đo ngày 2026-11-01 (:doc:`08-so-muc-chua-biet` mục 6)"],
     ["M3, M5", "``RKNNLite.inference`` có nhả GIL không, nhiều tiến trình dùng lõi khác nhau", "ĐO một phần", "Ba tiến trình chạy được trên ba nhân, throughput không khác ba luồng ở mức 5% (mục 5). GIL chưa kết luận"],
-    ["M4", "Một context dùng chung nhiều luồng", "chưa biết", "SDK guide tr.153 nói về việc dùng chung context giữa các luồng và ``rknn_dup_context`` nhưng không nêu tính an toàn khi gọi đồng thời [T1 UG232 tr.153]. Harness dùng một context mỗi luồng nên không cần"],
-    ["M6", "``async_mode`` làm gì lúc chạy", "chưa biết", "API232 tr.16 ghi \"Not Supported yet\", ngoài phạm vi"],
-    ["M7", "``rknn_batch_size`` nhiều batch", "chưa biết", "Ngoài phạm vi S1 đến S3"],
-    ["M8", "Mục tiêu FPS thời gian thực của dự án", "chưa biết", "Cần người dùng đặt. S2 đạt " + f(cfg['T5']['fps'], 1) + " FPS trên tập ảnh đo"],
-    ["M9", "Lợi ích đa nhân ReLU so với SiLU với model đã huấn luyện", "ĐO", "Mục 2.1 và :doc:`10-ket-qua-g4`: ReLU nhanh hơn, mAP thấp hơn, bị loại"],
+    ["M4", "Một context dùng chung nhiều luồng", "ĐO (2026-11-01, :doc:`08-so-muc-chua-biet` mục 7)", "Ba luồng dùng chung một context cho đầu ra sai âm thầm, một luồng đúng. SDK guide tr.153 nói về việc dùng chung context giữa các luồng và ``rknn_dup_context`` nhưng không nêu tính an toàn khi gọi đồng thời [T1 UG232 tr.153]. Harness dùng một context mỗi luồng nên không cần"],
+    ["M6", "``async_mode`` làm gì lúc chạy", "ĐO một phần (:doc:`08-so-muc-chua-biet` mục 7)", "API232 tr.16 ghi \"Not Supported yet\". Thăm dò: được chấp nhận, ``inference`` tuần tự vẫn trả đầu ra của ảnh vừa gửi"],
+    ["M7", "``rknn_batch_size`` nhiều batch", "ĐO (:doc:`08-so-muc-chua-biet` mục 7), khớp batch 1 không tái lập giữa hai lần chạy", "Batch 4 chạy, đầu ra từng ảnh khớp batch 1 ở lần đầu, một ảnh lệch ở lần lặp. Ngoài phạm vi S1 đến S3"],
+    ["M8", "Mục tiêu FPS thời gian thực của dự án", "người dùng chốt 60 FPS (2026-11-01)", "Mục 8: S2 đạt " + f(cfg['T5']['fps'], 1) + " FPS, một context chưa đạt"],
+    ["M9", "Lợi ích đa nhân ReLU so với SiLU với model đã huấn luyện", "ĐO", "Mục 2.1 và :doc:`01-ket-qua-g4`: ReLU nhanh hơn, mAP thấp hơn, bị loại"],
     ["M10", "``AUTO`` chọn nhân thế nào", "ĐO một phần", "Mục 6: chạy trên dòng ngắt của nhân 0 khi một job một lúc. Hành vi khi nhiều context chưa đo"],
     ["M14", "Bộ nhớ mỗi context", "ĐO (RSS tiến trình)", "Mục 3. Bộ nhớ NPU chưa đo"],
-    ["M16", "Số context tối đa", "chưa biết", "Ngoài phạm vi, chỉ thử 1, 2, 3 context"],
+    ["M16", "Số context tối đa", "ĐO một phần (:doc:`08-so-muc-chua-biet` mục 7)", "32 context đều chạy đúng, dừng ở ngưỡng chặn. Giới hạn thật chưa biết. S2 chỉ dùng 1, 2, 3 context"],
 ], [8, 40, 18, 70]))
+_m = {c: cfg[c] for c in ("T1", "T2", "T3", "T4", "T5", "T6")}
+assert all(round(_m[c]["fps"], 1) == v for c, v in (("T1", 54.7), ("T2", 55.8), ("T3", 56.1), ("T4", 102.0), ("T5", 141.2), ("T6", 147.4)))
+_met = [c for c in _m if _m[c]["fps"] >= 60]
+assert _met == ["T4", "T5", "T6"]
+_lat = [c for c in _m if _m[c]["t_pre"] + _m[c]["t_npu"] + _m[c]["t_post"] <= 1000 / 60]
+assert _lat == []
+w(f"""
+8. Mục tiêu 60 FPS của người dùng
+=================================
+
+Ngày 2026-11-01 người dùng chốt: mục tiêu là tăng FPS để đáp ứng nhu cầu thực tế, chọn 60 FPS. Người dùng chưa nói rõ đó là FPS của một luồng camera hay tổng nhiều luồng, và là thông lượng hay thời gian cho mỗi khung. Bảng dưới đưa cả hai cách đọc, cách đọc mặc định của tôi là thông lượng của pipeline phát hiện cho một luồng, với giả định các khung độc lập và thứ tự đầu ra không bị ràng buộc (giả định này chưa được kiểm: harness không kiểm thứ tự đầu ra). Đây là bước đạt hoặc không đạt mục tiêu tuyệt đối mà :doc:`../03-tang-npu-don-bay/02-multi-core` mục 5 dự kiến thêm sau các bước hiện có, không thay các bước hiện có.
+
+FPS của harness tính cả tiền xử lý, NPU và hậu xử lý của từng khung (``T_pre``, ``T_npu``, ``T_post``), trên ảnh đã cache trong bộ nhớ. Không gồm thu nhận camera, giải mã video, vẽ và lưu kết quả. Mỗi dòng là trung vị của ba lần chạy.
+""")
+w(table(["Cấu hình", "FPS", "Đạt 60 FPS (thông lượng)", "T_pre + T_npu + T_post (ms)", "Đạt 16.67 ms mỗi khung"], [
+    [cfg[c]["label"], f(cfg[c]["fps"], 1), "đạt" if cfg[c]["fps"] >= 60 else f"không, thiếu {f(60 - cfg[c]['fps'], 1)} FPS ({f(100 * (60 - cfg[c]['fps']) / 60, 1)}%)",
+     f(cfg[c]["t_pre"] + cfg[c]["t_npu"] + cfg[c]["t_post"], 2), "đạt" if cfg[c]["t_pre"] + cfg[c]["t_npu"] + cfg[c]["t_post"] <= 1000 / 60 else "không"] for c in _m], [34, 10, 36, 32, 28]))
+w(f"""
+
+Đọc theo thông lượng: ba cấu hình một context ({f(cfg['T1']['fps'], 1)} đến {f(cfg['T3']['fps'], 1)} FPS) chưa đạt 60, hai context ({f(cfg['T4']['fps'], 1)} FPS), S2 ({f(cfg['T5']['fps'], 1)} FPS) và S3 ({f(cfg['T6']['fps'], 1)} FPS) đạt. Cấu hình nhỏ nhất đã đo đạt mục tiêu là hai context trên ``CORE_0`` và ``CORE_1`` (điểm đo mở rộng, không phải cổng), dùng CPU trung bình {f(cfg['T4']['cpu_pct'], 0)}% so với {f(cfg['T5']['cpu_pct'], 0)}% của S2. Đọc theo thời gian mỗi khung: tổng ``T_pre`` cộng ``T_npu`` cộng ``T_post`` của mọi cấu hình đã đo lớn hơn 16.67 ms (nhỏ nhất {f(cfg['T3']['t_pre'] + cfg['T3']['t_npu'] + cfg['T3']['t_post'], 2)} ms ở một context ``CORE_0_1_2``), nên không cấu hình nào đạt nếu mỗi khung phải xong trong 16.67 ms. Tổng này là tổng ba trung vị theo giai đoạn, không phải thời gian đầu cuối đo trực tiếp (ở cấu hình nhiều context các giai đoạn chạy dưới tranh chấp, ở S3 còn có thời gian chờ hàng đợi không nằm trong tổng).
+
+Nhãn S1, S2, S3 không đổi (cổng tương đối 5%, mục 7). S2 vừa qua cổng tương đối vừa đạt mục tiêu 60 FPS theo thông lượng. Giới hạn: một seed, giao thức P3 đã duyệt, model INT8 mặc định của seed 0 (``int8h5`` đã đo ở :doc:`09-ket-qua-don-bay-fps` và không khác ``int8`` về thông lượng, ReLU chưa đo thông lượng), ảnh cache, chưa đo với camera thật, chưa đo bộ nhớ NPU. Cách hiểu 60 FPS (một luồng hay tổng, thông lượng hay thời gian mỗi khung) do người dùng xác nhận. Cập nhật 2026-11-01: đòn bẩy một context đã đo ở :doc:`09-ket-qua-don-bay-fps`, model tách đầu với giải mã chồng lấp đạt 60 FPS về thông lượng ở một context (một thí nghiệm, một seed), và ``int8h5`` không khác ``int8`` về thông lượng.
+""")
 w("""
-8. Nguồn
+9. Nguồn
 ========
 
 - T1: SDK User Guide V2.3.2 tr.72 đến 75, 153 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``), ``3rdparty/rknn-toolkit2/rknpu2/runtime/Linux/librknn_api/include/rknn_api.h`` dòng 253, mã driver ``3rdparty/rknpu-driver-0.9.8`` (``rknpu_job.c``).
@@ -440,9 +469,9 @@ w("""
 - Quy tắc viết trước dữ liệu: ``bench/onboard_thr/rule.txt``, ``bench/onboard_g4b/rule.txt``.
 - Mã đo: ``ai/board/bench_throughput_rep.py``, ``ai/automation/analyze_thr.py``, ``ai/automation/analyze_g4.py``.
 """)
-pages["11-ket-qua-da-nhan.rst"] = "\n".join(P)
+pages["03-ket-qua-da-nhan.rst"] = "\n".join(P)
 
-# ------------------------------------------------------------------ page 12
+# ------------------------------------------------------------------ 02-ket-qua-bien-the-activation
 V1 = json.loads((RES / "g4v_latency_workload.json").read_text())
 V2 = json.loads((RES / "g4v_latency_workload_2.json").read_text())
 VR = {"silu": SILU, "relu": RELU, "leakyrelu": "ppe5_yolov8n_leakyrelu_100ep_s0", "relu6": "ppe5_yolov8n_relu6_100ep_s0", "relu200": "ppe5_yolov8n_relu_200ep_s0"}
@@ -479,9 +508,9 @@ assert "silu200" in rv200
 P = []
 w = P.append
 lab = {k: label(k) for k in VN}
-w("""*************************************
-Kết quả biến thể activation
-*************************************
+w("""*******************
+Biến thể activation
+*******************
 
 .. admonition:: Trang này trả lời
 
@@ -498,9 +527,9 @@ for k, n in VN.items():
 s2 = cv["relu200"]["css_test|int8"]
 w(f"   - Huấn luyện 200 epoch đưa ReLU từ {pm(cs['diff_pp']['map50_95'])} xuống {pm(s2['diff_vs_silu_pp']['map50_95'])} điểm AP50-95 so với SiLU 100 epoch. So với đối chứng SiLU 200 epoch, ReLU 200 epoch chênh {pm(s2['diff_vs_silu200_pp']['map50_95'])} điểm. Chính SiLU 200 epoch chênh {pm(c200['css_test|int8']['map50_95'])} điểm so với SiLU 100 epoch. Vì vậy câu đúng là ``ReLU 200 epoch đạt cổng C so với SiLU 100 epoch``, không phải ``đổi activation đạt``.")
 w(f"   - Cả ba biến thể nhanh hơn ở ``CORE_0_1_2`` so với ``CORE_0`` khoảng {f(min(vb(V, m)['drop_pct'] for V in (V1, V2) for m in VN), 1)} đến {f(max(vb(V, m)['drop_pct'] for V in (V1, V2) for m in VN), 1)}% (hai thí nghiệm) và độ phủ đa nhân {pct(min(min(V1['gate_a'][m]['coverage_per_session']) for m in VN), 1)} (SiLU {pct(max(V1['gate_a']['silu']['coverage_per_session']), 1)}). Hai lần chạy latency xen kẽ, mỗi mô hình có ít nhất một lần thực hiện đúng giao thức P2.")
-w("   - Mọi ứng viên là 1 seed, giao thức P2 chưa qua người dùng duyệt. Độ dốc LeakyReLU 0.1 là một điểm do dự án chọn, không quét. Hardswish, GELU, Mish không thử vì không nằm trong danh sách op đa nhân của T1.")
+w("   - Mọi ứng viên là 1 seed, giao thức P2 đã duyệt ngày 2026-11-01. Độ dốc LeakyReLU 0.1 là một điểm do dự án chọn, không quét. Hardswish, GELU, Mish không thử vì không nằm trong danh sách op đa nhân của T1.")
 w("""
-Kết quả của ReLU gốc, nhiễu seed và cổng ở :doc:`10-ket-qua-g4`. Đa nhân S1 đến S3 ở :doc:`11-ket-qua-da-nhan`. Mọi số INT8 ở trang này dùng công thức lượng tử hóa mặc định của Ultralytics. Trang :doc:`13-ket-qua-luong-tu-hoa` cho thấy công thức ``h5`` lấy lại gần hết mức rơi INT8 so với FP16, và cổng C dưới ``h5`` nằm ở mục 5 của trang đó.
+Kết quả của ReLU gốc, nhiễu seed và cổng ở :doc:`01-ket-qua-g4`. Đa nhân S1 đến S3 ở :doc:`03-ket-qua-da-nhan`. Mọi số INT8 ở trang này dùng công thức lượng tử hóa mặc định của Ultralytics. Trang :doc:`05-ket-qua-luong-tu-hoa` cho thấy công thức ``h5`` lấy lại gần hết mức rơi INT8 so với FP16, và cổng C dưới ``h5`` nằm ở mục 5 của trang đó.
 
 .. contents:: Trong trang này
    :local:
@@ -509,12 +538,12 @@ Kết quả của ReLU gốc, nhiễu seed và cổng ở :doc:`10-ket-qua-g4`. 
 1. Ứng viên và điều kiện
 ========================
 
-Mỗi ứng viên là YOLOv8n ppe5, seed 0, khởi tạo từ trọng số ``yolov8n.pt`` (SiLU) nạp vào kiến trúc mới, cùng cài đặt huấn luyện Ultralytics của baseline, chỉ khác file yaml mô hình và số epoch. INT8 dùng danh sách hiệu chuẩn của seed 0 (``stems_md5`` và ``png_md5`` giống hệt như ở :doc:`10-ket-qua-g4`). Quy tắc viết trước dữ liệu: ``bench/eval_g4/rule_variants.txt`` (mAP), ``bench/onboard_g4v/rule.txt`` (latency, thí nghiệm 1 và 2). Cổng C của mọi ứng viên so với SiLU seed 0 huấn luyện 100 epoch (baseline đã duyệt).
+Mỗi ứng viên là YOLOv8n ppe5, seed 0, khởi tạo từ trọng số ``yolov8n.pt`` (SiLU) nạp vào kiến trúc mới, cùng cài đặt huấn luyện Ultralytics của baseline, chỉ khác file yaml mô hình và số epoch. INT8 dùng danh sách hiệu chuẩn của seed 0 (``stems_md5`` và ``png_md5`` giống hệt như ở :doc:`01-ket-qua-g4`). Quy tắc viết trước dữ liệu: ``bench/eval_g4/rule_variants.txt`` (mAP), ``bench/onboard_g4v/rule.txt`` (latency, thí nghiệm 1 và 2). Cổng C của mọi ứng viên so với SiLU seed 0 huấn luyện 100 epoch (baseline đã duyệt).
 
 """)
 w(table(["Ứng viên", "Activation", "Epoch", "Run", "INT8 sha256 (8 ký tự đầu)"],
         [["SiLU (baseline)", "``SiLU``", 100, f"``{SILU}``", VX["silu"]["rknn_sha256"][:8]]] +
-        [["ReLU (trang 10)", "``nn.ReLU()``", 100, f"``{RELU}``", VX["relu"]["rknn_sha256"][:8]]] +
+        [["ReLU (:doc:`01-ket-qua-g4`)", "``nn.ReLU()``", 100, f"``{RELU}``", VX["relu"]["rknn_sha256"][:8]]] +
         [[VN[k], {"leakyrelu": "``nn.LeakyReLU(0.1)``", "relu6": "``nn.ReLU6()``", "relu200": "``nn.ReLU()``"}[k], 200 if k == "relu200" else 100, f"``{VR[k]}``", VX[k]["rknn_sha256"][:8]] for k in VN] +
         [["SiLU 200 epoch (đối chứng)", "``SiLU``", 200, "``ppe5_yolov8n_baseline_200ep_s0``", S200["rknn_sha256"][:8]]], [22, 22, 8, 44, 16]))
 w("""
@@ -523,7 +552,7 @@ w("""
 2. G1 theo tên op
 =================
 
-Quy tắc ánh xạ (viết trước dữ liệu, giống ReLU): tên op sau khi compiler gộp ánh xạ theo tên sang mục ``ConvolutionXxx`` của Operator List. Tên có ``Add`` (``ConvLeakyReluAdd``, ``ConvReluAdd``) không có mục cùng tên, nên G1 chỉ qua một phần và nhãn tối đa là "Chưa biết" dù A, B, C đạt. Quy tắc này do dự án viết trong ``rule_variants.txt`` trước khi có dữ liệu, không nằm trong chuẩn ở :doc:`01-operator-support` mục 2 (chuẩn chỉ nói "Chưa biết" khi chưa chạy hết các bước). Nguồn T1 do doc-reader trích:
+Quy tắc ánh xạ (viết trước dữ liệu, giống ReLU): tên op sau khi compiler gộp ánh xạ theo tên sang mục ``ConvolutionXxx`` của Operator List. Tên có ``Add`` (``ConvLeakyReluAdd``, ``ConvReluAdd``) không có mục cùng tên, nên G1 chỉ qua một phần và nhãn tối đa là "Chưa biết" dù A, B, C đạt. Quy tắc này do dự án viết trong ``rule_variants.txt`` trước khi có dữ liệu, không nằm trong chuẩn ở :doc:`../03-tang-npu-don-bay/01-operator-support` mục 2 (chuẩn chỉ nói "Chưa biết" khi chưa chạy hết các bước). Nguồn T1 do doc-reader trích:
 """)
 w(table(["Việc", "Kết quả", "Nguồn"], [
     ["``ConvolutionPRelu/LeakyRelu`` (3.2.9)", "Có mục: ``Output = LeakyRelu(Conv(Input))``, ``说明及规格限制同Convolution``, ``多核联合: 支持``, không có ràng buộc độ dốc", "[T1 OPL tr.61]"],
@@ -550,7 +579,7 @@ Kết quả G3: cả ba biến thể qua (chỉ ``Transpose`` ở CPU, như SiLU
 4. Điều kiện A và B: độ phủ đa nhân và latency
 ==============================================
 
-Quy tắc như ở :doc:`10-ket-qua-g4` (mục 3 và 4), chạy xen kẽ dưới P2: hai mask ``CORE_0`` và ``CORE_0_1_2``, năm mô hình, hai vòng cùng thứ tự, 45 giây nghỉ. Thí nghiệm 1 (``onboard_g4v``) có một phiên SiLU không thực hiện đúng P2 (một mẫu giây có một luồng ``rknn_server`` chưa ở CPU4, ngắt vẫn 100% ở CPU4). Theo quy tắc viết trước, đó là điều kiện để chạy thí nghiệm 2 (``onboard_g4v2``, lặp lại nguyên thiết kế). Thí nghiệm 2 có ba phiên không thực hiện đúng ở các mô hình khác (cùng loại: một mẫu giây có một luồng ngoài CPU4). Ngân sách của giai đoạn là tối đa hai thí nghiệm cho mỗi việc, nên không chạy thêm. Mỗi mô hình có ít nhất một thí nghiệm mà cả hai mask thực hiện đúng, và kết quả B giữa các thí nghiệm hợp lệ không mâu thuẫn. Bảng ghi cả hai.
+Quy tắc như ở :doc:`01-ket-qua-g4` (mục 3 và 4), chạy xen kẽ dưới P2: hai mask ``CORE_0`` và ``CORE_0_1_2``, năm mô hình, hai vòng cùng thứ tự, 45 giây nghỉ. Thí nghiệm 1 (``onboard_g4v``) có một phiên SiLU không thực hiện đúng P2 (một mẫu giây có một luồng ``rknn_server`` chưa ở CPU4, ngắt vẫn 100% ở CPU4). Theo quy tắc viết trước, đó là điều kiện để chạy thí nghiệm 2 (``onboard_g4v2``, lặp lại nguyên thiết kế). Thí nghiệm 2 có ba phiên không thực hiện đúng ở các mô hình khác (cùng loại: một mẫu giây có một luồng ngoài CPU4). Ngân sách của giai đoạn là tối đa hai thí nghiệm cho mỗi việc, nên không chạy thêm. Mỗi mô hình có ít nhất một thí nghiệm mà cả hai mask thực hiện đúng, và kết quả B giữa các thí nghiệm hợp lệ không mâu thuẫn. Bảng ghi cả hai.
 """)
 rows = []
 for m, n in (("silu", "SiLU"), ("relu", "ReLU"), ("leakyrelu", "LeakyReLU"), ("relu6", "ReLU6"), ("relu200", "ReLU 200 epoch")):
@@ -572,7 +601,7 @@ rows = []
 for k, n in VN.items():
     r = cv[k]["css_test|int8"]
     rows.append([n, " / ".join(f(r["values"][c], 2) for c in ("map50_95", "NoHelmet", "Vest")), " / ".join(pm(r["diff_vs_silu_pp"][c]) for c in ("map50_95", "NoHelmet", "Vest")), "đạt" if r["passes"] else "không đạt"])
-rows.append(["ReLU (trang 10)", " / ".join(f(cs["relu"][c], 2) for c in ("map50_95", "NoHelmet", "Vest")), " / ".join(pm(cs["diff_pp"][c]) for c in ("map50_95", "NoHelmet", "Vest")), "không đạt"])
+rows.append(["ReLU (:doc:`01-ket-qua-g4`)", " / ".join(f(cs["relu"][c], 2) for c in ("map50_95", "NoHelmet", "Vest")), " / ".join(pm(cs["diff_pp"][c]) for c in ("map50_95", "NoHelmet", "Vest")), "không đạt"])
 rows.append(["SiLU 200 epoch (đối chứng)", " / ".join(f(rv200["silu200"][c], 2) for c in ("map50_95", "NoHelmet", "Vest")), " / ".join(pm(c200["css_test|int8"][c]) for c in ("map50_95", "NoHelmet", "Vest")), "không áp dụng"])
 w(table(["Ứng viên", "AP50-95 / AP NoHelmet / AP Vest", "Chênh so với SiLU seed 0, 100 epoch", "Cổng C"], rows, [26, 34, 40, 14]))
 w(f"""
@@ -584,7 +613,7 @@ w(table(["Ứng viên", "FP16 chênh", "FP32 chênh"],
 w(f"""
 Về huấn luyện 200 epoch (V-E, mô tả cạnh cổng C): ReLU 200 epoch chênh {pm(s2['diff_vs_silu200_pp']['map50_95'])} điểm AP50-95, {pm(s2['diff_vs_silu200_pp']['NoHelmet'])} điểm AP NoHelmet, {pm(s2['diff_vs_silu200_pp']['Vest'])} điểm AP Vest so với SiLU 200 epoch. SiLU 200 epoch chênh {pm(c200['css_test|int8']['map50_95'])} điểm AP50-95 so với SiLU 100 epoch (INT8). Cổng C của ReLU 200 epoch so với SiLU 100 epoch: {'đạt' if s2['passes'] else 'không đạt'}.
 
-Đọc cùng nhiễu seed: khoảng trải AP50-95 INT8 giữa ba seed SiLU là {f(n8['map50_95']['range'], 2)} điểm và giữa ba seed ReLU là {f(rn['map50_95']['range'], 2)} điểm (:doc:`10-ket-qua-g4` mục 5). Ba ứng viên của trang này chỉ có 1 seed, nên mức chênh nhỏ hơn các khoảng trải đó không đủ để kết luận có khác biệt.
+Đọc cùng nhiễu seed: khoảng trải AP50-95 INT8 giữa ba seed SiLU là {f(n8['map50_95']['range'], 2)} điểm và giữa ba seed ReLU là {f(rn['map50_95']['range'], 2)} điểm (:doc:`01-ket-qua-g4` mục 5). Ba ứng viên của trang này chỉ có 1 seed, nên mức chênh nhỏ hơn các khoảng trải đó không đủ để kết luận có khác biệt.
 
 6. Nhãn của từng ứng viên
 =========================
@@ -592,7 +621,7 @@ Về huấn luyện 200 epoch (V-E, mô tả cạnh cổng C): ReLU 200 epoch ch
 w(table(["Ứng viên", "G1", "G2", "G3", "A", "B", "C", "Nhãn"],
         [[VN[k], "qua" if G1_FULL[k] else "qua một phần", "ghi nhận", "qua", "đạt", "đạt" if any(vb(V, k)["verdict"] == "nhanh hơn" for V in (V1, V2)) else "không đạt", "đạt" if cv[k]["css_test|int8"]["passes"] else "không đạt", f"**{lab[k][0]}**"] for k in VN], [24, 16, 10, 8, 8, 8, 12, 14]))
 w("""
-Ứng viên dừng ở bước đầu tiên không qua. G1 qua một phần chỉ cho nhãn tối đa "Chưa biết" khi A, B, C đều đạt. Tất cả là 1 seed. Nhãn của ReLU gốc ở :doc:`10-ket-qua-g4`. Trang này không đổi nhãn đó.
+Ứng viên dừng ở bước đầu tiên không qua. G1 qua một phần chỉ cho nhãn tối đa "Chưa biết" khi A, B, C đều đạt. Tất cả là 1 seed. Nhãn của ReLU gốc ở :doc:`01-ket-qua-g4`. Trang này không đổi nhãn đó.
 
 7. Điều chưa biết
 =================
@@ -603,8 +632,8 @@ w(table(["Việc", "Trạng thái", "Đã làm gì"], [
     ["Độ dốc LeakyReLU khác 0.1", "chưa biết", "Một điểm, không quét"],
     ["Hardswish, GELU, Mish", "chưa biết", "Không thử, không nằm trong danh sách op đa nhân của T1"],
     ["Mâu thuẫn Relu, Clip, LeakyRelu đứng riêng giữa Operator List và hai guide", "chưa biết", "Không nguồn T1 nào giải thích"],
-    ["Có công thức lượng tử hóa nào đưa mAP INT8 về gần FP32 cho SiLU hoặc biến thể", "chưa biết", "Chẩn đoán lượng tử hóa là giai đoạn 2c, chưa chạy"],
-    ["P2", "chưa qua người dùng duyệt", "Hai thí nghiệm, mỗi lần có phiên bị đánh dấu không thực hiện đúng do một mẫu giây"],
+    ["Có công thức lượng tử hóa nào đưa mAP INT8 về gần FP16 cho SiLU hoặc biến thể", "đã làm ở trang khác", "Công thức ``h5`` ở :doc:`05-ket-qua-luong-tu-hoa` (chẩn đoán giai đoạn 2c), một seed"],
+    ["P2", "đã duyệt ngày 2026-11-01", "Hai thí nghiệm, mỗi lần có phiên bị đánh dấu không thực hiện đúng do một mẫu giây"],
 ], [40, 22, 50]))
 w("""
 8. Nguồn
@@ -614,9 +643,9 @@ w("""
 - T3 PC và board: ``results/g4v_latency_workload.*``, ``results/g4v_latency_workload_2.*``, ``results/eval_g4.*``, ``bench/onboard_g4v/``, ``bench/onboard_g4v2/``, ``bench/eval_g4/rule_variants.txt``, ``export_int8.json`` của các run.
 - Tìm nguồn: ``results/phase2b_variants_design.md`` (thiết kế và kết quả tìm nguồn G1 của LeakyReLU và ReLU6, doc-reader).
 """)
-pages["12-ket-qua-bien-the-activation.rst"] = "\n".join(P)
+pages["02-ket-qua-bien-the-activation.rst"] = "\n".join(P)
 
-# ------------------------------------------------------------------ page 13
+# ------------------------------------------------------------------ 05-ket-qua-luong-tu-hoa
 QD = json.loads((RES / "q2c_diag.json").read_text())
 QR = json.loads((RES / "q2c_recipes.json").read_text())
 QH = json.loads((RES / "q2h_latency.json").read_text())
@@ -646,9 +675,9 @@ def _ap(run, tag):
 
 DR = {m: [(_ap(f"ppe5_yolov8n_{r}_100ep_s{n}", "pt_fp32") - _ap(f"ppe5_yolov8n_{r}_100ep_s{n}", "rknn_int8"), _ap(f"ppe5_yolov8n_{r}_100ep_s{n}", "rknn_fp16") - _ap(f"ppe5_yolov8n_{r}_100ep_s{n}", "rknn_int8")) for n in (0, 1, 2)]
       for m, r in (("silu", "baseline"), ("relu", "relu"))}
-w(f"""*****************************************
-Kết quả chẩn đoán lượng tử hóa INT8
-*****************************************
+w(f"""**********************
+Chẩn đoán lượng tử hóa
+**********************
 
 .. admonition:: Trang này trả lời
 
@@ -664,9 +693,9 @@ Kết quả chẩn đoán lượng tử hóa INT8
    - ``h5`` không tốn latency: thay đổi {pm(QH['cost']['silu|CORE_0']['cost_ms'], 3)} ms ở SiLU ``CORE_0`` và {pm(QH['cost']['relu|CORE_0_1_2']['cost_ms'], 3)} ms ở ReLU ``CORE_0_1_2`` (dưới 5%), độ phủ đa nhân của ReLU {pct(min(QH['gate_a']['relu']['coverage_per_session']), 1)}, bảng build không có op CPU mới.
    - Cổng G4 của ReLU không đổi: dưới ``h5`` ReLU vẫn kém SiLU {f(-RC['h5|css_test']['diff_pp']['map50_95'], 2)} điểm AP50-95 và {f(-RC['h5|css_test']['diff_pp']['NoHelmet'], 2)} điểm AP NoHelmet, cổng C không đạt. Khoảng cách này đã có ở FP16.
    - Công thức ``h6`` (``h5`` cộng cả nhánh box ``cv2``) làm AP50-95 của SiLU thấp hơn base {f(-(rec('silu', 'h6')['map50_95'] - rec('silu', 'base')['map50_95']), 2)} điểm, nguyên nhân chưa biết. ``mmse`` không dựng được với 300 ảnh hiệu chuẩn (bị hệ điều hành dừng, mã 137, nghi thiếu bộ nhớ).
-   - Một ứng viên mỗi công thức, một seed, giao thức đo latency P2 chưa qua người dùng duyệt. Bộ chấm đã nâng giới hạn thời gian NMS lên 60 giây mỗi ảnh (kết quả cũ không đổi, đã kiểm trên bốn dump).
+   - Một ứng viên mỗi công thức, một seed, giao thức đo latency P2 (đã duyệt ngày 2026-11-01). Bộ chấm đã nâng giới hạn thời gian NMS lên 60 giây mỗi ảnh (kết quả cũ không đổi, đã kiểm trên bốn dump).
 
-Kết quả cổng G4 ở :doc:`10-ket-qua-g4`, biến thể activation ở :doc:`12-ket-qua-bien-the-activation`.
+Kết quả cổng G4 ở :doc:`01-ket-qua-g4`, biến thể activation ở :doc:`02-ket-qua-bien-the-activation`.
 
 .. contents:: Trong trang này
    :local:
@@ -744,7 +773,7 @@ assert VH["relu200"]["css_test"]["passes"] and not VH["leakyrelu"]["css_test"]["
 w(f"""
 Dưới ``h5`` ReLU vẫn trượt cổng C ({pm(RC['h5|css_test']['diff_pp']['map50_95'])} điểm AP50-95, {pm(RC['h5|css_test']['diff_pp']['NoHelmet'])} điểm AP NoHelmet). Khoảng cách này đã có ở FP16 ({f(fp['relu']['map50_95'] - fp['silu']['map50_95'], 2)} điểm AP50-95), nên phần chênh này không do lượng tử hóa (một seed, nhiễu seed 1.35 đến 1.57 điểm). Trên ``ppe2286_ext`` (mô tả) chênh dưới ``h5`` là {pm(RC['h5|ppe2286_ext']['diff_pp']['map50_95'])} điểm AP50-95.
 
-Cổng C dưới ``h5`` cho các biến thể activation (thêm theo quy tắc ADDENDUM 3 của ``rule_recipes.txt`` viết trước dữ liệu): mỗi ứng viên dựng lại bằng ``h5`` từ ONNX chuẩn hóa của chính nó, chấm trên board, so với SiLU seed 0 (100 epoch) cũng dưới ``h5``. Không đổi nhãn G4 đã duyệt (nhãn đó tính với INT8 mặc định, xem :doc:`12-ket-qua-bien-the-activation`).
+Cổng C dưới ``h5`` cho các biến thể activation (thêm theo quy tắc ADDENDUM 3 của ``rule_recipes.txt`` viết trước dữ liệu): mỗi ứng viên dựng lại bằng ``h5`` từ ONNX chuẩn hóa của chính nó, chấm trên board, so với SiLU seed 0 (100 epoch) cũng dưới ``h5``. Không đổi nhãn G4 đã duyệt (nhãn đó tính với INT8 mặc định, xem :doc:`02-ket-qua-bien-the-activation`).
 """)
 rows = []
 for k, n in (("relu200", "ReLU 200 epoch"), ("leakyrelu", "LeakyReLU (0.1)"), ("relu6", "ReLU6")):
@@ -777,12 +806,12 @@ w(f"""
 """)
 w(table(["Việc", "Trạng thái", "Đã làm gì"], [
     ["Vì sao giữ FP16 nhánh giải mã box lấy lại điểm (độ chính xác tọa độ, hay tương tác khác)", "chưa biết", "``h5`` lấy lại gần hết khoảng cách FP16, ``h3`` và ``h4`` (đuôi class FP16) không. Chưa đo sai số tọa độ box riêng"],
-    ["Vì sao ``h6`` (``h5`` cộng nhánh box ``cv2`` FP16) làm tệ hơn base", "chưa biết", "Một lần dựng, một lần chấm (SiLU), chưa dựng lại hay chia nhỏ"],
+    ["Vì sao ``h6`` (``h5`` cộng nhánh box ``cv2`` FP16) làm tệ hơn base", "chưa biết (tái lập 2026-11-01)", "Dựng lần hai cho file khác byte (dựng không tất định) nhưng cùng AP50-95 và AP50 trên ``css_test``, tức mức giảm tái lập qua hai lần dựng. Nguyên nhân vẫn chưa biết (:doc:`08-so-muc-chua-biet` mục 8)"],
     ["``mmse``", "không dựng được ở đây", "Một lần dựng thử trên SiLU với 300 ảnh bị hệ điều hành dừng (mã 137 sau 401 giây, máy 15.6 GB, nghi thiếu bộ nhớ, log gốc không giữ trong repo). Không giảm số ảnh vì danh sách hiệu chuẩn phải giữ nguyên"],
-    ["QAT và kiến trúc thân thiện lượng tử hóa", "chờ người dùng quyết", "Nằm trong kế hoạch đã duyệt, điều kiện chạy (còn khoảng cách lớn sau bước công thức) không xảy ra vì ``h5`` đưa INT8 gần FP16 ở cả hai model. Khoảng cách ReLU kém SiLU còn lại có ở FP16 nên lượng tử hóa không sửa được. Mỗi cái sẽ là một ứng viên mới qua G1 đến G4"],
+    ["QAT và kiến trúc thân thiện lượng tử hóa", "đã làm ở :doc:`07-ket-qua-qat-kien-truc`", "Người dùng duyệt ngày 2026-10-31. Kết quả A1 tách đầu, B QAT và A2 bỏ DFL ở :doc:`07-ket-qua-qat-kien-truc` (một seed mỗi ứng viên, chỉ SiLU). Khoảng cách ReLU kém SiLU còn lại có ở FP16 nên lượng tử hóa không sửa được. Mỗi cái là phần bổ sung, không đổi nhãn G4"],
     ["Công thức ``h5`` với seed khác, model khác, tập ảnh khác", "chưa biết", "Một seed mỗi model, 82 ảnh ``css_test``, ``ppe2286_ext`` chỉ mô tả"],
-    ["Latency ``h5`` ngoài P2", "chưa biết", "P2 chưa qua người dùng duyệt"],
-    ["Triển khai ``h5`` trong ``ai/automation/export_npu.py``", "đã làm (cập nhật sau trang này)", "Nhãn ``int8h5`` song song với ``int8`` mặc định, xem :doc:`14-quy-trinh-tai-lap`. ``pipeline.py`` chưa nối"],
+    ["Latency ``h5`` ngoài P2", "chưa biết", "P2 đã được người dùng duyệt ngày 2026-11-01, số ngoài P2 chỉ có một phiên"],
+    ["Triển khai ``h5`` trong ``ai/automation/export_npu.py``", "đã làm (cập nhật sau trang này)", "Nhãn ``int8h5`` song song với ``int8`` mặc định, xem :doc:`06-quy-trinh-tai-lap`. ``pipeline.py`` chưa nối"],
 ], [44, 20, 60]))
 w("""
 Thay đổi bộ chấm: ``ai/core/evaluator.py`` truyền ``max_time_img=60`` cho NMS (``MAX_TIME_IMG``), vì các công thức giữ FP16 đuôi class cho hàng nghìn hộp trên ngưỡng 0.001 mỗi ảnh và giới hạn mặc định của Ultralytics (2 giây cộng 0.05 giây mỗi ảnh) cắt NMS sớm. Kết quả cũ không đổi: chấm lại bốn dump (INT8 ``css_test`` và ``ppe2286_ext``, FP16 ``css_test`` và ``ppe2286_ext``) của seed 0 cho số liệu y hệt.
@@ -795,9 +824,9 @@ Thay đổi bộ chấm: ``ai/core/evaluator.py`` truyền ``max_time_img=60`` c
 - T3: ``results/q2c_diag.*``, ``results/q2c_recipes.*``, ``results/q2h_latency.*``, ``bench/onboard_q2c/`` (gồm ``step1_silu.quantization.cfg``, cấu hình lượng tử hóa bước 1 của SiLU nơi đọc các bước 0.0041 và 0.31 đến 0.63), ``bench/onboard_q2h/``, ``ai/automation/diagnose_quant.py``, ``build_recipe.py``, ``analyze_q2c_diag.py``, ``analyze_q2c_recipes.py``, ``analyze_q2h.py``.
 - Tìm nguồn: ``results/phase2c_source_facts.md``.
 """)
-pages["13-ket-qua-luong-tu-hoa.rst"] = "\n".join(P)
+pages["05-ket-qua-luong-tu-hoa.rst"] = "\n".join(P)
 
-# ------------------------------------------------------------------ page 14
+# ------------------------------------------------------------------ 06-quy-trinh-tai-lap
 IH = json.loads((RES / "int8h5.json").read_text())
 QI = json.loads((RES / "q2i_latency.json").read_text())
 ihr = IH["runs"]
@@ -806,9 +835,9 @@ assert all(v["export"]["n_float16"] == 15 and v["export"]["stems_md5"] == "11d6a
 H5N = 15  # tensors kept float16 by recipe h5, asserted against export_int8h5.json above and in ai/core/rknn/hybrid.py
 P = []
 w = P.append
-w(f"""***********************************************
-Quy trình tái lập và chuẩn INT8 int8h5
-***********************************************
+w(f"""************
+Chuẩn int8h5
+************
 
 .. admonition:: Trang này trả lời
 
@@ -818,11 +847,11 @@ Quy trình tái lập và chuẩn INT8 int8h5
 
 .. admonition:: Tóm tắt
 
-   - ``int8h5`` là INT8 mặc định của Ultralytics với đúng {H5N} tensor của nhánh giải mã box giữ FP16 (công thức ``h5`` ở :doc:`13-ket-qua-luong-tu-hoa`). Nhãn ``PREC=int8h5``, thư mục ``weights/rknn_int8h5/``, tệp ``export_int8h5.json``. ``int8`` mặc định và mọi kết quả của nó không đổi (sha256 của file seed 0 trước và sau khi xuất giống nhau).
+   - ``int8h5`` là INT8 mặc định của Ultralytics với đúng {H5N} tensor của nhánh giải mã box giữ FP16 (công thức ``h5`` ở :doc:`05-ket-qua-luong-tu-hoa`). Nhãn ``PREC=int8h5``, thư mục ``weights/rknn_int8h5/``, tệp ``export_int8h5.json``. ``int8`` mặc định và mọi kết quả của nó không đổi (sha256 của file seed 0 trước và sau khi xuất giống nhau).
    - Xuất bằng ``make export-npu PREC=int8h5`` cho đúng danh sách tensor và AP50-95 của bản dựng thử ``h5`` (chênh {f(IH['v1']['ap_diff_pp'], 2)} điểm trên ``css_test``). File xuất có sha256 khác bản dựng thử, nên latency được đo lại.
    - ``css_test`` AP50-95 của ``int8h5``: SiLU seed 0, 1, 2 là {', '.join(f(ihr[f'silu_s{n}']['sets']['css_test']['int8h5']['map50_95'], 2) for n in (0, 1, 2))} (FP16: {', '.join(f(ihr[f'silu_s{n}']['sets']['css_test']['fp16']['map50_95'], 2) for n in (0, 1, 2))}, ``int8``: {', '.join(f(ihr[f'silu_s{n}']['sets']['css_test']['int8']['map50_95'], 2) for n in (0, 1, 2))}), ReLU seed 0 là {f(ihr['relu_s0']['sets']['css_test']['int8h5']['map50_95'], 2)} (FP16 {f(ihr['relu_s0']['sets']['css_test']['fp16']['map50_95'], 2)}).
    - Latency của ``int8h5`` so với ``int8`` (P2, một lần chạy xen kẽ): SiLU ``CORE_0`` {pm(QI['cost']['silu|CORE_0']['cost_ms'], 3)} ms, ReLU ``CORE_0_1_2`` {pm(QI['cost']['relu|CORE_0_1_2']['cost_ms'], 3)} ms, độ phủ đa nhân của ReLU {pct(min(QI['gate_a']['relu|int8h5']['coverage_per_session']), 1)}.
-   - ``ai/automation/pipeline.py`` chưa nối ``int8h5``, chưa có latency ngoài P2, mọi số là 1 seed mỗi model.
+   - ``int8h5`` đã nối vào ``ai/automation/pipeline.py``, ``tables.py`` (Bảng F) và ``make benchmark-npu`` và ``bench-board`` (2026-11-01). Mọi số là 1 seed mỗi model, latency chính thức dưới P2 (đã duyệt, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`).
 
 .. contents:: Trong trang này
    :local:
@@ -834,15 +863,15 @@ Quy trình tái lập và chuẩn INT8 int8h5
 Các quyết định của người dùng trong giai đoạn 2 (ngày 2026-10-31), ghi lại vì không nằm ở trang kết quả nào khác:
 """)
 w(table(["Quyết định", "Nội dung", "Nơi áp dụng"], [
-    ["Giao thức latency", "P2 dùng cho điều kiện B của G4 và S1, ngưỡng 5% giữ nguyên. P2 và P3 chưa được duyệt làm giao thức chính", ":doc:`10-ket-qua-g4`, :doc:`11-ket-qua-da-nhan`"],
-    ["Seed và mAP", "ReLU seed 0 so baseline seed 0, nhãn 1 seed. mAP chấm bằng RKNNLite trên board (INT8 kết luận, FP16 tham chiếu, FP32 mô tả). Sau đó mở rộng: thêm ReLU seed 1, 2 để mô tả nhiễu", ":doc:`10-ket-qua-g4`"],
-    ["Biến thể activation", "Làm đủ LeakyReLU, ReLU6, ReLU 200 epoch kèm đối chứng SiLU 200 epoch (Hardswish, GELU, Mish không thử vì không nằm trong danh sách op đa nhân của T1)", ":doc:`12-ket-qua-bien-the-activation`"],
-    ["Chẩn đoán lượng tử hóa", "Làm tuần tự: tài liệu, chẩn đoán từng lớp, công thức, rồi QAT và kiến trúc thân thiện lượng tử hóa nếu còn khoảng cách lớn. Điều kiện sau cùng không xảy ra nên chờ người dùng quyết", ":doc:`13-ket-qua-luong-tu-hoa`"],
+    ["Giao thức latency", "P2 dùng cho điều kiện B của G4 và S1, ngưỡng 5% giữ nguyên. P2 và P3 được người dùng duyệt nguyên trạng ngày 2026-11-01 (:doc:`/contents/09-tien-do/02-quyet-dinh/02-duyet-giao-thuc-p2-p3`)", ":doc:`01-ket-qua-g4`, :doc:`03-ket-qua-da-nhan`"],
+    ["Seed và mAP", "ReLU seed 0 so baseline seed 0, nhãn 1 seed. mAP chấm bằng RKNNLite trên board (INT8 kết luận, FP16 tham chiếu, FP32 mô tả). Sau đó mở rộng: thêm ReLU seed 1, 2 để mô tả nhiễu", ":doc:`01-ket-qua-g4`"],
+    ["Biến thể activation", "Làm đủ LeakyReLU, ReLU6, ReLU 200 epoch kèm đối chứng SiLU 200 epoch (Hardswish, GELU, Mish không thử vì không nằm trong danh sách op đa nhân của T1)", ":doc:`02-ket-qua-bien-the-activation`"],
+    ["Chẩn đoán lượng tử hóa", "Làm tuần tự: tài liệu, chẩn đoán từng lớp, công thức, rồi QAT và kiến trúc thân thiện lượng tử hóa (người dùng duyệt ngày 2026-10-31 và đã chạy)", ":doc:`05-ket-qua-luong-tu-hoa`, :doc:`07-ket-qua-qat-kien-truc`"],
     ["Chuẩn INT8", "``int8h5`` là nhãn mới song song với ``int8`` (không thay thế)", "mục 2 trang này"],
     ["Quản lý repo", "Không commit, không push. ``tmp/`` giữ nguyên (bị ``.gitignore``), trọng số ``weights/rknn_*`` cũng bị ``.gitignore`` và chỉ có sha256 trong ``export_*.json``", "toàn bộ"],
 ], [20, 90, 34]))
 w(f"""
-Nguồn của bảng: các quyết định này được ghi từ hội thoại với người dùng, không có tệp quyết định riêng ngoài các quy tắc ``rule*.txt`` viết trước dữ liệu (xác nhận từng phép đo, P2 và P3 chưa duyệt) và ``results/phase2b_variants_design.md``. Sổ theo dõi ở ``tmp/`` bị ``.gitignore``.
+Nguồn của bảng: các quyết định này được ghi từ hội thoại với người dùng, không có tệp quyết định riêng ngoài các quy tắc ``rule*.txt`` viết trước dữ liệu (xác nhận từng phép đo, P2 và P3 viết khi chưa duyệt và được duyệt ngày 2026-11-01) và ``results/phase2b_variants_design.md``. Sổ theo dõi ở ``tmp/`` bị ``.gitignore``.
 
 2. Chuẩn int8h5
 ===============
@@ -872,7 +901,7 @@ Khoảng trải AP50-95 giữa ba seed SiLU: ``int8h5`` {f(rg['int8h5']['map50_9
 3. Latency và đa nhân của int8h5
 ================================
 
-Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy tắc viết trước ``bench/onboard_q2i/rule.txt``): SiLU và ReLU seed 0, ``int8`` và ``int8h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2. Vì đo lại file xuất chuẩn nên số này thay cho số của bản dựng thử ở :doc:`13-ket-qua-luong-tu-hoa`, hai số cùng cỡ.
+Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy tắc viết trước ``bench/onboard_q2i/rule.txt``): SiLU và ReLU seed 0, ``int8`` và ``int8h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2. Vì đo lại file xuất chuẩn nên số này thay cho số của bản dựng thử ở :doc:`05-ket-qua-luong-tu-hoa`, hai số cùng cỡ.
 """)
 rows = []
 for m, n in (("silu", "SiLU"), ("relu", "ReLU")):
@@ -904,7 +933,7 @@ w("""
 - **Helper trên board.** ``ai/board/lock_freq.sh`` (khóa tần số), ``bench/onboard_x4/x4_hold.sh`` (giao thức P2) và ``bench/onboard_thr/p3_hold.sh`` (giao thức P3) trong thư mục chạy của seed 0 được cài thành bản root-owned ở ``/usr/local/sbin`` kèm một tệp ``/etc/sudoers.d/rk3588-measure`` cho phép chạy đúng ba script này không cần mật khẩu. Bản trong repo là nguồn: sửa xong phải cài lại bằng ``sudo install -o root -g root -m 755 <file> /usr/local/sbin/`` trong một terminal có tty. Helper ghi trạng thái vào ``~/x4`` hoặc ``~/p3`` (script tự tạo thư mục, xóa sau khi đo là việc làm tay), và khôi phục affinity ngắt, ``irqbalance`` rồi đọc lại khi kết thúc.
 - **Một việc board mỗi lần.** Chấm mAP trên board không chạy cùng lúc với phép đo thời gian.
 - **Bộ chấm.** ``ai/core/evaluator.py`` truyền ``max_time_img=60`` cho NMS. Giá trị cũ của Ultralytics (2 giây cộng 0.05 giây mỗi ảnh) cắt NMS khi hàng nghìn hộp qua ngưỡng 0.001. Kết quả cũ không đổi (chấm lại bốn dump).
-- **Hiệu chuẩn.** Mọi export INT8 của seed 1, 2, ReLU và các biến thể dùng ``--calib-from ppe5_yolov8n_baseline_100ep_s0`` (seed 0 là nguồn, tự lấy mẫu với ``seed`` 0 và 20 ảnh mỗi class, md5 danh sách tính lại cho cùng giá trị). ``make export-npu PREC=int8h5`` đặt ``--calib-from`` mặc định, ``PREC=int8`` không truyền cờ này. Sampler ``ai/core/rknn/calibration.py`` đã sửa (``sorted``), có ``tests/test_calibration.py``, nhưng export cũ của seed 0 không bị sửa. Export cũ của seed 1 giữ tên ``rknn_int8_ownlist``.
+- **Hiệu chuẩn.** Mọi export INT8 của seed 1, 2, ReLU và các biến thể dùng ``--calib-from ppe5_yolov8n_baseline_100ep_s0`` (seed 0 là nguồn, tự lấy mẫu với ``seed`` 0 và 20 ảnh mỗi class, md5 danh sách tính lại cho cùng giá trị). ``make export-npu PREC=int8h5`` đặt ``--calib-from`` mặc định, ``PREC=int8`` không truyền cờ này. Sampler ``ai/core/rknn/calibration.py`` đã sửa (``sorted``), có ``tests/test_calibration.py``, nhưng export cũ của seed 0 không bị sửa. Export cũ của seed 1 giữ tên ``rknn_int8_ownlist``. Từ 2026-11-01 ``make export-npu PREC=int8 CALIB_FROM=<run>`` truyền ``--calib-from`` (không có ``CALIB_FROM`` thì lấy mẫu mới như trước) và ``pipeline.py`` truyền ``CALIB_FROM`` cho cả ``int8`` và ``int8h5``.
 - **Bộ nhớ.** ``mmse`` với 300 ảnh bị hệ điều hành dừng (máy 15.6 GB). Dựng thử ``kl`` chạy dưới ``systemd-run --user --scope -p MemoryMax=9G`` (``rule_recipes.txt``), các lần dựng công thức sau đó dưới ``MemoryMax=11G``.
 - **ONNX FP32 của run.** Mỗi lần chạy ``export_npu.py`` (kể cả ``int8h5``) xuất lại ``weights/best.onnx``. Xuất ONNX không tất định theo byte: hai lần xuất cùng trọng số seed 0 cho hai sha256 khác nhau, cùng 233 nút và cùng histogram op. Vì vậy ``onnx_sha256`` ghi trong ``export_int8.json`` cũ khác sha hiện tại của ``best.onnx`` ở cả bốn run, và khớp với ``export_int8h5.json`` mới. Không mã nào trong repo so ``onnx_sha256`` (``tables.py`` chỉ kiểm ``rknn_sha256``). Bảng H dùng ONNX này cho cột CPU của board, đồ thị không đổi.
 - **Kiểm sau khi chuyển mã.** Sau khi chuyển logic công thức sang ``hybrid.py`` và bật ``verbose``, ``build_hybrid`` được dựng thử trực tiếp (không ghi đè file đã đo) cho 15 tên tensor và in bảng layer. Các file ``int8h5`` và ``rknn_int8_h5`` đã đo được dựng trước thay đổi đó. Log xuất ``int8h5`` của seed 0 (chạy trực tiếp ``export_npu.py``) không được giữ, log của seed 1, 2 và ReLU nằm trong ``runs/<run>/logs/``.
@@ -913,13 +942,14 @@ w("""
 6. Điều chưa làm
 ================
 
-- ``ai/automation/pipeline.py`` chưa có bước ``int8h5``. ``ai/automation/tables.py`` đã thêm hàng ``int8h5`` vào Bảng F (khi mọi seed của model đều có ``export_int8h5.json``) nhưng chưa chạy kiểm được: ``make tables DATASET=ppe5`` đã lỗi sẵn ở Bảng A (``ZeroDivisionError`` ở ``table_a``, không do thay đổi này). ``tables.py`` còn danh sách ``CLASSES`` cũ (``person``, ``helmet``, ``head``) lệch tên class ppe5, nên các cột ΔAP theo class của hàng ``int8h5`` có thể trống khi chạy được.
-- Latency của ``int8h5`` ngoài giao thức P2, và với seed khác, chưa đo.
-- Nguyên nhân giữ FP16 nhánh giải mã box lấy lại điểm vẫn chưa biết (:doc:`13-ket-qua-luong-tu-hoa` mục 7).
-- QAT và kiến trúc thân thiện lượng tử hóa chờ người dùng quyết.
+- Đã làm 2026-11-01: ``pipeline.py`` có bước ``int8h5`` cho phase3 và phase4 (model không có DFL, ví dụ ``nodfl``, bỏ qua vì công thức ``h5`` cần 4 tensor DFL). ``tables.py`` sửa ba lỗi sẵn có để ``make tables DATASET=ppe5`` chạy được: danh sách ``CLASSES`` cũ lệch tên class ppe5 (nay đọc từ yaml dataset), thư mục nhãn của tập ``ppe2286_ext`` (nay theo tên split) và run 200 epoch ghi đè run 100 epoch cùng seed trong cùng một hàng model (nay là hàng riêng ``_200ep``). Hàng ``INT8H5`` của Bảng F khớp số đã biết (trung bình ba seed của SiLU 50.38 AP50-95 trên ``css_test``). ``make benchmark-npu PREC=int8h5`` và ``make bench-board PREC=int8h5`` đã chạy một lần trên board (không dưới P2).
+- Đã sửa 2026-11-01: ``MODELS`` của ``pipeline.py`` có ``yolov8s_baseline`` nhưng thư mục ``configs`` không có ``ppe5_yolov8s_baseline.yaml``, nên ``phase2`` và ``phase4`` lỗi ``FileNotFoundError``. Nay ``models_for(ds)`` chỉ lấy model có config, ``phase2``, ``phase3`` và ``phase4`` dựng được danh sách bước cho ppe5.
+- Latency của ``int8h5`` với seed khác chưa đo. Ngoài P2 có một phiên ``make benchmark-npu`` ``CORE_0`` (20.513 ms, trung vị 5 lần, một phiên, không chạy helper P2, chỉ để kiểm đường Make. Trang :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3` dùng nó làm ví dụ cỡ số, không phải kết luận).
+- Nguyên nhân giữ FP16 nhánh giải mã box lấy lại điểm vẫn chưa biết (:doc:`05-ket-qua-luong-tu-hoa` mục 7).
+- QAT và kiến trúc thân thiện lượng tử hóa đã chạy một seed ở :doc:`07-ket-qua-qat-kien-truc`. Còn chưa làm: A2 tách đầu, QAT với torch 1.10 đến 1.13.1, thời gian NPU của bản QAT.
 - Mã mới chưa được commit. ``tests`` mới: ``test_calibration``, ``test_throughput_rep``.
 """)
-pages["14-quy-trinh-tai-lap.rst"] = "\n".join(P)
+pages["06-quy-trinh-tai-lap.rst"] = "\n".join(P)
 
 for name, text in pages.items():
     (OUTDIR / name).write_text(text + "\n", encoding="utf-8")
