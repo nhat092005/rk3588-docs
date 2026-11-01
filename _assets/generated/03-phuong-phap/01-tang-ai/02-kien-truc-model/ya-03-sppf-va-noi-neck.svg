@@ -22,12 +22,9 @@
 <text x="168" y="337" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">128×20×20 · tương đương 13×13</text>
 <path d="M68 142 L52 142 L52 392 L80 392" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
 <text x="40" y="392" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">x0</text>
-<path d="M268 215 L298 215 L298 352" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M268 271 L312 271 L312 352" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M268 327 L326 327 L326 352" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M298 352 L298 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M312 352 L312 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M326 352 L326 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<path d="M268 215 L298 215 L298 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<path d="M268 271 L312 271 L312 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<path d="M268 327 L326 327 L326 372" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
 <rect x="80" y="372" width="300" height="40" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
 <text x="230" y="386" font-size="12" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">Concat (x0, x1, x2, x3)</text>
 <text x="230" y="402" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">4 × 128 = 512 kênh</text>

@@ -72,7 +72,7 @@
 <text x="580" y="246" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">y0: 64×40×40</text>
 <path d="M731 214 L731 250" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
 <text x="738" y="228" font-size="10.5" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">y1: 64×40×40</text>
-<path d="M731 242 L656 242 L656 426" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
+<path d="M731 232 L656 232 L656 426" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
 <rect x="671" y="250" width="120" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
 <text x="731" y="266" font-size="12" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">Bottleneck 1</text>
 <text x="731" y="285" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">64 → 64 → 64</text>

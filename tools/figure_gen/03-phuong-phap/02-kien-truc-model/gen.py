@@ -385,7 +385,7 @@ def fig_conv_bottleneck_c2f():
     # y1 chain
     arrow(f, [(mx + 55, 214), (mx + 55, 250)])
     f.text(mx + 62, 228, "y1: 64×40×40", size=10.5, weight=700, fill=GREEN)
-    f.line([(mx + 55, 242), (mx - 20, 242), (mx - 20, 426)], GREEN, THIN, False)
+    f.line([(mx + 55, 232), (mx - 20, 232), (mx - 20, 426)], GREEN, THIN, False)
     rect(f, mx - 5, 250, 120, 50, fill="#F0FDF4", stroke=GREEN, sw=1.3)
     f.text(mx + 55, 266, "Bottleneck 1", size=12, weight=700, fill="#1B5E20", anchor="middle")
     f.text(mx + 55, 285, "64 → 64 → 64", size=11, fill=INK, anchor="middle")
@@ -461,11 +461,7 @@ def fig_sppf_neck():
     f.text(xa + 22, 392, "x0", size=11, weight=700, fill=GREEN)
     for k, ty_ in enumerate(yy):
         xr = cx + 130 + 14 * k
-        f.line([(cx + 100, ty_ + 19), (xr, ty_ + 19), (xr, cat_y + 20), (xa + 62 + 296, cat_y + 20)] if False else
-               [(cx + 100, ty_ + 19), (xr, ty_ + 19), (xr, cat_y - 20)], GREEN, THIN, False)
-    for k in range(3):
-        xr = cx + 130 + 14 * k
-        arrow(f, [(xr, cat_y - 20), (xr, cat_y)], GREEN)
+        f.line([(cx + 100, ty_ + 19), (xr, ty_ + 19), (xr, cat_y)], GREEN, THIN, False)
     rect(f, xa + 62, cat_y, 300, 40, fill="#FFF7ED", stroke=ORANGE, sw=1.3)
     f.text(xa + 212, cat_y + 14, "Concat (x0, x1, x2, x3)", size=12, weight=700, fill=ORANGE, anchor="middle")
     f.text(xa + 212, cat_y + 30, "4 × 128 = 512 kênh", size=10.5, fill=INK, anchor="middle")
