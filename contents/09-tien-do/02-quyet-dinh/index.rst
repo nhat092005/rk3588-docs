@@ -8,3 +8,4 @@ Các quyết định đã khóa trong protocol v1 và căn cứ.
    :maxdepth: 1
 
    01-quyet-dinh-da-khoa
+   02-duyet-giao-thuc-p2-p3

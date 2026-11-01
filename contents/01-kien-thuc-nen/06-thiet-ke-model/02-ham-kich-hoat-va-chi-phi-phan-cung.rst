@@ -193,7 +193,7 @@ Mặc dù các quy tắc thiết kế chung đã được kiểm chứng trên c
    - Cấu hình tối ưu hóa đồ thị của trình biên dịch: Trình biên dịch RKNN cung cấp các cấp độ tối ưu hóa đồ thị khác nhau, trong đó các luật gộp toán tử (fusion passes) có thể biến đổi tùy thuộc vào cấu trúc lớp tích chập đứng trước và lớp chuẩn hóa đứng sau.
    - Băng thông truy cập bộ nhớ cục bộ SRAM giữa ba lõi NPU độc lập (Core 0, Core 1, Core 2) khi phải lưu chuyển các bản đồ đặc trưng có độ phân giải lớn.
 
-   Do đó, mức chênh lệch độ trễ vi mô giữa SiLU và ReLU trên NPU RK3588 cần được xác định bằng phép đo profiling thực nghiệm theo từng lớp trên bo mạch đích (xem :doc:`/contents/03-phuong-phap/02-tang-npu/01-operator-support`).
+   Do đó, mức chênh lệch độ trễ vi mô giữa SiLU và ReLU trên NPU RK3588 cần được xác định bằng phép đo profiling thực nghiệm theo từng lớp trên bo mạch đích (xem :doc:`/contents/03-phuong-phap/03-tang-npu-don-bay/01-operator-support`).
 
 Nguồn
 =====
