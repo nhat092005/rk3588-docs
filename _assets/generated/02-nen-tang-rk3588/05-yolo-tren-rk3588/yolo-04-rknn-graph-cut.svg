@@ -5,7 +5,7 @@
 <rect x="14" y="42" width="852" height="146" rx="6" ry="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.3"/>
 <rect x="14" y="42" width="852" height="26" rx="6" ry="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.0"/>
 <rect x="22" y="46" width="6" height="18" rx="2" ry="2" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
-<text x="36" y="56" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Phần cứng RKNPU RK3588: Đồ thị nơ-ron INT8 (3 Nhân 6 TOPS - 100% phần cứng)</text>
+<text x="36" y="56" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">1. Phần cứng RKNPU RK3588: Đồ thị nơ-ron INT8 (3 Nhân 6 TOPS)</text>
 <rect x="28" y="76" width="110" height="100" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
 <text x="83" y="93" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Frame đầu vào</text>
 <text x="83" y="107" font-size="8.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">RGB 640×640×3</text>
@@ -24,7 +24,7 @@
 <rect x="282" y="116" width="48" height="22" rx="2" ry="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.2"/>
 <text x="306" y="127" font-size="7.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">P5 (20²)</text>
 <text x="250" y="148" font-size="7.5" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">Hợp nhất toán tử (Operator Fusion)</text>
-<text x="250" y="162" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">100% thực thi trên mảng MAC NPU</text>
+<text x="250" y="162" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Thực thi trên NPU</text>
 <path d="M343 126 L363 126" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
 <rect x="363" y="76" width="180" height="100" rx="4" ry="4" fill="white" stroke="#94A3B8" stroke-width="1.2"/>
 <text x="453" y="93" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Decoupled Head</text>
@@ -61,7 +61,7 @@
 <rect x="240" y="268" width="192" height="100" rx="4" ry="4" fill="white" stroke="#CBD5E1" stroke-width="1.2"/>
 <text x="336" y="284" font-size="9" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bước 2: Lọc ngưỡng Score</text>
 <text x="336" y="300" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">• max(cls_score) &gt; conf_thres</text>
-<text x="336" y="314" font-size="7.8" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central">• Loại bỏ 90% - 95% hộp rác</text>
+<text x="336" y="314" font-size="7.8" font-weight="400" fill="#DC2626" text-anchor="middle" dominant-baseline="central">• Loại hộp dưới ngưỡng conf</text>
 <rect x="250" y="328" width="172" height="28" rx="2" ry="2" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.2"/>
 <text x="336" y="342" font-size="7.8" font-weight="700" fill="#B91C1C" text-anchor="middle" dominant-baseline="central">Còn lại: ~30 - 80 ứng viên</text>
 <path d="M432 318 L452 318" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>

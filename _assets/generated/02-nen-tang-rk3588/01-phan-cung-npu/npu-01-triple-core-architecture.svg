@@ -8,7 +8,7 @@
 <text x="36" y="58" font-size="10.5" font-weight="700" fill="#1E40AF" text-anchor="start" dominant-baseline="central">Phân vùng NPU Subsystem (Điện áp độc lập VD_NPU: 0.675V - 0.95V, Xung nhịp max 1.0 GHz)</text>
 <rect x="24" y="78" width="266" height="162" rx="4" ry="4" fill="white" stroke="#3B82F6" stroke-width="1.2"/>
 <rect x="24" y="78" width="266" height="24" rx="4" ry="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.0"/>
-<text x="157.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 0 (2.0 TOPS INT8)</text>
+<text x="157.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 0 (2 TOPS = 6/3, phép chia)</text>
 <rect x="32" y="108" width="250" height="38" rx="2" ry="2" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
 <text x="157.0" y="120" font-size="8.2" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">CNA: 1024 MACs INT8 (1 GHz)</text>
 <text x="157.0" y="133" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Hỗ trợ INT4/INT8/INT16/FP16/BF16</text>
@@ -21,7 +21,7 @@
 <text x="157.0" y="223" font-size="7.2" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">core_mask = 0b001</text>
 <rect x="304" y="78" width="266" height="162" rx="4" ry="4" fill="white" stroke="#3B82F6" stroke-width="1.2"/>
 <rect x="304" y="78" width="266" height="24" rx="4" ry="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.0"/>
-<text x="437.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 1 (2.0 TOPS INT8)</text>
+<text x="437.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 1 (2 TOPS = 6/3, phép chia)</text>
 <rect x="312" y="108" width="250" height="38" rx="2" ry="2" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
 <text x="437.0" y="120" font-size="8.2" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">CNA: 1024 MACs INT8 (1 GHz)</text>
 <text x="437.0" y="133" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Hỗ trợ INT4/INT8/INT16/FP16/BF16</text>
@@ -34,7 +34,7 @@
 <text x="437.0" y="223" font-size="7.2" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">core_mask = 0b010</text>
 <rect x="584" y="78" width="266" height="162" rx="4" ry="4" fill="white" stroke="#3B82F6" stroke-width="1.2"/>
 <rect x="584" y="78" width="266" height="24" rx="4" ry="4" fill="#DBEAFE" stroke="#3B82F6" stroke-width="1.0"/>
-<text x="717.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 2 (2.0 TOPS INT8)</text>
+<text x="717.0" y="89" font-size="9" font-weight="700" fill="#1E3A8A" text-anchor="middle" dominant-baseline="central">NPU Core 2 (2 TOPS = 6/3, phép chia)</text>
 <rect x="592" y="108" width="250" height="38" rx="2" ry="2" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
 <text x="717.0" y="120" font-size="8.2" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="central">CNA: 1024 MACs INT8 (1 GHz)</text>
 <text x="717.0" y="133" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="middle" dominant-baseline="central">Hỗ trợ INT4/INT8/INT16/FP16/BF16</text>
@@ -54,8 +54,8 @@
 <path d="M660 280 L660 294" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
 <rect x="24" y="294" width="395" height="46" rx="4" ry="4" fill="#ECFDF5" stroke="#059669" stroke-width="1.3"/>
 <rect x="32" y="299" width="379" height="18" rx="2" ry="2" fill="#FFFFFF" stroke="#059669" stroke-width="1.2"/>
-<text x="221" y="308" font-size="8.5" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Shared System SRAM: 4.0 MB (TRM Part 1 Ch. 34)</text>
-<text x="221" y="328" font-size="7.5" font-weight="400" fill="#065F46" text-anchor="middle" dominant-baseline="central">Chia sẻ cho cả 3 core NPU, GPU và CPU | Giảm truy xuất DDR ngoài</text>
+<text x="221" y="308" font-size="8.5" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">Shared System SRAM: 1 MB, NPU cấp được tối đa 956 KB (TRM1 tr.1965, UG232 tr.106)</text>
+<text x="221" y="328" font-size="7.5" font-weight="400" fill="#065F46" text-anchor="middle" dominant-baseline="central">Dùng chung giữa các IP, ví dụ codec | Giảm truy xuất DDR ngoài</text>
 <rect x="447" y="294" width="419" height="46" rx="4" ry="4" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.3"/>
 <rect x="455" y="299" width="403" height="18" rx="2" ry="2" fill="#FFFFFF" stroke="#EA580C" stroke-width="1.2"/>
 <text x="656" y="308" font-size="8.2" font-weight="700" fill="#C2410C" text-anchor="middle" dominant-baseline="central">NPU IOMMU (2 Bộ: IOMMU 0 cho Core 0/1, IOMMU 1 cho Core 2)</text>
@@ -64,6 +64,6 @@
 <rect x="14" y="354" width="852" height="48" rx="4" ry="4" fill="#F1F5F9" stroke="#475569" stroke-width="1.3"/>
 <rect x="22" y="360" width="836" height="18" rx="2" ry="2" fill="#FFFFFF" stroke="#475569" stroke-width="1.2"/>
 <text x="440.0" y="369" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Bộ điều khiển bộ nhớ DMC: 4 Kênh DDR độc lập (Ch0, Ch1, Ch2, Ch3 - 64-bit LPDDR4x/LPDDR5)</text>
-<text x="440.0" y="390" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Băng thông cực đại đạt 68.2 GB/s | Độ trễ burst bus thấp nhất khi nạp định dạng NC1HWC2</text>
+<text x="440.0" y="390" font-size="7.8" font-weight="400" fill="#334155" text-anchor="middle" dominant-baseline="central">Trần tính từ thông số bộ điều khiển: 34.1 GB/s (LPDDR4/4X), 44.0 GB/s (LPDDR5). Hãng không ghi GB/s</text>
 <text x="10" y="418" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 TRM1 tr.1984-1995, Ch.36] [T1 TRM1 Ch.34 System SRAM] [T1 TRM2 Ch.1-2 Interconnect &amp; DMC]</text>
 </svg>

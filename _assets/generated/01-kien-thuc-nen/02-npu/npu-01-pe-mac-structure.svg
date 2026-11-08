@@ -112,7 +112,7 @@
 <text x="540" y="185" font-size="7.0" font-weight="700" fill="#D97706" text-anchor="start" dominant-baseline="central">Pha 2: Nhân số học</text>
 <text x="644" y="185" font-size="6.8" font-weight="700" fill="#475569" text-anchor="start" dominant-baseline="central">15% - 50% T</text>
 <text x="699" y="185" font-size="6.6" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Lan truyền qua mạch nhân mảng Booth trong ALU</text>
-<text x="524" y="200" font-size="6.8" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">prod = x_i x w_i = (+3) x (-2) = -6 [16b signed, ~0.2 pJ]</text>
+<text x="524" y="200" font-size="6.8" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">prod = x_i x w_i = (+3) x (-2) = -6 [16b signed]</text>
 <rect x="514" y="216" width="338" height="36" rx="3" fill="#FFFFFF" stroke="#2E7D32" stroke-width="1.0"/>
 <rect x="520" y="221" width="16" height="12" rx="2" fill="#2E7D32" stroke="#2E7D32" stroke-width="0.8"/>
 <text x="528" y="227.5" font-size="6.6" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">3</text>
@@ -132,6 +132,6 @@
 <text x="522" y="328" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thông lượng: Đạt đúng 1 MAC / PE / chu kỳ khi đủ dữ liệu [Chen 2016 tr.7]</text>
 <text x="522" y="344" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Không có bong bóng tính toán (stall-free) nhờ pFIFO và RF đệm luồng</text>
 <text x="522" y="360" font-size="6.8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Truyền Systolic 2D: X truyền ngang, Psum truyền dọc đồng bộ chu kỳ</text>
-<text x="522" y="375" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Năng lượng thấp: ~0.2 pJ/MAC (INT8) so với ~1.2 pJ/MAC (FP16) [Jouppi 2017]</text>
+<text x="522" y="375" font-size="6.8" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Năng lượng phép nhân: 0.2 pJ (8 bit) so với 1.1 pJ (FP16), 45 nm [Gholami 2021, Hình 7]</text>
 <text x="10" y="424" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 Chen 2016 tr.2, tr.7; T2 Jouppi 2017 tr.1, tr.3. Một PE gồm 3 thành phần: pFIFO, RF (&lt; 1 kB), ALU Datapath (MAC/add).</text>
 </svg>

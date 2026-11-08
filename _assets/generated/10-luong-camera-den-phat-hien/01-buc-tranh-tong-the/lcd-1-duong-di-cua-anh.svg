@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 594" width="1060" height="594" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1060" height="594" fill="white"/>
+<path d="M30 24 L64 24" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="74" y="24" font-size="13.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">truyền giữa hai khối</text>
+<path d="M230 24 L264 24" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="274.0" y="24" font-size="13.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">ghi, đọc qua DDR</text>
+<rect x="404.4" y="16" width="30" height="16" rx="3" fill="#CDE5D3" stroke="#333333" stroke-width="1.2"/>
+<text x="444.4" y="24" font-size="13.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đo khi chạy camera</text>
+<rect x="583.5999999999999" y="16" width="30" height="16" rx="3" fill="#F8E6BC" stroke="#B7791F" stroke-width="1.2"/>
+<text x="623.5999999999999" y="24" font-size="13.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đo trên khung thật</text>
+<rect x="762.8" y="16" width="30" height="16" rx="3" fill="white" stroke="#333333" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="802.8" y="24" font-size="13.5" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">chưa đo</text>
+<rect x="16" y="54" width="1028" height="172" rx="8" fill="#F7F7F7" stroke="#BBBBBB" stroke-width="1.3"/>
+<text x="30" y="70" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Thu nhận ảnh, bước 0 đến 3 (đo khi chạy camera)</text>
+<rect x="30.0" y="88" width="180" height="124" rx="5" fill="#CDE5D3" stroke="#333333" stroke-width="1.3"/>
+<text x="120.0" y="104" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">OV13855 cảm biến</text>
+<text x="120.0" y="124" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">13 MP, kèm VCM DW9714</text>
+<path d="M42.0 166 L198.0 166" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="120.0" y="180" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">Bayer RAW10, 4224x3136,</text>
+<text x="120.0" y="196" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">30 khung/giây</text>
+<circle cx="30.0" cy="88" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="30.0" y="88.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="303.3333333333333" y="88" width="180" height="124" rx="5" fill="#CDE5D3" stroke="#333333" stroke-width="1.3"/>
+<text x="393.3333333333333" y="104" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">D-PHY + CSI-2 host</text>
+<text x="393.3333333333333" y="124" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">MIPI, 1080 Mbps mỗi lane</text>
+<path d="M315.3333333333333 166 L471.3333333333333 166" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="393.3333333333333" y="180" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">luồng pixel RAW10</text>
+<circle cx="303.3333333333333" cy="88" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="303.3333333333333" y="88.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="576.6666666666666" y="88" width="180" height="124" rx="5" fill="#CDE5D3" stroke="#333333" stroke-width="1.3"/>
+<text x="666.6666666666666" y="104" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">VICAP (rkcif)</text>
+<text x="666.6666666666666" y="124" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">thu nhận</text>
+<path d="M588.6666666666666 166 L744.6666666666666 166" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="666.6666666666666" y="180" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">RAW10</text>
+<circle cx="576.6666666666666" cy="88" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="576.6666666666666" y="88.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="850.0" y="88" width="180" height="124" rx="5" fill="#CDE5D3" stroke="#333333" stroke-width="1.3"/>
+<text x="940.0" y="104" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">ISP (rkisp0)</text>
+<text x="940.0" y="124" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">Bayer sang YUV, khử nhiễu</text>
+<path d="M862.0 166 L1018.0 166" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="940.0" y="180" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">NV12 (và NV16, UYVY...)</text>
+<circle cx="850.0" cy="88" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="850.0" y="88.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">3</text>
+<path d="M210 150 L303.333 150" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="256.66666666666663" y="138.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">MIPI D-PHY</text>
+<path d="M483.333 150 L576.667 150" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="530.0" y="138.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">luồng pixel</text>
+<path d="M756.667 150 L850 150" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="803.3333333333333" y="108.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">online: thẳng</text>
+<text x="803.3333333333333" y="123.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">vào ISP,</text>
+<text x="803.3333333333333" y="138.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">dma = 0</text>
+<rect x="16" y="278" width="1028" height="40" rx="6" fill="#EEF2F8" stroke="#1E5BB8" stroke-width="1.6"/>
+<text x="530.0" y="298" font-size="15" font-weight="700" fill="#1F3A66" text-anchor="middle" dominant-baseline="central">DDR, bộ nhớ dùng chung (từ ISP trở đi mọi khối trao đổi qua bộ đệm trong DDR)</text>
+<path d="M940 212 L940 278" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="926.0" y="253.0" font-size="13" font-weight="400" fill="#444444" text-anchor="end" dominant-baseline="central">ghi bộ đệm NV12 vào DDR</text>
+<rect x="16" y="360" width="1028" height="172" rx="8" fill="#F7F7F7" stroke="#BBBBBB" stroke-width="1.3"/>
+<text x="1030" y="376" font-size="14" font-weight="700" fill="#444444" text-anchor="end" dominant-baseline="central">Xử lý, theo dõi, xuất, bước 4 đến 8 (4 đến 6 đo trên khung thật)</text>
+<rect x="30" y="394" width="160" height="124" rx="5" fill="#F8E6BC" stroke="#B7791F" stroke-width="1.3"/>
+<text x="110.0" y="410" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">RGA hoặc CPU</text>
+<text x="110.0" y="430" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">resize, đổi màu,</text>
+<text x="110.0" y="446" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">viền 114</text>
+<path d="M42 472 L178 472" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="110.0" y="486" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">RGB888 640x640x3</text>
+<circle cx="30" cy="394" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="30" y="394.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="226" y="394" width="160" height="124" rx="5" fill="#F8E6BC" stroke="#B7791F" stroke-width="1.3"/>
+<text x="306.0" y="410" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">NPU, 3 lõi</text>
+<text x="306.0" y="430" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">RKNN INT8</text>
+<path d="M238 472 L374 472" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="306.0" y="486" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">tensor thô</text>
+<circle cx="226" cy="394" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="226" y="394.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="422" y="394" width="160" height="124" rx="5" fill="#F8E6BC" stroke="#B7791F" stroke-width="1.3"/>
+<text x="502.0" y="410" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">CPU</text>
+<text x="502.0" y="430" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">giải mã hộp,</text>
+<text x="502.0" y="446" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">lọc, NMS</text>
+<path d="M434 472 L570 472" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="502.0" y="486" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">hộp + lớp</text>
+<circle cx="422" cy="394" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="422" y="394.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">6</text>
+<rect x="622" y="394" width="160" height="124" rx="5" fill="white" stroke="#333333" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="702.0" y="410" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">CPU</text>
+<text x="702.0" y="430" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">ByteTrack</text>
+<path d="M634 472 L770 472" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="702.0" y="486" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">hộp + mã số</text>
+<circle cx="622" cy="394" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="622" y="394.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">7</text>
+<rect x="870" y="394" width="160" height="124" rx="5" fill="white" stroke="#333333" stroke-width="1.3" stroke-dasharray="5 3"/>
+<text x="950.0" y="410" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">VOP hoặc bộ mã</text>
+<text x="950.0" y="428" font-size="16" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">hóa video</text>
+<text x="950.0" y="448" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">hiển thị, lưu</text>
+<text x="950.0" y="464" font-size="13.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">hoặc phát</text>
+<path d="M882 472 L1018 472" stroke="#AAAAAA" stroke-width="0.8"/>
+<text x="950.0" y="486" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">màn hình hoặc</text>
+<text x="950.0" y="502" font-size="13.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" font-style="italic">luồng nén</text>
+<circle cx="870" cy="394" r="10" fill="#444444" stroke="white" stroke-width="1.5"/>
+<text x="870" y="394.5" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">8</text>
+<path d="M60 318 L60 394" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="71" y="338" font-size="13" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">đọc NV12</text>
+<path d="M154 394 L154 318" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="165" y="338" font-size="13" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">ghi RGB888</text>
+<path d="M256 318 L256 394" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="267" y="338" font-size="13" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">đọc RGB888</text>
+<path d="M350 394 L350 318" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="361" y="338" font-size="13" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">ghi tensor thô</text>
+<path d="M452 318 L452 394" fill="none" stroke="#1E5BB8" stroke-width="2.2" marker-end="url(#m1E5BB8n)"/>
+<text x="463" y="338" font-size="13" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">CPU đọc tensor từ DDR</text>
+<path d="M582 456 L622 456" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<path d="M782 456 L870 456" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
+<text x="826.0" y="432.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">dữ liệu trong</text>
+<text x="826.0" y="447.0" font-size="13" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">bộ nhớ CPU</text>
+<text x="10" y="562" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Đo trên board Orange Pi 5 (RK3588S), camera OV13855, ngày 2026-11-07 [T3 board]. Bước 4 đến 6 đo trên khung NV12 chụp ra tệp, chưa chạy liên tục.</text>
+<text x="10" y="580" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Chiều đọc của bước 4 và 5 suy ra từ chiều ghi của bước trước [SL].</text>
+</svg>

@@ -4,7 +4,7 @@
 <text x="14" y="22" font-size="14" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Ma trận tương thích toán tử phần cứng NPU Rockchip RK3588 (OPL 3.2)</text>
 <rect x="14" y="44" width="274" height="350" rx="6" ry="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3"/>
 <rect x="14" y="44" width="274" height="28" rx="6" ry="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.0"/>
-<text x="151.0" y="55" font-size="9.5" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">1. VÙNG XANH: 100% PHẦN CỨNG NPU</text>
+<text x="151.0" y="55" font-size="9.5" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">1. VÙNG XANH: OP CHẠY TRÊN NPU</text>
 <text x="151.0" y="67" font-size="7.5" font-weight="400" fill="#15803D" text-anchor="middle" dominant-baseline="central">Hỗ trợ 3 nhân song song | Hiệu suất tối đa</text>
 <rect x="22" y="80" width="258" height="92" rx="3" ry="3" fill="white" stroke="#86EFAC" stroke-width="1.2"/>
 <text x="32" y="95" font-size="8.8" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Conv 3×3 &amp; Conv 1×1 (Chuẩn)</text>
@@ -20,18 +20,18 @@
 <text x="246" y="194" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Fused OP</text>
 <text x="32" y="211" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Tự động gộp thành 1 lệnh phần cứng</text>
 <text x="32" y="224" font-size="7.5" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">• Triệt tiêu ghi tensor trung gian ra RAM</text>
-<text x="32" y="237" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Tiết kiệm 40% lưu lượng bus DDR</text>
+<text x="32" y="237" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Bảng gộp của hãng: UG232 tr.142</text>
 <text x="32" y="250" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Chuẩn hóa mặc định trên YOLOv8/v11</text>
 <rect x="22" y="280" width="258" height="92" rx="3" ry="3" fill="white" stroke="#86EFAC" stroke-width="1.2"/>
 <text x="32" y="295" font-size="8.8" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">C2f / C3k2 &amp; MaxPool SPPF</text>
 <rect x="220" y="286" width="52" height="16" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
 <text x="246" y="294" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Multi-Core</text>
 <text x="32" y="311" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Phép cộng residual Add hỗ trợ 3 core</text>
-<text x="32" y="324" font-size="7.5" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">• SPPF MaxPool kernel ≤ 7 chạy 100% NPU</text>
+<text x="32" y="324" font-size="7.5" font-weight="700" fill="#15803D" text-anchor="start" dominant-baseline="central">• SPPF MaxPool kernel ≤ 7 chạy trên NPU</text>
 <text x="32" y="337" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Split &amp; Concat xử lý trực tiếp</text>
 <text x="32" y="350" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Độ ổn định suy luận hoàn hảo</text>
 <rect x="22" y="376" width="258" height="14" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
-<text x="151.0" y="383" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Mô hình thuần nhóm này: 0% tải CPU</text>
+<text x="151.0" y="383" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Nhóm op này chạy trên NPU</text>
 <rect x="303" y="44" width="274" height="350" rx="6" ry="6" fill="#FEFCE8" stroke="#CA8A04" stroke-width="1.3"/>
 <rect x="303" y="44" width="274" height="28" rx="6" ry="6" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.0"/>
 <text x="440.0" y="55" font-size="9.5" font-weight="700" fill="#713F12" text-anchor="middle" dominant-baseline="central">2. VÙNG VÀNG: CẦN TỐI ƯU HÓA</text>
@@ -41,8 +41,8 @@
 <rect x="509" y="86" width="52" height="16" rx="2" ry="2" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.2"/>
 <text x="535" y="94" font-size="7.2" font-weight="700" fill="#713F12" text-anchor="middle" dominant-baseline="central">Low MAC</text>
 <text x="321" y="111" font-size="7.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Thiếu tái sử dụng dữ liệu chéo kênh</text>
-<text x="321" y="124" font-size="7.5" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Kênh INT8: Bắt buộc bội số 64</text>
-<text x="321" y="137" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• Hiệu suất tính toán MAC chỉ đạt ~30%</text>
+<text x="321" y="124" font-size="7.5" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Kênh INT8: nên bội số 64, không bắt buộc</text>
+<text x="321" y="137" font-size="7.2" font-weight="400" fill="#64748B" text-anchor="start" dominant-baseline="central">• YOLOv8n của dự án không có Depthwise</text>
 <text x="321" y="150" font-size="7.2" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Khuyến nghị: Dùng Conv 3×3 tiêu chuẩn</text>
 <rect x="311" y="180" width="258" height="92" rx="3" ry="3" fill="white" stroke="#FDE047" stroke-width="1.2"/>
 <text x="321" y="195" font-size="8.8" font-weight="700" fill="#713F12" text-anchor="start" dominant-baseline="central">Cơ chế chú ý (FlashAttention)</text>

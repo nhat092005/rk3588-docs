@@ -14,7 +14,7 @@
 <text x="466" y="57" font-size="9.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">B. KỊCH BẢN FUSED (1 KERNEL GỘP ON-CHIP)</text>
 <text x="466" y="68" font-size="6.8" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">Khép kín trên chip: Chỉ 2 lượt DRAM (1 đọc vào, 1 ghi ra)</text>
 <rect x="24" y="80" width="402" height="54" rx="3" fill="#FFF1F2" stroke="#C62828" stroke-width="1.0"/>
-<text x="30" y="89" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">OFF-CHIP DRAM (Bộ nhớ ngoài chip - LPDDR4X) [~200 pJ/bit, Băng thông hạn hẹp]</text>
+<text x="30" y="89" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">OFF-CHIP DRAM (Bộ nhớ ngoài chip - LPDDR4X) [Đọc 32 bit: 640 pJ, 45 nm, Gholami 2021]</text>
 <rect x="28" y="98" width="92" height="30" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="0.8"/>
 <text x="74.0" y="107" font-size="6.8" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">Tensor Input X</text>
 <text x="74.0" y="118" font-size="6.6" font-weight="400" fill="#1E40AF" text-anchor="middle" dominant-baseline="central">196.0 KiB</text>
@@ -126,7 +126,7 @@
 <text x="728" y="310" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Ghi thẳng ra đệm output</text>
 <rect x="458" y="334" width="394" height="26" rx="2" fill="#ECFDF5" stroke="#2E7D32" stroke-width="0.6"/>
 <text x="464" y="343" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Ưu thế: Luồng xử lý khép kín trong On-chip SRAM, PE hoạt động stall-free</text>
-<text x="464" y="353" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Tiết kiệm năng lượng ~95% cho phần xử lý trung gian (~5 pJ vs ~200 pJ/bit)</text>
+<text x="464" y="353" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Đọc 32 bit: SRAM 8 KB 5 pJ so với DRAM 640 pJ, 45 nm [Gholami 2021, Hình 7]</text>
 <rect x="24" y="376" width="402" height="100" rx="3" fill="#FFF9F9" stroke="#C62828" stroke-width="1.0"/>
 <text x="30" y="386" font-size="6.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Định lượng Lưu lượng DRAM (Feature Map INT8 64×56×56 = 196.0 KiB):</text>
 <rect x="32" y="395" width="386" height="18" rx="2" fill="#FEE2E2" stroke="#C62828" stroke-width="0.8"/>
@@ -142,8 +142,8 @@
 <rect x="590.538" y="395" width="257.462" height="18" rx="2" fill="#ECFDF5" stroke="#10B981" stroke-width="0.8" stroke-dasharray="5 3"/>
 <text x="719.269" y="404" font-size="6.6" font-weight="700" fill="#047857" text-anchor="middle" dominant-baseline="central">TIẾT KIỆM 66.7% LƯU LƯỢNG (-802.8 KB)</text>
 <text x="462" y="423" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Tổng lượt truy cập: 1 lần Đọc (196 KiB) + 1 lần Ghi (196 KiB) = 2 lượt (Giảm 3.0x)</text>
-<text x="462" y="436" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Tăng tốc suy luận: Đạt 1.2x - 2.0x speedup nhờ triệt tiêu hoàn toàn memory stall [TVM]</text>
+<text x="462" y="436" font-size="6.6" font-weight="700" fill="#047857" text-anchor="start" dominant-baseline="central">• Tăng tốc suy luận: Đạt 1.2× đến 2× nhờ giảm truy cập bộ nhớ [TVM tr.4]</text>
 <text x="462" y="449" font-size="6.6" font-weight="400" fill="#047857" text-anchor="start" dominant-baseline="central">• Trạng thái phần cứng: Chuyển dịch từ Memory-bound sang Compute-bound tối ưu</text>
-<text x="462" y="462" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Tiết kiệm năng lượng: Giảm ~60% toàn hệ thống nhờ giữ dữ liệu trên SRAM nội bộ</text>
+<text x="462" y="462" font-size="6.6" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Giữ dữ liệu trên SRAM nội bộ, giảm truy cập DRAM</text>
 <text x="10" y="510" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T2 Chen 2018 (TVM, OSDI tr.3-4); T2 Lee 2024 (IEEE TVLSI tr.1); T2 Bamberg 2023 (eIQ Neutron tr.3).</text>
 </svg>

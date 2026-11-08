@@ -77,7 +77,7 @@
 <text x="624" y="336" font-size="8.8" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Lợi thế triển khai phần cứng:</text>
 <text x="624" y="354" font-size="8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Đồ thị tĩnh (DAG) tất định</text>
 <text x="624" y="372" font-size="8" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Dễ dàng lượng tử hóa INT8</text>
-<text x="624" y="390" font-size="8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Giảm 30% tham số, 37% FLOPs</text>
+<text x="624" y="390" font-size="8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Giảm tham số và FLOPs</text>
 <text x="624" y="408" font-size="8" font-weight="400" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Không phụ thuộc NMS trên CPU</text>
 <path d="M579 230 L597 230" fill="none" stroke="#2E7D32" stroke-width="3.0" marker-end="url(#m2E7D32t)"/>
 <text x="10" y="459" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: Ultralytics (yolo26.yaml:13), Sapkota et al. (YOLO26 2025 tr.17), Jocher (YOLO26 2026 tr.11)</text>

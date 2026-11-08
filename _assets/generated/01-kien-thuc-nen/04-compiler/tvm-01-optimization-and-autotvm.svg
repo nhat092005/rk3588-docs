@@ -118,8 +118,8 @@
 <text x="460" y="319" font-size="6.6" font-weight="400" fill="#6D28D9" text-anchor="start" dominant-baseline="central">Càng đo nhiều mô hình càng chính xác; loại bỏ 99% cấu hình tồi trước khi đo!</text>
 <rect x="452" y="342" width="404" height="120" rx="4" fill="#FFFBEB" stroke="#F59E0B" stroke-width="0.9"/>
 <text x="458" y="354" font-size="7.0" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">3. Đánh đổi &amp; Giá trị Thực tiễn của TVM [Chen 2018]:</text>
-<text x="458" y="369" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tốc độ hội tụ: Nhanh hơn 2x - 10x so với auto-tuning hộp đen không có ML</text>
-<text x="458" y="383" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Hiệu năng Kernel: Đạt 85% - 105% so với thư viện viết tay của chuyên gia (cuDNN)</text>
+<text x="458" y="369" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tốc độ hội tụ: cost model tìm cấu hình tốt nhanh hơn đo thật</text>
+<text x="458" y="383" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Tốc độ: 1.2× đến 3.8× so với framework dùng thư viện tối ưu tay</text>
 <text x="458" y="397" font-size="6.6" font-weight="700" fill="#B45309" text-anchor="start" dominant-baseline="central">• Tính di động (Portability): 1 codebase thống nhất cho CPU, GPU và NPU chuyên dụng</text>
 <text x="458" y="413" font-size="6.6" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Cơ chế Tensorization: Ánh xạ vòng lặp vào lệnh ma trận phần cứng (GEMM/Systolic)</text>
 <text x="458" y="431" font-size="6.6" font-weight="400" fill="#92400E" text-anchor="start" dominant-baseline="central" font-style="italic">Ranh giới: RK3588 dùng RKNN toolkit kín, không công bố có dùng ML cost model hay không</text>

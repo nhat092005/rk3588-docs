@@ -42,7 +42,7 @@
 <text x="224.0" y="360" font-size="8.5" font-weight="700" fill="#444444" text-anchor="middle" dominant-baseline="central">Tập hộp dự đoán cuối cùng (Variable count)</text>
 <rect x="33" y="380" width="382" height="46" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
 <text x="43" y="394" font-size="8.2" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">Rào cản NPU: Softmax phi tuyến cực kỳ khó lượng tử hóa INT8.</text>
-<text x="43" y="410" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">NMS chạy trên CPU chiếm tới 30-50% tổng độ trễ thực thi tại biên.</text>
+<text x="43" y="410" font-size="8.2" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">NMS chạy trên CPU. Dự án: T_post 0.662 ms trên 18.04 ms (gồm NMS).</text>
 <rect x="450" y="40" width="412" height="395" rx="5" fill="#F6FBF7" stroke="#2E7D32" stroke-width="1.3"/>
 <rect x="460" y="50" width="165" height="22" rx="3" fill="#2E7D32" stroke="#2E7D32" stroke-width="1"/>
 <text x="542" y="61" font-size="9.8" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">YOLO26 DECOUPLED HEAD</text>

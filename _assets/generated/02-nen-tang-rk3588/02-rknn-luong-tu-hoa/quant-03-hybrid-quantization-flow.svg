@@ -53,11 +53,11 @@
 <text x="248" y="243" font-size="6.8" font-weight="400" fill="#991B1B" text-anchor="start" dominant-baseline="central" font-style="italic">→ Gây mất phát hiện vật thể nhỏ</text>
 <rect x="242" y="254" width="178" height="60" rx="3" ry="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
 <text x="248" y="268" font-size="7.5" font-weight="700" fill="#92400E" text-anchor="start" dominant-baseline="central">Nguyên tắc chọn layer phục hồi:</text>
-<text x="248" y="281" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chỉ chọn top 3-5% layer tệ nhất</text>
+<text x="248" y="281" font-size="7.0" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Chỉ chọn số ít layer tệ nhất</text>
 <text x="248" y="294" font-size="7.0" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Không đưa toàn bộ model về FP16</text>
 <text x="248" y="306" font-size="6.8" font-weight="400" fill="#475569" text-anchor="start" dominant-baseline="central">• Giữ nguyên compute layers ở INT8</text>
 <rect x="242" y="320" width="178" height="22" rx="2" ry="2" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
-<text x="331.0" y="334" font-size="7.2" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Chỉ giữ 5-10% layer nhạy cảm</text>
+<text x="331.0" y="334" font-size="7.2" font-weight="700" fill="#92400E" text-anchor="middle" dominant-baseline="central">Chỉ giữ số ít layer nhạy cảm</text>
 <path d="M430 196 L448 196" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
 <rect x="448" y="44" width="198" height="304" rx="6" ry="6" fill="#FAF5FF" stroke="#9333EA" stroke-width="1.2"/>
 <rect x="448" y="44" width="198" height="26" rx="6" ry="6" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.0"/>
@@ -97,25 +97,25 @@
 <rect x="674" y="98" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.2"/>
 <text x="680" y="112" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Phân bổ tài nguyên RKNPU:</text>
 <rect x="680" y="118" width="146" height="16" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
-<text x="686" y="129" font-size="6.8" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">90-95% Khối lượng: MAC INT8</text>
+<text x="686" y="129" font-size="6.8" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Phần lớn tensor: MAC INT8</text>
 <rect x="680" y="137" width="146" height="16" rx="2" ry="2" fill="#FEF2F2" stroke="#F87171" stroke-width="1.2"/>
-<text x="686" y="148" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">5-10% Head nhạy: Cores FP16</text>
-<text x="680" y="162" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">Tận dụng trọn vẹn 6 TOPS NPU core</text>
+<text x="686" y="148" font-size="6.8" font-weight="700" fill="#991B1B" text-anchor="start" dominant-baseline="central">h5: 15 tensor nhánh box FP16</text>
+<text x="680" y="162" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">Thông lượng không khác INT8 (quy tắc 5%)</text>
 <rect x="674" y="176" width="178" height="72" rx="3" ry="3" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1.2"/>
-<text x="680" y="190" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Hiệu quả thực nghiệm (YOLO):</text>
-<text x="680" y="204" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Độ chính xác mAP:</text>
-<text x="844" y="204" font-size="7.0" font-weight="700" fill="#15803D" text-anchor="end" dominant-baseline="central">Phục hồi ~99%</text>
-<text x="680" y="218" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Độ trễ suy luận:</text>
-<text x="844" y="218" font-size="7.0" font-weight="700" fill="#D97706" text-anchor="end" dominant-baseline="central">Tăng nhẹ 5-15%</text>
-<text x="680" y="232" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tiết kiệm bộ nhớ:</text>
-<text x="844" y="232" font-size="7.0" font-weight="700" fill="#2563EB" text-anchor="end" dominant-baseline="central">Giảm ~45% DDR</text>
-<text x="680" y="243" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">→ Điểm cân bằng Pareto tối ưu</text>
+<text x="680" y="190" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Số đo h5 của dự án (1 seed):</text>
+<text x="680" y="204" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• AP50-95 (INT8 36.75):</text>
+<text x="844" y="204" font-size="7.0" font-weight="700" fill="#15803D" text-anchor="end" dominant-baseline="central">49.66</text>
+<text x="680" y="218" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Latency CORE_0:</text>
+<text x="844" y="218" font-size="7.0" font-weight="700" fill="#D97706" text-anchor="end" dominant-baseline="central">-0.121 ms</text>
+<text x="680" y="232" font-size="7.0" font-weight="400" fill="#334155" text-anchor="start" dominant-baseline="central">• Tensor trong (MiB):</text>
+<text x="844" y="232" font-size="7.0" font-weight="700" fill="#2563EB" text-anchor="end" dominant-baseline="central">6.256 lên 8.691</text>
+<text x="680" y="243" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central" font-style="italic">→ FP16 tham chiếu: 49.76</text>
 <rect x="674" y="254" width="178" height="60" rx="3" ry="3" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
 <text x="680" y="268" font-size="7.5" font-weight="700" fill="#14532D" text-anchor="start" dominant-baseline="central">Lưu ý tài liệu hãng [T1 UG232]:</text>
 <text x="680" y="281" font-size="7.0" font-weight="400" fill="#78350F" text-anchor="start" dominant-baseline="central">• Lớp FP16 trên NPU chạy chậm hơn</text>
 <text x="680" y="294" font-size="7.0" font-weight="400" fill="#B91C1C" text-anchor="start" dominant-baseline="central">• Tránh đưa conv nặng vào FP16</text>
 <text x="680" y="306" font-size="6.8" font-weight="400" fill="#15803D" text-anchor="start" dominant-baseline="central">• Thích hợp nhất cho lớp cuối</text>
 <rect x="674" y="320" width="178" height="22" rx="2" ry="2" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.2"/>
-<text x="763.0" y="334" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">Tối ưu Pareto: mAP cao, tốc độ tốt</text>
+<text x="763.0" y="334" font-size="7.2" font-weight="700" fill="#14532D" text-anchor="middle" dominant-baseline="central">AP về gần FP16, latency đổi dưới 5%</text>
 <text x="10" y="368" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">[T1 UG232 tr.123-134, Fig. 6-3, 6-4] [T1 API232 tr.20-22] [T1 Gholami survey 2021]</text>
 </svg>

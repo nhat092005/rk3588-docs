@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="532.8pt" height="439.2pt" viewBox="0 0 532.8 439.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 439.2 
+L 532.8 439.2 
+L 532.8 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 213.12 379.8 
+L 508.824 379.8 
+L 508.824 21.96 
+L 213.12 21.96 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 262.568666 379.8 
+L 262.568666 21.96 
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m6b51293588" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m6b51293588" x="262.568666" y="379.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="262.568666" y="393.733594" transform="rotate(-0 262.568666 393.733594)">0.965</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 319.219981 379.8 
+L 319.219981 21.96 
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m6b51293588" x="319.219981" y="379.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="319.219981" y="393.733594" transform="rotate(-0 319.219981 393.733594)">0.970</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 375.871296 379.8 
+L 375.871296 21.96 
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m6b51293588" x="375.871296" y="379.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="375.871296" y="393.733594" transform="rotate(-0 375.871296 393.733594)">0.975</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 432.52261 379.8 
+L 432.52261 21.96 
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m6b51293588" x="432.52261" y="379.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="432.52261" y="393.733594" transform="rotate(-0 432.52261 393.733594)">0.980</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 489.173925 379.8 
+L 489.173925 21.96 
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.6; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m6b51293588" x="489.173925" y="379.8" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="489.173925" y="393.733594" transform="rotate(-0 489.173925 393.733594)">0.985</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 10px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: middle" x="360.972" y="406.849609" transform="rotate(-0 360.972 406.849609)">Cosine một lớp, trung bình trên 10 ảnh</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11">
+      <defs>
+       <path id="m7d8f28614e" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="38.225455" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="40.998892" transform="rotate(-0 206.12 40.998892)">SiLU  Conv  22/cv3.1/cv3.1.2/Conv</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="74.370909" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="77.146534" transform="rotate(-0 206.12 77.146534)">SiLU  Reshape  22/Reshape_4</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="110.516364" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="113.289801" transform="rotate(-0 206.12 113.289801)">SiLU  Conv  22/cv3.2/cv3.2.2/Conv</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="146.661818" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="149.437443" transform="rotate(-0 206.12 149.437443)">SiLU  Reshape  22/Reshape_5</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="182.807273" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="185.58071" transform="rotate(-0 206.12 185.58071)">SiLU  Conv  22/cv3.0/cv3.0.2/Conv</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="218.952727" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="221.728352" transform="rotate(-0 206.12 221.728352)">ReLU  Reshape  22/Reshape_4</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="255.098182" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="257.871619" transform="rotate(-0 206.12 257.871619)">ReLU  Conv  22/cv3.1/cv3.1.2/Conv</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="291.243636" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="294.017074" transform="rotate(-0 206.12 294.017074)">ReLU  Conv  22/cv3.2/cv3.2.2/Conv</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="327.389091" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="330.164716" transform="rotate(-0 206.12 330.164716)">ReLU  Reshape  22/Reshape_5</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m7d8f28614e" x="213.12" y="363.534545" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 8px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: end" x="206.12" y="366.307983" transform="rotate(-0 206.12 366.307983)">ReLU  Conv  22/cv3.0/cv3.0.2/Conv</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 213.12 379.8 
+L 213.12 21.96 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 213.12 379.8 
+L 508.824 379.8 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <path d="M 340.456036 41.542079 
+L 347.089286 41.542079 
+L 347.089286 34.90883 
+L 340.456036 34.90883 
+L 340.456036 41.542079 
+z
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #555555; stroke-width: 1.2"/>
+   </g>
+   <g id="PathCollection_2">
+    <path d="M 340.931907 77.687534 
+L 347.565157 77.687534 
+L 347.565157 71.054284 
+L 340.931907 71.054284 
+L 340.931907 77.687534 
+z
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #555555; stroke-width: 1.2"/>
+   </g>
+   <g id="PathCollection_3">
+    <path d="M 392.076714 113.832988 
+L 398.709964 113.832988 
+L 398.709964 107.199739 
+L 392.076714 107.199739 
+L 392.076714 113.832988 
+z
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #555555; stroke-width: 1.2"/>
+   </g>
+   <g id="PathCollection_4">
+    <path d="M 392.495934 149.978443 
+L 399.129183 149.978443 
+L 399.129183 143.345193 
+L 392.495934 143.345193 
+L 392.495934 149.978443 
+z
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #555555; stroke-width: 1.2"/>
+   </g>
+   <g id="PathCollection_5">
+    <path d="M 492.066284 186.123898 
+L 498.699534 186.123898 
+L 498.699534 179.490648 
+L 492.066284 179.490648 
+L 492.066284 186.123898 
+z
+" clip-path="url(#pcdc6d040cc)" style="fill: none; stroke: #555555; stroke-width: 1.2"/>
+   </g>
+   <g id="PathCollection_6">
+    <defs>
+     <path id="m73fdbb0584" d="M 0 3.316625 
+C 0.879579 3.316625 1.723251 2.967164 2.345208 2.345208 
+C 2.967164 1.723251 3.316625 0.879579 3.316625 0 
+C 3.316625 -0.879579 2.967164 -1.723251 2.345208 -2.345208 
+C 1.723251 -2.967164 0.879579 -3.316625 0 -3.316625 
+C -0.879579 -3.316625 -1.723251 -2.967164 -2.345208 -2.345208 
+C -2.967164 -1.723251 -3.316625 -0.879579 -3.316625 0 
+C -3.316625 0.879579 -2.967164 1.723251 -2.345208 2.345208 
+C -1.723251 2.967164 -0.879579 3.316625 0 3.316625 
+z
+" style="stroke: #1e5bb8; stroke-width: 1.2"/>
+    </defs>
+    <g clip-path="url(#pcdc6d040cc)">
+     <use xlink:href="#m73fdbb0584" x="226.561091" y="218.952727" style="fill: #1e5bb8; stroke: #1e5bb8; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_7">
+    <g clip-path="url(#pcdc6d040cc)">
+     <use xlink:href="#m73fdbb0584" x="226.606412" y="255.098182" style="fill: #1e5bb8; stroke: #1e5bb8; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_8">
+    <g clip-path="url(#pcdc6d040cc)">
+     <use xlink:href="#m73fdbb0584" x="328.170889" y="291.243636" style="fill: #1e5bb8; stroke: #1e5bb8; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_9">
+    <g clip-path="url(#pcdc6d040cc)">
+     <use xlink:href="#m73fdbb0584" x="328.22754" y="327.389091" style="fill: #1e5bb8; stroke: #1e5bb8; stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="PathCollection_10">
+    <g clip-path="url(#pcdc6d040cc)">
+     <use xlink:href="#m73fdbb0584" x="473.560823" y="363.534545" style="fill: #1e5bb8; stroke: #1e5bb8; stroke-width: 1.2"/>
+    </g>
+   </g>
+  </g>
+  <g id="text_17">
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="435.889294" transform="rotate(-0 5.328 435.889294)">Năm tensor có cosine thấp nhất mỗi model, mô phỏng INT8 trên PC (10 ảnh). File: results/q2c_diag.json (khóa lowest_single)</text>
+  </g>
+  <g id="legend_1">
+   <g id="line2d_21">
+    <defs>
+     <path id="ma543d30503" d="M -3.25 3.25 
+L 3.25 3.25 
+L 3.25 -3.25 
+L -3.25 -3.25 
+z
+" style="stroke: #555555; stroke-linejoin: miter"/>
+    </defs>
+    <g>
+     <use xlink:href="#ma543d30503" x="233.66018" y="12.821" style="fill-opacity: 0; stroke: #555555; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start" x="248.96018" y="15.796" transform="rotate(-0 248.96018 15.796)">SiLU</text>
+   </g>
+   <g id="line2d_22">
+    <defs>
+     <path id="m64c68469b3" d="M 0 3.25 
+C 0.86191 3.25 1.688635 2.907559 2.298097 2.298097 
+C 2.907559 1.688635 3.25 0.86191 3.25 0 
+C 3.25 -0.86191 2.907559 -1.688635 2.298097 -2.298097 
+C 1.688635 -2.907559 0.86191 -3.25 0 -3.25 
+C -0.86191 -3.25 -1.688635 -2.907559 -2.298097 -2.298097 
+C -2.907559 -1.688635 -3.25 -0.86191 -3.25 0 
+C -3.25 0.86191 -2.907559 1.688635 -2.298097 2.298097 
+C -1.688635 2.907559 -0.86191 3.25 0 3.25 
+z
+" style="stroke: #1e5bb8"/>
+    </defs>
+    <g>
+     <use xlink:href="#m64c68469b3" x="292.878617" y="12.821" style="fill: #1e5bb8; stroke: #1e5bb8"/>
+    </g>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 8.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start" x="308.178617" y="15.796" transform="rotate(-0 308.178617 15.796)">ReLU</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pcdc6d040cc">
+   <rect x="213.12" y="21.96" width="295.704" height="357.84"/>
+  </clipPath>
+ </defs>
+</svg>

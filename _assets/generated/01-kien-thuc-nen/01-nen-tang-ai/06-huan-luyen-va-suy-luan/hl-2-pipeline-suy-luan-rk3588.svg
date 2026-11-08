@@ -100,8 +100,8 @@
 <text x="306" y="396" font-size="7.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">   làm sai lệch hoàn toàn kết quả phát hiện!</text>
 <rect x="571" y="318" width="264" height="92" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
 <text x="580" y="334" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">3. Môi trường thực thi (Dependencies)</text>
-<text x="580" y="351" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• PC: PyTorch, CUDA, Ultralytics engine (~4 GB)</text>
-<text x="580" y="366" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Board: Thuần NumPy, OpenCV, RKNN C-API (&lt;80 MB)</text>
+<text x="580" y="351" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• PC: PyTorch, CUDA, Ultralytics engine</text>
+<text x="580" y="366" font-size="8.2" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">• Board: Thuần NumPy, OpenCV, RKNN C-API</text>
 <text x="580" y="382" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">-&gt; Loại bỏ hoàn toàn overhead nặng nề của PyTorch,</text>
 <text x="580" y="396" font-size="7.8" font-weight="400" fill="#777777" text-anchor="start" dominant-baseline="central">   giảm thiểu RAM tiêu thụ, tối ưu tốc độ thời gian thực.</text>
 <text x="10" y="430" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: T3 ai/board/common.py:19-125, ai/core/backends.py:31; T1 ultralytics utils/export/rknn.py:74.</text>

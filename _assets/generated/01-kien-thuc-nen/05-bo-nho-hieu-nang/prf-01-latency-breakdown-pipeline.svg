@@ -12,7 +12,7 @@
 <rect x="234" y="72" width="186" height="76" rx="4" fill="#FFFBEB" stroke="#E65100" stroke-width="1.2"/>
 <text x="327.0" y="88" font-size="10" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">2. Nạp dữ liệu (T_load)</text>
 <text x="327.0" y="108" font-size="8.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">Sao chép bộ nhớ / Memory copy</text>
-<text x="327.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Zero-copy dma-buf tiệm cận ~0 ms</text>
+<text x="327.0" y="126" font-size="8.5" font-weight="400" fill="#777777" text-anchor="middle" dominant-baseline="central">Zero-copy giảm chi phí copy, chưa đo</text>
 <path d="M422 110 L438 110" fill="none" stroke="#222222" stroke-width="1.6" marker-end="url(#m222222n)"/>
 <rect x="440" y="72" width="206" height="76" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.2"/>
 <text x="543.0" y="88" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">3. Suy luận NPU (T_npu)</text>
@@ -40,7 +40,7 @@
 <rect x="357" y="254" width="60" height="24" rx="2" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1"/>
 <text x="387" y="266" font-size="8.2" font-weight="400" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">T_pre</text>
 <rect x="33" y="292" width="382" height="136" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
-<text x="43" y="308" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính luồng tuần tự đơn giản:</text>
+<text x="43" y="308" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Luồng tuần tự (số ví dụ, không phải số đo):</text>
 <text x="53" y="328" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Tổng độ trễ 1 khung hình: T_E2E = 12 + 18 + 15 = 45 ms</text>
 <text x="53" y="348" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Thông lượng tối đa: 1000 / 45 ≈ 22.2 FPS</text>
 <text x="53" y="368" font-size="8.8" font-weight="700" fill="#C62828" text-anchor="start" dominant-baseline="central">• Tỷ lệ NPU bận: 18 / 45 = 40.0% (Lãng phí 60% năng lực NPU)</text>
@@ -66,7 +66,7 @@
 <rect x="731" y="272" width="90" height="22" rx="2" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1"/>
 <text x="776" y="283" font-size="8.2" font-weight="400" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">Post F1 (15m)</text>
 <rect x="465" y="302" width="382" height="126" rx="4" fill="white" stroke="#E2E8F0" stroke-width="1"/>
-<text x="475" y="318" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đặc tính kiến trúc đường ống gối đầu:</text>
+<text x="475" y="318" font-size="9.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đường ống gối đầu (số ví dụ, không phải số đo):</text>
 <text x="485" y="336" font-size="8.8" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">• Thông lượng bị chặn bởi chặng dài nhất: max(12, 18, 15) = 18 ms</text>
 <text x="485" y="354" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Thông lượng ổn định: 1000 / 18 ≈ 55.6 FPS (Tăng 2.5× thông lượng)</text>
 <text x="485" y="372" font-size="8.8" font-weight="700" fill="#2E7D32" text-anchor="start" dominant-baseline="central">• Tỷ lệ NPU bận: tiệm cận ~100% công suất thực tế</text>
