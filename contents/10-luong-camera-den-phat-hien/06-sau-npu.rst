@@ -66,9 +66,9 @@ Các hằng số: ``CONF = 0.25``, ``IOU = 0.7``, ``MAX_DET = 300``, ``MAX_NMS =
     lớp hiển thị của repo: làm mượt 5 hộp, bỏ phiếu lớp 15 khung,
                            chỉ vẽ sau 3 lần khớp, giữ 5 khung sau khi mất
 
-Tham số ``track_high_thresh`` 0.25, ``track_low_thresh`` 0.1, ``new_track_thresh`` 0.25, ``track_buffer`` 30, ``match_thresh`` 0.8 lấy từ ``bytetrack.yaml`` của Ultralytics [Mã nguồn repo, ``.venv/lib/python3.12/site-packages/ultralytics/cfg/trackers/bytetrack.yaml``]. Tách hộp điểm cao và điểm thấp nằm ở ``byte_tracker.py`` dòng 316 và 317, ghép lần hai ở ``_second_association``. Lớp hiển thị dùng ``--smooth 5``, ``--vote 15``, ``--min-hits 3``, ``--hold 5`` mặc định [Mã nguồn repo ``scripts/demo/video/track.py:97-105``]. ``track.py`` có tham số ``--conf`` mặc định 0.25, và đầu vào tracker là mọi hộp từ ``DET_CONF`` trở lên [Mã nguồn repo ``scripts/demo/video/track.py:3-5, 98``, ``scripts/demo/common.py:28``].
+Tham số ``track_high_thresh`` 0.25, ``track_low_thresh`` 0.1, ``new_track_thresh`` 0.25, ``track_buffer`` 30, ``match_thresh`` 0.8 lấy từ ``bytetrack.yaml`` của Ultralytics [Mã nguồn repo, ``.venv/lib/python3.12/site-packages/ultralytics/cfg/trackers/bytetrack.yaml``]. Tách hộp điểm cao và thấp ở ``byte_tracker.py`` dòng 316 và 317, ghép lần hai ở ``_second_association``. Lớp hiển thị dùng ``--smooth 5``, ``--vote 15``, ``--min-hits 3``, ``--hold 5`` mặc định [Mã nguồn repo ``scripts/demo/video/track.py:97-105``]. Đầu vào tracker là mọi hộp từ ``DET_CONF`` trở lên [Mã nguồn repo ``scripts/demo/video/track.py:3-5, 98``, ``scripts/demo/common.py:28``].
 
-Đo ngày 2026-11-07 trên board với CPU, NPU, DDR khóa ``performance`` bằng ``lock_freq.sh``, 600 khung sau 30 khung khởi động [T3 board, ``track_bench.py``, ``build_trk_pkg.py``]. Mã tracker là các tệp ``byte_tracker.py``, ``basetrack.py``, ``kalman_filter.py``, ``matching.py``, ``stracks.py`` của Ultralytics 8.4.154 trong repo, chép nguyên văn sang board. Board không có ``ultralytics`` và ``torch`` nên ``ultralytics.utils`` được thay bằng bản nhỏ (``LOGGER``, ``xywh2ltwh`` và ``bbox_ioa`` trích nguyên từ mã gốc). Thư viện ``lap`` 0.5.14 cài vào thư mục tạm bằng ``pip --target``, không đổi venv của board. Lớp hiển thị là ``TrackDisplay`` chép từ ``track.py``. Dữ liệu là hộp người giả (chuyển động ngẫu nhiên, 10% khung điểm tụt xuống 0.12 đến 0.24, thêm hộp dương giả bằng một phần năm số người), không phải đầu ra của model. Trung vị ms:
+Đo ngày 2026-11-07 trên board, CPU, NPU, DDR khóa ``performance`` bằng ``lock_freq.sh``, 600 khung sau 30 khung khởi động [T3 board, ``track_bench.py``, ``build_trk_pkg.py``]. Mã tracker là ``byte_tracker.py``, ``basetrack.py``, ``kalman_filter.py``, ``matching.py``, ``stracks.py`` của Ultralytics 8.4.154, chép nguyên văn sang board. Board không có ``ultralytics`` và ``torch`` nên ``ultralytics.utils`` được thay bằng bản nhỏ (``LOGGER``, ``xywh2ltwh``, ``bbox_ioa`` trích nguyên từ mã gốc). ``lap`` 0.5.14 cài vào thư mục tạm bằng ``pip --target``. Lớp hiển thị là ``TrackDisplay`` chép từ ``track.py``. Dữ liệu là hộp người giả (chuyển động ngẫu nhiên, 10% khung điểm tụt xuống 0.12 đến 0.24, thêm hộp dương giả bằng một phần năm số người), không phải đầu ra của model. Trung vị ms:
 
 .. list-table::
    :header-rows: 1
@@ -110,9 +110,9 @@ Tham số ``track_high_thresh`` 0.25, ``track_low_thresh`` 0.1, ``new_track_thre
      - 82.253
      - không đo
 
-Điều kiện các cột: A76 là ``taskset -c 6``, A55 là ``taskset -c 0``, cả hai với ``OPENBLAS_NUM_THREADS=1`` và ``OMP_NUM_THREADS=1``. Cột BLAS mặc định không ghim lõi và không đặt biến môi trường, chỉ chạy 60 khung. p95 ở lõi A76 chỉ hơn trung vị tối đa 0.2 ms ở dòng tổng 5 người. Ở lõi A55, p95 của dòng 5 người là 18.769 ms (trung vị 5.310 ms) và dòng 34 người là 51.955 ms. Số track ra bằng số người và số mã số duy nhất chỉ hơn 1 hoặc 6 (6 mã cho 5 người, 35 cho 34, 66 cho 60), nên tracker nhận đúng hộp [T3 board, ``track_bench.py``].
+Điều kiện: A76 là ``taskset -c 6``, A55 là ``taskset -c 0``, cả hai với ``OPENBLAS_NUM_THREADS=1`` và ``OMP_NUM_THREADS=1``. Cột BLAS mặc định không ghim và không đặt biến môi trường, chỉ chạy 60 khung. Số track ra bằng số người, số mã số duy nhất chỉ hơn 1 hoặc 6 (6 mã cho 5 người, 35 cho 34, 66 cho 60), nên tracker nhận đúng hộp [T3 board, ``track_bench.py``].
 
-Cột BLAS mặc định cho thấy chi phí không đến từ thuật toán: ``cProfile`` ở 34 người ghi 45.4 s trong ``numpy.linalg`` trên tổng 46.4 s, qua 3025 lần gọi cập nhật Kalman (khoảng 15 ms mỗi lần) [T3 board, ``cProfile``]. Đặt ``OPENBLAS_NUM_THREADS=1`` đưa ``update`` từ 447 ms xuống 4.4 ms. Nguyên nhân là nhiều luồng BLAS tranh nhau trên ma trận rất nhỏ là suy luận [SL], chưa tách riêng từng yếu tố. Ở lõi A76, tracker cộng hiển thị chiếm 5.6 ms (17% chu kỳ 33.3 ms của camera) với 34 người và 9.4 ms (28%) với 60 người. Ở lõi A55 cùng tải 34 người mất 51.2 ms, vượt chu kỳ camera, nên tracker phải chạy trên lõi A76 [SL, phép so sánh]. Chưa đo khi NPU, RGA và hậu xử lý chạy cùng lúc.
+Chi phí ở cột BLAS mặc định không đến từ thuật toán: ``cProfile`` ở 34 người ghi 45.4 s trong ``numpy.linalg`` trên tổng 46.4 s, qua 3025 lần cập nhật Kalman (khoảng 15 ms mỗi lần) [T3 board, ``cProfile``]. ``OPENBLAS_NUM_THREADS=1`` đưa ``update`` từ 447 ms xuống 4.4 ms. Nguyên nhân là nhiều luồng BLAS tranh nhau trên ma trận rất nhỏ [SL]. Ở lõi A76, tracker cộng hiển thị chiếm 5.6 ms (17% chu kỳ 33.3 ms) với 34 người và 9.4 ms (28%) với 60 người. Ở lõi A55 cùng tải 34 người mất 51.2 ms, vượt chu kỳ camera, nên tracker phải chạy trên A76 [SL, phép so sánh]. Chưa đo khi NPU, RGA và hậu xử lý chạy cùng.
 
 3. Đầu ra
 =========
@@ -171,7 +171,51 @@ Repo ghi video bằng ``VideoWriter`` lớp PyAV libx264 [Mã nguồn repo ``scr
      - 8.413
      - 190
 
-Nguồn ``videotestsrc`` tự tốn gần 3 s CPU nên che chi phí mã hóa của VPU: chỉ kết luận được VPU không chậm hơn 100 khung/giây ở 1080p, không đo được trần của nó. Nội dung ảnh giả và bitrate mặc định của ``mpph264enc`` khác ``crf 20`` nên không so được chất lượng. Cột suy ra là 300 chia thời gian thực [SL]. libx264 mặc định dùng khoảng 4.9 lõi CPU (41.812 chia 8.583) [SL].
+Nguồn ``videotestsrc`` tự tốn gần 3 s CPU nên che chi phí của VPU: chỉ kết luận được VPU không chậm hơn 100 khung/giây ở 1080p, không đo được trần. Nội dung giả và bitrate mặc định của ``mpph264enc`` khác ``crf 20`` nên không so được chất lượng. Cột suy ra là 300 chia thời gian thực [SL]. libx264 mặc định dùng khoảng 4.9 lõi CPU (41.812 chia 8.583) [SL]. Ở 4K UHD từ camera thật, ``rkvenc2`` ghi đủ nhịp thời gian thực (mục 3.1, quyết định 16 trong :doc:`../00-tong-quan/04-gioi-han-va-huong-phat-trien` mục 3.1).
+
+3.1. Mã hóa 4K, H.264 và H.265
+------------------------------
+
+Đo ngày 2026-11-08. Khung NV12 3840x2160 lấy từ mainpath ``/dev/video11`` (cảnh trong nhà có người, 30 khung lặp 4 lần thành 120 khung), GStreamer ``mpph264enc`` và ``mpph265enc``, CBR, GOP 30, ghim lõi A76, xung khóa. Chất lượng là PSNR và SSIM so với khung gốc, giải mã bằng ffmpeg phần mềm [T3 board, ``tmp/camera-pipeline/enc_rga_2026-11-08/``].
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 20 20
+
+   * - Bitrate đích
+     - PSNR trung bình H.264
+     - PSNR trung bình H.265
+     - SSIM All H.264
+     - SSIM All H.265
+   * - 4 Mbps
+     - 35.59 dB
+     - 36.78 dB
+     - 0.9050
+     - 0.9141
+   * - 8 Mbps
+     - 36.40 dB
+     - 37.44 dB
+     - 0.9139
+     - 0.9224
+   * - 16 Mbps
+     - 37.31 dB
+     - 38.47 dB
+     - 0.9248
+     - 0.9347
+   * - 32 Mbps
+     - 38.47 dB
+     - 39.62 dB
+     - 0.9390
+     - 0.9487
+
+- Cùng bitrate, H.265 hơn H.264 từ 1.04 đến 1.18 dB PSNR trung bình (riêng kênh Y từ 1.22 đến 1.42 dB) và từ 0.008 đến 0.010 SSIM.
+- H.265 ở một nửa bitrate xấp xỉ H.264: PSNR trung bình H.265 hơn từ 0.00 đến 0.37 dB, SSIM từ +0.0002 đến -0.0042 (kém ở hai cặp bitrate cao). Chỉ nên đọc là "gần tương đương ở khoảng nửa bitrate".
+- Giới hạn: một cảnh, 30 khung lặp lại nên dự đoán theo thời gian chỉ trong 30 khung, cấu hình mặc định của plugin. Chưa đo cảnh nhiều chuyển động hay thiếu sáng.
+- Chi phí như nhau. Từ tệp, 120 khung mất 3.5 đến 3.8 s (31.6 đến 34.4 khung/giây) với cả hai codec, nguồn không mã hóa 2.16 s nên chưa phải trần của bộ mã hóa. CPU 3.7 đến 4.0 s, phần lớn là thời gian hệ thống. Tải DDR (``dmc``) 17.9 đến 19.9% ở mọi ca kể cả ca không mã hóa, không phân biệt được giữa hai codec.
+- Từ camera qua dma-buf, 300 khung: cả hai codec mất 10.28 đến 10.30 s (30 khung/giây thời gian thực), CPU 4.17 đến 4.22 s mỗi lần chạy (khoảng 41% một lõi). Tệp ra chỉ khoảng 4.9 MB cho 10 s dù đích 16 Mbps, tức CBR chưa đạt đích ở đường này. Chưa tìm nguyên nhân nên không dùng kích thước tệp ở ca này để so sánh.
+- Hỗ trợ trình duyệt (caniuse, đọc 2026-11-08): H.264 "Supported" ở Chrome, Edge, Firefox, Safari, Chrome Android và Safari iOS ở các phiên bản hiện tại [Web caniuse.com/mpeg4]. H.265 chỉ hỗ trợ một phần: Chrome từ 107, Edge từ 79, Firefox tắt mặc định ở 121 đến 136 và hỗ trợ một phần từ 137, Safari từ 13 và Safari iOS từ 11 hỗ trợ đầy đủ [Web caniuse.com/hevc]. Trang ghi lý do: "hard for browsers to universally support HEVC because it is complex and expensive to license". Điều kiện chi tiết của mức "một phần" (giải mã phần cứng, hệ điều hành) chưa đọc được từ caniuse, một nguồn thứ ba nói Chrome và Edge phụ thuộc giải mã phần cứng, chưa kiểm.
+
+Kết luận cho quyết định 16: chọn H.265, tiết kiệm khoảng một nửa dung lượng ở chất lượng gần tương đương [SL, từ số đo một cảnh]. Cái giá là trình duyệt chỉ hỗ trợ một phần, nên xem video bằng player. Cần phát trên trình duyệt thì chuyển sang H.264, bộ VPU làm được cả hai.
 
 4. Điều chưa biết
 =================
@@ -184,8 +228,8 @@ Nguồn ``videotestsrc`` tự tốn gần 3 s CPU nên che chi phí mã hóa c�
      - Cần để xác minh
    * - ByteTrack với hộp thật từ model, và khi NPU, RGA chạy cùng lúc
      - Đo bằng hộp giả khi chạy riêng. ``ai/board/camera.py --track`` đã chạy cùng pipeline với 0 hộp (ByteTrack 0.190 ms) và với người đứng trong khung tối (trung bình 0.59 hộp mỗi khung, ByteTrack 0.727 ms trung vị, :doc:`07-chay-lien-tuc-tren-board`). Chưa đo với nhiều người trong phòng đủ sáng
-   * - Trần mã hóa của VPU, và so với libx264 ở cùng chất lượng và nội dung thật
-     - Dùng nguồn là tệp NV12 đã ghi sẵn thay cho ``videotestsrc``, đặt bitrate tương đương
+   * - Trần mã hóa của VPU (nguồn tệp ở 4K chỉ đạt 55 khung/giây không mã hóa, che trần), so với libx264 ở cùng chất lượng, và H.265 so với H.264 ở nhiều cảnh (chuyển động, thiếu sáng)
+     - Nạp khung vào bộ đệm dma-buf dựng sẵn thay cho ``fdsrc``, đặt bitrate tương đương, thêm cảnh
    * - ``postprocess`` với khung camera thật có người
      - Đã đo với 34 hộp từ ảnh test phóng lên. Chưa đo với khung camera thật có người, cần người đứng trước camera
    * - Có cần theo dõi ở nhịp 30 khung/giây của camera không

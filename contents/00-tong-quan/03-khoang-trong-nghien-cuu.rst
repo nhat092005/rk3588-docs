@@ -12,36 +12,20 @@ Research gap
 
 .. admonition:: Tóm tắt
 
-   - Cách làm đúng là đọc paper, liệt kê limitation, verify trên RK3588S, tìm bottleneck thật rồi mới đặt research question, không chọn kỹ thuật trước.
-   - Case A (FP16 còn chậm): S3NAS bỏ bớt SE blocks cho 82.72% top-1 với 11.66ms latency, vừa nhanh hơn vừa chính xác hơn (Table 6, tr.10).
-   - Hướng thiết kế lại toán tử cho đề tài: thay hàm kích hoạt SiLU của YOLOv8 bằng ReLU hoặc LeakyReLU để tận dụng cơ chế phân đoạn đa nhân trên các lớp tích chập của RK3588, đồng thời đánh giá đánh đổi giữa độ trễ đa nhân và mAP tại chương :doc:`Operator support </contents/03-phuong-phap/03-tang-npu-don-bay/01-operator-support>`.
-   - Case B (INT8 giảm accuracy): RKNN-Toolkit2 có `hybrid_quantization_step1` / `hybrid_quantization_step2`, và quantize theo channel đã là mặc định.
-   - Case C (FLOPs thấp nhưng NPU chậm): DAHD-YOLO có 21.8 GFLOPs so với 28.4 của YOLOv8s nhưng chỉ 50.2 FPS so với 70.9 FPS trên RK3588 INT8.
-   - Chiều ngược lại cũng đúng: ours-M có nhiều parameters và FLOPS hơn EfficientNet-B1 nhưng latency ngắn hơn, nên độ phức tạp không phải chỉ báo trực tiếp của latency.
+   - Cách làm đúng: đọc paper, liệt kê limitation, verify trên RK3588S, tìm bottleneck thật, rồi mới đặt research question, không chọn kỹ thuật trước.
+   - Case A (FP16 còn chậm): S3NAS bỏ bớt SE blocks cho 82.72% top-1 với 11.66 ms latency, vừa nhanh hơn vừa chính xác hơn (Table 6, tr.10).
+   - Hướng đổi SiLU sang ReLU hoặc LeakyReLU để tận dụng đa nhân đã đo và bị loại: nhanh hơn 20.9% đến 22.3% ở một lõi nhưng AP50-95 kém 2.64 đến 3.63 điểm, ngưỡng 1.0 (:doc:`Kết quả biến thể activation </contents/03-phuong-phap/04-tang-npu-ket-qua/02-ket-qua-bien-the-activation>`).
+   - Case B (INT8 giảm accuracy): RKNN-Toolkit2 có ``hybrid_quantization_step1`` và ``hybrid_quantization_step2``, quantize theo channel là mặc định.
+   - Case C (FLOPs thấp nhưng NPU chậm): DAHD-YOLO có 21.8 GFLOPs so với 28.4 của YOLOv8s nhưng chỉ 50.2 FPS so với 70.9 FPS trên RK3588 INT8. Chiều ngược lại cũng đúng (ours-M, S3NAS), nên độ phức tạp không phải chỉ báo trực tiếp của latency.
 
 .. contents:: Trong trang này
    :local:
    :depth: 2
 
-.. _41-sai-cách:
-
-1. Tiếp cận sai cách: Chọn giải pháp trước khi tìm vấn đề
-====================================================================================================
-
-.. code:: text
-
-   “Tôi muốn thêm attention”
-      ↓
-   “Tôi muốn pruning”
-      ↓
-   “Tôi muốn INT8”
-      ↓
-   sau đó mới tìm problem để giải thích
-
 .. _42-đúng-cách:
 
-2. Tiếp cận đúng cách: Xuất phát từ nút thắt phần cứng thực tế
-====================================================================================================
+1. Cách tiếp cận: xuất phát từ nút thắt phần cứng thực tế
+==========================================================
 
 .. code:: text
 
@@ -61,13 +45,13 @@ Research gap
 
 .. _43-ví-dụ-gap-có-thể-xuất-hiện-sau-benchmark:
 
-3. Các khoảng trống nghiên cứu tiềm năng (Research Gaps)
-====================================================================================================
+2. Các khoảng trống nghiên cứu tiềm năng (Research Gaps)
+========================================================
 
 .. _case-a--fp16-còn-chậm:
 
-3.1. Case A: FP16 còn chậm (Cần tối ưu kiến trúc và toán tử)
-----------------------------------------------------------------------------------------------------
+2.1. Case A: FP16 còn chậm (Cần tối ưu kiến trúc và toán tử)
+------------------------------------------------------------
 
 .. code:: text
 
@@ -131,7 +115,7 @@ Tức bỏ bớt SE blocks (tốn băng thông bộ nhớ, không khai thác t�
 
 Lưu ý: bản thân phép gộp không tốn thêm chi phí lúc inference, nhưng module DBCA đầy đủ của DAHD-YOLO còn kèm attention (CAA). Xem Case C, cả model vẫn chậm hơn YOLOv8s, nên phải đo trên board chứ không suy từ lý thuyết.
 
-Hướng thiết kế cụ thể đặt ra cho đề tài (từ đặc tả tại bảng :ref:`Research problem đề xuất <21-research-problem-đề-xuất>`): thay hàm kích hoạt SiLU của YOLOv8 sang ReLU hoặc LeakyReLU, vì theo tài liệu Operator List V2.3.2 của Rockchip, các phép tích chập gộp ReLU, Clip hoặc PReLU/LeakyReLU đều hỗ trợ chạy đa nhân trong khi tích chập gộp Swish (``ConvolutionSwish``) tạm chưa hỗ trợ đa nhân. Quy trình kiểm chứng độ trễ đa nhân ở ``CORE_0_1_2`` và đánh giá độ chính xác mAP khi huấn luyện lại mô hình được trình bày chi tiết tại trang :doc:`Operator support </contents/03-phuong-phap/03-tang-npu-don-bay/01-operator-support>`.
+Hướng thiết kế cụ thể đặt ra cho đề tài (từ bảng :ref:`Research problem đề xuất <21-research-problem-đề-xuất>`) là thay SiLU của YOLOv8 bằng ReLU hoặc LeakyReLU, vì theo Operator List V2.3.2 các phép tích chập gộp ReLU, Clip hoặc PReLU/LeakyReLU hỗ trợ đa nhân còn ``ConvolutionSwish`` thì chưa. Kết quả đo: latency nhanh hơn nhưng AP kém quá ngưỡng, nên hướng này bị loại (:doc:`Operator support </contents/03-phuong-phap/03-tang-npu-don-bay/01-operator-support>`, :doc:`Kết quả biến thể activation </contents/03-phuong-phap/04-tang-npu-ket-qua/02-ket-qua-bien-the-activation>`).
 
 **``lighter detection head``:** :download:`_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf <../../_assets/pdf/papers/07_ppe_detection/ppe_yolo_chv_2021wang.pdf>`, Table 4, tr.12 (mục 3.2 "Different Layers"):
 
@@ -156,8 +140,8 @@ Tức thêm detection layer không tăng accuracy mà còn chậm hơn 27%, ủn
 
 .. _case-b--int8-nhanh-nhưng-accuracy-giảm:
 
-3.2. Case B: INT8 nhanh nhưng suy giảm độ chính xác
-----------------------------------------------------------------------------------------------------
+2.2. Case B: INT8 nhanh nhưng suy giảm độ chính xác
+---------------------------------------------------
 
 .. code:: text
 
@@ -207,10 +191,7 @@ Các hướng cứu accuracy ở trên, đối chiếu với thực tế RKNN-To
    * - Quantize theo channel
      - Đã là mặc định, không cần làm thêm. Toolkit2-API trang PDF 8: *"quantized_method: Currently support layer, channel or group{SIZE}. The default value is channel."*
 
-Chú thích "quantize theo channel": khi quantize trọng số 1 layer conv, cần chọn khoảng giá trị (clipping range) để map sang INT8.
-
-- **Theo layer (layerwise)**: Cả layer dùng chung 1 khoảng, filter nào có giá trị dao động hẹp sẽ bị mất độ chính xác, vì khoảng chung bị kéo rộng theo filter có giá trị dao động rộng nhất.
-- **Theo channel (channelwise)**: Mỗi filter có khoảng riêng, giữ độ chính xác cho từng filter, chi phí gần như không đáng kể.
+Chú thích "quantize theo channel": theo layer thì cả layer dùng chung một khoảng giá trị, filter có giá trị dao động hẹp bị mất độ chính xác. Theo channel thì mỗi filter có khoảng riêng, chi phí gần như không đáng kể.
 
 :download:`quantization_survey_2021gholami.pdf <../../_assets/pdf/papers/02_quantization/quantization_survey_2021gholami.pdf>`, Figure 3, tr.6, nguyên văn:
 
@@ -218,8 +199,8 @@ Chú thích "quantize theo channel": khi quantize trọng số 1 layer conv, c�
 
 .. _case-c--flops-thấp-nhưng-npu-vẫn-chậm:
 
-3.3. Case C: FLOPs thấp nhưng NPU vẫn chậm (Nghịch lý độ phức tạp)
-----------------------------------------------------------------------------------------------------
+2.3. Case C: FLOPs thấp nhưng NPU vẫn chậm (Nghịch lý độ phức tạp)
+------------------------------------------------------------------
 
 .. code:: text
 

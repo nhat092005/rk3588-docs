@@ -12,11 +12,11 @@ Tiền xử lý
 
 .. admonition:: Tóm tắt
 
-   1. NPU nhận tensor NHWC 1, 3 hoặc 4 kênh [T1 UG232 tr.69]. Đầu vào của model là uint8 RGB 640x640 theo ``ai/board/common.py`` [Mã nguồn repo ``ai/board/common.py:64-79``].
-   2. Có ba tuyến: A (CPU, chuỗi hiện có của repo), B (ISP thu nhỏ rồi RGA hoặc CPU thêm viền), C (RGA đổi màu và thu nhỏ một lệnh, theo demo của hãng). Repo chỉ có tuyến A, và bước NV12 sang BGR của nó chưa viết.
-   3. Board có hai lõi RGA3 và một lõi RGA2 [T3 board, ``dmesg``]. RGA đổi NV12 1920x1080 sang RGB888 640x640 có letterbox mất 2.222 và 2.244 ms (bộ đệm dma-buf, hai lần đo) hoặc 3.605 và 3.219 ms (địa chỉ ảo), trung vị [T3 board, ``rga_bench.c``]. CPU đổi NV12 1080p sang BGR mất 0.915 ms với 8 luồng, 4.571 ms với 1 luồng [T3 board, ``board_pipeline_test.py``].
-   4. ISP xuất trực tiếp NV12 640x360 hoặc 640x640 ở 29.95 fps [T3 board, ``v4l2-ctl --stream-mmap``]. Mặc định ``Dcrop`` của ISP là cả khung 4224x3136 (tỉ lệ 1.347), nên đầu ra 1920x1080 và 640x360 (1.778) hay 640x640 (1.0) bị méo tỉ lệ [SL] [T3 board, ``/proc/rkisp0-vir1``]. ISP cắt được 16:9 bằng ``VIDIOC_S_SELECTION`` (``Dcrop(0,380|4224x2376)``), khi đó thu nhỏ về 1920x1080 giữ đúng tỉ lệ [T3 board, ``v4l2-ctl --set-selection``].
-   5. Tiền xử lý CPU của repo đo được 0.216 ms mỗi khung ở một context, trên 82 ảnh kiểm thử nạp sẵn, không ghi kích thước ảnh và không gồm NV12 sang BGR (bước chưa tồn tại). Chưa suy ra được cho khung camera 1080p hay 4224x3136 [T3 board, ``results/thr_p3.json``, ``ai/board/bench_throughput_rep.py``, :doc:`../03-phuong-phap/03-tang-npu-don-bay/09-pre-post-processing`].
+   1. NPU nhận tensor NHWC 1, 3 hoặc 4 kênh [T1 UG232 tr.69]. Đầu vào hiện tại của model là uint8 RGB 640x640 theo ``ai/board/common.py:64-79`` [Mã nguồn repo]. Quyết định đổi sang 384x640 ở :doc:`../00-tong-quan/04-gioi-han-va-huong-phat-trien` mục 3.1 (quyết định 6).
+   2. Có ba tuyến: A (CPU, chuỗi hiện có của repo), B (ISP thu nhỏ rồi RGA hoặc CPU thêm viền), C (RGA đổi màu và thu nhỏ một lệnh, theo demo của hãng). Repo chỉ có tuyến A.
+   3. RGA đổi NV12 1920x1080 sang RGB888 640x640 có viền mất 2.222 và 2.244 ms (bộ đệm dma-buf, hai lần đo) hoặc 3.605 và 3.219 ms (địa chỉ ảo). CPU đổi NV12 1080p sang BGR mất 0.915 ms với 8 luồng, 4.571 ms với 1 luồng [T3 board, ``rga_bench.c``, ``board_pipeline_test.py``].
+   4. ISP xuất trực tiếp NV12 640x360 hoặc 640x640 ở 29.95 fps [T3 board, ``v4l2-ctl --stream-mmap``]. Mặc định ``Dcrop`` là cả khung 4224x3136 (tỉ lệ 1.347), nên đầu ra 16:9 hoặc vuông bị méo [SL] [T3 board, ``/proc/rkisp0-vir1``]. ISP cắt được 16:9 bằng ``VIDIOC_S_SELECTION`` (``Dcrop(0,380|4224x2376)``), khi đó thu nhỏ giữ đúng tỉ lệ (mục 7).
+   5. Tiền xử lý CPU của repo đo 0.216 ms mỗi khung ở một context, trên 82 ảnh kiểm thử nạp sẵn, không gồm NV12 sang BGR. Chưa suy ra được cho khung camera [T3 board, ``results/thr_p3.json``, :doc:`../03-phuong-phap/03-tang-npu-don-bay/09-pre-post-processing`].
 
 .. contents:: Trong trang này
    :local:
@@ -45,7 +45,7 @@ Tiền xử lý
         -> RGA imresize: NV12 sang RGB888 và thu nhỏ trong một lệnh
         -> rknn_inputs_set, fmt = NHWC
 
-Tuyến A là phần ``preprocess`` có sẵn: resize ``cv2.INTER_LINEAR`` về cạnh dài 640, ``copyMakeBorder`` giá trị 114, BGR sang RGB, trả ``(1, 640, 640, 3)`` uint8 [Mã nguồn repo ``ai/board/common.py:64-79``]. Phase 9 của kế hoạch ghi chuỗi ``OV13855, NV12, RGB, LetterBox, RKNN, NMS`` [Mã nguồn repo, :doc:`../09-tien-do/01-phase/05-phase-9-10`]. Tuyến C: demo ``main_video.cc`` đổi ``RK_FORMAT_YCbCr_420_SP`` sang ``RK_FORMAT_RGB_888`` bằng ``imresize`` rồi gọi ``rknn_inputs_set`` với ``fmt = RKNN_TENSOR_NHWC`` [T1 rknn-toolkit2 ``rknpu2/examples/rknn_yolov5_demo/src/main_video.cc:286-312``, ``main_video.cc:393``]. ``imresize`` của demo kéo thẳng về kích thước model, không có bước letterbox.
+Tuyến A là ``preprocess`` có sẵn: resize ``cv2.INTER_LINEAR`` về cạnh dài 640, ``copyMakeBorder`` giá trị 114, BGR sang RGB [Mã nguồn repo ``ai/board/common.py:64-79``]. Tuyến C: demo ``main_video.cc`` đổi ``RK_FORMAT_YCbCr_420_SP`` sang ``RK_FORMAT_RGB_888`` bằng ``imresize`` rồi gọi ``rknn_inputs_set`` với ``fmt = RKNN_TENSOR_NHWC``, kéo thẳng về kích thước model, không letterbox [T1 rknn-toolkit2 ``rknpu2/examples/rknn_yolov5_demo/src/main_video.cc:286-312``, ``main_video.cc:393``]. Dự án chọn tuyến B (quyết định 4 và 6).
 
 2. Hình học letterbox
 =====================
@@ -66,7 +66,7 @@ Tuyến A là phần ``preprocess`` có sẵn: resize ``cv2.INTER_LINEAR`` về 
       +-----------------------------+
       (hình không đúng tỉ lệ)
 
-Công thức của repo: ``r = 640 / max(h0, w0)``, kích thước sau resize ``(min(ceil(w0 r), 640), min(ceil(h0 r), 640))``, viền ``round(dh - 0.1)`` và ``round(dh + 0.1)`` với ``dh = (640 - h) / 2`` [Mã nguồn repo ``ai/board/common.py:64-79``]. Với 1920x1080: ``r = 1/3``, ảnh 640x360, ``dh = 140`` nên viền 140 hàng trên và 140 hàng dưới (phép tính [SL]). Hình học này đúng cho nguồn 16:9. Nếu ISP thu nhỏ cả khung 4:3 xuống 1920x1080 hoặc 640x360 thì ảnh đã bị nén theo chiều dọc trước bước này, và tuyến B thêm viền như thể nguồn là 16:9 [SL]. Muốn giữ tỉ lệ cần cắt ảnh trước. ISP cắt được (mục 5), nên tuyến B hợp lệ khi cắt 4224x2376 trước rồi thu nhỏ về 1920x1080 hoặc 640x360 [SL]. Cắt bằng RGA chưa thử.
+Công thức của repo: ``r = 640 / max(h0, w0)``, kích thước sau resize ``(min(ceil(w0 r), 640), min(ceil(h0 r), 640))``, viền ``round(dh - 0.1)`` và ``round(dh + 0.1)`` với ``dh = (640 - h) / 2`` [Mã nguồn repo ``ai/board/common.py:64-79``]. Với 1920x1080: ``r = 1/3``, ảnh 640x360, viền 140 hàng trên và dưới [SL, phép tính]. Hình học này đúng cho nguồn 16:9. Nếu ISP thu nhỏ cả khung 4:3 xuống 16:9 thì ảnh đã bị nén theo chiều dọc trước bước này [SL], nên phải cắt 4224x2376 ở ISP trước (mục 7). Với đầu vào 384x640 của quyết định 6, ảnh 640x360 chỉ cần 12 hàng viền mỗi bên. Cắt bằng RGA chưa thử.
 
 3. Kích thước dữ liệu
 =====================
@@ -90,40 +90,20 @@ Công thức của repo: ``r = 640 / max(h0, w0)``, kích thước sau resize ``
    * - RGB888 640x640x3
      - 1228800
      - 36.9 MB/s
+   * - RGB888 640x384x3
+     - 737280
+     - 22.1 MB/s
 
 Các số là phép tính từ kích thước (NV12 là 1.5 byte mỗi pixel, RGB888 là 3 byte) [SL]. Riêng 345600 byte của NV12 640x360 khớp ``Size Image`` do driver báo [T3 board, ``v4l2-ctl --try-fmt-video``].
 
 4. RGA
 ======
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 40 30
-
-   * - Mục
-     - Nội dung
-     - Nguồn
-   * - Số lõi trên board
-     - ``rga3`` tại ``fdb60000`` và ``fdb70000``, ``rga2`` tại ``fdb80000``
-     - [T3 board, ``dmesg``]
-   * - RGA3, kích thước
-     - Nguồn tối đa 8176x8176, đích tối đa 8128x8128
-     - [T1 RGA guide, Design Index]
-   * - RGA3, co giãn
-     - 1/8 đến 8, phóng to bi-cubic, thu nhỏ lấy trung bình
-     - [T1 RGA guide, Design Index]
-   * - RGA3, bộ nhớ
-     - Raster, nằm trong DDR
-     - [T1 TRM2 tr.703]
-   * - Ràng buộc căn lề
-     - Bề rộng stride căn 16. Định dạng ``YCbCr_420_SP``: offset, rộng, cao, cao stride căn 2
-     - [T1 RGA guide, Image Format Supported]
-   * - Loại bộ đệm
-     - Thứ tự hiệu năng: địa chỉ vật lý, fd, địa chỉ ảo. Khuyến nghị fd
-     - [T1 RGA guide]
-   * - Model zoo
-     - Dùng RGA khi bề rộng nguồn và đích chia hết 16, ngược lại rơi về CPU
-     - [T1 rknn_model_zoo ``utils/image_utils.c:684``]
+- Board: ``rga3`` tại ``fdb60000``, ``fdb70000``, ``rga2`` tại ``fdb80000`` [T3 board, ``dmesg``].
+- RGA3: nguồn tối đa 8176x8176, đích tối đa 8128x8128, co giãn 1/8 đến 8 (phóng to bi-cubic, thu nhỏ lấy trung bình) [T1 RGA guide, Design Index]. Bộ nhớ raster trong DDR [T1 TRM2 tr.703].
+- Căn lề: bề rộng stride căn 16. Định dạng ``YCbCr_420_SP``: offset, rộng, cao, cao stride căn 2 [T1 RGA guide, Image Format Supported].
+- Loại bộ đệm: thứ tự hiệu năng là địa chỉ vật lý, fd, địa chỉ ảo, khuyến nghị fd [T1 RGA guide].
+- Model zoo dùng RGA khi bề rộng nguồn và đích chia hết 16, ngược lại rơi về CPU [T1 rknn_model_zoo ``utils/image_utils.c:684``].
 
 ``RGA guide`` là ``docs/Rockchip_Developer_Guide_RGA_EN.md`` trong kho ``airockchip/librga`` (commit 2b32edcb97b6, đọc ngày 2026-11-07). Tệp này chưa nằm trong ``docs/_assets/pdf``. Với các kích thước ở trang này: 1920, 640 chia hết 16 và 1080, 360 chia hết 2 [SL].
 
@@ -165,7 +145,7 @@ Các số là phép tính từ kích thước (NV12 là 1.5 byte mỗi pixel, RG
      - 9.264 (9.286)
      -
 
-Mỗi ca chỉ chạy hai lần (hai lần chạy chương trình, mỗi lần 300 vòng). Các ca khác lệch nhau dưới 2% ở bộ đệm ``fd``, riêng ``va`` lệch đến 11% (ca letterbox 1080p: 3.605 và 3.219 ms). Riêng ca ``imcvtcolor`` 1080p bằng ``fd`` ra hai chế độ (1.056 và 1.867 ms), nguyên nhân có thể là RGA tự chọn lõi RGA3 hoặc RGA2 khác nhau giữa hai lần chạy [SL], chưa kiểm. Số không khóa xung dao động theo xung DDR, đo lại khi khóa xung ở dưới. Màu viền của ``imfill`` là 0x727272 và chưa kiểm đúng 114 trên ảnh ra. CPU, trên khung NV12 thật chụp từ camera, ``cv2`` 4.11.0 [T3 board, ``board_pipeline_test.py``]:
+Mỗi ca chạy hai lần (mỗi lần 300 vòng). Các ca lệch nhau dưới 2% ở bộ đệm ``fd``, riêng ``va`` lệch đến 11%. Ca ``imcvtcolor`` 1080p bằng ``fd`` ra hai chế độ (1.056 và 1.867 ms), có thể do RGA tự chọn lõi RGA3 hoặc RGA2 khác nhau [SL], chưa kiểm. Số không khóa xung dao động theo xung DDR, đo lại khi khóa xung ở mục 6. Màu viền của ``imfill`` là 0x727272, chưa kiểm đúng 114 trên ảnh ra. CPU, trên khung NV12 thật chụp từ camera, ``cv2`` 4.11.0 [T3 board, ``board_pipeline_test.py``]:
 
 .. list-table::
    :header-rows: 1
@@ -188,7 +168,7 @@ Mỗi ca chỉ chạy hai lần (hai lần chạy chương trình, mỗi lần 3
      - 1.124
      - 0.127
 
-Đọc số: với ảnh 1080p, CPU làm NV12 sang BGR rồi ``preprocess`` hết khoảng 2.0 ms khi chạy riêng (8 luồng, không khóa xung). Trong pipeline không khóa xung và không ghim, hai việc này tốn 1.842 và 5.154 ms. Khi khóa xung và ghim lõi 4 đến 7 chúng tốn 1.181 và 1.199 ms (:doc:`01-buc-tranh-tong-the` mục 7). RGA dma-buf làm cả đổi màu, resize và viền trong khoảng 2.2 ms (hai lần đo) và không dùng thời gian CPU. RGA chưa đo trong lúc NPU và CPU cùng chạy. Với ảnh 640x360 từ ISP, CPU mất khoảng 0.23 ms còn RGA dma-buf 0.626 ms (phép cộng và so sánh là [SL]).
+Đọc số: với ảnh 1080p, CPU làm NV12 sang BGR rồi ``preprocess`` hết khoảng 2.0 ms khi chạy riêng. Trong pipeline không khóa xung và không ghim hai việc này tốn 1.842 và 5.154 ms, khóa xung và ghim lõi 4 đến 7 thì 1.181 và 1.199 ms (:doc:`01-buc-tranh-tong-the` mục 5). RGA dma-buf làm cả đổi màu, resize và viền trong khoảng 2.2 ms và không dùng CPU. Với ảnh 640x360 từ ISP, CPU mất khoảng 0.23 ms còn RGA dma-buf 0.626 ms [SL, phép cộng]. RGA chưa đo khi NPU và CPU cùng chạy.
 
 6. Đo lại khi khóa xung
 =======================
@@ -235,12 +215,12 @@ Khóa CPU, NPU và DDR ở ``performance`` bằng ``lock_freq.sh`` (CPU 1800, 22
      - 12.916 đến 13.152
      - 13.208
 
-Đọc số: khi khóa xung, bộ đệm dma-buf cho kết quả ổn định (ba lần giống nhau đến 3 chữ số), ca ``imcvtcolor`` 1080p luôn 1.004 ms. Hai chế độ 1.056 và 1.867 ms ở mục 5 nhiều khả năng do xung DDR dao động dưới ``ondemand`` (528 MHz lúc nghỉ, 2112 MHz khi khóa) [SL], chưa tách riêng. Bộ đệm địa chỉ ảo dao động rộng hơn (đến 27% ở ca 1080p ``imcvtcolor``). RGA dma-buf chậm hơn tối đa 3.3% khi NPU chạy cùng (ca 1080p ``imcvtcolor``, 1.004 lên 1.037 ms), các ca khác dưới 2%. Vòng NPU đo cùng lúc: trung vị 17.043 ms (p95 21.040 ms) trên cửa sổ 90 s mà RGA chạy khoảng 30 s, còn NPU chạy riêng 12 s là 19.997 ms (p95 20.812 ms), cả hai không ghim CPU [T3 board, ``npu_loop.py``]. Hai mức khoảng 17 và 20 ms trộn lẫn khi không ghim, nên hai lần đo này không tách được ảnh hưởng của RGA lên NPU. Mã nguồn đo và kết quả thô ở repo chính.
+Đọc số: khi khóa xung, bộ đệm dma-buf cho kết quả ổn định (ba lần giống nhau đến 3 chữ số). Hai chế độ ở mục 5 nhiều khả năng do xung DDR dao động dưới ``ondemand`` (528 MHz lúc nghỉ, 2112 MHz khi khóa) [SL], chưa tách riêng. Bộ đệm địa chỉ ảo dao động rộng hơn (đến 27% ở ca 1080p ``imcvtcolor``). RGA dma-buf chậm hơn tối đa 3.3% khi NPU chạy cùng (1.004 lên 1.037 ms), các ca khác dưới 2%. Vòng NPU đo cùng lúc: trung vị 17.043 ms (p95 21.040 ms) trên cửa sổ 90 s, còn NPU chạy riêng 12 s là 19.997 ms (p95 20.812 ms), cả hai không ghim CPU [T3 board, ``npu_loop.py``]. Hai mức 17 và 20 ms trộn lẫn khi không ghim nên không tách được ảnh hưởng của RGA lên NPU.
 
 7. Cắt 16:9 ở ISP
 =================
 
-Đặt vùng cắt ``top=380, left=0, width=4224, height=2376`` trên ``rkisp_selfpath`` rồi phát 1920x1080: ``/proc/rkisp0-vir1`` ghi ``Dcrop(0,380|4224x2376)``, 29.95 fps, ``frameloss:0``. Vùng cắt giữ nguyên giữa các lần mở nút, đã đặt lại và đọc lại xác nhận ``Left 0, Top 0, Width 4224, Height 3136`` [T3 board, ``v4l2-ctl --set-selection``, ``--get-selection``]. Chi tiết ở :doc:`03-isp-va-vong-3a`. Mã đo lưu ở repo chính cùng ghi chú đo, không thuộc docs.
+Đặt vùng cắt ``top=380, left=0, width=4224, height=2376`` trên ``rkisp_selfpath`` rồi phát 1920x1080: ``/proc/rkisp0-vir1`` ghi ``Dcrop(0,380|4224x2376)``, 29.95 fps, ``frameloss:0``. Vùng cắt giữ nguyên giữa các lần mở nút, đã đặt lại và đọc lại xác nhận ``Left 0, Top 0, Width 4224, Height 3136`` [T3 board, ``v4l2-ctl --set-selection``, ``--get-selection``]. Chi tiết ở :doc:`03-isp-va-vong-3a`.
 
 8. Ảnh méo tỉ lệ và độ chính xác (ảnh tĩnh)
 ===========================================
