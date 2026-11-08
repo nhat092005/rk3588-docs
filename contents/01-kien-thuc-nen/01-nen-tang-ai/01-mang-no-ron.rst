@@ -103,8 +103,6 @@ Bảng tóm tắt cấu trúc mạng 4-5-3 theo mô tả của sách. [T2 D2L tr
 
 Lan truyền xuôi (forward propagation hay forward pass) là quá trình tính và lưu các biến trung gian, kể cả đầu ra, theo thứ tự từ lớp đầu vào đến lớp đầu ra. [T2 D2L tr.180]
 
-   "Forward propagation (or forward pass) refers to the calculation and storage of intermediate variables (including outputs) for a neural network in order from the input layer to the output layer." [T2 D2L tr.180]
-
 ..
 
    "For the sake of simplicity, let’s assume that the input example is x ∈ R𝑑 and that our hidden layer does not include a bias term. Here the intermediate variable is:" [T2 D2L tr.180]
@@ -154,8 +152,6 @@ Phần tử đầu của :math:`\mathbf{z}` là :math:`-1` nên ReLU đưa nó v
 =======================
 
 Tham số (parameter) của mạng gồm hai loại: trọng số (weight) và bias. Đây là các giá trị mà quá trình huấn luyện đi tìm, sách gọi chung là "model parameters" [T2 D2L tr.84]. Trong ví dụ của sách, một lớp fully connected có hai nhóm tham số, một nhóm trọng số và một nhóm bias [T2 D2L tr.214].
-
-   "We can see that this fully connected layer contains two parameters, corresponding to that layer’s weights and biases, respectively." [T2 D2L tr.214]
 
 ..
 
@@ -218,8 +214,6 @@ Ví dụ trên của sách cho thấy cách đếm: mỗi cặp (đầu vào, đ
 
 Nếu chỉ xếp chồng các lớp tuyến tính (đúng hơn là affine, tức tuyến tính cộng bias) thì mạng nhiều lớp không mạnh hơn mạng một lớp. Sách viết rằng đầu ra của lớp ẩn là một hàm affine của đầu vào, đầu ra của mạng lại là hàm affine của lớp ẩn, và hợp của hai hàm affine vẫn là một hàm affine [T2 D2L tr.170].
 
-   "The hidden units above are given by an affine function of the inputs, and the outputs (pre-softmax) are just an affine function of the hidden units. An affine function of an affine function is itself an affine function." [T2 D2L tr.170]
-
 Sách chứng minh bằng phép gộp (5.1.2) [T2 D2L tr.170]. Ở đây sách dùng dạng batch hàng, khác với dạng vector cột ``z = W x`` của mục 3 (sách đổi ký hiệu giữa mục 5.1 và 5.3).
 
 .. math::
@@ -229,8 +223,6 @@ Sách chứng minh bằng phép gộp (5.1.2) [T2 D2L tr.170]. Ở đây sách d
 Kết quả là một mô hình một lớp với tham số ``W = W(1) W(2)`` và ``b = b(1) W(2) + b(2)`` [T2 D2L tr.170]. Thêm lớp ẩn mà không có gì khác thì không thêm được khả năng biểu diễn nào.
 
 Cách sửa là đặt một activation (hàm kích hoạt) phi tuyến σ lên từng hidden unit, ngay sau phép affine [T2 D2L tr.170]. Sách mô tả activation là các toán tử khả vi biến tín hiệu vào thành tín hiệu ra, và hầu hết chúng thêm tính phi tuyến [T2 D2L tr.171].
-
-   "In general, with activation functions in place, it is no longer possible to collapse our MLP into a linear model:" [T2 D2L tr.170]
 
 Một activation đơn giản là ReLU (5.1.4) [T2 D2L tr.171]:
 

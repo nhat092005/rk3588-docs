@@ -146,8 +146,6 @@ Thay vì thiết kế phần cứng NPU trước rồi mới xây dựng compile
 - Phần cứng tích hợp mảng tính toán gần bộ nhớ, vi điều khiển nhẹ kiến trúc RISC-V, bộ điều khiển DMA và các khối bộ nhớ đệm nội bộ (SRAM / Tightly Coupled Memory - TCM) chia theo ngân hàng (banks) [T2 BAMB tr.3].
 - Compiler eIQ Neutron chia thành 3 phần: frontend nhập đồ thị mô hình, mid-end chịu trách nhiệm hạ bậc và tối ưu đồ thị thông qua các kỹ thuật then chốt, và backend phát sinh luồng lệnh điều khiển cho vi điều khiển RISC-V cùng bộ điều khiển DMA [T2 BAMB tr.4]:
 
-   "the mid-end lowers and optimizes the graph through tiling, scheduling, and memory allocation" [T2 BAMB tr.4]
-
 Mid-end của eIQ Neutron sử dụng thuật toán giải quy hoạch ràng buộc (Constraint Programming) để giải đồng thời bài toán phân khối không gian (spatial tiling), phân khối thời gian (temporal tiling) và hợp nhất lớp (layer fusion) nhằm đảm bảo toàn bộ tensor trung gian nằm trọn trong SRAM nội bộ [T2 BAMB tr.4] [T2 BAMB tr.7]. Trong đó, spatial tiling khai thác line parallelism (phân chia tính toán theo từng dòng chiều cao outH) để các engine chia sẻ chung trọng số thông qua cơ chế broadcast [T2 BAMB tr.4].
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/04-compiler/neu-01-hw-sw-codesign.svg

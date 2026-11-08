@@ -172,8 +172,6 @@ Một bộ tăng tốc CNN gồm mảng PE, global buffer trên chip và DRAM ng
 
 TPU ghép theo cách khác: một khối nhân ma trận 256x256 MAC nhân cộng số nguyên 8 bit [T2 Jouppi 2017 tr.3].
 
-   "It contains 256x256 MACs that can perform 8-bit multiply-and-adds on signed or unsigned integers." [T2 Jouppi 2017 tr.3]
-
 .. _fig-npu-tpu-block:
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/kien-truc-npu-va-mac/tpu-fig1-block-diagram.png

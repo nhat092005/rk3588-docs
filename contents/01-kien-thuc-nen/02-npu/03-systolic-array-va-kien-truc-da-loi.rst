@@ -67,8 +67,6 @@ Mảng chỉ bận hết thời gian khi B xấp xỉ 1349 trở lên. Con số 
 
 Layer-Puzzle thì dùng mảng systolic với dataflow output stationary [T2 Gao 2023 tr.2]. Đoạn mô tả kiến trúc NPU của họ:
 
-   "It mainly consists of a systolic array that completes the convolution computation, a weight buffer that stores the weight, a unified buffer that stores the input feature maps(ifmaps), and output feature maps(ofmaps)." [T2 Gao 2023 tr.2]
-
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/02-npu/systolic-array-va-kien-truc-da-loi/lp-fig2-systolic-npu-router.png
    :align: center
    :alt: NPU có systolic array và nhiều NPU nối qua router
@@ -139,8 +137,6 @@ Liên hệ RK3588: cơ chế bỏ qua số 0 của NPU RK3588 (nếu có) đư�
 
 Vì sao có nhiều core? Jung 2023 nêu: multicore NPU phù hợp khi chạy đồng thời nhiều DNN, khi xử lý các mạng cỡ khác nhau, và khi nhà sản xuất cần dòng sản phẩm với số core NPU khác nhau [T2 Jung 2023 tr.2]. Kiến trúc điển hình của họ là mỗi core có compute engine và bộ nhớ cục bộ riêng:
 
-   "Multicore design consists of a compute engine and distributed, isolated local memory per core." [T2 Jung 2023 tr.2]
-
 3.1 Chia việc theo layer
 ------------------------
 
@@ -149,10 +145,6 @@ Jung 2023 chọn chia một lớp thành các lớp con (sub-layer) chạy song 
    "By partitioning a layer of DNNs into multiple sub-layers, we can execute them in parallel on multicore NPUs." [T2 Jung 2023 tr.1]
 
 Với lớp convolution, hai hướng chia thông dụng là theo chiều không gian và theo chiều kênh [T2 Jung 2023 tr.4]:
-
-   "In spatial direction partitioning (Figure 5 (a)), input and output tensors are partitioned in spatial directions, that means images are segmented in half along the height or width." [T2 Jung 2023 tr.4]
-
-   "Channel direction partitioning (Figure 5 (b)) produces an output image partitioned along channels." [T2 Jung 2023 tr.4]
 
 Hai cách này khác nhau ở dữ liệu phải nhân bản:
 
@@ -189,8 +181,6 @@ Ví dụ số (suy ra, tính bằng script): lớp CONV3 của AlexNet (C = 256,
    CONV5,"1,370,304","571,968",kênh
 
 Lớp có ảnh lớn và ít kênh như CONV1 hợp chia theo không gian, lớp nhiều kênh như CONV3 hợp chia theo kênh. Jung 2023 rút ra kết luận tương ứng từ thực nghiệm trên InceptionV3: chia theo một hướng cho mọi lớp không phù hợp để tận dụng tối đa các core [T2 Jung 2023 tr.9]. Họ cũng nêu thêm một ràng buộc không nằm trong bảng trên:
-
-   "If the number of channels is too small to distribute evenly across the cores, core utilization can be degraded." [T2 Jung 2023 tr.9]
 
 3.2 Chia việc theo dữ liệu và theo tác vụ
 -----------------------------------------

@@ -70,8 +70,6 @@ Nagel định nghĩa lượng tử hóa đều (uniform) kiểu affine:
 
 Scale thường là số thực và là bước nhảy (step-size) của quantizer. Zero-point là số nguyên [T2 Nagel 2021 tr.4]. Nguồn nêu lý do cần zero-point nguyên:
 
-   "The zero-point is an integer that ensures that real zero is quantized without error. This is important to ensure that common operations like zero padding or ReLU do not induce quantization error." [T2 Nagel 2021 tr.4]
-
 2.2 Công thức lượng tử hóa và giải lượng tử
 -------------------------------------------
 
@@ -211,8 +209,6 @@ Khi cả weight và activation đều có zero-point, tích của hai giá trị
 
 Nagel phân tích: số hạng thứ nhất giống trường hợp symmetric, số hạng thứ ba và thứ tư chỉ phụ thuộc scale, offset và weight đã biết trước nên tính sẵn rồi cộng vào bias gần như miễn phí. Số hạng thứ hai phụ thuộc dữ liệu đầu vào x, nên mỗi batch phải tính thêm khi suy luận, gây chi phí đáng kể về độ trễ và công suất vì tương đương thêm một channel [T2 Nagel 2021 tr.8]. Kết luận của nguồn:
 
-   "it is a common approach to use asymmetric activation quantization and symmetric weight quantization that avoids the additional data-dependent term." [T2 Nagel 2021 tr.8]
-
 Ví dụ số (script Python, suy ra theo Eq. 13). Weight ``W = [0.50, 0.80, 0.30, -0.10]``, activation ``a = [-0.40, 0.60, 1.50, 2.40]``, tích thực ``W·a = 0.49``. Weight symmetric: ``s_w = 0.006299``, ``W_int = [79, 127, 48, -16]``. Activation asymmetric: ``s_a = 0.010980``, ``z_a = 36``, ``a_int = [0, 91, 173, 255]``.
 
 .. list-table::
@@ -252,8 +248,6 @@ Per-tensor là lựa chọn phổ biến nhất vì phần cứng đơn giản: 
    "For example, for weight tensors, we can specify a different quantizer per output channel. This is known as per-channel quantization" [T2 Nagel 2021 tr.5]
 
 Với weight, mỗi output channel có scale riêng và bộ tăng tốc chỉ cần nhân scale riêng cho mỗi channel đầu ra, không phải rescale lại accumulator [T2 Nagel 2021 tr.8]. Với activation thì khác:
-
-   "Per-channel quantization of activations is much harder to implement because we cannot factor the scale factor out of the summation and would, therefore, require rescaling the accumulator for each input channel." [T2 Nagel 2021 tr.8]
 
 Không phải phần cứng thương mại nào cũng hỗ trợ per-channel weight, nên cần kiểm tra thiết bị đích [T2 Nagel 2021 tr.8]. Gholami xếp channelwise là phương pháp chuẩn để lượng tử hóa kernel tích chập [T2 Gholami 2021 tr.7].
 

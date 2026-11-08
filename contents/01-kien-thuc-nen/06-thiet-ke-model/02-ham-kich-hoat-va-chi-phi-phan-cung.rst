@@ -73,8 +73,6 @@ Các số liệu thực nghiệm trên cho thấy những quy luật nhất quá
    - Đáng chú ý, các hàm kích hoạt động (Dynamic activations) như DynamicReLU-A (273.49 ms) và DynamicReLU-B (242.14 ms) làm tăng độ trễ lên hơn 150 lần so với ReLU do yêu cầu sinh trọng số phụ thuộc dữ liệu đầu vào và phá vỡ cơ chế song song hóa phần cứng [T2 MOBONE tr.4].
    - Nghiên cứu MobileOne chỉ ra rằng các thành phần cấu trúc buộc phải đồng bộ hóa dữ liệu toàn cục hoặc truy cập bộ nhớ phụ trợ sẽ làm bùng nổ độ trễ ẩn trên chip [T2 MOBONE tr.4]:
 
-   "To demonstrate the hidden costs like memory access cost and synchronization cost, we ablate over using skip connections" [T2 MOBONE tr.4]
-
    Do đó, để tối ưu hóa hoàn toàn cho thiết bị di động, MobileOne kiên quyết chỉ sử dụng duy nhất hàm kích hoạt ReLU:
 
    "Therefore we use only ReLU activations in MobileOne." [T2 MOBONE tr.3]
@@ -141,11 +139,7 @@ Nhằm khắc phục nhược điểm của Swish trên thiết bị biên, Mobi
 
 Hàm này loại bỏ hoàn toàn phép tính hàm mũ số thực, thay bằng các phép cộng, nhân và dịch bit số nguyên dễ cài đặt trên các tập lệnh SIMD CPU như ARM NEON. Một số NPU giả định có thể hỗ trợ Hardswish một cách hiệu quả [T2 S3NAS tr.2]:
 
-   "the NPU assumed in this paper can execute depth-wise separable convolution (DWConv), squeeze-and-excitation (SE), and h-swish activation function efficiently" [T2 S3NAS tr.2]
-
 Tuy nhiên, Vasu và các cộng sự chỉ ra rằng giải pháp này không phải lúc nào cũng tối ưu khi triển khai trên nhiều nền tảng phần cứng khác nhau, đặc biệt là các NPU mảng hai chiều không có bộ chia [T2 MOBONE tr.3]:
-
-   "MobileNet-V3 [30], introduces an optimized activation function - Hard-Swish for a specific platform. However, scaling such functions to different platforms may be difficult. Therefore, our design uses basic operators that are already available across different platforms." [T2 MOBONE tr.3]
 
 2.4 Đánh giá proxy không chi phí và quy tắc cấu trúc lai từ ActNAS
 ------------------------------------------------------------------
@@ -158,15 +152,9 @@ Tuy nhiên, Vasu và các cộng sự chỉ ra rằng giải pháp này không p
 
 Phân tích không gian đặc trưng chỉ ra rằng các tầng đầu tiên của mạng thị giác đảm nhận việc xử lý các bản đồ đặc trưng có kích thước không gian lớn (:math:`H \times W` lớn), đóng góp tỷ trọng bộ nhớ và số lượng phép tính activation cao nhất trên toàn mạng [T2 ACTNAS tr.7]. Từ không gian tìm kiếm gồm các hàm ứng viên [ReLU, SiLU, Hardswish, ReLU6, LeakyReLU], ActNAS phát hiện quy tắc thực nghiệm quan trọng [T2 ACTNAS tr.2, 7]:
 
-   "None of the ActNAS models utilized SiLU or Hardswish in the first two layers." [T2 ACTNAS tr.7]
-
 Ngay cả phương pháp thay thế thô (naive approach) chuyển đổi ba hàm kích hoạt đầu tiên từ SiLU sang ReLU cũng mang lại hiệu quả rõ rệt [T2 ACTNAS tr.7]:
 
-   "slightly slower performance compared to other baseline models, but the drop in mAP was less than 1% compared to the SiLU model" [T2 ACTNAS tr.7]
-
 Bằng cách áp dụng các biến thể ReLU tại các tầng đầu và duy trì SiLU hoặc Hardswish ở các tầng sau, mô hình ActNAS5n.1 giảm được 58% dung lượng bộ nhớ trên NPU 1, đồng thời tăng 22.28% tốc độ so với bản thuần SiLU mà mức sụt giảm mAP duy trì dưới 1% [T2 ACTNAS tr.7]. Đối với các hệ thống nhạy cảm với độ trễ thời gian thực, việc sử dụng RepConv kết hợp với ReLU hoàn toàn là giải pháp được khuyến nghị hàng đầu [T2 Y6 tr.8]:
-
-   "We suggest users adopt RepConv with ReLU in latency-sensitive applications." [T2 Y6 tr.8]
 
 3. Điều chưa biết
 =================
@@ -175,13 +163,9 @@ Mặc dù các quy tắc thiết kế chung đã được kiểm chứng trên c
 
 1. **Thiếu thông số vi kiến trúc của các NPU trong nghiên cứu**: Công trình ActNAS hoàn toàn không công bố danh tính nhà sản xuất, tên gọi thương mại hay thông số vi kiến trúc của ba vi xử lý NPU được sử dụng trong bài báo [T2 ACTNAS tr.3]:
 
-   "We are not disclosing the vendor name and actual name of these NPUs" [T2 ACTNAS tr.3]
-
    Người dùng không thể biết các NPU này sử dụng kiến trúc mảng Systolic Array, SIMD VLIW hay vi kiến trúc dòng dữ liệu (dataflow), cũng như không rõ các phép đo được thực hiện ở chế độ số nguyên INT8 hay dấu phẩy động FP16.
 
 2. **Tính chuyển giao phần cứng thấp của các mô hình NAS**: Nghiên cứu ActNAS chỉ ra rằng mô hình được tìm kiếm và tối ưu hóa riêng cho một NPU cụ thể mang lại hệ số tăng tốc cao nhất trên chính thiết bị đó, nhưng lại chỉ đạt mức tăng tốc rất thấp hoặc không đáng kể khi chạy trên phần cứng khác [T2 ACTNAS tr.8]:
-
-   "We can see that both NPU aware models provide highest speedup on these devices but very low speedup on other devices." [T2 ACTNAS tr.8]
 
    Hiện tượng này xuất phát từ sự khác biệt sâu sắc giữa các bộ tăng tốc biên: kích thước bộ nhớ đệm nội bộ (SRAM capacity), cơ chế DMA chuyển khối, số lượng cổng đọc/ghi và khả năng tối ưu hóa của từng trình biên dịch đồ thị.
 

@@ -174,8 +174,6 @@ Trong thực tế profiling trên thiết bị biên, các dấu hiệu nhận b
 2. **Độ trễ không co giãn theo xung nhịp NPU**: Khi nâng xung nhịp lõi NPU (ví dụ tăng 25%), độ trễ thực thi của lớp chỉ giảm không đáng kể (dưới 5%), chứng tỏ nút thắt cổ chai nằm ở tốc độ truyền tải của bus bộ nhớ ngoài.
 3. **Tiêu thụ năng lượng áp đảo từ DRAM**: Theo mô hình chi phí của Chen 2016, năng lượng truy cập DRAM ngoài chip đắt hơn khoảng 200 lần so với một phép tính MAC chuẩn trên chip [T2 Chen 2016 tr.8]:
 
-   "Table IV shows the energy cost of accessing each level relative to a MAC operation under the listed conditions." [T2 Chen 2016 tr.8]
-
 Khi các lớp mạng có cường độ hoạt động thấp liên tục truy xuất trọng số và activation từ DRAM ngoài, hệ thống sẽ phát sinh lượng nhiệt lớn từ bộ điều khiển bộ nhớ và suy giảm mạnh hiệu suất năng lượng tổng thể.
 
 4. Hiểu sai thường gặp

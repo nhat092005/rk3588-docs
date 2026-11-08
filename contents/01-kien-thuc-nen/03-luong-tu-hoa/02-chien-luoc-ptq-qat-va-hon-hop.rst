@@ -35,8 +35,6 @@ Nagel nói PTQ không cần hoặc cần ít dữ liệu, ít chỉnh siêu tham
 
 Nagel nhấn mạnh sự đánh đổi giữa clipping và rounding error khi chọn range, và các phương pháp thường tối ưu hàm chi phí cục bộ thay vì loss của task, vì PTQ cần nhanh và không train đầu cuối [T2 Nagel 2021 tr.9]. Dữ liệu cần cho từng loại tensor:
 
-   "Weights can usually be quantized without any need for calibration data. However, determining parameters for activation quantization often requires a few batches of calibration data." [T2 Nagel 2021 tr.9]
-
 .. list-table::
    :header-rows: 1
    :widths: 20 52 28
@@ -160,8 +158,6 @@ Vấn đề của QAT là phép làm tròn không có đạo hàm hữu ích:
    "the gradient of the round-to-nearest operation in equation (4) is either zero or undefined everywhere, which makes gradient-based training impossible." [T2 Nagel 2021 tr.19]
 
 Giải pháp phổ biến là STE, xấp xỉ đạo hàm của phép làm tròn bằng 1 [T2 Nagel 2021 tr.19]. Gholami diễn đạt thành "bỏ qua làm tròn, xem như hàm đồng nhất", và nhận xét STE thô nhưng thường dùng được trong thực tế, trừ lượng tử hóa cực thấp bit như nhị phân [T2 Gholami 2021 tr.9]:
-
-   "Despite the coarse approximation of STE, it often works well in practice, except for ultra low-precision quantization such as binary quantization" [T2 Gholami 2021 tr.9]
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/03-luong-tu-hoa/chien-luoc-ptq-qat-va-hon-hop/gholami-fig5-qat-straight-through-estimator.png
    :align: center

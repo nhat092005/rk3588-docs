@@ -34,11 +34,7 @@ Công trình S3NAS (Lee và cộng sự, 2020) phát triển một framework tì
 
 Cần lưu ý rằng phần cứng mục tiêu trong nghiên cứu S3NAS là MIDAP - một bộ xử lý NPU giả định được phát triển dưới dạng mô hình ảo chu kỳ chính xác (cycle-accurate simulator) chứ chưa phải chip vật lý thương mại [T2 S3NAS tr.4]:
 
-   "Note that MIDAP has not been implemented as a real hardware chip yet but as a virtual prototype with a cycle-accurate simulator." [T2 S3NAS tr.4]
-
 Để tối ưu hóa cho mảng tính toán của MIDAP, S3NAS áp dụng các ràng buộc kiến trúc vi mô cụ thể nhằm tránh lãng phí chu kỳ xử lý [T2 S3NAS tr.9]:
-
-   "We make the number of filters to be multiples of 16 to maximize the MAC unit utilization on MIDAP." [T2 S3NAS tr.9]
 
 Không gian tìm kiếm siêu mạng của S3NAS cho phép số lượng khối ở từng giai đoạn thay đổi linh hoạt thay vì cố định như các phương pháp One-Shot NAS truyền thống, với các kích thước kernel ứng viên :math:`\{3 \times 3, 5 \times 5, 7 \times 7\}` và hệ số mở rộng kênh :math:`\{3, 4, 6\}` [T2 S3NAS tr.4, 5]. Do số phép nhân trong một lớp DWConv bằng :math:`W \times H \times C \times K^2`, các giai đoạn sâu hơn của mạng thường có độ trễ ngắn hơn nhờ diện tích không gian :math:`H \times W` giảm nhanh hơn tốc độ tăng của số kênh :math:`C` [T2 S3NAS tr.5].
 
@@ -82,15 +78,11 @@ Khác với các phương pháp NAS truyền thống can thiệp vào cấu trú
 
 Thay vì huấn luyện lại toàn bộ mô hình cho từng cấu hình ứng viên trong không gian tìm kiếm rộng lớn, ActNAS sử dụng chỉ số ước lượng không chi phí (Zero-Cost Proxy NWOT) [T2 ACTNAS tr.3]:
 
-   "Figure 3 shows that the NWOT score has a strong correlation with the mAP of fully trained models." [T2 ACTNAS tr.3]
-
 Kết hợp thuật toán tiến hóa với bảng tra độ trễ thực tế trên thiết bị (lấy trung bình 50 lần đo), ActNAS phát hiện quy luật cấu trúc then chốt:
 
    "None of the ActNAS models utilized SiLU or Hardswish in the first two layers." [T2 ACTNAS tr.7]
 
 Bằng cách áp dụng các biến thể ReLU tại các tầng đầu có kích thước bản đồ đặc trưng lớn và giữ lại SiLU hoặc Hardswish ở các tầng sâu, mô hình ActNAS5n.1 giảm được 58% bộ nhớ trên NPU 1, tăng 22.28% tốc độ so với bản thuần SiLU mà mAP chỉ giảm dưới 1% [T2 ACTNAS tr.7]. Trên mô hình lớn hơn, ActNAS8m.2 đạt bước nhảy vọt [T2 ACTNAS tr.8]:
-
-   "ActNAS8m.2 model is 1.66x faster compared to the SiLU model without significant impact on accuracy of the model." [T2 ACTNAS tr.8]
 
 Tuy nhiên, nghiên cứu ActNAS cũng chỉ ra ranh giới nghiêm ngặt về khả năng tổng quát hóa của các mô hình NAS:
 
@@ -103,11 +95,7 @@ Mô hình được tối ưu hóa cho NPU đích đạt tốc độ cao nhất t
 
 Mô hình phát hiện đối tượng YOLOv6 được thiết kế với mục tiêu thu hẹp khoảng cách phần cứng (hardware gap) giữa nghiên cứu học thuật và môi trường phục vụ công nghiệp thực tế [T2 Y6 tr.2]:
 
-   "There is a hardware gap when it comes to real serving environment. Typically, low-power GPUs like Tesla T4 are less costly and provide rather good inference performance." [T2 Y6 tr.2]
-
 Nhóm tác giả nhận định các lớp tích chập chuẩn kích thước :math:`3 \times 3` sở hữu mật độ tính toán cao và được hỗ trợ tối đa bởi các thư viện vi mã trên phần cứng [T2 Y6 tr.3]:
-
-   "Typically a 3×3 convolution is highly optimized on mainstream GPUs and CPUs and it enjoys higher computational density." [T2 Y6 tr.3]
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/yolov6-fig3-repblock-repconv-cspstackrep.png
    :align: center
@@ -134,15 +122,9 @@ Kiến trúc YOLOv6 đề xuất ba cải tiến cấu trúc then chốt hướn
    - Các đầu giải mã tách nhánh truyền thống (như trong FCOS hay YOLOX) sử dụng hai lớp Conv 3x3 trên mỗi nhánh phân loại và định vị. YOLOv6 tinh gọn cấu trúc bằng cách chỉ giữ lại duy nhất một lớp Conv 3x3 trung gian theo chiến lược hybrid-channel, giúp giảm đáng kể chi phí tính toán [T2 Y6 tr.4].
    - Đặc biệt, đối với hàm mất mát phân phối hộp bao Distribution Focal Loss (DFL), YOLOv6 chỉ ra sự lãng phí tài nguyên phần cứng nghiêm trọng [T2 Y6 tr.5]:
 
-   "DFL usually outputs 17× more regression values than general box regression, leading to a substantial overhead." [T2 Y6 tr.5]
-
    Việc xuất ra số lượng giá trị hồi quy gấp 17 lần khiến cho chi phí xử lý I/O và độ trễ tăng vọt, triệt tiêu lợi thế thời gian thực trên các mô hình nhỏ. Vì vậy, DFL bị loại bỏ hoàn toàn trên YOLOv6-N và YOLOv6-S [T2 Y6 tr.5].
 
 Trong các thử nghiệm triệt tiêu trên GPU Tesla T4 [T2 Y6 Table 4, tr.9], RepConv + ReLU đạt 1233 FPS (35.2% AP) so với 971 FPS của RepConv + SiLU, khẳng định ưu thế của sự kết hợp giữa tái tham số hóa và toán tử thân thiện phần cứng [T2 Y6 tr.8]:
-
-   "ReLU has a greater speed advantage because of its fusion into convolution." [T2 Y6 tr.8]
-
-   "We suggest users adopt RepConv with ReLU in latency-sensitive applications." [T2 Y6 tr.8]
 
 Liên hệ RK3588: bài EDGE đo trên RK3588 thấy YOLO11n có FLOPs thấp nhất nhưng độ trễ INT8 cao nhất trong ba bản nano [T2 EDGE tr.4, tr.7]. Số đo YOLO trên RK3588 trong các bài báo nằm ở :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>` mục 2.
 

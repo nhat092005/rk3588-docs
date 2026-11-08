@@ -175,7 +175,7 @@ Log mẫu của hãng có cột ``WorkLoad(0/1/2)-ImproveTherical``, ví dụ ``
    * - Có chia theo khối lượng tính không?
      - Có. Mỗi lớp được chia theo tỷ lệ phần trăm khối lượng tính giữa các core [T1 UG232 tr.75]
    * - Chia theo chiều nào của tensor (không gian, kênh, batch)?
-     - Do bộ biên dịch và runtime đóng gói vào ``subcore_task[5]``, không công bố chiều tách cụ thể trong tài liệu T1 [T1 DRV include/rknpu_ioctl.h:241-279]
+     - Tài liệu T1 không công bố [T1 DRV include/rknpu_ioctl.h:241-279]. Đo trên board 2026-11-08 bằng cách chặn lệnh ``RKNPU_SUBMIT`` (model INT8 SiLU seed 0, sha256 ``a501f94e``, 640x640, ``CORE_0_1_2``): 29 trên 77 lần submit mỗi suy luận là job ba lõi, mỗi lõi nhận danh sách task riêng. Ở mọi task ba lõi, thanh ghi chiều cao ``dpu_data_cube_height`` (``0x4034``) khác nhau giữa các lõi còn chiều rộng và số kênh bằng nhau. Tổng ba chiều cao khớp đúng bản đồ đặc trưng: 54, 53, 53 (160 hàng), 27, 27, 26 (80), 14, 13, 13 (40), 7, 7, 6 (20). Vậy NPU chia theo chiều cao (hàng), thành ba dải liên tiếp, dư dồn về lõi trước [T3 board, ``tmp/npu-split``] [T1 TRM1 tr.2019 cho tên thanh ghi]. Giá trị thanh ghi là chiều cao trừ 1, suy ra từ việc tổng khớp bản đồ đặc trưng [SL]. Cùng trọng số xuất ở input cao 384, rộng 640 (hiệu chuẩn bằng 100 ảnh riêng): vẫn 29 job ba lõi với đúng 52 task elementwise, 29 task pool và 6 task conv, số hàng chia đều 32, 32, 32 (96 hàng), 16, 16, 16 (48), 8, 8, 8 (24) và 4, 4, 4 (12). Chỉ 6 task conv chạy ba lõi ở cả hai kích thước, còn 144 task conv một lõi ở 640x640 và 100 ở 384x640 [T3 board]
    * - Mode ``nn_mode`` nào ứng với dual, triple?
      - TRM1 chỉ ghi "target for multicore mode" và liệt kê các cấu hình 64x32, 96x32, 32x64, 32x96 [T1 TRM1 tr.2001]
 
@@ -301,7 +301,7 @@ Nếu một context chưa dùng hết SRAM thì phần còn lại các context k
    * - Mục
      - Ranh giới thông tin theo nguồn T1
    * - Chia theo chiều nào của tensor
-     - Driver chỉ nhận danh sách ``subcore_task`` đã chia sẵn [T1 DRV include/rknpu_ioctl.h:241-279]. UG232 chỉ mô tả tỷ lệ "calculation amount" và "granularity of NPU multi-core task allocation" mà không nêu chiều tách tensor [T1 UG232 tr.75]
+     - Chiều tách đã đo trên board (chia theo hàng, xem mục trên). Riêng tài liệu T1: driver chỉ nhận danh sách ``subcore_task`` đã chia sẵn [T1 DRV include/rknpu_ioctl.h:241-279]. UG232 chỉ mô tả tỷ lệ "calculation amount" và "granularity of NPU multi-core task allocation" mà không nêu chiều tách tensor [T1 UG232 tr.75]
    * - ``nn_mode`` trong chế độ đa lõi
      - TRM1 liệt kê các cấu hình 32x32, 64x32, 96x32, 32x64, 32x96 kèm câu "target for multicore mode" và không quy định ánh xạ cứng sang dual hay triple [T1 TRM1 tr.2001]
    * - Giao diện và hiệu năng System SRAM

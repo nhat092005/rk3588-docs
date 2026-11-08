@@ -68,8 +68,6 @@ Chữ "dimension" trong tiếng Anh dễ gây nhầm lẫn, vì nó vừa chỉ 
 
 Shape của tensor là bộ số thể hiện độ dài theo từng trục tương ứng [T2 D2L tr.31]. Mỗi giá trị nằm tại một vị trí cụ thể trong tensor gọi là một phần tử (element). Tổng số phần tử trong tensor bằng tích các kích thước trong shape của nó.
 
-   "With two axes, a tensor is called a matrix. With 𝑘 > 2 axes, we drop the specialized names and just refer to the object as a 𝑘 th -order tensor." [T2 D2L tr.31]
-
 ..
 
    "Each of these values is called an element of the tensor. The tensor x contains 12 elements." [T2 D2L tr.31]
@@ -138,8 +136,6 @@ D2L ghi thứ tự các trục theo nhiều cách khác nhau, và sách không h
 
 Quy ước của trang này: thứ tự trục là (batch, channel, height, width), viết tắt NCHW. Quy ước này khớp với D2L ở chỗ batch đứng trước [T2 D2L tr.137] [T2 D2L tr.263] và channel đứng trước height, width [T2 D2L tr.135] [T2 D2L tr.252]. Các mục sau đều theo quy ước này. Cấu trúc hình học của tensor 4 chiều theo chuẩn này được minh họa tại :ref:`Hình 1 <fig-tien-hoa-tensor-0d-den-4d>` (cột Bậc 4), và cách thức xếp phẳng các trục vào bộ nhớ RAM được đối chiếu tại :ref:`Hình 3 <fig-bo-cuc-bo-nho-nchw-va-nhwc>`.
 
-   "By convention we store an image as a 𝑐 × ℎ × 𝑤 tensor, where 𝑐 is the number of color channels, ℎ is the height and 𝑤 is the width." [T2 D2L tr.135]
-
 ..
 
    "As we commonly do with images, we read them as a tensor of shape (batch size, number of channels, height, width). For now, we only have one channel as the images are grayscale" [T2 D2L tr.137]
@@ -183,8 +179,6 @@ Ví dụ tự tính: với ảnh màu 3×32×32 ở mục 2, trục channel có 
 Một tensor có shape cố định vẫn có thể được lưu vào bộ nhớ theo nhiều thứ tự khác nhau [T1 PTMF]. Trang này dùng thứ tự trục (batch, channel, height, width), viết tắt NCHW, khớp cách D2L ghi ở tr.137 và tr.263 [T2 D2L tr.137] [T2 D2L tr.263]. Sách D2L còn ghi (height, width, channel) cho một ảnh ở tr.44 [T2 D2L tr.44] và (channel, height, width) ở tr.135, tr.252 [T2 D2L tr.135] [T2 D2L tr.252], nên cần nêu rõ quy ước khi đọc.
 
 Tài liệu PyTorch định nghĩa bố cục channels last như một cách khác để xếp tensor NCHW vào bộ nhớ mà vẫn giữ thứ tự các trục [T1 PTMF]:
-
-   "The channels last memory format is an alternative way of ordering NCHW tensors in memory preserving dimensions ordering. Channels last tensors ordered in such a way that channels become the densest dimension (aka storing images pixel-per-pixel)." [T1 PTMF]
 
 ..
 
@@ -235,8 +229,6 @@ Phần layout riêng của RKNN được trình bày ở trang :doc:`../../02-ne
 Mỗi phần tử của tensor được lưu bằng một kiểu số. Các nguồn mô tả kiểu số bằng số bit. Với kiểu float, bảng so sánh của bài BFLOAT16 ghi bộ ba (s, e, m) là số bit dấu, số bit mũ và số bit mantissa [T2 BF16 tr.4]. Với INT8, các nguồn lượng tử hóa nêu bit-width b = 8 và lưới số nguyên tương ứng [T2 NAGEL tr.4] [T2 NAGEL tr.5] [T2 GHOLAMI tr.5]. Từ độ rộng bit, quy đổi theo đơn vị cơ bản 1 byte = 8 bit cho kích thước lưu trữ của từng phần tử: 32 bit tương ứng 4 byte, 16 bit tương ứng 2 byte và 8 bit tương ứng 1 byte.
 
 Bảng của bài BFLOAT16 ghi mantissa của FP16 là 10, trùng với bài Mixed Precision Training [T2 BF16 tr.4] [T2 MIXP tr.3]:
-
-   "Since FP16 has 10 bits of mantissa, the implicit bit must be right-shifted by 11 or more positions to potentially create a zero (in some cases rounding can recover the value)." [T2 MIXP tr.3]
 
 Với BFLOAT16, chính bài BF16 tự mâu thuẫn. Văn bản nói 8 bit mantissa, còn Table 1 ghi (1, 8, 7), tức m = 7. Nguồn không hòa giải hai con số này, và bảng dưới đây lấy theo Table 1:
 

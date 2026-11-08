@@ -204,8 +204,6 @@ Trên các bộ gia tốc AI đa nhân (multi-core NPU), compiler chịu trách 
 
 - **Song song hóa theo dòng không gian (Line Parallelism)**: Chia các dòng chiều cao ngõ ra (:math:`outH`) cho các core hoặc compute engine khác nhau [T2 BAMB tr.4]:
 
-   "With lineparallel computing, different compute engines work on different output lines but the same output channels." [T2 BAMB tr.4]
-
   Do các dòng không gian dùng chung bộ lọc trọng số, tham số mô hình chỉ cần được đọc một lần từ bộ nhớ và phát quảng bá (broadcast) tới tất cả các engine, tiết kiệm tối đa băng thông [T2 BAMB tr.4].
 - **Tránh xung đột ngân hàng bộ nhớ (Bank Conflict Avoidance)**: Khi nhiều core cùng truy xuất vào các khối bộ nhớ SRAM chia sẻ, các truy cập đồng thời vào cùng một ngân hàng (bank) sẽ gây trễ chu kỳ xung nhịp (bank collision stalls). Compiler phải căn lề địa chỉ và xen kẽ bước nhảy (stride interleaving) để đảm bảo các core truy cập vào các bank độc lập [T2 BAMB tr.3] [T2 BAMB tr.4].
 - **Chi phí đồng bộ rào chắn (Barrier Synchronization Overhead)**: Khi phân chia các tile của cùng một lớp cho nhiều core xử lý song song, các core phải đợi nhau tại điểm rào chắn (barrier) trước khi chuyển sang lớp kế tiếp. Nếu một core hoàn thành sớm hơn các core còn lại do khối lượng tính toán ở mép biên nhỏ hơn, core đó buộc phải nhàn rỗi (idle), làm giảm hệ số tăng tốc lý thuyết của hệ thống đa nhân [T2 BAMB tr.4] [T2 LEE24 tr.2].

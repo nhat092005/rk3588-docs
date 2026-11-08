@@ -92,7 +92,7 @@ Số liệu và quy tắc ở :doc:`01-ket-qua-g4` mục 4. Với SiLU:
      - 0.022
      - không nhanh hơn
 
-Cả hai mask đa nhân đều dưới ngưỡng 5%. Theo quy tắc ở :doc:`../03-tang-npu-don-bay/02-multi-core` (mục 5.3, bước 1) S1 bị loại cho trục latency của SiLU, và latency một frame dùng ``CORE_0``. Độ phủ (điều kiện A) của SiLU là 1.8% (:doc:`01-ket-qua-g4` mục 3). Với ReLU, ``CORE_0_1`` giảm 22.9% và ``CORE_0_1_2`` giảm 33.6%, đạt B (ReLU bị loại ở C).
+Cả hai mask đa nhân đều dưới ngưỡng 5%. Theo quy tắc ở :doc:`../03-tang-npu-don-bay/02-multi-core` (mục 5.3, bước 1) S1 bị loại cho trục latency của SiLU. Nhãn "Loại" chỉ nghĩa là không qua ngưỡng 5%, không phải cấm dùng. Ngày 2026-11-08 dự án vẫn chọn intra-frame làm kiểu chạy NPU (quyết định 7, :doc:`../../00-tong-quan/04-gioi-han-va-huong-phat-trien` mục 4.1). Độ phủ (điều kiện A) của SiLU là 1.8% (:doc:`01-ket-qua-g4` mục 3). Với ReLU, ``CORE_0_1`` giảm 22.9% và ``CORE_0_1_2`` giảm 33.6%, đạt B (ReLU bị loại ở C).
 
 2.2. Throughput một context dưới P3
 -----------------------------------

@@ -79,8 +79,6 @@ Khối xây dựng cơ bản của mạng RepVGG ở giai đoạn huấn luyện
 
 Để đảm bảo tính tương đương toán học khi gộp, RepVGG đòi hỏi các nhánh tích chập phải có cùng bước trượt (stride), đồng thời cấu hình đệm (padding) của nhánh 1x1 phải nhỏ hơn nhánh 3x3 đúng một pixel [T2 REPVGG tr.5]:
 
-   "Note that the equivalence of such transformations requires the 3 × 3 and 1 × 1 layer to have the same stride, and the padding configuration of the latter shall be one pixel less than the former." [T2 REPVGG tr.5]
-
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/tai-tham-so-hoa-cau-truc/repvgg-fig4-structural-reparameterization.png
    :align: center
    :alt: Structural re-parameterization của một khối RepVGG
@@ -237,11 +235,7 @@ Theo số đo từ MobileOne Table 9 [T2 MOBONE tr.7], thứ hạng tốc độ 
 
 Mặc dù RepVGG đạt tốc độ suy luận FP32 rất ấn tượng trên GPU nhờ topo đơn nhánh, mô hình này lại gặp thất bại nghiêm trọng khi lượng tử hóa hậu huấn luyện (Post-Training Quantization - PTQ) sang INT8 [T2 QAREP tr.1]:
 
-   "Nonetheless, its quantization performance is usually too poor to deploy (more than 20% top-1 accuracy drop on ImageNet) when INT8 inference is desired." [T2 QAREP tr.1]
-
 Nghiên cứu của Chu và cộng sự [T2 QAREP tr.1, 5, 6] chỉ ra rằng sự sụt giảm độ chính xác của RepVGG dao động rất lớn tùy biến thể: RepVGG-A0 sụt 20.2 điểm phần trăm (từ 72.4% xuống 52.2%), RepVGG-B0 sụt 34.9 điểm (từ 75.1% xuống 40.2%), và RepVGG-B1g4 sụt tới 77.05 điểm (từ 77.6% xuống 0.55%). Trên mô hình phát hiện đối tượng YOLOv6s sử dụng RepBlock, độ chính xác sụt giảm 7.4% mAP qua PTQ [T2 QAREP tr.7]:
-
-   "Noticeably, YOLOv6s-RepVGG suffers a huge quantization degradation for about 7.4% mAP via PTQ." [T2 QAREP tr.7]
 
 Nguyên nhân gốc rễ bắt nguồn từ sự vi phạm hai điều kiện cơ bản của lượng tử hóa [T2 QAREP tr.3]:
 
@@ -263,8 +257,6 @@ Nguyên nhân gốc rễ bắt nguồn từ sự vi phạm hai điều kiện c�
 - **M2 (Bỏ BN ở nhánh Identity)**: Loại bỏ lớp BN trên đường truyền identity [T2 QAREP tr.5].
 - **M3 (Bỏ BN ở nhánh Conv 1x1)**: Loại bỏ lớp BN sau lớp tích chập 1x1 [T2 QAREP tr.5].
 - **M4 (Bổ sung Post-BN)**: Đặt một lớp Batch Normalization duy nhất ngay sau phép cộng của ba nhánh [T2 QAREP tr.5]:
-
-   "we remove BN from the identity and 1×1 branch plus appending an extra BN after the addition of three branches." [T2 QAREP tr.5]
 
 Việc bổ sung Post-BN đóng vai trò chuẩn hóa toàn bộ tensor đầu ra sau phép cộng, triệt tiêu hiện tượng dịch chuyển hiệp biến (covariate shift) và giữ cho phương sai activation luôn nằm trong dải phân bố hẹp, thân thiện với các thang chia lượng tử hóa INT8 đối xứng [T2 QAREP tr.5, 6].
 

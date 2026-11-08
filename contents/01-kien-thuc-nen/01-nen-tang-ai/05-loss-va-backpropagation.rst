@@ -69,8 +69,6 @@ Một vòng huấn luyện lặp lại bốn bước. Hai bước đầu đã c�
 
 Sách mô tả đơn vị lặp như sau: một epoch là một lượt đi qua toàn bộ tập huấn luyện, và mỗi iteration lấy một minibatch để tính loss. [T2 D2L tr.105]
 
-   "In each epoch, we iterate through the entire training dataset, passing once through every example (assuming that the number of examples is divisible by the batch size)." [T2 D2L tr.105]
-
 .. _fig-chu-trinh-huan-luyen:
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/01-nen-tang-ai/05-loss-va-backpropagation/bp-1-chu-trinh-huan-luyen-4-buoc.svg
@@ -186,8 +184,6 @@ Detector một giai đoạn gặp mất cân bằng lớp rất lớn giữa n�
 
 Dòng sau là dạng cân bằng :math:`\alpha` mà tác giả dùng trong thực nghiệm. [T2 Focal tr.3] Khi :math:`\gamma = 0`, FL trùng CE. [T2 Focal tr.3]
 
-   "with γ = 2, an example classified with pt = 0.9 would have 100× lower loss compared with CE and with pt ≈ 0.968 it would have 1000× lower loss." [T2 Focal tr.3]
-
 .. _fig-focal-loss-gamma:
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/loss-va-backpropagation/focal-fig1-loss-gamma-curves.png
@@ -202,8 +198,6 @@ Bài nêu :math:`\gamma = 2` và :math:`\alpha = 0.25` cho kết quả tốt nh�
 ---------------------------
 
 IoU (giao trên hợp, định nghĩa ở trang :doc:`08-evaluation-metrics`) dùng được làm loss dưới dạng :math:`L_{IoU} = 1 - \mathrm{IoU}`. Điểm yếu: khi hai box không giao nhau IoU bằng 0 và không phản ánh hai box cách xa bao nhiêu. [T2 GIoU tr.2]
-
-   "if two objects do not overlap, the IoU value will be zero and will not reflect how far the two shapes are from each other. In this case of non-overlapping objects, if IoU is used as a loss, its gradient will be zero and cannot be optimized." [T2 GIoU tr.2]
 
 .. _fig-giou-l2-vs-iou:
 
@@ -282,8 +276,6 @@ Trong huấn luyện, :math:`f` là loss :math:`L` và :math:`\mathbf{x}` là c�
 
 Hai cách chọn sai :math:`\eta` được sách mô tả. Quá nhỏ thì cập nhật chậm và cần nhiều vòng lặp hơn. Quá lớn thì :math:`|\eta f'(x)|` có thể quá lớn để xấp xỉ Taylor bậc nhất còn đúng. [T2 D2L tr.484]
 
-   "Conversely, if we use an excessively high learning rate, \|𝜂 𝑓 0 (𝑥)\| might be too large for the first-order Taylor expansion formula." [T2 D2L tr.484]
-
 Sách minh họa bằng các ví dụ :math:`\eta = 0.05`, :math:`0.2` và :math:`1.1` trên hàm một biến. Đó là giá trị ví dụ, không phải giá trị mặc định. [T2 D2L tr.484]
 
 5. Backpropagation
@@ -292,8 +284,6 @@ Sách minh họa bằng các ví dụ :math:`\eta = 0.05`, :math:`0.2` và :math
    "Backpropagation refers to the method of calculating the gradient of neural network parameters. In short, the method traverses the network in reverse order, from the output to the input layer, according to the chain rule from calculus." [T2 D2L tr.181]
 
 Khung autograd của sách cùng ý: framework dựng đồ thị tính toán (computational graph) ghi lại mỗi giá trị phụ thuộc giá trị nào, rồi lần ngược qua đồ thị và áp dụng quy tắc chuỗi. [T2 D2L tr.60]
-
-   "To calculate derivatives, automatic differentiation works backwards through this graph applying the chain rule. The computational algorithm for applying the chain rule in this fashion is called backpropagation." [T2 D2L tr.60]
 
 Hệ quả thực tế: backward dùng lại các giá trị trung gian đã lưu ở forward, nên huấn luyện phải giữ chúng trong bộ nhớ đến khi backward xong. [T2 D2L tr.183]
 
@@ -472,8 +462,6 @@ Sách tính loss trung bình trên minibatch, nên gradient không cần chia th
    "The phenomenon of fitting closer to our training data than to the underlying distribution is called overfitting, and techniques for combatting overfitting are often called regularization methods." [T2 D2L tr.113]
 
 Để phát hiện overfitting, sách dùng một tập validation tách riêng. Lỗi trên dữ liệu giữ lại này gọi là validation error. [T2 D2L tr.115]
-
-   "we want to watch out for the cases when our training error is significantly lower than our validation error, indicating severe overfitting." [T2 D2L tr.115]
 
 .. _fig-underfitting-overfitting:
 

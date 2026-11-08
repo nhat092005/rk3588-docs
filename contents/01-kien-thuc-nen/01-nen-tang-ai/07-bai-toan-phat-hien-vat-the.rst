@@ -31,11 +31,7 @@ Bài toán phát hiện vật thể
 
 Bài toán phân loại ảnh giả định ảnh có một vật chính và chỉ hỏi vật đó thuộc lớp nào. Khi ảnh có nhiều vật, ta cần biết cả lớp lẫn vị trí của từng vật. Sách gọi tác vụ này là object detection. [T2 D2L tr.606]
 
-   "In image classification tasks, we assume that there is only one major object in the image and we only focus on how to recognize its category. However, there are often multiple objects in the image of interest. We not only want to know their categories, but also their specific positions in the image." [T2 D2L tr.606]
-
 Phân đoạn ngữ nghĩa đi sâu hơn: thay vì hộp chữ nhật, nhãn và dự đoán nằm ở mức pixel. [T2 D2L tr.648]
-
-   "Different from object detection, semantic segmentation recognizes and understands what are in images in pixel level: its labeling and prediction of semantic regions are in pixel level." [T2 D2L tr.648]
 
 .. _fig-d2l-phan-doan-ngu-nghia:
 
@@ -82,8 +78,6 @@ Trang này chỉ bàn về phát hiện vật thể, tức đầu ra là danh s�
 =========================
 
 Sách dùng hộp chữ nhật (bounding box) để mô tả vị trí vật thể và nêu hai cách biểu diễn. [T2 D2L tr.607]
-
-   "The bounding box is rectangular, which is determined by the 𝑥 and 𝑦 coordinates of the upper-left corner of the rectangle and the such coordinates of the lower-right corner. Another commonly used bounding box representation is the (𝑥, 𝑦)-axis coordinates of the bounding box center, and the width and height of the box." [T2 D2L tr.607]
 
 Gốc tọa độ của ảnh là góc trên trái, chiều dương của trục :math:`x` hướng sang phải và của trục :math:`y` hướng xuống dưới. [T2 D2L tr.608] Phép đổi giữa hai dạng theo mã của sách như sau. [T2 D2L tr.607, tr.608]
 
@@ -152,15 +146,11 @@ Trang này không nêu tên hay số lượng lớp của một bộ dữ liệu
 
 Bài YOLOv6 mô tả detector một giai đoạn gồm ba phần. [T2 YOLOv6 tr.3]
 
-   "A one-stage object detector is generally composed of the following parts: a backbone, a neck and a head. The backbone mainly determines the feature representation ability, meanwhile, its design has a critical influence on the inference efficiency since it carries a large portion of computation cost. The neck is used to aggregate the low-level physical features with high-level semantic features, and then build up pyramid feature maps at all levels." [T2 YOLOv6 tr.3]
-
 ..
 
    "The head consists of several convolutional layers, and it predicts final detection results according to multi-level features assembled by the neck." [T2 YOLOv6 tr.3]
 
 Bài YOLOv4 nêu cùng cấu trúc từ góc nhìn lịch sử: detector hiện đại gồm backbone tiền huấn luyện trên ImageNet và head dự đoán lớp và box, còn các lớp chèn giữa hai phần để gom bản đồ đặc trưng từ nhiều giai đoạn gọi là neck. [T2 YOLOv4 tr.2]
-
-   "Object detectors developed in recent years often insert some layers between backbone and head, and these layers are usually used to collect feature maps from different stages. We can call it the neck of an object detector." [T2 YOLOv4 tr.2]
 
 .. _fig-yolov4-cau-truc-detector:
 
@@ -231,8 +221,6 @@ Giá trị mặc định của sách là :math:`\mu_x = \mu_y = \mu_w = \mu_h = 
 ---------------
 
 Bài FCOS nêu gần như mọi detector hiện đại thời đó (RetinaNet, SSD, YOLOv3, Faster R-CNN) dựa vào anchor được định nghĩa trước, còn FCOS thì không có anchor. [T2 FCOS tr.1]
-
-   "By eliminating the predefined set of anchor boxes, FCOS completely avoids the complicated computation related to anchor boxes such as calculating overlapping during training. More importantly, we also avoid all hyper-parameters related to anchor boxes, which are often very sensitive to the final detection performance." [T2 FCOS tr.1]
 
 Thay vì lấy anchor làm hộp tham chiếu, detector coi mỗi vị trí trên bản đồ đặc trưng là một mẫu huấn luyện và hồi quy trực tiếp hộp đích tại đó. [T2 FCOS tr.4] Đích hồi quy là bốn khoảng cách :math:`(l^*, t^*, r^*, b^*)` từ vị trí tới bốn cạnh của hộp. [T2 FCOS tr.4]
 
@@ -309,8 +297,6 @@ Với detector kiểu FCOS, đầu ra tại vị trí :math:`(x, y)` là bốn k
 
 Với một hộp dự đoán, mạng cho khả năng của từng lớp. Sách gọi giá trị lớn nhất :math:`p` là độ tin cậy (confidence hay score) của hộp và lớp tương ứng là lớp dự đoán. [T2 D2L tr.619]
 
-   "Denoting by 𝑝 the largest predicted likelihood, the class corresponding to this probability is the predicted class for 𝐵. Specifically, we refer to 𝑝 as the confidence (score) of the predicted bounding box 𝐵." [T2 D2L tr.619]
-
 Hình dạng và đơn vị cụ thể của đầu ra thô trên board (số cột, tọa độ theo pixel hay chuẩn hóa) phụ thuộc mô hình và đường xuất. Giá trị của dự án nằm ở :doc:`/contents/07-bang-tra/01-ban-do-code`.
 
 7. Lọc ngưỡng confidence và NMS
@@ -329,8 +315,6 @@ Mặc định của hàm cũng khác mặc định của cấu hình: hàm ``non
 ---------------------------
 
 Nhiều anchor hoặc vị trí cùng bao một vật nên cho nhiều hộp chồng nhau. NMS gộp các hộp tương tự về một. [T2 D2L tr.619] Thuật toán của sách như sau. [T2 D2L tr.619, tr.620]
-
-   "Select the predicted bounding box 𝐵1 with the highest confidence from 𝐿 as a basis and remove all non-basis predicted bounding boxes whose IoU with 𝐵1 exceeds a predefined threshold 𝜖 from 𝐿." [T2 D2L tr.619]
 
 Quá trình lặp: sắp các hộp không phải nền theo confidence giảm dần thành danh sách :math:`L`, chọn hộp đầu làm cơ sở, loại các hộp có IoU với nó vượt :math:`\epsilon`, rồi chọn hộp tiếp theo còn lại làm cơ sở, cho đến khi mọi hộp trong :math:`L` đã làm cơ sở. Khi đó IoU của mọi cặp hộp còn lại đều dưới :math:`\epsilon`. [T2 D2L tr.619, tr.620]
 

@@ -308,25 +308,7 @@ Bản ghi T3 board ngày 2026-10-10 nằm trong ``contents/09-tien-do/03-khoang-
 
 Giới hạn của bản ghi: nhật ký gốc ``04_debug-logs/2026-10-10_t3-board-silu-resize`` đã bị xóa, nên các số này không kiểm lại được và chỉ còn dưới dạng bản ghi trong docs. Bản ghi khớp với build PC ở mục 3.2 (57 ``ConvExSwish``, 51 ``ConvRelu``, 6 ``ConvReluAdd``). Model chưa huấn luyện nên không có mAP. Đối chiếu với chuẩn G4, phần này là suy ra từ bản ghi và build INT8 (mục 3.5), không phải đo mới: điều kiện A thỏa vì ``ConvRelu`` và ``ConvReluAdd`` chiếm 95.8% cycles ước tính (5431517 trên 5666717). Điều kiện B: mức giảm khoảng 8% lớn hơn 5%, chưa đối chiếu với chênh lệch giữa hai phiên. Điều kiện C chưa đo. Đính chính 2026-10-31: C đã đo và B đã đo theo chuẩn hai phiên trên model đã huấn luyện, xem bảng dưới và :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 44 22 34
-
-   * - Câu hỏi
-     - Trạng thái
-     - Cách giải quyết
-   * - ``ConvExSwish`` chạy đa nhân theo T1
-     - Không (cả hai mục ứng viên). Bản ghi T3 board: 100%/0%/0%. Đã đo lại 2026-10-31: 57 trên 57 dòng 100%/0%/0%
-     - Đã làm (G4, :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 3)
-   * - Phần cycles ước tính ở op đa nhân sau khi đổi sang ReLU
-     - Ít nhất 90.9% (INT8) theo T1, còn 9.1% chưa biết theo T1. Đã đo 2026-10-31: 97.6% (``ConvReluAdd`` chia ba nhân)
-     - T1 không có mục cùng tên, kết quả là phép đo T3 (:doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 3)
-   * - Đổi SiLU sang ReLU mở khóa tăng tốc đa nhân
-     - Đã đo 2026-10-31 (ReLU 1 seed): ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.6%, model SiLU 2.9%
-     - Đã làm theo chuẩn B (:doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 4)
-   * - Chi phí mAP của việc đổi activation
-     - Đã đo 2026-10-31 (INT8, ``css_test``, 1 seed): AP50-95 giảm 3.51 điểm, AP NoHelmet giảm 4.94 điểm, AP Vest tăng 0.14 điểm. Không đạt C
-     - Đã làm (:doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 5)
+Kết quả đo ngày 2026-10-31 (:doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`): ``ConvExSwish`` 57 trên 57 dòng chạy 100%/0%/0% (mục 3). Phần cycles ước tính ở op đa nhân sau khi đổi sang ReLU là 97.6% (T1 chỉ bảo đảm ít nhất 90.9%, phần 9.1% của ``ConvReluAdd`` không có mục cùng tên). ReLU ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.6%, SiLU 2.9% (mục 4). Chi phí mAP của ReLU (INT8, ``css_test``, 1 seed): AP50-95 giảm 3.51 điểm, AP NoHelmet giảm 4.94 điểm, AP Vest tăng 0.14 điểm, không đạt điều kiện C (mục 5).
 
 4. Resize
 =========
@@ -565,24 +547,10 @@ Số dòng RKNN khác số node ONNX do các pass của compiler: 57 cặp Sigmo
 
 Slice không xuất hiện trong bảng per-layer của RKNN. Các op Sub, Reshape, Transpose, Sigmoid, exSoftmax13 và Resize có trạng thái không đa nhân rõ ràng trong Operator List và nằm ở neck và detection head. Thời gian từng lớp có trong bản ghi T3 board ở ``contents/09-tien-do/03-khoang-trong/06-yolo.rst`` cho một số model, trang này không đối chiếu các số đó. Cột thời gian lấy từ phép đo 2026-10-31 (trung vị hai phiên ``CORE_0``, tổng thời gian dòng của chế độ ``perf_debug``, mô tả chứ không phải latency).
 
-5.4. Việc cần làm để đóng bảng
-------------------------------
+Bản ghi T3 board 2026-10-10 chỉ nêu ``ConvExSwish``, ``ConvRelu`` và ``ConvReluAdd``. WorkLoad của cả 119 dòng ở ``CORE_0_1_2`` (model SiLU) và 113 dòng (model ReLU) đã đo ngày 2026-10-31, tổng hợp theo loại op ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 3.
 
-.. list-table::
-   :header-rows: 1
-   :widths: 40 28 32
-
-   * - Việc
-     - Công cụ
-     - Kết quả cần có
-   * - Chạy trên board ở ``CORE_0_1_2`` để điền WorkLoad cho cả 119 dòng
-     - ``eval_perf`` với ``perf_debug=True``
-     - Cột ``WorkLoad(0/1/2)-ImproveTherical`` đầy đủ (đã làm 2026-10-31)
-
-Bản ghi T3 board 2026-10-10 chỉ nêu ``ConvExSwish``, ``ConvRelu`` và ``ConvReluAdd``. Đính chính 2026-10-31: WorkLoad của cả 119 dòng ở ``CORE_0_1_2`` (model SiLU) và 113 dòng (model ReLU) đã đo, tổng hợp theo loại op ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` mục 3.
-
-6. Mâu thuẫn, điểm chưa biết và đặc tả đo T3
-============================================
+6. Mâu thuẫn và điểm chưa biết
+==============================
 
 6.1. Hai tài liệu T1 khác nhau
 ------------------------------
@@ -644,34 +612,4 @@ Trang này dùng Operator List cho trạng thái từng op vì tài liệu này 
      - biết một phần (Slice thành Split, Div thành Mul)
      - Không áp dụng
 
-6.3. Đặc tả đo T3 board
------------------------
-
-Cách đo theo bảng tham số ở mục 2: mỗi ``core_mask`` chạy hai phiên ``init_runtime``, một phiên không bật ``perf_debug`` cho latency, một phiên ``perf_debug=True`` cho WorkLoad.
-
-.. list-table::
-   :header-rows: 1
-   :widths: 28 72
-
-   * - Mục
-     - Giá trị
-   * - Model cần đo
-     - YOLOv8n SiLU và YOLOv8n ReLU hoặc LeakyReLU, đều 5 class ppe5. Model SiLU đã train xong: ``ppe5_yolov8n_baseline_100ep_s0`` trong ``ai/automation/runs`` (``best.pt`` có sẵn). Model ReLU ``ppe5_yolov8n_relu_100ep_s0`` đã train ngày 2026-10-31 (đính chính: trước ngày đó chưa có)
-   * - Target
-     - ``rk3588``
-   * - dtype
-     - INT8 (kết luận), FP16 (tham chiếu)
-   * - Toolkit
-     - rknn-toolkit2 2.3.2
-   * - Chế độ ``core_mask``
-     - ``CORE_0`` và ``CORE_0_1_2``
-   * - Công cụ
-     - ``rknn.init_runtime(..., perf_debug=True)`` và ``rknn.eval_perf()`` (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, trang 74 và 75)
-   * - Cột cần đọc
-     - ``WorkLoad(0/1/2)-ImproveTherical`` và ``Target``
-   * - Số liệu cần ghi
-     - latency (ms), mAP, ``AP NoHelmet``, ``AP Vest``, workload của từng lớp ConvExSwish hoặc ConvRelu
-   * - Kết quả hiện tại
-     - đã đo model đã huấn luyện ngày 2026-10-31, kết quả ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`. Bản ghi một phần ở mục 3.6 chỉ ghi lại
-
-Kết quả đo ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`.
+Đặc tả đo đã chạy xong: mỗi ``core_mask`` (``CORE_0``, ``CORE_0_1_2``) hai phiên ``init_runtime``, một phiên không bật ``perf_debug`` cho latency, một phiên ``perf_debug=True`` cho cột ``WorkLoad(0/1/2)-ImproveTherical`` và ``Target``, model YOLOv8n SiLU và ReLU 5 class (ppe5), target ``rk3588``, INT8 (kết luận) và FP16 (tham chiếu), rknn-toolkit2 2.3.2 [T1 UG232 tr.74, tr.75]. Kết quả đo ngày 2026-10-31 ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`.

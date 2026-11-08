@@ -29,11 +29,7 @@ Convolution và CNN
 
 Trong thị giác máy tính, việc dùng mạng kết nối đầy đủ (MLP) cho ảnh kích thước lớn gặp trở ngại lớn về số lượng tham số. Hai nguyên lý định hướng việc thiết kế mạng tích chập là tính bất biến dịch chuyển (translation invariance) và tính cục bộ (locality) [T2 D2L tr.234].
 
-   "Invariance: In the earliest layers, our network should respond similarly to the same patch, regardless of where it appears in the image... Locality: The earliest layers should focus on local regions, without regard to what is going on in the image at great distances." [T2 D2L tr.234]
-
 Sách chỉ ra rằng các lớp tích chập trong thực hành thực chất là phép tương quan chéo (cross-correlation) [T2 D2L tr.240].
-
-   "Recall that strictly speaking, convolutional layers are a misnomer, since the operations they express are more accurately described as cross-correlations. Based on our descriptions of convolutional layers in Section 7.1, in such a layer, an input tensor and a kernel tensor are combined to produce an output tensor through a cross-correlation operation." [T2 D2L tr.240]
 
 Trong phép tương quan chéo hai chiều, cửa sổ kernel trượt qua từng vị trí trên ảnh từ trái sang phải và từ trên xuống dưới. Tại mỗi vị trí, các phần tử tương ứng của vùng ảnh con và kernel được nhân với nhau rồi cộng lại để cho ra một số vô hướng [T2 D2L tr.240, tr.241].
 
@@ -49,8 +45,6 @@ Trong phép tương quan chéo hai chiều, cửa sổ kernel trượt qua từn
 
 Một lớp tích chập hoàn chỉnh bao gồm phép tương quan chéo cộng thêm một hệ số bias [T2 D2L tr.242].
 
-   "A convolutional layer cross-correlates the input and kernel and adds a scalar bias to produce an output. The two parameters of a convolutional layer are the kernel and the scalar bias." [T2 D2L tr.242]
-
 Về mặt trực giác thị giác, kernel đóng vai trò như một bộ lọc dò tìm đặc trưng cục bộ (như cạnh ngang, cạnh dọc hoặc tương phản sáng tối). Khi kernel quét qua vùng ảnh khớp với mẫu mà nó đại diện, kết quả nhân chập sinh ra một giá trị kích hoạt lớn, báo hiệu đặc trưng đó xuất hiện trên bản đồ đặc trưng [T2 D2L tr.242]. Sách lấy ví dụ bộ lọc vi phân bậc một kích thước :math:`1 \times 2` với trọng số :math:`[1, -1]`: khi trượt qua vùng ảnh có màu đồng nhất, kết quả bằng :math:`0`, còn khi chạm vào đường biên phân cách giữa hai mảng sáng tối, kết quả khác :math:`0`, giúp định vị chính xác đường viền của vật thể [T2 D2L tr.242, tr.243].
 
 **Ví dụ tự tính theo Fig. 7.2.1 của sách.** Đầu vào kích thước :math:`3 \times 3`, kernel :math:`2 \times 2`, bias :math:`b = 0`:
@@ -60,27 +54,7 @@ Về mặt trực giác thị giác, kernel đóng vai trò như một bộ lọ
    X = \begin{bmatrix} 0 & 1 & 2 \\ 3 & 4 & 5 \\ 6 & 7 & 8 \end{bmatrix}, \qquad
    K = \begin{bmatrix} 0 & 1 \\ 2 & 3 \end{bmatrix}
 
-Bốn giá trị đầu ra được tính tại từng vị trí cửa sổ [T2 D2L tr.241, Eq. 7.2.1]:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 20 50 30
-
-   * - Vị trí đầu ra
-     - Phép tính
-     - Giá trị
-   * - :math:`Y_{0,0}`
-     - :math:`0 \cdot 0 + 1 \cdot 1 + 3 \cdot 2 + 4 \cdot 3`
-     - :math:`19`
-   * - :math:`Y_{0,1}`
-     - :math:`1 \cdot 0 + 2 \cdot 1 + 4 \cdot 2 + 5 \cdot 3`
-     - :math:`25`
-   * - :math:`Y_{1,0}`
-     - :math:`3 \cdot 0 + 4 \cdot 1 + 6 \cdot 2 + 7 \cdot 3`
-     - :math:`37`
-   * - :math:`Y_{1,1}`
-     - :math:`4 \cdot 0 + 5 \cdot 1 + 7 \cdot 2 + 8 \cdot 3`
-     - :math:`43`
+Bốn giá trị đầu ra tại từng vị trí cửa sổ là :math:`19, 25, 37, 43` (ví dụ :math:`Y_{0,0} = 0 \cdot 0 + 1 \cdot 1 + 3 \cdot 2 + 4 \cdot 3 = 19`) [T2 D2L tr.241, Eq. 7.2.1].
 
 Liên hệ RK3588: cách mảng MAC tính các tích vô hướng này xem :doc:`MAC và PE array </contents/01-kien-thuc-nen/02-npu/01-kien-truc-npu-va-mac>`.
 
@@ -132,11 +106,7 @@ Liên hệ RK3588: NPU core có bộ điều khiển tiền xử lý tích chậ
 
 Trong mạng tích chập, đầu ra của mỗi lớp còn được gọi là bản đồ đặc trưng (feature map) [T2 D2L tr.245]. Trường tiếp nhận (receptive field) mô tả phạm vi không gian mà một nơ-ron có thể quan sát được từ các lớp trước đó.
 
-   "In CNNs, for any element x of some layer, its receptive field refers to all the elements (from all the previous layers) that may affect the calculation of x during the forward propagation. Note that the receptive field may be larger than the actual size of the input." [T2 D2L tr.245]
-
 Sách lấy ví dụ từ Fig. 7.2.1: một phần tử ở lớp đầu ra :math:`Y` có receptive field là vùng :math:`2 \times 2` trên ảnh đầu vào. Nếu xếp chồng thêm một lớp tích chập :math:`2 \times 2` thứ hai nhận :math:`Y` làm đầu vào để cho ra một giá trị :math:`z`, thì receptive field của :math:`z` trên :math:`Y` là :math:`2 \times 2` (4 phần tử), nhưng receptive field của :math:`z` trên ảnh gốc ban đầu bao phủ toàn bộ :math:`3 \times 3` (9 phần tử) [T2 D2L tr.245].
-
-   "Thus, when any element in a feature map needs a larger receptive field to detect input features over a broader area, we can build a deeper network." [T2 D2L tr.245]
 
 Việc xếp chồng nhiều lớp tích chập với kernel nhỏ (ví dụ hai lớp :math:`3 \times 3`) cho cùng receptive field với một kernel lớn (:math:`5 \times 5`), nhưng giảm số tham số và bổ sung thêm các hàm phi tuyến [T2 D2L tr.279].
 
@@ -148,31 +118,7 @@ Việc xếp chồng nhiều lớp tích chập với kernel nhỏ (ví dụ hai
 
    Cơ chế mở rộng Receptive Field qua các tầng CNN: Xếp chồng hai lớp tích chập 3x3 liên tiếp đạt trường tiếp nhận 5x5 trên ảnh gốc nhưng giảm 28% số lượng tham số so với một lớp 5x5 đơn lẻ và tăng tính phi tuyến.
 
-.. list-table:: So sánh kiến trúc: Hai lớp Conv 3×3 xếp chồng vs Một lớp Conv 5×5 đơn lẻ
-   :widths: 20 28 26 26
-   :header-rows: 1
-   :align: center
-
-   * - Tiêu chí so sánh
-     - Hai lớp Conv 3×3 liên tiếp
-     - Một lớp Conv 5×5 đơn lẻ
-     - Đánh giá / Ưu thế
-   * - Trường tiếp nhận (RF)
-     - :math:`5 \times 5` pixel trên ảnh gốc
-     - :math:`5 \times 5` pixel trên ảnh gốc
-     - Tương đương nhau 100%, bao quát cùng một vùng
-   * - Số lượng tham số (Weights)
-     - :math:`2 \times (3 \times 3) = 18` trọng số (giả sử 1 kênh)
-     - :math:`1 \times (5 \times 5) = 25` trọng số (giả sử 1 kênh)
-     - Giảm 28% tham số, tiết kiệm bộ nhớ RAM
-   * - Tính phi tuyến (Non-linearity)
-     - 2 lớp hàm kích hoạt ReLU
-     - Chỉ có 1 lớp kích hoạt ReLU
-     - Mạng sâu hơn biểu diễn hàm phức tạp tốt hơn
-   * - Ứng dụng trong YOLO / NPU
-     - Chuẩn thiết kế VGG / CSPDarknet
-     - Hiếm dùng trong CNN hiện đại
-     - Dễ ánh xạ phần cứng NPU, tối ưu hóa bộ đệm CBUF
+Hai lớp 3x3 cho cùng receptive field 5x5 với một lớp 5x5 nhưng chỉ cần 18 thay vì 25 trọng số trên một kênh (giảm 28%) và có hai lần phi tuyến.
 
 Receptive field quyết định khả năng nhận diện vật thể lớn ở các tầng đặc trưng sâu của detector (xem :doc:`Kiến trúc và các khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`).
 
@@ -192,8 +138,6 @@ Khi dữ liệu đầu vào chứa :math:`c_i` kênh, mỗi bộ lọc phải c�
 Để tạo ra :math:`c_o` kênh đầu ra, ta ghép :math:`c_o` bộ lọc đa kênh lại với nhau, tạo thành tensor trọng số có shape :math:`c_o \times c_i \times k_h \times k_w` [T2 D2L tr.254].
 
 Lớp tích chập :math:`1 \times 1` không liên kết các điểm ảnh lân cận trong không gian, mà chỉ tính tổ hợp tuyến tính dọc theo chiều kênh [T2 D2L tr.255].
-
-   "You could think of the 1 × 1 convolutional layer as constituting a fully connected layer applied at every single pixel location to transform the c_i corresponding input values into c_o output values." [T2 D2L tr.255]
 
 Số tham số của lớp tích chập gồm trọng số và bias [T2 D2L tr.254]:
 
@@ -222,8 +166,6 @@ Tỷ lệ giữa số MAC và số byte đọc từ bộ nhớ quyết định v
 
 Để tận dụng các thư viện nhân ma trận tối ưu (BLAS/GEMM) và mảng systolic của phần cứng, tích chập thường được hạ bậc (lowering) về phép nhân ma trận [T2 CUDNN tr.4].
 
-   "One approach is to lower the convolutions into a matrix multiplication, following [6]. This can be implemented by creating a large data matrix by duplicating the original input data into a matrix D_m with dimensions CRS × NPQ... The filter matrix F_m has dimensions K × CRS = 2 × 12, while the data matrix D_m has dimensions CRS × NPQ = 12 × 4. Note that each element of D is duplicated up to RS = 4 times in D_m. The output matrix O_m has dimensions K × NPQ = 2 × 4." [T2 CUDNN tr.4]
-
 .. _fig-cudnn-lowering:
 
 .. figure:: ../../../_assets/img/01-kien-thuc-nen/01-nen-tang-ai/convolution-va-cnn/cudnn-fig-1-convolution-lowering.png
@@ -239,8 +181,6 @@ Thao tác trải dữ liệu (thường gọi là im2col) chuyển mỗi vùng t
    O_m = F_m \times D_m
 
 Đánh đổi lớn nhất của im2col tường minh là việc chiếm dụng bộ nhớ đệm và băng thông, do mỗi điểm ảnh đầu vào bị sao chép lặp lại tới :math:`R \times S` lần [T2 CUDNN tr.5].
-
-   "The disadvantage of this approach is that forming D_m involves duplicating the input data up to RS times, which can require a prohibitively large temporary allocation... This approach also lowers the computational intensity of the convolutions, because D_m must be written and read, in addition to reading D itself, requiring significantly more memory traffic as a more direct approach." [T2 CUDNN tr.5]
 
 Sách D2L minh họa góc nhìn tương đương: viết lại kernel thành ma trận trọng số thưa :math:`W` kích thước :math:`4 \times 9` nhân với vector đầu vào trải phẳng :math:`X` độ dài :math:`9` để cho ra vector đầu ra độ dài :math:`4` [T2 D2L tr.658].
 
@@ -258,8 +198,6 @@ Liên hệ RK3588: layout dữ liệu mà NPU dùng khi nạp tensor xem :doc:`L
 =========================
 
 Kiến trúc MobileNet giới thiệu phép phân rã tích chập (factorized convolution), tách tích chập tiêu chuẩn thành hai bước riêng biệt: depthwise convolution và pointwise convolution [T2 MOBILENET tr.2].
-
-   "The MobileNet model is based on depthwise separable convolutions which is a form of factorized convolutions which factorize a standard convolution into a depthwise convolution and a 1 × 1 convolution called a pointwise convolution. For MobileNets the depthwise convolution applies a single filter to each input channel. The pointwise convolution then applies a 1 × 1 convolution to combine the outputs the depthwise convolution." [T2 MOBILENET tr.2]
 
 .. _fig-mobilenet-depthwise:
 
@@ -289,33 +227,12 @@ Tổng chi phí của depthwise separable convolution và tỷ lệ cắt giảm
 
 Với kernel :math:`3 \times 3`, lượng tính toán giảm từ 8 đến 9 lần [T2 MOBILENET tr.3].
 
-   "MobileNet uses 3 × 3 depthwise separable convolutions which uses between 8 to 9 times less computation than standard convolutions at only a small reduction in accuracy." [T2 MOBILENET tr.3]
-
 Liên hệ RK3588: TRM của RK3588 có riêng chế độ phần cứng Depthwise convolution mode trong bộ điều khiển DPU (xem :doc:`Cấu trúc NPU core và DPU </contents/02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core>`).
 
 7. Group convolution
 ====================
 
 Group convolution (tích chập theo nhóm) chia :math:`c_i` kênh vào và :math:`c_o` kênh ra thành :math:`g` nhóm song song độc lập [T2 D2L tr.309].
-
-   "Breaking up a convolution from c_i to c_o channels into one of g groups of size c_i/g generating g outputs of size c_o/g is called, quite fittingly, a grouped convolution. The computational cost (proportionally) is reduced from O(c_i · c_o) to O(g · (c_i/g) · (c_o/g)) = O(c_i · c_o / g), i.e., it is g times faster. Even better, the number of parameters needed to generate the output is also reduced from a c_i × c_o matrix to g smaller matrices of size (c_i/g) × (c_o/g), again a g times reduction." [T2 D2L tr.309]
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 35 35
-
-   * - Tiêu chí
-     - Tích chập tiêu chuẩn (:math:`g = 1`)
-     - Group convolution (:math:`g` nhóm)
-   * - Trọng số
-     - :math:`c_o \cdot c_i \cdot k_h \cdot k_w`
-     - :math:`\frac{c_o \cdot c_i \cdot k_h \cdot k_w}{g}`
-   * - Độ phức tạp tính toán
-     - :math:`O(c_i \cdot c_o)`
-     - :math:`O\left(\frac{c_i \cdot c_o}{g}\right)`
-   * - Trao đổi thông tin giữa các kênh
-     - Toàn bộ các kênh
-     - Chỉ trong nội bộ từng nhóm
 
 Một cách nhìn khác về group convolution là ma trận trọng số có dạng khối đường chéo (block-diagonal), trong đó mỗi khối có kích thước :math:`(c_i / g) \times (c_o / g)` [T2 D2L tr.309].
 
@@ -364,13 +281,9 @@ Liên hệ RK3588: toán tử tích chập RKNN hỗ trợ và ràng buộc củ
 
 Pooling là toán tử thu nhỏ độ phân giải không gian bằng cách trượt một cửa sổ cố định trên đầu vào và trích xuất một giá trị thống kê duy nhất cho mỗi vị trí [T2 D2L tr.258].
 
-   "However, unlike the cross-correlation computation of the inputs and kernels in the convolutional layer, the pooling layer contains no parameters (there is no kernel). Instead, pooling operators are deterministic, typically calculating either the maximum or the average value of the elements in the pooling window. These operations are called maximum pooling (max-pooling for short) and average pooling, respectively." [T2 D2L tr.258]
-
 Khác với tích chập cộng dồn các kênh, pooling xử lý từng kênh một cách độc lập, do đó số lượng kênh đầu ra luôn bằng đúng số lượng kênh đầu vào [T2 D2L tr.261].
 
 Ngược lại với quá trình giảm độ phân giải, mạng cần tăng kích thước không gian (upsample) trong các bài toán phân vùng ngữ nghĩa hoặc ghép đặc trưng đa tỷ lệ. Tích chập chuyển vị (transposed convolution) thực hiện tăng kích thước bằng cách nhân từng phần tử đầu vào với kernel để thế vào các vị trí trong vùng đệm trung gian rồi cộng dồn lại [T2 D2L tr.655].
-
-   "In transposed convolution, each element in the input tensor is multiplied by the kernel so that the resulting k_h × k_w tensor replaces a portion in each intermediate tensor... In the end, all the intermediate results are summed over to produce the output." [T2 D2L tr.655]
 
 Về mặt đại số tuyến tính, phép tính này tương đương với việc nhân vector đầu vào với ma trận chuyển vị :math:`W^{\top}` của ma trận trọng số thưa từ phép tích chập xuôi [T2 D2L tr.658]. Ngoài tích chập chuyển vị, các phương pháp upsample nội suy (nearest neighbor, bilinear) cũng thường được dùng để tránh sinh thêm tham số.
  
@@ -382,40 +295,12 @@ Về mặt đại số tuyến tính, phép tính này tương đương với vi
 
    Cơ chế Pooling (Downsampling) và Upsampling trong CNN: (1) Pooling trượt không tham số độc lập trên từng kênh gồm Max Pooling (giữ biên cạnh nổi bật) và Average Pooling (làm mịn tín hiệu), (2) Upsampling tăng độ phân giải gồm Nearest Neighbor (sao chép điểm ảnh, 0 MAC) và Transposed Conv (nhân ma trận trọng số chuyển vị :math:`W^{\top}`).
 
-.. list-table:: So sánh các toán tử Pooling và Upsampling trong mạng CNN
-   :widths: 18 24 16 22
-   :header-rows: 1
-   :align: center
-
-   * - Toán tử
-     - Cơ chế toán học
-     - Tham số học
-     - Đặc tính kiến trúc
-   * - Max Pooling
-     - Lấy giá trị lớn nhất trong cửa sổ :math:`k \times k`
-     - 0 (không tham số)
-     - Giữ biên cạnh sắc nét, bất biến dịch chuyển
-   * - Average Pooling
-     - Trung bình cộng các phần tử
-     - 0 (không tham số)
-     - Làm mịn không gian, nén vector (GAP)
-   * - Nearest Upsample
-     - Sao chép lặp giá trị điểm ảnh gần nhất
-     - 0 (không tham số)
-     - Phóng to không làm biến dạng giá trị gốc
-   * - Transposed Conv
-     - Nhân kernel :math:`W^{\top}` thế chỗ
-     - :math:`c_o \times c_i \times k^2`
-     - Tự học cách hoàn nguyên độ phân giải
-
 Liên hệ RK3588: Pooling và Resize trên RKNN xem :doc:`Op của YOLOv8 trên RKNN </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/02-op-yolov8-tren-rknn>`.
 
 9. Phép Add và khối residual
 ============================
 
 Khi mạng nơ-ron trở nên rất sâu, việc huấn luyện gặp khó khăn do vấn đề tiêu biến gradient. Kiến trúc ResNet giải quyết vấn đề này bằng khối residual [T2 D2L tr.304].
-
-   "On the right, the portion within the dotted-line box needs to learn the residual mapping g(x) = f(x) − x, which is how the residual block derives its name. If the identity mapping f(x) = x is the desired underlying mapping, the residual mapping amounts to g(x) = 0 and it is thus easier to learn: we only need to push the weights and biases of the upper weight layer... to zero. The right figure illustrates the residual block of ResNet, where the solid line carrying the layer input x to the addition operator is called a residual connection (or shortcut connection)." [T2 D2L tr.304]
 
 .. _fig-d2l-residual-block:
 
@@ -441,26 +326,7 @@ Nhánh tắt (shortcut connection) dẫn trực tiếp đầu vào :math:`\mathb
 
    Cấu trúc Khối Residual và Nhánh Shortcut: (1) Identity Shortcut nối trực tiếp khi giữ nguyên chiều, (2) Projection Shortcut đi qua Conv 1x1 khi đổi số kênh hoặc stride, (3) Phép cộng phần tử Add kết hợp đầu ra nhánh chính với nhánh tắt.
 
-.. list-table:: So sánh các cấu trúc nhánh Shortcut trong khối Residual
-   :widths: 22 26 26
-   :header-rows: 1
-   :align: center
-
-   * - Tiêu chí
-     - Identity Shortcut (Cơ bản)
-     - Projection Shortcut (Đổi kênh / Stride)
-   * - Điều kiện áp dụng
-     - :math:`c_{in} = c_{out}` và :math:`\text{stride} = 1`
-     - :math:`c_{in} \neq c_{out}` hoặc :math:`\text{stride} = 2`
-   * - Tham số trên Shortcut
-     - 0 (đường dây nối thuần túy)
-     - :math:`c_{out} \times c_{in} \times (1 \times 1) + c_{out}`
-   * - Dòng chảy Gradient
-     - Cộng trực tiếp hệ số :math:`+1` không suy giảm
-     - Nhân qua ma trận trọng số :math:`1 \times 1`
-   * - Ảnh hưởng bộ nhớ NPU
-     - Giữ tensor :math:`\mathbf{x}` trong SRAM đệm
-     - Tính thêm 1 lớp Conv :math:`1 \times 1` trên NPU
+Identity shortcut dùng khi :math:`c_{in} = c_{out}` và stride 1, không thêm tham số. Projection shortcut (Conv :math:`1 \times 1`, :math:`c_{out} \cdot c_{in} + c_{out}` tham số) dùng khi đổi số kênh hoặc stride 2.
 
 Liên hệ RK3588: rule fusion của RKNN cho Add xem :doc:`Layout NC1HWC2 và fusion </contents/02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2>`.
 
@@ -514,32 +380,6 @@ Quy luật ghép khối phổ biến trong các mạng phát hiện vật thể 
    :alt: Phân tầng Đặc trưng (Feature Hierarchy) và Luồng Tensor trong CNN
 
    Phân tầng Đặc trưng (Feature Hierarchy) và Luồng Tensor trong CNN: Tiến trình trừu tượng hóa từ đặc trưng hình học cục bộ (cạnh, góc) ở tầng nông sang ngữ nghĩa trừu tượng (bộ phận, vật thể) ở tầng sâu, theo quy luật giảm độ phân giải không gian để tăng số lượng kênh đặc trưng.
-
-.. list-table:: Phân tầng đặc trưng qua các stage của CNN
-   :widths: 20 18 20 22
-   :header-rows: 1
-   :align: center
-
-   * - Tầng kiến trúc
-     - Tensor Shape
-     - Receptive Field
-     - Bản chất đặc trưng
-   * - Tầng nông (Stage 1-2)
-     - :math:`320 \times 320 \times 64`
-     - Nhỏ (:math:`3 \times 3` đến :math:`7 \times 7`)
-     - Cạnh biên, góc nhọn, tương phản viền
-   * - Tầng giữa (Stage 3)
-     - :math:`80 \times 80 \times 256`
-     - Trung bình (15 đến 35)
-     - Vân bề mặt, hoa văn, hình khối
-   * - Tầng sâu (Stage 4-5)
-     - :math:`20 \times 20 \times 1024`
-     - Rất lớn (bao trùm toàn vật thể)
-     - Ngữ nghĩa trừu tượng, bộ phận vật thể
-   * - Tầng tác vụ (Heads)
-     - Vector / P3-P5
-     - Bao phủ toàn bộ ảnh gốc
-     - Xác suất phân loại hoặc Bounding Box
 
 Detector như YOLO dùng backbone trích đặc trưng nhiều tỷ lệ rồi neck kết hợp P3, P4, P5 (xem :doc:`Kiến trúc và các khối cấu thành YOLO </contents/01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo>`).
 
