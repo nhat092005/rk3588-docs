@@ -77,6 +77,14 @@ Lệnh chuẩn (``CALIB_FROM`` mặc định là ``ppe5_yolov8n_baseline_100ep_s
 
 Kiểm chứng (quy tắc viết trước ``bench/onboard_q2c/rule_int8h5.txt``): V-1, bản xuất chuẩn có cùng 15 tensor FP16 với bản dựng thử và AP50-95 ``css_test`` chênh 0.00 điểm (giới hạn 0.5 điểm là số mới chưa duyệt), kết quả: export reproduces h5. V-2, sha256 của ``weights/rknn_int8`` seed 0 (so với hằng số viết trong quy tắc trước khi xuất, tệp có thời điểm sửa 2026-10-30) trước và sau khi xuất giống nhau. V-3 (mô tả, ``css_test``, điểm):
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/06-quy-trinh-tai-lap/r-01-ap-int8h5-theo-lan-chay.svg
+   :align: center
+   :width: 100%
+   :alt: AP50-95 của INT8 mặc định, int8h5 và FP16 ở bốn lần chạy huấn luyện
+
+   AP50-95 của INT8 mặc định, ``int8h5`` và FP16 ở bốn lần chạy huấn luyện. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 14 10 10 10 16 16 24 22
@@ -128,6 +136,14 @@ Khoảng trải AP50-95 giữa ba seed SiLU: ``int8h5`` 1.13 điểm, ``int8`` 1
 ================================
 
 Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy tắc viết trước ``bench/onboard_q2i/rule.txt``): SiLU và ReLU seed 0, ``int8`` và ``int8h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2. Vì đo lại file xuất chuẩn nên số này thay cho số của bản dựng thử ở :doc:`05-ket-qua-luong-tu-hoa`, hai số cùng cỡ.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/06-quy-trinh-tai-lap/r-02-chi-phi-latency-int8h5.svg
+   :align: center
+   :width: 100%
+   :alt: Chi phí latency của int8h5 so với INT8 theo mặt nạ nhân
+
+   Chi phí latency của ``int8h5`` so với INT8 theo mặt nạ nhân. Đường đứt 5% là ngưỡng đáng kể. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -228,10 +244,6 @@ Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy t�
      - ``bench/onboard_q2c/rule_int8h5.txt``
      - ``analyze_int8h5.py``
      - 14
-   * - Mọi trang sinh
-     - ``.venv/bin/python docs/tools/gen_phase2_results_pages.py``
-     - ``results/*.json``
-     - (có ``assert`` mỗi số)
      - 10 đến 14
 
 5. Điều kiện thiết bị và công cụ

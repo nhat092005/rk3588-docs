@@ -59,6 +59,14 @@ Harness mới sửa các giới hạn của harness cũ ở :doc:`../03-tang-npu
 
 Số liệu và quy tắc ở :doc:`01-ket-qua-g4` mục 4. Với SiLU:
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/03-ket-qua-da-nhan/nhan-01-s1-latency-va-fps.svg
+   :align: center
+   :width: 100%
+   :alt: Median latency P2 và thông lượng P3 của một context theo mặt nạ nhân
+
+   Median latency P2 (trái) và thông lượng P3 (phải) của một context theo mặt nạ nhân. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 16 16 22 28 18
@@ -186,6 +194,14 @@ S3 hơn S2 6.21 FPS (4.4%), lớn hơn khoảng trải 0.80 FPS nhưng dưới n
 
 Cùng ba context trên ``CORE_0``, ``CORE_1``, ``CORE_2``, chạy bằng ba tiến trình (T7) so với ba luồng (T5). Đây là chẩn đoán, không phải chiến lược và không phải cổng.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/03-ket-qua-da-nhan/nhan-02-fps-cac-cau-hinh.svg
+   :align: center
+   :width: 100%
+   :alt: Thông lượng P3 của một context, hai context, ba context, pipeline và ba tiến trình
+
+   Thông lượng P3 của cấu hình một context (đối chiếu), hai context, ba context (S2), pipeline (S3) và ba tiến trình (chẩn đoán), ba lần chạy mỗi cấu hình. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 30 30 14 14
@@ -274,8 +290,8 @@ Các điểm đa nhân còn lại và trạng thái sau giai đoạn này:
      - Batch 4 chạy, đầu ra từng ảnh khớp batch 1 ở lần đầu, một ảnh lệch ở lần lặp. Ngoài phạm vi S1 đến S3
    * - M8
      - Mục tiêu FPS thời gian thực của dự án
-     - người dùng chốt 60 FPS (2026-11-01)
-     - Mục 8: S2 đạt 141.2 FPS, một context chưa đạt
+     - người dùng chốt 60 FPS (2026-11-01), đổi thành 30 FPS (2026-11-08)
+     - Mục 8: cả sáu cấu hình đạt, kể cả một context 54.7 FPS
    * - M9
      - Lợi ích đa nhân ReLU so với SiLU với model đã huấn luyện
      - ĐO
@@ -293,12 +309,20 @@ Các điểm đa nhân còn lại và trạng thái sau giai đoạn này:
      - ĐO một phần (:doc:`08-so-muc-chua-biet` mục 7)
      - 32 context đều chạy đúng, dừng ở ngưỡng chặn. Giới hạn thật chưa biết. S2 chỉ dùng 1, 2, 3 context
 
-8. Mục tiêu 60 FPS của người dùng
+8. Mục tiêu 30 FPS của người dùng
 =================================
 
-Ngày 2026-11-01 người dùng chốt: mục tiêu là tăng FPS để đáp ứng nhu cầu thực tế, chọn 60 FPS. Người dùng chưa nói rõ đó là FPS của một luồng camera hay tổng nhiều luồng, và là thông lượng hay thời gian cho mỗi khung. Bảng dưới đưa cả hai cách đọc, cách đọc mặc định của tôi là thông lượng của pipeline phát hiện cho một luồng, với giả định các khung độc lập và thứ tự đầu ra không bị ràng buộc (giả định này chưa được kiểm: harness không kiểm thứ tự đầu ra). Đây là bước đạt hoặc không đạt mục tiêu tuyệt đối mà :doc:`../03-tang-npu-don-bay/02-multi-core` mục 5 dự kiến thêm sau các bước hiện có, không thay các bước hiện có.
+Ngày 2026-11-01 người dùng chốt mục tiêu 60 FPS. Ngày 2026-11-08 người dùng đổi thành 30 FPS vì camera chỉ có 30 khung/giây (cảm biến một chế độ 30 khung/giây, :doc:`../../10-luong-camera-den-phat-hien/01-buc-tranh-tong-the`). Mục tiêu là một luồng camera, nên ngân sách mỗi khung là 33.33 ms. Hai cách đọc cũ (thông lượng, thời gian mỗi khung) vẫn được tính cả hai. Đây là bước đạt hoặc không đạt mục tiêu tuyệt đối mà :doc:`../03-tang-npu-don-bay/02-multi-core` mục 5 dự kiến thêm sau các bước hiện có, không thay các bước hiện có. Các số dưới đây không đổi so với lần đo ngày 2026-11-01, chỉ đổi mốc so sánh.
 
 FPS của harness tính cả tiền xử lý, NPU và hậu xử lý của từng khung (``T_pre``, ``T_npu``, ``T_post``), trên ảnh đã cache trong bộ nhớ. Không gồm thu nhận camera, giải mã video, vẽ và lưu kết quả. Mỗi dòng là trung vị của ba lần chạy.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/03-ket-qua-da-nhan/nhan-03-muc-tieu-30-fps.svg
+   :align: center
+   :width: 100%
+   :alt: Thông lượng và thời gian mỗi khung của sáu cấu hình so với 30 FPS
+
+   Thông lượng (trên) và thời gian mỗi khung (dưới) của sáu cấu hình so với mục tiêu 30 FPS và 33.33 ms. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -306,44 +330,46 @@ FPS của harness tính cả tiền xử lý, NPU và hậu xử lý của từn
 
    * - Cấu hình
      - FPS
-     - Đạt 60 FPS (thông lượng)
+     - Đạt 30 FPS (thông lượng)
      - T_pre + T_npu + T_post (ms)
-     - Đạt 16.67 ms mỗi khung
+     - Đạt 33.33 ms mỗi khung
    * - 1 context CORE_0
      - 54.7
-     - không, thiếu 5.3 FPS (8.9%)
+     - đạt, dư 24.7 FPS (1.82 lần)
      - 18.04
-     - không
+     - đạt, dư 15.29 ms
    * - 1 context CORE_0_1
      - 55.8
-     - không, thiếu 4.2 FPS (7.1%)
+     - đạt, dư 25.8 FPS (1.86 lần)
      - 17.66
-     - không
+     - đạt, dư 15.67 ms
    * - 1 context CORE_0_1_2
      - 56.1
-     - không, thiếu 3.9 FPS (6.5%)
+     - đạt, dư 26.1 FPS (1.87 lần)
      - 17.56
-     - không
+     - đạt, dư 15.77 ms
    * - 2 context CORE_0 và CORE_1
      - 102.0
-     - đạt
+     - đạt, 3.40 lần
      - 19.26
-     - không
+     - đạt, dư 14.07 ms
    * - 3 context (S2)
      - 141.2
-     - đạt
+     - đạt, 4.71 lần
      - 20.74
-     - không
+     - đạt, dư 12.59 ms
    * - S3 pipeline
      - 147.4
-     - đạt
+     - đạt, 4.91 lần
      - 22.50
-     - không
+     - đạt, dư 10.83 ms
 
 
-Đọc theo thông lượng: ba cấu hình một context (54.7 đến 56.1 FPS) chưa đạt 60, hai context (102.0 FPS), S2 (141.2 FPS) và S3 (147.4 FPS) đạt. Cấu hình nhỏ nhất đã đo đạt mục tiêu là hai context trên ``CORE_0`` và ``CORE_1`` (điểm đo mở rộng, không phải cổng), dùng CPU trung bình 47% so với 68% của S2. Đọc theo thời gian mỗi khung: tổng ``T_pre`` cộng ``T_npu`` cộng ``T_post`` của mọi cấu hình đã đo lớn hơn 16.67 ms (nhỏ nhất 17.56 ms ở một context ``CORE_0_1_2``), nên không cấu hình nào đạt nếu mỗi khung phải xong trong 16.67 ms. Tổng này là tổng ba trung vị theo giai đoạn, không phải thời gian đầu cuối đo trực tiếp (ở cấu hình nhiều context các giai đoạn chạy dưới tranh chấp, ở S3 còn có thời gian chờ hàng đợi không nằm trong tổng).
+Cả sáu cấu hình đạt theo cả hai cách đọc, kể cả một context ``CORE_0`` (54.7 FPS, tổng 18.04 ms). Với một camera 30 khung/giây, mục tiêu này không còn phân biệt được các cấu hình: việc thêm lõi, thêm context hoặc thêm pipeline nâng thông lượng nhưng không giúp thêm khung nào từ camera. Tổng ``T_pre`` cộng ``T_npu`` cộng ``T_post`` là tổng ba trung vị theo giai đoạn, không phải thời gian đầu cuối đo trực tiếp (ở cấu hình nhiều context các giai đoạn chạy dưới tranh chấp, ở S3 còn có thời gian chờ hàng đợi không nằm trong tổng). Thời gian đầu cuối đo trực tiếp trên camera ở một context ``CORE_0`` là 18.97 ms (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`).
 
-Nhãn S1, S2, S3 không đổi (cổng tương đối 5%, mục 7). S2 vừa qua cổng tương đối vừa đạt mục tiêu 60 FPS theo thông lượng. Giới hạn: một seed, giao thức P3 đã duyệt, model INT8 mặc định của seed 0 (``int8h5`` đã đo ở :doc:`09-ket-qua-don-bay-fps` và không khác ``int8`` về thông lượng, ReLU chưa đo thông lượng), ảnh cache, chưa đo với camera thật, chưa đo bộ nhớ NPU. Cách hiểu 60 FPS (một luồng hay tổng, thông lượng hay thời gian mỗi khung) do người dùng xác nhận. Cập nhật 2026-11-01: đòn bẩy một context đã đo ở :doc:`09-ket-qua-don-bay-fps`, model tách đầu với giải mã chồng lấp đạt 60 FPS về thông lượng ở một context (một thí nghiệm, một seed), và ``int8h5`` không khác ``int8`` về thông lượng.
+Việc còn lại để chọn giữa các cấu hình do phần dư và các tiêu chí khác quyết định: cổng tương đối 5% (mục 7), phần dư mỗi khung để đổi lấy độ chính xác (model lớn hơn, input lớn hơn), CPU còn dư, và số camera chạy cùng lúc. Mức thông lượng 102.0 đến 147.4 FPS chỉ có giá trị khi có nhiều camera hoặc việc nặng khác dùng chung NPU, và yêu cầu này chưa có.
+
+Nhãn S1, S2, S3 không đổi (cổng tương đối 5%, mục 7). Giới hạn: một seed, giao thức P3 đã duyệt, model INT8 mặc định của seed 0 (``int8h5`` đã đo ở :doc:`09-ket-qua-don-bay-fps` và không khác ``int8`` về thông lượng, ReLU chưa đo thông lượng), ảnh cache, bộ nhớ NPU chưa đo. Cách hiểu "một luồng" dựa trên việc camera chỉ có 30 khung/giây, nếu sau này có nhiều camera thì phải đọc lại.
 
 
 9. Nguồn

@@ -214,6 +214,15 @@ Hai chỗ đáng chú ý khi dùng bảng này để quyết định:
 
 --------------
 
+5. Custom op và Matmul API
+==========================
+
+Hai đường này thêm phép tính ngoài danh sách op, nhưng không thêm op mới chạy trên NPU.
+
+- Custom op là phép tính tự viết bằng C, chạy trên CPU hoặc GPU: "extend and optimize model functions for specific hardware (CPU or GPU)" [T1 UG232 tr.88] và "The execution backend of the operator, currently supports CPU and GPU." [T1 UG232 tr.94].
+- Custom op chỉ áp dụng cho model ONNX [T1 UG232 tr.88]. Khi thêm op không thuộc ONNX chuẩn, "The op_type of the operator cannot be the same as the ONNX standard operator" [T1 UG232 tr.90].
+- Matmul API nhân ma trận trên NPU, không cần model RKNN: "The bottom layer of Matmul API is implemented using RKNPU" [T1 UG232 tr.41]. Đây chỉ là phép nhân ma trận, không phải phép tính tùy ý.
+
 Nguồn
 =====
 

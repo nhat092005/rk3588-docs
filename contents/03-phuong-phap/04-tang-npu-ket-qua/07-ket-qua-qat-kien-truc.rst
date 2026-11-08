@@ -42,6 +42,13 @@ Phần bỏ DFL dựa trên mã Ultralytics 8.4.154 đã cài: tham số ``reg_m
 
 Độ chính xác trên ``css_test`` (AP50-95, điểm):
 
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc/qat-01-a1-tach-dau.svg
+   :align: center
+   :width: 100%
+   :alt: AP50-95 của năm model và latency NPU của ba model
+
+   AP50-95 của năm model (trái) và median latency phần NPU (phải). Dấu X là P2 không thực hiện đúng. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 34 14 14 14 14
@@ -124,6 +131,13 @@ Yếu tố gây nhiễu cần biết: với ``reg_max`` 1, cả nhánh box ``cv2
 
 Độ chính xác trên ``css_test`` (AP50-95, điểm), cùng đường đo trên board:
 
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc/qat-02-a2-bo-dfl.svg
+   :align: center
+   :width: 100%
+   :alt: AP50-95 của SiLU baseline và A2 bỏ DFL ở ba kiểu số
+
+   AP50-95 của SiLU baseline và A2 bỏ DFL ở ba kiểu số. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 30 18 14 18 28
@@ -152,6 +166,13 @@ Giới hạn của cách đọc: A2 mặc định không tách được lượng
 
 5. Tổng hợp ba ứng viên
 =========================
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc/qat-03-tong-hop-ung-vien.svg
+   :align: center
+   :width: 100%
+   :alt: AP50-95 INT8 của bốn ứng viên so với tiêu chí 48.41
+
+   AP50-95 INT8 của bốn ứng viên so với tiêu chí 48.41. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -218,4 +239,4 @@ Mọi lệnh chạy từ gốc repo chính, board đã khóa tần số và có 
 
 ``make export-npu PREC=int8`` chỉ truyền ``--calib-from`` khi có ``CALIB_FROM=<run>`` (từ 2026-11-01, ``pipeline.py`` luôn truyền). Không có biến này, với run A2 nó sẽ lấy mẫu một danh sách hiệu chuẩn mới. Dùng lệnh ``export_npu`` ở trên, hoặc ``make export-npu RUN=ppe5_yolov8n_nodfl_100ep_s0 PREC=int8 CALIB_FROM=ppe5_yolov8n_baseline_100ep_s0``, để giữ danh sách của seed 0.
 
-Số liệu: ``results/q2j_split.json`` (A1, ``analyze_q2j.py``), ``results/q2k_qat.json`` và ``results/q2k_qat_layers.json`` (QAT, ``analyze_q2kl.py``), ``results/q2l_nodfl.json`` (A2, ``analyze_q2kl.py``). Log: ``bench/onboard_q2c/logs/`` (``qat_train.log``, ``evaluate_qat_int8.log``, ``a2_precheck_untrained_export.log``) và ``runs/ppe5_yolov8n_nodfl_100ep_s0/logs/``. Thiết kế: ``results/phase2d_design.md``, nguồn: ``results/phase2d_source_facts.md``. Sinh trang này: ``.venv/bin/python docs/tools/gen_phase2d_results_page.py``.
+Số liệu: ``results/q2j_split.json`` (A1, ``analyze_q2j.py``), ``results/q2k_qat.json`` và ``results/q2k_qat_layers.json`` (QAT, ``analyze_q2kl.py``), ``results/q2l_nodfl.json`` (A2, ``analyze_q2kl.py``). Log: ``bench/onboard_q2c/logs/`` (``qat_train.log``, ``evaluate_qat_int8.log``, ``a2_precheck_untrained_export.log``) và ``runs/ppe5_yolov8n_nodfl_100ep_s0/logs/``. Thiết kế: ``results/phase2d_design.md``, nguồn: ``results/phase2d_source_facts.md``.

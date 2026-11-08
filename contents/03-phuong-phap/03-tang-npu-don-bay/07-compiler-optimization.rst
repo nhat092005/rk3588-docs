@@ -6,7 +6,7 @@ Compiler optimization
 
    - Compiler của RKNN-Toolkit2 biến đồ thị YOLOv8n thành gì, theo log build của dự án và theo tài liệu vendor?
    - Tùy chọn build hay chỉnh đồ thị nào có thể tăng FPS, cái nào đã đo, cái nào chỉ có nguồn, cái nào chưa biết?
-   - Số đo của dự án về các đòn bẩy phía compiler (hybrid ``h5``, tách đầu, chồng lấp giải mã, đổi activation) cho 60 FPS thấy gì?
+   - Số đo của dự án về các đòn bẩy phía compiler (hybrid ``h5``, tách đầu, chồng lấp giải mã, đổi activation) cho mục tiêu FPS thấy gì (đo lúc mục tiêu là 60 FPS, nay là 30 FPS)?
 
 .. admonition:: Tóm tắt
 
@@ -16,7 +16,7 @@ Compiler optimization
    4. Đóng góp FPS riêng của từng fusion: chưa biết. Không có số T1 hay T2, và dự án chưa đo bằng cách tắt từng pass.
    5. Đã đo: K1 hybrid ``h5`` (độ chính xác về mức FP16, latency đổi -0.121 ms ở ``CORE_0`` tức dưới 5%, throughput không phân biệt được), K2 tách đầu (NPU nhanh hơn, tổng chậm hơn nếu không chồng lấp), K3 chồng lấp giải mã (65.99 FPS một context ``CORE_0``), K4 đổi sang ReLU (nhãn Loại).
    6. K5 ``optimization_level`` thấp hơn: chỉ có nguồn, không đo. Vendor nói mức thấp tắt một số tối ưu.
-   7. Mục tiêu 60 FPS: đạt theo cách đọc thông lượng ở K3. Theo cách đọc thời gian mỗi khung (16.67 ms), chưa đạt và thời gian mỗi khung ở nhịp 60 FPS chưa đo [T3 board, ``results/q2f_fps.json``].
+   7. Mục tiêu 30 FPS (đổi từ 60 ngày 2026-11-08): đạt ở mọi cấu hình đã đo, kể cả ``int8h5`` một context tuần tự (54.79 FPS, tổng ba giai đoạn 18.08 ms so với 33.33 ms), nên K3 không cần để đạt mục tiêu. Thời gian mỗi khung của K3 ở nhịp 30 FPS của camera chưa đo [T3 board, ``results/q2f_fps.json``].
 
 Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/01-luong-onnx-sang-rknn` và :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2`. Kết quả FPS của các đòn bẩy ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
@@ -129,6 +129,17 @@ Vendor cũng nói toolkit chưa tối ưu hết. Có thể đổi thứ tự Tra
 
 UG232 Bảng 8-5 khuyên giảm ba nhóm op: chuyển dữ liệu (Transpose, Reshape, Split, Concat), đổi kích thước (Resize, Tile, Pooling, Pad) và activation không phải Relu (Sigmoid, Tanh, Softplus, Hardswish): "Try to reduce the following three types of operators in the model" [T1 UG232 tr.146]. Đồ thị của dự án có Concat 17, Split 9, Reshape 7, Transpose 1 (bảng ở mục 2.2). Vendor cũng lưu ý Reshape và Transpose dư ở đầu và cuối đồ thị ảnh hưởng hiệu năng: "It is common for redundant reshape and transpose ops to exist at the input and output nodes of the model, which affects the inference performance of the RKNN model." [T1 UG232 tr.117]. Mức đóng góp FPS của từng op trong nhóm này ở model của dự án: chưa biết.
 
+2.5. Quy tắc kích thước của hãng trên baseline
+----------------------------------------------
+
+Tính từ ONNX của baseline (``bench/onboard_q2c/diag/ppe5_yolov8n_baseline_100ep_s0/int8_input.onnx``, sha ``8ffa6eb2701d``), ở mức ONNX trước khi compiler gộp op, chưa đo latency. Hãng ghi các quy tắc này không bắt buộc [T1 UG232 tr.144]. Bảng căn lề INT8 của RK3588 ở [T1 UG232 tr.145].
+
+- 64 lớp Conv, 0 lớp Depthwise. 55 lớp căn lề cả vào lẫn ra theo bội số 32.
+- 9 lớp lệch: ``model.0`` (3 sang 16), ``model.1`` (16 sang 32), hai lớp trong ``model.2/m.0`` (16 sang 16), ``model.2/cv2`` (48 sang 32), ba lớp cuối ``cv3`` (64 sang 5), ``dfl`` (16 sang 1).
+- Quy tắc 6 KB "KH* KW * KC * type_bytes < 6K Bytes" [T1 UG232 tr.147]: cả 64 lớp đạt, lớn nhất 2304 byte, khi KC là một chiều channel. UG232 không ghi KC là chiều vào hay chiều ra, hai cách cho cùng kết quả. Nếu tính tổng trọng số của lớp (vào nhân ra) thì chỉ 14 trên 64 lớp đạt.
+- Channel vào: không lớp nào trên 512, ngưỡng mà hãng ghi hiệu suất bắt đầu giảm [T1 UG232 tr.146].
+- Tỉ lệ kernel trên stride: 32 lớp 3x3 stride 1, 7 lớp 3x3 stride 2, 25 lớp 1x1 stride 1. Không có lớp 1x1 stride 2.
+
 3. Tùy chọn build liên quan
 ===========================
 
@@ -190,14 +201,16 @@ Nhãn: ĐO (có số T3 của dự án), NGUỒN (chỉ có tài liệu), CHƯA 
 
 Điều rút ra từ K1 và K2: model chuẩn của dự án đã dùng hybrid (K1) để lấy lại độ chính xác mà không tốn latency đo được, trong khi K2 đạt cùng độ chính xác bằng cách đưa phần giải mã ra khỏi đồ thị. Hybrid có chi phí theo vendor: lớp chuyển sang không lượng tử hóa chạy chậm hơn trên NPU, làm giảm tốc độ suy luận [T1 UG232 tr.123]. Vendor còn nêu hybrid là cách xử lý khi độ chính xác đủ nhưng hiệu năng chưa đạt: "or if the accuracy is sufficient but the performance does not meet the requirements due to hybrid quantization" [T1 UG232 tr.135]. Ở ``h5`` dự án không thấy chi phí đó trong latency (K1). Vì sao, chưa biết.
 
-K3 không phải tùy chọn của compiler mà là thay đổi cách xếp luồng ở harness trên model tách đầu (kết quả của K2), và là thay đổi duy nhất đã đưa một context lên trên 60 FPS theo thông lượng. Mô tả của phép đo: phần NPU của model tách đầu ngắn hơn phần NPU của ``int8h5`` (13.07 so với 16.44 ms ở ``CORE_0``, K2) và ở điều kiện C trung vị ``T_post`` (11.61 ms) nhỏ hơn ``T_npu`` (15.04 ms). Pipeline một mình không giúp ``int8h5`` (56.62 FPS, không phân biệt được với tuần tự), phép đo không nói vì sao. Thêm một luồng giải mã (D) hay dùng ba lõi cho một context (E) không phân biệt được với K3. Đây là mô tả của phép đo, không phải cơ chế [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4].
+K3 không phải tùy chọn của compiler mà là thay đổi cách xếp luồng ở harness trên model tách đầu (kết quả của K2), và là thay đổi duy nhất đã đưa một context lên trên mốc 60 FPS cũ theo thông lượng. Mô tả của phép đo: phần NPU của model tách đầu ngắn hơn phần NPU của ``int8h5`` (13.07 so với 16.44 ms ở ``CORE_0``, K2) và ở điều kiện C trung vị ``T_post`` (11.61 ms) nhỏ hơn ``T_npu`` (15.04 ms). Pipeline một mình không giúp ``int8h5`` (56.62 FPS, không phân biệt được với tuần tự), phép đo không nói vì sao. Thêm một luồng giải mã (D) hay dùng ba lõi cho một context (E) không phân biệt được với K3. Đây là mô tả của phép đo, không phải cơ chế [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4].
 
-5. Đọc theo mục tiêu 60 FPS
+5. Đọc theo mục tiêu 30 FPS
 ===========================
 
-**Đọc theo thông lượng**: K3 đạt (65.99 FPS, khoảng trải 0.03) với một context ``CORE_0``, không cần nhiều context. ``int8h5`` một context chưa đạt (54.79 đến 56.62 FPS) và cần hai context (101.89 FPS) [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8]. Tổn phí của K3: CPU tiến trình khoảng 100% so với 24% của ``int8h5`` tuần tự, model tách đầu chưa nối vào script demo của repo [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 7].
+Mốc 60 FPS cũ làm ``int8h5`` một context chưa đạt, nên K3 là cách duy nhất đưa một context qua mốc đó. Mốc 30 FPS (camera 30 khung/giây) đổi kết luận này.
 
-**Đọc theo thời gian mỗi khung** (mỗi khung xong trong 16.67 ms): không điều kiện nào của K3 đạt. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms. Số này gồm thời gian chờ hàng đợi nên chỉ là cận trên, không phải thời gian mỗi khung. Thời gian mỗi khung ở nhịp 60 FPS chưa đo. Thứ tự đầu ra của pipeline được giữ theo cách xây dựng (một luồng mỗi giai đoạn, hàng đợi FIFO) nhưng chưa kiểm.
+**Đọc theo thông lượng**: K3 đạt (65.99 FPS, khoảng trải 0.03) với một context ``CORE_0``. ``int8h5`` một context cũng đạt (54.79 đến 56.62 FPS, dư 24.8 FPS trên 30), nên K3 không cần cho mục tiêu [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8]. Tổn phí của K3: CPU tiến trình khoảng 100% so với 24% của ``int8h5`` tuần tự, model tách đầu chưa nối vào script demo của repo [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 7].
+
+**Đọc theo thời gian mỗi khung** (mỗi khung xong trong 33.33 ms): tổng ba giai đoạn của K3 (điều kiện C) là 27.55 ms, dưới 33.33 ms, dư 5.78 ms, ít hơn nhiều so với 15.25 ms của ``int8h5`` tuần tự (18.08 ms) [T3 board, ``results/q2f_fps.json``]. Đây là tổng trung vị từng giai đoạn dưới tranh chấp. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms. Số này gồm thời gian chờ hàng đợi nên chỉ là cận trên, không phải thời gian mỗi khung. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Thứ tự đầu ra của pipeline được giữ theo cách xây dựng (một luồng mỗi giai đoạn, hàng đợi FIFO) nhưng chưa kiểm.
 
 6. Điều chưa biết
 =================
@@ -224,11 +237,11 @@ K3 không phải tùy chọn của compiler mà là thay đổi cách xếp lu�
    * - Chi phí hybrid ngoài số của ``h5``
      - chưa biết
      - Chỉ có hai câu của vendor (UG232 tr.123, tr.135) và số K1
-   * - Thời gian mỗi khung của K3 ở nhịp 60 FPS, thứ tự đầu ra
+   * - Thời gian mỗi khung của K3 ở nhịp 30 FPS, thứ tự đầu ra
      - chưa đo
      - :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 7
-   * - Cách hiểu mục tiêu 60 FPS
-     - chưa xác nhận
+   * - Cách hiểu mục tiêu 30 FPS
+     - một luồng camera, suy từ lý do người dùng nêu ngày 2026-11-08
      - :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 
 7. Nguồn

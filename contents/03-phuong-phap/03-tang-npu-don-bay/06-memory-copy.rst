@@ -29,7 +29,7 @@ Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/03-ze
 
 Trang này không giải thích lại hai nhóm API, ba cách cấp phát bộ nhớ, điều kiện căn lề của zero-copy, cờ đồng bộ cache hay cách đo bằng profiling API. Phần đó ở :doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/03-zero-copy-can-le-profiling-api`. Định dạng NC1HWC2 và chuyển layout ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2` và :doc:`03-tensor-layout`. Bộ nhớ của model và lưu lượng DDR ở :doc:`05-memory-access`.
 
-Trang chỉ ghi điều dự án cần cho quyết định: đường đi thực tế của một khung, những gì đo được và không đo được, và các đòn bẩy sao chép. Mục tiêu 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8) chưa được người dùng xác nhận cách hiểu (một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung), nên trang không nói đòn bẩy nào đủ để đạt 60.
+Trang chỉ ghi điều dự án cần cho quyết định: đường đi thực tế của một khung, những gì đo được và không đo được, và các đòn bẩy sao chép. Mục tiêu 30 FPS, đổi từ 60 ngày 2026-11-08 vì camera chỉ có 30 khung/giây (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8), hiểu là một luồng camera. Mọi cấu hình đã đo đạt mốc này, nên trang không coi đòn bẩy nào là cần để đạt mục tiêu.
 
 2. Đường đi của một khung trong repo
 ====================================
@@ -208,8 +208,8 @@ FPS của các đòn bẩy phối hợp (ví dụ nhiều context cộng chồng
    * - Nguyên nhân ``pass_through`` kỳ vọng 4915200 byte
      - chưa biết
      - Chỉ có ghi chú trong mã
-   * - Cách hiểu 60 FPS
-     - chưa xác nhận
+   * - Cách hiểu 30 FPS
+     - một luồng camera, suy từ lý do người dùng nêu ngày 2026-11-08
      - :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 
 8. Nguồn

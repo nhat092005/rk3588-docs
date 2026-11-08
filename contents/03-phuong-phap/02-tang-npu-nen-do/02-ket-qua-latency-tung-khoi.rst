@@ -65,7 +65,7 @@ Model: ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/rknn_int8/bes
      - 8 đến 40 khối mỗi thí nghiệm
      - ``bench/onboard_e2*/*``
 
-Mọi bảng dưới đây sinh tự động bằng ``docs/tools/gen_latency_results_page.py`` từ ``results/latency_per_block_*.json``, ``results/layer_analysis_*.json``, ``results/onboard_*.json`` và các file ở cột "File". Thời gian từng lớp luôn là thời gian ở chế độ ``perf_debug=True`` (hoặc ``detail``), hãng ghi chế độ này có thể tắt một số cơ chế song song [T1 UG232 tr.177]. Vì vậy các con số từng khối dùng để so sánh với nhau, không cộng thành latency.
+Mọi bảng dưới đây lấy số từ ``results/latency_per_block_*.json``, ``results/layer_analysis_*.json``, ``results/onboard_*.json`` và các file ở cột "File". Thời gian từng lớp luôn là thời gian ở chế độ ``perf_debug=True`` (hoặc ``detail``), hãng ghi chế độ này có thể tắt một số cơ chế song song [T1 UG232 tr.177]. Vì vậy các con số từng khối dùng để so sánh với nhau, không cộng thành latency.
 
 2. Latency tổng
 ===============
@@ -139,6 +139,14 @@ Cột "B3 (µs)" là trung vị thời gian khối ở chế độ debug qua 3 p
 
 3.1. Bảng 1: khối L0 đến L22
 ----------------------------
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/02-ket-qua-latency-tung-khoi/lat-01-thoi-gian-tung-khoi.svg
+   :align: center
+   :width: 100%
+   :alt: Thời gian từng khối L0 đến L22, io và post_detect ở chế độ debug, so B3 với B2
+
+   Thời gian từng khối ở chế độ debug. Chấm tròn là B3 (trung vị 3 phiên), ô vuông là B2 (một phiên). Khối chậm nhất là L22 với 7877 µs ở B3. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/02-ket-qua-latency-tung-khoi/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -436,6 +444,14 @@ Cột "B3 (µs)" là trung vị thời gian khối ở chế độ debug qua 3 p
 3.2. Bảng 2: thành phần trong khối
 ----------------------------------
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/02-ket-qua-latency-tung-khoi/lat-02-thanh-phan-trong-khoi.svg
+   :align: center
+   :width: 100%
+   :alt: Thời gian 22 thành phần lớn nhất trong khối ở chế độ debug
+
+   Thời gian 22 thành phần đầu của Bảng 2, xếp theo tỉ lệ toàn mạng. Thành phần chậm nhất là L22/dfl với 3265 µs ở B3. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/02-ket-qua-latency-tung-khoi/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 20 12 16 16 18 18
@@ -583,6 +599,14 @@ Bảng đầy đủ {len(A['parts'])} thành phần nằm ở ``results/latency_
 
 3.3. Bảng 3: theo OpType
 ------------------------
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/02-ket-qua-latency-tung-khoi/lat-03-theo-optype.svg
+   :align: center
+   :width: 100%
+   :alt: Tổng thời gian của từng OpType ở chế độ debug, thang log
+
+   Tổng thời gian các dòng cùng OpType trong một lần gọi, thang log. OpType chậm nhất là ConvExSwish với 13513 µs ở B3. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/02-ket-qua-latency-tung-khoi/gen.py``.
 
 .. list-table::
    :header-rows: 1

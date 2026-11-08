@@ -2,7 +2,7 @@
 Kết quả đo NPU
 **************
 
-Kết quả các thí nghiệm của tầng NPU, xếp theo chủ đề: activation (01, 02), đa nhân (03), lượng tử hóa (04 đến 07), các mục chưa biết còn lại (08) và đòn bẩy FPS cho mục tiêu 60 FPS (09). Quy tắc và giả thuyết của từng thí nghiệm nằm ở nhóm :doc:`../03-tang-npu-don-bay/index`, giao thức đo ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`.
+Kết quả các thí nghiệm của tầng NPU, xếp theo chủ đề: activation (01, 02), đa nhân (03), lượng tử hóa (04 đến 07), các mục chưa biết còn lại (08) và đòn bẩy FPS (09, đo lúc mục tiêu còn là 60 FPS, mục tiêu hiện hành là 30 FPS). Quy tắc và giả thuyết của từng thí nghiệm nằm ở nhóm :doc:`../03-tang-npu-don-bay/index`, giao thức đo ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`.
 
 .. list-table::
    :header-rows: 1

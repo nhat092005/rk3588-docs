@@ -30,6 +30,14 @@ Mỗi phiên là lệnh ``benchmark_npu.py`` của kế hoạch (một phiên la
 2. Cổng A1 đến A8 của hai giao thức
 ===================================
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/08-ket-qua-p2-va-do-mo-rong/p2-01-phien-p1lan-va-p2.svg
+   :align: center
+   :width: 100%
+   :alt: Median latency và tổng debug của 10 phiên P1-LAN so với 10 phiên P2
+
+   Median latency ``eval_perf`` (trên) và tổng thời gian debug (dưới) của 10 phiên mỗi giao thức. Ô vuông rỗng là P1-LAN, chấm đặc là P2, chấm xám nhỏ là năm lần gọi của từng phiên. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/08-ket-qua-p2-va-do-mo-rong/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 12 24 24

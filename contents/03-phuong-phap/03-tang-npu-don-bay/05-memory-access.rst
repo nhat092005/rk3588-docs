@@ -28,7 +28,7 @@ Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/01-dd
 
 Trang này không lặp lại loại DRAM, số kênh và băng thông suy ra của bộ điều khiển (:doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/01-ddr-tren-rk3588`), cách bật và kiểm tra SRAM, các điều kiện kernel, driver và trình tự quyết định (:doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/02-sram-cho-npu`), hay đường dữ liệu IOMMU và DDR (:doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/06-duong-truyen-du-lieu-iommu-va-ddr`). Lý thuyết về phân cấp bộ nhớ và roofline ở :doc:`../../01-kien-thuc-nen/02-npu/02-dataflow-va-phan-cap-bo-nho`, cách nhận biết nghẽn băng thông ở :doc:`../../01-kien-thuc-nen/05-bo-nho-hieu-nang/01-do-do-tre-va-profiling`. Tiền xử lý và hậu xử lý nằm ngoài NPU nên không thuộc trang này (:doc:`09-pre-post-processing`), cách sao chép giữa CPU và NPU ở :doc:`06-memory-copy`.
 
-Trang chỉ ghi điều dự án cần: bộ nhớ và lưu lượng của model đang dùng, điều kiện đo, và các đòn bẩy. Mục tiêu 60 FPS của người dùng (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8) chưa được xác nhận cách hiểu (một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung), nên trang này không nói đòn bẩy nào đủ để đạt 60.
+Trang chỉ ghi điều dự án cần: bộ nhớ và lưu lượng của model đang dùng, điều kiện đo, và các đòn bẩy. Mục tiêu 30 FPS của người dùng, đổi từ 60 ngày 2026-11-08 vì camera chỉ có 30 khung/giây (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8), hiểu là một luồng camera. Mọi cấu hình đã đo đạt mốc này, nên trang không coi đòn bẩy nào là cần để đạt mục tiêu.
 
 Lưu ý về tên cột: tài liệu vendor định nghĩa ``DDRCycles`` là "DDR reading and writing clock cycles" và ``RW(KB)`` là "Total amount of data read and written (KB)" [T1 UG232 tr.32]. Vendor không có câu nào dùng chữ memory-bound hay compute-bound trong sổ tay SDK, tài liệu API Toolkit2 và tài liệu RKNNRT (đã tìm cả ba).
 
@@ -196,8 +196,8 @@ Bốn đòn bẩy này không đòn bẩy nào có số đo riêng về lợi í
    * - Độ nhạy FPS với tần số DDR
      - chưa biết
      - Chỉ có đo ở một tần số khóa
-   * - Cách hiểu 60 FPS
-     - chưa xác nhận
+   * - Cách hiểu 30 FPS
+     - một luồng camera, suy từ lý do người dùng nêu ngày 2026-11-08
      - :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 
 7. Nguồn

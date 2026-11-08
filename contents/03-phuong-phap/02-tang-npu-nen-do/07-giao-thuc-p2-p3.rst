@@ -153,4 +153,3 @@ Các kết luận về độ chính xác (cổng C, mAP) không phụ thuộc P2
 - ``bench/onboard_x4/x4_hold.sh`` (P2), ``bench/onboard_thr/p3_hold.sh`` (P3), ``bench/onboard_g4b/rule.txt``, ``bench/onboard_thr/rule.txt`` (quy tắc viết trước, định nghĩa thực hiện đúng), trong thư mục run ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0``.
 - ``results/g4_latency_workload.json``, ``g4v_latency_workload.json``, ``g4v_latency_workload_2.json``, ``q2h_latency.json``, ``q2i_latency.json``, ``q2j_split.json``, ``thr_p3.json`` (số phiên và kết quả).
 - ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/tier1_int8h5_CORE_0.json`` (phép đo không ghim bằng ``make benchmark-npu PREC=int8h5``).
-- Sinh trang này: ``.venv/bin/python docs/tools/gen_protocol_review_page.py``.

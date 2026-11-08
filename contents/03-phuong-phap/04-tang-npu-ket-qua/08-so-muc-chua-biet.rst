@@ -17,7 +17,7 @@ Mục chưa biết còn lại
    - ``h6``: dựng lần hai cho file khác byte và cùng AP50-95 (30.18), nguyên nhân ``h6`` tệ hơn vẫn chưa biết.
    - A2 tách đầu: AP50-95 INT8 49.96, đạt tiêu chí 47.98. QAT: NPU 13.84 ms ở ``CORE_0``, chậm hơn A1 PTQ tách đầu 6.3% và nhanh hơn ``int8h5`` 15.5% (phần NPU), tổng với giải mã CPU chậm hơn ``int8h5`` 5.48 ms.
    - M2: ``core_mask`` ``NPU_CORE_ALL`` (0xffff) chia 29 dòng, đúng tập dòng của ``CORE_0_1_2``, còn ``AUTO`` chia 0 dòng. Điều bài EDGE gọi là ``ALL`` vẫn chưa biết.
-   - Vẫn chưa biết (nhãn cuối, đã ghi điều đã thử): quy tắc chia job của ``librknnrt`` (M1 chỉ mô tả), nguyên nhân ``h5`` lấy lại điểm, ``mmse``, QAT với torch 1.10 đến 1.13.1. Người dùng đã quyết định ngày 2026-11-01: M8 mục tiêu 60 FPS (:doc:`03-ket-qua-da-nhan` mục 8) và duyệt P2 và P3 (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`).
+   - Vẫn chưa biết (nhãn cuối, đã ghi điều đã thử): quy tắc chia job của ``librknnrt`` (M1 chỉ mô tả), nguyên nhân ``h5`` lấy lại điểm, ``mmse``, QAT với torch 1.10 đến 1.13.1. Người dùng đã quyết định ngày 2026-11-01: M8 mục tiêu 60 FPS, đổi thành 30 FPS ngày 2026-11-08 (:doc:`03-ket-qua-da-nhan` mục 8) và duyệt P2 và P3 (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`).
 
 Kiểm kê và lớp của từng mục ở ``results/phase2e_unknowns_inventory.md``, quy tắc viết trước dữ liệu ở ``bench/onboard_q2e/rule_*.txt`` và ``bench/onboard_q2e_qat/rule.txt`` (run ``ppe5_yolov8n_baseline_100ep_s0``). Trang liên quan: :doc:`../03-tang-npu-don-bay/01-operator-support`, :doc:`../03-tang-npu-don-bay/02-multi-core`, :doc:`05-ket-qua-luong-tu-hoa`, :doc:`07-ket-qua-qat-kien-truc`.
 
@@ -70,7 +70,7 @@ Kiểm kê và lớp của từng mục ở ``results/phase2e_unknowns_inventory
      - 7
    * - M8
      - Mục tiêu FPS
-     - Người dùng chốt 60 FPS (2026-11-01), kiểm tra đạt hoặc không đạt ở :doc:`03-ket-qua-da-nhan` mục 8
+     - Người dùng chốt 60 FPS (2026-11-01), đổi thành 30 FPS (2026-11-08), kiểm tra đạt hoặc không đạt ở :doc:`03-ket-qua-da-nhan` mục 8
      - 6
    * - M16
      - Số context tối đa
@@ -113,6 +113,13 @@ Hai node Resize của model ``int8_input.onnx`` có ``mode`` ``nearest``, ``coor
 **G7a, onnxruntime.** Ở tỉ lệ 2 (cũng ở 1.5 và 3), bộ ``half_pixel`` với ``round_prefer_floor`` cho đầu ra giống hệt bộ ``asymmetric`` với ``floor`` (lệch 0, trên đầu vào 1x256x20x20 là hình dạng của Resize đầu tiên trong bảng layer). Bộ ``half_pixel`` với ``floor`` lệch 6.57 ở tỉ lệ 2. Bộ ``align_corners`` giống ở tỉ lệ 2 và lệch 6.17 ở tỉ lệ 1.5. Nghĩa là quan sát cũ "đổi sang giá trị được liệt kê cho bảng build giống hệt" (:doc:`../03-tang-npu-don-bay/01-operator-support`) có thể chỉ vì các bộ thuộc tính đó cho cùng chỉ số nguồn ở hình dạng thử, chứ chưa nói gì về cách compiler xử lý thuộc tính.
 
 **G7b, NPU.** Ba micro model Resize (đầu vào 1x256x20x20, tỉ lệ 2), FP16, chạy trên board:
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/08-so-muc-chua-biet/u-01-g7-resize.svg
+   :align: center
+   :width: 100%
+   :alt: Độ lệch của NPU ở ba bộ thuộc tính Resize
+
+   Độ lệch của NPU so với onnxruntime ở ba bộ thuộc tính Resize, thang log. Đường đứt 0.01 là ngưỡng khớp viết trước. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -203,6 +210,13 @@ Chạy trên board bằng ``ai/board/probe_runtime.py``, model INT8 chuẩn củ
 
 **Thời gian NPU của QAT** (``bench/onboard_q2e_qat``, dưới P2, mọi phiên thực hiện đúng). Trung vị hai phiên:
 
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/08-so-muc-chua-biet/u-02-thoi-gian-npu-qat.svg
+   :align: center
+   :width: 100%
+   :alt: Median latency P2 của int8h5, A1 tách đầu và QAT tách đầu
+
+   Median latency P2 của ``int8h5``, A1 tách đầu và QAT tách đầu ở hai mặt nạ nhân. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 40 24 28
@@ -227,7 +241,7 @@ QAT khác A1 ở ``CORE_0`` 0.820 ms (6.3%, lớn hơn chênh hai phiên 0.016 m
 10. Việc còn lại và giới hạn
 ==============================
 
-- Đã được người dùng quyết định: P2 và P3 duyệt (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), mục tiêu FPS 60 (:doc:`03-ket-qua-da-nhan` mục 8). Cách hiểu 60 FPS (một luồng hay tổng, thông lượng hay thời gian mỗi khung) cần người dùng xác nhận.
+- Đã được người dùng quyết định: P2 và P3 duyệt (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), mục tiêu FPS 60 (2026-11-01), đổi thành 30 (2026-11-08, :doc:`03-ket-qua-da-nhan` mục 8). Cách hiểu 30 FPS là một luồng camera, suy từ lý do camera chỉ có 30 khung/giây.
 - Vẫn chưa biết: nghĩa của ``ALL`` trong bài EDGE (M2), quy tắc chia job (M1), vì sao Resize lên NPU (G7), vì sao ba Reshape và các Slice không có dòng cùng tên (G10), nguyên nhân của ``h5``, ``h6``, 8 hàng FP16 của QAT, giới hạn số context (M16), hành vi ``async_mode`` khi gửi nhiều ảnh liên tiếp (M6).
 - Không chạy: ``mmse`` (đổi danh tính hiệu chuẩn), QAT với torch 1.10 đến 1.13.1 (cần bộ công cụ thứ hai).
 - Mọi kết quả là một board, một lần chạy mỗi phép đo, một seed, micro model không phải op trong YOLO, thời gian dưới P2.
@@ -246,6 +260,5 @@ QAT khác A1 ở ``CORE_0`` 0.820 ms (6.3%, lớn hơn chênh hai phiên 0.016 m
    .venv/bin/python ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2e_qat/q2e_qat_driver.py   # thời gian QAT dưới P2 (helper x4_hold.sh đang chạy)
    .venv/bin/python -m ai.automation.probe_core_all 192.168.137.49:5555   # M2 (board, rknn_server)
    .venv/bin/python -m ai.automation.analyze_q2e_board
-   .venv/bin/python docs/tools/gen_phase2e_results_page.py
 
 Số liệu: ``results/q2e_pc.json``, ``q2e_micro.json``, ``q2e_core_all.json``, ``q2e_board.json``. Sau lần sửa mã ``decode_split`` cho ``reg_max``, board cần ``make board-sync`` trước khi chấm A2 tách đầu.

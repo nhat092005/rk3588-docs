@@ -43,6 +43,14 @@ Danh sách nguồn đầy đủ: ``results/phase2c_source_facts.md``. Quy tắc 
 
 ``accuracy_analysis`` trên bộ mô phỏng của toolkit (không dùng board), 5 ảnh trong danh sách hiệu chuẩn và 5 ảnh ``css_test``, so tensor của mỗi lớp với đồ thị float. Cosine của một lớp càng thấp thì sai số của riêng lớp đó càng lớn. Bảng ghi 5 dòng thấp nhất (trung bình 10 ảnh).
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa/q-01-cosine-thap-nhat.svg
+   :align: center
+   :width: 100%
+   :alt: Năm tensor có cosine một lớp thấp nhất của mỗi model
+
+   Năm tensor có cosine một lớp thấp nhất của mỗi model. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 10 14 62 20
@@ -98,6 +106,14 @@ Danh sách nguồn đầy đủ: ``results/phase2c_source_facts.md``. Quy tắc 
 ===========================
 
 Mọi công thức dựng từ cùng ONNX và cùng danh sách hiệu chuẩn, chấm bằng RKNNLite trên board (``css_test``, 82 ảnh). Công thức: ``kl`` là ``quantized_algorithm`` ``kl_divergence``, ``h1`` giữ FP16 ba Conv cuối của nhánh class, ``h2`` giữ FP16 cả nhánh class, ``h3`` giữ FP16 đuôi đầu ra (5 tensor ``Concat_1``, ``Sigmoid``, ``output0``), ``h4`` là ``h2`` cộng ``h3``, ``auto`` là ``auto_hybrid`` mặc định. Thí nghiệm 2 (thêm sau khi thấy dữ liệu thí nghiệm 1, theo ngân sách hai thí nghiệm cho việc này) gồm ``h5`` (đuôi giải mã box), ``h6`` (``h5`` cộng nhánh box ``cv2``) và ``c_all`` (kiểm tra hợp lệ), chỉ chạy SiLU, ``h5`` rồi chạy tiếp ReLU theo quy tắc.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa/q-02-ap-theo-cong-thuc.svg
+   :align: center
+   :width: 100%
+   :alt: AP50-95 của INT8 theo từng công thức lượng tử hóa
+
+   AP50-95 của INT8 theo từng công thức lượng tử hóa. Đường chấm là AP50-95 FP16 của mỗi model. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -337,6 +353,14 @@ Quy tắc viết trước của thí nghiệm 2: ``c_all`` hợp lệ khi lệch
 
 Cổng C dưới công thức (R-c, ghi nhãn riêng, không đổi nhãn G4 đã duyệt): ReLU trừ SiLU cùng công thức, ``css_test``, AP50-95 / AP NoHelmet / AP Vest.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa/q-03-cong-c-h5.svg
+   :align: center
+   :width: 100%
+   :alt: Chênh AP dưới công thức h5 so với SiLU
+
+   Chênh AP của ReLU so với SiLU dưới base và ``h5`` (trái), và của các ứng viên so với SiLU dưới ``h5`` (phải). Đường đứt -1.0 điểm là ngưỡng cổng C. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 16 40 14
@@ -386,6 +410,14 @@ ReLU 200 epoch đạt cổng C dưới ``h5`` so với SiLU 100 epoch (-0.28 đi
 ====================================
 
 Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2h``): SiLU và ReLU, INT8 đã triển khai và ``h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước. Chi phí là trung vị của hai trung vị phiên của ``h5`` trừ giá trị tương ứng của INT8 đã triển khai. Ở cả bốn điều kiện chênh lệch lớn hơn chênh hai phiên lớn nhất nhưng dưới 5%.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa/q-04-chi-phi-latency-h5.svg
+   :align: center
+   :width: 100%
+   :alt: Chi phí latency của h5 so với INT8 theo mặt nạ nhân
+
+   Chi phí latency của ``h5`` so với INT8 theo mặt nạ nhân. Đường đứt 5% là ngưỡng đáng kể. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1

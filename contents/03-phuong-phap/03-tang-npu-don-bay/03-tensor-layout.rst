@@ -28,7 +28,7 @@ Kiến thức nền về NC1HWC2 ở :doc:`../../02-nen-tang-rk3588/03-toolchain
 
 Trang này không giải thích lại định dạng NC1HWC2, bảng C2 theo kiểu số hay điều kiện căn chỉnh zero-copy. Phần đó đã có ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2` và :doc:`../../02-nen-tang-rk3588/04-bo-nho-hieu-nang/03-zero-copy-can-le-profiling-api`. Chỉ các điểm cần cho quyết định của dự án được nhắc lại, kèm thẻ nguồn. Tầng bộ nhớ và di chuyển dữ liệu nói chung ở :doc:`../../01-kien-thuc-nen/02-npu/02-dataflow-va-phan-cap-bo-nho`.
 
-Mục tiêu FPS của người dùng là 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Cách hiểu (một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung) chưa được người dùng xác nhận, nên trang này chỉ nói đòn bẩy có thể đổi thời gian ở đâu, không nói đòn bẩy nào đủ để đạt 60.
+Mục tiêu FPS của người dùng là 30 FPS, đổi từ 60 ngày 2026-11-08 vì camera chỉ có 30 khung/giây (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Hiểu là một luồng camera, ngân sách 33.33 ms mỗi khung. Mọi cấu hình đã đo đạt mốc này theo cả thông lượng lẫn thời gian mỗi khung, nên trang này nói đòn bẩy có thể đổi thời gian ở đâu, không coi đòn bẩy nào là cần để đạt mục tiêu.
 
 2. Layout mà dự án nhìn thấy
 ============================

@@ -15,7 +15,7 @@ Multi-core
    - Bài Kong 2026 trên RK3588: đa nhân chỉ cho lợi ích biên, thường dưới 10% [T2 EDGE tr.2]. Ở YOLOv8n, ``C0_1_2`` là 25.33 ms còn ``C0`` là 24.54 ms [T2 EDGE tr.7].
    - Driver 0.9.8 có hàng đợi riêng cho từng lõi và mỗi lõi chạy một job tại một thời điểm [T1 DRV rknpu_job.c:431-455] [T1 DRV rknpu_job.c:545-553]. Đây là cơ sở cơ chế cho S2, lợi ích chưa đo.
    - ``async_mode`` được API guide ghi "(Not Supported yet)" [T1 API232 tr.16], nên S3 là thiết kế luồng ở tầng ứng dụng. Harness S3 đã viết 2026-10-31 (``ai/board/bench_throughput_rep.py``).
-   - Quy tắc chọn dùng ngưỡng tương đối 5% (tham số của dự án, chốt 2026-10-25). Cập nhật 2026-11-01: người dùng chốt mục tiêu 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8, đo với model INT8 mặc định, ``int8h5`` không khác ``int8`` về thông lượng theo :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`). Trước ngày đó dự án chưa có mục tiêu FPS tuyệt đối trong tài liệu.
+   - Quy tắc chọn dùng ngưỡng tương đối 5% (tham số của dự án, chốt 2026-10-25). Cập nhật 2026-11-01: người dùng chốt mục tiêu 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8, đo với model INT8 mặc định, ``int8h5`` không khác ``int8`` về thông lượng theo :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`). Trước ngày đó dự án chưa có mục tiêu FPS tuyệt đối trong tài liệu. Cập nhật 2026-11-08: người dùng đổi mục tiêu thành 30 FPS vì camera chỉ có 30 khung/giây, mọi cấu hình đã đo đạt (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8).
    - ``bench_throughput.py`` chạy một lượt cho mỗi cấu hình, nên chưa có độ trải. Đã làm 2026-10-31: harness mới lặp 3 lần độc lập mỗi cấu hình và có chế độ S3 (kết quả ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`).
 
 .. contents:: Trong trang này
@@ -91,7 +91,7 @@ Mọi khẳng định có thẻ trong ngoặc vuông, ví dụ [T1 UG232 tr.75],
    * - Công suất và điện năng
      - Repo chưa có phép đo công suất đa nhân. Chương không bàn
 
-Đính chính 2026-11-01: người dùng đã chốt mục tiêu 60 FPS, kiểm tra đạt hoặc không đạt ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8. Trước ngày đó dự án chưa có mục tiêu FPS tuyệt đối nào trong tài liệu (chưa biết, cần người dùng chốt hoặc nguồn yêu cầu từ ứng dụng giám sát). Quy tắc chọn ở mục 5 vẫn dùng ngưỡng tương đối so với cấu hình một nhân, mục tiêu 60 FPS là một bước kiểm tra thêm sau đó. Bài DAHD dùng mốc 25 FPS cho giám sát camera [T2 DAHD tr.18], nhưng đó là mốc của bài báo, không phải yêu cầu của dự án.
+Đính chính 2026-11-01: người dùng đã chốt mục tiêu 60 FPS, kiểm tra đạt hoặc không đạt ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8. Trước ngày đó dự án chưa có mục tiêu FPS tuyệt đối nào trong tài liệu (chưa biết, cần người dùng chốt hoặc nguồn yêu cầu từ ứng dụng giám sát). Quy tắc chọn ở mục 5 vẫn dùng ngưỡng tương đối so với cấu hình một nhân, mục tiêu 60 FPS là một bước kiểm tra thêm sau đó. Bài DAHD dùng mốc 25 FPS cho giám sát camera [T2 DAHD tr.18], nhưng đó là mốc của bài báo, không phải yêu cầu của dự án. Cập nhật 2026-11-08: mục tiêu đổi thành 30 FPS, một luồng camera (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8).
 
 1.4. Nguồn và đường dẫn
 -----------------------
@@ -674,7 +674,7 @@ Nếu S2 bị "Loại" ở bước 2 thì bước 3 so S3 với cấu hình tố
      - T3 2026-10-31: tăng 4.4% so với S2, dưới ngưỡng 5% (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 4). Không có bằng chứng T1 hay T2
      - Đã làm bước 3
 
-Cập nhật 2026-11-01: người dùng chốt 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Trước đó dự án chưa có mục tiêu FPS tuyệt đối (ghi nhận lúc đó: tìm "FPS", "real-time", "thời gian thực" và "camera" trong các trang tổng quan, kiến thức nền và phương pháp không thấy con số nào, câu hỏi về yêu cầu thời gian thực ở ``00-tong-quan/01-bai-toan-va-ung-dung.rst`` dòng 9 chưa có số trả lời, nên quy tắc ở mục 5 là tương đối). Mục tiêu người dùng chốt thêm một bước kiểm tra, không thay thế các bước ở mục 5.3, và người dùng chưa nói rõ 60 FPS là của một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung. Mốc 25 FPS của DAHD là ngưỡng của chính bài báo, không phải của dự án [T2 DAHD tr.18].
+Cập nhật 2026-11-01: người dùng chốt 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Trước đó dự án chưa có mục tiêu FPS tuyệt đối (ghi nhận lúc đó: tìm "FPS", "real-time", "thời gian thực" và "camera" trong các trang tổng quan, kiến thức nền và phương pháp không thấy con số nào, câu hỏi về yêu cầu thời gian thực ở ``00-tong-quan/01-bai-toan-va-ung-dung.rst`` dòng 9 chưa có số trả lời, nên quy tắc ở mục 5 là tương đối). Mục tiêu người dùng chốt thêm một bước kiểm tra, không thay thế các bước ở mục 5.3, và người dùng chưa nói rõ 60 FPS là của một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung. Mốc 25 FPS của DAHD là ngưỡng của chính bài báo, không phải của dự án [T2 DAHD tr.18]. Cập nhật 2026-11-08: người dùng đổi mục tiêu thành 30 FPS vì camera chỉ có 30 khung/giây, nên hiểu là một luồng camera.
 
 Bối cảnh cho S1. Bằng chứng hiện có (T2 và T3 board) nghiêng về việc S1 chỉ cho lợi ích nhỏ:
 
@@ -719,7 +719,7 @@ Bối cảnh cho S1. Bằng chứng hiện có (T2 và T3 board) nghiêng về v
      - Chưa biết. Tài liệu mô tả cơ chế: runtime sao chép context, mỗi context ``core_mask`` bằng 0, và một thread pool chạy ba luồng [T1 UG232 tr.104]. Hãng khuyên bội số của 3 cho RK3588 [T1 UG232 tr.105]. Chưa có tài liệu về độ trễ khi gom batch cho luồng video
      - Đo riêng nếu chủ dự án muốn xét. Nằm ngoài S1 đến S3. Thăm dò 2026-11-01: batch 4 chạy, runtime ghi rơi về ``CORE_AUTO``. Đầu ra từng ảnh khớp batch 1 ở lần đầu nhưng một ảnh lệch 0.19 ở lần lặp (:doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 7)
    * - Mục tiêu FPS thời gian thực của dự án PPE
-     - Người dùng chốt 60 FPS ngày 2026-11-01 (trước đó: không thấy con số trong các trang đã tìm [Mã nguồn repo 00-tong-quan/01-bai-toan-va-ung-dung.rst:9])
+     - Người dùng chốt 60 FPS ngày 2026-11-01, đổi thành 30 FPS ngày 2026-11-08 (trước đó: không thấy con số trong các trang đã tìm [Mã nguồn repo 00-tong-quan/01-bai-toan-va-ung-dung.rst:9])
      - Đã làm: kiểm tra đạt hoặc không đạt ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
    * - Lợi ích đa nhân của ReLU so với SiLU có còn với model đã huấn luyện không
      - Đã đo 2026-10-31 (1 seed): ReLU nhanh hơn 33.6% ở ``CORE_0_1_2`` so với ``CORE_0``, mAP thấp hơn, bị loại ở G4 C. Bản ghi 8% (trọng số ngẫu nhiên) chỉ ghi lại
@@ -788,4 +788,4 @@ Bảng dưới chỉ mô tả hệ quả của từng kết quả, không dự �
    * - Phần CPU lớn hơn ``T_npu``
      - Theo công thức của repo, thêm lõi NPU không tăng FPS. Việc cần làm chuyển sang giảm thời gian pre và post
    * - Mục tiêu FPS tuyệt đối được đặt
-     - Thêm một bước kiểm tra đạt hoặc không đạt mục tiêu sau mục 5.3. Không thay các bước hiện có. Đã làm 2026-11-01 với mục tiêu 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8)
+     - Thêm một bước kiểm tra đạt hoặc không đạt mục tiêu sau mục 5.3. Không thay các bước hiện có. Đã làm 2026-11-01 với mục tiêu 60 FPS, đọc lại 2026-11-08 với mục tiêu 30 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8)

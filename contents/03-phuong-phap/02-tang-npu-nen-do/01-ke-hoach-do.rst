@@ -129,7 +129,7 @@ Mỗi bước có lệnh, file tạo ra và điều kiện đạt. Chưa qua đi
      - Báo đủ các tỉ số ở mục 8
    * - B6
      - Ghi kết quả
-     - Sinh các trang 02 đến 06 và 08 của nhóm này, cùng trang ``04-do-chinh-xac-int8-do-latency`` của nhóm kết quả đo, bằng ``docs/tools/gen_latency_results_page.py``: chép số kèm file (tạo tự động từ ``results/*.json``)
+     - Viết các trang 02 đến 06 và 08 của nhóm này, cùng trang ``04-do-chinh-xac-int8-do-latency`` của nhóm kết quả đo: chép số kèm file (lấy từ ``results/*.json``)
      - Trang docs, file ``tier1_*`` còn nguyên
      - Mọi số trong trang truy ra được file
    * - B7
@@ -415,7 +415,7 @@ Quy tắc đọc kết quả: hai khối chỉ được xếp hạng khi chênh 
 8. Kết quả sẽ báo
 =================
 
-Các bảng dưới đây là định dạng kết quả. Số liệu thực nằm ở :doc:`02-ket-qua-latency-tung-khoi`, sinh tự động từ ``results/*.json``.
+Các bảng dưới đây là định dạng kết quả. Số liệu thực nằm ở :doc:`02-ket-qua-latency-tung-khoi`, lấy từ ``results/*.json``.
 
 .. list-table::
    :header-rows: 1

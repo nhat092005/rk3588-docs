@@ -311,6 +311,13 @@ Khi chuyển sang chế độ triển khai (deploy mode), ba nhánh không có B
 
 Kết quả từ Bảng 5 của QAREP [T2 QAREP tr.6] khẳng định QARepVGG giải quyết triệt để vấn đề lượng tử hóa của RepVGG, duy trì độ chính xác INT8 chỉ chênh lệch dưới 2% so với bản gốc FP32 mà không phải trả thêm bất kỳ chi phí trễ nào trên phần cứng thực thi.
 
+5. Trên RK3588
+==============
+
+- DAHD-YOLO dùng tái tham số hóa DBB cho đầu phát hiện, "changes mAP50 and mAP50:95 by 1.5% and 1.4%" trên bộ dữ liệu của bài [T2 DAHD tr.16], và bản INT8 chạy 79.1 ms ở 1280x720 sau tối ưu thread pool, 0.1162 s khi đơn luồng [T2 DAHD tr.18]. Bài đổi nhiều thứ cùng lúc, nên số latency không tách riêng cho tái tham số hóa.
+- Trên phát hiện đối tượng, mục 4 có số YOLOv6s-RepVGG mất khoảng 7.4% mAP khi PTQ [T2 QAREP tr.7]. Trên RK3588 thì chưa có số tách riêng.
+- Dự án: ONNX của baseline YOLOv8n không có khối tái tham số hóa, và chưa đo cách này. Áp dụng phải huấn luyện lại và qua cổng G1 đến G4 (:doc:`../../03-phuong-phap/03-tang-npu-don-bay/01-operator-support`).
+
 Nguồn
 =====
 

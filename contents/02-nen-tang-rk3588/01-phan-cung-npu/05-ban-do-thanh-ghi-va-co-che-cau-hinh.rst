@@ -256,16 +256,32 @@ Hàm commit của driver ghi ``0x1`` vào ``PC_DATA_ADDR`` (``0x10``, ``// switc
 3. Ping-pong
 ============
 
-3.1 Hai tầng ping-pong trong TRM
---------------------------------
+3.1 Hai tầng ping-pong trong TRM và ý nghĩa Group 0/1
+-------------------------------------------------------
 
    "In order to reduce the time of fetch registers, every Calculate Core and Control Core of RKNN has its owner ping-pong registers. Configure the group 0 when use the group 1, and configure the group 1 when use group 0. ... Writing S_POINTER of every block can enable this function." [T1 TRM1 tr.2052]
+
+**Bản chất phần cứng của Group 0 và Group 1:**
+Group 0 và Group 1 không phải là hai khối tính toán khác nhau, mà là cơ chế **Dual Register Bank (Shadow Registers)**. Mọi khối tính toán (CNA, CORE, DPU, DPU_RDMA, PPU, PPU_RDMA) đều có chung một lõi phần cứng (ALU/MAC), nhưng hệ thống thanh ghi cấu hình từ offset ``+0x08`` trở đi được nhân đôi thành hai bộ bóng song song [T1 TRM1 tr.1999]:
+- Con trỏ ``executer`` (bit 16 của ``s_pointer``, Read-Only) chỉ nhóm thanh ghi mà phần cứng đang bận dùng để điều khiển tính toán.
+- Con trỏ ``pointer`` (bit 0 của ``s_pointer``) chỉ nhóm thanh ghi đang rảnh rỗi để nhận cấu hình tác vụ tiếp theo nạp qua PC DMA.
+- Khi tác vụ ở Group 0 tính toán hoàn tất, phần cứng phát tín hiệu ngắt hoàn thành Group 0 (ví dụ bit 6 ``CORE group 0``), Executer tự động đảo sang Group 1 để chạy ngay tác vụ kế tiếp, và Pointer trỏ về Group 0 để tiếp tục nhận cấu hình mới. Cơ chế này loại bỏ hoàn toàn hiện tượng bong bóng đường ống (pipeline bubble) chờ CPU/DMA nạp lệnh.
 
 **Tầng 1 (trong từng block thực thi qua ``S_POINTER``):** từ thanh ghi ``operation_enable`` (offset ``+0x8``) trở đi, mọi thanh ghi của block đều có hai bản shadow cho group 0 và group 1 [T1 TRM1 tr.1999]. Thanh ghi ``s_pointer`` (offset ``+0x4``) gồm: bit 0 ``pointer`` (chọn group để ghi), bit 1 ``pointer_pp_en``, bit 2 ``executer_pp_en``, bit 3 ``pointer_pp_mode`` (0 đổi theo executer, 1 đổi theo pointer), bit 4 ``pointer_pp_clear``, bit 5 ``executer_pp_clear`` và bit 16 ``executer`` (RO, báo group đang chạy) [T1 TRM1 tr.1998-1999]. Thanh ghi ``s_status`` (offset ``+0x0``) báo trạng thái hai executer (0 idle, 1 đang chạy, 2 đang chạy và executer kia chờ) [T1 TRM1 tr.1998].
 
 **Tầng 2 (ở cấp PC task qua ``task_pp_en``):** bit 12 của ``RKNN_pc_task_con`` (``0x0030``) bật nạp cấu hình task tiếp theo ngay sau khi nạp xong cấu hình task trước thay vì đợi task trước tính xong [T1 TRM1 tr.1997].
 
-3.2 Cách driver bật ping-pong
+3.2 Khái niệm Task: Quan hệ giữa Layer, Fused Operator và Hardware Task
+----------------------------------------------------------------------------------
+
+Trong chuỗi công cụ RKNN và driver Linux, cần phân định rạch ròi ba cấp độ:
+
+1. **Graph Operator**: Là một toán tử trên đồ thị tính toán của compiler, có thể là một layer đơn lẻ (như ``Conv``, ``MaxPool``) hoặc một chuỗi layer được gộp tối ưu (fused operator như ``ConvExSwish`` = Conv + SiLU, ``ConvReluAdd`` = Conv + ReLU + Add).
+2. **Hardware Task (Task phần cứng)**: Tại tầng Programmable Controller (PC), 1 task là một tập lệnh nạp thanh ghi 64-bit khép kín từ bộ nhớ hệ thống qua DMA, kết thúc bằng lệnh ghi ``op_en`` (bit 55 = 1) để kích hoạt phần cứng chạy [T1 TRM1 tr.1994].
+3. **Mối quan hệ qua Tiling**: Khi kích thước feature map hoặc trọng số của một operator vượt quá dung lượng bộ đệm CBUF (256KB) hoặc SRAM, compiler pass ``RKNNTilingPass`` [T1 UG232 tr.168] sẽ cắt lát (tile/slice) operator đó thành nhiều task phần cứng độc lập. Trong driver, cấu trúc ``struct rknpu_task`` [T1 DRV include/rknpu_ioctl.h:222-232] lưu trường ``op_idx`` để định danh các task phần cứng thuộc cùng một operator đồ thị.
+   - Minh chứng: Trong ví dụ kiểm thử của toolkit [T1 EX npu_device_test/README.md:43], một layer ``ConvRelu`` đơn lẻ có ``Task Number = 3``, chứng minh 1 layer có thể được chia thành nhiều task phần cứng tùy theo kích thước tensor.
+
+3.3 Cách driver bật ping-pong
 -----------------------------
 
 Ở mức job, cờ ``RKNPU_JOB_PINGPONG = 1 << 2`` quyết định ``task_pp_en`` [T1 DRV include/rknpu_ioctl.h:101] [T1 DRV rknpu_job.c:292]. Khi RK3588 chạy trên nền tảng đa lõi (``num_irqs > 1``), driver khởi tạo trực tiếp ``s_pointer`` của CNA (``0x1004``) và CORE (``0x3004``) qua MMIO trước khi kích PC:
@@ -321,8 +337,8 @@ Hàm commit của driver ghi ``0x1`` vào ``PC_DATA_ADDR`` (``0x10``, ``// switc
      - DMA read error / DMA write error
      - [T1 TRM1 tr.1995]
    * - 14, 15, 16
-     - Nằm trong trường 17-bit ``[16:0]`` nhưng bảng thanh ghi TRM1 chỉ liệt kê mô tả đến bit 13
-     - [T1 TRM1 tr.1995]
+     - Nằm trong trường 17-bit ``[16:0]`` (reset ``0x0001FFFF``) và TRM1 tr.2053 khẳng định có đúng 17 sự kiện ngắt phần cứng, driver định nghĩa ``RKNPU_INT_CLEAR = 0x1ffff`` [T1 DRV include/rknpu_ioctl.h:36]. Tuy nhiên bảng thanh ghi TRM1 chỉ in mô tả tới bit 13, và mã driver không gán nhãn cho ba bit này (undocumented).
+     - [T1 TRM1 tr.1995, tr.2053] [T1 DRV include/rknpu_ioctl.h:36]
 
 4.2 Nối ngắt với core và xử lý trong driver
 -------------------------------------------
@@ -350,7 +366,15 @@ Hàm commit của driver ghi ``0x1`` vào ``PC_DATA_ADDR`` (``0x10``, ``// switc
 
 MCU ``NPU_M0`` cũng có đường nhận ba ngắt này với IRQ ID 4 (``C0_RKNN``), 5 (``C1_RKNN``), 6 (``C2_RKNN``) [T1 TRM1 tr.1298]. Trong driver Linux, từng đường ngắt gắn với handler riêng của core tương ứng: ``npu0_irq -> rknpu_core0_irq_handler``, ``npu1_irq -> rknpu_core1_irq_handler``, ``npu2_irq -> rknpu_core2_irq_handler`` [T1 DRV rknpu_drv.c:84-88].
 
-Khi ngắt xảy ra, ``rknpu_core_irq_handler`` đọc ``INT_STATUS`` của ``base[core_index]``, đối chiếu ``rknpu_fuzz_status(status)`` với ``job->int_mask[core_index]``, ghi ``RKNPU_INT_CLEAR`` (``0x1ffff``) vào ``INT_CLEAR`` và gọi ``rknpu_job_done`` [T1 DRV rknpu_job.c:640-682]. Hàm ``rknpu_fuzz_status`` gộp từng cặp bit group 0/1 theo sáu mặt nạ ``0x3``, ``0xc``, ``0x30``, ``0xc0``, ``0x300``, ``0xc00`` (bit 0 đến 11) và bỏ qua bit 12-13 [T1 DRV rknpu_job.c:615-638]. Nếu một job vượt quá ``max_submit_number = (1 << 12) - 1`` (4095 task), ``rknpu_job_done`` tự động nạp đợt tiếp theo cho tới khi hết danh sách task [T1 DRV rknpu_drv.c:196] [T1 DRV rknpu_job.c:466-472]. Khi timeout, driver in ``INT_STATUS``, ``INT_RAW_STATUS``, ``job->int_mask`` và bộ đếm task ``0x3c & 0xfff`` [T1 DRV rknpu_job.c:591-601].
+Khi ngắt xảy ra, ``rknpu_core_irq_handler`` đọc ``INT_STATUS`` của ``base[core_index]``, đối chiếu ``rknpu_fuzz_status(status)`` với ``job->int_mask[core_index]``, ghi ``RKNPU_INT_CLEAR`` (``0x1ffff``) vào ``INT_CLEAR`` và gọi ``rknpu_job_done`` [T1 DRV rknpu_job.c:640-682].
+
+**Cơ chế gom bit trong rknpu_fuzz_status:**
+Hàm ``rknpu_fuzz_status`` [T1 DRV rknpu_job.c:615-638] gộp từng cặp bit liền kề bằng 6 mặt nạ ``0x3`` (bit 0-1: CNA feature), ``0xc`` (bit 2-3: CNA weight), ``0x30`` (bit 4-5: CNA csc), ``0xc0`` (bit 6-7: CORE), ``0x300`` (bit 8-9: DPU), và ``0xc00`` (bit 10-11: PPU). Lý do kỹ thuật:
+- Bit chẵn đại diện cho hoàn thành ở Group 0 (Executer 0), bit lẻ đại diện cho hoàn thành ở Group 1 (Executer 1).
+- Vì phần cứng hoạt động theo cơ chế ping-pong luân phiên, đối với tầng quản lý luồng tác vụ của OS driver, sự kiện hoàn thành của một module chức năng (ví dụ khối CORE) dù xuất phát từ Group 0 hay Group 1 đều mang ý nghĩa tương đương: module đó đã tính xong một lượt lệnh.
+- Driver bỏ qua bit 12 và 13 (lỗi DMA) cùng bit 14-16 trong hàm fuzzing này; nếu phát sinh lỗi ngắt ngoài mặt nạ mong đợi, driver sẽ log cảnh báo ``invalid irq status: %#x, raw status: %#x`` [T1 DRV rknpu_job.c:668-672].
+
+Nếu một job vượt quá ``max_submit_number = (1 << 12) - 1`` (4095 task), ``rknpu_job_done`` tự động nạp đợt tiếp theo cho tới khi hết danh sách task [T1 DRV rknpu_drv.c:196] [T1 DRV rknpu_job.c:466-472]. Khi timeout, driver in ``INT_STATUS``, ``INT_RAW_STATUS``, ``job->int_mask`` và bộ đếm task ``0x3c & 0xfff`` [T1 DRV rknpu_job.c:591-601].
 
 5. Hiểu sai thường gặp
 ======================
@@ -380,6 +404,20 @@ Khi ngắt xảy ra, ``rknpu_core_irq_handler`` đọc ``INT_STATUS`` của ``ba
    * - Driver bắt được lỗi DMA bằng nhánh "invalid irq status".
      - ``rknpu_fuzz_status`` chỉ lấy bit 0..11 nên bit 12 và 13 không tham gia phép so với ``int_mask``.
      - [T1 DRV rknpu_job.c:615-638]
+
+6. Driver mở và tự viết danh sách thanh ghi
+===========================================
+
+Mục này gom chi tiết cho :doc:`../../00-tong-quan/04-gioi-han-va-huong-phat-trien` mục 1.1.
+
+- Linux có driver mở ``accel/rocket``: "supports the Neural Processing Units (NPUs) inside some Rockchip SoCs such as the RK3588". Driver này chỉ bật tắt nguồn, cấp bộ nhớ và gửi job xuống NPU ("submits jobs to the frontend unit"), mọi việc còn lại nằm ở userspace trong Mesa3D [Tài liệu kernel Linux, ``accel/rocket``].
+- Định dạng model: phần userspace này (Teflon trong Mesa) nhận model TensorFlow Lite, không nhận file ``.rknn`` [Tài liệu Mesa, Teflon].
+- Model đã thử: Mesa liệt kê MobileNet V1, MobileNet V2 và SSDLite MobileDet trên board QuartzPro64 (cũng dùng NPU RK3588). YOLOv8 không có trong danh sách [Tài liệu Mesa, Teflon].
+- Op: ``rkt_ml.c`` của Mesa chỉ xử lý Convolution, Add và Pooling, loại khác báo "Unsupported ML operation type" [Mã nguồn Mesa, commit ``2648b2059f1a``]. YOLOv8n của dự án còn có Concat, Split và Resize.
+- Kernel: ``drivers/accel/rocket`` có trong tag ``v6.18`` của Linux và không có trong ``v6.17`` [Mã nguồn Linux]. Board của dự án chạy ``6.1.99-rockchip-rk3588`` [T3 board, ``uname -r``]. Trang Teflon của Mesa ghi mainline 6.7 là câu chung cho mọi driver, không riêng Rocket.
+- Tự viết danh sách thanh ghi: giao diện có sẵn (TRM mô tả thanh ghi, driver nhận ``regcmd_addr``), và Mesa đã làm cách này cho 3 loại op trên. UG232 và API232 không nhắc tới ``regcmd``. Dự án chưa thử.
+- Bảng tra LUT: khối DPU có thanh ghi LUT [T1 TRM1 tr.1990]. API232 không nhắc tới LUT, UG232 chỉ có cột ``Lut Number`` trong log, nên SDK không có tham số để ghi LUT.
+- Gói ``rknn_toolkit2`` 2.3.2 (bản cp37 x86_64) gồm 383 file ``.so`` và 27 file ``.py``, các module lõi trong ``rknn/api`` là ``.so``.
 
 Nguồn
 =====

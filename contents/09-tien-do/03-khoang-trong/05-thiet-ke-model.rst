@@ -8,7 +8,7 @@
 
    - Trang ghi 5 mâu thuẫn hoặc nhập nhằng, trong đó UG232 tr.75 và OPL tr.84 đến 86 lệch nhau về op hỗ trợ đa lõi, và DAHD Table 6 có thời gian thấp hơn nhưng FPS cũng thấp hơn ở FP16.
    - Chi phí SiLU so ReLU trên RK3588 chỉ được đóng một phần bằng T3: YOLOv8n trọng số ngẫu nhiên, INT8, 19.154 ms (SiLU) so 13.617 ms (ReLU), chưa có accuracy.
-   - Re-param (RepVGG, MobileOne, DBB) có giảm độ trễ hoặc mất độ chính xác INT8 trên RK3588 hay không vẫn thiếu nguồn.
+   - Re-param (RepVGG, MobileOne, DBB) trên RK3588 mới có một bằng chứng gộp: DAHD-YOLO dùng DBB cho đầu phát hiện và bản INT8 chạy 79.1 ms ở 1280x720 sau tối ưu thread pool [T2 DAHD tr.18], nhưng bài đổi nhiều thứ cùng lúc nên số này không tách riêng cho re-param. Dự án chưa đo.
    - Hiệu suất MAC của depthwise conv, NAS với độ trễ đo trên NPU Rockchip và lý do YOLO11 chậm hơn YOLOv8 trên RK3588 INT8 đều chưa có nguồn.
    - Nguồn ưu tiên khi UG232 và OPL lệch về đa lõi chưa quyết định, vì đo T3 trên một model chỉ ghi hành vi.
 
@@ -51,7 +51,7 @@ Còn thiếu nguồn (unknown)
 
    * - Câu hỏi
      - Truy vấn hoặc cách kiểm
-   * - Re-param (RepVGG, MobileOne, DBB) có giảm độ trễ hoặc mất độ chính xác INT8 trên RK3588
+   * - Re-param (RepVGG, MobileOne, DBB) có giảm độ trễ hoặc mất độ chính xác INT8 trên RK3588. Đóng một phần: DAHD-YOLO có số gộp, chưa có số tách riêng [T2 DAHD tr.18]
      - "structural reparameterization RKNN RK3588 INT8 latency accuracy". T3
    * - Chi phí SiLU so ReLU trên RK3588. Sigmoid + Mul có ghép thành ConvolutionSwish không. Đóng một phần (T3 board, 2026-10-10, log T3 board 2026-10-10): YOLOv8n trọng số ngẫu nhiên, INT8, ``core_mask`` AUTO, toolkit 2.3.2. Sigmoid + Mul sau Conv được ghép: 57 bộ trong ONNX thành 57 lớp ``ConvExSwish`` trên NPU (tên trong bảng lớp). Độ trễ trung vị 19.154 ms (SiLU, level 3) và 13.617 ms (ReLU, level 3), ReLU thấp hơn 28.9%. Cảnh báo: hai thay đổi trộn lẫn, activation và việc ghép ``Add`` (``Add`` đứng riêng giảm từ 8 xuống 2), thí nghiệm không tách được phần đóng góp của từng thay đổi. SiLU trải từ 17.769 đến 19.628 ms, ReLU từ 13.481 đến 13.668 ms (5 lần đo). Chưa có accuracy, chưa kết luận cho model đã huấn luyện. Lượt 2 (log T3 board 2026-10-10, lượt 2): bản không residual ``Add`` (``silu_noadd``, ``relu_noadd``, cùng 113 lớp, cùng 2 ``Add`` đứng riêng) loại biến nhiễu trên: với ``core_mask`` AUTO, 21.431 ms (SiLU) so 13.929 ms (ReLU), ReLU thấp hơn 35.0%.``relu_opt3`` so ``relu_noadd`` (13.963 so 13.929 ms) chênh lệch nằm trong độ trải, nên ghép ``Add`` không đóng góp đo được ở model này. Số SiLU dao động giữa hai lượt (``silu_opt3``, AUTO: 19.154 ms rồi 22.021 ms, cùng file ``.rknn``), nên đọc như khoảng, nguyên nhân chưa biết. Vẫn chưa có accuracy.
      - "SiLU vs ReLU latency RKNN RK3588 INT8 YOLOv8". T3: YOLOv8n SiLU và ReLU bằng ``eval_perf``

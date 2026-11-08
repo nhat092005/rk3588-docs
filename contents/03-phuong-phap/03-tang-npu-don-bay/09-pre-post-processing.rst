@@ -14,8 +14,8 @@ Pre/post-processing
    2. Model INT8 mặc định (``int8``) ở một context ``CORE_0``: ``T_pre`` 0.216 ms, ``T_npu`` 17.161 ms, ``T_post`` 0.662 ms (trung vị), 54.66 FPS. Tiền xử lý và hậu xử lý cộng lại 0.878 ms [T3 board, ``results/thr_p3.json``].
    3. Model tách đầu đưa phần giải mã box ra CPU: numpy tốn 8.02 ms (trung vị, 200 lần, đầu vào ngẫu nhiên). Tổng ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.44 ms của ``int8h5`` nếu cùng một luồng [T3 board, ``results/q2j_split.json``].
    4. Vendor định nghĩa thời gian ứng dụng gồm pre, post và code logic, và khuyên tối ưu hoặc dùng phần cứng chuyên dụng khi nó chiếm tỷ lệ lớn [T1 UG232 tr.137]. Chữ NEON không có trong T1 tiếng Anh đã tìm.
-   5. P1 chồng lấp giải mã bằng pipeline: ĐO, 65.99 FPS ở một context ``CORE_0`` (:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`). P2 giải mã bằng C hoặc NEON: không cần theo cách đọc thông lượng của mục tiêu 60 FPS ở cấu hình này (cách đọc thời gian mỗi khung chưa xét), chưa đo. P3 RGA: chưa thử. P4 bỏ NMS: ngoài phạm vi.
-   6. Chưa biết: thời gian NMS riêng trên RK3588, giải mã trên ảnh thật ở model tách đầu trong pipeline, thứ tự đầu ra của pipeline, thời gian mỗi khung ở nhịp 60 FPS.
+   5. P1 chồng lấp giải mã bằng pipeline: ĐO, 65.99 FPS ở một context ``CORE_0`` (:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`). P2 giải mã bằng C hoặc NEON: không cần cho mục tiêu 30 FPS (C đạt 65.99 FPS, cả mốc 60 cũ lẫn mốc 30 hiện hành), chưa đo. P3 RGA: chưa thử. P4 bỏ NMS: ngoài phạm vi.
+   6. Chưa biết: thời gian NMS riêng trên RK3588, giải mã trên ảnh thật ở model tách đầu trong pipeline, thứ tự đầu ra của pipeline, thời gian mỗi khung ở nhịp 30 FPS.
 
 Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/05-yolo-tren-rk3588/01-do-thi-xuat-va-duong-rknn`. Kết quả FPS của các đòn bẩy ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
@@ -178,7 +178,7 @@ Nhãn: ĐO (số T3 của dự án), NGUỒN, CHƯA BIẾT. Các nhãn chưa ph�
    * - P2
      - Giải mã bằng C hoặc NEON thay numpy
      - Chưa đo
-     - Thí nghiệm E3 không chạy vì điều kiện kích hoạt viết trước không xảy ra (C đạt 60 FPS và ``T_post`` 11.61 ms nhỏ hơn ``T_npu`` 15.04 ms). Kết luận: không cần theo cách đọc thông lượng của mục tiêu 60 FPS ở cấu hình này, cách đọc thời gian mỗi khung chưa được xét. Lợi ích khi cần giảm CPU hoặc vượt 60 FPS: chưa biết [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 6]
+     - Thí nghiệm E3 không chạy vì điều kiện kích hoạt viết trước không xảy ra (quy tắc viết lúc mục tiêu còn là 60 FPS, C đạt 65.99 FPS và ``T_post`` 11.61 ms nhỏ hơn ``T_npu`` 15.04 ms). Kết luận: không cần cho mục tiêu 30 FPS ở cấu hình này. Lợi ích khi cần giảm CPU hoặc vượt mốc đó: chưa biết [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 6]
    * - P3
      - RGA cho tiền xử lý
      - NGUỒN, chưa thử
@@ -190,7 +190,7 @@ Nhãn: ĐO (số T3 của dự án), NGUỒN, CHƯA BIẾT. Các nhãn chưa ph�
 
 Hai điều rút ra từ số đo. Một, ở model INT8 mặc định tiền xử lý và hậu xử lý chỉ chiếm khoảng 4.9% thời gian một khung (mục 3.1), nên phần lớn FPS nằm ở ``T_npu``. Hai, giải mã CPU của model tách đầu là phần CPU lớn nhất đã đo (8.02 ms) và P1 là cách đã đo để che nó. Hai điều này là mô tả của phép đo, không phải cơ chế.
 
-**Đọc theo thông lượng** (mặc định của :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8): P1 đạt 60 FPS với một context (65.99 FPS), P2 và P3 không cần. **Đọc theo thời gian mỗi khung** (16.67 ms): không điều kiện nào của P1 đạt, vì tổng ba giai đoạn của C là 27.6 ms (tổng trung vị từng giai đoạn dưới tranh chấp, không phải đo đầu cuối trực tiếp và không phải cực tiểu). Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms nhưng gồm chờ hàng đợi nên chỉ là cận trên. Thời gian mỗi khung ở nhịp 60 FPS chưa đo. Theo cách đọc này P2 và P3 mới có thể liên quan, vì giảm ``T_post`` hay ``T_pre`` rút ngắn tổng ba giai đoạn, nhưng mức rút ngắn đủ để đạt 16.67 ms: chưa biết (``T_npu`` một mình đã 15.04 ms ở C).
+**Đọc theo thông lượng** (mặc định của :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8): mọi điều kiện đạt 30 FPS, kể cả ``int8`` một context tuần tự (54.66 FPS) mà không cần P1, nên P1, P2 và P3 đều không cần cho mục tiêu. **Đọc theo thời gian mỗi khung** (33.33 ms): tổng ba giai đoạn của C là 27.55 ms (``stage_sum`` trong ``results/q2f_fps.json``, tổng trung vị từng giai đoạn dưới tranh chấp, không phải đo đầu cuối trực tiếp và không phải cực tiểu), dưới 33.33 ms, dư 5.78 ms. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms nhưng gồm chờ hàng đợi nên chỉ là cận trên. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Theo cách đọc này P2 và P3 chỉ có ích nếu cần thêm phần dư (giảm ``T_post`` hay ``T_pre`` rút ngắn tổng ba giai đoạn), mức rút ngắn đạt được: chưa biết (``T_npu`` một mình đã 15.04 ms ở C).
 
 6. Điều chưa biết
 =================
@@ -214,7 +214,7 @@ Hai điều rút ra từ số đo. Một, ở model INT8 mặc định tiền x�
    * - Thứ tự đầu ra của pipeline
      - chưa kiểm
      - Giữ theo cách xây dựng (một luồng mỗi giai đoạn, hàng đợi FIFO), harness không kiểm. Điều kiện D có hai luồng post nên có thể đảo
-   * - Thời gian mỗi khung ở nhịp 60 FPS
+   * - Thời gian mỗi khung ở nhịp 30 FPS
      - chưa đo
      - :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 5
    * - Lợi ích của NEON hoặc C, và của RGA
@@ -223,8 +223,8 @@ Hai điều rút ra từ số đo. Một, ở model INT8 mặc định tiền x�
    * - Mean và std chạy ở đâu lúc suy luận
      - chưa biết
      - UG232 tr.22, tr.69, tr.158 không nói rõ
-   * - Cách hiểu mục tiêu 60 FPS
-     - chưa xác nhận
+   * - Cách hiểu mục tiêu 30 FPS
+     - một luồng camera, suy từ lý do người dùng nêu ngày 2026-11-08
      - :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 
 7. Nguồn

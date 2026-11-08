@@ -30,7 +30,7 @@ Trang này không giải thích lại công thức affine, scale và zero-point,
 
 Trang này chỉ gom ba thứ cho quyết định chọn kiểu số: các lựa chọn đã đo cạnh nhau, kiểu số mà build và runtime thật sự ghi, và các đòn bẩy FPS liên quan. Bố cục dữ liệu (NHWC và NC1HWC2) ở :doc:`03-tensor-layout`, bộ nhớ ở :doc:`05-memory-access` và :doc:`06-memory-copy`.
 
-Mục tiêu FPS của người dùng là 60 FPS (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Cách hiểu (một luồng hay tổng nhiều luồng, thông lượng hay thời gian mỗi khung) chưa được người dùng xác nhận. Trang này đọc mỗi lựa chọn theo số đo của nó và không coi một cách hiểu là đúng.
+Mục tiêu FPS của người dùng là 30 FPS, đổi từ 60 ngày 2026-11-08 vì camera chỉ có 30 khung/giây (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Hiểu là một luồng camera, ngân sách 33.33 ms mỗi khung. Mọi cấu hình đã đo đạt mốc này theo cả thông lượng lẫn thời gian mỗi khung. Trang này đọc mỗi lựa chọn theo số đo của nó.
 
 2. Các lựa chọn đã đo
 =====================
@@ -249,8 +249,8 @@ Nguồn: [T3 board, ``results/q2f_fps.json`` khóa ``e1``]. Quy tắc của thí
    * - FP16 nhiều context
      - chưa biết
      - Chỉ có ba phiên FP16 một context ``CORE_0``
-   * - Cách hiểu 60 FPS
-     - chưa xác nhận
+   * - Cách hiểu 30 FPS
+     - một luồng camera, suy từ lý do người dùng nêu ngày 2026-11-08
      - :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 
 8. Nguồn

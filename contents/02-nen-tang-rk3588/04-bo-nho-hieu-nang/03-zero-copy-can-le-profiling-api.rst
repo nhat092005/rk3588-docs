@@ -71,7 +71,7 @@ Trên RK3562, RK3566, RK3568, RK3576, RK3588 và RV1126B có hai nhóm API là g
    :align: center
    :alt: Cơ chế luân chuyển bộ nhớ giữa General API và Zero-Copy API trên RK3588
 
-   So sánh cơ chế luân chuyển bộ nhớ: General API (2 lần CPU memcpy) vs Zero-Copy API (DMA-BUF trực tiếp) trên RK3588. Nguồn: [T1 UG232 tr.64-68] [T1 OPL tr.335-339]
+   So sánh cơ chế luân chuyển bộ nhớ: General API (CPU copy đầu vào, hãng không ghi số lần) vs Zero-Copy API (DMA-BUF trực tiếp) trên RK3588. Thời gian copy dự án chưa đo. Nguồn: [T1 UG232 tr.64-68] [T1 OPL tr.335-339]
 
 1.2 Ba cách cấp phát
 --------------------

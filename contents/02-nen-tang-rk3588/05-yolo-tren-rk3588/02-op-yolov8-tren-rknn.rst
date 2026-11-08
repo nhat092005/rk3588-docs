@@ -186,6 +186,73 @@ Các op sau cũng có mục NPU trong OPL chương 3.2 và xuất hiện trong Y
 
    Ma trận phân loại mức độ thân thiện NPU trên RK3588: Vùng Xanh (100% NPU), Vùng Vàng (Cần tối ưu), và Vùng Đỏ (Nguy cơ rơi về CPU). Nguồn: [T1 OPL tr.56-107, tr.320-333] [T1 UG232 tr.140-150] [T1 ULT engine/exporter.py:682-688]
 
+1.5 Phân bổ thời gian thực thi: Tích chập so với Hậu xử lý và Head
+------------------------------------------------------------------
+
+Từ bảng profiling chi tiết từng lớp khi chạy suy luận YOLOv8n INT8 trên RK3588 (lõi ``CORE_0``, cố định tần số NPU 1 GHz và DDR 2.112 GHz [T3 board, ``eval_perf_debug_int8_core0.txt``]), tổng thời gian thực thi một khung hình là **18,598 µs** (~18.60 ms). Tỉ trọng thời gian giữa các nhóm toán tử phân bổ như sau:
+
+.. list-table:: Phân bổ thời gian thực thi các nhóm toán tử của YOLOv8n trên RK3588
+   :header-rows: 1
+   :widths: 25 15 25 20 15
+
+   * - Nhóm toán tử
+     - Số lần gọi
+     - Thiết bị thực thi
+     - Thời gian (µs)
+     - Tỉ lệ (%)
+   * - Tích chập (``ConvExSwish``)
+     - 57
+     - NPU
+     - 11,347
+     - 61.01%
+   * - Tích chập tiêu chuẩn (``Conv``)
+     - 7
+     - NPU
+     - 571
+     - 3.07%
+   * - **Tổng nhóm tích chập**
+     - **64**
+     - **NPU**
+     - **11,918**
+     - **64.08%**
+   * - Softmax phân bố (``exSoftmax13``)
+     - 1
+     - NPU (DFL Head)
+     - 2,063
+     - 11.09%
+   * - Nối tensor (``Concat``)
+     - 17
+     - NPU (C2f / Neck / Head)
+     - 1,622
+     - 8.72%
+   * - Hoán vị trục (``Transpose``)
+     - 1
+     - CPU (Fallback)
+     - 850
+     - 4.57%
+   * - Tách tensor (``Split``)
+     - 9
+     - NPU (C2f / Head)
+     - 719
+     - 3.87%
+   * - Cộng phần tử (``Add``)
+     - 8
+     - NPU (Shortcut)
+     - 419
+     - 2.25%
+   * - Các toán tử khác (``Reshape``, ``Resize``, v.v.)
+     - 17
+     - NPU / CPU
+     - 1,007
+     - 5.42%
+   * - **Tổng nhóm phi tích chập**
+     - **53**
+     - **NPU + CPU**
+     - **6,680**
+     - **35.92%**
+
+Số liệu thực tế chỉ ra một phát hiện quan trọng về mặt tối ưu: mặc dù các lớp tích chập chiếm tới hơn 99% tổng lượng phép tính lý thuyết (GFLOPs) của mạng, nhưng trong thời gian chạy thực tế trên NPU, nhóm tích chập chỉ chiếm **64.08%** thời gian. Nhóm phi tích chập (gồm khối DFL, nối/tách tensor và hoán vị trục rơi về CPU) chiếm tới **35.92%** độ trễ toàn mạng. Riêng toán tử ``exSoftmax13`` và ``Concat`` cộng lại đã tiêu tốn gần 20% thời gian khung hình. Bảng này không đủ để kết luận các op đó bị giới hạn bởi băng thông bộ nhớ, vì "the NPU Cycles column only displays the Cycles required by Conv" [T1 UG232 tr.140].
+
 2. Op rơi về CPU và nguyên nhân
 ===============================
 

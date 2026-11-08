@@ -65,3 +65,18 @@ Power Management IC (PMIC)
    * - :download:`Fairchild_FUSB302B_Datasheet.pdf <../../_assets/pdf/datasheet/power/Fairchild_FUSB302B_Datasheet.pdf>`
      - FUSB302B
      - Bo dieu khien USB Type-C va USB Power Delivery (PD)
+
+.. _24-camera-vcm-driver:
+
+Camera (chip điều khiển VCM)
+============================
+
+.. list-table::
+   :header-rows: 1
+
+   * - File
+     - IC
+     - Ghi chú
+   * - :download:`Dongwoon_DW9714V_Brief.pdf <../../_assets/pdf/datasheet/camera/Dongwoon_DW9714V_Brief.pdf>`
+     - DW9714V
+     - Tờ giới thiệu 2 trang của Dongwoon Anatech (không có số phiên bản). Tải từ bản người dùng đăng trên e2e.ti.com, không tải từ trang của hãng. Là bản có hậu tố V, board chỉ báo tên ``dw9714`` nên chưa biết hai bản có trùng không

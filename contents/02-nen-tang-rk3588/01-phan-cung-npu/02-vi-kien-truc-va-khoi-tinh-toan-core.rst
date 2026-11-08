@@ -41,9 +41,9 @@ RK3588 có ba core giống nhau, chạy riêng hoặc phối hợp ("Include tri
 
 .. figure:: ../../../_assets/generated/02-nen-tang-rk3588/01-phan-cung-npu/npu-01-triple-core-architecture.svg
    :align: center
-   :alt: Sơ đồ kiến trúc 3 lõi RKNPU RK3588, System SRAM 4MB và Bus kết nối DDR
+   :alt: Sơ đồ kiến trúc 3 lõi RKNPU RK3588, System SRAM 1MB và Bus kết nối DDR
 
-   Kiến trúc 3 lõi NPU RK3588 (6 TOPS INT8), phân bổ Internal Buffer 384KB mỗi core, System SRAM 4MB và bus AXI kết nối tới 4 kênh DDR. Nguồn: tổng hợp từ [T1 TRM1 Ch.34, Ch.36, TRM2 Ch.1-2].
+   Kiến trúc 3 lõi NPU RK3588 (6 TOPS INT8), phân bổ Internal Buffer 384KB mỗi core, System SRAM 1MB và bus AXI kết nối tới 4 kênh DDR. Nguồn: tổng hợp từ [T1 TRM1 Ch.34, Ch.36, TRM2 Ch.1-2].
 
 .. _fig-trm1-triple-core:
 
@@ -63,44 +63,96 @@ RK3588 có ba core giống nhau, chạy riêng hoặc phối hợp ("Include tri
 
 Các nhãn trong Fig. 36-2 gồm: NPU CORE, Memory Interface AXI, Register File Fetch, Register File/Interrupt Control, CNA, Weight Decompress, Zero-Skipping, Weight Data Load, Feature Data Load, DPU (Data Process Unit), PPU (Planar Process Unit), Config Interface (AHB), Accumulator, 384KB Buffer, Sequence Controller, MAC Array [T1 TRM1 tr.1985].
 
-.. list-table::
+.. list-table:: Các thành phần trong một NPU core [T1 TRM1 Ch.36]
    :header-rows: 1
-   :widths: 24 56 20
+   :widths: 14 22 46 18
 
-   * - Khối
-     - Vai trò theo TRM
+   * - Nhóm
+     - Khối
+     - Vai trò theo TRM / Suy luận
      - Nguồn
-   * - Neural Network Accelerating Engine
-     - "This unit include convolution pre-process controller, internal buffer, mac array, accumulator. It provides parallel convolution MAC for recognition functions"
+   * - Điều khiển & Giao tiếp
+     - PC (0x0000)
+     - Nạp danh sách thanh ghi từ bộ nhớ qua AXI (Register File Fetch Unit), quản lý ngắt, đếm task
+     - [T1 TRM1 tr.1986, tr.1994-1997]
+   * - 
+     - Giao diện AXI, AHB
+     - AXI master đọc nạp dữ liệu từ bộ nhớ hệ thống; AHB slave để CPU cấu hình, debug, test thanh ghi
      - [T1 TRM1 tr.1985]
-   * - DPU
-     - "mainly process the single data calculate, such as leaky_relu, relu, relux, sigmoid, tanh...etc. It also provides function: softmax, transpose, data format conversion"
+   * - Tính conv
+     - CNA (0x1000)
+     - Tiền xử lý conv, nạp weight/feature, giải nén, zero-skipping
      - [T1 TRM1 tr.1985]
-   * - PPU
-     - "mainly provide planar function followed by output data from Data Processing Unit, such as average pooling, max pooling, min pooling"
+   * - 
+     - CBUF (trong CNA)
+     - Internal buffer 384KB chia bank, giữ weight/feature, tái dùng dữ liệu
+     - [T1 TRM1 tr.2003-2004]
+   * - 
+     - CSC (trong CNA)
+     - Convolution Sequence Controller: quét weight/feature từ buffer, đưa sang core tính
+     - [T1 TRM1 tr.2001, tr.2008]
+   * - 
+     - MAC array / CORE (0x3000)
+     - Mảng nhân cộng song song (1024 MAC INT8 mỗi chu kỳ trên mỗi core)
+     - [T1 TRM1 tr.1984, tr.2001]
+   * - 
+     - CMAC
+     - Tên module Convolution MAC (ứng với mảng MAC trong CORE)
+     - [T1 TRM1 tr.2054]
+   * - Hậu xử lý
+     - DPU (0x4000)
+     - Phép trên từng phần tử (activation ReLU, sigmoid, tanh), softmax, đổi định dạng dữ liệu
      - [T1 TRM1 tr.1985]
-   * - Register File Fetch Unit
-     - "fetch register configuration from external system memory through AXI interface"
-     - [T1 TRM1 tr.1986]
-   * - Giao diện AXI, AHB
-     - AXI master lấy dữ liệu từ bộ nhớ. AHB slave truy cập thanh ghi để cấu hình, debug, test
-     - [T1 TRM1 tr.1985]
+   * - 
+     - BS_CORE (trong DPU)
+     - Bias & Scaling: ALU (Add/Minus qua ``bs_alu_algo``), nhân scale định lượng (``bs_mul_algo``/MUL/PReLU), ReLU; nạp bias/scale qua BRDMA [T1 TRM1 tr.2020, tr.2038]. Luôn tham gia luồng tích chập chuẩn (Convolution Flow 1).
+     - [T1 TRM1 tr.2020, tr.2038]
+   * - 
+     - BN_CORE (trong DPU)
+     - BatchNorm: nhân hệ số scale và chuẩn hóa batch; nạp tham số qua NRDMA [T1 TRM1 tr.2023-2024, tr.2039]. Trong luồng suy luận thông thường (như YOLOv8n), BatchNorm luôn được compiler fuse trực tiếp vào trọng số và bias của Conv (Conv-BN folding), nên không chạy trên BN_CORE. Khối này được phần cứng trưng dụng làm bộ nhân tích chập thay thế khi chạy Convolution Flow 2 (zero-skipping) [T1 TRM1 tr.2055].
+     - [T1 TRM1 tr.2023-2024, tr.2039, tr.2055]
+   * - 
+     - EW_CORE (trong DPU)
+     - Element-Wise: ALU 9 phép toán (``ew_alu_algo``: Max, Min, Add, Div, Minus, Abs, Neg, Floor, Ceil), bộ đổi kiểu, nạp toán hạng qua ERDMA
+     - [T1 TRM1 tr.2025-2028, tr.2040]
+   * - 
+     - PPU (0x6000)
+     - Planar Process Unit cho pooling (average, max, min pooling)
+     - [T1 TRM1 tr.1985, tr.2055]
+   * - Đọc dữ liệu
+     - DPU_RDMA, PPU_RDMA
+     - Đọc dữ liệu trực tiếp vào DPU (0x5000: MRDMA, BRDMA, NRDMA, ERDMA) và PPU (0x7000) ở flying mode
+     - [T1 TRM1 tr.1986, tr.2017, tr.2036-2040]
+   * - 
+     - DDMA, SDMA
+     - Cấu hình tham số giao dịch bus AXI (0x8000, 0x9000), ưu tiên, QoS
+     - [T1 TRM1 tr.2046-2049]
 
-TRM1 chỉ in tên đầy đủ cho ``DPU (Data Process Unit)`` và ``PPU (Planar Process Unit)`` trên Fig. 36-2 [T1 TRM1 tr.1985], còn các khối con ``CNA``, ``CMAC``, ``CSC``, ``CBUF``, ``DDMA``, ``SDMA``, ``BS``, ``BN``, ``EW`` được định danh trực tiếp bằng tên viết tắt trong sơ đồ và bảng thanh ghi. Mỗi khối thanh ghi nằm trong một trang 4KB của không gian địa chỉ core (Table 1-1 "RKNN Address Mapping"): ``PC 0x0000``, ``CNA 0x1000``, ``CORE 0x3000``, ``DPU 0x4000``, ``DPU_RDMA 0x5000``, ``PPU 0x6000``, ``PPU_RDMA 0x7000``, ``DDMA 0x8000``, ``SDMA 0x9000`` và ``GLOBAL 0xf000`` [T1 TRM1 tr.1986] (chi tiết tại :doc:`05-ban-do-thanh-ghi-va-co-che-cau-hinh`).
+TRM1 chỉ in tên đầy đủ cho ``DPU (Data Process Unit)`` và ``PPU (Planar Process Unit)`` trên Fig. 36-2 [T1 TRM1 tr.1985], trong khi các khối con ``CNA``, ``CMAC``, ``CSC``, ``CBUF``, ``DDMA``, ``SDMA``, ``BS``, ``BN``, ``EW`` dùng tên viết tắt kế thừa từ quy chuẩn kiến trúc vi xử lý mở NVDLA [nguồn khác NVDLA Hardware Architecture Spec]. Trong NVDLA, ``CBUF`` là Convolution Buffer (SRAM đệm on-chip), ``CSC`` là Convolution Sequence Controller (điều khiển nạp weight và feature map từ CBUF vào mảng tính toán), ``CMAC`` là Convolution MAC (mảng nhân cộng song song), và ``SDP`` (Single Data Point Processor, tương ứng với ``DPU`` của Rockchip) chia thành ba khối con: ``BS`` (Bias & Scaling) kèm BRDMA, ``BN`` (Batch Normalization) kèm NRDMA, và ``EW`` (Element-Wise) kèm ERDMA. Trong NPU RK3588, ``CMAC`` chính là mảng tính toán ``MAC Array`` thuộc khối ``CORE`` (``0x3000``), khớp với việc các thanh ghi gating (``RKNN_core_mac_gating`` offset ``0x300C``) và độ chính xác tính toán (``RKNN_core_misc_cfg`` offset ``0x3010``) đều nằm ở khối này [T1 TRM1 tr.1989, tr.2013-2014, tr.2054].
+
+Mỗi khối thanh ghi nằm trong một trang 4KB của không gian địa chỉ core (Table 1-1 "RKNN Address Mapping"): ``PC 0x0000``, ``CNA 0x1000``, ``CORE 0x3000``, ``DPU 0x4000``, ``DPU_RDMA 0x5000``, ``PPU 0x6000``, ``PPU_RDMA 0x7000``, ``DDMA 0x8000``, ``SDMA 0x9000`` và ``GLOBAL 0xf000`` [T1 TRM1 tr.1986] (chi tiết tại :doc:`05-ban-do-thanh-ghi-va-co-che-cau-hinh`).
 
 Driver xác nhận cấu hình 3 nhân qua ba tên ngắt ``npu0_irq``, ``npu1_irq``, ``npu2_irq`` [T1 DRV rknpu_drv.c:84-88], ``.num_irqs = ARRAY_SIZE(rk3588_npu_irqs)`` [T1 DRV rknpu_drv.c:193], ``.core_mask = 0x7`` [T1 DRV rknpu_drv.c:197], và các mặt nạ ``RKNPU_CORE0_MASK`` (0x01), ``RKNPU_CORE1_MASK`` (0x02), ``RKNPU_CORE2_MASK`` (0x04), ``RKNPU_CORE_AUTO_MASK`` (0x00) [T1 DRV include/rknpu_job.h:24-27] (``nbuf_size = 0`` trên RK3588 [T1 DRV rknpu_drv.c:195]).
 
 1.2 Luồng dữ liệu qua core
 --------------------------
 
-TRM mô tả hai đường tính được chọn bằng thanh ghi: "RKNN supports variety of convolution and matrix multiplication. If use the MAC array to calculate, the work flow should obey the Figure 1-4, and if use DPU CORE calculate, work flow should obey the Figure 1-5." [T1 TRM1 tr.2053] (văn bản ghi Figure 1-4 và 1-5 tương ứng với Fig. 36-4 và Fig. 36-5 in trong PDF). Với đường tích chập qua MAC array (Fig. 36-4), trình tự cấu hình gồm:
+TRM mô tả hai đường tính được chọn bằng thanh ghi: "RKNN supports variety of convolution and matrix multiplication. If use the MAC array to calculate, the work flow should obey the Figure 1-4, and if use DPU CORE calculate, work flow should obey the Figure 1-5." [T1 TRM1 tr.2053] (văn bản ghi Figure 1-4 và 1-5 tương ứng với Fig. 36-4 và Fig. 36-5 in trong PDF):
 
-- **Bước 3 & 4**: cấu hình kích thước feature map, độ chính xác đầu vào/xử lý, ``grains``, ``entries``, kích thước weight, ``conv_mode`` và các thanh ghi auto gating của CMAC cùng CNA sequence controller [T1 TRM1 tr.2054].
-- **Bước 5 & 6**: cấu hình ``DPU_CORE`` để áp các toán tử cố định hoặc lập trình được lên đầu ra tích chập ("you can specify some operators to the outputs of convolution according to configure the DPU_CORE" [T1 TRM1 tr.2054]), sau đó đưa sang ``PPU`` cho các phép toán như pooling ("you can do some extra operators to the outputs of DPU, pooling for example." [T1 TRM1 tr.2054]).
+1. **Convolution Flow 1 (đường qua MAC array)**: Áp dụng cho tích chập 2D tiêu chuẩn (Fig. 36-4). Dữ liệu weight và feature map từ CBUF đi vào mảng MAC (CMAC trong CORE). Kết quả tích chập đi trực tiếp vào DPU (nơi ``BS_CORE`` cộng bias và nhân scale định lượng), sau đó có thể nối ống sang PPU để pooling nếu cần [T1 TRM1 tr.2054].
+2. **Convolution Flow 2 (đường trực tiếp qua DPU CORE)**: Áp dụng khi dùng DPU CORE thực hiện tính toán (Fig. 36-5), không đi qua mảng MAC [T1 TRM1 tr.2053, tr.2055].
 
 PPU hỗ trợ hai chế độ: chạy nối ống cùng DPU hoặc chạy độc lập ở flying mode ("You can use PPU in two ways, pipeline with DPU, and flying mode independently." [T1 TRM1 tr.2055]). Trường ``flying_mode`` chọn nguồn dữ liệu cho DPU ("flying_mode ... 1'd0: DPU core main data is from convolution output; 1'd1: DPU core main data is from MRDMA;" [T1 TRM1 tr.2017]), còn ``output_mode`` quyết định đầu ra đi vào PPU hay ghi ra ngoài ("[0]: If the output goes to PPU, high is active; [1]: If the output goes to outside, high is active." [T1 TRM1 tr.2017]).
 
-**Zero-skipping.** Khi phần tử feature bằng 0, phần cứng bỏ bước nạp weight tương ứng từ bộ nhớ hệ thống ("When one pixel feature data is 0, the corresponding weight data is not fetched from system memory." [T1 TRM1 tr.2006]). Cơ chế này bật qua ``cna_fc_con0``, ``cna_fc_con1``, ``cna_fc_con2`` kèm ràng buộc: "If enable zero skipping, the conv_mode of DPU must configure to be 3, and must bypass the BS_CORE." [T1 TRM1 tr.2055]. TRM1 chỉ mô tả việc bỏ nạp weight [T1 TRM1 tr.2006] và thanh ghi ``slcg_op_en`` ("Soft clock gating signals." [T1 TRM1 tr.2013]), không đề cập việc cắt chu kỳ nhân bên trong mảng MAC.
+**Cơ chế Zero-skipping và ràng buộc conv_mode 3.** Khi phần tử feature bằng 0, phần cứng có thể bỏ bước nạp trọng số tương ứng từ bộ nhớ hệ thống ("When one pixel feature data is 0, the corresponding weight data is not fetched from system memory." [T1 TRM1 tr.2006]). Cơ chế này được cấu hình qua nhóm thanh ghi ``RKNN_cna_fc_con0`` (offset ``0x1060``, bit 0 ``fc_skip_en``, bit 31:16 ``fc_skip_data``), ``cna_fc_con1`` và ``cna_fc_con2`` [T1 TRM1 tr.2006, tr.2055]. TRM1 quy định rõ ràng buộc phần cứng:
+
+   "If enable zero skipping, the conv_mode of DPU must configure to be 3, and must bypass the BS_CORE. The alu_src must set to be 0, the mul_src must set to be 1, and the alu_algo must set be 3. We bypass BS_CORE, and use BN_CORE to calculate convolution, so the extra operators have to achieve by EW_CORE. But we use NRDMA to read operands to EW_CORE when ew_src is 1." [T1 TRM1 tr.2055]
+
+Ràng buộc này giải thích nguyên lý thiết kế:
+- Zero-skipping được gán vào khối điều khiển Fully Connected (FC) của CNA và hoạt động trên đường **Convolution Flow 2**.
+- Trong chế độ này, DPU chuyển sang ``conv_mode = 3``, tắt hẳn ``BS_CORE`` và chuyển giao nhiệm vụ tính tích chập cho bộ nhân của ``BN_CORE``, đồng thời dồn các toán tử hậu xử lý/activation về sau sang ``EW_CORE`` nhận dữ liệu qua kênh nạp ``NRDMA``.
+- **Mảng MAC không bỏ phép nhân 0**: TRM1 chỉ mô tả việc bỏ nạp trọng số từ bộ nhớ hệ thống [T1 TRM1 tr.2006] và soft clock gating [T1 TRM1 tr.2013], không có cơ chế cắt chu kỳ nhân trong mảng MAC. Bằng chứng thực nghiệm từ thí nghiệm X5 trên bo mạch RK3588 (:doc:`../../03-phuong-phap/02-tang-npu-nen-do/01-ke-hoach-do` mục 3) cho thấy khi đưa vào ảnh toàn 0, ảnh thật và ảnh ngẫu nhiên, độ trễ suy luận dao động dưới 0.008 ms (< 0.05% tổng độ trễ 16.5 ms) [T3 onboard_x5], chứng minh mảng MAC chạy theo chu kỳ SIMD cố định độc lập với giá trị dữ liệu.
+- **YOLOv8n không bật zero-skipping**: Compiler RKNN không bật zero-skipping cho YOLOv8n do YOLOv8n hoàn toàn cấu thành từ các tầng tích chập không gian 2D (57 tầng ``ConvExSwish``), không sử dụng luồng FC/GEMV của Convolution Flow 2.
 
 2. Kiểu số và số MAC mỗi chu kỳ
 ===============================

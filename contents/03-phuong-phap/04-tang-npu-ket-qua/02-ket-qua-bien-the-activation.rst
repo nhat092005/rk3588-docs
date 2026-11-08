@@ -152,6 +152,14 @@ Kết quả G3: cả ba biến thể qua (chỉ ``Transpose`` ở CPU, như SiLU
 
 Quy tắc như ở :doc:`01-ket-qua-g4` (mục 3 và 4), chạy xen kẽ dưới P2: hai mask ``CORE_0`` và ``CORE_0_1_2``, năm mô hình, hai vòng cùng thứ tự, 45 giây nghỉ. Thí nghiệm 1 (``onboard_g4v``) có một phiên SiLU không thực hiện đúng P2 (một mẫu giây có một luồng ``rknn_server`` chưa ở CPU4, ngắt vẫn 100% ở CPU4). Theo quy tắc viết trước, đó là điều kiện để chạy thí nghiệm 2 (``onboard_g4v2``, lặp lại nguyên thiết kế). Thí nghiệm 2 có ba phiên không thực hiện đúng ở các mô hình khác (cùng loại: một mẫu giây có một luồng ngoài CPU4). Ngân sách của giai đoạn là tối đa hai thí nghiệm cho mỗi việc, nên không chạy thêm. Mỗi mô hình có ít nhất một thí nghiệm mà cả hai mask thực hiện đúng, và kết quả B giữa các thí nghiệm hợp lệ không mâu thuẫn. Bảng ghi cả hai.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/02-ket-qua-bien-the-activation/bv-01-giam-latency-da-nhan.svg
+   :align: center
+   :width: 100%
+   :alt: Mức giảm latency CORE_0_1_2 của năm biến thể activation
+
+   Mức giảm latency của ``CORE_0_1_2`` so với ``CORE_0`` ở hai lần chạy thí nghiệm. Dấu X là ô có P2 không thực hiện đúng. Đường đứt 5% là ngưỡng. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 18 10 14 16 10 20 24 12
@@ -252,6 +260,14 @@ Mô tả: ở ``CORE_0`` (thí nghiệm 1) LeakyReLU nhanh hơn SiLU 22.2%, ReLU
 ===================
 
 Chấm bằng RKNNLite trên board, ``css_test`` (82 ảnh), INT8 là dtype kết luận. Chênh so với SiLU seed 0 (100 epoch), đơn vị điểm phần trăm. Cổng C đạt khi cả ba cột chênh từ -1.0 trở lên.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/02-ket-qua-bien-the-activation/bv-02-chenh-ap-theo-kieu-so.svg
+   :align: center
+   :width: 100%
+   :alt: Chênh AP50-95 của các ứng viên activation ở ba kiểu số
+
+   Chênh AP50-95 của từng ứng viên so với SiLU ở ba kiểu số. Đường đứt -1.0 điểm là ngưỡng cổng C của INT8. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1

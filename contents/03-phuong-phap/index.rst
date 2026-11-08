@@ -17,7 +17,7 @@ Phương pháp theo hai tầng: tầng trên là AI, tầng dưới là NPU. T�
    * - :doc:`Đòn bẩy tăng tốc NPU <03-tang-npu-don-bay/index>`
      - Op hỗ trợ, đa nhân, layout, kiểu số, bộ nhớ, compiler, kiến trúc NPU, tiền và hậu xử lý: đòn bẩy FPS nào đã đo, chỉ có nguồn hay chưa biết.
    * - :doc:`Kết quả đo NPU <04-tang-npu-ket-qua/index>`
-     - Kết quả các thí nghiệm theo chủ đề: activation, đa nhân, lượng tử hóa, mục chưa biết, đòn bẩy FPS cho mục tiêu 60 FPS.
+     - Kết quả các thí nghiệm theo chủ đề: activation, đa nhân, lượng tử hóa, mục chưa biết, đòn bẩy FPS (đo lúc mục tiêu còn là 60 FPS, mục tiêu hiện hành là 30 FPS).
 
 .. toctree::
    :maxdepth: 1

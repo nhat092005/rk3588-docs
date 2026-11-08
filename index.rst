@@ -11,6 +11,7 @@ Tài liệu nghiên cứu phát hiện thiết bị bảo hộ cá nhân (PPE) b
    contents/00-tong-quan/index
    contents/01-kien-thuc-nen/index
    contents/02-nen-tang-rk3588/index
+   contents/10-luong-camera-den-phat-hien/index
 
 .. toctree::
    :caption: Nghiên cứu
@@ -54,6 +55,9 @@ Các mục
    * - :doc:`Nền tảng RK3588 </contents/02-nen-tang-rk3588/index>`
      - RK3588S và RKNN cụ thể làm gì: phần cứng NPU, lượng tử hóa, toolchain, bộ nhớ, YOLO trên RKNN?
      - Người cần hiểu chip đích
+   * - :doc:`Luồng camera đến phát hiện </contents/10-luong-camera-den-phat-hien/index>`
+     - Ảnh đi từ camera qua ISP, NPU, CPU đến hộp phát hiện và theo dõi thế nào, mỗi khối phần cứng làm gì?
+     - Người cần hiểu hệ thống từ đầu đến cuối
    * - :doc:`Phương pháp </contents/03-phuong-phap/index>`
      - Phương pháp ở tầng AI và tầng NPU là gì?
      - Hội đồng, người đánh giá

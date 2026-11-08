@@ -11,11 +11,11 @@ NPU architecture
 .. admonition:: Tóm tắt
 
    1. Phần cứng theo T1: ba lõi, 1024x3 MAC int8 và 512x3 MAC float16 mỗi chu kỳ, bộ đệm trong 384 KB mỗi lõi, bảng OPP của driver từ 300 đến 1000 MHz [T1 TRM1 tr.1984, T1 DRV ``dts/rk3588s.dtsi:3482-3640``].
-   2. Con số TOPS mâu thuẫn giữa các nguồn (datasheet 6 TOPS tổng, bài EDGE 2 TOPS một lõi, bài DAHD 2 TOPS mỗi lõi). Trang này không giải quyết mâu thuẫn và không suy TOPS từ số MAC.
+   2. Hãng chỉ ghi tổng tới 6 TOPS, không ghi số mỗi lõi. Chia đều cho ba lõi là 2 TOPS (phép chia, không phải số của hãng). Hai bài báo viết khác nhau về 2 TOPS (bài EDGE một lõi, bài DAHD mỗi lõi). Trang này không suy TOPS từ số MAC.
    3. Vendor nói đa lõi hợp mạng lớn và ít lợi cho mạng nhỏ [T1 UG232 tr.72], bài EDGE đo lợi ích đa lõi nhỏ dưới 10% [T2 EDGE tr.2]. Số đo của dự án cùng chiều: một context ba lõi chỉ hơn một lõi 2.6% về FPS (56.1 so với 54.66) [T3 board, ``results/thr_p3.json``].
    4. Danh sách op chia đa lõi của vendor và số đo của dự án lệch nhau ở ``ConvExSwish`` (0 trên 57 dòng chia). ``ConvRelu`` chia 51 trên 51 [T3 board, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 5].
-   5. Nhiều context độc lập nâng thông lượng lên 102.0 FPS (hai context) và 141.18 FPS (ba context). Đây là đòn bẩy kiến trúc đã đo, đạt 60 FPS theo cách đọc thông lượng, cách đọc chưa được người dùng xác nhận (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8).
-   6. Chưa biết: TOPS mỗi lõi, xung NPU trong TRM (tần số đang khóa là 1000 MHz theo nhật ký đo), quy tắc chia một lớp qua các lõi, SRAM mỗi lõi ngoài 384 KB.
+   5. Nhiều context độc lập nâng thông lượng lên 102.0 FPS (hai context) và 141.18 FPS (ba context). Đây là đòn bẩy kiến trúc đã đo. Với mục tiêu 30 FPS (một camera) thì một context đã đạt (54.66 FPS), nên đòn bẩy này chỉ có giá trị khi có nhiều camera hoặc việc nặng khác dùng chung NPU (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8).
+   6. Chưa biết: TOPS mỗi lõi theo số của hãng, xung NPU trong TRM (tần số đang khóa là 1000 MHz theo nhật ký đo), quy tắc chia một lớp qua các lõi, SRAM mỗi lõi ngoài 384 KB.
 
 Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/02-vi-kien-truc-va-khoi-tinh-toan-core` và :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/03-che-do-da-loi-va-system-sram`. Kết quả FPS của các đòn bẩy sẽ ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
@@ -66,7 +66,7 @@ Nguyên văn các câu này ở :doc:`../../02-nen-tang-rk3588/01-phan-cung-npu/
 
 Thêm từ driver: cấu hình RK3588 đặt ``.core_mask = 0x7`` (ba lõi) [T1 DRV ``rknpu_drv.c:197``], chuỗi compatible ``rockchip,rk3588-rknpu`` [T1 DRV ``rknpu_drv.c:299``], số lõi dùng của một job lấy từ số bit trong ``core_mask`` [T1 DRV ``rknpu_job.c:143-145``]. Bảng OPP của NPU nằm ở ``dts/rk3588s.dtsi`` dòng 3482 (chú thích ``/* RK3588 npu OPPs */`` ở dòng 3533), từ ``opp-300000000`` (dòng 3534) đến ``opp-1000000000`` (dòng 3640) [T1 DRV ``dts/rk3588s.dtsi``]. Thanh ghi ``RKNN_cna_conv_con3`` có chế độ mảng MAC int8 32x32 và ghi chú dành cho chế độ đa lõi: "This register is target for multicore mode. By single core mode keep it at 3'd0." [T1 TRM1 tr.2001].
 
-Mâu thuẫn TOPS, ghi nguyên trạng:
+Con số TOPS theo từng nguồn:
 
 .. list-table::
    :header-rows: 1
@@ -85,7 +85,7 @@ Mâu thuẫn TOPS, ghi nguyên trạng:
      - "the RK3588 integrates three NPU cores, each delivering a computational power of 2 TOPS"
      - [T2 DAHD tr.18]
 
-Hai bài báo không khớp nhau về việc 2 TOPS là của một lõi hay mỗi lõi. Dự án không suy giá trị TOPS từ số MAC (cần xung, và xung của NPU trong TRM chưa tìm thấy, mục 6). Với quyết định của dự án, TOPS không cần: giới hạn FPS được đọc từ số đo (mục 4), không tính từ TOPS.
+Tài liệu của hãng chỉ ghi số tổng. Hai bài báo không khớp nhau về việc 2 TOPS là của một lõi hay mỗi lõi, và phép chia 6 cho 3 khớp với cách viết của DAHD. Dự án không suy giá trị TOPS từ số MAC (cần xung, và xung của NPU trong TRM chưa tìm thấy, mục 6). Với quyết định của dự án, TOPS không cần: giới hạn FPS được đọc từ số đo (mục 4), không tính từ TOPS.
 
 Bài EDGE mô tả cấu trúc: "the NPU consists of the Convolution Neural Accelerator (CNA), Data Processing Unit (DPU), and Pooling Processing Unit (PPU), supported by a shared MAC array." [T2 EDGE tr.3].
 
@@ -154,7 +154,7 @@ Giao thức P3 (đã duyệt ngày 2026-11-01, :doc:`../02-tang-npu-nen-do/07-gi
      - 147.39
      -
 
-Đọc theo thông lượng, ba cấu hình một context chưa đạt 60 FPS và các cấu hình nhiều context đạt (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Đọc theo thời gian mỗi khung (16.67 ms), không cấu hình nào đạt vì ``t_npu`` một context đã 17.161 ms. Cách hiểu nào là đúng: chưa được người dùng xác nhận.
+Mục tiêu 30 FPS: mọi cấu hình đạt theo thông lượng (từ 54.66 FPS). Đọc theo thời gian mỗi khung (33.33 ms), ``t_npu`` một context 17.161 ms nằm trong ngân sách (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8). Mốc 60 FPS cũ làm ba cấu hình một context chưa đạt, và theo thời gian mỗi khung (16.67 ms) không cấu hình nào đạt.
 
 Về độ lợi của đa lõi trong một context: latency của ``int8h5`` SiLU ở ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 2.9% (điều kiện B, phiên P2, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` mục 6) và về FPS là 54.66 sang 56.1. Hai số nhỏ, cùng bậc với phát biểu của vendor về mạng nhỏ và của bài EDGE. Dự án chưa có phép đo tách nguyên nhân (ví dụ chi phí đồng bộ lõi), nên "vì sao nhỏ" là chưa biết. Với ReLU, ``CORE_0_1_2`` nhanh hơn ``CORE_0`` 33.7% ở ``int8h5`` (cùng mục), vì ``ConvRelu`` chia hết.
 
@@ -197,8 +197,8 @@ Kết quả FPS của các đòn bẩy này ở :doc:`../04-tang-npu-ket-qua/09-
      - Trạng thái
      - Đã tìm gì
    * - Giá trị TOPS của một lõi
-     - chưa biết
-     - Datasheet, EDGE và DAHD mâu thuẫn. Không suy từ số MAC
+     - hãng không ghi
+     - Datasheet chỉ ghi tổng 6 TOPS. EDGE và DAHD viết khác nhau. Không suy từ số MAC
    * - Xung NPU trong TRM
      - chưa biết
      - Đã tìm ``clk_npu_root``, ``clk_npu_dsu``, ``clk_npu_cm0`` và ``npu.*(MHz|GHz)``, chỉ thấy tên mux và gating. Khoảng tần số duy nhất là bảng OPP của driver

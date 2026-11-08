@@ -24,6 +24,14 @@ Kết quả latency và tỉ lệ từng khối nằm ở :doc:`02-ket-qua-laten
 
 Ba đợt 1000 lần chạy liên tiếp trên board cho ba mức chính cùng một số lần chạy ở giữa: 248 trên 3000 lần (8.3%) nằm trong khoảng 17.0 đến 18.5 ms, giữa mức nhanh và mức giữa. Ngưỡng mức đọc từ chỗ lõm của biểu đồ gộp 3000 lần chạy (khoảng 0.25 ms): dưới 17.0 ms là mức nhanh, từ 20.0 ms là mức chậm, ở giữa là mức giữa. Trung vị của từng mức trên toàn bộ 3000 lần chạy: nhanh 16.625, giữa 19.127, chậm 21.661 ms.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-01-ba-dot-lien-tiep.svg
+   :align: center
+   :width: 100%
+   :alt: Thời gian từng lần chạy của ba đợt 1000 lần chạy liên tiếp, tô màu theo mức nhanh, giữa, chậm
+
+   Thời gian từng lần chạy ``rknn_run`` của ba đợt 1000 lần chạy liên tiếp trên board, tô màu theo mức. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 8 12 10 8 11 11 11 17 12
@@ -78,6 +86,14 @@ Trong đợt 1, mỗi 0.1 giây đọc ``/sys/kernel/debug/rknpu/power`` và ``l
 3.1. NPU khởi động nguội giữa các lần chạy
 ------------------------------------------
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-02-nghi-giua-lan-chay.svg
+   :align: center
+   :width: 100%
+   :alt: Thời gian từng lần chạy khi nghỉ 2 giây và 10 giây giữa các lần chạy
+
+   Thời gian từng lần chạy khi nghỉ 2 giây (40 lần chạy) và 10 giây (20 lần chạy) giữa các lần chạy trong cùng một tiến trình. Vòng tròn đánh dấu lần chạy đầu. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 14 12 14 12 12 16 10
@@ -109,6 +125,14 @@ Nghỉ 2 và 10 giây giữa các lần chạy (trong cùng một tiến trình)
 
 3.2. Bộ đếm ``cpuidle`` trong ba đợt liên tiếp
 ----------------------------------------------
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-03-cpuidle-ba-dot.svg
+   :align: center
+   :width: 100%
+   :alt: Trung vị thời gian của ba đợt theo số lần vào cpu-sleep
+
+   Trung vị thời gian của ba đợt liên tiếp theo số lần vào ``cpu-sleep`` cộng trên mọi CPU. Chỉ có ba điểm. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -142,6 +166,16 @@ Nghỉ 2 và 10 giây giữa các lần chạy (trong cùng một tiến trình)
 
 Hệ số theo cycles ước tính của phép khớp ``time = a x est. + b`` trên các dòng Conv giữ nguyên giữa ba đợt ``detail`` (1.818, 1.818, 1.819) trong khi hằng số b đổi (50.6, 21.6, 59.0 µs), và tổng thời gian mỗi lần chạy (trung vị) của ba đợt là 21.34, 18.59, 22.50 ms. Nếu xung nhịp NPU hoặc băng thông DDR đổi, phần tỉ lệ với kích thước phải đổi theo. Ở B2 so với B3 cũng vậy (:doc:`03-phan-tich-sau-latency-tung-khoi`, mục 5). **Nhãn: không ủng hộ.** Bộ lấy mẫu 1 Hz trong E1 (``bench/extra_e1_sampler.sh``) đọc các file sysfs ``cur_freq`` và ``governor`` của NPU và DDR, tần số của ba cụm CPU và nhiệt độ, không dùng bộ đếm xung nhịp. Các giá trị đó không đổi, nhưng không chứng minh xung nhịp thật ổn định.
 
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-04-he-so-ba-dot-detail.svg
+   :align: center
+   :width: 100%
+   :alt: Hệ số theo cycles và hằng số b của ba đợt detail
+
+   Hệ số theo cycles ước tính a (trái) và hằng số b (phải) của phép khớp trên các dòng Conv, ba đợt ``detail``. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
+
+
 3.4. Vị trí CPU, ngắt NPU và trạng thái ngủ của CPU
 ---------------------------------------------------
 
@@ -152,6 +186,14 @@ Giả thuyết này được kiểm bằng năm thí nghiệm E2 đến E2e ở 
 
 4.1. E1: dao động ngay trong một phiên ``eval_perf``
 ----------------------------------------------------
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-05-e1-theo-lan-goi.svg
+   :align: center
+   :width: 100%
+   :alt: Latency từng lần gọi eval_perf của hai phiên E1
+
+   Latency từng lần gọi ``eval_perf`` của hai phiên E1, 20 lần gọi mỗi phiên. Vòng tròn đánh dấu lần gọi đầu. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -190,6 +232,14 @@ Chênh trung vị giữa hai phiên chỉ 0.64% nhưng trong mỗi phiên giá t
 
 4.2. Lần gọi đầu và các lần sau trong một phiên
 -----------------------------------------------
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre/lvl-06-lan-goi-dau-b3.svg
+   :align: center
+   :width: 100%
+   :alt: Lần gọi đầu so với trung vị các lần sau của ba phiên B3
+
+   Lần gọi đầu (vòng rỗng) so với trung vị các lần sau (chấm đặc) của ba phiên B3, theo latency (trái) và tổng thời gian debug (phải). Trục y không bắt đầu từ 0. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py``.
 
 .. list-table::
    :header-rows: 1

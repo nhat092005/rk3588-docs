@@ -23,6 +23,14 @@ Latency của đúng file INT8 này ở :doc:`../02-tang-npu-nen-do/02-ket-qua-l
 
 X7 chấm chính file INT8 được đo latency (sha256 ``a501f94e``), suy luận bằng RKNNLite trên board, chấm điểm trên PC bằng cùng mã và cùng ngưỡng tin cậy với bản FP32 (Evaluation Protocol v1, ``ai/core/evaluator.py``). Quy tắc ``bench/eval_x7/rule.txt``: chỉ báo số, không áp ngưỡng nào (ngưỡng 1.0 pp mAP đã duyệt thuộc cổng G4, giai đoạn 2).
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/04-do-chinh-xac-int8-do-latency/x7-01-int8-so-voi-fp32.svg
+   :align: center
+   :width: 100%
+   :alt: INT8 so với FP32 theo bốn chỉ số trên hai tập
+
+   INT8 của file đo latency so với FP32 theo bốn chỉ số trên hai tập. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 14 8 14 12 12 14

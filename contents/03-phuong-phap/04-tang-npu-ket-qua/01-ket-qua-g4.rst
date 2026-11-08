@@ -99,6 +99,14 @@ Bảng layer của build INT8 (rknn-toolkit2 2.3.2) của model ReLU đã huấn
 
 Một dòng của bảng layer ở ``CORE_0_1_2`` được tính là chia khi ít nhất hai trong ba phần trăm WorkLoad lớn hơn 0.0%. Độ phủ là tổng cycles (cột ``Total``) của các dòng chia chia cho tổng cycles của mọi dòng có cycles. Tổng cycles của bảng board bằng tổng cycles của bảng build của cùng file ``.rknn`` (đã assert). Độ phủ lấy từ bảng ``perf_debug=True``, chỉ là chỉ báo vì ``perf_debug`` có thể tắt cơ chế song song [T1 UG232 tr.177].
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-01-phu-da-nhan-va-resize.svg
+   :align: center
+   :width: 100%
+   :alt: Độ phủ đa nhân và thời gian dòng Resize của SiLU và ReLU
+
+   Độ phủ đa nhân của hai phiên đo (trái) và thời gian hai dòng Resize của mỗi model ở hai mặt nạ nhân (phải). Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 16 20 20 20
@@ -117,6 +125,14 @@ Một dòng của bảng layer ở ``CORE_0_1_2`` được tính là chia khi í
      - đạt
 
 Bảng theo loại op ở ``CORE_0_1_2`` (phiên 1, từng model). Cột "Dòng chia" là số dòng có ít nhất hai phần trăm WorkLoad lớn hơn 0.0%. Cột "Tỉ lệ thời gian" là tỉ lệ tổng thời gian dòng ở ``CORE_0`` (trung vị hai phiên, chế độ ``perf_debug``).
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-02-thoi-gian-theo-op.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ thời gian của từng op trên CORE_0 cho SiLU và ReLU
+
+   Tỉ lệ thời gian của từng op trên ``CORE_0`` cho hai model. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -361,6 +377,14 @@ Các số này là thời gian dòng trong chế độ ``perf_debug`` và không
 
 Trung vị của hai trung vị phiên (mỗi phiên là trung vị 5 lần ``eval_perf``) cho mỗi tổ hợp, đơn vị ms. Chênh hai phiên là chênh giữa hai trung vị phiên của tổ hợp.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-03-latency-theo-mask.svg
+   :align: center
+   :width: 100%
+   :alt: Median latency theo mặt nạ nhân và mức giảm so với CORE_0
+
+   Median latency theo mặt nạ nhân (trái) và mức giảm so với ``CORE_0`` (phải). Đường đứt 5% là ngưỡng giảm tối thiểu. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 10 16 28 18 18
@@ -457,6 +481,14 @@ Quy tắc B (viết trước dữ liệu): giảm so với ``CORE_0`` tính bằ
 
 Chấm bằng RKNNLite trên board, cùng mã và cùng ngưỡng tin cậy cho mọi model (``make evaluate BACKEND=rknn``). Tập cổng là ``css_test`` (82 ảnh, 41 instance ``NoHelmet``). Tập ``ppe2286_ext`` (180 ảnh) chỉ để mô tả. AP là AP50-95 của class, đơn vị điểm phần trăm.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-04-cong-c-chenh-relu.svg
+   :align: center
+   :width: 100%
+   :alt: Chênh AP của ReLU so với SiLU ở sáu tổ hợp tập và kiểu số
+
+   Chênh ReLU so với SiLU của ba chỉ số ở sáu tổ hợp tập và kiểu số. Đường đứt -1.0 điểm là ngưỡng cổng C. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 26 26 26 26 14
@@ -500,6 +532,14 @@ Chấm bằng RKNNLite trên board, cùng mã và cùng ngưỡng tin cậy cho 
 Cổng C chỉ dùng hàng ``css_test`` INT8: AP50-95 -3.51 điểm và AP NoHelmet -4.94 điểm đều dưới -1.0, AP Vest +0.14 điểm. Kết quả: **C không đạt**. Ở FP16 (tham chiếu) và FP32 (mô tả) cũng thấp hơn SiLU ở AP50-95 trên ``css_test``.
 
 Nhiễu giữa seed (chỉ mô tả, không phải cổng): baseline SiLU seed 0, 1, 2 chấm cùng đường, INT8 dùng cùng danh sách hiệu chuẩn. Khoảng trải là lớn nhất trừ nhỏ nhất. Quy tắc viết trước: mức 1.0 điểm "trong nhiễu seed" khi khoảng trải của cột đó từ 1.0 điểm trở lên, "ngoài nhiễu seed" khi dưới 1.0. Có ba seed nên độ lệch chuẩn mẫu chỉ đi kèm, không phải kết luận.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-05-nhieu-seed.svg
+   :align: center
+   :width: 100%
+   :alt: Giá trị AP của ba seed cho SiLU và ReLU
+
+   Giá trị của ba seed cho SiLU và ReLU, mỗi hàng một chỉ số. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -685,6 +725,14 @@ Nhiễu seed của ReLU (thêm theo duyệt của người dùng ngày 2026-10-3
      - trong nhiễu seed
 
 Cổng C của từng seed ReLU so với SiLU cùng số seed (``css_test`` INT8, AP50-95 / AP NoHelmet / AP Vest, điểm):
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/01-ket-qua-g4/g4-06-relu-ba-seed.svg
+   :align: center
+   :width: 100%
+   :alt: Chênh AP của ReLU so với SiLU cùng seed
+
+   Chênh ReLU so với SiLU cùng seed của ba chỉ số. Đường đứt -1.0 điểm là ngưỡng cổng C. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py``.
 
 .. list-table::
    :header-rows: 1

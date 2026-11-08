@@ -45,7 +45,7 @@ Trang mô tả đúng một kiến trúc, và đó là **mô hình gốc để m
 
 Mọi con số tham số và GFLOPs trong các hình được tính lại từ công thức rồi ``assert`` với số đo thật trong ``gen.py`` cùng thư mục. Gõ sai một hằng số thì script sinh hình dừng.
 
-Quy ước: kích thước tensor viết ``C×H×W`` (bỏ chiều batch). "Tham số" là số phần tử của ``model.parameters()``, gồm gamma và beta của BatchNorm. Hai buffer ``running_mean`` và ``running_var`` không tính. GFLOPs bằng 2 × MACs của các lớp ``Conv2d``, đo ở ảnh 640×640. Công cụ ``get_flops`` của Ultralytics cho 8.196 GFLOPs ở ``nc=5`` (8.855 ở ``nc=80``) [T3 ``measure.py``]. Chênh 0.109 so với 8.087 ở trên chưa tách nguyên nhân, nên con số trong trang dùng cách đếm Conv2d để cộng được theo từng lớp.
+Quy ước: kích thước tensor viết ``C×H×W`` (bỏ chiều batch). "Tham số" là số phần tử của ``model.parameters()``, gồm gamma và beta của BatchNorm. Hai buffer ``running_mean`` và ``running_var`` không tính. GFLOPs bằng 2 × MACs của các lớp ``Conv2d``, đo ở ảnh 640×640. Công cụ ``get_flops`` của Ultralytics cho 8.196 GFLOPs ở ``nc=5`` (8.855 ở ``nc=80``) khi model chưa fuse [T3 ``measure.py``]. Chênh lệch 0.109 so với 8.087 là do ``thop.profile`` tính thêm 54,476,800 ops của BatchNorm2d (4 ops mỗi phần tử khi có affine, quy ra 0.109 GFLOPs). Khi gộp BatchNorm vào Conv2d trước suy luận (``model.fuse()``), ``get_flops`` cho đúng 8.087 GFLOPs [T3 ``measure.py``].
 
 2. Tổng quan 23 lớp
 ===================
@@ -394,6 +394,7 @@ Ba nhận xét rút ra từ số đo:
 - Head có ít tham số hơn backbone gần một nửa nhưng chi phí tính toán gần bằng. Lý do là Conv 3×3 của head chạy trên lưới lớn: riêng mức P3 (80×80) chạy 6400 vị trí. Tính theo công thức, mức P3 của head tiêu tốn :math:`6400 \cdot (64 \cdot 64 \cdot 9 \cdot 4 + 64 \cdot 64 + 64 \cdot 5) = 0.972` GMACs hay 1.944 GFLOPs, khoảng hai phần ba (65.6%) GFLOPs của head. Đo bằng hook Conv2d trong ``measure.py`` (2 FLOP mỗi MAC), GFLOPs của head theo mức là: P3 1.944 (65.6%), P4 0.722 (24.3%), P5 0.298 (10.1%), Conv 1×1 của DFL 0.001 (0.04%), tổng 2.965; số P3 khớp phép tính theo công thức.
 - Hai lớp C2f ×2 của backbone (L4, L6) mỗi lớp 0.629 GFLOPs, cao nhất trong các lớp backbone. L21 (neck, 493,056 tham số) là lớp nhiều tham số nhất ngoài head nhưng chỉ 0.393 GFLOPs vì chạy ở lưới 20×20.
 - Đổi ``nc`` chỉ ảnh hưởng head. Backbone cộng neck có 2,259,536 tham số ở cả ``nc=5`` và ``nc=80``. Head là 752,287 (``nc=5``) và 897,664 (``nc=80``), tổng 3,157,200 khớp con số ghi trong yaml [T1 yolov8.yaml:11] [T3 ``measure.py``]. Ở ``nc=80``, ``c3`` lên 80 nên nhánh lớp rộng hơn.
+- Khối lượng các phép tính ngoài Conv2d (đo trên ảnh 640×640 bằng ``measure.py``, đếm theo số phần tử đầu ra): BatchNorm2d 13,619,200 (57 lớp), SiLU 13,619,200 (57 lớp), Split 2,457,600 (8 C2f), Concat 2,304,000 (4 lớp), Add 1,075,200 (6 Bottleneck có shortcut), Upsample 1,228,800 (2 lớp), MaxPool2d 153,600 (3 lớp SPPF). Các phép này không quy ra FLOPs vì số FLOPs mỗi phần tử là quy ước không có nguồn chuẩn, và khi suy luận BatchNorm được gộp vào Conv2d còn các phép trên chủ yếu bị giới hạn bởi băng thông bộ nhớ (memory-bound).
 
 8. Đối chiếu với model đã huấn luyện
 ====================================
@@ -413,5 +414,4 @@ Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu.yaml``) thay SiLU bằng
 10. Việc chưa làm
 =================
 
-- Các phép ngoài Conv2d mới được đếm số phần tử đầu ra (``measure.py``, ảnh 640×640): BatchNorm2d 13,619,200 (57 lớp), SiLU 13,619,200 (57 lớp), MaxPool2d 153,600 (3 lớp), Upsample 1,228,800 (2 lớp). Chưa quy ra FLOPs vì số FLOPs mỗi phần tử là quy ước chưa có nguồn. Add, Concat, Split và Mul chưa đếm. Chênh 0.109 giữa cách đếm này và ``get_flops`` chưa được giải thích.
 - Chưa so yaml trong ultralytics 8.4.154 với bản YOLOv8n phát hành gốc năm 2023. "Chuẩn" ở đây nghĩa là chuẩn theo cấu hình hiện hành của Ultralytics, đã khớp con số 3,157,200 tham số ghi trong chính yaml đó [T1 yolov8.yaml:11].

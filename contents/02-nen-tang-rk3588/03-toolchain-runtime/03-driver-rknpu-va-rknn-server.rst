@@ -73,6 +73,11 @@ Hãng nêu hai con số trong cùng một tài liệu, ở hai ngữ cảnh khá
 
 Cách giải: 0.9.2 là khuyến nghị chung khi dựng môi trường, 0.8.8 là mốc cho riêng chuyện hiệu năng. Vì 0.9.2 lớn hơn 0.8.8, driver đạt 0.9.2 thì đạt cả hai (suy ra). Driver 0.9.8 trong repo vượt cả hai mốc. Nguồn driver ghi nhánh ``orange-pi-6.1-rk35xx`` của ``orangepi-xunlong/linux-orangepi``, commit ``f6eedab0cbe9b4be3f855661a0a7e7008812d40a``, thư mục ``drivers/rknpu/`` [T1 DRV SOURCE.txt:1-5]. Hãng nói driver là mã nguồn mở và nằm trong kernel Rockchip [T1 EX 3rdparty/rknn-toolkit2/README.md:16].
 
+**Xuất xứ binary và tình trạng mã nguồn compiler:**
+
+1. **Mã nguồn compiler**: Hoàn toàn **không có trong repo**. Thư mục submodule ``3rdparty/rknn-toolkit2/`` chỉ chứa các ví dụ mẫu (C/C++ demo), tài liệu hướng dẫn và thư viện bên ngoài (OpenCV, RGA, stb, cnpy). Bản thân bộ biên dịch đồ thị RKNN (compiler, graph optimizer, quantizer, code generator) được Rockchip phát hành dưới dạng thư viện nhị phân đóng gói kín (closed-source binary: các tệp ``.so`` bên trong file wheel Python và thư viện liên kết động ``librknnrt.so``).
+2. **Đối soát binary trên bo mạch với commit f6eedab0**: Chuỗi phiên bản trên bo mạch khớp ``0.9.8 20240828`` qua dmesg (``"Initialized rknpu 0.9.8 20240828 for fdab0000.npu"`` [T1 DRV SOURCE.txt:6]). Tuy nhiên, do driver trên bo mạch được biên dịch tích hợp tĩnh trong kernel image của nhà sản xuất (Orange Pi OS) thay vì module nạp động rời, việc đối soát băm SHA256 của file nhị phân trên bo mạch so với bản build trực tiếp từ commit ``f6eedab0`` vẫn là điểm chưa đối soát bit-by-bit.
+
 1.2 Hỏi phiên bản và các node
 -----------------------------
 

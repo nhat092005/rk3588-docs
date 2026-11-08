@@ -6,7 +6,7 @@ Phase 9: camera
 
 .. admonition:: Tóm tắt
 
-   - Phase 9 kiểm tra model đề xuất trên camera OV13855 qua pipeline NV12, RGB, LetterBox, RKNN (NPU), NMS. Tệp `ai/board/camera.py` chưa có.
+   - Phase 9 kiểm tra model đề xuất trên camera OV13855 qua pipeline NV12, RGB, LetterBox, RKNN (NPU), NMS. Tệp ``ai/board/camera.py`` và target ``make bench-camera`` đã viết ngày 2026-11-07, kiểm bằng ba lần chạy 60 đến 120 giây trên board (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`). Target mới chạy khô bằng ``make -n``, chưa chạy thật qua ``make``. Lần chạy nghiệm thu chưa làm.
    - Phase 9 chạy tới khi nhiệt độ ổn định (tăng không quá 1°C trong 10 phút liền) rồi thêm 30 phút. Các ngưỡng này chốt trước khi đo.
 
 .. _phase-9-camera--real-world-evaluation:
@@ -26,7 +26,7 @@ Phase 9. Camera / real-world evaluation
    * - Việc
      - File
    * - Pipeline camera trên board, dùng lại ``preprocess``, ``postprocess``, ``ResourceMonitor``
-     - ``ai/board/camera.py`` (chưa có), ``ai/board/common.py``
+     - ``ai/board/camera.py`` (đã có, chưa nghiệm thu), ``ai/board/common.py``
    * - Ghi FPS, nhiệt độ NPU mỗi phút
      - ``runs/<run_id>/bench/camera_<ngày>.json``
 
@@ -36,3 +36,264 @@ Phase 9. Camera / real-world evaluation
 - ☐ Lưu video/ảnh mẫu các trường hợp đúng, sót, nhầm
 
 **Tiêu chí xong:** chạy hết 30 phút ổn định không lỗi, có đường FPS và nhiệt độ theo thời gian.
+
+Quy tắc nghiệm thu (chốt ngày 2026-11-07, trước lần chạy)
+---------------------------------------------------------
+
+Ba ngưỡng ở trên giữ nguyên (1°C, 10 phút, 30 phút). Phần dưới chốt cách đo, ghi trước khi có số liệu của lần chạy dài. Chương trình là ``ai/board/camera.py --until-stable`` [Mã nguồn repo ``ai/board/camera.py``].
+
+.. list-table::
+   :header-rows: 1
+   :widths: 28 72
+
+   * - Việc
+     - Định nghĩa chốt
+   * - Nhiệt độ
+     - Vùng nhiệt ``npu-thermal``, lấy mẫu mỗi 1 giây, lấy trung bình theo từng phút. Phút 0 bắt đầu từ khung đầu tiên sau 30 khung khởi động
+   * - Ổn định tại phút k
+     - Trong 10 giá trị trung bình phút liền nhau kết thúc ở phút k, không giá trị nào cao hơn giá trị đầu của cửa sổ quá 1.0°C. Phút nào thiếu mẫu nhiệt thì cửa sổ chứa nó không được xét
+   * - Cửa sổ ổn định
+     - 30 phút đầy đủ ngay sau phút k
+   * - Cửa sổ đầu
+     - 5 phút đầu của lần chạy, dùng để so FPS lúc đầu với lúc ổn định
+   * - Trần
+     - 120 phút. Chạm trần mà chưa ổn định thì ghi "chưa ổn định" và không nghiệm thu
+   * - Số báo cho mỗi cửa sổ
+     - FPS, độ trễ phần mềm đầu cuối trung bình và p95, NPU trung vị, CPU tiến trình và hệ thống, RSS đỉnh, nhiệt độ, xung thấp nhất của NPU, DDR và từng cụm CPU trong mỗi phút
+   * - "Không lỗi"
+     - Chương trình thoát mã 0, ISP ``frameloss`` bằng 0, không khung nào bị ghi đè, không phút nào có xung NPU hay DDR thấp hơn mức đã khóa (hạ xung do nhiệt)
+   * - Điều kiện đo
+     - Ghim lõi 4 đến 7, ``CORE_0``, ``OPENBLAS_NUM_THREADS=1``, CPU, NPU, DDR khóa ``performance`` bằng ``lock_freq.sh`` (nhiệt xấu nhất, khớp giao thức đo của dự án), không bật ``--track``, ``--save-dir``, ``--save-video``. Bắt đầu từ board đã nghỉ, nhiệt độ đầu lần chạy được ghi vào JSON
+   * - Đo độ trễ
+     - Phần mềm, từ lúc đọc đủ một khung đến hết hậu xử lý, không gồm phơi sáng và xử lý trong ISP
+
+FPS không phản ánh hạ xung vì camera giới hạn ở 29.95 khung/giây [T3 board, ``camera.py``], nên cần các cột xung thấp nhất và độ trễ NPU theo phút. Lần đầu chạy bằng model baseline ``ppe5_yolov8n_baseline_100ep_s0`` (INT8), vì model đề xuất của Phase 7 chưa được chọn. Kết quả đó là mốc nhiệt của pipeline với baseline, chưa phải nghiệm thu Phase 9 cho model đề xuất.
+
+Tiêu chí lần chạy mốc trên code đã chốt (chốt ngày 2026-11-08, trước lần chạy)
+------------------------------------------------------------------------------
+
+Lần chạy này vẫn dùng model baseline, là mốc để so với model đề xuất, chưa phải nghiệm thu Phase 9. Quy tắc nghiệm thu ở trên giữ nguyên, thêm các điều kiện dưới. Các ngưỡng là giá trị chọn, không có nguồn bên ngoài quy định.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 34 36
+
+   * - Điều kiện
+     - Ngưỡng
+     - Căn cứ
+   * - Board đã nghỉ trước khi chạy
+     - ``npu-thermal`` không quá 43.5°C, chưa đạt thì chờ
+     - Lần đầu bắt đầu ở 42.5°C, cảm biến nhảy bước 0.923°C
+   * - Không chậm hơn baseline
+     - Độ trễ đầu cuối p50 trong cửa sổ ổn định không quá 19.16 ms
+     - Baseline 19.02 ms cộng 0.14 ms, mức trôi giữa hai lần đo cùng biến thể
+   * - Thời gian dọn rác không tăng dần
+     - Trung bình ``gc_collect_ms`` 10 phút cuối không cao hơn 10 phút đầu quá 1 ms
+     - Lần chạy trước tăng từ 0.67 lên 10.06 ms trong 42 phút
+   * - RSS
+     - Chỉ báo cáo, không dùng làm điều kiện đạt
+     - Chưa rõ nguồn của khoảng 0.5 MiB mỗi phút nên chưa có cơ sở đặt ngưỡng
+
+Nếu trượt điều kiện độ trễ hoặc thời gian dọn thì không dùng số của lần chạy làm kết quả chính.
+
+Lần chạy đầu theo bảng này (``camera_2026-11-08_rested.json``) trượt điều kiện thời gian dọn: trung bình 1.00 ms ở 10 phút đầu, 4.27 ms ở 10 phút cuối, chênh 3.27 ms so với giới hạn 1 ms. Ngưỡng giữ nguyên. Nguyên nhân là bốn danh sách mẫu của ``ResourceMonitor``, đã đổi sang ``array``. Các lần đo tiếp theo chốt trước khi đo (ngày 2026-11-08): lần lặp trên code đã sửa dùng đúng bảng trên, thêm 30 phút board không chạy trước khi xét ngưỡng nhiệt. Lần không khóa xung (``ondemand``) chỉ báo cáo, không có ngưỡng đạt.
+
+Kết quả lần chạy baseline ngày 2026-11-07
+-----------------------------------------
+
+Chạy từ 21:23:38 đến 22:08:40 (giờ board, 45 phút), lệnh ``camera.py --until-stable --max-minutes 120`` trong ``setsid nohup`` kèm ``lock_freq.sh`` (khóa rồi tự trả ``ondemand``), thoát mã 0. Model là baseline ``ppe5_yolov8n_baseline_100ep_s0`` INT8, chưa phải model đề xuất. Điều kiện đúng như quy tắc trên: khóa CPU 1800, 2256, 2304 MHz, NPU 1000 MHz, DDR 2112 MHz, ghim lõi 4 đến 7, không bật tracker hay lưu ảnh, nhiệt độ NPU đầu lần chạy 42.5°C, phòng trống (``n_det_mean`` 0.02). Tệp: ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/camera_2026-11-07.json`` và ``camera_2026-11-07.rows.jsonl`` (một dòng mỗi phút). Chạy bằng lệnh tương đương ``make bench-camera ... STABLE=1``, không qua ``make`` vì cần chạy tách khỏi phiên ssh [T3 board, ``camera.py``].
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Điều kiện đã chốt
+     - Kết quả
+   * - Ổn định
+     - Đạt ở phút 14. Cửa sổ phút 5 đến 14 có trung bình nhiệt từ 54.54 đến 55.46°C, cao hơn giá trị đầu tối đa 0.92°C (không quá 1.0)
+   * - Cửa sổ ổn định
+     - Phút 15 đến 44, 30 phút đầy đủ, 53909 khung
+   * - Chương trình thoát mã 0
+     - Đạt
+   * - ISP ``frameloss`` bằng 0
+     - Đạt: ISP đếm 80894 khung, đọc từ ống 80895
+   * - Không khung nào bị ghi đè
+     - Đạt: 0
+   * - Không phút nào xung thấp hơn mức khóa
+     - Đạt: 45 phút đều NPU 1000 MHz, DDR 2112 MHz, CPU 1800, 2256, 2304 MHz
+
+So hai cửa sổ (trung bình hoặc trung vị, ms):
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+
+   * - Chỉ số
+     - 5 phút đầu (phút 0 đến 4)
+     - 30 phút ổn định (phút 15 đến 44)
+   * - FPS
+     - 29.95
+     - 29.949
+   * - Độ trễ đầu cuối trung bình, p50, p95
+     - 19.023, 19.000, 19.192
+     - 19.034, 19.022, 19.173
+   * - NPU trung vị và p95
+     - 17.989 và 18.141
+     - 18.000 và 18.099
+   * - CPU tiến trình, hệ thống (%)
+     - 16.4, 15.0
+     - 16.4, 15.0
+   * - RSS đỉnh (MiB)
+     - 145.5
+     - 224.7
+   * - Nhiệt độ trung bình phút đầu và phút cuối (°C)
+     - 48.83 và 54.26
+     - 55.46 và 56.32
+   * - Nhiệt độ cao nhất (°C)
+     - 54.538
+     - 56.384
+
+Toàn lần chạy: 80865 khung đo trong 2700 giây, 29.95 khung/giây, độ trễ đầu cuối trung bình 19.030, p50 19.017, p95 19.172, độ lệch chuẩn 0.11 ms. Chu kỳ camera 33.389 ms, p95 33.432 ms. Trung vị NPU theo phút nằm giữa 17.975 và 18.011 ms, p95 độ trễ theo phút giữa 19.137 và 19.344 ms [T3 board, ``camera_2026-11-07.rows.jsonl``].
+
+Điều cần đọc kèm:
+
+- **Nhiệt độ không phẳng hẳn.** Trong cửa sổ ổn định nhiệt trung bình vẫn dao động giữa 55.46 và 56.37°C (đỉnh ở phút 35, hạ xuống 55.60 ở phút 40, lại lên 56.32 ở phút 44). Cảm biến ``npu-thermal`` nhảy theo bước 0.923°C (các nhiệt độ cao nhất theo phút chỉ nhận 50.846, 52.692, 53.615, 54.538, 55.461, 56.384), nên ngưỡng 1.0°C tương đương đúng một bước [T3 board, ``/sys/class/thermal``].
+- **Biên nhiệt.** Vùng ``npu-thermal`` chỉ có điểm tới hạn 115°C, không thấy điểm hạ xung (passive) [T3 board, ``trip_point_0_temp``]. Cuối lần chạy 56.4°C. Nhiệt độ môi trường không đo.
+- **RSS tăng đều 2.0 MiB mỗi phút** (133.7 lên 224.7 MiB), cả trong cửa sổ ổn định (2.01 MiB mỗi phút). Lần chạy này dùng ``camera.py`` trước khi sửa, nên RSS ở bảng trên cao hơn phần pipeline cần. Nguyên nhân và cách sửa ở mục cuối trang.
+- **Giới hạn.** Một lần chạy, model baseline, phòng trống nên hậu xử lý gần như không có hộp, chưa so với ``ondemand``, chưa đo công suất, chưa đo nhiệt độ môi trường. FPS luôn 29.95 vì camera giới hạn, nên không dùng được làm chỉ báo hạ xung, đã dùng cột xung thấp nhất.
+
+Kết luận theo quy tắc chốt: baseline thỏa mọi điều kiện (ổn định ở phút 14, 30 phút ổn định không lỗi, FPS và độ trễ không đổi giữa đầu và lúc ổn định). Đây là mốc nhiệt của pipeline với baseline. Nghiệm thu Phase 9 cho model đề xuất cần chạy lại đúng lệnh này khi Phase 7 chọn xong model, nên các hộp kiểm ở trên chưa đánh dấu.
+
+
+Nguyên nhân RSS tăng và cách sửa (ngày 2026-11-07 và 2026-11-08)
+----------------------------------------------------------------
+
+Không thấy rò rỉ trong pipeline. Độ dốc RSS giảm từ 2.01 còn 0.33 MiB mỗi phút sau các thay đổi trong chương trình đo, độ trễ đầu cuối p50 từ 19.022 thành 19.065 ms (trong mức trôi 0.14 ms giữa hai lần đo cùng biến thể). Một cách sửa đã thử (``mallopt``) làm chậm pipeline nên đã bỏ.
+
+Năm lần chạy dài, cùng model baseline INT8, khóa xung, ghim lõi 4 đến 7, phòng trống. Số độ trễ và độ dốc RSS lấy trong cửa sổ ổn định [T3 board, ``camera_2026-11-07.json``, ``camera_2026-11-07_fixed.json``, ``camera_2026-11-08.json``, ``camera_2026-11-08_rested.json``, ``camera_2026-11-08_r2.json``].
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 15 15 15 15 15
+
+   * - Chỉ số
+     - Code cũ
+     - ``mallopt``, ``gc``
+     - ``gc``, board chưa nghỉ
+     - ``gc``, ``Records``
+     - Code đã chốt (``_r2``)
+   * - Độ trễ đầu cuối p50 (ms)
+     - 19.022
+     - 21.468
+     - 19.090
+     - 19.083
+     - 19.065
+   * - Độ lệch chuẩn đầu cuối (ms)
+     - 0.084
+     - 1.046
+     - 0.084
+     - 0.104
+     - 0.092
+   * - NPU p50 (ms)
+     - 18.000
+     - 19.245
+     - 18.063
+     - 18.071
+     - 18.047
+   * - CPU tiến trình (%)
+     - 16.4
+     - 26.7
+     - 16.6
+     - 16.6
+     - 16.6
+   * - RSS đỉnh, lấy mẫu 10 lần mỗi giây (MiB)
+     - 228.1
+     - 184.3
+     - 185.3
+     - 163.7
+     - 161.0
+   * - Độ dốc RSS, bình phương tối thiểu (MiB mỗi phút)
+     - 2.009
+     - 1.192
+     - 1.334
+     - 0.302
+     - 0.328
+   * - ``gc_collect_ms`` thấp nhất, cao nhất
+     - không có
+     - 1.77, 15.93
+     - 0.67, 10.06
+     - 0.61, 5.38
+     - 0.30, 1.48
+   * - Ổn định ở phút, tổng số phút
+     - 14, 45
+     - 14, 45
+     - 11, 42
+     - 15, 46
+     - 14, 45
+   * - Nhiệt độ NPU đầu lần chạy (°C)
+     - 42.5
+     - 43.5
+     - 48.1
+     - 44.4
+     - 42.5
+
+Cả năm lần đều thoát mã 0, ISP ``frameloss`` bằng 0, không khung nào bị ghi đè, không phút nào có xung thấp hơn mức khóa. Lần ``gc``, board chưa nghỉ được khởi động 1 phút sau lần đo trước nên sai điều kiện nghỉ, chỉ giữ làm bằng chứng. Lần ``gc``, ``Records`` đạt độ trễ nhưng trượt bảng tiêu chí ở điều kiện thời gian dọn. Lần ``_r2`` đạt toàn bộ bảng tiêu chí: độ trễ đầu cuối p50 19.065 ms (giới hạn 19.16), ``gc_collect_ms`` trung bình 0.62 ms ở 10 phút đầu và 0.81 ms ở 10 phút cuối (chênh 0.19, giới hạn 1), nhiệt độ đầu lần chạy 42.5°C.
+
+**Vì sao RSS tăng.** Probe từng tầng (khung xám tĩnh, 6000 khung) cho thấy capture, đổi màu, tiền xử lý, NPU, hậu xử lý đều tăng dưới 0.015 KiB mỗi khung [T3 board, ``rss_probe.py``]. Trong tiến trình thật, ``gc.collect()`` ép chạy làm RSS giảm từ 100.1 xuống 82.1, từ 127.9 xuống 83.1, từ 184.9 xuống 86.6 MiB. Rác là cấu trúc ctypes của ``rknnlite`` (``RKNNInputOutputNum``, ``RKNNRtTensorAttr``, bộ đệm 1228800 byte) nằm trong vòng tham chiếu [T3 board, ``live_smaps.py``, lần chạy có ``mallopt``]. ``tracemalloc`` ghi bản ghi từng khung của chương trình đo khoảng 0.5 KiB mỗi khung [T3 board]. Việc gán 0.68 MiB mỗi phút cho rác và 1.03 MiB mỗi phút cho bản ghi chỉ là phép trừ giữa các lần chạy khác điều kiện [SL].
+
+**Cách sửa đang dùng** (``ai/board/camera.py``, ``ai/board/common.py``):
+
+- ``gc.freeze()`` trước khi mở camera và ``gc.collect()`` mỗi phút sau khi xử lý xong khung. Chưa có ``gc.freeze()`` thì mỗi lần dọn 26 đến 29 ms và 11 khung bị ghi đè trong 10 phút [T3 board, không khóa xung].
+- Bản ghi từng khung và thời điểm đến lưu theo cột ``array('d')`` (lớp ``Records``), 72 byte mỗi khung cho 9 cột.
+- Mẫu của ``ResourceMonitor`` cũng lưu bằng ``array('d')``. Bộ gom rác phải duyệt từng phần tử của ``list`` dài: 251256 phần tử mất 10.06 ms, tức 40 ns mỗi phần tử, từ đó dự đoán 4.40 ms cho 109856 phần tử của ``ResourceMonitor``, đo được trung bình 4.27 ms ở 10 phút cuối [T3 board, phép tính từ hai tệp JSON]. Sau khi đổi, ``_r2`` giữ dưới 1.5 ms suốt 45 phút.
+
+**Vì sao bỏ ``mallopt(M_MMAP_THRESHOLD)``.** So sánh 5 phút mỗi biến thể, khóa xung, chỉ đổi hai công tắc [T3 board, ``tmp/camera-pipeline/ab_runs/``]:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 28 14 14 14 16 14
+
+   * - Biến thể (theo thứ tự chạy)
+     - Đầu cuối p50 (ms)
+     - Độ lệch chuẩn (ms)
+     - NPU p50 (ms)
+     - RSS phút đầu, cuối (MiB)
+     - ``gc_collect_ms``
+   * - Không có gì
+     - 19.052
+     - 0.242
+     - 18.028
+     - 133.5, 147.6
+     - không có
+   * - ``mallopt`` và ``gc``
+     - 21.448
+     - 1.037
+     - 19.259
+     - 78.9, 83.8
+     - 2.66 đến 6.81
+   * - Chỉ ``mallopt``
+     - 21.389
+     - 1.059
+     - 19.283
+     - 93.6, 110.0
+     - không có
+   * - Chỉ ``gc``
+     - 19.159
+     - 0.185
+     - 18.143
+     - 127.1, 140.9
+     - 0.71 đến 1.48
+   * - Không có gì, lặp lại
+     - 19.192
+     - 0.262
+     - 18.164
+     - 131.8, 141.2
+     - không có
+
+``mallopt`` làm đầu cuối chậm thêm khoảng 2.3 ms và NPU khoảng 1.2 ms, độ lệch chuẩn tăng khoảng 4 lần, lần chạy 45 phút có CPU tiến trình 26.7% so với 16.4%. Hai lần "không có gì" lệch nhau 0.14 ms, nên ``gc`` không tạo chênh lệch đo được. Nguyên nhân có thể là bộ đệm đầu vào 1.2 MB được cấp bằng ``mmap`` và page fault lại mỗi khung [SL], chưa đo số page fault.
+
+Điều cần đọc kèm:
+
+- **Không dùng cột ``rss_mib`` để so các bản.** Cột này đọc ngay sau ``gc.collect()``, nên thấp hơn đỉnh thật. Lần có ``mallopt`` ghi 131.7 MiB ở cột phút, trong khi ``ResourceMonitor`` đo đỉnh 184.3 MiB. Bảng đầu mục này dùng đỉnh của ``ResourceMonitor``.
+- **RSS không còn tăng đều.** Lần ``_r2`` giữ khoảng 140 MiB tới phút 30, lên khoảng 148 MiB rồi giữ, kèm vài đỉnh tạm thời (147.4, 150.0 MiB). Lần ``gc``, ``Records`` có đỉnh 153.8, 156.8, 160.6 MiB rồi tụt về khoảng 150 MiB. Nguyên nhân các bậc và đỉnh: unknown.
+- **Độ dốc 0.33 MiB mỗi phút chưa tách** phần của chương trình đo với phần còn lại, và không phải đường thẳng nên chỉ dùng để so sánh. Phần lưu trữ theo cột tính ra khoảng 0.15 MiB mỗi phút [SL, phép tính].

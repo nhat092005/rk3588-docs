@@ -32,6 +32,14 @@ Cơ sở T1: mục "5.3.3 Multi-Core Performance Improvement Tips" của UG232 g
 
 E2 chạy bốn điều kiện dự định (A mặc định, B ứng dụng và ngắt NPU cùng CPU4, C cùng CPU0, D tắt trạng thái ``cpu-sleep``: script ghi 1 vào ``state1/disable`` của mọi CPU, và chỉ đọc lại CPU0), mỗi khối 1000 lần chạy, thứ tự ABCD rồi DCBA, và khôi phục ngắt và ``cpuidle`` sau cùng (đã đọc lại trên board xác nhận ngắt về ``0-7`` và ``cpu-sleep`` bật lại). Điều kiện B ở khối 2 **không thực hiện đúng**: 89% ngắt NPU vẫn rơi vào CPU0, chỉ 7030 ngắt rơi vào CPU4, khoảng 112 lần chạy với 63 ngắt mỗi lần chạy. Cửa sổ 100 lần chạy đầu của khối có trung vị 16.31 ms rồi chuyển sang 18.87 ms. Trên board có ``irqbalance`` đang chạy. Việc ``irqbalance`` trả ngắt về CPU0 là suy đoán nhất quán với dữ liệu, chưa kiểm. Đính chính ngày 2026-10-31: X9 lặp lại điều kiện B với ``irqbalance`` đang chạy, ba lần, mỗi lần 3000 lần chạy liên tiếp, log mỗi giây ghi được 49 đến 55 mẫu. Ở lần thứ nhất, trong khoảng 1 giây affinity của ngắt 36 bị đổi từ CPU4 về ``0-7`` và 98% ngắt rơi vào CPU0, hai lần sau giữ CPU4 (``bench/onboard_x9/``, quy tắc viết trước). Vậy ``irqbalance`` có đổi affinity trong lúc chạy, đã quan sát ở 1 trên 3 lần. Vì vậy bảng dưới phân loại theo yếu tố thực tế.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-02-e2-bon-dieu-kien.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của tám khối E2 theo bốn điều kiện
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của tám khối E2 theo bốn điều kiện. Điểm đặc là nửa 1 (thứ tự ABCD), vòng rỗng là nửa 2 (thứ tự DCBA), dấu X là khối không thực hiện đúng điều kiện. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 6 8 8 10 9 7 9 9 9 12 14 9
@@ -337,6 +345,14 @@ Kiểm tra nhất quán, không phải cơ chế: mỗi lần chạy có 63 ng�
 
 Ở E2, khối 2 của B không thực hiện đúng vì 89% ngắt vẫn ở CPU0 trong khi ``irqbalance`` đang chạy, nên B không gán được nhãn. E2b chạy trên một lần khởi động khác của board (board được khởi động lại giữa hai lần, khóa tần số được áp lại bằng ``lock_freq.sh lock`` với governor ``performance``), dừng ``irqbalance`` suốt phép đo, rồi chạy tám khối thứ tự ABBA ABBA, mỗi khối 1000 lần sau 50 lần làm nóng. B so với các khối A của chính E2b, không so với E2. Quy tắc gán nhãn viết vào ``rule.txt`` trước khi có dữ liệu và dùng đúng điều kiện thực hiện đúng của E2 (ứng dụng chạy trên CPU4 và ít nhất 99% ngắt ở CPU4).
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-03-e2b-dung-irqbalance.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của tám khối E2b theo hai điều kiện A và B
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của tám khối E2b. Mỗi điều kiện có hai khối ở mỗi nửa, điểm đặc là nửa 1 và vòng rỗng là nửa 2. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 6 9 10 9 10 9 9 9 16 16
@@ -468,6 +484,14 @@ Trạng thái board ghi trong ``bench/onboard_e2b/progress.txt``: ``irqbalance``
 ===============================================
 
 Sáu điều kiện (CPU của ứng dụng, CPU nhận ngắt): A mặc định, B (4, 4), C (0, 0), E (4, 0), F (0, 4), G (1, 0). ``irqbalance`` dừng, mười hai khối thứ tự A B C E F G rồi G F E C B A (mỗi nửa đúng một khối A), mỗi khối 1000 lần chạy sau 50 lần làm nóng. Quy tắc ``rule.txt`` viết trước dữ liệu và không sửa sau đó. Ngưỡng 0.01 của "mất mức chậm" là ngưỡng mới do tôi chọn cho quy tắc này, không từ nguồn nào. Khác biệt trạng thái với E2b đã công bố: E2b chạy trước khi ``rknn_server`` và ``adbd`` được khởi động lại sau khi board khởi động lại, còn E2c chạy khi cả hai đã bật, nên E2c dùng các khối B và C của chính nó làm đối chứng. Trạng thái đầu lượt (nhân, uptime, tần số, ``rknn_server``, ``adbd``, md5 mô hình) ghi ở đầu ``bench/onboard_e2c/progress.txt``.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-04-e2c-tach-vi-tri.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của mười hai khối E2c theo sáu điều kiện
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của mười hai khối E2c theo sáu điều kiện. Đường đứt là ngưỡng 1% và 20% của quy tắc. Điểm đặc là nửa 1, vòng rỗng là nửa 2. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -664,6 +688,14 @@ Chưa kết luận được yếu tố nào gây ra mức chậm. E2d ngay bên 
 
 Số đo mô tả của E2c (không phải kết quả theo quy tắc) gợi ý rằng mất mức chậm không đòi hỏi hai thứ cùng CPU4, nên E2d hỏi hai câu chỉ về vị trí: mức chậm xuất hiện khi ứng dụng ghim ở những CPU nào (với ngắt ở CPU0 và với ngắt ở CPU4), và mức nhanh ổn định (quanh 16.3 ms, độ lệch chuẩn nhỏ) xuất hiện ở những cặp (CPU ứng dụng, CPU ngắt) nào. Hai mươi điều kiện: A (không ghim, ngắt mặc định), 16 ô gồm CPU ứng dụng 0 đến 7 và CPU ngắt 0 hoặc 4, và ba ô cùng CPU lớn (5, 5), (6, 6), (7, 7). Mỗi điều kiện hai khối (một khối mỗi nửa, nửa 2 là thứ tự đảo ngược của nửa 1), mỗi khối 1000 lần chạy sau 50 lần làm nóng, ``irqbalance`` dừng. Quy tắc ``bench/onboard_e2d/rule.txt`` được viết lúc 2026-10-31 00:00 theo giờ PC, trước khi có dữ liệu, và người dùng đã duyệt hai kiểm tra hợp lệ, các ngưỡng 0.05 và 0.95 và ba ô cùng CPU lớn. Hai ngưỡng 0.05 (mất mức chậm) và 0.95 (đạt mức nhanh) lấy từ dữ liệu E2c, nên là chọn sau khi đã thấy E2c. Ngưỡng 0.20 (còn mức chậm) giữ từ E2.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-01-ban-do-e2d.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của 20 ô theo CPU ghim ứng dụng và CPU ngắt, hai nửa mỗi ô
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của 20 ô E2d theo CPU ghim ứng dụng. Kiểu điểm là CPU ngắt, điểm đặc là nửa 1 và vòng rỗng là nửa 2. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 20 24 20 20 18 22
@@ -824,6 +856,14 @@ Một khác biệt trạng thái cần ghi: NPU và DDR đọc ra governor ``use
 6.2. Kết quả mười bốn khối
 --------------------------
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-05-e2e-eval-perf.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của mười bốn khối E2e theo bảy điều kiện
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của mười bốn khối E2e, đường ``eval_perf`` qua ``rknn_server``. Đường đứt là ngưỡng 5%, 20% và 95% của quy tắc. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 6 10 12 12 10 10 10 22 16
@@ -971,6 +1011,14 @@ Cả mười bốn khối thực hiện đúng điều kiện: ``Cpus_allowed_li
 
 Mỗi ô được so với cùng ô của E2d theo cả kết quả chính (mất, còn mức chậm hoặc lẫn lộn) và kết quả mức nhanh.
 
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-06-e2e-so-voi-e2d.svg
+   :align: center
+   :width: 100%
+   :alt: Trung vị thời gian của sáu ô chung giữa đường eval_perf và đường C API
+
+   Trung vị thời gian của sáu ô chung giữa đường ``eval_perf`` (E2e) và đường C API (E2d). Đường đứt là ranh giới mức 17.0 và 20.0 ms của đường C API. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
+
 .. list-table::
    :header-rows: 1
    :widths: 14 16 16 16 16 14 14 10 14
@@ -1054,6 +1102,14 @@ Giới hạn theo quy tắc: mỗi ô chỉ có hai khối kề nhau theo thời
 
 
 X6 (ngày 2026-10-31, quy tắc ``bench/onboard_x6/rule.txt`` viết trước dữ liệu) chạy cùng cách đo của E2e ở bảy ô CPU lớn: (4, 4) làm đối chứng, (5, 4), (6, 4), (7, 4), (5, 5), (6, 6), (7, 7). Tiến trình root chạy ở CPU3 (không thuộc ô nào). Cả 14 khối thực hiện đúng (mọi luồng ``rknn_server`` ở CPU đã ghim ở hai lần đọc, ngắt NPU ở CPU đích). Tiến trình root chỉ đọc danh sách CPU của các luồng ở hai thời điểm mỗi khối, nên vi phạm ngắn giữa hai lần đọc có thể không thấy.
+
+
+.. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-07-x6-cpu-lon.svg
+   :align: center
+   :width: 100%
+   :alt: Tỉ lệ mức chậm và mức nhanh của mười bốn khối X6 theo bảy ô CPU lớn
+
+   Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của mười bốn khối X6 ở bảy ô CPU lớn, cùng cách đo với E2e. Đường đứt là ngưỡng 5%, 20% và 95%. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
 
 .. list-table::
    :header-rows: 1
@@ -1147,5 +1203,5 @@ X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao t
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.75, mục 5.3.3).
-- T3 board và PC: ``results/onboard_*`` (mục 10 đến 14 của tệp ``.md``), ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_e2/`` (gồm ``progress.txt``, ``board_facts.txt``, ``e2_run.sh``), ``bench/onboard_e2b/`` (gồm ``progress.txt``, ``rule.txt``, ``rule_note.txt``, ``runtime_facts.txt``, ``e2b_run.sh``), ``bench/onboard_e2c/`` (gồm ``progress.txt``, ``rule.txt``, ``e2c_run.sh``), ``bench/onboard_e2d/`` (gồm ``progress.txt``, ``rule.txt``, ``e2d_run.sh``), ``bench/onboard_e2e/`` (gồm ``rule.txt``, ``progress.txt``, ``driver.log``, ``e2e_daemon.sh``, ``e2e_driver.py``), ``bench/extra_tier1_lan_timing.txt``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/automation/analyze_onboard.py``. Trang này được sinh bởi ``docs/tools/gen_latency_results_page.py``.
+- T3 board và PC: ``results/onboard_*`` (mục 10 đến 14 của tệp ``.md``), ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_e2/`` (gồm ``progress.txt``, ``board_facts.txt``, ``e2_run.sh``), ``bench/onboard_e2b/`` (gồm ``progress.txt``, ``rule.txt``, ``rule_note.txt``, ``runtime_facts.txt``, ``e2b_run.sh``), ``bench/onboard_e2c/`` (gồm ``progress.txt``, ``rule.txt``, ``e2c_run.sh``), ``bench/onboard_e2d/`` (gồm ``progress.txt``, ``rule.txt``, ``e2d_run.sh``), ``bench/onboard_e2e/`` (gồm ``rule.txt``, ``progress.txt``, ``driver.log``, ``e2e_daemon.sh``, ``e2e_driver.py``), ``bench/extra_tier1_lan_timing.txt``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/automation/analyze_onboard.py``.
 
