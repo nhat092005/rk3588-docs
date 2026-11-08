@@ -4,8 +4,8 @@
 Sinh hình vector SVG minh họa:
   1. rknn-02-zero-copy-vs-general-api:
      Trực quan hóa kiến trúc luân chuyển bộ nhớ:
-     - General API: Phân mảnh địa chỉ ảo/vật lý, 2 lần CPU memcpy, tiêu tốn băng thông bus DDR.
-     - Zero-Copy API: Cơ chế chia sẻ vùng nhớ dma-buf/DRM GEM, 0 lần memcpy, RKNPU IOMMU DMA trực tiếp.
+     - General API: Phân mảnh địa chỉ ảo/vật lý, CPU copy đầu vào (hãng không ghi số lần), tốn băng thông DDR hơn.
+     - Zero-Copy API: Cơ chế chia sẻ vùng nhớ dma-buf/DRM GEM, RKNPU IOMMU DMA trực tiếp.
 
 Chạy: python3 gen.py [outdir] [--png] [figure-name ...]
 """
@@ -85,7 +85,7 @@ def fig_zero_copy_vs_general():
 
     # Thẻ tác vụ CPU lần 1
     rect(f, bx + 16, y1 + 42, bw - 32, 22, fill="#FEF2F2", stroke=RED, sw=1.0, rx=3)
-    f.text(mid_x1, y1 + 53, "CPU memcpy #1 + Tiền xử lý phần mềm (Chuyển kiểu/Normalize)",
+    f.text(mid_x1, y1 + 53, "CPU copy đầu vào + chuẩn hóa, lượng tử hóa, đổi layout",
            size=7.2, weight=700, fill=RED, anchor="middle")
 
     # 2. Driver Input DMA Buffer
@@ -120,7 +120,7 @@ def fig_zero_copy_vs_general():
 
     # Thẻ tác vụ CPU lần 2
     rect(f, bx + 16, y4 + 42, bw - 32, 22, fill="#FEF2F2", stroke=RED, sw=1.0, rx=3)
-    f.text(mid_x1, y4 + 53, "CPU memcpy #2 + Hậu xử lý chuyển kiểu (INT8 → FP32)",
+    f.text(mid_x1, y4 + 53, "CPU đổi layout + giải lượng tử đầu ra",
            size=7.2, weight=700, fill=RED, anchor="middle")
 
     # 5. User Output Buffer
@@ -128,11 +128,11 @@ def fig_zero_copy_vs_general():
     arrow(f, mid_x1, y4 + 64, mid_x1, y5, color=RED, sw=THIN)
     rect(f, bx, y5, bw, 28, fill="#FFFFFF", stroke="#94A3B8", sw=1.1, rx=3)
     f.text(bx + 10, y5 + 11, "Bộ đệm đích User (Ứng dụng nhận mảng kết quả)", size=8.5, weight=700, fill=DARK)
-    f.text(bx + 10, y5 + 21, "• Tốn 2 lần sao chép toàn phần dữ liệu qua CPU", size=7.2, fill="#DC2626")
+    f.text(bx + 10, y5 + 21, "• Đầu ra đã đổi layout và giải lượng tử", size=7.2, fill="#DC2626")
 
     # Thẻ đánh giá hiệu năng góc dưới
     rect(f, bx, y5 + 34, bw, 22, fill="#FEF2F2", stroke="#DC2626", rx=3)
-    f.text(mid_x1, y5 + 45, "Tải CPU: 50% - 80% | Độ trễ I/O: 5 - 15 ms | Tốn 2x băng thông DDR",
+    f.text(mid_x1, y5 + 45, "Hãng không ghi số lần copy. Thời gian copy: dự án chưa đo",
            size=7.6, weight=700, fill="#B91C1C", anchor="middle")
 
     # ==========================================================================
@@ -166,7 +166,7 @@ def fig_zero_copy_vs_general():
 
     f.text(bx2 + 12, zy2 + 33, "• App User: Ánh xạ con trỏ qua mmap(fd) → 0 sao chép", size=7.5, fill="#334155")
     f.text(bx2 + 12, zy2 + 46, "• NPU Driver: Đăng ký fd qua rknn_set_io_mem() → 0 sao chép", size=7.5, fill="#15803D")
-    f.text(bx2 + 12, zy2 + 58, "• Căn lề địa chỉ vật lý: Bội số 16 byte (stride-aligned)", size=7.2, fill="#64748B")
+    f.text(bx2 + 12, zy2 + 58, "• Căn lề: width bội số 16 byte (RK3588, đầu vào 4 chiều)", size=7.2, fill="#64748B")
 
     # Mũi tên DMA trực tiếp vào RKNPU Core
     zy3 = zy2 + 80
@@ -177,7 +177,7 @@ def fig_zero_copy_vs_general():
     f.text(mid_x2, zy3 + 11, "RKNPU Core (Tự động Tiền xử lý + Tính toán phần cứng)",
            size=8.5, weight=700, fill="#15803D", anchor="middle")
     f.text(mid_x2, zy3 + 22, "Phần cứng NPU tự trừ mean, nhân scale (Quantize) on-the-fly", size=7.5, fill="#047857", anchor="middle")
-    f.text(mid_x2, zy3 + 33, "Thực thi mạng nơ-ron hoàn toàn độc lập, không tiêu tốn chu kỳ CPU", size=7.2, fill="#64748B", anchor="middle")
+    f.text(mid_x2, zy3 + 33, "Chuẩn hóa, lượng tử hóa và suy luận đều chạy trên NPU", size=7.2, fill="#64748B", anchor="middle")
 
     # Mũi tên DMA xuất thẳng ra Shared Output DMA-BUF
     zy4 = zy3 + 56
@@ -193,7 +193,7 @@ def fig_zero_copy_vs_general():
 
     # Thẻ đánh giá ưu điểm góc dưới
     rect(f, bx2, y5 + 34, bw, 22, fill="#ECFDF5", stroke="#059669", rx=3)
-    f.text(mid_x2, y5 + 45, "0 lần memcpy | Tải CPU: ~0% | Độ trễ I/O: < 0.2 ms | Băng thông tối ưu",
+    f.text(mid_x2, y5 + 45, "Hãng ghi: giảm chi phí copy, tốn ít băng thông hơn. Dự án chưa đo",
            size=7.6, weight=700, fill="#047857", anchor="middle")
 
     source(f, H - 12, "[T1 UG232 tr.64-68, Fig. 5-5, 5-6] [T1 OPL tr.335-339] [T1 rknn_api.h]")

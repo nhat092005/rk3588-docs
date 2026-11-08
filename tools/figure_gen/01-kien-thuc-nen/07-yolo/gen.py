@@ -175,7 +175,7 @@ def fig_c2f_vs_c3k2():
     # Đánh giá Panel 2
     rect(f, x2 + 15, 380, col_w - 30, 46, fill="white", stroke=GRID, sw=1, rx=3)
     f.text(x2 + 25, 394, "Đặc tính C3k2: Tùy biến linh hoạt theo độ sâu tầng mạng.", size=8.5, weight=700, fill=DARK)
-    f.text(x2 + 25, 410, "Tiết kiệm 37% FLOPs; loại bỏ toàn bộ Tap giúp giải phóng ngay SRAM.", size=8.2, fill=GREEN)
+    f.text(x2 + 25, 410, "Loại bỏ toàn bộ Tap giúp giải phóng ngay SRAM.", size=8.2, fill=GREEN)
 
     source(f, H - 24, "Nguồn: Ultralytics (yolov8.yaml:20-47, yolo26.yaml:22-50), Sapkota et al. (YOLO26 2025 tr.5, tr.17)")
     return f
@@ -257,7 +257,7 @@ def fig_head_dfl_vs_nms_free():
     # Đánh giá Panel 1
     rect(f, x1 + 15, 380, col_w - 30, 46, fill="white", stroke=GRID, sw=1, rx=3)
     f.text(x1 + 25, 394, "Rào cản NPU: Softmax phi tuyến cực kỳ khó lượng tử hóa INT8.", size=8.2, weight=700, fill=RED)
-    f.text(x1 + 25, 410, "NMS chạy trên CPU chiếm tới 30-50% tổng độ trễ thực thi tại biên.", size=8.2, fill=GRAY)
+    f.text(x1 + 25, 410, "NMS chạy trên CPU. Dự án: T_post 0.662 ms trên 18.04 ms (gồm NMS).", size=8.2, fill=GRAY)
 
     # Panel Phải: YOLO26 Head (Direct Regression + NMS-Free)
     rect(f, x2, 40, col_w, 395, fill="#F6FBF7", stroke=GREEN, sw=1.3, rx=5)
@@ -415,7 +415,7 @@ def fig_train_to_infer_pipeline():
     f.text(x3 + 18, 336, "Lợi thế triển khai phần cứng:", size=8.8, weight=700, fill=DARK)
     f.text(x3 + 18, 354, "• Đồ thị tĩnh (DAG) tất định", size=8, weight=700, fill=GREEN)
     f.text(x3 + 18, 372, "• Dễ dàng lượng tử hóa INT8", size=8, fill=DARK)
-    f.text(x3 + 18, 390, "• Giảm 30% tham số, 37% FLOPs", size=8, fill=GREEN)
+    f.text(x3 + 18, 390, "• Giảm tham số và FLOPs", size=8, fill=GREEN)
     f.text(x3 + 18, 408, "• Không phụ thuộc NMS trên CPU", size=8, fill=GREEN)
 
     # Mũi tên từ Cột 2 sang Cột 3 (gap = 30px, from 576 to 606)

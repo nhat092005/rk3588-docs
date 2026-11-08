@@ -174,7 +174,7 @@ def fig_unfused_vs_fused():
     # TẦNG 1: OFF-CHIP DRAM (y: 80, h: 54)
     # ==============================================================================
     rect(f, x1 + 6, 80, col_w - 12, 54, fill="#FFF1F2", stroke=RED, sw=1.0, rx=3)
-    f.text(x1 + 12, 89, "OFF-CHIP DRAM (Bộ nhớ ngoài chip - LPDDR4X) [~200 pJ/bit, Băng thông hạn hẹp]", size=6.8, weight=700, fill="#991B1B")
+    f.text(x1 + 12, 89, "OFF-CHIP DRAM (Bộ nhớ ngoài chip - LPDDR4X) [Đọc 32 bit: 640 pJ, 45 nm, Gholami 2021]", size=6.8, weight=700, fill="#991B1B")
 
     tw = 92
     tx0 = x1 + 10
@@ -357,7 +357,7 @@ def fig_unfused_vs_fused():
 
     rect(f, x2 + 10, 334, col_w - 20, 26, fill="#ECFDF5", stroke=GREEN, sw=0.6, rx=2)
     f.text(x2 + 16, 343, "• Ưu thế: Luồng xử lý khép kín trong On-chip SRAM, PE hoạt động stall-free", size=6.6, weight=700, fill="#047857")
-    f.text(x2 + 16, 353, "• Tiết kiệm năng lượng ~95% cho phần xử lý trung gian (~5 pJ vs ~200 pJ/bit)", size=6.6, fill="#047857")
+    f.text(x2 + 16, 353, "• Đọc 32 bit: SRAM 8 KB 5 pJ so với DRAM 640 pJ, 45 nm [Gholami 2021, Hình 7]", size=6.6, fill="#047857")
 
     # ==============================================================================
     # TẦNG 4: ĐỊNH LƯỢNG LƯU LƯỢNG DRAM & HIỆU QUẢ TĂNG TỐC (y: 376, h: 100)
@@ -386,9 +386,9 @@ def fig_unfused_vs_fused():
     f.text(x2 + 14 + f_used_w + (bar_w - f_used_w) / 2, 404, "TIẾT KIỆM 66.7% LƯU LƯỢNG (-802.8 KB)", size=6.6, weight=700, fill="#047857", anchor="middle")
 
     f.text(x2 + 14, 423, "• Tổng lượt truy cập: 1 lần Đọc (196 KiB) + 1 lần Ghi (196 KiB) = 2 lượt (Giảm 3.0x)", size=6.6, weight=700, fill="#047857")
-    f.text(x2 + 14, 436, "• Tăng tốc suy luận: Đạt 1.2x - 2.0x speedup nhờ triệt tiêu hoàn toàn memory stall [TVM]", size=6.6, weight=700, fill="#047857")
+    f.text(x2 + 14, 436, "• Tăng tốc suy luận: Đạt 1.2× đến 2× nhờ giảm truy cập bộ nhớ [TVM tr.4]", size=6.6, weight=700, fill="#047857")
     f.text(x2 + 14, 449, "• Trạng thái phần cứng: Chuyển dịch từ Memory-bound sang Compute-bound tối ưu", size=6.6, fill="#047857")
-    f.text(x2 + 14, 462, "• Tiết kiệm năng lượng: Giảm ~60% toàn hệ thống nhờ giữ dữ liệu trên SRAM nội bộ", size=6.6, fill="#475569")
+    f.text(x2 + 14, 462, "• Giữ dữ liệu trên SRAM nội bộ, giảm truy cập DRAM", size=6.6, fill="#475569")
 
     source(f, H - 18, "Nguồn: T2 Chen 2018 (TVM, OSDI tr.3-4); T2 Lee 2024 (IEEE TVLSI tr.1); T2 Bamberg 2023 (eIQ Neutron tr.3).")
     return f
@@ -930,8 +930,8 @@ def fig_tvm_optimization_and_autotvm():
     h_b3 = 120
     rect(f, x_b + 6, y_b3, w_b - 12, h_b3, fill="#FFFBEB", stroke="#F59E0B", sw=0.9, rx=4)
     f.text(x_b + 12, y_b3 + 12, "3. Đánh đổi & Giá trị Thực tiễn của TVM [Chen 2018]:", size=7.0, weight=700, fill="#92400E")
-    f.text(x_b + 12, y_b3 + 27, "• Tốc độ hội tụ: Nhanh hơn 2x - 10x so với auto-tuning hộp đen không có ML", size=6.6, fill="#78350F")
-    f.text(x_b + 12, y_b3 + 41, "• Hiệu năng Kernel: Đạt 85% - 105% so với thư viện viết tay của chuyên gia (cuDNN)", size=6.6, fill="#78350F")
+    f.text(x_b + 12, y_b3 + 27, "• Tốc độ hội tụ: cost model tìm cấu hình tốt nhanh hơn đo thật", size=6.6, fill="#78350F")
+    f.text(x_b + 12, y_b3 + 41, "• Tốc độ: 1.2× đến 3.8× so với framework dùng thư viện tối ưu tay", size=6.6, fill="#78350F")
     f.text(x_b + 12, y_b3 + 55, "• Tính di động (Portability): 1 codebase thống nhất cho CPU, GPU và NPU chuyên dụng", size=6.6, weight=700, fill="#B45309")
     f.text(x_b + 12, y_b3 + 71, "• Cơ chế Tensorization: Ánh xạ vòng lặp vào lệnh ma trận phần cứng (GEMM/Systolic)", size=6.6, fill="#78350F")
     f.text(x_b + 12, y_b3 + 89, "Ranh giới: RK3588 dùng RKNN toolkit kín, không công bố có dùng ML cost model hay không", size=6.6, italic=True, fill="#92400E")

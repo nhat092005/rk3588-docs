@@ -41,7 +41,7 @@ print("best.pt params", sum(p.numel() for p in trained.parameters()), "tensors",
 from ultralytics.utils.torch_utils import get_flops  # noqa: E402
 
 fused = DetectionModel("yolov8n.yaml", nc=5, verbose=False).eval().fuse(verbose=False)
-print("nc=5 fused params", sum(p.numel() for p in fused.parameters()))
+print("nc=5 fused params", sum(p.numel() for p in fused.parameters()), "get_flops(640) GFLOPs", round(get_flops(fused, 640), 3))
 for nc in (5, 80):
     mm = DetectionModel("yolov8n.yaml", nc=nc, verbose=False).eval()
     print(f"nc={nc}: params", sum(p.numel() for p in mm.parameters()), "head", sum(p.numel() for p in mm.model[22].parameters()),
@@ -50,6 +50,7 @@ for nc in (5, 80):
 # Conv2d MACs của L22 theo cạnh đầu ra (80, 40, 20 là ba mức P3, P4, P5, cạnh 4 là Conv 1x1 của DFL) và số phần tử đầu ra của
 # các phép ngoài Conv2d (đếm phần tử, không quy ra FLOPs vì số FLOPs mỗi phần tử là quy ước).
 import collections  # noqa: E402
+from ultralytics.nn.modules import Bottleneck, C2f, Concat  # noqa: E402
 
 mm = DetectionModel("yolov8n.yaml", nc=5, verbose=False).eval()
 layer_now, head_macs, elems = [None], collections.defaultdict(int), collections.defaultdict(int)
@@ -67,6 +68,12 @@ for mod in mm.modules():
     for kind in (nn.BatchNorm2d, nn.SiLU, nn.MaxPool2d, nn.Upsample):
         if isinstance(mod, kind):
             mod.register_forward_hook(lambda mod, inp, out, name=kind.__name__: elems.__setitem__(name, elems[name] + out.numel()))
+    if isinstance(mod, Bottleneck):
+        mod.register_forward_hook(lambda mod, inp, out: elems.__setitem__("Add", elems["Add"] + out.numel()) if mod.add else None)
+    elif isinstance(mod, C2f):
+        mod.cv1.register_forward_hook(lambda mod, inp, out: elems.__setitem__("Split", elems["Split"] + out.numel()))
+    elif isinstance(mod, Concat):
+        mod.register_forward_hook(lambda mod, inp, out: elems.__setitem__("Concat", elems["Concat"] + out.numel()))
 for i, layer in enumerate(mm.model):
     layer.register_forward_pre_hook(lambda mod, inp, i=i: layer_now.__setitem__(0, i))
 with torch.no_grad():

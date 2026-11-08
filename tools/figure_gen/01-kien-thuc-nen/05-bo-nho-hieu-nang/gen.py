@@ -68,7 +68,7 @@ def fig_latency_breakdown_pipeline():
 
     stages = [
         ("1. Tiền xử lý (T_pre)", "Camera, Giải mã JPEG, BGR->RGB", "Resize, Letterbox đệm viền, Float", BLUE, "#EFF6FF", 28, 186),
-        ("2. Nạp dữ liệu (T_load)", "Sao chép bộ nhớ / Memory copy", "Zero-copy dma-buf tiệm cận ~0 ms", ORANGE, "#FFFBEB", 234, 186),
+        ("2. Nạp dữ liệu (T_load)", "Sao chép bộ nhớ / Memory copy", "Zero-copy giảm chi phí copy, chưa đo", ORANGE, "#FFFBEB", 234, 186),
         ("3. Suy luận NPU (T_npu)", "Mảng systolic parallel PE chạy", "Conv, MatMul, Activation, Pooling", GREEN, "#F0FDF4", 440, 206),
         ("4. Hậu xử lý (T_post)", "Trích xuất tensor, khôi phục tọa độ", "Lọc Score thresholding, chạy NMS CPU", PURPLE, "#FAF5FF", 666, 186),
     ]
@@ -115,7 +115,7 @@ def fig_latency_breakdown_pipeline():
 
     # Đánh giá tuần tự
     rect(f, x1 + 15, 292, col_w - 30, 136, fill="white", stroke=GRID, sw=1, rx=4)
-    f.text(x1 + 25, 308, "Đặc tính luồng tuần tự đơn giản:", size=9.5, weight=700, fill=DARK)
+    f.text(x1 + 25, 308, "Luồng tuần tự (số ví dụ, không phải số đo):", size=9.5, weight=700, fill=DARK)
     f.text(x1 + 35, 328, "• Tổng độ trễ 1 khung hình: T_E2E = 12 + 18 + 15 = 45 ms", size=8.8, fill=INK)
     f.text(x1 + 35, 348, "• Thông lượng tối đa: 1000 / 45 ≈ 22.2 FPS", size=8.8, fill=INK)
     f.text(x1 + 35, 368, "• Tỷ lệ NPU bận: 18 / 45 = 40.0% (Lãng phí 60% năng lực NPU)", size=8.8, weight=700, fill=RED)
@@ -152,7 +152,7 @@ def fig_latency_breakdown_pipeline():
 
     # Đánh giá đường ống
     rect(f, x2 + 15, 302, col_w - 30, 126, fill="white", stroke=GRID, sw=1, rx=4)
-    f.text(x2 + 25, 318, "Đặc tính kiến trúc đường ống gối đầu:", size=9.5, weight=700, fill=DARK)
+    f.text(x2 + 25, 318, "Đường ống gối đầu (số ví dụ, không phải số đo):", size=9.5, weight=700, fill=DARK)
     f.text(x2 + 35, 336, "• Thông lượng bị chặn bởi chặng dài nhất: max(12, 18, 15) = 18 ms", size=8.8, fill=INK)
     f.text(x2 + 35, 354, "• Thông lượng ổn định: 1000 / 18 ≈ 55.6 FPS (Tăng 2.5× thông lượng)", size=8.8, weight=700, fill=GREEN)
     f.text(x2 + 35, 372, "• Tỷ lệ NPU bận: tiệm cận ~100% công suất thực tế", size=8.8, weight=700, fill=GREEN)

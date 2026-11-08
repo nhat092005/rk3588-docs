@@ -60,7 +60,7 @@ def fig_yolo_rknn_graph_cut():
     rect(f, 14, 42, 852, 146, fill="#F8FAFC", stroke="#2563EB", sw=1.3, rx=6)
     rect(f, 14, 42, 852, 26, fill="#EFF6FF", stroke="#2563EB", sw=1.0, rx=6)
     rect(f, 22, 46, 6, 18, fill=BLUE, stroke=BLUE, sw=1, rx=2)
-    f.text(36, 56, "1. Phần cứng RKNPU RK3588: Đồ thị nơ-ron INT8 (3 Nhân 6 TOPS - 100% phần cứng)",
+    f.text(36, 56, "1. Phần cứng RKNPU RK3588: Đồ thị nơ-ron INT8 (3 Nhân 6 TOPS)",
            size=10.5, weight=700, fill="#1E40AF")
 
     # 1.A Input frame
@@ -90,7 +90,7 @@ def fig_yolo_rknn_graph_cut():
     f.text(306, 127, "P5 (20²)", size=7.5, weight=700, fill=BLUE, anchor="middle")
 
     f.text(250, 148, "Hợp nhất toán tử (Operator Fusion)", size=7.5, weight=700, fill="#15803D", anchor="middle")
-    f.text(250, 162, "100% thực thi trên mảng MAC NPU", size=7.2, fill="#64748B", anchor="middle")
+    f.text(250, 162, "Thực thi trên NPU", size=7.2, fill="#64748B", anchor="middle")
 
     arrow(f, 343, 126, 363, 126, color=BLUE)
 
@@ -158,7 +158,7 @@ def fig_yolo_rknn_graph_cut():
     rect(f, 240, y_cpu + 36, 192, 100, fill="white", stroke="#CBD5E1", rx=4)
     f.text(336, y_cpu + 52, "Bước 2: Lọc ngưỡng Score", size=9, weight=700, fill=DARK, anchor="middle")
     f.text(336, y_cpu + 68, "• max(cls_score) > conf_thres", size=7.8, fill="#334155", anchor="middle")
-    f.text(336, y_cpu + 82, "• Loại bỏ 90% - 95% hộp rác", size=7.8, fill="#DC2626", anchor="middle")
+    f.text(336, y_cpu + 82, "• Loại hộp dưới ngưỡng conf", size=7.8, fill="#DC2626", anchor="middle")
     rect(f, 250, y_cpu + 96, 172, 28, fill="#FEF2F2", stroke="#DC2626", rx=2)
     f.text(336, y_cpu + 110, "Còn lại: ~30 - 80 ứng viên", size=7.8, weight=700, fill="#B91C1C", anchor="middle")
 
@@ -209,7 +209,7 @@ def fig_npu_compatibility_matrix():
     # --------------------------------------------------------------------------
     rect(f, x1, col_y, col_w, col_h, fill="#F0FDF4", stroke="#16A34A", sw=1.3, rx=6)
     rect(f, x1, col_y, col_w, 28, fill="#DCFCE7", stroke="#16A34A", sw=1.0, rx=6)
-    f.text(x1 + col_w / 2, col_y + 11, "1. VÙNG XANH: 100% PHẦN CỨNG NPU", size=9.5, weight=700, fill="#14532D", anchor="middle")
+    f.text(x1 + col_w / 2, col_y + 11, "1. VÙNG XANH: OP CHẠY TRÊN NPU", size=9.5, weight=700, fill="#14532D", anchor="middle")
     f.text(x1 + col_w / 2, col_y + 23, "Hỗ trợ 3 nhân song song | Hiệu suất tối đa", size=7.5, fill="#15803D", anchor="middle")
 
     row_h = 92
@@ -233,7 +233,7 @@ def fig_npu_compatibility_matrix():
     f.text(rx1 + rw - 34, col_y + 150, "Fused OP", size=7.2, weight=700, fill="#14532D", anchor="middle")
     f.text(rx1 + 10, col_y + 167, "• Tự động gộp thành 1 lệnh phần cứng", size=7.5, fill=DARK)
     f.text(rx1 + 10, col_y + 180, "• Triệt tiêu ghi tensor trung gian ra RAM", size=7.5, weight=700, fill="#15803D")
-    f.text(rx1 + 10, col_y + 193, "• Tiết kiệm 40% lưu lượng bus DDR", size=7.2, fill="#64748B")
+    f.text(rx1 + 10, col_y + 193, "• Bảng gộp của hãng: UG232 tr.142", size=7.2, fill="#64748B")
     f.text(rx1 + 10, col_y + 206, "• Chuẩn hóa mặc định trên YOLOv8/v11", size=7.2, fill="#64748B")
 
     # 1.3 Residual Add & SPPF
@@ -242,13 +242,13 @@ def fig_npu_compatibility_matrix():
     rect(f, rx1 + rw - 60, col_y + 242, 52, 16, fill="#DCFCE7", stroke="#16A34A", rx=2)
     f.text(rx1 + rw - 34, col_y + 250, "Multi-Core", size=7.2, weight=700, fill="#14532D", anchor="middle")
     f.text(rx1 + 10, col_y + 267, "• Phép cộng residual Add hỗ trợ 3 core", size=7.5, fill=DARK)
-    f.text(rx1 + 10, col_y + 280, "• SPPF MaxPool kernel ≤ 7 chạy 100% NPU", size=7.5, weight=700, fill="#15803D")
+    f.text(rx1 + 10, col_y + 280, "• SPPF MaxPool kernel ≤ 7 chạy trên NPU", size=7.5, weight=700, fill="#15803D")
     f.text(rx1 + 10, col_y + 293, "• Split & Concat xử lý trực tiếp", size=7.2, fill="#64748B")
     f.text(rx1 + 10, col_y + 306, "• Độ ổn định suy luận hoàn hảo", size=7.2, fill="#64748B")
 
     # Thẻ tóm tắt đáy cột 1
     rect(f, rx1, col_y + 332, rw, 14, fill="#DCFCE7", stroke="#16A34A", rx=2)
-    f.text(rx1 + rw / 2, col_y + 339, "Mô hình thuần nhóm này: 0% tải CPU", size=7.2, weight=700, fill="#14532D", anchor="middle")
+    f.text(rx1 + rw / 2, col_y + 339, "Nhóm op này chạy trên NPU", size=7.2, weight=700, fill="#14532D", anchor="middle")
 
     # --------------------------------------------------------------------------
     # CỘT 2: VÙNG VÀNG - CẦN CẤU HÌNH VÀ TỐI ƯU HÓA
@@ -265,8 +265,8 @@ def fig_npu_compatibility_matrix():
     rect(f, rx2 + rw - 60, col_y + 42, 52, 16, fill="#FEF9C3", stroke="#CA8A04", rx=2)
     f.text(rx2 + rw - 34, col_y + 50, "Low MAC", size=7.2, weight=700, fill="#713F12", anchor="middle")
     f.text(rx2 + 10, col_y + 67, "• Thiếu tái sử dụng dữ liệu chéo kênh", size=7.5, fill=DARK)
-    f.text(rx2 + 10, col_y + 80, "• Kênh INT8: Bắt buộc bội số 64", size=7.5, weight=700, fill="#B45309")
-    f.text(rx2 + 10, col_y + 93, "• Hiệu suất tính toán MAC chỉ đạt ~30%", size=7.2, fill="#64748B")
+    f.text(rx2 + 10, col_y + 80, "• Kênh INT8: nên bội số 64, không bắt buộc", size=7.5, weight=700, fill="#B45309")
+    f.text(rx2 + 10, col_y + 93, "• YOLOv8n của dự án không có Depthwise", size=7.2, fill="#64748B")
     f.text(rx2 + 10, col_y + 106, "• Khuyến nghị: Dùng Conv 3×3 tiêu chuẩn", size=7.2, fill="#15803D")
 
     # 2.2 FlashAttention

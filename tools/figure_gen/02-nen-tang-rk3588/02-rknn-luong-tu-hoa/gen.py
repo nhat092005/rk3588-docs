@@ -448,13 +448,13 @@ def fig_hybrid_quantization_flow():
     # Box 3: Quy tắc chọn
     rect(f, c2_x + 10, 254, card_w - 20, 60, fill="#FEF3C7", stroke="#F59E0B", rx=3)
     f.text(c2_x + 16, 268, "Nguyên tắc chọn layer phục hồi:", size=7.5, weight=700, fill="#92400E")
-    f.text(c2_x + 16, 281, "• Chỉ chọn top 3-5% layer tệ nhất", size=7.0, fill="#15803D")
+    f.text(c2_x + 16, 281, "• Chỉ chọn số ít layer tệ nhất", size=7.0, fill="#15803D")
     f.text(c2_x + 16, 294, "• Không đưa toàn bộ model về FP16", size=7.0, fill="#B91C1C")
     f.text(c2_x + 16, 306, "• Giữ nguyên compute layers ở INT8", size=6.8, fill="#475569")
 
     # Thẻ tóm tắt đáy
     rect(f, c2_x + 10, 320, card_w - 20, 22, fill="#FEF3C7", stroke=ORANGE, rx=2)
-    f.text(c2_x + card_w / 2, 334, "Chỉ giữ 5-10% layer nhạy cảm", size=7.2, weight=700, fill="#92400E", anchor="middle")
+    f.text(c2_x + card_w / 2, 334, "Chỉ giữ số ít layer nhạy cảm", size=7.2, weight=700, fill="#92400E", anchor="middle")
 
     # Mũi tên liên kết 2 -> 3
     arrow(f, c2_x + card_w, 196, c3_x, 196, color=ORANGE, sw=1.5)
@@ -518,21 +518,21 @@ def fig_hybrid_quantization_flow():
     rect(f, c4_x + 10, 98, card_w - 20, 72, fill="#FFFFFF", stroke="#86EFAC", rx=3)
     f.text(c4_x + 16, 112, "Phân bổ tài nguyên RKNPU:", size=7.5, weight=700, fill="#14532D")
     rect(f, c4_x + 16, 118, 146, 16, fill="#DCFCE7", stroke="#16A34A", rx=2)
-    f.text(c4_x + 22, 129, "90-95% Khối lượng: MAC INT8", size=6.8, weight=700, fill="#14532D")
+    f.text(c4_x + 22, 129, "Phần lớn tensor: MAC INT8", size=6.8, weight=700, fill="#14532D")
     rect(f, c4_x + 16, 137, 146, 16, fill="#FEF2F2", stroke="#F87171", rx=2)
-    f.text(c4_x + 22, 148, "5-10% Head nhạy: Cores FP16", size=6.8, weight=700, fill="#991B1B")
-    f.text(c4_x + 16, 162, "Tận dụng trọn vẹn 6 TOPS NPU core", size=6.8, italic=True, fill="#15803D")
+    f.text(c4_x + 22, 148, "h5: 15 tensor nhánh box FP16", size=6.8, weight=700, fill="#991B1B")
+    f.text(c4_x + 16, 162, "Thông lượng không khác INT8 (quy tắc 5%)", size=6.8, italic=True, fill="#15803D")
 
     # Box 2: Đánh đổi mAP & Latency
     rect(f, c4_x + 10, 176, card_w - 20, 72, fill="#FFFFFF", stroke="#86EFAC", rx=3)
-    f.text(c4_x + 16, 190, "Hiệu quả thực nghiệm (YOLO):", size=7.5, weight=700, fill="#14532D")
-    f.text(c4_x + 16, 204, "• Độ chính xác mAP:", size=7.0, fill="#334155")
-    f.text(c4_x + card_w - 18, 204, "Phục hồi ~99%", size=7.0, weight=700, fill="#15803D", anchor="end")
-    f.text(c4_x + 16, 218, "• Độ trễ suy luận:", size=7.0, fill="#334155")
-    f.text(c4_x + card_w - 18, 218, "Tăng nhẹ 5-15%", size=7.0, weight=700, fill="#D97706", anchor="end")
-    f.text(c4_x + 16, 232, "• Tiết kiệm bộ nhớ:", size=7.0, fill="#334155")
-    f.text(c4_x + card_w - 18, 232, "Giảm ~45% DDR", size=7.0, weight=700, fill="#2563EB", anchor="end")
-    f.text(c4_x + 16, 243, "→ Điểm cân bằng Pareto tối ưu", size=6.8, italic=True, fill="#15803D")
+    f.text(c4_x + 16, 190, "Số đo h5 của dự án (1 seed):", size=7.5, weight=700, fill="#14532D")
+    f.text(c4_x + 16, 204, "• AP50-95 (INT8 36.75):", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 204, "49.66", size=7.0, weight=700, fill="#15803D", anchor="end")
+    f.text(c4_x + 16, 218, "• Latency CORE_0:", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 218, "-0.121 ms", size=7.0, weight=700, fill="#D97706", anchor="end")
+    f.text(c4_x + 16, 232, "• Tensor trong (MiB):", size=7.0, fill="#334155")
+    f.text(c4_x + card_w - 18, 232, "6.256 lên 8.691", size=7.0, weight=700, fill="#2563EB", anchor="end")
+    f.text(c4_x + 16, 243, "→ FP16 tham chiếu: 49.76", size=6.8, italic=True, fill="#15803D")
 
     # Box 3: Cảnh báo phần cứng
     rect(f, c4_x + 10, 254, card_w - 20, 60, fill="#F0FDF4", stroke="#86EFAC", rx=3)
@@ -543,7 +543,7 @@ def fig_hybrid_quantization_flow():
 
     # Thẻ tóm tắt đáy
     rect(f, c4_x + 10, 320, card_w - 20, 22, fill="#DCFCE7", stroke="#16A34A", rx=2)
-    f.text(c4_x + card_w / 2, 334, "Tối ưu Pareto: mAP cao, tốc độ tốt", size=7.2, weight=700, fill="#14532D", anchor="middle")
+    f.text(c4_x + card_w / 2, 334, "AP về gần FP16, latency đổi dưới 5%", size=7.2, weight=700, fill="#14532D", anchor="middle")
 
     source(f, y_top + card_h + 2, "[T1 UG232 tr.123-134, Fig. 6-3, 6-4] [T1 API232 tr.20-22] [T1 Gholami survey 2021]")
     return f

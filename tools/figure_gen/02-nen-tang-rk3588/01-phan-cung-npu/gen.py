@@ -74,7 +74,7 @@ def fig_triple_core_arch():
         cx = cx0 + i * (core_w + gap)
         rect(f, cx, core_y, core_w, core_h, fill="white", stroke="#3B82F6", sw=1.2, rx=4)
         rect(f, cx, core_y, core_w, 24, fill="#DBEAFE", stroke="#3B82F6", sw=1.0, rx=4)
-        f.text(cx + core_w / 2, core_y + 11, f"{core_names[i]} (2.0 TOPS INT8)", size=9, weight=700, fill="#1E3A8A", anchor="middle")
+        f.text(cx + core_w / 2, core_y + 11, f"{core_names[i]} (2 TOPS = 6/3, phép chia)", size=9, weight=700, fill="#1E3A8A", anchor="middle")
 
         # Khối CNA (Convolution Neural Accelerator)
         rect(f, cx + 8, core_y + 30, core_w - 16, 38, fill="#F0FDF4", stroke="#16A34A", rx=2)
@@ -113,11 +113,11 @@ def fig_triple_core_arch():
     arrow(f, 220, y_bus + 24, 220, y_mid, color=INK, sw=THIN)
     arrow(f, 660, y_bus + 24, 660, y_mid, color=INK, sw=THIN)
 
-    # System SRAM 4MB
+    # System SRAM 1MB
     rect(f, 24, y_mid, 395, 46, fill="#ECFDF5", stroke="#059669", sw=1.3, rx=4)
     rect(f, 32, y_mid + 5, 379, 18, fill="#FFFFFF", stroke="#059669", rx=2)
-    f.text(221, y_mid + 14, "Shared System SRAM: 4.0 MB (TRM Part 1 Ch. 34)", size=8.5, weight=700, fill="#047857", anchor="middle")
-    f.text(221, y_mid + 34, "Chia sẻ cho cả 3 core NPU, GPU và CPU | Giảm truy xuất DDR ngoài", size=7.5, fill="#065F46", anchor="middle")
+    f.text(221, y_mid + 14, "Shared System SRAM: 1 MB, NPU cấp được tối đa 956 KB (TRM1 tr.1965, UG232 tr.106)", size=8.5, weight=700, fill="#047857", anchor="middle")
+    f.text(221, y_mid + 34, "Dùng chung giữa các IP, ví dụ codec | Giảm truy xuất DDR ngoài", size=7.5, fill="#065F46", anchor="middle")
 
     # NPU IOMMU (2 khối IOMMU cho 3 core)
     rect(f, 447, y_mid, 419, 46, fill="#FFF7ED", stroke="#EA580C", sw=1.3, rx=4)
@@ -134,7 +134,7 @@ def fig_triple_core_arch():
     rect(f, 22, y_ddr + 6, card_w - 16, 18, fill="#FFFFFF", stroke="#475569", rx=2)
     f.text(14 + card_w / 2, y_ddr + 15, "Bộ điều khiển bộ nhớ DMC: 4 Kênh DDR độc lập (Ch0, Ch1, Ch2, Ch3 - 64-bit LPDDR4x/LPDDR5)",
            size=8.5, weight=700, fill=DARK, anchor="middle")
-    f.text(14 + card_w / 2, y_ddr + 36, "Băng thông cực đại đạt 68.2 GB/s | Độ trễ burst bus thấp nhất khi nạp định dạng NC1HWC2",
+    f.text(14 + card_w / 2, y_ddr + 36, "Trần tính từ thông số bộ điều khiển: 34.1 GB/s (LPDDR4/4X), 44.0 GB/s (LPDDR5). Hãng không ghi GB/s",
            size=7.8, fill="#334155", anchor="middle")
 
     source(f, H - 12, "[T1 TRM1 tr.1984-1995, Ch.36] [T1 TRM1 Ch.34 System SRAM] [T1 TRM2 Ch.1-2 Interconnect & DMC]")

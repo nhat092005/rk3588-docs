@@ -294,7 +294,7 @@ def fig_pe_mac_structure():
         ("1", "Pha 1: Nạp toán hạng", "0% - 15% T", "Lấy x_i từ pFIFO, w_i từ RF, P_in từ PE phía trên",
          "x_i = +3 [8b]  |  w_i = -2 [8b]  |  P_in = +10 [32b]", BLUE, "#EFF6FF", "#1E40AF"),
         ("2", "Pha 2: Nhân số học", "15% - 50% T", "Lan truyền qua mạch nhân mảng Booth trong ALU",
-         "prod = x_i x w_i = (+3) x (-2) = -6 [16b signed, ~0.2 pJ]", "#D97706", "#FFFBEB", "#92400E"),
+         "prod = x_i x w_i = (+3) x (-2) = -6 [16b signed]", "#D97706", "#FFFBEB", "#92400E"),
         ("3", "Pha 3: Cộng tích lũy", "50% - 85% T", "Mở rộng dấu 16b->32b và cộng vào Partial Sum",
          "P_out = P_in + prod = (+10) + (-6) = +4 [32b CLA chống tràn]", GREEN, "#ECFDF5", "#047857"),
         ("4", "Pha 4: Chuyển tiếp Systolic", "85% - 100% T", "Chốt thanh ghi và chuyển tiếp sang PE kế cận",
@@ -330,7 +330,7 @@ def fig_pe_mac_structure():
            size=6.8, fill=DARK)
     f.text(wf_x + 8, bot_y + 60, "• Truyền Systolic 2D: X truyền ngang, Psum truyền dọc đồng bộ chu kỳ",
            size=6.8, fill=DARK)
-    f.text(wf_x + 8, bot_y + 75, "• Năng lượng thấp: ~0.2 pJ/MAC (INT8) so với ~1.2 pJ/MAC (FP16) [Jouppi 2017]",
+    f.text(wf_x + 8, bot_y + 75, "• Năng lượng phép nhân: 0.2 pJ (8 bit) so với 1.1 pJ (FP16), 45 nm [Gholami 2021, Hình 7]",
            size=6.8, weight=700, fill="#047857")
 
     # Dòng nguồn

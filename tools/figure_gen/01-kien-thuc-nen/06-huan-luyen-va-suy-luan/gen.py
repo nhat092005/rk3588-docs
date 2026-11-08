@@ -415,8 +415,8 @@ def fig_pipeline_rk3588():
     # Card 3: Thư viện
     rect(f, 571, box_y + 32, card_w, 92, fill="#FFFFFF", stroke="#CBD5E1", sw=1, rx=4)
     f.text(580, box_y + 48, "3. Môi trường thực thi (Dependencies)", size=8.8, weight=700, fill=GREEN)
-    f.text(580, box_y + 65, "• PC: PyTorch, CUDA, Ultralytics engine (~4 GB)", size=8.2, fill=DARK)
-    f.text(580, box_y + 80, "• Board: Thuần NumPy, OpenCV, RKNN C-API (<80 MB)", size=8.2, fill=DARK)
+    f.text(580, box_y + 65, "• PC: PyTorch, CUDA, Ultralytics engine", size=8.2, fill=DARK)
+    f.text(580, box_y + 80, "• Board: Thuần NumPy, OpenCV, RKNN C-API", size=8.2, fill=DARK)
     f.text(580, box_y + 96, "-> Loại bỏ hoàn toàn overhead nặng nề của PyTorch,", size=7.8, fill=GRAY)
     f.text(580, box_y + 110, "   giảm thiểu RAM tiêu thụ, tối ưu tốc độ thời gian thực.", size=7.8, fill=GRAY)
 

@@ -25,6 +25,7 @@ PDF = {
     "DS V1.7": DOCS / "_assets/pdf/datasheet/soc/Rockchip_RK3588S_Datasheet_V1.7.pdf",
     "DS V1.3": DOCS / "_assets/pdf/datasheet/soc/Rockchip_RK3588_Datasheet_V1.3_20220328.pdf",
     "DS V0.1": DOCS / "_assets/pdf/datasheet/soc/02_RK3588_Datasheet_V0.1-20210727.pdf",
+    "DW9714V": DOCS / "_assets/pdf/datasheet/camera/Dongwoon_DW9714V_Brief.pdf",
     "UG152": DOCS / "_assets/pdf/rknn/02_Rockchip_RKNPU_User_Guide_RKNN_API_V1.5.2_EN.pdf",
     "API232": DOCS / "_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf",
     "OPL": DOCS / "_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf",
