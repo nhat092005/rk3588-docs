@@ -447,7 +447,7 @@ z
   </g>
   <g id="text_9">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.947167)">Micro model Resize 1x256x20x20, tỉ lệ 2, FP16. Đường đứt 0.01 là ngưỡng khớp viết trước. A là bộ asymmetric, floor.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/q2e_micro.json (khóa g7b)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/npu/operator_support/q2e_micro.json (khóa g7b)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_43">

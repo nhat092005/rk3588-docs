@@ -483,7 +483,7 @@ L 508.824 241.2
   </g>
   <g id="text_23">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.880792)">Board RK3588, YOLOv8n INT8 (SiLU), một context. Chấm xám là từng phiên (trái) hoặc từng lần chạy (phải), chấm xanh là median. Trục y không bắt đầu từ 0.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/g4_latency_workload.json (khóa conditions), results/thr_p3.json (khóa configs)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/npu/operator_support/g4_latency_workload.json (khóa conditions), results/npu/throughput/thr_p3.json (khóa configs)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_35">

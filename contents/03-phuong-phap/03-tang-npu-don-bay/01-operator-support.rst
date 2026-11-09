@@ -348,7 +348,7 @@ Nguồn: :download:`03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf <../../../
 
 Hai op Resize trong bản build đều scale 2 lần (xem mục 4.3), nên theo shape thì thỏa giới hạn bội số nguyên từ 2 đến 8.
 
-Thuộc tính của hai node ONNX ``/model.10/Resize`` và ``/model.13/Resize`` (đọc từ ``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx`` bằng onnx 1.18.0, model 7 class, run đã xóa khỏi repo. Hai model 5 class export lại cho cùng ba giá trị) [T3 PC]:
+Thuộc tính của hai node ONNX ``/model.10/Resize`` và ``/model.13/Resize`` (đọc từ ``experiments/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx`` bằng onnx 1.18.0, model 7 class, run đã xóa khỏi repo. Hai model 5 class export lại cho cùng ba giá trị) [T3 PC]:
 
 .. list-table::
    :header-rows: 1
@@ -440,7 +440,7 @@ Mọi phương án thay thế đều chưa thử [chưa đo]. Tài liệu API V1
 5.1. Nguồn và phạm vi
 ---------------------
 
-Bảng ở mục 5.2 lấy từ model SiLU 5 class train trên SFCHD cũ (run ``sfchd_5class_yolov8n_baseline_100ep_s42``, đã xóa khỏi repo), ONNX của model ppe5 hiện tại cho cùng số node: ONNX 233 node, opset 19, output ``[1, 9, 8400]``, bảng layer 119 dòng. Model 7 class cũ (``ai/automation/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx``, output ``[1, 11, 8400]``) cho đúng danh sách op này. Danh sách op của model ReLU nằm ở mục 3.2.
+Bảng ở mục 5.2 lấy từ model SiLU 5 class train trên SFCHD cũ (run ``sfchd_5class_yolov8n_baseline_100ep_s42``, đã xóa khỏi repo), ONNX của model ppe5 hiện tại cho cùng số node: ONNX 233 node, opset 19, output ``[1, 9, 8400]``, bảng layer 119 dòng. Model 7 class cũ (``experiments/runs/2026-09-17_sfchd_yolov8n_baseline_5ep/weights/best.onnx``, output ``[1, 11, 8400]``) cho đúng danh sách op này. Danh sách op của model ReLU nằm ở mục 3.2.
 
 Bảng lấy từ bản build FP16 (bản INT8 cho cùng 119 dòng, cùng OpType và Target), rknn-toolkit2 2.3.2, target ``rk3588``, ``librknnc version: 2.3.2 (e045de294f@2025-04-07T19:48:25)``. Build log gốc mà các trang cũ trích dẫn không còn tồn tại, trang này thay bằng build lại. Script ``build_fp16.py`` gồm 5 lệnh: ``RKNN(verbose=True)``, ``config(target_platform="rk3588")``, ``load_onnx``, ``build(do_quantization=False)``, ``release``.
 

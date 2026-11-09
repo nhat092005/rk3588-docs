@@ -58,7 +58,7 @@ Phép đo latency một context đọc thời gian của một lần chạy trê
      - Khóa trước phiên bằng ``ai/board/lock_freq.sh lock``, ``make board-check LOCK=1`` kiểm tra đã khóa, helper chỉ ghi ``lock_freq.sh status``
      - Như P2
 
-Hai script nằm trong repo (``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_x4/x4_hold.sh`` và ``bench/onboard_thr/p3_hold.sh``). Chúng chạy bằng quyền root qua ``sudo -n`` nhờ tệp ``/etc/sudoers.d/rk3588-measure`` trên board, chỉ cho phép ba bản sao root-owned ``lock_freq.sh``, ``x4_hold.sh`` và ``p3_hold.sh`` trong ``/usr/local/sbin``. Sửa script trong repo không có tác dụng trên board đến khi người dùng cài lại bản sao.
+Hai script nằm trong repo (``experiments/npu/latency/onboard_x4/x4_hold.sh`` và ``experiments/npu/throughput/onboard_thr/p3_hold.sh``). Chúng chạy bằng quyền root qua ``sudo -n`` nhờ tệp ``/etc/sudoers.d/rk3588-measure`` trên board, chỉ cho phép ba bản sao root-owned ``lock_freq.sh``, ``x4_hold.sh`` và ``p3_hold.sh`` trong ``/usr/local/sbin``. Sửa script trong repo không có tác dụng trên board đến khi người dùng cài lại bản sao.
 
 3. Khi nào một phiên được tính là thực hiện đúng
 ==================================================
@@ -150,6 +150,6 @@ Các kết luận về độ chính xác (cổng C, mAP) không phụ thuộc P2
 7. Nguồn
 ==========
 
-- ``bench/onboard_x4/x4_hold.sh`` (P2), ``bench/onboard_thr/p3_hold.sh`` (P3), ``bench/onboard_g4b/rule.txt``, ``bench/onboard_thr/rule.txt`` (quy tắc viết trước, định nghĩa thực hiện đúng), trong thư mục run ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0``.
-- ``results/g4_latency_workload.json``, ``g4v_latency_workload.json``, ``g4v_latency_workload_2.json``, ``q2h_latency.json``, ``q2i_latency.json``, ``q2j_split.json``, ``thr_p3.json`` (số phiên và kết quả).
-- ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/tier1_int8h5_CORE_0.json`` (phép đo không ghim bằng ``make benchmark-npu PREC=int8h5``).
+- ``experiments/npu/latency/onboard_x4/x4_hold.sh`` (P2), ``experiments/npu/throughput/onboard_thr/p3_hold.sh`` (P3), ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/rule.txt``, ``experiments/npu/throughput/onboard_thr/rule.txt`` (quy tắc viết trước, định nghĩa thực hiện đúng), trong thư mục run ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0``.
+- ``results/npu/operator_support/g4_latency_workload.json``, ``g4v_latency_workload.json``, ``g4v_latency_workload_2.json``, ``q2h_latency.json``, ``q2i_latency.json``, ``q2j_split.json``, ``thr_p3.json`` (số phiên và kết quả).
+- ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/tier1_int8h5_CORE_0.json`` (phép đo không ghim bằng ``make benchmark-npu PREC=int8h5``).

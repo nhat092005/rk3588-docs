@@ -599,7 +599,7 @@ z
   </g>
   <g id="text_30">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 334.487967)">Board RK3588, YOLOv8n INT8, CORE_0, C API, 40 lần chạy cách 2 giây và 20 lần chạy cách 10 giây. Thời gian là đồng hồ CPU quanh rknn_run.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 342.124045)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa gap)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 342.124045)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa gap)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_30">

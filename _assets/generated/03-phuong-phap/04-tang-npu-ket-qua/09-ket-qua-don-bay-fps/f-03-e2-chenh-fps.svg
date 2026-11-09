@@ -336,7 +336,7 @@ z
    </g>
   </g>
   <g id="text_19">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="285.294094" transform="rotate(-0 5.328 285.294094)">Quy tắc 'khác': chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn. Đường đứt là ±5%. File: results/q2f_fps.json (khóa e2, comparisons)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="285.294094" transform="rotate(-0 5.328 285.294094)">Quy tắc 'khác': chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn. Đường đứt là ±5%. File: results/npu/throughput/q2f_fps.json (khóa e2, comparisons)</text>
   </g>
  </g>
  <defs>

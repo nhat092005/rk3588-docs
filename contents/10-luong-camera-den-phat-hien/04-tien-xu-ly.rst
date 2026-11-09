@@ -16,7 +16,7 @@ Tiền xử lý
    2. Có ba tuyến: A (CPU, chuỗi hiện có của repo), B (ISP thu nhỏ rồi RGA hoặc CPU thêm viền), C (RGA đổi màu và thu nhỏ một lệnh, theo demo của hãng). Repo chỉ có tuyến A.
    3. RGA đổi NV12 1920x1080 sang RGB888 640x640 có viền mất 2.222 và 2.244 ms (bộ đệm dma-buf, hai lần đo) hoặc 3.605 và 3.219 ms (địa chỉ ảo). CPU đổi NV12 1080p sang BGR mất 0.915 ms với 8 luồng, 4.571 ms với 1 luồng [T3 board, ``rga_bench.c``, ``board_pipeline_test.py``].
    4. ISP xuất trực tiếp NV12 640x360 hoặc 640x640 ở 29.95 fps [T3 board, ``v4l2-ctl --stream-mmap``]. Mặc định ``Dcrop`` là cả khung 4224x3136 (tỉ lệ 1.347), nên đầu ra 16:9 hoặc vuông bị méo [SL] [T3 board, ``/proc/rkisp0-vir1``]. ISP cắt được 16:9 bằng ``VIDIOC_S_SELECTION`` (``Dcrop(0,380|4224x2376)``), khi đó thu nhỏ giữ đúng tỉ lệ (mục 7).
-   5. Tiền xử lý CPU của repo đo 0.216 ms mỗi khung ở một context, trên 82 ảnh kiểm thử nạp sẵn, không gồm NV12 sang BGR. Chưa suy ra được cho khung camera [T3 board, ``results/thr_p3.json``, :doc:`../03-phuong-phap/03-tang-npu-don-bay/09-pre-post-processing`].
+   5. Tiền xử lý CPU của repo đo 0.216 ms mỗi khung ở một context, trên 82 ảnh kiểm thử nạp sẵn, không gồm NV12 sang BGR. Chưa suy ra được cho khung camera [T3 board, ``results/npu/throughput/thr_p3.json``, :doc:`../03-phuong-phap/03-tang-npu-don-bay/09-pre-post-processing`].
 
 .. contents:: Trong trang này
    :local:
@@ -225,9 +225,9 @@ Khóa CPU, NPU và DDR ở ``performance`` bằng ``lock_freq.sh`` (CPU 1800, 22
 8. Ảnh méo tỉ lệ và độ chính xác (ảnh tĩnh)
 ===========================================
 
-Đo ngày 2026-11-08 trên PC bằng evaluator protocol v1, model baseline FP32 (``best.pt``), không phải INT8 trên board. Nhãn YOLO chuẩn hóa không đổi khi co giãn theo trục nên giữ nguyên. Bản letterbox tái lập đúng số đã lưu của từng tập [T3 PC, ``tmp/camera-pipeline/distort/results.json``].
+Đo ngày 2026-11-08 trên PC bằng evaluator protocol v1, model baseline FP32 (``best.pt``), không phải INT8 trên board. Nhãn YOLO chuẩn hóa không đổi khi co giãn theo trục nên giữ nguyên. Bản letterbox tái lập đúng số đã lưu của từng tập [T3 PC, ``experiments/camera/distort/results.json``].
 
-CSS v28 đã được hãng xử lý ``Resize to 640x640 (Stretch)`` cho mọi ảnh [T1, ``data/css/raw/README.roboflow.txt``], gồm cả tập train và ``css_test``. Vì vậy ``css_test`` không phải mốc tỉ lệ tự nhiên. Phép thử dùng được chỉ gồm ảnh tự nhiên không vuông của ppe2286, so letterbox với ép về 640x640 (như ISP xuất 640x640, nhưng từ tỉ lệ gốc của từng ảnh, không phải 4:3), bootstrap ghép cặp theo ảnh 1000 lần [T3 PC, ``tmp/camera-pipeline/stretch/results.json``]:
+CSS v28 đã được hãng xử lý ``Resize to 640x640 (Stretch)`` cho mọi ảnh [T1, ``data/css/raw/README.roboflow.txt``], gồm cả tập train và ``css_test``. Vì vậy ``css_test`` không phải mốc tỉ lệ tự nhiên. Phép thử dùng được chỉ gồm ảnh tự nhiên không vuông của ppe2286, so letterbox với ép về 640x640 (như ISP xuất 640x640, nhưng từ tỉ lệ gốc của từng ảnh, không phải 4:3), bootstrap ghép cặp theo ảnh 1000 lần [T3 PC, ``experiments/camera/stretch/results.json``]:
 
 .. list-table::
    :header-rows: 1

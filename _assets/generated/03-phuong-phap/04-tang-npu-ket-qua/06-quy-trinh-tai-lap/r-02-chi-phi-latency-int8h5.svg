@@ -230,7 +230,7 @@ z
   </g>
   <g id="text_11">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 248.433567)">Board RK3588, YOLOv8n INT8, P2. Chi phí dương là chậm hơn. Đường đứt 5% là ngưỡng tính là đáng kể.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 256.069645)">File: results/q2i_latency.json (khóa cost)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 256.069645)">File: results/npu/operator_support/q2i_latency.json (khóa cost)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_17">

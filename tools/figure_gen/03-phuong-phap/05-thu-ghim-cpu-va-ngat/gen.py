@@ -1,4 +1,4 @@
-"""Hình cho trang 05-thu-ghim-cpu-va-ngat (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/onboard_*.json (khóa e2d).
+"""Hình cho trang 05-thu-ghim-cpu-va-ngat (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/npu/latency/onboard_*.json (khóa e2d).
 
 Dùng: .venv/bin/python docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py [outdir] [tên_ảnh ...]
 """
@@ -40,7 +40,7 @@ def cell_geometry(cond):
 
 
 def fig_map():
-    onb = json.load(open(os.path.join(ROOT, "results", ONB_NAME), encoding="utf-8"))
+    onb = json.load(open(os.path.join(ROOT, "results", "npu", "latency", ONB_NAME), encoding="utf-8"))
     e = onb["e2d"]
     blocks = e["blocks"]
     assert len(blocks) == 40 and all(b["realized"] for b in blocks.values()) and e["valid"]
@@ -82,14 +82,14 @@ def fig_map():
     fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, fontsize=8.5, bbox_to_anchor=(0.52, 0.995))
     note = ("Board RK3588, YOLOv8n INT8, CORE_0, 20 điều kiện x 2 nửa, mỗi khối 1000 lần chạy sau 50 lần khởi động, irqbalance dừng.\n"
             "Nửa 1 theo thứ tự cố định, nửa 2 theo thứ tự ngược. Ngưỡng 20% theo E2, 5% và 95% chọn sau khi đã thấy dữ liệu E2c.\n"
-            f"File: results/{ONB_NAME} (khóa e2d)")
+            f"File: results/npu/latency/{ONB_NAME} (khóa e2d)")
     fig.text(0.01, 0.004, note, fontsize=7.2, style="italic", color="#444444", va="bottom", ha="left")
     fig.subplots_adjust(left=0.1, right=0.955, top=0.9, bottom=0.17, hspace=0.12)
     return fig
 
 
 def _load():
-    return json.load(open(os.path.join(ROOT, "results", ONB_NAME), encoding="utf-8"))
+    return json.load(open(os.path.join(ROOT, "results", "npu", "latency", ONB_NAME), encoding="utf-8"))
 
 
 def _half(b):
@@ -138,7 +138,7 @@ def cells_figure(key, order, labels, slow_lines, fast_lines, note_lines, bad_blo
                               label="khối không thực hiện đúng điều kiện"))
     fig.legend(handles=handles, loc="upper center", ncol=len(handles), frameon=False, fontsize=8.5,
                bbox_to_anchor=(0.52, 0.995))
-    fig.text(0.01, 0.004, "\n".join(note_lines + [f"File: results/{ONB_NAME} (khóa {key})"]), fontsize=7.2,
+    fig.text(0.01, 0.004, "\n".join(note_lines + [f"File: results/npu/latency/{ONB_NAME} (khóa {key})"]), fontsize=7.2,
              style="italic", color="#444444", va="bottom", ha="left")
     n_note = len(note_lines) + 1
     tick_lines = max(t.count("\n") + 1 for t in labels)
@@ -218,7 +218,7 @@ def fig_e2e_vs_e2d():
     ax.legend(loc="upper center", ncol=2, frameon=False, fontsize=9, bbox_to_anchor=(0.5, 1.13))
     note = ("Board RK3588, YOLOv8n INT8, CORE_0, sáu ô chung của E2e và E2d. Trung vị mỗi ô là trung bình trung vị của hai khối.\n"
             "Thời gian eval_perf và thời gian C API là hai đại lượng khác nhau, ngưỡng 17.0 và 20.0 ms lấy từ đường C API.\n"
-            f"File: results/{ONB_NAME} (khóa e2e, comparison)")
+            f"File: results/npu/latency/{ONB_NAME} (khóa e2e, comparison)")
     fig.text(0.01, 0.004, note, fontsize=7.2, style="italic", color="#444444", va="bottom", ha="left")
     fig.subplots_adjust(left=0.1, right=0.955, top=0.88, bottom=0.27)
     return fig

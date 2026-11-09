@@ -27,7 +27,7 @@ Kết quả của ReLU gốc, nhiễu seed và cổng ở :doc:`01-ket-qua-g4`. 
 1. Ứng viên và điều kiện
 ========================
 
-Mỗi ứng viên là YOLOv8n ppe5, seed 0, khởi tạo từ trọng số ``yolov8n.pt`` (SiLU) nạp vào kiến trúc mới, cùng cài đặt huấn luyện Ultralytics của baseline, chỉ khác file yaml mô hình và số epoch. INT8 dùng danh sách hiệu chuẩn của seed 0 (``stems_md5`` và ``png_md5`` giống hệt như ở :doc:`01-ket-qua-g4`). Quy tắc viết trước dữ liệu: ``bench/eval_g4/rule_variants.txt`` (mAP), ``bench/onboard_g4v/rule.txt`` (latency, thí nghiệm 1 và 2). Cổng C của mọi ứng viên so với SiLU seed 0 huấn luyện 100 epoch (baseline đã duyệt).
+Mỗi ứng viên là YOLOv8n ppe5, seed 0, khởi tạo từ trọng số ``yolov8n.pt`` (SiLU) nạp vào kiến trúc mới, cùng cài đặt huấn luyện Ultralytics của baseline, chỉ khác file yaml mô hình và số epoch. INT8 dùng danh sách hiệu chuẩn của seed 0 (``stems_md5`` và ``png_md5`` giống hệt như ở :doc:`01-ket-qua-g4`). Quy tắc viết trước dữ liệu: ``experiments/npu/operator_support/eval_g4/rule_variants.txt`` (mAP), ``experiments/npu/operator_support/onboard_g4v/ppe5_yolov8n_baseline_100ep_s0/rule.txt`` (latency, thí nghiệm 1 và 2). Cổng C của mọi ứng viên so với SiLU seed 0 huấn luyện 100 epoch (baseline đã duyệt).
 
 
 .. list-table::
@@ -402,6 +402,6 @@ Về huấn luyện 200 epoch (V-E, mô tả cạnh cổng C): ReLU 200 epoch ch
 ========
 
 - T1: Operator List V2.3.2 (``docs/_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf``, tr.59 đến 61, 63, 84 đến 86), SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, tr.56 đến 57, 75, 142), API guide V1.5.2 tr.27.
-- T3 PC và board: ``results/g4v_latency_workload.*``, ``results/g4v_latency_workload_2.*``, ``results/eval_g4.*``, ``bench/onboard_g4v/``, ``bench/onboard_g4v2/``, ``bench/eval_g4/rule_variants.txt``, ``export_int8.json`` của các run.
-- Tìm nguồn: ``results/phase2b_variants_design.md`` (thiết kế và kết quả tìm nguồn G1 của LeakyReLU và ReLU6, doc-reader).
+- T3 PC và board: ``results/npu/operator_support/g4v_latency_workload.*``, ``results/npu/operator_support/g4v_latency_workload_2.*``, ``results/npu/operator_support/eval_g4.*``, ``experiments/npu/operator_support/onboard_g4v/ppe5_yolov8n_baseline_100ep_s0/``, ``experiments/npu/operator_support/onboard_g4v2/ppe5_yolov8n_baseline_100ep_s0/``, ``experiments/npu/operator_support/eval_g4/rule_variants.txt``, ``export_int8.json`` của các run.
+- Tìm nguồn: ``results/notes/phase2b_variants_design.md`` (thiết kế và kết quả tìm nguồn G1 của LeakyReLU và ReLU6, doc-reader).
 

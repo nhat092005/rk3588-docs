@@ -40,7 +40,7 @@ Phase 1. Khoá protocol v1
 
 **Lệnh:** ``make golden-test``, ``make test-parsers``. Kiểm chéo với ``model.val()`` chạy tự động trong ``make phase2``.
 
-- ☒ ``make golden-test`` pass (2026-09-26, log ``ai/automation/golden/logs/``). Golden file ``ai/automation/golden/evaluator_v1.json``
+- ☒ ``make golden-test`` pass (2026-09-26, log ``experiments/golden/logs/``). Golden file ``experiments/golden/evaluator_v1.json``
 - ☒ ``make crosscheck`` với model 7 class cũ: 24 metric, lệch lớn nhất 0.0001
 - ☒ Parser ``eval_perf`` khớp output thật của RKNN 2.3.2: tổng thời gian 119 layer đúng bằng tổng board in ra (``tests/test_parsers.py``)
 - ☒ Tiền xử lý trên board trùng từng pixel với evaluator (md5 4 ảnh). Ảnh calibration trùng input evaluator (sai khác 0)

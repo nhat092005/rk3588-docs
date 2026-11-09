@@ -21,7 +21,7 @@ Latency của đúng file INT8 này ở :doc:`../02-tang-npu-nen-do/02-ket-qua-l
 1. Kết quả chấm điểm
 ====================
 
-X7 chấm chính file INT8 được đo latency (sha256 ``a501f94e``), suy luận bằng RKNNLite trên board, chấm điểm trên PC bằng cùng mã và cùng ngưỡng tin cậy với bản FP32 (Evaluation Protocol v1, ``ai/core/evaluator.py``). Quy tắc ``bench/eval_x7/rule.txt``: chỉ báo số, không áp ngưỡng nào (ngưỡng 1.0 pp mAP đã duyệt thuộc cổng G4, giai đoạn 2).
+X7 chấm chính file INT8 được đo latency (sha256 ``a501f94e``), suy luận bằng RKNNLite trên board, chấm điểm trên PC bằng cùng mã và cùng ngưỡng tin cậy với bản FP32 (Evaluation Protocol v1, ``ai/core/evaluator.py``). Quy tắc ``experiments/npu/operator_support/eval_x7/rule.txt``: chỉ báo số, không áp ngưỡng nào (ngưỡng 1.0 pp mAP đã duyệt thuộc cổng G4, giai đoạn 2).
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/04-do-chinh-xac-int8-do-latency/x7-01-int8-so-voi-fp32.svg
@@ -90,7 +90,7 @@ X7 chấm chính file INT8 được đo latency (sha256 ``a501f94e``), suy luậ
      - 0.2624
      - -3.11
 
-Trên ``css_test``, mAP50-95 của INT8 thấp hơn FP32 13.24 điểm phần trăm. Phép so này gộp cả hai khác biệt: lượng tử hóa và đường suy luận (RKNNLite trên board so với PyTorch trên PC). X7b tách chúng bằng cách chấm mô hình FP16 qua đúng đường RKNNLite (``bench/eval_x7b/rule.txt``, viết trước, các số 0.25 và 0.75 là số mới, chưa qua người dùng duyệt): trên ``css_test``, FP16 qua RKNNLite có mAP50-95 0.4976, chênh -0.23 điểm phần trăm so với FP32, còn INT8 chênh -13.24. Theo quy tắc: **mức giảm của INT8 chủ yếu đi theo lượng tử hóa**. Trên ``ppe2286_ext`` (mô tả) FP16 qua RKNNLite chênh 0.11 và INT8 chênh -3.11. ``css_test`` chỉ có 82 ảnh và một seed. Mức giảm do lượng tử hóa là phát biểu về kết quả đo, nguyên nhân bên trong lượng tử hóa (hiệu chuẩn hay lớp nhạy) chưa được kiểm. Từ khóa đề xuất: "RKNN INT8 accuracy drop YOLOv8 quantization calibration".
+Trên ``css_test``, mAP50-95 của INT8 thấp hơn FP32 13.24 điểm phần trăm. Phép so này gộp cả hai khác biệt: lượng tử hóa và đường suy luận (RKNNLite trên board so với PyTorch trên PC). X7b tách chúng bằng cách chấm mô hình FP16 qua đúng đường RKNNLite (``experiments/npu/operator_support/eval_x7b/rule.txt``, viết trước, các số 0.25 và 0.75 là số mới, chưa qua người dùng duyệt): trên ``css_test``, FP16 qua RKNNLite có mAP50-95 0.4976, chênh -0.23 điểm phần trăm so với FP32, còn INT8 chênh -13.24. Theo quy tắc: **mức giảm của INT8 chủ yếu đi theo lượng tử hóa**. Trên ``ppe2286_ext`` (mô tả) FP16 qua RKNNLite chênh 0.11 và INT8 chênh -3.11. ``css_test`` chỉ có 82 ảnh và một seed. Mức giảm do lượng tử hóa là phát biểu về kết quả đo, nguyên nhân bên trong lượng tử hóa (hiệu chuẩn hay lớp nhạy) chưa được kiểm. Từ khóa đề xuất: "RKNN INT8 accuracy drop YOLOv8 quantization calibration".
 
 2. Điều chưa biết và giới hạn
 =============================
@@ -100,5 +100,5 @@ Trên ``css_test``, mAP50-95 của INT8 thấp hơn FP32 13.24 điểm phần tr
 3. Nguồn
 ========
 
-- T3 board và PC: ``results/eval_x7_*``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/eval_x7/``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/eval/``. Mã: ``ai/automation/analyze_x7.py``.
+- T3 board và PC: ``results/npu/operator_support/eval_x7_*``, ``experiments/npu/operator_support/eval_x7/``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/eval/``. Mã: ``ai/npu/operator_support/analyze_x7.py``.
 

@@ -10,9 +10,9 @@ Pre/post-processing
 
 .. admonition:: Tóm tắt
 
-   1. Tiền xử lý trên CPU gồm resize ``INTER_LINEAR``, viền 114, BGR sang RGB, trả tensor ``(1, 640, 640, 3)`` uint8. Hậu xử lý gồm argmax lớp, lọc ``conf > 0.25``, NMS numpy (IoU 0.7, tối đa 300 hộp). Mean 0 và std 255 nằm trong model [Mã nguồn repo ``ai/board/common.py:64-79, 99-123``, ``ai/automation/build_recipe.py:64``].
-   2. Model INT8 mặc định (``int8``) ở một context ``CORE_0``: ``T_pre`` 0.216 ms, ``T_npu`` 17.161 ms, ``T_post`` 0.662 ms (trung vị), 54.66 FPS. Tiền xử lý và hậu xử lý cộng lại 0.878 ms [T3 board, ``results/thr_p3.json``].
-   3. Model tách đầu đưa phần giải mã box ra CPU: numpy tốn 8.02 ms (trung vị, 200 lần, đầu vào ngẫu nhiên). Tổng ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.44 ms của ``int8h5`` nếu cùng một luồng [T3 board, ``results/q2j_split.json``].
+   1. Tiền xử lý trên CPU gồm resize ``INTER_LINEAR``, viền 114, BGR sang RGB, trả tensor ``(1, 640, 640, 3)`` uint8. Hậu xử lý gồm argmax lớp, lọc ``conf > 0.25``, NMS numpy (IoU 0.7, tối đa 300 hộp). Mean 0 và std 255 nằm trong model [Mã nguồn repo ``ai/board/common.py:64-79, 99-123``, ``ai/npu/operator_support/build_recipe.py:64``].
+   2. Model INT8 mặc định (``int8``) ở một context ``CORE_0``: ``T_pre`` 0.216 ms, ``T_npu`` 17.161 ms, ``T_post`` 0.662 ms (trung vị), 54.66 FPS. Tiền xử lý và hậu xử lý cộng lại 0.878 ms [T3 board, ``results/npu/throughput/thr_p3.json``].
+   3. Model tách đầu đưa phần giải mã box ra CPU: numpy tốn 8.02 ms (trung vị, 200 lần, đầu vào ngẫu nhiên). Tổng ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.44 ms của ``int8h5`` nếu cùng một luồng [T3 board, ``results/npu/operator_support/q2j_split.json``].
    4. Vendor định nghĩa thời gian ứng dụng gồm pre, post và code logic, và khuyên tối ưu hoặc dùng phần cứng chuyên dụng khi nó chiếm tỷ lệ lớn [T1 UG232 tr.137]. Chữ NEON không có trong T1 tiếng Anh đã tìm.
    5. P1 chồng lấp giải mã bằng pipeline: ĐO, 65.99 FPS ở một context ``CORE_0`` (:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`). P2 giải mã bằng C hoặc NEON: không cần cho mục tiêu 30 FPS (C đạt 65.99 FPS, cả mốc 60 cũ lẫn mốc 30 hiện hành), chưa đo. P3 RGA: chưa thử. P4 bỏ NMS: ngoài phạm vi.
    6. Chưa biết: thời gian NMS riêng trên RK3588, giải mã trên ảnh thật ở model tách đầu trong pipeline, thứ tự đầu ra của pipeline, thời gian mỗi khung ở nhịp 30 FPS.
@@ -45,7 +45,7 @@ Trang chỉ ghi điều dự án cần cho quyết định: CPU làm gì, tốn 
      - [Mã nguồn repo ``ai/board/common.py:64-79``]
    * - Chuẩn hóa
      - ``mean_values`` 0, ``std_values`` 255 đặt lúc build, đầu vào uint8 vào thẳng ``rknn.inference``
-     - [Mã nguồn repo ``ai/automation/build_split.py:47``]
+     - [Mã nguồn repo ``ai/npu/operator_support/build_split.py:47``]
    * - Hậu xử lý (model INT8 mặc định)
      - Argmax lớp, lọc ``conf > 0.25``, giữ tối đa ``MAX_NMS`` 30000 ứng viên, NMS numpy với IoU 0.7, tối đa ``MAX_DET`` 300
      - [Mã nguồn repo ``ai/board/common.py:24-27, 99-123``]
@@ -93,16 +93,16 @@ Về chuẩn hóa, vendor ghi các giá trị này dùng trong lượng tử hó
      - 1.28
      - 147.39
 
-Nguồn: [T3 board, ``results/thr_p3.json``, trường ``configs``]. Ở một context, ``T_pre`` cộng ``T_post`` là 0.878 ms trong tổng khoảng 18.04 ms (tính từ ba trung vị, xấp xỉ 4.9%). Khi nhiều context chạy cùng lúc, ``T_pre`` và ``T_post`` tăng (0.216 lên 1.084 ms và 0.662 lên 1.28 ms ở T6), mô tả của phép đo, nguyên nhân chưa biết. Bảng đầy đủ và điều kiện P3 ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 2 đến 5. ``T_pre`` đo từng khung bằng ``time.perf_counter`` và gộp cả letterbox, không tách riêng từng bước [Mã nguồn repo ``ai/board/bench_throughput_rep.py``].
+Nguồn: [T3 board, ``results/npu/throughput/thr_p3.json``, trường ``configs``]. Ở một context, ``T_pre`` cộng ``T_post`` là 0.878 ms trong tổng khoảng 18.04 ms (tính từ ba trung vị, xấp xỉ 4.9%). Khi nhiều context chạy cùng lúc, ``T_pre`` và ``T_post`` tăng (0.216 lên 1.084 ms và 0.662 lên 1.28 ms ở T6), mô tả của phép đo, nguyên nhân chưa biết. Bảng đầy đủ và điều kiện P3 ở :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 2 đến 5. ``T_pre`` đo từng khung bằng ``time.perf_counter`` và gộp cả letterbox, không tách riêng từng bước [Mã nguồn repo ``ai/board/bench_throughput_rep.py``].
 
 3.2. Model tách đầu, giải mã CPU
 --------------------------------
 
-Giải mã numpy đo riêng: trung vị 8.02 ms, p95 8.246 ms, nhỏ nhất 7.88 ms qua 200 lần, đầu vào ngẫu nhiên (``default_rng(0)``, hộp ``N(0,4)`` hình ``(1,64,8400)``, điểm ``N(-3,3)`` hình ``(1,5,8400)``), tần số và CPU khóa [T3 board, ``results/q2j_split.json`` trường ``decode``, ``ai/board/bench_decode.py``]. Trên đầu ra thật của hai model tách đầu, trung vị giải mã là 8.261 ms (INT8) và 8.222 ms (FP16), số anchor giữ lại là 14805 và 15719. Số này đo trong lúc chấm và chưa ghim CPU [T3 board, ``results/q2j_split.json`` trường ``s4``].
+Giải mã numpy đo riêng: trung vị 8.02 ms, p95 8.246 ms, nhỏ nhất 7.88 ms qua 200 lần, đầu vào ngẫu nhiên (``default_rng(0)``, hộp ``N(0,4)`` hình ``(1,64,8400)``, điểm ``N(-3,3)`` hình ``(1,5,8400)``), tần số và CPU khóa [T3 board, ``results/npu/operator_support/q2j_split.json`` trường ``decode``, ``ai/board/bench_decode.py``]. Trên đầu ra thật của hai model tách đầu, trung vị giải mã là 8.261 ms (INT8) và 8.222 ms (FP16), số anchor giữ lại là 14805 và 15719. Số này đo trong lúc chấm và chưa ghim CPU [T3 board, ``results/npu/operator_support/q2j_split.json`` trường ``s4``].
 
-Tổng nếu cùng một luồng: ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.4425 ms của ``int8h5`` (chênh +4.6475 ms). Ở ``CORE_0_1_2`` là 12.557 + 8.02 = 20.577 ms so với 15.928 ms. Các so sánh này mang nhãn "chưa kết luận" vì ``all_realized`` là false (điều kiện ``int8`` ở ``CORE_0`` không thực hiện đúng) [T3 board, ``results/q2j_split.json``, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` mục 2].
+Tổng nếu cùng một luồng: ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.4425 ms của ``int8h5`` (chênh +4.6475 ms). Ở ``CORE_0_1_2`` là 12.557 + 8.02 = 20.577 ms so với 15.928 ms. Các so sánh này mang nhãn "chưa kết luận" vì ``all_realized`` là false (điều kiện ``int8`` ở ``CORE_0`` không thực hiện đúng) [T3 board, ``results/npu/operator_support/q2j_split.json``, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` mục 2].
 
-Trong harness E2, khi giải mã nằm cùng luồng với hậu xử lý (điều kiện B), ``T_post`` trung vị là 8.94 ms và FPS là 42.05, thấp hơn ``int8h5`` tuần tự (54.79). Khi tách thành luồng riêng (điều kiện C), ``T_post`` là 11.61 ms trong lúc ``T_npu`` là 15.04 ms [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4].
+Trong harness E2, khi giải mã nằm cùng luồng với hậu xử lý (điều kiện B), ``T_post`` trung vị là 8.94 ms và FPS là 42.05, thấp hơn ``int8h5`` tuần tự (54.79). Khi tách thành luồng riêng (điều kiện C), ``T_post`` là 11.61 ms trong lúc ``T_npu`` là 15.04 ms [T3 board, ``results/npu/throughput/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4].
 
 4. Vendor và bài báo
 ====================
@@ -174,7 +174,7 @@ Nhãn: ĐO (số T3 của dự án), NGUỒN, CHƯA BIẾT. Các nhãn chưa ph�
    * - P1
      - Chồng lấp giải mã bằng pipeline (một luồng pre, một NPU, một post)
      - ĐO
-     - Model tách đầu ở ``CORE_0``: 65.99 FPS (C), so với 42.05 FPS khi giải mã cùng luồng (B) và 54.79 FPS của ``int8h5`` tuần tự (A). Thêm luồng post (D, 65.74) hay ba lõi (E, 68.21) không phân biệt được với C. Pipeline không giúp ``int8h5`` (F, 56.62, không phân biệt được với A). CPU tiến trình khoảng 100% ở C so với 24% ở A [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4]
+     - Model tách đầu ở ``CORE_0``: 65.99 FPS (C), so với 42.05 FPS khi giải mã cùng luồng (B) và 54.79 FPS của ``int8h5`` tuần tự (A). Thêm luồng post (D, 65.74) hay ba lõi (E, 68.21) không phân biệt được với C. Pipeline không giúp ``int8h5`` (F, 56.62, không phân biệt được với A). CPU tiến trình khoảng 100% ở C so với 24% ở A [T3 board, ``results/npu/throughput/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 4]
    * - P2
      - Giải mã bằng C hoặc NEON thay numpy
      - Chưa đo
@@ -190,7 +190,7 @@ Nhãn: ĐO (số T3 của dự án), NGUỒN, CHƯA BIẾT. Các nhãn chưa ph�
 
 Hai điều rút ra từ số đo. Một, ở model INT8 mặc định tiền xử lý và hậu xử lý chỉ chiếm khoảng 4.9% thời gian một khung (mục 3.1), nên phần lớn FPS nằm ở ``T_npu``. Hai, giải mã CPU của model tách đầu là phần CPU lớn nhất đã đo (8.02 ms) và P1 là cách đã đo để che nó. Hai điều này là mô tả của phép đo, không phải cơ chế.
 
-**Đọc theo thông lượng** (mặc định của :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8): mọi điều kiện đạt 30 FPS, kể cả ``int8`` một context tuần tự (54.66 FPS) mà không cần P1, nên P1, P2 và P3 đều không cần cho mục tiêu. **Đọc theo thời gian mỗi khung** (33.33 ms): tổng ba giai đoạn của C là 27.55 ms (``stage_sum`` trong ``results/q2f_fps.json``, tổng trung vị từng giai đoạn dưới tranh chấp, không phải đo đầu cuối trực tiếp và không phải cực tiểu), dưới 33.33 ms, dư 5.78 ms. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms nhưng gồm chờ hàng đợi nên chỉ là cận trên. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Theo cách đọc này P2 và P3 chỉ có ích nếu cần thêm phần dư (giảm ``T_post`` hay ``T_pre`` rút ngắn tổng ba giai đoạn), mức rút ngắn đạt được: chưa biết (``T_npu`` một mình đã 15.04 ms ở C).
+**Đọc theo thông lượng** (mặc định của :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8): mọi điều kiện đạt 30 FPS, kể cả ``int8`` một context tuần tự (54.66 FPS) mà không cần P1, nên P1, P2 và P3 đều không cần cho mục tiêu. **Đọc theo thời gian mỗi khung** (33.33 ms): tổng ba giai đoạn của C là 27.55 ms (``stage_sum`` trong ``results/npu/throughput/q2f_fps.json``, tổng trung vị từng giai đoạn dưới tranh chấp, không phải đo đầu cuối trực tiếp và không phải cực tiểu), dưới 33.33 ms, dư 5.78 ms. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms nhưng gồm chờ hàng đợi nên chỉ là cận trên. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Theo cách đọc này P2 và P3 chỉ có ích nếu cần thêm phần dư (giảm ``T_post`` hay ``T_pre`` rút ngắn tổng ba giai đoạn), mức rút ngắn đạt được: chưa biết (``T_npu`` một mình đã 15.04 ms ở C).
 
 6. Điều chưa biết
 =================
@@ -232,6 +232,6 @@ Hai điều rút ra từ số đo. Một, ở model INT8 mặc định tiền x�
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.22, 67, 69, 137, 158, 168), ví dụ demo ``3rdparty/rknn-toolkit2/rknpu2/examples/rknn_yolov5_demo/`` (``README.md:13``, ``src/main.cc:265-280``, ``include/preprocess.h:12``, ``src/preprocess.cc:17``).
 - T2: Limaran (``rk3566_npu_yolo11_2026limaran.pdf`` tr.4, 6), Chakrabarty (``yolo26_nmsfree_2026chakrabarty.pdf`` tr.7), Sapkota (``yolo26_arch_2025sapkota.pdf`` tr.5), Li 2022 (``yolov6_hwfriendly_2022li.pdf`` tr.4), EDGE (``edgesoc_benchmark_2026kong.pdf`` tr.2, 5).
-- T3: ``results/thr_p3.json``, ``results/q2j_split.json``, ``results/q2f_fps.json``.
-- Mã nguồn repo: ``ai/board/common.py:24-27, 64-79, 99-123``, ``ai/board/split_decode.py``, ``ai/board/bench_decode.py``, ``ai/board/bench_throughput_rep.py``, ``ai/automation/build_split.py:47``, ``ai/automation/build_recipe.py:64``.
+- T3: ``results/npu/throughput/thr_p3.json``, ``results/npu/operator_support/q2j_split.json``, ``results/npu/throughput/q2f_fps.json``.
+- Mã nguồn repo: ``ai/board/common.py:24-27, 64-79, 99-123``, ``ai/board/split_decode.py``, ``ai/board/bench_decode.py``, ``ai/board/bench_throughput_rep.py``, ``ai/npu/operator_support/build_split.py:47``, ``ai/npu/operator_support/build_recipe.py:64``.
 - Trang liên quan: :doc:`03-tensor-layout`, :doc:`06-memory-copy`, :doc:`07-compiler-optimization`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

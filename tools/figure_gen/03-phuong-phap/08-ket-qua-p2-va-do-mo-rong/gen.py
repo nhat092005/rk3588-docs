@@ -1,4 +1,4 @@
-"""Hình cho trang 08-ket-qua-p2-va-do-mo-rong (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/onboard_x4_*.json.
+"""Hình cho trang 08-ket-qua-p2-va-do-mo-rong (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/npu/latency/onboard_x4_*.json.
 
 Dùng: .venv/bin/python docs/tools/figure_gen/03-phuong-phap/08-ket-qua-p2-va-do-mo-rong/gen.py [outdir] [tên_ảnh ...]
 """
@@ -25,7 +25,7 @@ plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "
 
 
 def fig_sessions():
-    x4 = json.load(open(os.path.join(ROOT, "results", X4_NAME), encoding="utf-8"))
+    x4 = json.load(open(os.path.join(ROOT, "results", "npu", "latency", X4_NAME), encoding="utf-8"))
     p1, p2 = x4["protocols"]["p1lan"]["sessions"], x4["protocols"]["p2"]["sessions"]
     assert len(p1) == len(p2) == 10
     for ses, lo, hi in ((p1, 17.25, 21.87), (p2, 16.632, 16.658)):  # khoảng trung vị phiên ghi trong lời văn của trang
@@ -60,7 +60,7 @@ def fig_sessions():
     fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, fontsize=8.5, bbox_to_anchor=(0.52, 0.995))
     note = ("Board RK3588, YOLOv8n INT8, CORE_0, LAN trực tiếp, mỗi phiên 5 lần eval_perf (perf_debug=False) và 5 lần từng lớp (perf_debug=True).\n"
             "Đường đứt 17.0 và 20.0 ms là ranh giới mức nhanh và chậm. Cổng A5 so median latency giữa các phiên, A8 so tổng debug và tỉ lệ từng khối (không vẽ ở đây).\n"
-            f"File: results/{X4_NAME} (khóa protocols)")
+            f"File: results/npu/latency/{X4_NAME} (khóa protocols)")
     fig.text(0.01, 0.004, note, fontsize=7.2, style="italic", color="#444444", va="bottom", ha="left")
     fig.subplots_adjust(left=0.11, right=0.955, top=0.9, bottom=0.2, hspace=0.12)
     return fig

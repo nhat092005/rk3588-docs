@@ -19,7 +19,7 @@ Mục chưa biết còn lại
    - M2: ``core_mask`` ``NPU_CORE_ALL`` (0xffff) chia 29 dòng, đúng tập dòng của ``CORE_0_1_2``, còn ``AUTO`` chia 0 dòng. Điều bài EDGE gọi là ``ALL`` vẫn chưa biết.
    - Vẫn chưa biết (nhãn cuối, đã ghi điều đã thử): quy tắc chia job của ``librknnrt`` (M1 chỉ mô tả), nguyên nhân ``h5`` lấy lại điểm, ``mmse``, QAT với torch 1.10 đến 1.13.1. Người dùng đã quyết định ngày 2026-11-01: M8 mục tiêu 60 FPS, đổi thành 30 FPS ngày 2026-11-08 (:doc:`03-ket-qua-da-nhan` mục 8) và duyệt P2 và P3 (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`).
 
-Kiểm kê và lớp của từng mục ở ``results/phase2e_unknowns_inventory.md``, quy tắc viết trước dữ liệu ở ``bench/onboard_q2e/rule_*.txt`` và ``bench/onboard_q2e_qat/rule.txt`` (run ``ppe5_yolov8n_baseline_100ep_s0``). Trang liên quan: :doc:`../03-tang-npu-don-bay/01-operator-support`, :doc:`../03-tang-npu-don-bay/02-multi-core`, :doc:`05-ket-qua-luong-tu-hoa`, :doc:`07-ket-qua-qat-kien-truc`.
+Kiểm kê và lớp của từng mục ở ``results/notes/phase2e_unknowns_inventory.md``, quy tắc viết trước dữ liệu ở ``experiments/npu/operator_support/onboard_q2e/rule_*.txt`` và ``experiments/npu/operator_support/onboard_q2e_qat/rule.txt`` (run ``ppe5_yolov8n_baseline_100ep_s0``). Trang liên quan: :doc:`../03-tang-npu-don-bay/01-operator-support`, :doc:`../03-tang-npu-don-bay/02-multi-core`, :doc:`05-ket-qua-luong-tu-hoa`, :doc:`07-ket-qua-qat-kien-truc`.
 
 .. contents:: Trong trang này
    :local:
@@ -162,7 +162,7 @@ Micro model một node Relu (1x64x80x80, FP16). Kết quả ở ``CORE_0_1_2``: 
 5. M1: mẫu chia job quan sát được
 ===================================
 
-Từ bảng ``WorkLoad`` của các phiên ``CORE_0_1_2`` (``bench/onboard_g4b``), mỗi model một phiên. Đây là mẫu quan sát, không phải quy tắc.
+Từ bảng ``WorkLoad`` của các phiên ``CORE_0_1_2`` (``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0``), mỗi model một phiên. Đây là mẫu quan sát, không phải quy tắc.
 
 .. list-table::
    :header-rows: 1
@@ -183,7 +183,7 @@ Quan sát: ở model SiLU không dòng ``ConvExSwish`` nào chia (0 trên 57) c�
 6. M2 và M8
 =============
 
-**M2** (``ALL`` trong Table 4 của EDGE): đã tìm lại toàn bộ bài báo và T1 ngày 2026-10-31, bài không định nghĩa ``ALL`` và header ghi ``0xffff`` chọn nhân theo nền tảng. :doc:`../03-tang-npu-don-bay/02-multi-core` mục 6.1 nêu một đường chưa dùng là đo ``ALL`` trên board, nên bảng kiểm kê ban đầu xếp M2 vào nhóm hết ngân sách là sai và đã sửa (``rule_core_all.txt``). Phép đo (``ai/automation/probe_core_all.py``, mô hình INT8 chuẩn của seed 0, bảng layer ``perf_debug`` một lần mỗi mặt nạ): ``AUTO`` chia 0 dòng, ``CORE_0_1_2`` chia 29 dòng và ``NPU_CORE_ALL`` chia 29 dòng, đúng cùng tập với ``CORE_0_1_2``. Trung vị latency một phiên không ghim: ``AUTO`` 19.14 ms, ``CORE_0_1_2`` 19.29 ms, ``ALL`` 19.27 ms, chỉ mô tả (một phiên, không dưới P2). Kết quả cho biết ``NPU_CORE_ALL`` chia đúng tập dòng của ``CORE_0_1_2`` (file kết quả chỉ ghi tên các dòng chia, không ghi số nhân từng dòng). Điều bài EDGE gọi là ``ALL`` vẫn chưa biết. **M8** (mục tiêu FPS): người dùng chốt 60 FPS ngày 2026-11-01, kiểm tra đạt hoặc không đạt ở :doc:`03-ket-qua-da-nhan` mục 8 (cấu hình một context chưa đạt, hai context, S2 và S3 đạt theo thông lượng, đo với model INT8 mặc định, ``int8h5`` không khác ``int8`` về thông lượng theo :doc:`09-ket-qua-don-bay-fps`).
+**M2** (``ALL`` trong Table 4 của EDGE): đã tìm lại toàn bộ bài báo và T1 ngày 2026-10-31, bài không định nghĩa ``ALL`` và header ghi ``0xffff`` chọn nhân theo nền tảng. :doc:`../03-tang-npu-don-bay/02-multi-core` mục 6.1 nêu một đường chưa dùng là đo ``ALL`` trên board, nên bảng kiểm kê ban đầu xếp M2 vào nhóm hết ngân sách là sai và đã sửa (``rule_core_all.txt``). Phép đo (``ai/npu/operator_support/probe_core_all.py``, mô hình INT8 chuẩn của seed 0, bảng layer ``perf_debug`` một lần mỗi mặt nạ): ``AUTO`` chia 0 dòng, ``CORE_0_1_2`` chia 29 dòng và ``NPU_CORE_ALL`` chia 29 dòng, đúng cùng tập với ``CORE_0_1_2``. Trung vị latency một phiên không ghim: ``AUTO`` 19.14 ms, ``CORE_0_1_2`` 19.29 ms, ``ALL`` 19.27 ms, chỉ mô tả (một phiên, không dưới P2). Kết quả cho biết ``NPU_CORE_ALL`` chia đúng tập dòng của ``CORE_0_1_2`` (file kết quả chỉ ghi tên các dòng chia, không ghi số nhân từng dòng). Điều bài EDGE gọi là ``ALL`` vẫn chưa biết. **M8** (mục tiêu FPS): người dùng chốt 60 FPS ngày 2026-11-01, kiểm tra đạt hoặc không đạt ở :doc:`03-ket-qua-da-nhan` mục 8 (cấu hình một context chưa đạt, hai context, S2 và S3 đạt theo thông lượng, đo với model INT8 mặc định, ``int8h5`` không khác ``int8`` về thông lượng theo :doc:`09-ket-qua-don-bay-fps`).
 
 7. M4, M6, M7, M16: thăm dò RKNNLite
 ======================================
@@ -198,7 +198,7 @@ Chạy trên board bằng ``ai/board/probe_runtime.py``, model INT8 chuẩn củ
 8. Nhãn cuối của các mục 2c và 2d còn lại
 ===========================================
 
-- **Dựng lại ``h6``** (``rule_h6.txt``): file dựng lần hai (sha256 ``40e3ef03``) khác byte file lần đầu (``4fa1ae1e``) nhưng AP50-95 trên ``css_test`` giống nhau (30.18) và AP50 giống nhau (48.93). Theo bảng đọc viết trước: byte dựng không tất định nhưng độ chính xác tái lập, tức mức giảm 6.57 điểm tái lập qua hai lần dựng. Nguyên nhân vẫn chưa biết, và một lần dựng lại chưa đủ để nói gì thêm về nhiễu dựng. File lần đầu được khôi phục vào chỗ cũ, file lần hai ở ``bench/onboard_q2e/h6_second/``.
+- **Dựng lại ``h6``** (``rule_h6.txt``): file dựng lần hai (sha256 ``40e3ef03``) khác byte file lần đầu (``4fa1ae1e``) nhưng AP50-95 trên ``css_test`` giống nhau (30.18) và AP50 giống nhau (48.93). Theo bảng đọc viết trước: byte dựng không tất định nhưng độ chính xác tái lập, tức mức giảm 6.57 điểm tái lập qua hai lần dựng. Nguyên nhân vẫn chưa biết, và một lần dựng lại chưa đủ để nói gì thêm về nhiễu dựng. File lần đầu được khôi phục vào chỗ cũ, file lần hai ở ``experiments/npu/operator_support/onboard_q2e/h6_second/``.
 - **``h5`` lấy lại điểm:** đã dùng ``h1`` đến ``h4``, ``h6``, ``c_all``, ``kl`` và ``auto`` (:doc:`05-ket-qua-luong-tu-hoa`), hết ngân sách, không có đường mới trong ngân sách: vẫn chưa biết.
 - **``mmse``:** dựng với 300 ảnh bị hệ điều hành dừng (mã 137). Giảm số ảnh hiệu chuẩn làm sai lệch danh tính hiệu chuẩn (cặp md5 chung), nên không chạy: không có kết quả.
 - **QAT với torch 1.10 đến 1.13.1** (khuyến nghị UG232 tr.156): cần môi trường torch và python tương thích, venv hiện dùng python 3.12 và torch 2.4.0. Không chạy, không có kết quả.
@@ -208,7 +208,7 @@ Chạy trên board bằng ``ai/board/probe_runtime.py``, model INT8 chuẩn củ
 
 **Vị trí 8 hàng FLOAT16 của bản QAT** (``rule_pc.txt``). Hai nhóm hàng giống nhau, ở id 47, 48, 49, 50 và 59, 60, 61, 62: ``exSwish`` (FLOAT16), ``exDataConvert`` (lượng tử hóa), ``Resize`` (FLOAT16), ``exDataConvert`` (chuyển FLOAT16 về INT8). Ngay trước mỗi nhóm là một dòng ``Conv`` INT8 và một ``exDataConvert`` khử lượng tử hóa. Ở bản PTQ tách đầu, Conv và SiLU đứng trước hai Resize hợp thành ``ConvExSwish`` INT8 và hai dòng Resize là INT8. Nghĩa là trong bản QAT, phần SiLU của lớp Conv ngay trước hai Resize bị tách ra chạy FP16 cùng với Resize. Nguyên nhân chưa biết.
 
-**Thời gian NPU của QAT** (``bench/onboard_q2e_qat``, dưới P2, mọi phiên thực hiện đúng). Trung vị hai phiên:
+**Thời gian NPU của QAT** (``experiments/npu/operator_support/onboard_q2e_qat``, dưới P2, mọi phiên thực hiện đúng). Trung vị hai phiên:
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/08-so-muc-chua-biet/u-02-thoi-gian-npu-qat.svg
    :align: center
@@ -251,14 +251,14 @@ QAT khác A1 ở ``CORE_0`` 0.820 ms (6.3%, lớn hơn chênh hai phiên 0.016 m
 
 .. code-block:: bash
 
-   .venv/bin/python -m ai.automation.analyze_q2e_pc            # G7a, G10, M1, vết QAT (PC)
-   .venv/bin/python -m ai.automation.micro_ops 192.168.137.49:5555   # G7b, G11 (board, rknn_server)
-   .venv/bin/python -m ai.automation.build_batch_probe          # M7 dựng batch 1 và 4 (PC)
+   .venv/bin/python -m ai.npu.operator_support.analyze_q2e_pc            # G7a, G10, M1, vết QAT (PC)
+   .venv/bin/python -m ai.npu.operator_support.micro_ops 192.168.137.49:5555   # G7b, G11 (board, rknn_server)
+   .venv/bin/python -m ai.npu.operator_support.build_batch_probe          # M7 dựng batch 1 và 4 (PC)
    # board: .venv-board/bin/python -m ai.board.probe_runtime m4|m4c|m6|m7|m16 --model <rknn_int8 dir> --out <json>  (M7 thêm --b1 --b4)
-   .venv/bin/python -m ai.automation.build_split ppe5_yolov8n_nodfl_100ep_s0 int8   # A2 tách đầu (cũng fp16)
+   .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_nodfl_100ep_s0 int8   # A2 tách đầu (cũng fp16)
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
-   .venv/bin/python ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2e_qat/q2e_qat_driver.py   # thời gian QAT dưới P2 (helper x4_hold.sh đang chạy)
-   .venv/bin/python -m ai.automation.probe_core_all 192.168.137.49:5555   # M2 (board, rknn_server)
-   .venv/bin/python -m ai.automation.analyze_q2e_board
+   .venv/bin/python experiments/npu/operator_support/onboard_q2e_qat/q2e_qat_driver.py   # thời gian QAT dưới P2 (helper x4_hold.sh đang chạy)
+   .venv/bin/python -m ai.npu.operator_support.probe_core_all 192.168.137.49:5555   # M2 (board, rknn_server)
+   .venv/bin/python -m ai.npu.operator_support.analyze_q2e_board
 
-Số liệu: ``results/q2e_pc.json``, ``q2e_micro.json``, ``q2e_core_all.json``, ``q2e_board.json``. Sau lần sửa mã ``decode_split`` cho ``reg_max``, board cần ``make board-sync`` trước khi chấm A2 tách đầu.
+Số liệu: ``results/npu/operator_support/q2e_pc.json``, ``q2e_micro.json``, ``q2e_core_all.json``, ``q2e_board.json``. Sau lần sửa mã ``decode_split`` cho ``reg_max``, board cần ``make board-sync`` trước khi chấm A2 tách đầu.

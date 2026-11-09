@@ -664,7 +664,7 @@ z
   </g>
   <g id="text_21">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 391.857567)">Ba seed (0, 1, 2) mỗi model, 100 epoch. Mỗi hàng có ba điểm SiLU và ba điểm ReLU.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 399.493645)">File: results/eval_g4.json (khóa noise, relu_noise)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 399.493645)">File: results/npu/operator_support/eval_g4.json (khóa noise, relu_noise)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_27">

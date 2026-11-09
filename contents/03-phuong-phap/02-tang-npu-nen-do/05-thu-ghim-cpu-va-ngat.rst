@@ -30,7 +30,7 @@ Cơ sở T1: mục "5.3.3 Multi-Core Performance Improvement Tips" của UG232 g
 2. E2: bốn điều kiện
 ====================
 
-E2 chạy bốn điều kiện dự định (A mặc định, B ứng dụng và ngắt NPU cùng CPU4, C cùng CPU0, D tắt trạng thái ``cpu-sleep``: script ghi 1 vào ``state1/disable`` của mọi CPU, và chỉ đọc lại CPU0), mỗi khối 1000 lần chạy, thứ tự ABCD rồi DCBA, và khôi phục ngắt và ``cpuidle`` sau cùng (đã đọc lại trên board xác nhận ngắt về ``0-7`` và ``cpu-sleep`` bật lại). Điều kiện B ở khối 2 **không thực hiện đúng**: 89% ngắt NPU vẫn rơi vào CPU0, chỉ 7030 ngắt rơi vào CPU4, khoảng 112 lần chạy với 63 ngắt mỗi lần chạy. Cửa sổ 100 lần chạy đầu của khối có trung vị 16.31 ms rồi chuyển sang 18.87 ms. Trên board có ``irqbalance`` đang chạy. Việc ``irqbalance`` trả ngắt về CPU0 là suy đoán nhất quán với dữ liệu, chưa kiểm. Đính chính ngày 2026-10-31: X9 lặp lại điều kiện B với ``irqbalance`` đang chạy, ba lần, mỗi lần 3000 lần chạy liên tiếp, log mỗi giây ghi được 49 đến 55 mẫu. Ở lần thứ nhất, trong khoảng 1 giây affinity của ngắt 36 bị đổi từ CPU4 về ``0-7`` và 98% ngắt rơi vào CPU0, hai lần sau giữ CPU4 (``bench/onboard_x9/``, quy tắc viết trước). Vậy ``irqbalance`` có đổi affinity trong lúc chạy, đã quan sát ở 1 trên 3 lần. Vì vậy bảng dưới phân loại theo yếu tố thực tế.
+E2 chạy bốn điều kiện dự định (A mặc định, B ứng dụng và ngắt NPU cùng CPU4, C cùng CPU0, D tắt trạng thái ``cpu-sleep``: script ghi 1 vào ``state1/disable`` của mọi CPU, và chỉ đọc lại CPU0), mỗi khối 1000 lần chạy, thứ tự ABCD rồi DCBA, và khôi phục ngắt và ``cpuidle`` sau cùng (đã đọc lại trên board xác nhận ngắt về ``0-7`` và ``cpu-sleep`` bật lại). Điều kiện B ở khối 2 **không thực hiện đúng**: 89% ngắt NPU vẫn rơi vào CPU0, chỉ 7030 ngắt rơi vào CPU4, khoảng 112 lần chạy với 63 ngắt mỗi lần chạy. Cửa sổ 100 lần chạy đầu của khối có trung vị 16.31 ms rồi chuyển sang 18.87 ms. Trên board có ``irqbalance`` đang chạy. Việc ``irqbalance`` trả ngắt về CPU0 là suy đoán nhất quán với dữ liệu, chưa kiểm. Đính chính ngày 2026-10-31: X9 lặp lại điều kiện B với ``irqbalance`` đang chạy, ba lần, mỗi lần 3000 lần chạy liên tiếp, log mỗi giây ghi được 49 đến 55 mẫu. Ở lần thứ nhất, trong khoảng 1 giây affinity của ngắt 36 bị đổi từ CPU4 về ``0-7`` và 98% ngắt rơi vào CPU0, hai lần sau giữ CPU4 (``experiments/npu/latency/onboard_x9/``, quy tắc viết trước). Vậy ``irqbalance`` có đổi affinity trong lúc chạy, đã quan sát ở 1 trên 3 lần. Vì vậy bảng dưới phân loại theo yếu tố thực tế.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-02-e2-bon-dieu-kien.svg
@@ -189,7 +189,7 @@ Khối bị loại là khối không thực hiện đúng điều kiện dự đ
 
 
 
-Kiểm tra nhất quán, không phải cơ chế: mỗi lần chạy có 63 ngắt NPU, hai khoảng cách giữa ba mức là 2502 và 2535 µs, tức 40 và 40 µs mỗi ngắt. Cùng cỡ với chi phí cố định mỗi dòng ở :doc:`03-phan-tich-sau-latency-tung-khoi` (mục 5). Trên board, ``cpu-sleep`` có độ trễ thoát 220 µs và thời gian nằm tối thiểu 1000 µs, ``WFI`` có độ trễ 1 µs (``bench/onboard_e2/board_facts.txt``). Con số 220 µs không bằng 40 µs, nên không dùng để khẳng định cơ chế.
+Kiểm tra nhất quán, không phải cơ chế: mỗi lần chạy có 63 ngắt NPU, hai khoảng cách giữa ba mức là 2502 và 2535 µs, tức 40 và 40 µs mỗi ngắt. Cùng cỡ với chi phí cố định mỗi dòng ở :doc:`03-phan-tich-sau-latency-tung-khoi` (mục 5). Trên board, ``cpu-sleep`` có độ trễ thoát 220 µs và thời gian nằm tối thiểu 1000 µs, ``WFI`` có độ trễ 1 µs (``experiments/npu/latency/onboard_e2/board_facts.txt``). Con số 220 µs không bằng 40 µs, nên không dùng để khẳng định cơ chế.
 
 **Nhãn cho các giả thuyết về CPU và ngắt: chưa kết luận về cơ chế.** Phép thử chỉ cho thấy liên hệ giữa mức chậm với việc CPU nhận ngắt NPU (CPU0) có thể vào ``cpu-sleep`` trong khi ứng dụng chạy ở lõi khác (E2d ngay bên dưới kiểm tra lại có đối chứng: ứng dụng ở CPU4 đến CPU7 với ngắt ở CPU0 không có mức chậm, nên kết quả đó không khớp với cách giải thích này). Chưa đo độ trễ từng ngắt. E2e (mục 6) chạy phép ghim cho đường ``eval_perf`` qua ``rknn_server`` và cho cùng kết quả vị trí trong sáu ô đã thử.
 
@@ -206,7 +206,7 @@ Kiểm tra nhất quán, không phải cơ chế: mỗi lần chạy có 63 ng�
 
    Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của tám khối E2b. Mỗi điều kiện có hai khối ở mỗi nửa, điểm đặc là nửa 1 và vòng rỗng là nửa 2. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
 
-Bảng từng khối nằm trong ``bench/onboard_e2b/`` và hình trên.
+Bảng từng khối nằm trong ``experiments/npu/latency/onboard_e2b/`` và hình trên.
 
 B thực hiện đúng ở cả 4 khối B (kiểm bằng ``effective_affinity_list`` đọc lại sau mỗi khối và bằng số ngắt: mỗi khối đếm 66150 ngắt NPU, bằng 1050 lần chạy nhân 63). Trong cả bốn khối B không có lần chạy nào ở mức chậm, trung vị 16.29 đến 16.30 ms và độ lệch chuẩn 0.009 đến 0.040 ms, so với 0.86 đến 1.52 ms ở các khối A. Các khối A vẫn dao động mạnh dù ``irqbalance`` đã dừng: mức chậm 53.4%, 52.9%, 3.6%, 66.0% ở bốn khối A.
 
@@ -235,15 +235,15 @@ Nhãn của B theo cách ghép trung bình: **ủng hộ**. Hai cách ghép đ�
 
 Quan sát thăm dò sau khi có dữ liệu, không dùng để gán nhãn: ở các khối A, cột ``cpu`` ghi CPU mà tiến trình đứng sau mỗi lần chạy. Lần chạy chậm gần như chỉ xảy ra khi tiến trình kết thúc ở CPU1 đến CPU3 (CPU1: 1032/1096, CPU2: 378/428, CPU3: 343/360), còn ở CPU0: 6/764, CPU4: 0/571, CPU5: 0/749. Điều này không khớp với giả thuyết đơn giản "khác lõi với ngắt thì chậm" (CPU4 và CPU5 khác lõi với ngắt ở CPU0 mà không chậm). E2d ngay bên dưới kiểm tra mẫu này có đối chứng. Cơ chế vẫn chưa kết luận.
 
-Cột CPU ở bảng thăm dò trên đọc bằng ``sched_getcpu()`` sau khi lần chạy kết thúc, nên chỉ cho biết tiến trình thức dậy ở đâu và không cho biết chiều nhân quả (lần chạy chậm có thể tự ảnh hưởng nơi tiến trình thức dậy). Phiên bản RKNN API 2.3.2 và driver 0.9.8 ở E2b giống E2 (``bench/onboard_e2b/runtime_facts.txt``). Nhân của board ở E2b là 6.1.99-rockchip-rk3588, nhân ở E2 không được ghi lại nên chưa xác nhận giống nhau. Board được khởi động lại giữa hai lần.
+Cột CPU ở bảng thăm dò trên đọc bằng ``sched_getcpu()`` sau khi lần chạy kết thúc, nên chỉ cho biết tiến trình thức dậy ở đâu và không cho biết chiều nhân quả (lần chạy chậm có thể tự ảnh hưởng nơi tiến trình thức dậy). Phiên bản RKNN API 2.3.2 và driver 0.9.8 ở E2b giống E2 (``experiments/npu/latency/onboard_e2b/runtime_facts.txt``). Nhân của board ở E2b là 6.1.99-rockchip-rk3588, nhân ở E2 không được ghi lại nên chưa xác nhận giống nhau. Board được khởi động lại giữa hai lần.
 
-Trạng thái board ghi trong ``bench/onboard_e2b/progress.txt``: ``irqbalance`` dừng suốt phép đo, affinity ngắt về ``0-7`` và ``cpu-sleep`` bật lại được đọc lại trước khi ``irqbalance`` chạy lại.
+Trạng thái board ghi trong ``experiments/npu/latency/onboard_e2b/progress.txt``: ``irqbalance`` dừng suốt phép đo, affinity ngắt về ``0-7`` và ``cpu-sleep`` bật lại được đọc lại trước khi ``irqbalance`` chạy lại.
 
 
 4. E2c: tách vị trí ứng dụng và vị trí ngắt NPU
 ===============================================
 
-Sáu điều kiện (CPU của ứng dụng, CPU nhận ngắt): A mặc định, B (4, 4), C (0, 0), E (4, 0), F (0, 4), G (1, 0). ``irqbalance`` dừng, mười hai khối thứ tự A B C E F G rồi G F E C B A (mỗi nửa đúng một khối A), mỗi khối 1000 lần chạy sau 50 lần làm nóng. Quy tắc ``rule.txt`` viết trước dữ liệu và không sửa sau đó. Ngưỡng 0.01 của "mất mức chậm" là ngưỡng mới do tôi chọn cho quy tắc này, không từ nguồn nào. Khác biệt trạng thái với E2b đã công bố: E2b chạy trước khi ``rknn_server`` và ``adbd`` được khởi động lại sau khi board khởi động lại, còn E2c chạy khi cả hai đã bật, nên E2c dùng các khối B và C của chính nó làm đối chứng. Trạng thái đầu lượt (nhân, uptime, tần số, ``rknn_server``, ``adbd``, md5 mô hình) ghi ở đầu ``bench/onboard_e2c/progress.txt``.
+Sáu điều kiện (CPU của ứng dụng, CPU nhận ngắt): A mặc định, B (4, 4), C (0, 0), E (4, 0), F (0, 4), G (1, 0). ``irqbalance`` dừng, mười hai khối thứ tự A B C E F G rồi G F E C B A (mỗi nửa đúng một khối A), mỗi khối 1000 lần chạy sau 50 lần làm nóng. Quy tắc ``rule.txt`` viết trước dữ liệu và không sửa sau đó. Ngưỡng 0.01 của "mất mức chậm" là ngưỡng mới do tôi chọn cho quy tắc này, không từ nguồn nào. Khác biệt trạng thái với E2b đã công bố: E2b chạy trước khi ``rknn_server`` và ``adbd`` được khởi động lại sau khi board khởi động lại, còn E2c chạy khi cả hai đã bật, nên E2c dùng các khối B và C của chính nó làm đối chứng. Trạng thái đầu lượt (nhân, uptime, tần số, ``rknn_server``, ``adbd``, md5 mô hình) ghi ở đầu ``experiments/npu/latency/onboard_e2c/progress.txt``.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-04-e2c-tach-vi-tri.svg
@@ -253,7 +253,7 @@ Sáu điều kiện (CPU của ứng dụng, CPU nhận ngắt): A mặc định
 
    Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của mười hai khối E2c theo sáu điều kiện. Đường đứt là ngưỡng 1% và 20% của quy tắc. Điểm đặc là nửa 1, vòng rỗng là nửa 2. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
 
-Bảng từng khối nằm trong ``bench/onboard_e2c/`` và hình trên.
+Bảng từng khối nằm trong ``experiments/npu/latency/onboard_e2c/`` và hình trên.
 
 Cả 12 khối thực hiện đúng điều kiện (mỗi khối đếm 66150 ngắt NPU, bằng 1050 lần chạy nhân 63, và ``effective_affinity_list`` đọc lại khớp CPU đích ở mọi khối). Kết quả theo quy tắc đã viết trước:
 
@@ -300,7 +300,7 @@ Chưa kết luận được yếu tố nào gây ra mức chậm. E2d ngay bên 
 5. E2d: bản đồ vị trí ứng dụng và vị trí ngắt NPU
 =================================================
 
-Số đo mô tả của E2c (không phải kết quả theo quy tắc) gợi ý rằng mất mức chậm không đòi hỏi hai thứ cùng CPU4, nên E2d hỏi hai câu chỉ về vị trí: mức chậm xuất hiện khi ứng dụng ghim ở những CPU nào (với ngắt ở CPU0 và với ngắt ở CPU4), và mức nhanh ổn định (quanh 16.3 ms, độ lệch chuẩn nhỏ) xuất hiện ở những cặp (CPU ứng dụng, CPU ngắt) nào. Hai mươi điều kiện: A (không ghim, ngắt mặc định), 16 ô gồm CPU ứng dụng 0 đến 7 và CPU ngắt 0 hoặc 4, và ba ô cùng CPU lớn (5, 5), (6, 6), (7, 7). Mỗi điều kiện hai khối (một khối mỗi nửa, nửa 2 là thứ tự đảo ngược của nửa 1), mỗi khối 1000 lần chạy sau 50 lần làm nóng, ``irqbalance`` dừng. Quy tắc ``bench/onboard_e2d/rule.txt`` được viết lúc 2026-10-31 00:00 theo giờ PC, trước khi có dữ liệu, và người dùng đã duyệt hai kiểm tra hợp lệ, các ngưỡng 0.05 và 0.95 và ba ô cùng CPU lớn. Hai ngưỡng 0.05 (mất mức chậm) và 0.95 (đạt mức nhanh) lấy từ dữ liệu E2c, nên là chọn sau khi đã thấy E2c. Ngưỡng 0.20 (còn mức chậm) giữ từ E2.
+Số đo mô tả của E2c (không phải kết quả theo quy tắc) gợi ý rằng mất mức chậm không đòi hỏi hai thứ cùng CPU4, nên E2d hỏi hai câu chỉ về vị trí: mức chậm xuất hiện khi ứng dụng ghim ở những CPU nào (với ngắt ở CPU0 và với ngắt ở CPU4), và mức nhanh ổn định (quanh 16.3 ms, độ lệch chuẩn nhỏ) xuất hiện ở những cặp (CPU ứng dụng, CPU ngắt) nào. Hai mươi điều kiện: A (không ghim, ngắt mặc định), 16 ô gồm CPU ứng dụng 0 đến 7 và CPU ngắt 0 hoặc 4, và ba ô cùng CPU lớn (5, 5), (6, 6), (7, 7). Mỗi điều kiện hai khối (một khối mỗi nửa, nửa 2 là thứ tự đảo ngược của nửa 1), mỗi khối 1000 lần chạy sau 50 lần làm nóng, ``irqbalance`` dừng. Quy tắc ``experiments/npu/latency/onboard_e2d/rule.txt`` được viết lúc 2026-10-31 00:00 theo giờ PC, trước khi có dữ liệu, và người dùng đã duyệt hai kiểm tra hợp lệ, các ngưỡng 0.05 và 0.95 và ba ô cùng CPU lớn. Hai ngưỡng 0.05 (mất mức chậm) và 0.95 (đạt mức nhanh) lấy từ dữ liệu E2c, nên là chọn sau khi đã thấy E2c. Ngưỡng 0.20 (còn mức chậm) giữ từ E2.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-01-ban-do-e2d.svg
@@ -459,7 +459,7 @@ Giới hạn theo quy tắc: mỗi ô chỉ có hai khối kề nhau theo thời
 
 Câu hỏi mở (:doc:`02-ket-qua-latency-tung-khoi`, mục 2) là ``eval_perf`` qua ``rknn_server`` và ``rknn_run`` trên board cho hai mức khác nhau, và E2 chưa từng chạy cho đường ``eval_perf``. Trước đây mỗi phiên qua relay mất 15 đến 35 phút. Trên LAN trực tiếp, một phép đo chỉ ghi thời gian chờ (không ghi giá trị latency) cho ``init_runtime`` khoảng 1.5 giây và mỗi lần ``eval_perf`` khoảng 0.21 đến 0.23 giây (``bench/extra_tier1_lan_timing.txt``), nên E2e chạy được 500 lần gọi mỗi khối.
 
-Việc đã làm trên board trước khi viết quy tắc (đều không ghi giá trị latency, công bố trong ``bench/onboard_e2e/rule.txt``, và số lần xuất hiện của ``Total Time`` trong đầu ra của các phép thăm dò đã kiểm là 0): phép đo thời gian chờ nói trên, một phép đếm ngắt (một lần ``eval_perf`` cộng 63 ngắt trên ngắt 36, năm lần cộng 315, nên mỗi lần ``eval_perf`` là đúng một lần suy luận), và kiểm tra runtime (hai bản ``librknnrt.so`` cùng md5, ``rknn_server`` nạp ``/usr/lib/librknnrt.so``, phiên bản 2.3.2 giống bench C).
+Việc đã làm trên board trước khi viết quy tắc (đều không ghi giá trị latency, công bố trong ``experiments/npu/latency/onboard_e2e/rule.txt``, và số lần xuất hiện của ``Total Time`` trong đầu ra của các phép thăm dò đã kiểm là 0): phép đo thời gian chờ nói trên, một phép đếm ngắt (một lần ``eval_perf`` cộng 63 ngắt trên ngắt 36, năm lần cộng 315, nên mỗi lần ``eval_perf`` là đúng một lần suy luận), và kiểm tra runtime (hai bản ``librknnrt.so`` cùng md5, ``rknn_server`` nạp ``/usr/lib/librknnrt.so``, phiên bản 2.3.2 giống bench C).
 
 "Ứng dụng" ở đây là ``rknn_server`` trên board. Một tiến trình root phía board (chạy ở CPU7, danh sách trắng bảy điều kiện, khôi phục khi thoát) ghim mọi luồng của ``rknn_server`` bằng ``taskset -a -p`` và đặt ngắt NPU 36, 37, 38 về CPU đích. PC chạy ``load_rknn``, ``init_runtime`` (``CORE_0``), 50 lần ``eval_perf`` làm nóng rồi 500 lần đo, mỗi khối là một phiên mới, các lần gọi cách nhau khoảng 0.22 giây. Bảy điều kiện (CPU của ``rknn_server``, CPU ngắt): A (không ghim), (4, 4), (0, 0), (4, 0), (0, 4), (1, 0), (1, 4), mỗi điều kiện hai khối, nửa 2 là thứ tự đảo ngược của nửa 1, mười bốn khối. ``irqbalance`` dừng suốt phép đo.
 
@@ -478,9 +478,9 @@ Một khác biệt trạng thái cần ghi: NPU và DDR đọc ra governor ``use
 
    Tỉ lệ mức chậm (trên) và mức nhanh (dưới) của mười bốn khối E2e, đường ``eval_perf`` qua ``rknn_server``. Đường đứt là ngưỡng 5%, 20% và 95% của quy tắc. Hình sinh bằng ``docs/tools/figure_gen/03-phuong-phap/05-thu-ghim-cpu-va-ngat/gen.py``.
 
-Bảng từng khối (trung vị, độ lệch chuẩn, tỉ lệ ba mức, CPU nhận ngắt) nằm trong dữ liệu gốc ``bench/onboard_e2e/`` và hình trên.
+Bảng từng khối (trung vị, độ lệch chuẩn, tỉ lệ ba mức, CPU nhận ngắt) nằm trong dữ liệu gốc ``experiments/npu/latency/onboard_e2e/`` và hình trên.
 
-Cả mười bốn khối thực hiện đúng điều kiện: ``Cpus_allowed_list`` của mọi luồng ``rknn_server`` bằng CPU đã ghim ở cả hai lần đọc, luồng bận có CPU cuối khối đúng CPU đó, và ngắt NPU rơi hết vào CPU đích. Một phiên làm ``rknn_server`` có 10 luồng (9 luồng trước phiên), nên mã đọc lại và ghim lại sau ``init_runtime``. Mỗi khối đếm đúng 34650 ngắt NPU, bằng 550 lần gọi nhân 63, nên chính lần chạy này cũng xác nhận mỗi lần ``eval_perf`` là một lần suy luận. Luồng bận là ``listener`` ở 8 khối và luồng chính ``rknn_server`` ở 6 khối. ``init_runtime`` mất 0.94 đến 4.64 giây mỗi khối (``bench/onboard_e2e/driver.log``).
+Cả mười bốn khối thực hiện đúng điều kiện: ``Cpus_allowed_list`` của mọi luồng ``rknn_server`` bằng CPU đã ghim ở cả hai lần đọc, luồng bận có CPU cuối khối đúng CPU đó, và ngắt NPU rơi hết vào CPU đích. Một phiên làm ``rknn_server`` có 10 luồng (9 luồng trước phiên), nên mã đọc lại và ghim lại sau ``init_runtime``. Mỗi khối đếm đúng 34650 ngắt NPU, bằng 550 lần gọi nhân 63, nên chính lần chạy này cũng xác nhận mỗi lần ``eval_perf`` là một lần suy luận. Luồng bận là ``listener`` ở 8 khối và luồng chính ``rknn_server`` ở 6 khối. ``init_runtime`` mất 0.94 đến 4.64 giây mỗi khối (``experiments/npu/latency/onboard_e2e/driver.log``).
 
 6.3. So sánh với đường C API (E2d)
 ----------------------------------
@@ -577,7 +577,7 @@ Giới hạn theo quy tắc: mỗi ô chỉ có hai khối kề nhau theo thời
 ------------------------
 
 
-X6 (ngày 2026-10-31, quy tắc ``bench/onboard_x6/rule.txt`` viết trước dữ liệu) chạy cùng cách đo của E2e ở bảy ô CPU lớn: (4, 4) làm đối chứng, (5, 4), (6, 4), (7, 4), (5, 5), (6, 6), (7, 7). Tiến trình root chạy ở CPU3 (không thuộc ô nào). Cả 14 khối thực hiện đúng (mọi luồng ``rknn_server`` ở CPU đã ghim ở hai lần đọc, ngắt NPU ở CPU đích). Tiến trình root chỉ đọc danh sách CPU của các luồng ở hai thời điểm mỗi khối, nên vi phạm ngắn giữa hai lần đọc có thể không thấy.
+X6 (ngày 2026-10-31, quy tắc ``experiments/npu/latency/onboard_x6/rule.txt`` viết trước dữ liệu) chạy cùng cách đo của E2e ở bảy ô CPU lớn: (4, 4) làm đối chứng, (5, 4), (6, 4), (7, 4), (5, 5), (6, 6), (7, 7). Tiến trình root chạy ở CPU3 (không thuộc ô nào). Cả 14 khối thực hiện đúng (mọi luồng ``rknn_server`` ở CPU đã ghim ở hai lần đọc, ngắt NPU ở CPU đích). Tiến trình root chỉ đọc danh sách CPU của các luồng ở hai thời điểm mỗi khối, nên vi phạm ngắn giữa hai lần đọc có thể không thấy.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/02-tang-npu-nen-do/05-thu-ghim-cpu-va-ngat/pin-07-x6-cpu-lon.svg
@@ -666,7 +666,7 @@ Kết quả theo quy tắc của từng thí nghiệm nằm ở Tóm tắt và m
 
 - Mức nhanh ổn định đạt ở bảy ô đã thử của E2d, gồm ô (4, 4). Ở ô (4, 4), cả 10 khối của E2b, E2c, E2d và E2e không có lần chạy chậm nào. Trên đường C API, trung vị các khối của ô này từ 16.29 đến 16.32 ms, độ lệch chuẩn tối đa 0.040 ms trừ một khối của E2d (0.263 ms).
 
-X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao thức P2): cổng A5 và A8 đạt, còn giao thức gốc chạy lại trên LAN thì không (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 2). Điều kiện đo đề xuất cho các phép so sánh sau này (đề xuất của người viết trang này, chưa phải giao thức đã duyệt): ghim tiến trình đo (hoặc ``rknn_server``) và cả ba ngắt NPU vào CPU4, dừng ``irqbalance`` trong lúc đo, rồi khôi phục. Căn cứ: ô (4, 4) không có lần chạy chậm ở cả bốn thí nghiệm E2b đến E2e và đạt mức nhanh ở cả hai đường đo. Điều này nhất quán với hướng dẫn của hãng gắn ứng dụng và ngắt NPU vào lõi CPU lớn [T1 UG232 tr.75], nhưng hướng dẫn đó viết cho chạy đa nhân (mục 1), còn mọi phép đo ở đây là ``CORE_0``, và nó không giải thích cơ chế. Giới hạn: một board, E2b đến E2e chạy trong cùng một lần khởi động (uptime ghi ở ``bench/onboard_e2b/runtime_facts.txt`` và ở dòng trạng thái đầu ``progress.txt`` của E2c, E2d, E2e), governor của NPU và DDR ở E2e khác E2d (cùng tần số), và ở ô (4, 4) đường ``eval_perf`` lệch 0.28 ms so với đường C API. Dùng điều kiện này để đo lại A5 và A8 sẽ là một giao thức mới, không làm cổng A8 gốc đạt.
+X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao thức P2): cổng A5 và A8 đạt, còn giao thức gốc chạy lại trên LAN thì không (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 2). Điều kiện đo đề xuất cho các phép so sánh sau này (đề xuất của người viết trang này, chưa phải giao thức đã duyệt): ghim tiến trình đo (hoặc ``rknn_server``) và cả ba ngắt NPU vào CPU4, dừng ``irqbalance`` trong lúc đo, rồi khôi phục. Căn cứ: ô (4, 4) không có lần chạy chậm ở cả bốn thí nghiệm E2b đến E2e và đạt mức nhanh ở cả hai đường đo. Điều này nhất quán với hướng dẫn của hãng gắn ứng dụng và ngắt NPU vào lõi CPU lớn [T1 UG232 tr.75], nhưng hướng dẫn đó viết cho chạy đa nhân (mục 1), còn mọi phép đo ở đây là ``CORE_0``, và nó không giải thích cơ chế. Giới hạn: một board, E2b đến E2e chạy trong cùng một lần khởi động (uptime ghi ở ``experiments/npu/latency/onboard_e2b/runtime_facts.txt`` và ở dòng trạng thái đầu ``progress.txt`` của E2c, E2d, E2e), governor của NPU và DDR ở E2e khác E2d (cùng tần số), và ở ô (4, 4) đường ``eval_perf`` lệch 0.28 ms so với đường C API. Dùng điều kiện này để đo lại A5 và A8 sẽ là một giao thức mới, không làm cổng A8 gốc đạt.
 
 8. Điều chưa biết và giới hạn
 =============================
@@ -679,5 +679,5 @@ X4 về sau đo đúng điều kiện này trên đường ``eval_perf`` (giao t
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.75, mục 5.3.3).
-- T3 board và PC: ``results/onboard_*`` (mục 10 đến 14 của tệp ``.md``), ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_e2/`` (gồm ``progress.txt``, ``board_facts.txt``, ``e2_run.sh``), ``bench/onboard_e2b/`` (gồm ``progress.txt``, ``rule.txt``, ``rule_note.txt``, ``runtime_facts.txt``, ``e2b_run.sh``), ``bench/onboard_e2c/`` (gồm ``progress.txt``, ``rule.txt``, ``e2c_run.sh``), ``bench/onboard_e2d/`` (gồm ``progress.txt``, ``rule.txt``, ``e2d_run.sh``), ``bench/onboard_e2e/`` (gồm ``rule.txt``, ``progress.txt``, ``driver.log``, ``e2e_daemon.sh``, ``e2e_driver.py``), ``bench/extra_tier1_lan_timing.txt``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/automation/analyze_onboard.py``.
+- T3 board và PC: ``results/npu/latency/onboard_*`` (mục 10 đến 14 của tệp ``.md``), ``experiments/npu/latency/onboard_e2/`` (gồm ``progress.txt``, ``board_facts.txt``, ``e2_run.sh``), ``experiments/npu/latency/onboard_e2b/`` (gồm ``progress.txt``, ``rule.txt``, ``rule_note.txt``, ``runtime_facts.txt``, ``e2b_run.sh``), ``experiments/npu/latency/onboard_e2c/`` (gồm ``progress.txt``, ``rule.txt``, ``e2c_run.sh``), ``experiments/npu/latency/onboard_e2d/`` (gồm ``progress.txt``, ``rule.txt``, ``e2d_run.sh``), ``experiments/npu/latency/onboard_e2e/`` (gồm ``rule.txt``, ``progress.txt``, ``driver.log``, ``e2e_daemon.sh``, ``e2e_driver.py``), ``bench/extra_tier1_lan_timing.txt``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/npu/latency/analyze_onboard.py``.
 

@@ -10,13 +10,13 @@ Compiler optimization
 
 .. admonition:: Tóm tắt
 
-   1. Log build của model SiLU 5 class ghi 57 lần ``replace_exswish`` (mỗi lần thay một cặp Sigmoid và Mul), 2 lần ``replace_parallel_slice_by_split``, 2 lần ``convert_div_to_mul``, 1 lần ``convert_softmax_to_exsoftmax13`` và 1 lần ``fuse_reshape_transpose``. Đồ thị RKNN có 57 op ``ConvExSwish`` [T3 board, base log dòng 19, 76, 91, ``results/q2e_pc.json``].
+   1. Log build của model SiLU 5 class ghi 57 lần ``replace_exswish`` (mỗi lần thay một cặp Sigmoid và Mul), 2 lần ``replace_parallel_slice_by_split``, 2 lần ``convert_div_to_mul``, 1 lần ``convert_softmax_to_exsoftmax13`` và 1 lần ``fuse_reshape_transpose``. Đồ thị RKNN có 57 op ``ConvExSwish`` [T3 board, base log dòng 19, 76, 91, ``results/npu/operator_support/q2e_pc.json``].
    2. Tên ``ConvExSwish`` không có trong bất kỳ tài liệu T1 đã tìm. Operator List có ``ConvolutionSwish`` và ``exSwish``, UG232 có quy tắc Conv+Sigmoid(Silu). Việc ba tên này là một hay khác nhau: chưa biết [T1 UG232 tr.142, T1 OPL mục lục tr.326].
-   3. ``optimization_level`` mặc định 3. Mã build của repo không đặt tham số này nên build dùng mặc định [T1 UG232 tr.22, Mã nguồn repo ``ai/automation/build_recipe.py:64``].
+   3. ``optimization_level`` mặc định 3. Mã build của repo không đặt tham số này nên build dùng mặc định [T1 UG232 tr.22, Mã nguồn repo ``ai/npu/operator_support/build_recipe.py:64``].
    4. Đóng góp FPS riêng của từng fusion: chưa biết. Không có số T1 hay T2, và dự án chưa đo bằng cách tắt từng pass.
    5. Đã đo: K1 hybrid ``h5`` (độ chính xác về mức FP16, latency đổi -0.121 ms ở ``CORE_0`` tức dưới 5%, throughput không phân biệt được), K2 tách đầu (NPU nhanh hơn, tổng chậm hơn nếu không chồng lấp), K3 chồng lấp giải mã (65.99 FPS một context ``CORE_0``), K4 đổi sang ReLU (nhãn Loại).
    6. K5 ``optimization_level`` thấp hơn: chỉ có nguồn, không đo. Vendor nói mức thấp tắt một số tối ưu.
-   7. Mục tiêu 30 FPS (đổi từ 60 ngày 2026-11-08): đạt ở mọi cấu hình đã đo, kể cả ``int8h5`` một context tuần tự (54.79 FPS, tổng ba giai đoạn 18.08 ms so với 33.33 ms), nên K3 không cần để đạt mục tiêu. Thời gian mỗi khung của K3 ở nhịp 30 FPS của camera chưa đo [T3 board, ``results/q2f_fps.json``].
+   7. Mục tiêu 30 FPS (đổi từ 60 ngày 2026-11-08): đạt ở mọi cấu hình đã đo, kể cả ``int8h5`` một context tuần tự (54.79 FPS, tổng ba giai đoạn 18.08 ms so với 33.33 ms), nên K3 không cần để đạt mục tiêu. Thời gian mỗi khung của K3 ở nhịp 30 FPS của camera chưa đo [T3 board, ``results/npu/throughput/q2f_fps.json``].
 
 Kiến thức nền ở :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/01-luong-onnx-sang-rknn` và :doc:`../../02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2`. Kết quả FPS của các đòn bẩy ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
@@ -39,7 +39,7 @@ Mục tiêu FPS là 60 (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8
 2.1. Biến đổi quan sát trong log build
 --------------------------------------
 
-Log build INT8 mặc định ghi từng pass tối ưu (``base_optimize``, ``fold_constant``, ``correct_ops``, ``fuse_ops``, ``sparse_weight``, ``quant_optimizer``, ``recover_const_share``) và các pass RKNN nội bộ (``RKNNTilingPass``, ``RKNNMultiSurfacePass``, ``RKNNWeightTransposePass``, ``RKNNCPUWeightTransposePass``, ``RKNNProfileAnalysisPass``, ``ConvStrideFixPass``, ``ConvCachePass``, ``OpEmit``) [T3 board, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_base.log`` dòng 6, 9, 12, 15, 120]. Các quy tắc fuse có số lần xuất hiện như sau.
+Log build INT8 mặc định ghi từng pass tối ưu (``base_optimize``, ``fold_constant``, ``correct_ops``, ``fuse_ops``, ``sparse_weight``, ``quant_optimizer``, ``recover_const_share``) và các pass RKNN nội bộ (``RKNNTilingPass``, ``RKNNMultiSurfacePass``, ``RKNNWeightTransposePass``, ``RKNNCPUWeightTransposePass``, ``RKNNProfileAnalysisPass``, ``ConvStrideFixPass``, ``ConvCachePass``, ``OpEmit``) [T3 board, ``experiments/npu/operator_support/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_base.log`` dòng 6, 9, 12, 15, 120]. Các quy tắc fuse có số lần xuất hiện như sau.
 
 .. list-table::
    :header-rows: 1
@@ -108,7 +108,7 @@ Dòng 74 ghi hai ``Slice`` của khối ``model.22`` được thay bằng ``Slic
      - không trích
      - 17, 8, 7, 1, 1
 
-Nguồn: [T3 board, ``results/q2e_pc.json``, trường ``g10.onnx_ops`` và ``g10.rknn_ops``]. Số ``ConvExSwish`` (57) trùng số lần ``replace_exswish`` (57). Bảng layer INT8 và FP16 của cùng model giống nhau về loại op và target (57 ``ConvExSwish`` trên NPU, 1 ``Transpose`` trên CPU, 1 ``InputOperator`` trên CPU) và đều 119 dòng, chỉ khác kiểu số [T3 board, ``export_fp16_20261031-042838.log`` tiêu đề cột dòng 180, base log dòng 290]. Bản ``h5`` có 121 dòng (thêm 2 ``exDataConvert`` INT8 trên NPU, một số dòng Reshape, Sub, Add, Mul, Concat ở FLOAT16 trên NPU). Bản tách đầu INT8 có 106 dòng, không có ``Transpose``, chỉ ``InputOperator`` và ``OutputOperator`` chạy CPU [T3 board, log ``_h5`` và ``_split_int8``, đếm bằng grep]. Chi tiết dòng ``Transpose`` ở :doc:`03-tensor-layout` mục 3 và chi tiết op ở :doc:`01-operator-support`.
+Nguồn: [T3 board, ``results/npu/operator_support/q2e_pc.json``, trường ``g10.onnx_ops`` và ``g10.rknn_ops``]. Số ``ConvExSwish`` (57) trùng số lần ``replace_exswish`` (57). Bảng layer INT8 và FP16 của cùng model giống nhau về loại op và target (57 ``ConvExSwish`` trên NPU, 1 ``Transpose`` trên CPU, 1 ``InputOperator`` trên CPU) và đều 119 dòng, chỉ khác kiểu số [T3 board, ``export_fp16_20261031-042838.log`` tiêu đề cột dòng 180, base log dòng 290]. Bản ``h5`` có 121 dòng (thêm 2 ``exDataConvert`` INT8 trên NPU, một số dòng Reshape, Sub, Add, Mul, Concat ở FLOAT16 trên NPU). Bản tách đầu INT8 có 106 dòng, không có ``Transpose``, chỉ ``InputOperator`` và ``OutputOperator`` chạy CPU [T3 board, log ``_h5`` và ``_split_int8``, đếm bằng grep]. Chi tiết dòng ``Transpose`` ở :doc:`03-tensor-layout` mục 3 và chi tiết op ở :doc:`01-operator-support`.
 
 2.3. So với tài liệu vendor
 ---------------------------
@@ -132,7 +132,7 @@ UG232 Bảng 8-5 khuyên giảm ba nhóm op: chuyển dữ liệu (Transpose, Re
 2.5. Quy tắc kích thước của hãng trên baseline
 ----------------------------------------------
 
-Tính từ ONNX của baseline (``bench/onboard_q2c/diag/ppe5_yolov8n_baseline_100ep_s0/int8_input.onnx``, sha ``8ffa6eb2701d``), ở mức ONNX trước khi compiler gộp op, chưa đo latency. Hãng ghi các quy tắc này không bắt buộc [T1 UG232 tr.144]. Bảng căn lề INT8 của RK3588 ở [T1 UG232 tr.145].
+Tính từ ONNX của baseline (``experiments/npu/operator_support/onboard_q2c/diag/ppe5_yolov8n_baseline_100ep_s0/int8_input.onnx``, sha ``8ffa6eb2701d``), ở mức ONNX trước khi compiler gộp op, chưa đo latency. Hãng ghi các quy tắc này không bắt buộc [T1 UG232 tr.144]. Bảng căn lề INT8 của RK3588 ở [T1 UG232 tr.145].
 
 - 64 lớp Conv, 0 lớp Depthwise. 55 lớp căn lề cả vào lẫn ra theo bội số 32.
 - 9 lớp lệch: ``model.0`` (3 sang 16), ``model.1`` (16 sang 32), hai lớp trong ``model.2/m.0`` (16 sang 16), ``model.2/cv2`` (48 sang 32), ba lớp cuối ``cv3`` (64 sang 5), ``dfl`` (16 sang 1).
@@ -158,7 +158,7 @@ Tính từ ONNX của baseline (``bench/onboard_q2c/diag/ppe5_yolov8n_baseline_1
      - Hybrid ``h5`` dùng ``hybrid_quantization_step1``, ``custom_quantize_layers`` kiểu ``float16`` rồi step 2 [Mã nguồn repo ``ai/core/rknn/hybrid.py:66, 71, 75``]
    * - ``mean_values``, ``std_values``
      - Dùng trong lượng tử hóa [T1 UG232 tr.22]
-     - ``mean_values=[[0, 0, 0]]``, ``std_values=[[255, 255, 255]]``, ``target_platform="rk3588"`` [Mã nguồn repo ``ai/automation/build_recipe.py:64``, ``build_split.py:47``]
+     - ``mean_values=[[0, 0, 0]]``, ``std_values=[[255, 255, 255]]``, ``target_platform="rk3588"`` [Mã nguồn repo ``ai/npu/operator_support/build_recipe.py:64``, ``build_split.py:47``]
    * - ``rknn_batch_size``
      - Chỉ đổi chiều batch của mô hình xuất, trên RK3588 nên là bội số của 3 [T1 UG232 tr.165, tr.105]
      - ``rknn_batch_size=1`` ở ``build_split.py:52``. Kết quả batch 4 ở :doc:`06-memory-copy` mục 5
@@ -181,15 +181,15 @@ Nhãn: ĐO (có số T3 của dự án), NGUỒN (chỉ có tài liệu), CHƯA 
    * - K1
      - Hybrid ``h5`` (15 tensor nhánh giải mã box giữ FP16, còn lại INT8)
      - ĐO
-     - AP50-95 của SiLU từ 36.75 lên 49.66 (FP16: 49.76). Latency đổi -0.121 ms ở ``CORE_0``, dưới 5% [:doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa`]. Throughput ``int8h5`` và ``int8`` chênh 0.01% đến 0.68% ở bốn cấu hình, không phân biệt được [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 2]
+     - AP50-95 của SiLU từ 36.75 lên 49.66 (FP16: 49.76). Latency đổi -0.121 ms ở ``CORE_0``, dưới 5% [:doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa`]. Throughput ``int8h5`` và ``int8`` chênh 0.01% đến 0.68% ở bốn cấu hình, không phân biệt được [T3 board, ``results/npu/throughput/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 2]
    * - K2
      - Tách đầu A1: bỏ ``Transpose`` và đuôi giải mã khỏi đồ thị NPU, giải mã box bằng numpy trên CPU
      - ĐO
-     - AP50-95 49.84, đồ thị NPU toàn INT8, không op CPU. NPU 13.07 ms ở ``CORE_0`` nhưng giải mã 8.02 ms, tổng 21.09 ms so với 16.44 ms của ``int8h5`` nếu cùng luồng [T3 board, ``results/q2j_split.json``, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` mục 2]
+     - AP50-95 49.84, đồ thị NPU toàn INT8, không op CPU. NPU 13.07 ms ở ``CORE_0`` nhưng giải mã 8.02 ms, tổng 21.09 ms so với 16.44 ms của ``int8h5`` nếu cùng luồng [T3 board, ``results/npu/operator_support/q2j_split.json``, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` mục 2]
    * - K3
      - Chồng lấp giải mã bằng pipeline (một luồng pre, một NPU, một post)
      - ĐO
-     - 65.99 FPS ở một context ``CORE_0``, so với 54.79 của ``int8h5`` tuần tự và 42.05 của tách đầu giải mã cùng luồng [T3 board, ``results/q2f_fps.json``]
+     - 65.99 FPS ở một context ``CORE_0``, so với 54.79 của ``int8h5`` tuần tự và 42.05 của tách đầu giải mã cùng luồng [T3 board, ``results/npu/throughput/q2f_fps.json``]
    * - K4
      - Đổi SiLU sang ReLU (cổng G4)
      - ĐO
@@ -208,9 +208,9 @@ K3 không phải tùy chọn của compiler mà là thay đổi cách xếp lu�
 
 Mốc 60 FPS cũ làm ``int8h5`` một context chưa đạt, nên K3 là cách duy nhất đưa một context qua mốc đó. Mốc 30 FPS (camera 30 khung/giây) đổi kết luận này.
 
-**Đọc theo thông lượng**: K3 đạt (65.99 FPS, khoảng trải 0.03) với một context ``CORE_0``. ``int8h5`` một context cũng đạt (54.79 đến 56.62 FPS, dư 24.8 FPS trên 30), nên K3 không cần cho mục tiêu [T3 board, ``results/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8]. Tổn phí của K3: CPU tiến trình khoảng 100% so với 24% của ``int8h5`` tuần tự, model tách đầu chưa nối vào script demo của repo [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 7].
+**Đọc theo thông lượng**: K3 đạt (65.99 FPS, khoảng trải 0.03) với một context ``CORE_0``. ``int8h5`` một context cũng đạt (54.79 đến 56.62 FPS, dư 24.8 FPS trên 30), nên K3 không cần cho mục tiêu [T3 board, ``results/npu/throughput/q2f_fps.json``, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8]. Tổn phí của K3: CPU tiến trình khoảng 100% so với 24% của ``int8h5`` tuần tự, model tách đầu chưa nối vào script demo của repo [:doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps` mục 7].
 
-**Đọc theo thời gian mỗi khung** (mỗi khung xong trong 33.33 ms): tổng ba giai đoạn của K3 (điều kiện C) là 27.55 ms, dưới 33.33 ms, dư 5.78 ms, ít hơn nhiều so với 15.25 ms của ``int8h5`` tuần tự (18.08 ms) [T3 board, ``results/q2f_fps.json``]. Đây là tổng trung vị từng giai đoạn dưới tranh chấp. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms. Số này gồm thời gian chờ hàng đợi nên chỉ là cận trên, không phải thời gian mỗi khung. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Thứ tự đầu ra của pipeline được giữ theo cách xây dựng (một luồng mỗi giai đoạn, hàng đợi FIFO) nhưng chưa kiểm.
+**Đọc theo thời gian mỗi khung** (mỗi khung xong trong 33.33 ms): tổng ba giai đoạn của K3 (điều kiện C) là 27.55 ms, dưới 33.33 ms, dư 5.78 ms, ít hơn nhiều so với 15.25 ms của ``int8h5`` tuần tự (18.08 ms) [T3 board, ``results/npu/throughput/q2f_fps.json``]. Đây là tổng trung vị từng giai đoạn dưới tranh chấp. Thời gian đầu cuối đo trong pipeline bão hòa lớn hơn 128 ms. Số này gồm thời gian chờ hàng đợi nên chỉ là cận trên, không phải thời gian mỗi khung. Thời gian mỗi khung ở nhịp 30 FPS chưa đo. Thứ tự đầu ra của pipeline được giữ theo cách xây dựng (một luồng mỗi giai đoạn, hàng đợi FIFO) nhưng chưa kiểm.
 
 6. Điều chưa biết
 =================
@@ -248,6 +248,6 @@ Mốc 60 FPS cũ làm ``int8h5`` một context chưa đạt, nên K3 là cách d
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.22, 105, 117, 122, 123, 133, 135, 141, 142, 143, 146, 165, 166, 176), Operator List V2.3.2 (OPL mục lục tr.326).
-- T3: base log ``build_ppe5_yolov8n_baseline_100ep_s0_base.log`` dòng 6, 9, 12, 15, 17, 74, 89, 93, 120, 290, 338, ``export_fp16_20261031-042838.log``, ``results/q2e_pc.json``, ``results/q2j_split.json``, ``results/q2f_fps.json``.
-- Mã nguồn repo: ``ai/automation/build_recipe.py:64``, ``ai/automation/build_split.py:47, 52``, ``ai/core/rknn/hybrid.py:66, 71, 75``.
+- T3: base log ``build_ppe5_yolov8n_baseline_100ep_s0_base.log`` dòng 6, 9, 12, 15, 17, 74, 89, 93, 120, 290, 338, ``export_fp16_20261031-042838.log``, ``results/npu/operator_support/q2e_pc.json``, ``results/npu/operator_support/q2j_split.json``, ``results/npu/throughput/q2f_fps.json``.
+- Mã nguồn repo: ``ai/npu/operator_support/build_recipe.py:64``, ``ai/npu/operator_support/build_split.py:47, 52``, ``ai/core/rknn/hybrid.py:66, 71, 75``.
 - Trang liên quan: :doc:`01-operator-support`, :doc:`03-tensor-layout`, :doc:`04-datatype`, :doc:`06-memory-copy`, :doc:`09-pre-post-processing`, :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa`, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

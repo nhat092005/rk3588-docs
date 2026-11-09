@@ -8,7 +8,7 @@ Sinh 4 hình vector SVG:
   4. ya-04-detect-head: đầu Detect (L22), nhánh box và cls cho ba mức, giải mã DFL.
 
 Nguồn số liệu: ultralytics 8.4.154, cfg/models/v8/yolov8.yaml với scale n và nc=5, đối chiếu với
-ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt (3 011 823 tham số, 355 tensor trong state_dict).
+experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt (3 011 823 tham số, 355 tensor trong state_dict).
 Mọi con số tham số và MACs được tính lại từ công thức ở đầu file rồi assert với số đo thật (MEASURED_PARAMS), nên
 gõ sai một hằng số là script dừng.
 

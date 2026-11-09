@@ -253,7 +253,7 @@ z
   </g>
   <g id="text_17">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 248.367192)">Đường đứt 48.41 là tiêu chí viết trước dữ liệu: FP16 seed 0 của SiLU (49.76) trừ 1.35 điểm. Tiêu chí mới và chưa duyệt. Trục y bắt đầu từ 30.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 256.069645)">File: results/q2j_split.json, q2k_qat.json, q2l_nodfl.json</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 256.069645)">File: results/npu/operator_support/q2j_split.json, q2k_qat.json, q2l_nodfl.json</text>
   </g>
  </g>
  <defs>

@@ -62,7 +62,7 @@ Trang không trả lời các câu sau, mỗi câu có trang riêng:
      - Giá trị
      - Lý do và nguồn
    * - Model
-     - ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt``, YOLOv8n chuẩn ``nc=5``, 3,011,823 tham số
+     - ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt``, YOLOv8n chuẩn ``nc=5``, 3,011,823 tham số
      - Cùng model với trang kiến trúc (đối chiếu 355 tensor). Latency phụ thuộc cấu trúc nên dùng đúng cấu trúc đã mô tả
    * - Export
      - ``make export-npu RUN=<id> PREC=int8``: RKNN-Toolkit2 2.3.2, calibration 300 ảnh train, mỗi class ít nhất 20 ảnh, seed 0, LetterBox 640
@@ -129,13 +129,13 @@ Mỗi bước có lệnh, file tạo ra và điều kiện đạt. Chưa qua đi
      - Báo đủ các tỉ số ở mục 8
    * - B6
      - Ghi kết quả
-     - Viết các trang 02 đến 06 và 08 của nhóm này, cùng trang ``04-do-chinh-xac-int8-do-latency`` của nhóm kết quả đo: chép số kèm file (lấy từ ``results/*.json``)
+     - Viết các trang 02 đến 06 và 08 của nhóm này, cùng trang ``04-do-chinh-xac-int8-do-latency`` của nhóm kết quả đo: chép số kèm file (lấy từ ``results/npu/*/*.json``)
      - Trang docs, file ``tier1_*`` còn nguyên
      - Mọi số trong trang truy ra được file
    * - B7
      - Đo trên board bằng C API (không qua PC)
      - Biên dịch ``ai/board/rknn_perf_bench.c`` trên board, chạy ``onboard_run.sh``: 3 đợt 1000 lần liên tiếp (đợt 1 lấy mẫu ``rknpu/load`` và ``power``), thử nghỉ 2 và 10 giây giữa các lần chạy, 3 đợt 200 lần ở chế độ ``detail``, chụp ``cpuidle`` trước và sau mỗi đợt
-     - ``bench/onboard/*``, ``results/onboard_*.md``
+     - ``experiments/npu/latency/onboard/*``, ``results/npu/latency/onboard_*.md``
      - Tiêu chí ở :doc:`04-cac-muc-do-tre`
 
 Trạng thái ngày 2026-10-30: B0, B1 và B2 đạt. B3 chạy đủ ba phiên (``SESSION=1..3``, ``SKIP_MEMORY=1``). B4 chạy, cổng A5 và A8 không đạt (:doc:`02-ket-qua-latency-tung-khoi`, mục 4). B5 làm bằng B7 (C API trên board) thay cho tier 2 RKNNLite, vì C API là cách hãng khuyên cho tốc độ khung thực tế [T1 UG232 tr.175]. B6 là các trang 02 đến 06 và 08 của nhóm này (lúc viết là các trang 02 đến 07 của nhóm Đo latency trên NPU, trang 07 sau đó được đổi tên và đánh lại số). FP16 chưa chạy vì cổng A8 của INT8 không đạt. Ngày 2026-10-30 chạy thêm E2b (điều kiện B với ``irqbalance`` dừng), kết quả ở :doc:`05-thu-ghim-cpu-va-ngat` mục 3. Cùng ngày chạy E2c (tách vị trí ứng dụng và ngắt NPU) và kiểm tra hợp lệ viết trước không đạt, nên chưa đọc được yếu tố nào (:doc:`05-thu-ghim-cpu-va-ngat` mục 4). Ngày 2026-10-31 chạy E2d (bản đồ vị trí ứng dụng và ngắt NPU, 20 điều kiện), kiểm tra hợp lệ đạt, kết quả ở :doc:`05-thu-ghim-cpu-va-ngat` mục 5. Cùng ngày chạy E2e (ghim ``rknn_server`` và ngắt NPU trên đường ``eval_perf``, sáu ô, quy tắc viết trước), kết quả ở :doc:`05-thu-ghim-cpu-va-ngat` mục 6.
@@ -270,7 +270,7 @@ Hãng ghi lý do bật ``perf_debug``: xem lớp nào tốn thời gian để t�
 5.1. Gộp về L0-L22
 ------------------
 
-Cột ``FullName`` của bảng build có dạng ``<Op>:/model/model.<N>/...``, ví dụ ``Conv:/model/model.2/cv1/conv/Conv`` và ``Split:/model/model.4/Split`` [T3 PC, ``tmp/operator-support/c5_baseline/int8_build_stdout.txt``]. Quy tắc: khối ``N`` là số bắt gặp đầu tiên sau chuỗi ``model.`` bằng biểu thức ``model\.(\d+)``.
+Cột ``FullName`` của bảng build có dạng ``<Op>:/model/model.<N>/...``, ví dụ ``Conv:/model/model.2/cv1/conv/Conv`` và ``Split:/model/model.4/Split`` [T3 PC, ``experiments/npu/operator_support/c5_build/c5_baseline/int8_build_stdout.txt``]. Quy tắc: khối ``N`` là số bắt gặp đầu tiên sau chuỗi ``model.`` bằng biểu thức ``model\.(\d+)``.
 
 Kiểm trên bảng đo của export ppe5 ngày 2026-10-30 (119 dòng, ID board 1 đến 119, ID build 0 đến 118, chạy ``ai/core/rknn/blocks.py`` trên cột tên): 114 dòng có ``model.N``, trong đó khối 22 có 37 dòng, không có dòng nào rơi vào thành phần ``other``. Năm dòng còn lại không có chỉ số:
 
@@ -303,7 +303,7 @@ Kiểm trên bảng đo của export ppe5 ngày 2026-10-30 (119 dòng, ID board 
      - CPU
      - Nhóm ``io``
 
-Bảng đo trên board và bảng build của cùng ``.rknn`` có 119 dòng giống nhau về ``OpType`` và ``FullName`` theo đúng thứ tự, chỉ khác ID (board đếm từ 1, build đếm từ 0) [T3 board] [T3 PC]. Script gộp so hai bảng này ở mọi lần chạy (tiêu chí A1). Bảng build INT8 của model 5 class cũ trong ``tmp/operator-support/`` có cùng năm dòng ngoại lệ.
+Bảng đo trên board và bảng build của cùng ``.rknn`` có 119 dòng giống nhau về ``OpType`` và ``FullName`` theo đúng thứ tự, chỉ khác ID (board đếm từ 1, build đếm từ 0) [T3 board] [T3 PC]. Script gộp so hai bảng này ở mọi lần chạy (tiêu chí A1). Bảng build INT8 của model 5 class cũ trong ``experiments/npu/operator_support/c5_build/`` có cùng năm dòng ngoại lệ.
 
 5.2. Gộp về thành phần trong khối
 ---------------------------------
@@ -415,7 +415,7 @@ Quy tắc đọc kết quả: hai khối chỉ được xếp hạng khi chênh 
 8. Kết quả sẽ báo
 =================
 
-Các bảng dưới đây là định dạng kết quả. Số liệu thực nằm ở :doc:`02-ket-qua-latency-tung-khoi`, lấy từ ``results/*.json``.
+Các bảng dưới đây là định dạng kết quả. Số liệu thực nằm ở :doc:`02-ket-qua-latency-tung-khoi`, lấy từ ``results/npu/*/*.json``.
 
 .. list-table::
    :header-rows: 1
@@ -442,7 +442,7 @@ Không rút ra từ trang này: latency end-to-end của hệ thống, kết lu�
 9. Việc cần làm và điều chưa biết
 =================================
 
-Việc mã (đã làm, ngày 2026-10-30): ``measure_layers`` lặp 5 lần và lưu ``time_us_all``, tham số ``--session`` và ``--skip-memory`` cho ``benchmark_npu.py``, ``ai/core/rknn/blocks.py`` (gán lớp RKNN về khối), ``ai/automation/aggregate_layers.py`` (gộp, cổng A1 đến A8), ``ai/automation/analyze_layers.py`` (phân tích sâu), ``ai/automation/analyze_onboard.py`` (số đo trên board và E1), ``ai/board/rknn_perf_bench.c`` (C API trên board), ``tests/test_layer_blocks.py`` (chạy trên đầu ra thật của board).
+Việc mã (đã làm, ngày 2026-10-30): ``measure_layers`` lặp 5 lần và lưu ``time_us_all``, tham số ``--session`` và ``--skip-memory`` cho ``benchmark_npu.py``, ``ai/core/rknn/blocks.py`` (gán lớp RKNN về khối), ``ai/npu/latency/aggregate_layers.py`` (gộp, cổng A1 đến A8), ``ai/npu/latency/analyze_layers.py`` (phân tích sâu), ``ai/npu/latency/analyze_onboard.py`` (số đo trên board và E1), ``ai/board/rknn_perf_bench.c`` (C API trên board), ``tests/test_layer_blocks.py`` (chạy trên đầu ra thật của board).
 
 Điều đã được đo trả lời (T3 board, ngày 2026-10-30):
 
@@ -588,4 +588,4 @@ Chi tiết các việc có trang nhà là trang này:
 - U17, ``RW(KB)``: hãng chỉ ghi "Total amount of data read and written (KB)" [T1 UG232 tr.32]. Driver có bộ đếm đọc ghi phần cứng (``rknpu_job.c:990-1020``) nhưng không nguồn nào nối nó với cột này.
 - Nơi đã tìm cho U14, U15, U17 (và U6, U11, U12): mọi PDF trong ``3rdparty/rknn-toolkit2/doc/`` và ``docs/_assets/pdf/``, mã ``3rdparty/rknpu-driver-0.9.8``, ``3rdparty/rknn-toolkit2`` (header, ví dụ, README), chuỗi trong thư viện biên dịch của Toolkit2 và ``librknnrt.so``. Kết quả và từ khóa: ``tmp/2026-10-31_latency-sources-facts.md``. Từ khóa đề xuất để tìm bài báo: "RKNN eval_perf RW KB measured", "Rockchip NPU task number per layer".
 
-Nguồn: [T1 UG232] ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, [T1 API232] ``docs/_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf``, [T1 mã nguồn] ``3rdparty/rknpu-driver-0.9.8``, [T3] các thí nghiệm X1 đến X10 của giai đoạn 1, [T3 PC] bảng build INT8 trong ``tmp/operator-support/``. Mọi số trang là trang PDF.
+Nguồn: [T1 UG232] ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, [T1 API232] ``docs/_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf``, [T1 mã nguồn] ``3rdparty/rknpu-driver-0.9.8``, [T3] các thí nghiệm X1 đến X10 của giai đoạn 1, [T3 PC] bảng build INT8 trong ``experiments/npu/operator_support/c5_build/``. Mọi số trang là trang PDF.

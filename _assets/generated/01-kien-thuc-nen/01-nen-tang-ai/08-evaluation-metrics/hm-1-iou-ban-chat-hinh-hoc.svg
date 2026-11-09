@@ -31,5 +31,5 @@
 <text x="747.5" y="231" font-size="11" font-weight="600" fill="#C62828" text-anchor="middle" dominant-baseline="central">Phán đoán sai vị trí (FP)</text>
 <rect x="10" y="254" width="880" height="32" rx="4" fill="#EAF2FF" stroke="#90CAF9" stroke-width="1.0"/>
 <text x="20" y="264" font-size="10" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">Công thức tính IoU: </tspan><tspan font-weight="700">IoU = Diện tích vùng giao (B_p ∩ B_gt) / Diện tích vùng hợp (B_p ∪ B_gt)</tspan><tspan>  |  Miền giá trị: [0.0 (không chạm) đến 1.0 (trùng khít hoàn toàn)]</tspan></text>
-<text x="10" y="310" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Y6 tr.8.</text>
+<text x="10" y="310" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO experiments/leaderboards/sfchd_5class.csv; Y6 tr.8.</text>
 </svg>

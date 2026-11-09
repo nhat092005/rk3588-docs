@@ -287,7 +287,7 @@ z
    </g>
   </g>
   <g id="text_14">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="270.951694" transform="rotate(-0 5.328 270.951694)">Board RK3588, P2, hai phiên, mọi ô thực hiện đúng. Trục y không bắt đầu từ 0. File: results/q2e_board.json (khóa qat_time)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="270.951694" transform="rotate(-0 5.328 270.951694)">Board RK3588, P2, hai phiên, mọi ô thực hiện đúng. Trục y không bắt đầu từ 0. File: results/npu/operator_support/q2e_board.json (khóa qat_time)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_22">

@@ -438,7 +438,7 @@ z
   </g>
   <g id="text_21">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 262.709592)">Board RK3588, YOLOv8n INT8, CORE_0, ba phiên B3 (eval_perf), 5 lần gọi mỗi phiên. Trục y của hai panel không bắt đầu từ 0.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 270.412045)">File: results/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa first_vs_rest)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 270.412045)">File: results/npu/latency/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa first_vs_rest)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_37">

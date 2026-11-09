@@ -306,7 +306,7 @@ z
    </g>
   </g>
   <g id="text_14">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="278.122894" transform="rotate(-0 5.328 278.122894)">Bốn lần chạy huấn luyện, ba kiểu xuất. File: results/int8h5.json (khóa runs)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="278.122894" transform="rotate(-0 5.328 278.122894)">Bốn lần chạy huấn luyện, ba kiểu xuất. File: results/npu/operator_support/int8h5.json (khóa runs)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_21">

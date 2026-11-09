@@ -25,7 +25,7 @@ Kết quả chẩn đoán và công thức ``h5`` ở :doc:`05-ket-qua-luong-tu-
 
 Câu hỏi: model INT8 thuần có đạt độ chính xác của FP16 trên ``css_test`` không. Tiêu chí viết trước dữ liệu: AP50-95 từ 48.41 trở lên, tức không thấp hơn FP16 seed 0 (49.76) quá 1.35 điểm. Con số 1.35 là khoảng trải seed của INT8 SiLU ở :doc:`05-ket-qua-luong-tu-hoa`, đây là cách dùng mới và người dùng chưa duyệt. Nhãn cổng G4 đã duyệt không đổi, ba ứng viên này là phần bổ sung. Mốc tham chiếu: ``int8h5`` (49.66, lai, 15 tensor FP16) và INT8 mặc định (36.75).
 
-Quy tắc viết trước dữ liệu nằm ở ``bench/onboard_q2c/rule_split.txt`` (A1), ``rule_qat.txt`` (B) và ``rule_nodfl.txt`` (A2) của run ``ppe5_yolov8n_baseline_100ep_s0``. Nguồn T1:
+Quy tắc viết trước dữ liệu nằm ở ``experiments/npu/operator_support/onboard_q2c/rule_split.txt`` (A1), ``rule_qat.txt`` (B) và ``rule_nodfl.txt`` (A2) của run ``ppe5_yolov8n_baseline_100ep_s0``. Nguồn T1:
 
 - Tách hậu xử lý khỏi đồ thị NPU có tiền lệ trong SDK: "Due to hardware limitations, the demo model moves the post-processing part of the yolov5 model to the cpu implementation by default." (``3rdparty/rknn-toolkit2/rknpu2/examples/rknn_yolov5_demo/README.md:13``).
 - QAT trên RKNN-Toolkit2 đi qua giao diện FX: "RKNN currently supports quantized models generated from the FX interface, specifically the prepare_qat_fx interface and its associated interfaces." [T1 UG232 tr.127]. Khi nạp model đã QAT, đặt ``do_quantization=False`` (``examples/pytorch/resnet18_qat/README.md:18``).
@@ -38,7 +38,7 @@ Phần bỏ DFL dựa trên mã Ultralytics 8.4.154 đã cài: tham số ``reg_m
 2. A1: tách đầu, PTQ, không huấn luyện lại
 ============================================
 
-``ai/automation/build_split.py`` xuất mô hình SiLU seed 0 đã fuse thành hai đầu ra thô qua ``forward_head`` của chính đầu Detect: ``boxes`` (1x64x8400, logit DFL) và ``scores`` (1x5x8400, logit class). Mô hình dựng bằng cấu hình INT8 của Ultralytics và danh sách hiệu chuẩn seed 0. Phần giải mã (kỳ vọng softmax DFL, xywh, nhân stride, sigmoid) chạy bằng numpy trên CPU (``ai/board/split_decode.py``). Hai kiểm tra hợp lệ viết trước khi đọc số INT8 đều qua: giải mã float của ONNX so với ``output0`` của ONNX chuẩn lệch tối đa 1.8e-04 (giới hạn 0.01), và model FP16 tách đầu cho 49.94 trên ``css_test`` so với 49.76 của FP16 chuẩn (giới hạn chênh 1.35).
+``ai/npu/operator_support/build_split.py`` xuất mô hình SiLU seed 0 đã fuse thành hai đầu ra thô qua ``forward_head`` của chính đầu Detect: ``boxes`` (1x64x8400, logit DFL) và ``scores`` (1x5x8400, logit class). Mô hình dựng bằng cấu hình INT8 của Ultralytics và danh sách hiệu chuẩn seed 0. Phần giải mã (kỳ vọng softmax DFL, xywh, nhân stride, sigmoid) chạy bằng numpy trên CPU (``ai/board/split_decode.py``). Hai kiểm tra hợp lệ viết trước khi đọc số INT8 đều qua: giải mã float của ONNX so với ``output0`` của ONNX chuẩn lệch tối đa 1.8e-04 (giới hạn 0.01), và model FP16 tách đầu cho 49.94 trên ``css_test`` so với 49.76 của FP16 chuẩn (giới hạn chênh 1.35).
 
 Độ chính xác trên ``css_test`` (AP50-95, điểm):
 
@@ -86,7 +86,7 @@ Phần bỏ DFL dựa trên mã Ultralytics 8.4.154 đã cài: tham số ``reg_m
 
 Đồ thị NPU của A1 có 106 hàng, toàn INT8 và không op CPU ngoài Input và Output. INT8 tách đầu hơn FP16 +0.08 điểm và hơn ``int8h5`` +0.18 điểm, đạt tiêu chí. Cách đọc viết trước: ``h5`` giữ logit DFL và phép tính giải mã ở FP16 cùng lúc, còn mô hình tách đầu đưa logit DFL về INT8 và chỉ chuyển phần tính toán sang float. Vì tách đầu đạt, theo cách đọc đó phần đuôi tính toán của giải mã được ủng hộ là nguồn mất điểm, còn việc lượng tử hóa logit DFL thì không được ủng hộ. Đây không phải cơ chế.
 
-Thời gian (một lần chạy xen kẽ dưới P2, SiLU seed 0, ``bench/onboard_q2j``). Hai phiên tham chiếu của model ``int8`` mặc định không thực hiện đúng P2 nên mọi hàng so với ``int8`` mang nhãn "chưa kết luận". Các phiên của ``int8h5`` và A1 thực hiện đúng:
+Thời gian (một lần chạy xen kẽ dưới P2, SiLU seed 0, ``experiments/npu/operator_support/onboard_q2j``). Hai phiên tham chiếu của model ``int8`` mặc định không thực hiện đúng P2 nên mọi hàng so với ``int8`` mang nhãn "chưa kết luận". Các phiên của ``int8h5`` và A1 thực hiện đúng:
 
 .. list-table::
    :header-rows: 1
@@ -114,7 +114,7 @@ Giải mã CPU bằng numpy: trung vị 8.02 ms, p95 8.246 ms trên 200 lần (`
 3. B: QAT
 ===========
 
-Phương pháp (``ai/core/rknn/qat_split.py``, ``ai/automation/qat_split.py``): mô hình tách đầu (hai đầu ra thô), đầu vào FX trace qua một lớp bọc tường minh (các phép cắt tĩnh của C2f, đầu trả hai tensor), ``prepare_qat_fx`` với qconfig của tr.127 (activation ``FakeQuantize`` ``MovingAverageMinMaxObserver`` từ 0 đến 255, trọng số per-channel affine int8), tinh chỉnh 6 epoch, batch 8 (batch 16 hết bộ nhớ GPU 4 GB), SGD lr 0.0001, tắt observer từ epoch 5, đóng băng thống kê BN từ epoch 6, hàm mất mát phát hiện của Ultralytics trên đầu ra thô. Sau đó ``convert_fx``, ``torch.jit.trace``, ``load_pytorch`` và ``build`` với ``do_quantization=False``. Siêu tham số không đổi sau khi thấy kết quả. Loss trung bình mỗi epoch: 2.586, 2.594, 2.565, 2.540, 2.542, 2.459.
+Phương pháp (``ai/core/rknn/qat_split.py``, ``ai/npu/operator_support/qat_split.py``): mô hình tách đầu (hai đầu ra thô), đầu vào FX trace qua một lớp bọc tường minh (các phép cắt tĩnh của C2f, đầu trả hai tensor), ``prepare_qat_fx`` với qconfig của tr.127 (activation ``FakeQuantize`` ``MovingAverageMinMaxObserver`` từ 0 đến 255, trọng số per-channel affine int8), tinh chỉnh 6 epoch, batch 8 (batch 16 hết bộ nhớ GPU 4 GB), SGD lr 0.0001, tắt observer từ epoch 5, đóng băng thống kê BN từ epoch 6, hàm mất mát phát hiện của Ultralytics trên đầu ra thô. Sau đó ``convert_fx``, ``torch.jit.trace``, ``load_pytorch`` và ``build`` với ``do_quantization=False``. Siêu tham số không đổi sau khi thấy kết quả. Loss trung bình mỗi epoch: 2.586, 2.594, 2.565, 2.540, 2.542, 2.459.
 
 Phiên bản torch 2.4.0 khác khuyến nghị 1.10 đến 1.13.1 của tr.156. Chuỗi trace, TorchScript, nạp và dựng chạy được trên torch 2.4.0 nên khác biệt này không gây lỗi. Ảnh hưởng của nó lên độ chính xác thì chưa biết.
 
@@ -213,20 +213,20 @@ Giới hạn của cách đọc: A2 mặc định không tách được lượng
 7. Tái lập
 ============
 
-Mọi lệnh chạy từ gốc repo chính, board đã khóa tần số và có ``rknn_server`` (:doc:`06-quy-trinh-tai-lap`). Quy tắc viết trước nằm ở ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2c/`` (``rule_split.txt``, ``rule_qat.txt``, ``rule_nodfl.txt``).
+Mọi lệnh chạy từ gốc repo chính, board đã khóa tần số và có ``rknn_server`` (:doc:`06-quy-trinh-tai-lap`). Quy tắc viết trước nằm ở ``experiments/npu/operator_support/onboard_q2c/`` (``rule_split.txt``, ``rule_qat.txt``, ``rule_nodfl.txt``).
 
 .. code-block:: bash
 
    # A1: xuất tách đầu (int8 và fp16), chấm mAP trên board (FP16 tách đầu là kiểm tra hợp lệ V-board, chấm trước số INT8)
-   .venv/bin/python -m ai.automation.build_split ppe5_yolov8n_baseline_100ep_s0 int8
-   .venv/bin/python -m ai.automation.build_split ppe5_yolov8n_baseline_100ep_s0 fp16
+   .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_baseline_100ep_s0 int8
+   .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_baseline_100ep_s0 fp16
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision fp16 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
    # A1: thời gian. Phần NPU dưới P2 (benchmark_npu --variant split, xen kẽ với int8 và int8h5, theo quy tắc rule_split.txt mục S-3),
    # giải mã CPU ghim CPU4 (ai/board/bench_decode.py chạy trên board), rồi phân tích
-   .venv/bin/python -m ai.automation.analyze_q2j
+   .venv/bin/python -m ai.npu.operator_support.analyze_q2j
    # B: QAT rồi chấm mAP
-   RKNN_LOG_LEVEL=3 .venv/bin/python -m ai.automation.qat_split ppe5_yolov8n_baseline_100ep_s0 --epochs 6 --batch 8
+   RKNN_LOG_LEVEL=3 .venv/bin/python -m ai.npu.operator_support.qat_split ppe5_yolov8n_baseline_100ep_s0 --epochs 6 --batch 8
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant qat --board minhnhat@192.168.137.49 --board-repo rk3588
    # A2: huấn luyện, xuất (INT8 dùng danh sách hiệu chuẩn của seed 0), chấm mAP
    make train CONFIG=ai/automation/configs/ppe5_yolov8n_nodfl.yaml
@@ -235,8 +235,8 @@ Mọi lệnh chạy từ gốc repo chính, board đã khóa tần số và có 
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision fp16 --board minhnhat@192.168.137.49 --board-repo rk3588
    .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --board minhnhat@192.168.137.49 --board-repo rk3588
    # QAT và A2: bảng số liệu (đọc các file eval và log xuất trong repo)
-   .venv/bin/python -m ai.automation.analyze_q2kl
+   .venv/bin/python -m ai.npu.operator_support.analyze_q2kl
 
 ``make export-npu PREC=int8`` chỉ truyền ``--calib-from`` khi có ``CALIB_FROM=<run>`` (từ 2026-11-01, ``pipeline.py`` luôn truyền). Không có biến này, với run A2 nó sẽ lấy mẫu một danh sách hiệu chuẩn mới. Dùng lệnh ``export_npu`` ở trên, hoặc ``make export-npu RUN=ppe5_yolov8n_nodfl_100ep_s0 PREC=int8 CALIB_FROM=ppe5_yolov8n_baseline_100ep_s0``, để giữ danh sách của seed 0.
 
-Số liệu: ``results/q2j_split.json`` (A1, ``analyze_q2j.py``), ``results/q2k_qat.json`` và ``results/q2k_qat_layers.json`` (QAT, ``analyze_q2kl.py``), ``results/q2l_nodfl.json`` (A2, ``analyze_q2kl.py``). Log: ``bench/onboard_q2c/logs/`` (``qat_train.log``, ``evaluate_qat_int8.log``, ``a2_precheck_untrained_export.log``) và ``runs/ppe5_yolov8n_nodfl_100ep_s0/logs/``. Thiết kế: ``results/phase2d_design.md``, nguồn: ``results/phase2d_source_facts.md``.
+Số liệu: ``results/npu/operator_support/q2j_split.json`` (A1, ``analyze_q2j.py``), ``results/npu/operator_support/q2k_qat.json`` và ``results/npu/operator_support/q2k_qat_layers.json`` (QAT, ``analyze_q2kl.py``), ``results/npu/operator_support/q2l_nodfl.json`` (A2, ``analyze_q2kl.py``). Log: ``experiments/npu/operator_support/onboard_q2c/logs/`` (``qat_train.log``, ``evaluate_qat_int8.log``, ``a2_precheck_untrained_export.log``) và ``runs/ppe5_yolov8n_nodfl_100ep_s0/logs/``. Thiết kế: ``results/notes/phase2d_design.md``, nguồn: ``results/notes/phase2d_source_facts.md``.

@@ -228,7 +228,7 @@ z
    </g>
   </g>
   <g id="text_11">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="270.951694" transform="rotate(-0 5.328 270.951694)">Hai model huấn luyện 100 epoch. Trục y bắt đầu từ 30. File: results/q2l_nodfl.json (khóa silu, a2)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="270.951694" transform="rotate(-0 5.328 270.951694)">Hai model huấn luyện 100 epoch. Trục y bắt đầu từ 30. File: results/npu/operator_support/q2l_nodfl.json (khóa silu, a2)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_16">

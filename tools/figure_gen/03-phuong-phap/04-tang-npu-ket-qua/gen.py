@@ -1,8 +1,9 @@
-"""Hình cho các trang của nhóm Kết quả đo NPU (04-tang-npu-ket-qua), vẽ bằng matplotlib từ results/*.json.
+"""Hình cho các trang của nhóm Kết quả đo NPU (04-tang-npu-ket-qua), vẽ bằng matplotlib từ results/npu/*/*.json.
 
 Dùng: .venv/bin/python docs/tools/figure_gen/03-phuong-phap/04-tang-npu-ket-qua/gen.py [outdir] [tên_ảnh ...]
 Mỗi hình ghi vào thư mục con theo tên trang. Số trong hình lấy nguyên từ JSON mà generator của trang dùng cho bảng.
 """
+import glob
 import json
 import os
 import sys
@@ -27,7 +28,7 @@ plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "
 
 
 def J(name):
-    return json.load(open(os.path.join(ROOT, "results", name), encoding="utf-8"))
+    return json.load(open(glob.glob(os.path.join(ROOT, "results", "npu", "*", name))[0], encoding="utf-8"))
 
 
 def wrap(s, n=14):
@@ -102,7 +103,7 @@ def fig_g4_phu_resize():
     hd = [mk("o", BLUE, "phiên 1 (đặc)", True, 5), mk("o", BLUE, "phiên 2 (vòng)", False, 8), mk("o", BLUE, "CORE_0_1_2"),
           mk("s", GRAY, "CORE_0", False)]
     finish(fig, h, ["Board RK3588, YOLOv8n INT8 (SiLU và ReLU), P2. Trái: độ phủ của hai phiên đo (điều kiện A). Phải: hai dòng Resize mỗi model.",
-                    "File: results/g4_latency_workload.json (khóa gate_a, resize)"], hd, ncol=4, wspace=0.32)
+                    "File: results/npu/operator_support/g4_latency_workload.json (khóa gate_a, resize)"], hd, ncol=4, wspace=0.32)
     return fig
 
 
@@ -120,7 +121,7 @@ def fig_g4_theo_op():
     ax.set_xlabel("Tỉ lệ thời gian của op trên CORE_0 (%)"); ax.set_ylabel("Op")
     clean(ax, "x")
     finish(fig, h, ["Board RK3588, YOLOv8n INT8, CORE_0, chế độ debug. Op không xuất hiện trong một model thì không có điểm của model đó.",
-                    "File: results/g4_latency_workload.json (khóa by_op)"],
+                    "File: results/npu/operator_support/g4_latency_workload.json (khóa by_op)"],
            [mk("s", GRAY, "SiLU", False), mk("o", BLUE, "ReLU")], ncol=2, left=0.22, extra=0.45, top=0.95)
     return fig
 
@@ -148,7 +149,7 @@ def fig_g4_latency():
     ax.set_xticks([0, 1]); ax.set_xticklabels(["CORE 0+1", "CORE 0+1+2"], fontsize=8.5); ax.set_xlim(-0.5, 1.5)
     ax.set_ylabel("Giảm latency so với CORE_0 (%)"); clean(ax)
     finish(fig, h, ["Board RK3588, YOLOv8n INT8, P2, hai phiên. Chấm xám nhỏ là median của từng phiên.",
-                    "Đường đứt 5% là ngưỡng giảm tối thiểu của điều kiện B. File: results/g4_latency_workload.json (khóa conditions, gate_b)"],
+                    "Đường đứt 5% là ngưỡng giảm tối thiểu của điều kiện B. File: results/npu/operator_support/g4_latency_workload.json (khóa conditions, gate_b)"],
            [mk("s", GRAY, "SiLU", False), mk("o", BLUE, "ReLU"), mk("o", LGRAY, "median từng phiên", True, 3.5)], ncol=3, wspace=0.42, top=0.9)
     return fig
 
@@ -174,7 +175,7 @@ def fig_g4_cong_c():
     hd = [mk("o", BLUE, "INT8"), mk("o", GREEN, "FP16"), mk("o", GRAY, "FP32"), mk("o", INK, "css_test (đặc)", True, 6),
           mk("s", INK, "ppe2286_ext (vòng)", False, 6)]
     finish(fig, h, ["Điều kiện C: ReLU trừ SiLU, seed 0, 100 epoch. Đường đứt -1.0 điểm là ngưỡng của cổng C.",
-                    "File: results/eval_g4.json (khóa gate_c)"], hd, ncol=5)
+                    "File: results/npu/operator_support/eval_g4.json (khóa gate_c)"], hd, ncol=5)
     return fig
 
 
@@ -195,7 +196,7 @@ def fig_g4_nhieu_seed():
     ax.set_yticks(range(len(rows))); ax.set_yticklabels(labels, fontsize=8); ax.invert_yaxis()
     ax.set_xlabel("AP (%)"); clean(ax, "x")
     finish(fig, h, ["Ba seed (0, 1, 2) mỗi model, 100 epoch. Mỗi hàng có ba điểm SiLU và ba điểm ReLU.",
-                    "File: results/eval_g4.json (khóa noise, relu_noise)"],
+                    "File: results/npu/operator_support/eval_g4.json (khóa noise, relu_noise)"],
            [mk("s", GRAY, "SiLU, ba seed", False), mk("o", BLUE, "ReLU, ba seed")], ncol=2, left=0.3, top=0.95, extra=0.45)
     return fig
 
@@ -212,7 +213,7 @@ def fig_g4_relu_3seed():
     hline(ax, -1.0, "-1.0")
     ax.set_xticks(range(len(per))); ax.set_xticklabels([f"seed {r['seed']}" for r in per]); ax.set_xlim(-0.5, len(per) - 0.5)
     ax.set_ylabel("Chênh ReLU so với SiLU cùng seed (điểm %)"); clean(ax)
-    finish(fig, h, ["css_test, INT8, ba seed. Đường đứt -1.0 điểm là ngưỡng của cổng C. File: results/eval_g4.json (khóa relu_seed_gate_c)"],
+    finish(fig, h, ["css_test, INT8, ba seed. Đường đứt -1.0 điểm là ngưỡng của cổng C. File: results/npu/operator_support/eval_g4.json (khóa relu_seed_gate_c)"],
            [mk("o", cols[k], n) for k, n in METRICS], ncol=3)
     return fig
 
@@ -236,7 +237,7 @@ def fig_bv_giam_latency():
     ax.set_xticks(range(len(VARIANTS))); ax.set_xticklabels([wrap(n, 10) for _, n in VARIANTS], fontsize=8.5); ax.set_xlim(-0.5, len(VARIANTS) - 0.5)
     ax.set_ylabel("Giảm latency CORE_0_1_2 so với CORE_0 (%)"); clean(ax)
     finish(fig, h, ["Board RK3588, YOLOv8n INT8, P2, hai lần chạy thí nghiệm. Đường đứt 5% là ngưỡng giảm tối thiểu của điều kiện B.",
-                    "Dấu X là ô có P2 không thực hiện đúng (chưa kết luận). File: results/g4v_latency_workload.json, g4v_latency_workload_2.json"],
+                    "Dấu X là ô có P2 không thực hiện đúng (chưa kết luận). File: results/npu/operator_support/g4v_latency_workload.json, g4v_latency_workload_2.json"],
            [mk("o", BLUE, "lần chạy 1"), mk("s", GRAY, "lần chạy 2", False), mk("X", RED, "P2 không thực hiện đúng")], ncol=3)
     return fig
 
@@ -257,7 +258,7 @@ def fig_bv_cong_c():
     ax.set_xticks(range(len(rows))); ax.set_xticklabels([wrap(n, 11) if "\n" not in n else n for n, _ in rows], fontsize=8.5)
     ax.set_xlim(-0.5, len(rows) - 0.5); ax.set_ylabel("Chênh AP50-95 (điểm %)"); clean(ax)
     finish(fig, h, ["css_test, ba kiểu số. Chênh so với SiLU seed 0, 100 epoch, riêng SiLU 200 epoch là chênh so với SiLU 100 epoch.",
-                    "Đường đứt -1.0 điểm là ngưỡng cổng C của INT8. File: results/eval_g4.json (khóa variants, gate_c, silu200_vs_silu100)"],
+                    "Đường đứt -1.0 điểm là ngưỡng cổng C của INT8. File: results/npu/operator_support/eval_g4.json (khóa variants, gate_c, silu200_vs_silu100)"],
            [mk("o", DT_COL[d], d.upper()) for d in ("int8", "fp16", "fp32")], ncol=3)
     return fig
 
@@ -283,7 +284,7 @@ def fig_nhan_s1():
     ax.set_xticks(range(3)); ax.set_xticklabels(["CORE 0", "CORE 0+1", "CORE 0+1+2"], fontsize=8.5); ax.set_xlim(-0.5, 2.5)
     ax.set_ylabel("Thông lượng P3, một context (FPS)"); clean(ax)
     finish(fig, h, ["Board RK3588, YOLOv8n INT8 (SiLU), một context. Chấm xám là từng phiên (trái) hoặc từng lần chạy (phải), chấm xanh là median. Trục y không bắt đầu từ 0.",
-                    "File: results/g4_latency_workload.json (khóa conditions), results/thr_p3.json (khóa configs)"],
+                    "File: results/npu/operator_support/g4_latency_workload.json (khóa conditions), results/npu/throughput/thr_p3.json (khóa configs)"],
            [mk("o", BLUE, "median"), mk("o", LGRAY, "từng phiên hoặc lần chạy", True, 3.5)], ncol=2, wspace=0.34)
     return fig
 
@@ -300,7 +301,7 @@ def fig_nhan_cau_hinh():
     ax.set_xticks(range(len(cs))); ax.set_xticklabels([wrap(T["configs"][c]["label"], 16) for c in cs], fontsize=8)
     ax.set_xlim(-0.5, len(cs) - 0.5); ax.set_ylabel("Thông lượng P3 (FPS)"); clean(ax)
     finish(fig, h, ["Board RK3588, YOLOv8n INT8 (SiLU). Ba lần chạy mỗi cấu hình (xám), median (xanh). T7 là chẩn đoán, không phải cổng.",
-                    "File: results/thr_p3.json (khóa configs)"], [mk("o", BLUE, "median ba lần chạy"), mk("o", LGRAY, "từng lần chạy", True, 3.5)], ncol=2)
+                    "File: results/npu/throughput/thr_p3.json (khóa configs)"], [mk("o", BLUE, "median ba lần chạy"), mk("o", LGRAY, "từng lần chạy", True, 3.5)], ncol=2)
     return fig
 
 
@@ -321,7 +322,7 @@ def fig_nhan_30fps():
     for ax in axes:
         clean(ax)
     finish(fig, h, ["Board RK3588, YOLOv8n INT8 (SiLU), ảnh cache trong bộ nhớ, không gồm thu nhận camera. Mục tiêu 30 FPS (camera 30 khung/giây), người dùng đổi từ 60 ngày 2026-11-08.",
-                    "Hai cách đọc: thông lượng (trên) và thời gian mỗi khung (dưới). File: results/thr_p3.json (khóa configs)"], top=0.97, extra=0.4, right=0.9)
+                    "Hai cách đọc: thông lượng (trên) và thời gian mỗi khung (dưới). File: results/npu/throughput/thr_p3.json (khóa configs)"], top=0.97, extra=0.4, right=0.9)
     return fig
 
 
@@ -342,7 +343,7 @@ def fig_x7():
         clean(ax)
     axes[0].set_ylabel("Giá trị (%)"); axes[0].set_ylim(0, 100)
     finish(fig, h, ["YOLOv8n, INT8 của file đo latency và FP32 chấm trên cùng tập ảnh. Điểm xanh là INT8, ô vuông rỗng là FP32.",
-                    "File: results/eval_x7_ppe5_yolov8n_baseline_100ep_s0_int8.json (khóa sets)"],
+                    "File: results/npu/operator_support/eval_x7_ppe5_yolov8n_baseline_100ep_s0_int8.json (khóa sets)"],
            [mk("o", BLUE, "INT8 của file đo latency"), mk("s", GRAY, "FP32", False)], ncol=2, wspace=0.12)
     return fig
 
@@ -361,7 +362,7 @@ def fig_q_diag():
     ax.set_yticklabels([f"{'SiLU' if m == 'silu' else 'ReLU'}  {r['op']}  {short(r['name'])[:30]}" for m, r in rows], fontsize=8)
     ax.invert_yaxis(); ax.set_xlabel("Cosine một lớp, trung bình trên 10 ảnh")
     clean(ax, "x")
-    finish(fig, h, ["Năm tensor có cosine thấp nhất mỗi model, mô phỏng INT8 trên PC (10 ảnh). File: results/q2c_diag.json (khóa lowest_single)"],
+    finish(fig, h, ["Năm tensor có cosine thấp nhất mỗi model, mô phỏng INT8 trên PC (10 ảnh). File: results/npu/operator_support/q2c_diag.json (khóa lowest_single)"],
            [mk("s", GRAY, "SiLU", False), mk("o", BLUE, "ReLU")], ncol=2, left=0.4, top=0.95, extra=0.4)
     return fig
 
@@ -383,7 +384,7 @@ def fig_q_cong_thuc():
     ax.set_xticks(range(len(RECIPES))); ax.set_xticklabels(RECIPES, fontsize=8.5); ax.set_xlim(-0.5, len(RECIPES) - 0.5)
     ax.set_ylabel("AP50-95 trên css_test (%)"); ax.set_xlabel("Công thức lượng tử hóa"); clean(ax)
     finish(fig, h, ["INT8 trên board với từng công thức. Công thức không chạy cho một model thì không có điểm. Đường chấm là AP50-95 FP16 của mỗi model.",
-                    "File: results/q2c_recipes.json (khóa models)"],
+                    "File: results/npu/operator_support/q2c_recipes.json (khóa models)"],
            [mk("s", GRAY, "SiLU", False), mk("o", BLUE, "ReLU"), Line2D([], [], color=GRAY, linestyle=":", label="FP16 của model")], ncol=3, extra=0.3)
     return fig
 
@@ -407,7 +408,7 @@ def fig_q_h5_cong_c():
     ax.set_xticks(range(len(cands))); ax.set_xticklabels([n for _, n in cands], fontsize=8.5); ax.set_xlim(-0.5, len(cands) - 0.5)
     hline(ax, -1.0, "-1.0"); clean(ax)
     finish(fig, h, ["css_test, INT8 trên board. Trái: ReLU trừ SiLU dưới công thức base và h5. Phải: ứng viên trừ SiLU 100 epoch dưới h5.",
-                    "Đường đứt -1.0 điểm là ngưỡng cổng C. File: results/q2c_recipes.json (khóa r_c, variants_h5)"],
+                    "Đường đứt -1.0 điểm là ngưỡng cổng C. File: results/npu/operator_support/q2c_recipes.json (khóa r_c, variants_h5)"],
            [mk("o", cols[k], n) for k, n in METRICS], ncol=3, wspace=0.12, right=0.93, extra=0.25)
     return fig
 
@@ -423,7 +424,7 @@ def _cost_fig(fname, key_a, key_b, note, finfile):
     hline(ax, 5, "5%"); ax.axhline(0, color="#999999", linewidth=0.6)
     ax.set_xticks([0, 1]); ax.set_xticklabels(["CORE 0", "CORE 0+1+2"]); ax.set_xlim(-0.5, 1.5)
     ax.set_ylabel(note); ax.set_ylim(-3, 8); clean(ax)
-    finish(fig, h, ["Board RK3588, YOLOv8n INT8, P2. Chi phí dương là chậm hơn. Đường đứt 5% là ngưỡng tính là đáng kể.", f"File: results/{finfile}"],
+    finish(fig, h, ["Board RK3588, YOLOv8n INT8, P2. Chi phí dương là chậm hơn. Đường đứt 5% là ngưỡng tính là đáng kể.", f"File: results/npu/operator_support/{finfile}"],
            [mk("s", GRAY, "SiLU", False), mk("o", BLUE, "ReLU")], ncol=2)
     return fig
 
@@ -444,7 +445,7 @@ def fig_r_int8h5():
         scat(ax, [i + (j - 1) * 0.16 for i in range(len(runs))], [N["runs"][r]["sets"]["css_test"][d]["map50_95"] for r in runs], mkr, col, face, 40)
     ax.set_xticks(range(len(runs))); ax.set_xticklabels([r.replace("_s", " seed ").replace("silu", "SiLU").replace("relu", "ReLU") for r in runs], fontsize=8.5)
     ax.set_xlim(-0.5, len(runs) - 0.5); ax.set_ylabel("AP50-95 trên css_test (%)"); clean(ax)
-    finish(fig, h, ["Bốn lần chạy huấn luyện, ba kiểu xuất. File: results/int8h5.json (khóa runs)"], [mk(m_, c_, l_, f_) for l_, m_, c_, f_ in sty.values()], ncol=3)
+    finish(fig, h, ["Bốn lần chạy huấn luyện, ba kiểu xuất. File: results/npu/operator_support/int8h5.json (khóa runs)"], [mk(m_, c_, l_, f_) for l_, m_, c_, f_ in sty.values()], ncol=3)
     return fig
 
 
@@ -476,7 +477,7 @@ def fig_qat_a1():
     ax.set_ylabel("Median latency P2 (ms)"); clean(ax)
     hd = [mk("o", BLUE, "CORE_0"), mk("s", GRAY, "CORE_0_1_2", False), mk("X", RED, "P2 không thực hiện đúng")]
     finish(fig, h, ["Trái: AP50-95 của năm model. Phải: median latency, phần NPU, hai mặt nạ nhân. Dấu X là P2 không thực hiện đúng. Trục y của trái bắt đầu từ 30.",
-                    "File: results/q2j_split.json (khóa accuracy, conditions)"], hd, ncol=3, wspace=0.3, extra=0.25)
+                    "File: results/npu/operator_support/q2j_split.json (khóa accuracy, conditions)"], hd, ncol=3, wspace=0.3, extra=0.25)
     return fig
 
 
@@ -489,7 +490,7 @@ def fig_qat_a2():
         scat(ax, [i + off for i in range(3)], [N[m][k]["map50_95"] for k, _ in ks], mkr, col, face, 44)
     ax.set_xticks(range(3)); ax.set_xticklabels([n for _, n in ks]); ax.set_xlim(-0.5, 2.5)
     ax.set_ylabel("AP50-95 trên css_test (%)"); ax.set_ylim(30, 55); clean(ax)
-    finish(fig, h, ["Hai model huấn luyện 100 epoch. Trục y bắt đầu từ 30. File: results/q2l_nodfl.json (khóa silu, a2)"],
+    finish(fig, h, ["Hai model huấn luyện 100 epoch. Trục y bắt đầu từ 30. File: results/npu/operator_support/q2l_nodfl.json (khóa silu, a2)"],
            [mk("s", GRAY, "SiLU baseline", False), mk("o", BLUE, "A2 bỏ DFL")], ncol=2)
     return fig
 
@@ -507,7 +508,7 @@ def fig_qat_tong_hop():
     ax.set_xticks(range(len(rows))); ax.set_xticklabels([n for n, _ in rows]); ax.set_xlim(-0.5, len(rows) - 0.5)
     ax.set_ylabel("AP50-95 INT8 trên css_test (%)"); ax.set_ylim(30, 55); clean(ax)
     finish(fig, h, ["Đường đứt 48.41 là tiêu chí viết trước dữ liệu: FP16 seed 0 của SiLU (49.76) trừ 1.35 điểm. Tiêu chí mới và chưa duyệt. Trục y bắt đầu từ 30.",
-                    "File: results/q2j_split.json, q2k_qat.json, q2l_nodfl.json"], right=0.93, extra=0.3)
+                    "File: results/npu/operator_support/q2j_split.json, q2k_qat.json, q2l_nodfl.json"], right=0.93, extra=0.3)
     return fig
 
 
@@ -523,7 +524,7 @@ def fig_u_g7():
     ax.set_xticks(range(3)); ax.set_xticklabels([f"{k}\n{M['g7b'][k]['attrs'][0]}, {M['g7b'][k]['attrs'][1]}" for k in ks], fontsize=8.5); ax.set_xlim(-0.5, 2.5)
     ax.set_ylabel("Độ lệch tối đa của NPU (thang log)"); clean(ax)
     finish(fig, h, ["Micro model Resize 1x256x20x20, tỉ lệ 2, FP16. Đường đứt 0.01 là ngưỡng khớp viết trước. A là bộ asymmetric, floor.",
-                    "File: results/q2e_micro.json (khóa g7b)"],
+                    "File: results/npu/operator_support/q2e_micro.json (khóa g7b)"],
            [mk("o", BLUE, "so với onnxruntime của chính nó"), mk("s", GRAY, "so với onnxruntime của A", False)], ncol=2, extra=0.2)
     return fig
 
@@ -545,8 +546,8 @@ def fig_u_qat_time():
     ax.set_ylabel("Median latency P2 (ms)"); clean(ax)
     bad = [k for k, v in B["qat_time"]["conditions"].items() if not v["realized"]]
     hd = [mk("o", BLUE, "CORE_0"), mk("s", GRAY, "CORE_0_1_2", False)] + ([mk("X", RED, "P2 không thực hiện đúng")] if bad else [])
-    finish(fig, h, ["Board RK3588, P2, hai phiên, mọi ô thực hiện đúng. Trục y không bắt đầu từ 0. File: results/q2e_board.json (khóa qat_time)" if not bad
-                    else "Board RK3588, P2, hai phiên. Dấu X là P2 không thực hiện đúng. Trục y không bắt đầu từ 0. File: results/q2e_board.json (khóa qat_time)"],
+    finish(fig, h, ["Board RK3588, P2, hai phiên, mọi ô thực hiện đúng. Trục y không bắt đầu từ 0. File: results/npu/operator_support/q2e_board.json (khóa qat_time)" if not bad
+                    else "Board RK3588, P2, hai phiên. Dấu X là P2 không thực hiện đúng. Trục y không bắt đầu từ 0. File: results/npu/operator_support/q2e_board.json (khóa qat_time)"],
            hd, ncol=len(hd), extra=0.3)
     return fig
 
@@ -566,7 +567,7 @@ def fig_f_e1():
     ax.set_xticks(range(len(cs))); ax.set_xticklabels([wrap(T["configs"][c]["label"], 16) for c in cs], fontsize=8.5); ax.set_xlim(-0.5, len(cs) - 0.5)
     ax.set_ylabel("Thông lượng P3 (FPS)"); ax.set_ylim(0, 165); clean(ax)
     finish(fig, h, ["Board RK3588, ba lần chạy mỗi điểm (xám nhỏ), median (ô vuông rỗng là INT8 mặc định, chấm đặc là int8h5). Mục tiêu 30 FPS (đổi từ 60 ngày 2026-11-08).",
-                    "File: results/q2f_fps.json (khóa e1)"],
+                    "File: results/npu/throughput/q2f_fps.json (khóa e1)"],
            [mk("s", GRAY, "INT8 mặc định", False), mk("o", BLUE, "int8h5"), mk("o", LGRAY, "từng lần chạy", True, 3.5)], ncol=3, right=0.9, extra=0.15)
     return fig
 
@@ -589,7 +590,7 @@ def fig_f_e2():
     ax.set_ylabel("Thông lượng (FPS)"); ax.set_ylim(0, 80); clean(ax)
     mx = max(F["e2"]["conditions"][k]["spread"] for k in ks)
     finish(fig, h, [f"Board RK3588, median của ba lần chạy mỗi điều kiện (xanh), khoảng trải lớn nhất {mx:.2f} FPS nên ba lần chạy gần như trùng nhau.",
-                    "Đường đứt là mục tiêu 30 FPS về thông lượng. File: results/q2f_fps.json (khóa e2)"], right=0.9, extra=0.55)
+                    "Đường đứt là mục tiêu 30 FPS về thông lượng. File: results/npu/throughput/q2f_fps.json (khóa e2)"], right=0.9, extra=0.55)
     return fig
 
 
@@ -604,7 +605,7 @@ def fig_f_e2_chenh():
     hline(ax, 5, "+5%"); hline(ax, -5, "-5%"); ax.axhline(0, color="#999999", linewidth=0.6)
     ax.set_xticks(range(len(ks))); ax.set_xticklabels([k.replace("_vs_", "\nso với\n") for k in ks], fontsize=8.5); ax.set_xlim(-0.5, len(ks) - 0.5)
     ax.set_ylabel("Chênh FPS (%)"); clean(ax)
-    finish(fig, h, ["Quy tắc 'khác': chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn. Đường đứt là ±5%. File: results/q2f_fps.json (khóa e2, comparisons)"],
+    finish(fig, h, ["Quy tắc 'khác': chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn. Đường đứt là ±5%. File: results/npu/throughput/q2f_fps.json (khóa e2, comparisons)"],
            right=0.93, extra=0.4)
     return fig
 

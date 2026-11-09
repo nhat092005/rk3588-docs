@@ -11,7 +11,7 @@ Memory copy
 .. admonition:: Tóm tắt
 
    1. Trong harness, ``T_npu`` bao toàn bộ lời gọi ``rknn.inference(...)`` nên gồm copy vào, chạy và lấy ra. Dự án không tách riêng thời gian copy, nên thời gian copy là chưa biết [T3 board, ``ai/board/bench_throughput_rep.py:71-75``].
-   2. Ở một context ``CORE_0``, ``T_pre``, ``T_npu``, ``T_post`` là 0.216, 17.161, 0.662 ms (trung vị, P3) [T3 board, ``results/thr_p3.json``].
+   2. Ở một context ``CORE_0``, ``T_pre``, ``T_npu``, ``T_post`` là 0.216, 17.161, 0.662 ms (trung vị, P3) [T3 board, ``results/npu/throughput/thr_p3.json``].
    3. Zero-copy chỉ có ở C API. RKNNLite 2.3.2 không có hàm cấp bộ nhớ hay ``rknn_set_io_mem``, repo không dùng zero-copy [T3 board, wheel ``rknn_lite.py``, grep ``ai/``].
    4. ``pass_through = 1`` trong harness C bị ``rknn_inputs_set`` từ chối (kỳ vọng 4915200 byte cho đầu vào 1228800 byte), nguyên nhân chưa biết.
    5. Bộ nhớ mỗi context: RSS tiến trình tăng khoảng 12.8 MiB ở S2 và khoảng 17.1 MiB ở probe 32 context, không gồm bộ nhớ NPU do driver cấp. Dùng chung một context giữa ba luồng cho đầu ra sai (300 trên 300 lần gọi khác tham chiếu).
@@ -55,7 +55,7 @@ Harness đo thời gian bằng ``time.perf_counter()`` quanh từng khâu. Mỗi
 
 Nguồn: [T3 board, ``ai/board/bench_throughput_rep.py:71-75``] (mốc ``t0`` ở dòng 71, ``inference`` ở dòng 74) và ``rknn_lite.py:209`` (lời gọi ``set_inputs`` trong wrapper). Harness Python gọi ``inference(inputs=[inp])`` và không gọi ``create_mem`` hay ``set_io_mem`` [Mã nguồn repo, grep ``create_mem\|io_mem\|zero.copy`` trong ``ai/``, không có kết quả].
 
-Số đo ba khâu (trung vị, P3, ms) [T3 board, ``results/thr_p3.json``]:
+Số đo ba khâu (trung vị, P3, ms) [T3 board, ``results/npu/throughput/thr_p3.json``]:
 
 .. list-table::
    :header-rows: 1
@@ -131,7 +131,7 @@ Cấu hình nhiều context (S2, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan
    * - RSS tiến trình Python, S2
      - 172.3 MiB với 1 context, 197.9 MiB với 3 context, khoảng 12.8 MiB mỗi context thêm. Trang nguồn ghi rõ đây không gồm bộ nhớ NPU do driver cấp [T3 board, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 3]
    * - Probe M16 (một tiến trình, nhiều context, dừng ở 32)
-     - RSS 66.3 MiB (1 context), 83.0 (2), 100.0 (3), 185.6 (8), 322.0 (16), 595.6 (32). ``MemAvailable`` giảm từ 3182 xuống 2651 MiB. Độ dốc khoảng 17.1 MiB mỗi context (tính từ các hàng này) [T3 board, ``results/q2e_board.json`` ``$.probes.m16.result.rows``]
+     - RSS 66.3 MiB (1 context), 83.0 (2), 100.0 (3), 185.6 (8), 322.0 (16), 595.6 (32). ``MemAvailable`` giảm từ 3182 xuống 2651 MiB. Độ dốc khoảng 17.1 MiB mỗi context (tính từ các hàng này) [T3 board, ``results/npu/operator_support/q2e_board.json`` ``$.probes.m16.result.rows``]
 
 Hai số 12.8 và 17.1 MiB mỗi context đến từ hai phép đo khác cấu hình (S2 ba context trong harness thông lượng, M16 một tiến trình đến 32 context). Nguyên nhân chênh: chưa biết. Probe M16 dừng ở ngưỡng chặn 32, không phải giới hạn thật, nên giới hạn số context trên board chỉ biết là không nhỏ hơn 32.
 
@@ -140,7 +140,7 @@ Dùng chung một context giữa các luồng (M4): 300 lần gọi, 0 exception
 5. Batch
 ========
 
-Probe M7 dựng ``rknn_batch_size`` 4 ở FP16 và chạy được, đầu ra ``[4, 9, 8400]``. Một lần gọi trung vị 41.90 ms ở batch 1 và 90.19 ms ở batch 4 (22.55 ms mỗi ảnh) [T3 board, ``results/q2e_board.json`` ``$.probes.m7.result``]. Hạn chế đã ghi ở :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 7:
+Probe M7 dựng ``rknn_batch_size`` 4 ở FP16 và chạy được, đầu ra ``[4, 9, 8400]``. Một lần gọi trung vị 41.90 ms ở batch 1 và 90.19 ms ở batch 4 (22.55 ms mỗi ảnh) [T3 board, ``results/npu/operator_support/q2e_board.json`` ``$.probes.m7.result``]. Hạn chế đã ghi ở :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 7:
 
 - Kết quả khớp từng ảnh với batch 1 không tái lập. Lần chạy đầu lệch 0, lần chạy lặp một ảnh lệch 0.19.
 - Log console ghi "core mask = 1 is invalid for batch size: 4, fall back to CORE_AUTO mode", nên batch 4 chạy ở chế độ nhân khác.
@@ -216,5 +216,5 @@ FPS của các đòn bẩy phối hợp (ví dụ nhiều context cộng chồng
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.64, 65), API Reference Toolkit2 V2.3.2 (API232 tr.18), driver ``3rdparty/rknpu-driver-0.9.8/`` (``rknpu_gem.c:1353, 1684-1685``).
-- T3: ``ai/board/bench_throughput_rep.py:71-75``, ``ai/board/rknn_perf_bench.c:77-78, 95-97``, wheel ``rknn_lite.py``, ``results/thr_p3.json``, ``results/q2e_board.json``.
+- T3: ``ai/board/bench_throughput_rep.py:71-75``, ``ai/board/rknn_perf_bench.c:77-78, 95-97``, wheel ``rknn_lite.py``, ``results/npu/throughput/thr_p3.json``, ``results/npu/operator_support/q2e_board.json``.
 - Trang liên quan: :doc:`03-tensor-layout`, :doc:`04-datatype`, :doc:`05-memory-access`, :doc:`09-pre-post-processing`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

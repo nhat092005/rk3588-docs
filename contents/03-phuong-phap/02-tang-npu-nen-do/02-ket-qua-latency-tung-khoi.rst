@@ -22,7 +22,7 @@ Latency từng khối
 1. Dữ liệu và điều kiện đo
 ==========================
 
-Model: ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/rknn_int8/best-rk3588.rknn``, sha256 ``a501f94e`` (cùng file trên PC và trên board), RKNN-Toolkit2 2.3.2, ``rknn_server`` và runtime 2.3.2, driver ``rknpu`` 0.9.8. ``CORE_0``. CPU ở 1.8, 2.256 và 2.304 GHz, NPU 1.0 GHz, DDR 2.112 GHz, khoá bằng ``lock_freq.sh lock``. Kế hoạch và định nghĩa từng thông số nằm ở :doc:`01-ke-hoach-do`.
+Model: ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/rknn_int8/best-rk3588.rknn``, sha256 ``a501f94e`` (cùng file trên PC và trên board), RKNN-Toolkit2 2.3.2, ``rknn_server`` và runtime 2.3.2, driver ``rknpu`` 0.9.8. ``CORE_0``. CPU ở 1.8, 2.256 và 2.304 GHz, NPU 1.0 GHz, DDR 2.112 GHz, khoá bằng ``lock_freq.sh lock``. Kế hoạch và định nghĩa từng thông số nằm ở :doc:`01-ke-hoach-do`.
 
 .. list-table::
    :header-rows: 1
@@ -51,21 +51,21 @@ Model: ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/rknn_int8/bes
    * - Trên board, đợt liên tiếp
      - ``ai/board/rknn_perf_bench.c`` (C API, không qua PC), 3 tiến trình, 50 lần khởi động rồi 1000 lần chạy
      - 3 x 1000
-     - ``bench/onboard/hot_*.csv``
+     - ``experiments/npu/latency/onboard/hot_*.csv``
    * - Trên board, ``detail``
      - Cùng chương trình với ``RKNN_FLAG_COLLECT_PERF_MASK`` và ``RKNN_QUERY_PERF_DETAIL``, bảng từng lớp mỗi lần chạy
      - 3 x 200
-     - ``bench/onboard/detail_*_detail.txt``
+     - ``experiments/npu/latency/onboard/detail_*_detail.txt``
    * - Trên board, nghỉ giữa các lần chạy
      - Nghỉ 2 giây và 10 giây sau mỗi lần ``rknn_run``
      - 40 và 20
-     - ``bench/onboard/gap*.csv``
+     - ``experiments/npu/latency/onboard/gap*.csv``
    * - E2 đến E2e
      - Thử ghim CPU, ngắt NPU và tắt trạng thái ngủ, năm thí nghiệm (:doc:`05-thu-ghim-cpu-va-ngat`)
      - 8 đến 40 khối mỗi thí nghiệm
-     - ``bench/onboard_e2*/*``
+     - ``experiments/npu/latency/onboard_e2*/*``
 
-Mọi bảng dưới đây lấy số từ ``results/latency_per_block_*.json``, ``results/layer_analysis_*.json``, ``results/onboard_*.json`` và các file ở cột "File". Thời gian từng lớp luôn là thời gian ở chế độ ``perf_debug=True`` (hoặc ``detail``), hãng ghi chế độ này có thể tắt một số cơ chế song song [T1 UG232 tr.177]. Vì vậy các con số từng khối dùng để so sánh với nhau, không cộng thành latency.
+Mọi bảng dưới đây lấy số từ ``results/npu/latency/latency_per_block_*.json``, ``results/npu/latency/layer_analysis_*.json``, ``results/npu/latency/onboard_*.json`` và các file ở cột "File". Thời gian từng lớp luôn là thời gian ở chế độ ``perf_debug=True`` (hoặc ``detail``), hãng ghi chế độ này có thể tắt một số cơ chế song song [T1 UG232 tr.177]. Vì vậy các con số từng khối dùng để so sánh với nhau, không cộng thành latency.
 
 2. Latency tổng
 ===============
@@ -125,7 +125,7 @@ Mọi bảng dưới đây lấy số từ ``results/latency_per_block_*.json``,
      - 1000
      - chạy liên tiếp, ``rknn_run`` đo bằng đồng hồ CPU
 
-Quan sát (T3 board, ``results/latency_per_block_*.md``, ``results/onboard_*.md``):
+Quan sát (T3 board, ``results/npu/latency/latency_per_block_*.md``, ``results/npu/latency/onboard_*.md``):
 
 - Cùng một ``.rknn``, cùng tần số khoá, trung vị các phiên ``eval_perf`` lệch nhau 14.56% giữa B3 phiên 1, 2 và 3. Cổng A5 yêu cầu không quá 5%, không đạt.
 - Hai nguồn đo khác nhau về bản chất và mức của chúng không trùng nhau. ``eval_perf`` lấy thời gian từ phần cứng board [T1 API232 tr.18], còn thời gian trên board là đồng hồ CPU quanh ``rknn_run``. Ở chương trình C, ``wall_us`` và ``RKNN_QUERY_PERF_RUN`` bằng nhau trong 5 µs ở mọi lần chạy (True), nên số này gồm cả phần driver. Quan hệ giữa hai nguồn chưa biết. Thử giãn nhịp chạy C API (X3) cho kết quả "chưa kết luận" về việc nhịp gọi có giải thích chênh lệch hay không (:doc:`06-co-che-cac-muc-do-tre`, mục 4).
@@ -595,7 +595,7 @@ Cột "B3 (µs)" là trung vị thời gian khối ở chế độ debug qua 3 p
      - 0.4%
      - 32.1%
 
-Bảng đầy đủ {len(A['parts'])} thành phần nằm ở ``results/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md``. Thành phần của L22 gồm ``box_branch`` và ``cls_branch`` (hai nhánh Conv), ``dfl`` (Softmax, Conv, Transpose và Reshape) và ``decode`` (các phép tính giải mã hộp).
+Bảng đầy đủ {len(A['parts'])} thành phần nằm ở ``results/npu/latency/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md``. Thành phần của L22 gồm ``box_branch`` và ``cls_branch`` (hai nhánh Conv), ``dfl`` (Softmax, Conv, Transpose và Reshape) và ``decode`` (các phép tính giải mã hộp).
 
 3.3. Bảng 3: theo OpType
 ------------------------
@@ -743,5 +743,5 @@ Cách đọc. A5 và A8 không đạt, kể cả khi chỉ xét ba phiên B3. C�
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.177), ``docs/_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf`` (API232 tr.18), ``3rdparty/rknn-toolkit2/rknpu2/runtime/Linux/librknn_api/include/rknn_api.h`` (``RKNN_FLAG_COLLECT_PERF_MASK``, ``RKNN_QUERY_PERF_DETAIL``, ``RKNN_QUERY_PERF_RUN``).
-- T3 board và PC: ``results/latency_per_block_*``, ``results/layer_analysis_*``, ``results/onboard_*``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/export_int8.json``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/automation/aggregate_layers.py``, ``analyze_layers.py``, ``analyze_onboard.py``, ``ai/core/rknn/blocks.py``, ``tests/test_layer_blocks.py``.
+- T3 board và PC: ``results/npu/latency/latency_per_block_*``, ``results/npu/latency/layer_analysis_*``, ``results/npu/latency/onboard_*``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/export_int8.json``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/npu/latency/aggregate_layers.py``, ``analyze_layers.py``, ``analyze_onboard.py``, ``ai/core/rknn/blocks.py``, ``tests/test_layer_blocks.py``.
 

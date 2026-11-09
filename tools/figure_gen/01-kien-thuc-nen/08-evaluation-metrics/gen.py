@@ -120,7 +120,7 @@ def fig_iou_geometry():
          ("  |  Miền giá trị: [0.0 (không chạm) đến 1.0 (trùng khít hoàn toàn)]", "t")],
     ], size=10, dy=14)
 
-    source(f, y_f + 38, "Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Y6 tr.8.")
+    source(f, y_f + 38, "Nguồn: REPO experiments/leaderboards/sfchd_5class.csv; Y6 tr.8.")
     return f
 
 
@@ -591,7 +591,7 @@ def fig_map_classes():
         [("  chỉ ra điểm nghẽn cần bổ sung thêm dữ liệu huấn luyện.", "t")],
     ], size=8.5, dy=19)
 
-    source(f, 226, "Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.")
+    source(f, 226, "Nguồn: REPO experiments/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.")
     return f
 
 

@@ -28,7 +28,7 @@ Trang này là phần đo cơ chế của nhóm. Kết quả vị trí (E2 đế
 
 X1 và X2 chạy trên đường C API (``rknn_perf_bench``, ``CORE_0``, ảnh đầu vào toàn 0), ``irqbalance`` dừng, tần số khóa, ftrace với đồng hồ ``mono`` (cùng đồng hồ với cột ``t_us`` của CSV), bộ đệm tối thiểu 32768 KB mỗi CPU. Sự kiện ghi: ``irq_handler_entry`` và ``irq_handler_exit`` lọc theo ngắt 36, ``sched_wakeup`` và ``sched_switch`` lọc theo luồng ``rknn_perf_bench``, ``cpu_idle`` trên mọi CPU. Một phép thử 7 lần chạy (chỉ ghi tên luồng, không ghi thời gian) cho thấy ``rknn_perf_bench`` là luồng duy nhất được chuyển vào CPU, khoảng 63 lần mỗi lần chạy, khớp 63 ngắt NPU mỗi lần chạy. Mỗi khối 50 lần làm nóng rồi 300 lần đo, nửa 2 là thứ tự đảo ngược của nửa 1.
 
-Cách tách một lần chạy (định nghĩa trong ``bench/onboard_x1/rule.txt``, viết trước dữ liệu): C là thời gian luồng ở trên CPU. Khi luồng ngủ (trạng thái S hoặc D) rồi được chuyển vào lại, ngắt kết thúc khoảng chờ là ngắt 36 cuối cùng trong khoảng đó: N là từ lúc ngủ tới ngắt đó, D là từ ngắt đó tới lúc chạy lại. P là thời gian bị chiếm CPU khi đang sẵn sàng (trạng thái R). Khối thực hiện đúng khi ứng dụng và ngắt ở đúng CPU (ít nhất 99%), bốn phần cộng lại khớp thời gian đo trong 2% ở ít nhất 95% số lần chạy, và trace không mất sự kiện nào. Các ngưỡng 0.8, 1.2, 0.9, 0.1, 2% và 95% là ngưỡng mới chọn cho quy tắc này, chưa qua người dùng duyệt. X2 thêm kiểm can thiệp: file ``state1/disable`` và governor của ``policy4`` đọc lại trước và sau mỗi khối, và trong trace tỉ lệ lần CPU đích vào ``cpu-sleep`` phải không quá 0.01.
+Cách tách một lần chạy (định nghĩa trong ``experiments/npu/latency/onboard_x1/rule.txt``, viết trước dữ liệu): C là thời gian luồng ở trên CPU. Khi luồng ngủ (trạng thái S hoặc D) rồi được chuyển vào lại, ngắt kết thúc khoảng chờ là ngắt 36 cuối cùng trong khoảng đó: N là từ lúc ngủ tới ngắt đó, D là từ ngắt đó tới lúc chạy lại. P là thời gian bị chiếm CPU khi đang sẵn sàng (trạng thái R). Khối thực hiện đúng khi ứng dụng và ngắt ở đúng CPU (ít nhất 99%), bốn phần cộng lại khớp thời gian đo trong 2% ở ít nhất 95% số lần chạy, và trace không mất sự kiện nào. Các ngưỡng 0.8, 1.2, 0.9, 0.1, 2% và 95% là ngưỡng mới chọn cho quy tắc này, chưa qua người dùng duyệt. X2 thêm kiểm can thiệp: file ``state1/disable`` và governor của ``policy4`` đọc lại trước và sau mỗi khối, và trong trace tỉ lệ lần CPU đích vào ``cpu-sleep`` phải không quá 0.01.
 
 2. X1: thời gian tăng nằm ở phần nào
 ====================================
@@ -209,7 +209,7 @@ X2 dùng cùng cách đo, thêm các ô can thiệp: ``a4i0s`` (tắt ``cpu-slee
      - 0.584
      - 9
 
-Kết luận theo quy tắc viết trước (``bench/onboard_x2/rule.txt``):
+Kết luận theo quy tắc viết trước (``experiments/npu/latency/onboard_x2/rule.txt``):
 
 - S1 (ngắt ở CPU0): phần tăng ở N so với ``a4i4`` là 2.59 và 2.61 ms ở hai nửa, còn 0.15 và 0.14 ms khi tắt ``cpu-sleep`` ở CPU0. Nhãn: **làm mất**.
 - S2 (ứng dụng ở CPU1): phần tăng ở D là 1.95 và 1.96 ms, còn 0.39 và 0.39 ms khi tắt ``cpu-sleep`` ở CPU1. Tỉ lệ còn lại 0.200 và 0.201, ngưỡng là 0.2 và nhãn cần cả hai nửa cùng không vượt, nên nhãn là **chưa kết luận**. Ngưỡng không sửa sau khi thấy dữ liệu.
@@ -222,7 +222,7 @@ Theo bảng nhãn ghi trước trong quy tắc: độ trễ từng ngắt (U1a) 
 4. X3: nhịp gọi và chênh lệch giữa hai đường đo
 ===============================================
 
-Đường ``eval_perf`` (E2e) và đường C API (E2d) lệch nhau từ -1.20 đến 0.29 ms ở cùng ô. Các lần gọi ``eval_perf`` cách nhau khoảng 0.22 giây, còn C API chạy liên tiếp. X3 chạy lại C API ở sáu ô của E2e, mỗi ô một khối liên tiếp (B) và một khối nghỉ 220 ms sau mỗi lần chạy (G, chu kỳ khoảng 240 ms), đảo thứ tự ở nửa 2. Một ô chỉ được xét khi B còn khớp E2d trong 0.25 ms. Tỉ số f = (G - B) / (E - B), với E là trung vị ``eval_perf`` của ô ở E2e. Quy tắc ``bench/onboard_x3/rule.txt`` (ngưỡng 0.25 ms, 0.5, 1.5 và 0.25 là số mới, chưa qua người dùng duyệt).
+Đường ``eval_perf`` (E2e) và đường C API (E2d) lệch nhau từ -1.20 đến 0.29 ms ở cùng ô. Các lần gọi ``eval_perf`` cách nhau khoảng 0.22 giây, còn C API chạy liên tiếp. X3 chạy lại C API ở sáu ô của E2e, mỗi ô một khối liên tiếp (B) và một khối nghỉ 220 ms sau mỗi lần chạy (G, chu kỳ khoảng 240 ms), đảo thứ tự ở nửa 2. Một ô chỉ được xét khi B còn khớp E2d trong 0.25 ms. Tỉ số f = (G - B) / (E - B), với E là trung vị ``eval_perf`` của ô ở E2e. Quy tắc ``experiments/npu/latency/onboard_x3/rule.txt`` (ngưỡng 0.25 ms, 0.5, 1.5 và 0.25 là số mới, chưa qua người dùng duyệt).
 
 .. list-table::
    :header-rows: 1
@@ -287,6 +287,6 @@ Cả 24 khối thực hiện đúng và cả sáu ô đều xét được. Theo 
 6. Nguồn
 ========
 
-- T3 board: ``results/onboard_x1_*``, ``results/onboard_x2_*``, ``results/onboard_x3_*`` và ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_x1/``, ``onboard_x2/``, ``onboard_x3/`` (mỗi thư mục có ``rule.txt``, ``progress.txt``, script chạy, trace nén hoặc CSV). Mã phân tích: ``ai/automation/analyze_trace_x1.py`` (X1 và X2), ``ai/automation/analyze_x3.py``.
+- T3 board: ``results/npu/latency/onboard_x1_*``, ``results/npu/latency/onboard_x2_*``, ``results/npu/latency/onboard_x3_*`` và ``experiments/npu/latency/onboard_x1/``, ``onboard_x2/``, ``onboard_x3/`` (mỗi thư mục có ``rule.txt``, ``progress.txt``, script chạy, trace nén hoặc CSV). Mã phân tích: ``ai/npu/latency/analyze_trace_x1.py`` (X1 và X2), ``ai/npu/latency/analyze_x3.py``.
 - T1 mã nguồn: không có trích dẫn trong trang này.
 

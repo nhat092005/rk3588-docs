@@ -213,7 +213,7 @@ Bài Kong không báo throughput và không chạy nhiều model đồng thời 
 3.3. Harness và giới hạn
 ------------------------
 
-``ai/board/bench_throughput.py`` (harness cũ): một luồng mỗi context, mỗi luồng chạy pre, NPU, post trên frame đã giải mã sẵn, 200 ảnh cache dùng vòng tròn, warmup 20 lần trên ``frames[0]``, vùng đo gồm pre, ``rknn.inference`` và post, một lượt, tần số không cố định [Mã nguồn repo bench_throughput.py:3, 27-28, 37-47, 57-72, 88-91]. Giới hạn: không có độ trải, DVFS lẫn vào, ảnh cache lặp lại không phản ánh camera, warmup một frame. ``RKNNLite.inference`` có nhả GIL không là chưa biết (``RKNNRuntime`` là ``.so``). Harness mới ``bench_throughput_rep.py`` (``results/thr_p3.json``, 2026-10-31) lặp 3 lần độc lập và sửa các giới hạn trên trừ ảnh cache lặp lại và GIL (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`).
+``ai/board/bench_throughput.py`` (harness cũ): một luồng mỗi context, mỗi luồng chạy pre, NPU, post trên frame đã giải mã sẵn, 200 ảnh cache dùng vòng tròn, warmup 20 lần trên ``frames[0]``, vùng đo gồm pre, ``rknn.inference`` và post, một lượt, tần số không cố định [Mã nguồn repo bench_throughput.py:3, 27-28, 37-47, 57-72, 88-91]. Giới hạn: không có độ trải, DVFS lẫn vào, ảnh cache lặp lại không phản ánh camera, warmup một frame. ``RKNNLite.inference`` có nhả GIL không là chưa biết (``RKNNRuntime`` là ``.so``). Harness mới ``bench_throughput_rep.py`` (``results/npu/throughput/thr_p3.json``, 2026-10-31) lặp 3 lần độc lập và sửa các giới hạn trên trừ ảnh cache lặp lại và GIL (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`).
 
 3.4. Kết luận cho S2
 --------------------

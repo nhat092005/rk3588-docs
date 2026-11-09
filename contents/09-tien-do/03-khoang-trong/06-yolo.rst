@@ -174,7 +174,7 @@ Huấn luyện và triển khai của dự án
 
 Các câu hỏi dưới đây chuyển từ mục Kiến thức nền ngày 2026-10-31. Câu trả lời cần đọc cấu hình hoặc chạy đo trên dự án (T3).
 
-- **unknown:** batch size huấn luyện của từng run. Truy vấn tìm nguồn: ``args.yaml`` hoặc ``config.yaml`` trong ``ai/automation/runs/<run_id>/``.
+- **unknown:** batch size huấn luyện của từng run. Truy vấn tìm nguồn: ``args.yaml`` hoặc ``config.yaml`` trong ``experiments/runs/<run_id>/``.
 - **unknown:** kiểu dữ liệu huấn luyện (FP32 hay mixed precision). Truy vấn tìm nguồn: trường ``amp`` hoặc ``half`` trong ``config.yaml`` của run.
 - **unknown:** số bước warmup, hệ số giảm và loại scheduler dùng cho YOLO. Truy vấn tìm nguồn: ``args.yaml`` của các run trong ``results/``.
 - **unknown:** tỷ lệ chia train, validation, test của các bộ dữ liệu. Truy vấn tìm nguồn: ``data/*/DATA_CARD.md``.

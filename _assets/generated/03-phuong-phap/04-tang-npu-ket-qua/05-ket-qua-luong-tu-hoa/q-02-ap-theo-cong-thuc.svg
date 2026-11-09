@@ -379,7 +379,7 @@ z
   </g>
   <g id="text_22">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.118367)">INT8 trên board với từng công thức. Công thức không chạy cho một model thì không có điểm. Đường chấm là AP50-95 FP16 của mỗi model.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 284.754445)">File: results/q2c_recipes.json (khóa models)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 284.754445)">File: results/npu/operator_support/q2c_recipes.json (khóa models)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_31">

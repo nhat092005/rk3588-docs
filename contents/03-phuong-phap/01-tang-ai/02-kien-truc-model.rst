@@ -399,9 +399,9 @@ Ba nhận xét rút ra từ số đo:
 8. Đối chiếu với model đã huấn luyện
 ====================================
 
-Chạy ``measure.py`` nạp ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt`` và so ``state_dict`` với model dựng từ ``yolov8n.yaml`` (``nc=5``): cùng 355 tensor, cùng shape từng tensor, cùng 3,011,823 tham số. Tên lớp trong checkpoint là Helmet, NoHelmet, NoVest, Vest, Person. Nghĩa là các hình trong trang vẽ đúng kiến trúc mà các run ``ppe5`` đã huấn luyện, chưa phải một biến thể.
+Chạy ``measure.py`` nạp ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt`` và so ``state_dict`` với model dựng từ ``yolov8n.yaml`` (``nc=5``): cùng 355 tensor, cùng shape từng tensor, cùng 3,011,823 tham số. Tên lớp trong checkpoint là Helmet, NoHelmet, NoVest, Vest, Person. Nghĩa là các hình trong trang vẽ đúng kiến trúc mà các run ``ppe5`` đã huấn luyện, chưa phải một biến thể.
 
-Trọng số khởi tạo là ``yolov8n.pt`` (COCO), không phải kiến trúc khác: log huấn luyện ghi "Transferred 322/355 items from pretrained weights" [T3 ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/logs/train_20261026-004322.log``:38]. Kiểm trên model dựng từ yaml, các tensor không nạp được đều thuộc nhánh cls của head (``cv3``), vì checkpoint COCO có ``c3 = 80`` nên shape khác ``c3 = 64`` ở ``nc=5``. Log chỉ ghi tổng 322/355, nên danh sách chính xác của 33 tensor còn lại chưa đối chiếu từng cái.
+Trọng số khởi tạo là ``yolov8n.pt`` (COCO), không phải kiến trúc khác: log huấn luyện ghi "Transferred 322/355 items from pretrained weights" [T3 ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/logs/train_20261026-004322.log``:38]. Kiểm trên model dựng từ yaml, các tensor không nạp được đều thuộc nhánh cls của head (``cv3``), vì checkpoint COCO có ``c3 = 80`` nên shape khác ``c3 = 64`` ở ``nc=5``. Log chỉ ghi tổng 322/355, nên danh sách chính xác của 33 tensor còn lại chưa đối chiếu từng cái.
 
 Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu.yaml``) thay SiLU bằng ReLU và giữ nguyên mọi shape. Tệp ghi rõ chỉ thêm ``scale`` và ``activation`` so với ``yolov8.yaml`` bản 8.4.154 [T1 ``ai/models/yolov8n_relu.yaml``]. Mọi số tham số và GFLOPs trong trang áp dụng cho cả hai. Kết quả so sánh độ chính xác và độ trễ nằm ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` và :doc:`../04-tang-npu-ket-qua/02-ket-qua-bien-the-activation`.
 

@@ -13,7 +13,7 @@ Hậu xử lý và đầu ra
 .. admonition:: Tóm tắt
 
    1. Hậu xử lý của repo chạy trên CPU bằng numpy: argmax lớp, lọc ``conf > 0.25``, NMS theo lớp IoU 0.7, tối đa 300 hộp [Mã nguồn repo ``ai/board/common.py:24-27, 84-123``].
-   2. Model INT8 mặc định có ``T_post`` 0.662 ms (trung vị, một context, khóa xung). Model tách đầu cần giải mã thêm 8.02 ms bằng numpy [T3 board, ``results/thr_p3.json``, ``results/q2j_split.json``]. Trên khung camera thật không có hộp, ``postprocess`` mất 1.501 ms ở điều kiện không khóa xung. Khóa xung: 0.476 ms với 0 hộp và 2.043 ms với 34 hộp (ảnh test ppe5 phóng lên 1080p) [T3 board, ``board_pipeline_test.py``, ``board_pipeline_test2.py``].
+   2. Model INT8 mặc định có ``T_post`` 0.662 ms (trung vị, một context, khóa xung). Model tách đầu cần giải mã thêm 8.02 ms bằng numpy [T3 board, ``results/npu/throughput/thr_p3.json``, ``results/npu/operator_support/q2j_split.json``]. Trên khung camera thật không có hộp, ``postprocess`` mất 1.501 ms ở điều kiện không khóa xung. Khóa xung: 0.476 ms với 0 hộp và 2.043 ms với 34 hộp (ảnh test ppe5 phóng lên 1080p) [T3 board, ``board_pipeline_test.py``, ``board_pipeline_test2.py``].
    3. Theo dõi dùng ``BYTETracker`` của Ultralytics, hai lần ghép (hộp điểm cao, hộp điểm thấp). Đầu vào của tracker là mọi hộp có conf >= 0.1 (``DET_CONF``). Trong repo chạy offline trên ``detections.npz``, chưa nằm trong luồng thời gian thực [Mã nguồn repo ``scripts/demo/common.py:28``, ``scripts/demo/video/track.py``]. Trên board, với hộp giả và khóa xung, tracker cộng lớp hiển thị mất 5.6 ms cho 34 người trên lõi A76 khi đặt ``OPENBLAS_NUM_THREADS=1``, và 447 ms nếu để số luồng BLAS mặc định (mục 2) [T3 board, ``track_bench.py``].
    4. Ghi video của repo dùng libx264 qua PyAV trên CPU. Mã hóa 300 khung 1080p: libx264 ``crf 20`` mất 8.583 s (41.8 s thời gian CPU), còn ``mpph264enc`` của VPU không chậm hơn nguồn ảnh giả (3.05 s so với 3.00 s) [T3 board, ``gst-launch-1.0``, ``ffmpeg``]. VPU có bộ mã hóa H.264 và H.265, repo chưa dùng [Mã nguồn repo ``scripts/demo/common.py``] [T1 DS V1.7 tr.10].
    5. ``HDMI-A-1`` và ``DP-1`` đều ``disconnected`` lúc đọc [T3 board, ``/sys/class/drm``].
@@ -176,7 +176,7 @@ Nguồn ``videotestsrc`` tự tốn gần 3 s CPU nên che chi phí của VPU: c
 3.1. Mã hóa 4K, H.264 và H.265
 ------------------------------
 
-Đo ngày 2026-11-08. Khung NV12 3840x2160 lấy từ mainpath ``/dev/video11`` (cảnh trong nhà có người, 30 khung lặp 4 lần thành 120 khung), GStreamer ``mpph264enc`` và ``mpph265enc``, CBR, GOP 30, ghim lõi A76, xung khóa. Chất lượng là PSNR và SSIM so với khung gốc, giải mã bằng ffmpeg phần mềm [T3 board, ``tmp/camera-pipeline/enc_rga_2026-11-08/``].
+Đo ngày 2026-11-08. Khung NV12 3840x2160 lấy từ mainpath ``/dev/video11`` (cảnh trong nhà có người, 30 khung lặp 4 lần thành 120 khung), GStreamer ``mpph264enc`` và ``mpph265enc``, CBR, GOP 30, ghim lõi A76, xung khóa. Chất lượng là PSNR và SSIM so với khung gốc, giải mã bằng ffmpeg phần mềm [T3 board, ``experiments/camera/enc_rga_2026-11-08/``].
 
 .. list-table::
    :header-rows: 1

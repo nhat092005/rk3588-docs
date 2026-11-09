@@ -310,7 +310,7 @@ z
   <g id="text_18">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 262.100714)">Board RK3588, YOLOv8n INT8, CORE_0, sáu ô chung của E2e và E2d. Trung vị mỗi ô là trung bình trung vị của hai khối.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.947167)">Thời gian eval_perf và thời gian C API là hai đại lượng khác nhau, ngưỡng 17.0 và 20.0 ms lấy từ đường C API.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2e, comparison)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2e, comparison)</text>
   </g>
  </g>
  <defs>

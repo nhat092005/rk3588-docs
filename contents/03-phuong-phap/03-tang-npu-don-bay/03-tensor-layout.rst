@@ -12,8 +12,8 @@ Tensor layout
 
    1. Đầu vào trên board là tensor ``(1, 640, 640, 3)`` uint8 RGB (NHWC), lời gọi ``rknn.inference`` không đặt ``data_format`` hay ``pass_through``. Trong bảng layer, tensor ``images`` hiện ở dạng NC1HWC2 và đầu ra ``output0`` ở dạng UNDEFINED [T3 board, ``ai/board/common.py:65``, build log h5 dòng 454 và 623].
    2. Đường thường của API: chuẩn hóa, lượng tử hóa, chuyển layout và giải lượng tử hóa chạy trên CPU. Vendor mô tả zero-copy là cách hiệu quả hơn cho luồng đầu vào [T1 UG232 tr.8].
-   3. Op layout duy nhất trên CPU trong bảng layer là một dòng ``Transpose`` (FLOAT16 ở bản ``int8h5``, INT8 ở các bản INT8 khác), 571.5 us (SiLU) và 573.0 us (ReLU) ở ``core0``. Nó có trong 10 trên 12 log build và không có ở cả hai log tách đầu [T3 board, ``results/g4_latency_workload.json``].
-   4. Nguồn gốc của dòng này là nút ONNX ``dfl/Transpose``, đồ thị ONNX chỉ có một nút Transpose và các pass đồ thị chỉ viết lại nó [T3 board, ``results/q2e_pc.json``, build log h5 dòng 73].
+   3. Op layout duy nhất trên CPU trong bảng layer là một dòng ``Transpose`` (FLOAT16 ở bản ``int8h5``, INT8 ở các bản INT8 khác), 571.5 us (SiLU) và 573.0 us (ReLU) ở ``core0``. Nó có trong 10 trên 12 log build và không có ở cả hai log tách đầu [T3 board, ``results/npu/operator_support/g4_latency_workload.json``].
+   4. Nguồn gốc của dòng này là nút ONNX ``dfl/Transpose``, đồ thị ONNX chỉ có một nút Transpose và các pass đồ thị chỉ viết lại nó [T3 board, ``results/npu/operator_support/q2e_pc.json``, build log h5 dòng 73].
    5. Chi phí riêng của Transpose khi chạy thật: chưa tách. Số đo A1 tách đầu đổi nhiều thứ cùng lúc nên không quy cho riêng Transpose.
    6. Ba đòn bẩy: L1 bỏ Transpose qua tách đầu (ĐO gộp), L2 zero-copy (NGUỒN, chưa thử), L3 ``pass_through`` (ĐO một lần ở harness C và bị từ chối).
 
@@ -73,7 +73,7 @@ Về việc ai chuyển layout: vendor viết "Data normalization, quantization,
 3.1. Dòng trong bảng layer
 --------------------------
 
-Bảng layer của model ``int8h5`` có đúng một dòng op layout trên CPU, ``Transpose`` FLOAT16 (ở các bản INT8 khác dòng này là INT8, ví dụ ``build_..._base.log`` dòng 395), vào ``(4,1,1,8400)`` và ra ``(1,4,1,8400)``, FullName ``Transpose:/model/model.22/dfl/Reshape_1_output_0_rs`` [T3 board, build log h5 dòng 426]. Dòng này có trong 10 trên 12 file ``build_ppe5_yolov8n_baseline_100ep_s0_*.log`` và không có ở cả hai log ``*_split_*`` [T3 board, ``bench/onboard_q2c/logs/``].
+Bảng layer của model ``int8h5`` có đúng một dòng op layout trên CPU, ``Transpose`` FLOAT16 (ở các bản INT8 khác dòng này là INT8, ví dụ ``build_..._base.log`` dòng 395), vào ``(4,1,1,8400)`` và ra ``(1,4,1,8400)``, FullName ``Transpose:/model/model.22/dfl/Reshape_1_output_0_rs`` [T3 board, build log h5 dòng 426]. Dòng này có trong 10 trên 12 file ``build_ppe5_yolov8n_baseline_100ep_s0_*.log`` và không có ở cả hai log ``*_split_*`` [T3 board, ``experiments/npu/operator_support/onboard_q2c/logs/``].
 
 Thời gian của dòng này ở ``core0`` theo bảng layer:
 
@@ -94,12 +94,12 @@ Thời gian của dòng này ở ``core0`` theo bảng layer:
      - 573.0
      - 0.0428
 
-Nguồn: [T3 board, ``results/g4_latency_workload.json``, ``by_op.silu.Transpose`` và ``by_op.relu.Transpose``]. Đây là thời gian một dòng trong bảng ``perf_debug``, không phải chi phí đo riêng khi chạy suy luận liên tục.
+Nguồn: [T3 board, ``results/npu/operator_support/g4_latency_workload.json``, ``by_op.silu.Transpose`` và ``by_op.relu.Transpose``]. Đây là thời gian một dòng trong bảng ``perf_debug``, không phải chi phí đo riêng khi chạy suy luận liên tục.
 
 3.2. Nguồn gốc
 --------------
 
-Đồ thị ONNX có đúng một nút Transpose (``/model/model.22/dfl/Transpose``) và bảng RKNN cũng có Transpose 1 [T3 board, ``results/q2e_pc.json``, ``g10.onnx_ops`` và ``g10.rknn_ops``]. Log build ghi các pass viết lại chính nút này, ví dụ dòng 73: ``fuse_reshape_transpose: remove node = ['/model/model.22/dfl/Transpose'], add node = ['/model/model.22/dfl/Transpose']`` [T3 board, build log h5 dòng 73, 79, 82, 83, 103]. Nghĩa là dòng Transpose trên CPU là nút ``dfl/Transpose`` của khối giải mã DFL sau khi qua các pass.
+Đồ thị ONNX có đúng một nút Transpose (``/model/model.22/dfl/Transpose``) và bảng RKNN cũng có Transpose 1 [T3 board, ``results/npu/operator_support/q2e_pc.json``, ``g10.onnx_ops`` và ``g10.rknn_ops``]. Log build ghi các pass viết lại chính nút này, ví dụ dòng 73: ``fuse_reshape_transpose: remove node = ['/model/model.22/dfl/Transpose'], add node = ['/model/model.22/dfl/Transpose']`` [T3 board, build log h5 dòng 73, 79, 82, 83, 103]. Nghĩa là dòng Transpose trên CPU là nút ``dfl/Transpose`` của khối giải mã DFL sau khi qua các pass.
 
 Vì sao compiler đặt nó trên CPU: chưa biết. Log không có trường lý do, ``RKNNToolKit2_OP_Support-2.3.2.md`` dòng 190 ghi ``| Transpose | |`` với ghi chú trống, và TRM chương 36 không nêu. TRM nói khối DPU có chức năng transpose và chuyển định dạng dữ liệu: "It also provides function: softmax, transpose, data format conversion, …etc." [T1 TRM1 tr.1985]. Câu này không cho biết điều kiện nào buộc Transpose này rơi xuống CPU.
 
@@ -136,7 +136,7 @@ Nhãn trạng thái: ĐO (có số đo T3), NGUỒN (chỉ có tài liệu hoặ
 
 Về L3, vendor mô tả hai chế độ: "When pass_through is 0, the input data layout need to be arranged as NHWC. When pass_through is 1, the input data layout need to reshaped as RKNN_TENSOR_NC1HWC2." [T1 UG152 tr.53]. Với ``pass_through`` bằng 1 buffer được đưa thẳng vào nút đầu vào của model và không qua tiền xử lý [T1 RKNNRT tr.15]. Ghi chú của harness cho thấy khi phép chuyển nằm trong ``rknn_inputs_set`` thì nó nằm ngoài đoạn ``rknn_run`` được tính giờ. Nghĩa là số của harness C không gồm bước chuyển layout đầu vào. Với ``rknn.inference`` của harness Python, vendor xếp phép chuyển layout vào phần CPU của đường thường [T1 UG232 tr.8], dự án không tách riêng phần này (xem :doc:`06-memory-copy`).
 
-Probe micro-op ``ai/automation/micro_ops.py:64`` là nơi duy nhất trong mã Python của ``ai/`` truyền ``data_format="nchw"``. Nó không nằm trên đường suy luận của pipeline.
+Probe micro-op ``ai/npu/operator_support/micro_ops.py:64`` là nơi duy nhất trong mã Python của ``ai/`` truyền ``data_format="nchw"``. Nó không nằm trên đường suy luận của pipeline.
 
 5. Điều chưa biết
 =================
@@ -174,5 +174,5 @@ Probe micro-op ``ai/automation/micro_ops.py:64`` là nơi duy nhất trong mã P
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, tr.8, 11, 39, 61, 65), User Guide RKNN API V1.5.2 (tr.19, 53), API Reference RKNNRT V2.3.2 (tr.12, 15, 27), API Reference Toolkit2 V2.3.2 (tr.17, 18), ``rk3588_part1.pdf`` (TRM1 tr.1985).
-- T3: ``ai/board/common.py:65``, ``ai/board/infer_dump.py:41``, ``ai/board/rknn_perf_bench.c:77-98``, ``ai/automation/micro_ops.py:64``, ``results/g4_latency_workload.json``, ``results/q2e_pc.json``, build log ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log``.
+- T3: ``ai/board/common.py:65``, ``ai/board/infer_dump.py:41``, ``ai/board/rknn_perf_bench.c:77-98``, ``ai/npu/operator_support/micro_ops.py:64``, ``results/npu/operator_support/g4_latency_workload.json``, ``results/npu/operator_support/q2e_pc.json``, build log ``experiments/npu/operator_support/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log``.
 - Trang liên quan: :doc:`04-datatype`, :doc:`06-memory-copy`, :doc:`07-compiler-optimization`, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

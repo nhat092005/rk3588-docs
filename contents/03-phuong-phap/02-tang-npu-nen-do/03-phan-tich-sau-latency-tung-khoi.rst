@@ -49,7 +49,7 @@ Phân tích trên ba phiên B3 ở chế độ debug (tổng 23.11 ms), kết qu
      - 548
      - 62
 
-Dải 1.5 đến 3 lần ước tính chứa 32 trên 64 dòng Conv và 55% thời gian Conv. Sáu dòng ở dải trên 6 lần rất nhỏ (tổng 548 µs) và đều là Conv 1x1: bốn dòng là Conv 1x1 cuối của nhánh box và cls ở L22 (``cv2.1.2``, ``cv3.1.2``, ``cv2.2.2``, ``cv3.2.2``), hai dòng là ``cv1`` của L6 và L9. Số liệu từng dòng nằm ở ``results/layer_analysis_*.md``. Vì sao Conv lớn đạt gần ước tính nhất còn Conv nhỏ lệch xa là điều chưa có nguồn T1 hoặc T2 trong repo, nên không giải thích ở đây.
+Dải 1.5 đến 3 lần ước tính chứa 32 trên 64 dòng Conv và 55% thời gian Conv. Sáu dòng ở dải trên 6 lần rất nhỏ (tổng 548 µs) và đều là Conv 1x1: bốn dòng là Conv 1x1 cuối của nhánh box và cls ở L22 (``cv2.1.2``, ``cv3.1.2``, ``cv2.2.2``, ``cv3.2.2``), hai dòng là ``cv1`` của L6 và L9. Số liệu từng dòng nằm ở ``results/npu/latency/layer_analysis_*.md``. Vì sao Conv lớn đạt gần ước tính nhất còn Conv nhỏ lệch xa là điều chưa có nguồn T1 hoặc T2 trong repo, nên không giải thích ở đây.
 
 2. Các dòng không phải Conv
 ===========================
@@ -257,11 +257,11 @@ Chênh lệch giữa các phiên là một hằng số khoảng 35 đến 42 µs
 =================
 
 - Nguyên nhân của hằng số mỗi dòng ở chế độ debug và vì sao nó khác nhau giữa các phiên (mục 5). X4 đo được liên hệ với việc ghim lõi: dưới P2 hằng số khoảng 5 µs và chênh 0.3 µs giữa 10 phiên, không ghim thì 8 đến 52 µs (:doc:`08-ket-qua-p2-va-do-mo-rong`, mục 3). Nguyên nhân vẫn chưa biết.
-- Vì sao Conv lớn gần ước tính cycles còn Conv nhỏ lệch xa (mục 1). Nguồn hãng chỉ nói hiệu suất MAC phụ thuộc kích thước: "The utilization rate decreases when the Height * Width of the output Tensor < 16." [T1 UG232 tr.147], không nói chi phí cố định mỗi lớp. Phân tích lại dữ liệu B3 (X10, quy tắc ``bench/analysis_x10/rule.txt`` viết trước khi tính, ngưỡng 20% là số mới, chưa qua người dùng duyệt): 5 trên 6 dòng Conv nhỏ khớp mô hình thời gian = a × ước tính + b trong 20%, riêng dòng ``model.6/cv1`` đo 174 µs so với dự đoán 102 µs, nên "chưa kết luận". Vẫn chưa biết. Từ khóa đề xuất: "NPU per-layer launch overhead small convolution", "RKNN layer scheduling overhead".
+- Vì sao Conv lớn gần ước tính cycles còn Conv nhỏ lệch xa (mục 1). Nguồn hãng chỉ nói hiệu suất MAC phụ thuộc kích thước: "The utilization rate decreases when the Height * Width of the output Tensor < 16." [T1 UG232 tr.147], không nói chi phí cố định mỗi lớp. Phân tích lại dữ liệu B3 (X10, quy tắc ``experiments/npu/latency/analysis_x10/rule.txt`` viết trước khi tính, ngưỡng 20% là số mới, chưa qua người dùng duyệt): 5 trên 6 dòng Conv nhỏ khớp mô hình thời gian = a × ước tính + b trong 20%, riêng dòng ``model.6/cv1`` đo 174 µs so với dự đoán 102 µs, nên "chưa kết luận". Vẫn chưa biết. Từ khóa đề xuất: "NPU per-layer launch overhead small convolution", "RKNN layer scheduling overhead".
 - Vì sao tỉ lệ thời gian của backbone cao hơn tỉ lệ GFLOPs còn neck và head thấp hơn (mục 4). X10 bỏ hằng số mỗi dòng ra khỏi tỉ lệ thời gian: khoảng cách của backbone đổi từ 0.054 thành 0.071, neck từ -0.039 thành -0.066, head từ -0.034 thành -0.022, nên "chưa kết luận". Trong các nguồn đã tìm (UG232, API232, RKNNRT, tài liệu operator, bài báo ``edgesoc_benchmark_2026kong.pdf``, xem ``tmp/2026-10-31_latency-sources-facts.md``, câu hỏi Q8), không có câu nào nói thời gian NPU của Concat, Split, Add không theo FLOPs. Vẫn chưa biết.
 
 7. Nguồn
 =========
 
-T3 board và PC: ``results/layer_analysis_*``, ``results/latency_per_block_*``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/tier1_int8_CORE_0*``. Mã: ``ai/automation/analyze_layers.py``, ``ai/core/rknn/blocks.py``, ``ai/automation/analyze_x10.py`` (X10, ``results/analysis_x10_*``). T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.147).
+T3 board và PC: ``results/npu/latency/layer_analysis_*``, ``results/npu/latency/latency_per_block_*``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/tier1_int8_CORE_0*``. Mã: ``ai/npu/latency/analyze_layers.py``, ``ai/core/rknn/blocks.py``, ``ai/npu/latency/analyze_x10.py`` (X10, ``results/npu/latency/analysis_x10_*``). T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.147).
 

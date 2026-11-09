@@ -404,7 +404,7 @@ z
   </g>
   <g id="text_15">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 291.460767)">Điều kiện C: ReLU trừ SiLU, seed 0, 100 epoch. Đường đứt -1.0 điểm là ngưỡng của cổng C.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 299.096845)">File: results/eval_g4.json (khóa gate_c)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 299.096845)">File: results/npu/operator_support/eval_g4.json (khóa gate_c)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_23">

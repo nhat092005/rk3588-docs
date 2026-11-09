@@ -483,7 +483,7 @@ L 495.504 230.4
   </g>
   <g id="text_16">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 276.903492)">css_test, INT8 trên board. Trái: ReLU trừ SiLU dưới công thức base và h5. Phải: ứng viên trừ SiLU 100 epoch dưới h5.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 284.754445)">Đường đứt -1.0 điểm là ngưỡng cổng C. File: results/q2c_recipes.json (khóa r_c, variants_h5)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 284.754445)">Đường đứt -1.0 điểm là ngưỡng cổng C. File: results/npu/operator_support/q2c_recipes.json (khóa r_c, variants_h5)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_37">

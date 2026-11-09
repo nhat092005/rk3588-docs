@@ -463,7 +463,7 @@ z
   </g>
   <g id="text_18">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.947167)">YOLOv8n, INT8 của file đo latency và FP32 chấm trên cùng tập ảnh. Điểm xanh là INT8, ô vuông rỗng là FP32.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/eval_x7_ppe5_yolov8n_baseline_100ep_s0_int8.json (khóa sets)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/npu/operator_support/eval_x7_ppe5_yolov8n_baseline_100ep_s0_int8.json (khóa sets)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_33">

@@ -529,7 +529,7 @@ z
   <g id="text_19">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 405.524714)">Board RK3588, YOLOv8n INT8, CORE_0, 8 khối x 1000 lần chạy, thứ tự ABCD (nửa 1) rồi DCBA (nửa 2), irqbalance đang chạy.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 413.371167)">Nhãn của E2 tính theo độ dịch tỉ lệ mức chậm so với khối A cùng nửa, không theo ngưỡng cố định.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 421.007245)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 421.007245)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_33">

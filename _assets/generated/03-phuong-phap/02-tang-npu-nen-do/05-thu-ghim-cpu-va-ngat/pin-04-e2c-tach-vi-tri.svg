@@ -639,7 +639,7 @@ z
   <g id="text_23">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 368.701214)">Board RK3588, YOLOv8n INT8, CORE_0, irqbalance dừng, 12 khối x 1000 lần chạy, thứ tự A B C E F G rồi G F E C B A.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 377.515167)">Ô viết (CPU ứng dụng, CPU nhận ngắt). Ngưỡng 20% theo E2, ngưỡng 1% của 'mất mức chậm' là số mới chọn cho quy tắc E2c.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 385.151245)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2c)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 385.151245)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2c)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_39">

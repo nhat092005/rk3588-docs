@@ -31,12 +31,12 @@ Hai nguồn T1 xác định cách model INT8 hiện được dựng. Mã xuất 
 
 Mốc từ T2, chỉ để định vị, không so trực tiếp vì khác bộ dữ liệu và bộ lượng tử hóa: bài Q-YOLO báo YOLOv5s, YOLOv5m, YOLOv7 và YOLOv7x ở W8A8 trên COCO val2017 giảm AP từ 0.0 đến 0.5 điểm so với bản FP32 (MinMax 37.2, Percentile 36.9, Q-YOLO 37.4 so với 37.4 của YOLOv5s) [T2 Q-YOLO tr.8 Table 1]. Ngược chiều, với YOLOv6s mang RepVGG: "YOLOv6s-RepVGG suffers a huge quantization degradation for about 7.4% mAP via PTQ" [T2 QARepVGG tr.7] (COCO). Hai bài báo nêu rằng Swish dễ gặp vấn đề hoặc lợi ích của nó có thể mất khi lượng tử hóa: "Swish-like activations are known to have quantization collapse ..." [T2 QARepVGG tr.10] và "Although newer activations like Swish functions provide accuracy improvement in floating-point, these may vanish after quantization ..." [T2 Nagel 2021 tr.7]. Trong các bài đã đọc (Q-YOLO, QARepVGG, Nagel 2021, YOLOv6, ActNAS) không bài nào đo SiLU, ReLU6 hay hard-swish lên mAP YOLO sau PTQ INT8 bằng số. Số liệu của dự án (``css_test``, AP50-95, điểm): mức rơi từ FP32 xuống INT8 của SiLU seed 0, 1, 2 là 13.24, 13.01, 13.08 và của ReLU seed 0, 1, 2 là 13.09, 12.43, 11.83, từ FP16 xuống INT8 là 13.01, 12.91, 13.26 (SiLU) và 13.25, 12.33, 11.72 (ReLU). Chênh giữa hai activation nằm trong nhiễu seed, không có xu hướng rõ.
 
-Danh sách nguồn đầy đủ: ``results/phase2c_source_facts.md``. Quy tắc viết trước dữ liệu: ``bench/onboard_q2c/rule_diag.txt``, ``rule_recipes.txt`` (có phần thí nghiệm 2), ``bench/onboard_q2h/rule.txt``.
+Danh sách nguồn đầy đủ: ``results/notes/phase2c_source_facts.md``. Quy tắc viết trước dữ liệu: ``experiments/npu/operator_support/onboard_q2c/rule_diag.txt``, ``rule_recipes.txt`` (có phần thí nghiệm 2), ``experiments/npu/operator_support/onboard_q2h/ppe5_yolov8n_baseline_100ep_s0/rule.txt``.
 
 2. Dựng lại và đối chứng
 ========================
 
-``ai/automation/diagnose_quant.py`` dựng INT8 đúng như đường xuất của Ultralytics (ONNX có chia tọa độ, cấu hình mặc định, danh sách hiệu chuẩn của seed 0) và giữ ONNX đó, ``build_recipe.py`` dựng lại từ ONNX này với từng công thức. Công thức ``base`` (mặc định) cho AP50-95 trên ``css_test`` chênh 0.00 điểm (SiLU) và 0.00 điểm (ReLU) so với file đã triển khai. File dựng lại có cùng kích thước nhưng sha256 khác file gốc, nên mọi công thức được đọc so với ``base`` dựng lại.
+``ai/npu/operator_support/diagnose_quant.py`` dựng INT8 đúng như đường xuất của Ultralytics (ONNX có chia tọa độ, cấu hình mặc định, danh sách hiệu chuẩn của seed 0) và giữ ONNX đó, ``build_recipe.py`` dựng lại từ ONNX này với từng công thức. Công thức ``base`` (mặc định) cho AP50-95 trên ``css_test`` chênh 0.00 điểm (SiLU) và 0.00 điểm (ReLU) so với file đã triển khai. File dựng lại có cùng kích thước nhưng sha256 khác file gốc, nên mọi công thức được đọc so với ``base`` dựng lại.
 
 3. Chẩn đoán từng lớp (mô phỏng, 10 ảnh)
 ========================================
@@ -409,7 +409,7 @@ ReLU 200 epoch đạt cổng C dưới ``h5`` so với SiLU 100 epoch (-0.28 đi
 6. Chi phí latency và đa nhân của h5
 ====================================
 
-Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2h``): SiLU và ReLU, INT8 đã triển khai và ``h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước. Chi phí là trung vị của hai trung vị phiên của ``h5`` trừ giá trị tương ứng của INT8 đã triển khai. Ở cả bốn điều kiện chênh lệch lớn hơn chênh hai phiên lớn nhất nhưng dưới 5%.
+Một lần chạy xen kẽ 16 phiên dưới P2 (``experiments/npu/operator_support/onboard_q2h/ppe5_yolov8n_baseline_100ep_s0``): SiLU và ReLU, INT8 đã triển khai và ``h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước. Chi phí là trung vị của hai trung vị phiên của ``h5`` trừ giá trị tương ứng của INT8 đã triển khai. Ở cả bốn điều kiện chênh lệch lớn hơn chênh hai phiên lớn nhất nhưng dưới 5%.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa/q-04-chi-phi-latency-h5.svg
@@ -506,6 +506,6 @@ Thay đổi bộ chấm: ``ai/core/evaluator.py`` truyền ``max_time_img=60`` c
 
 - T1: API Reference Toolkit2 V2.3.2 (``3rdparty/rknn-toolkit2/doc/03_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf``, tr.6 đến 10, 14, 20 đến 22), SDK User Guide V2.3.2 (tr.8, 120, 124), mã Ultralytics 8.4.154 (``utils/export/rknn.py``, ``engine/exporter.py:1101``).
 - T2: ``docs/_assets/pdf/papers/02_quantization/qyolo_ptq_2023wang.pdf`` (tr.8 Table 1), ``docs/_assets/pdf/papers/08_npu_friendly_arch/qarepvgg_quant_2024chu.pdf`` (tr.10), ``docs/_assets/pdf/papers/02_quantization/quant_whitepaper_2021nagel.pdf`` (tr.7).
-- T3: ``results/q2c_diag.*``, ``results/q2c_recipes.*``, ``results/q2h_latency.*``, ``bench/onboard_q2c/`` (gồm ``step1_silu.quantization.cfg``, cấu hình lượng tử hóa bước 1 của SiLU nơi đọc các bước 0.0041 và 0.31 đến 0.63), ``bench/onboard_q2h/``, ``ai/automation/diagnose_quant.py``, ``build_recipe.py``, ``analyze_q2c_diag.py``, ``analyze_q2c_recipes.py``, ``analyze_q2h.py``.
-- Tìm nguồn: ``results/phase2c_source_facts.md``.
+- T3: ``results/npu/operator_support/q2c_diag.*``, ``results/npu/operator_support/q2c_recipes.*``, ``results/npu/operator_support/q2h_latency.*``, ``experiments/npu/operator_support/onboard_q2c/`` (gồm ``step1_silu.quantization.cfg``, cấu hình lượng tử hóa bước 1 của SiLU nơi đọc các bước 0.0041 và 0.31 đến 0.63), ``experiments/npu/operator_support/onboard_q2h/ppe5_yolov8n_baseline_100ep_s0/``, ``ai/npu/operator_support/diagnose_quant.py``, ``build_recipe.py``, ``analyze_q2c_diag.py``, ``analyze_q2c_recipes.py``, ``analyze_q2h.py``.
+- Tìm nguồn: ``results/notes/phase2c_source_facts.md``.
 

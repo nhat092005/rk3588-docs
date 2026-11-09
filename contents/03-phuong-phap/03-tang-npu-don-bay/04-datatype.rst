@@ -48,11 +48,11 @@ Bảng dưới ghi mỗi số kèm trang nguồn. Mọi số là SiLU, seed 0, m
    * - FP16
      - 49.76
      - 27.267 đến 27.284 (ba phiên)
-     - AP: :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` tóm tắt. Latency: [T3 board, ``bench/onboard_x8/fp16/tier1_fp16_CORE_0_sess{1,2,3}.json``]
+     - AP: :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` tóm tắt. Latency: [T3 board, ``experiments/npu/latency/onboard_x8/fp16/tier1_fp16_CORE_0_sess{1,2,3}.json``]
    * - INT8 mặc định
      - 36.75
      - 16.507 và 16.516 (hai phiên, ``onboard_g4b``). Trong lần chạy xen kẽ của :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`: 16.520
-     - AP: :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` tóm tắt. Latency: [T3 board, ``bench/onboard_g4b/tier1_int8_CORE_0_sess{1,2}.json``]
+     - AP: :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` tóm tắt. Latency: [T3 board, ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/tier1_int8_CORE_0_sess{1,2}.json``]
    * - ``int8h5`` (chuẩn)
      - 49.66
      - 16.442
@@ -68,12 +68,12 @@ Ba nhận xét, đều chỉ là mô tả số đo.
 - ``int8h5`` lấy lại gần hết điểm mà latency NPU đổi dưới 5%: SiLU ``CORE_0`` từ 16.530 xuống 16.410 ms (-0.121 ms), ``CORE_0_1_2`` từ 16.017 xuống 15.937 ms (-0.081 ms) [T3 board, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` mục 6].
 - A1 nhanh hơn ở phần NPU nhưng cộng giải mã CPU thì tổng chậm hơn khoảng 4.65 ms nếu không chồng lấp. Mọi so sánh thời gian của A1 mang nhãn "chưa kết luận" vì hai phiên tham chiếu INT8 không thực hiện đúng dưới P2 (:doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` tóm tắt).
 
-Ở lớp cuối, chẩn đoán 10 ảnh cho thấy ``h5`` giữ tensor ``output0`` gần đồ thị float: ``mean_entire_cos`` 0.99947900, ``mean_class_cos`` 0.99087 và ``mean_box_cos`` 0.99953 ở SiLU, ``mean_class_cos`` 0.97819 ở ReLU [T3 board, ``results/q2c_diag.json``]. Đây là sai số so với đồ thị float, không phải mAP.
+Ở lớp cuối, chẩn đoán 10 ảnh cho thấy ``h5`` giữ tensor ``output0`` gần đồ thị float: ``mean_entire_cos`` 0.99947900, ``mean_class_cos`` 0.99087 và ``mean_box_cos`` 0.99953 ở SiLU, ``mean_class_cos`` 0.97819 ở ReLU [T3 board, ``results/npu/operator_support/q2c_diag.json``]. Đây là sai số so với đồ thị float, không phải mAP.
 
 3. Cấu hình dtype của build
 ===========================
 
-Cấu hình build trong repo chỉ đặt chuẩn hóa và nền tảng: ``cfg = dict(mean_values=[[0, 0, 0]], std_values=[[255, 255, 255]], target_platform="rk3588")`` [Mã nguồn repo ``ai/automation/build_recipe.py:64``, ``ai/core/rknn/hybrid.py:64``]. Đã tìm ``quantized_dtype``, ``quantized_method`` và ``pass_through`` trong mã của ``ai/``, không có kết quả. Build lai chỉ thêm ``custom_quantize_layers`` với giá trị ``float16`` cho các tensor được chọn: ``q["custom_quantize_layers"] = {k: "float16" for k in layers}`` [Mã nguồn repo ``ai/core/rknn/hybrid.py:71``].
+Cấu hình build trong repo chỉ đặt chuẩn hóa và nền tảng: ``cfg = dict(mean_values=[[0, 0, 0]], std_values=[[255, 255, 255]], target_platform="rk3588")`` [Mã nguồn repo ``ai/npu/operator_support/build_recipe.py:64``, ``ai/core/rknn/hybrid.py:64``]. Đã tìm ``quantized_dtype``, ``quantized_method`` và ``pass_through`` trong mã của ``ai/``, không có kết quả. Build lai chỉ thêm ``custom_quantize_layers`` với giá trị ``float16`` cho các tensor được chọn: ``q["custom_quantize_layers"] = {k: "float16" for k in layers}`` [Mã nguồn repo ``ai/core/rknn/hybrid.py:71``].
 
 Giá trị mặc định mà toolkit áp dụng khi repo không đặt:
 
@@ -115,11 +115,11 @@ Số đo của dự án:
    * - Quan sát
      - Nguồn
    * - Log build ``h5`` có 4 dòng chứa chữ ``exDataConvert``, tên layer có hậu tố ``__cvt_int8_float16``. Log baseline có 0 dòng
-     - [T3 board, ``bench/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log:422, :439``]
+     - [T3 board, ``experiments/npu/operator_support/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log:422, :439``]
    * - Số dòng theo công thức: ``auto`` 20, ``h1`` 12, ``h2`` 12, ``h3`` 8, ``h4`` 16, ``h5`` 4, ``h6`` 16. ``base``, ``c_all``, ``kl``, ``split_int8``, ``split_fp16`` đều 0
      - [T3 board, đếm dòng bằng ``grep -c`` trong cùng thư mục logs]
    * - ReLU ``h5`` ``CORE_0_1_2`` phiên 1: hàng ``exDataConvert`` có 2 lần gọi, 332 us, 3.69% thời gian một khung
-     - [T3 board, ``runs/ppe5_yolov8n_relu_100ep_s0/bench/onboard_q2i/tier1_int8h5_CORE_0_1_2_sess1_layers.txt:146``]
+     - [T3 board, ``experiments/npu/operator_support/onboard_q2i/ppe5_yolov8n_relu_100ep_s0/tier1_int8h5_CORE_0_1_2_sess1_layers.txt:146``]
    * - Đồ thị QAT có 8 hàng FLOAT16 trên NPU, A1 tách đầu có 0 (106 hàng INT8)
      - :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc` mục 2 và 3
 
@@ -141,8 +141,8 @@ Có ba nhóm quan sát về kiểu số ở biên của model, và chúng không
      - ``InputOperator`` UINT8, đích CPU, ``(1,3,640,640)`` [T3 board, ``bench/tier1_int8_CORE_0_layers.txt:15``]
      - ``OutputOperator`` INT8, đích CPU [T3 board, ``bench/tier1_int8_CORE_0_layers.txt:133``]
    * - Thuộc tính tensor của runtime (``driver_stdout``)
-     - INT8, AFFINE, zp -128, scale 0.003922, dims ``[1, 640, 640, 3]`` [T3 board, ``bench/onboard_x4/driver_stdout.txt:20``]
-     - INT8, AFFINE, zp -128, scale 0.004099, dims ``[1, 9, 8400]`` [T3 board, ``bench/onboard_x4/driver_stdout.txt:22``]
+     - INT8, AFFINE, zp -128, scale 0.003922, dims ``[1, 640, 640, 3]`` [T3 board, ``experiments/npu/latency/onboard_x4/driver_stdout.txt:20``]
+     - INT8, AFFINE, zp -128, scale 0.004099, dims ``[1, 9, 8400]`` [T3 board, ``experiments/npu/latency/onboard_x4/driver_stdout.txt:22``]
    * - Bảng layer lúc build
      - INT8 (``build_..._base.log:292``, ``build_..._h5.log:322``)
      - FLOAT16 ở log ``h5`` (:doc:`03-tensor-layout` mục 2)
@@ -151,7 +151,7 @@ Ghi chú về cách đọc.
 
 - Mâu thuẫn UINT8 (bảng layer ``eval_perf``) và INT8 (runtime và bảng layer build) là có thật. UINT8 chỉ xuất hiện ở bảng layer của ``eval_perf`` trên board, có thể do ``eval_perf`` cấp đầu vào uint8, nhưng đó là phỏng đoán chưa kiểm. Lý do: chưa biết.
 - Wheel RKNNLite 2.3.2 có tham số ``data_type`` của ``inference`` với chữ ký mặc định ``None`` và docstring ghi mặc định ``uint8`` [T3 board, ``rknn_lite.py:193`` và ``:197`` trong wheel ``rknn_toolkit_lite2-2.3.2``]. Harness Python của repo gọi ``inference(inputs=[inp])`` không đặt ``data_type`` (:doc:`03-tensor-layout` mục 2).
-- Trong toàn bộ ``ai/automation/runs/*/bench/**/driver_stdout.txt`` có 0 file ghi ``type=FLOAT16``. Repo chưa có log nào cho thấy đầu vào hoặc đầu ra FP16 lúc chạy [T3 board, grep].
+- Trong toàn bộ ``experiments/runs/*/bench/**/driver_stdout.txt`` có 0 file ghi ``type=FLOAT16``. Repo chưa có log nào cho thấy đầu vào hoặc đầu ra FP16 lúc chạy [T3 board, grep].
 - Kiểu tensor của runtime gồm cả lượng tử bất đối xứng với scale và zp (``RKNN_TENSOR_QNT_AFFINE_ASYMMETRIC``) [T1 RKNNRT tr.12]. Điều này khớp với ``qnt_type=AFFINE`` của log.
 
 Hệ quả cho quyết định: đường FP16 vào và ra chưa từng được chạy trong repo, nên không có số FPS nào cho nó (mục 7).
@@ -172,7 +172,7 @@ Nhãn trạng thái: ĐO (có số đo T3), NGUỒN (chỉ có tài liệu hoặ
    * - D1
      - Dùng FP16 cho toàn model
      - ĐO
-     - Latency NPU ``CORE_0`` khoảng 27.3 ms, ``fps_latency`` 36.65, 36.65, 36.67 [T3 board, ``bench/onboard_x8/fp16/``]. Con số này đã thấp hơn 60 trước khi cộng tiền và hậu xử lý. Chỉ đo một context. FP16 nhiều context chưa đo. Độ chính xác 49.76 so với 49.66 của ``int8h5``
+     - Latency NPU ``CORE_0`` khoảng 27.3 ms, ``fps_latency`` 36.65, 36.65, 36.67 [T3 board, ``experiments/npu/latency/onboard_x8/fp16/``]. Con số này đã thấp hơn 60 trước khi cộng tiền và hậu xử lý. Chỉ đo một context. FP16 nhiều context chưa đo. Độ chính xác 49.76 so với 49.66 của ``int8h5``
    * - D2
      - INT8 mặc định, không lai
      - ĐO
@@ -190,7 +190,7 @@ Nhãn trạng thái: ĐO (có số đo T3), NGUỒN (chỉ có tài liệu hoặ
      - CHƯA BIẾT
      - Chỉ có danh sách và giới hạn nền tảng ở [T1 API232 tr.7], sổ tay SDK chỉ nói INT8 [T1 UG232 tr.121]. Không dựng, không đo
 
-E1, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`. Thí nghiệm E1 đo thông lượng của ``int8h5`` so với INT8 mặc định dưới P3 (giao thức đã duyệt, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), cùng harness ``bench_throughput_rep.py``, 1238 frame, trung vị ba lần chạy. Tần số khóa trong lúc đo: ``npu: userspace 1000000000 Hz`` và ``ddr: userspace 2112000000 Hz`` [T3 board, ``results/q2f_fps.json`` trường ``hold_progress`` của E1]. Kết quả (FPS):
+E1, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`. Thí nghiệm E1 đo thông lượng của ``int8h5`` so với INT8 mặc định dưới P3 (giao thức đã duyệt, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), cùng harness ``bench_throughput_rep.py``, 1238 frame, trung vị ba lần chạy. Tần số khóa trong lúc đo: ``npu: userspace 1000000000 Hz`` và ``ddr: userspace 2112000000 Hz`` [T3 board, ``results/npu/throughput/q2f_fps.json`` trường ``hold_progress`` của E1]. Kết quả (FPS):
 
 .. list-table::
    :header-rows: 1
@@ -217,7 +217,7 @@ E1, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`. Thí nghiệm E1 đo t
      - 142.09
      - không phân biệt được
 
-Nguồn: [T3 board, ``results/q2f_fps.json`` khóa ``e1``]. Quy tắc của thí nghiệm: "khác" khi chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn của hai model, ngược lại "không phân biệt được". Chênh thực tế từ -0.01% đến 0.68%. Quy tắc này là quy tắc của một thí nghiệm, chưa duyệt như ngưỡng chung. Hạn chế: một board, một seed, SiLU, ảnh đã cache, không kiểm thứ tự đầu ra. Diễn giải đầy đủ ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
+Nguồn: [T3 board, ``results/npu/throughput/q2f_fps.json`` khóa ``e1``]. Quy tắc của thí nghiệm: "khác" khi chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn của hai model, ngược lại "không phân biệt được". Chênh thực tế từ -0.01% đến 0.68%. Quy tắc này là quy tắc của một thí nghiệm, chưa duyệt như ngưỡng chung. Hạn chế: một board, một seed, SiLU, ảnh đã cache, không kiểm thứ tự đầu ra. Diễn giải đầy đủ ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
 Điều rút ra cho quyết định kiểu số: trong các lựa chọn đã đo, chuyển từ INT8 mặc định sang ``int8h5`` không đổi thông lượng ở mức đo được, nên chênh FPS không phải lý do để chọn giữa hai model đó. FPS vẫn dưới 60 ở một context bất kể kiểu số.
 
@@ -257,5 +257,5 @@ Nguồn: [T3 board, ``results/q2f_fps.json`` khóa ``e1``]. Quy tắc của thí
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.22, 120, 121, 130), API Reference Toolkit2 V2.3.2 (API232 tr.7, 8), Compiler Support Operator List V2.3.2 (OPL tr.330), API Reference RKNNRT V2.3.2 (tr.12).
-- T3: ``ai/automation/build_recipe.py:64``, ``ai/core/rknn/hybrid.py:64, 71``, ``bench/tier1_int8_CORE_0_layers.txt``, ``bench/onboard_x4/driver_stdout.txt``, ``bench/onboard_x8/fp16/``, ``bench/onboard_g4b/``, ``bench/onboard_q2c/logs/``, ``results/q2c_diag.json``, ``results/q2f_fps.json``, ``results/q2j_split.json`` (thư mục ``bench`` là ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``).
+- T3: ``ai/npu/operator_support/build_recipe.py:64``, ``ai/core/rknn/hybrid.py:64, 71``, ``bench/tier1_int8_CORE_0_layers.txt``, ``experiments/npu/latency/onboard_x4/driver_stdout.txt``, ``experiments/npu/latency/onboard_x8/fp16/``, ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/``, ``experiments/npu/operator_support/onboard_q2c/logs/``, ``results/npu/operator_support/q2c_diag.json``, ``results/npu/throughput/q2f_fps.json``, ``results/npu/operator_support/q2j_split.json`` (thư mục ``bench`` là ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``).
 - Trang liên quan: :doc:`03-tensor-layout`, :doc:`05-memory-access`, :doc:`06-memory-copy`, :doc:`07-compiler-optimization`, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa`, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

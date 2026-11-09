@@ -12,7 +12,7 @@ NPU architecture
 
    1. Phần cứng theo T1: ba lõi, 1024x3 MAC int8 và 512x3 MAC float16 mỗi chu kỳ, bộ đệm trong 384 KB mỗi lõi, bảng OPP của driver từ 300 đến 1000 MHz [T1 TRM1 tr.1984, T1 DRV ``dts/rk3588s.dtsi:3482-3640``].
    2. Hãng chỉ ghi tổng tới 6 TOPS, không ghi số mỗi lõi. Chia đều cho ba lõi là 2 TOPS (phép chia, không phải số của hãng). Hai bài báo viết khác nhau về 2 TOPS (bài EDGE một lõi, bài DAHD mỗi lõi). Trang này không suy TOPS từ số MAC.
-   3. Vendor nói đa lõi hợp mạng lớn và ít lợi cho mạng nhỏ [T1 UG232 tr.72], bài EDGE đo lợi ích đa lõi nhỏ dưới 10% [T2 EDGE tr.2]. Số đo của dự án cùng chiều: một context ba lõi chỉ hơn một lõi 2.6% về FPS (56.1 so với 54.66) [T3 board, ``results/thr_p3.json``].
+   3. Vendor nói đa lõi hợp mạng lớn và ít lợi cho mạng nhỏ [T1 UG232 tr.72], bài EDGE đo lợi ích đa lõi nhỏ dưới 10% [T2 EDGE tr.2]. Số đo của dự án cùng chiều: một context ba lõi chỉ hơn một lõi 2.6% về FPS (56.1 so với 54.66) [T3 board, ``results/npu/throughput/thr_p3.json``].
    4. Danh sách op chia đa lõi của vendor và số đo của dự án lệch nhau ở ``ConvExSwish`` (0 trên 57 dòng chia). ``ConvRelu`` chia 51 trên 51 [T3 board, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 5].
    5. Nhiều context độc lập nâng thông lượng lên 102.0 FPS (hai context) và 141.18 FPS (ba context). Đây là đòn bẩy kiến trúc đã đo. Với mục tiêu 30 FPS (một camera) thì một context đã đạt (54.66 FPS), nên đòn bẩy này chỉ có giá trị khi có nhiều camera hoặc việc nặng khác dùng chung NPU (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 8).
    6. Chưa biết: TOPS mỗi lõi theo số của hãng, xung NPU trong TRM (tần số đang khóa là 1000 MHz theo nhật ký đo), quy tắc chia một lớp qua các lõi, SRAM mỗi lõi ngoài 384 KB.
@@ -126,7 +126,7 @@ Bài EDGE cùng chiều với phần "mạng nhỏ": lợi ích lập lịch đa
 4. Số đo của dự án nhìn từ phần cứng
 ====================================
 
-Giao thức P3 (đã duyệt ngày 2026-11-01, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), model INT8 mặc định seed 0 [T3 board, ``results/thr_p3.json``, ``configs.T1`` đến ``T6``]:
+Giao thức P3 (đã duyệt ngày 2026-11-01, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`), model INT8 mặc định seed 0 [T3 board, ``results/npu/throughput/thr_p3.json``, ``configs.T1`` đến ``T6``]:
 
 .. list-table::
    :header-rows: 1
@@ -174,7 +174,7 @@ Nhãn: ĐO (có số T3), NGUỒN (chỉ tài liệu), CHƯA BIẾT.
    * - A1
      - Nhiều context độc lập, mỗi context một lõi hoặc hơn
      - ĐO
-     - 102.0 FPS (hai context), 141.18 FPS (ba context, S2) so với 54.66 FPS một context [T3 board, ``results/thr_p3.json``]. Một seed, ảnh cache, chưa đo camera thật. Dùng chung một context giữa các luồng cho đầu ra sai (:doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 7). Bộ nhớ mỗi context: :doc:`06-memory-copy`
+     - 102.0 FPS (hai context), 141.18 FPS (ba context, S2) so với 54.66 FPS một context [T3 board, ``results/npu/throughput/thr_p3.json``]. Một seed, ảnh cache, chưa đo camera thật. Dùng chung một context giữa các luồng cho đầu ra sai (:doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 7). Bộ nhớ mỗi context: :doc:`06-memory-copy`
    * - A2
      - Đổi activation để chia lõi (ReLU thay SiLU)
      - ĐO, ReLU bị loại
@@ -182,7 +182,7 @@ Nhãn: ĐO (có số T3), NGUỒN (chỉ tài liệu), CHƯA BIẾT.
    * - A3
      - Tần số NPU
      - ĐO (một tần số)
-     - Tần số khóa theo P2 và P3 (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`): ``npu: userspace 1000000000 Hz``, tức 1000 MHz, ghi trong nhật ký helper của các thí nghiệm [T3 board, ``results/q2f_fps.json`` trường ``hold_progress`` của E1 và ``results/q2j_split.json``]. Bảng OPP của driver cho 300 đến 1000 MHz. Vendor khuyên đặt tần số cao nhất [T1 UG232 tr.75]. Chưa có phép đo biến thiên tần số
+     - Tần số khóa theo P2 và P3 (:doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`): ``npu: userspace 1000000000 Hz``, tức 1000 MHz, ghi trong nhật ký helper của các thí nghiệm [T3 board, ``results/npu/throughput/q2f_fps.json`` trường ``hold_progress`` của E1 và ``results/npu/operator_support/q2j_split.json``]. Bảng OPP của driver cho 300 đến 1000 MHz. Vendor khuyên đặt tần số cao nhất [T1 UG232 tr.75]. Chưa có phép đo biến thiên tần số
 
 Kết quả FPS của các đòn bẩy này ở :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.
 
@@ -223,5 +223,5 @@ Kết quả FPS của các đòn bẩy này ở :doc:`../04-tang-npu-ket-qua/09-
 
 - T1: ``rk3588_part1.pdf`` (TRM1 tr.1984, 2001), ``Rockchip_RK3588_Datasheet_V1.3_20220328.pdf`` (DS13 tr.6, 9), SDK User Guide V2.3.2 (UG232 tr.72, 75), driver ``3rdparty/rknpu-driver-0.9.8/`` (``rknpu_drv.c:197, 299``, ``rknpu_job.c:82-86, 143-145``, ``dts/rk3588s.dtsi:3482-3640``).
 - T2: ``docs/_assets/pdf/papers/05_rk3588/edgesoc_benchmark_2026kong.pdf`` (EDGE tr.2, 3, 6, 10), ``dahd_yolo_rk3588_2025.pdf`` (DAHD tr.18).
-- T3: ``results/thr_p3.json``, bảng ``WorkLoad`` ở :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 5 và 6, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` mục 6.
+- T3: ``results/npu/throughput/thr_p3.json``, bảng ``WorkLoad`` ở :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet` mục 5 và 6, :doc:`../04-tang-npu-ket-qua/05-ket-qua-luong-tu-hoa` mục 6.
 - Trang liên quan: :doc:`02-multi-core`, :doc:`06-memory-copy`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

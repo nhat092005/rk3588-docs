@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 from ultralytics.nn.tasks import DetectionModel
 
-RUN = "ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt"
+RUN = "experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/best.pt"
 
 m = DetectionModel("yolov8n.yaml", nc=5, verbose=False).eval()
 macs, cur = {}, [None]

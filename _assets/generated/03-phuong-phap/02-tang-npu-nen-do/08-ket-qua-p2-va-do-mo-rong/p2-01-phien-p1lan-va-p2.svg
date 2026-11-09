@@ -687,7 +687,7 @@ z
   <g id="text_22">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 384.006614)">Board RK3588, YOLOv8n INT8, CORE_0, LAN trực tiếp, mỗi phiên 5 lần eval_perf (perf_debug=False) và 5 lần từng lớp (perf_debug=True).</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 391.857567)">Đường đứt 17.0 và 20.0 ms là ranh giới mức nhanh và chậm. Cổng A5 so median latency giữa các phiên, A8 so tổng debug và tỉ lệ từng khối (không vẽ ở đây).</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 399.493645)">File: results/onboard_x4_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa protocols)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 399.493645)">File: results/npu/latency/onboard_x4_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa protocols)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_35">

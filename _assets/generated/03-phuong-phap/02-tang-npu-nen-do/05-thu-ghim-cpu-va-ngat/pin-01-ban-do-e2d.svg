@@ -1138,7 +1138,7 @@ z
   <g id="text_28">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 419.867114)">Board RK3588, YOLOv8n INT8, CORE_0, 20 điều kiện x 2 nửa, mỗi khối 1000 lần chạy sau 50 lần khởi động, irqbalance dừng.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 427.713567)">Nửa 1 theo thứ tự cố định, nửa 2 theo thứ tự ngược. Ngưỡng 20% theo E2, 5% và 95% chọn sau khi đã thấy dữ liệu E2c.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 435.349645)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2d)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 435.349645)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2d)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_48">

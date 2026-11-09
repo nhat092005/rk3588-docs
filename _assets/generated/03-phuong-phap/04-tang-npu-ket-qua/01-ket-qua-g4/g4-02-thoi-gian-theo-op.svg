@@ -432,7 +432,7 @@ z
   </g>
   <g id="text_27">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 548.189727)">Board RK3588, YOLOv8n INT8, CORE_0, chế độ debug. Op không xuất hiện trong một model thì không có điểm của model đó.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 555.825805)">File: results/g4_latency_workload.json (khóa by_op)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 555.825805)">File: results/npu/operator_support/g4_latency_workload.json (khóa by_op)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_32">

@@ -37,5 +37,5 @@
 <text x="562" y="168" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  không bị lớp có nhiều ảnh lấn át lớp hiếm gặp.</tspan></text>
 <text x="562" y="187" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan font-weight="700">• Cảnh báo lớp yếu: </tspan><tspan>Lớp head (38.8%) kéo tụt mAP chung,</tspan></text>
 <text x="562" y="206" font-size="8.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>  chỉ ra điểm nghẽn cần bổ sung thêm dữ liệu huấn luyện.</tspan></text>
-<text x="10" y="244" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO ai/automation/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.</text>
+<text x="10" y="244" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: REPO experiments/leaderboards/sfchd_5class.csv; Ultralytics YOLOv8n.</text>
 </svg>

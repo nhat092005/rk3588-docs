@@ -116,7 +116,7 @@ NPU (bước 5)
 Hậu xử lý và đầu ra (bước 6 đến 8)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- **Giải mã hộp, lọc, NMS**: mỗi anchor lấy lớp có điểm cao nhất, giữ điểm trên 0.25, đổi hộp sang tọa độ góc, rồi NMS theo từng lớp với IoU 0.7, tối đa 300 hộp [Mã nguồn repo, ``ai/board/common.py:24-27, 84-123``]. Trên board 0.662 ms, trung vị, INT8 mặc định, một context, khóa xung [T3 board, ``results/thr_p3.json``].
+- **Giải mã hộp, lọc, NMS**: mỗi anchor lấy lớp có điểm cao nhất, giữ điểm trên 0.25, đổi hộp sang tọa độ góc, rồi NMS theo từng lớp với IoU 0.7, tối đa 300 hộp [Mã nguồn repo, ``ai/board/common.py:24-27, 84-123``]. Trên board 0.662 ms, trung vị, INT8 mặc định, một context, khóa xung [T3 board, ``results/npu/throughput/thr_p3.json``].
 - **ByteTrack**: gán mã số cho hộp qua các khung. Repo dùng ``BYTETracker`` của Ultralytics, hiện chạy offline [Mã nguồn repo, ``scripts/demo/common.py:28``, ``scripts/demo/video/track.py``].
 - **VOP**: đọc khung ảnh từ bộ nhớ hệ thống rồi đưa ra cổng hiển thị [T1 TRM2 tr.784]. **Bộ mã hóa video** (trong VPU): H.264 và H.265, repo chưa dùng [T1 DS V1.7 tr.10].
 
@@ -238,7 +238,7 @@ Chạy tuần tự trên khung NV12 1920x1080 thật chụp từ ``rkisp_selfpat
      - 31.791
      - 34.123
 
-Số đo khóa xung của dự án có NPU 17.161 ms ở ``CORE_0`` [T3 board, ``results/thr_p3.json``].
+Số đo khóa xung của dự án có NPU 17.161 ms ở ``CORE_0`` [T3 board, ``results/npu/throughput/thr_p3.json``].
 
 Đo lại ngày 2026-11-07 với CPU, NPU và DDR khóa ``performance`` bằng ``lock_freq.sh`` (CPU 1800, 2256 và 2304 MHz, NPU 1000 MHz, DDR 2112 MHz), 300 vòng sau 30 vòng khởi động, cùng model ở ``NPU_CORE_0`` [T3 board, ``board_pipeline_test2.py``]. Ảnh có người là ảnh test của ppe5 phóng lên 1920x1080, nên ``postprocess`` có 34 hộp trung bình:
 

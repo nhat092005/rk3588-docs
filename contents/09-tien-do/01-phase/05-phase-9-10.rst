@@ -28,7 +28,7 @@ Phase 9. Camera / real-world evaluation
    * - Pipeline camera trên board, dùng lại ``preprocess``, ``postprocess``, ``ResourceMonitor``
      - ``ai/board/camera.py`` (đã có, chưa nghiệm thu), ``ai/board/common.py``
    * - Ghi FPS, nhiệt độ NPU mỗi phút
-     - ``runs/<run_id>/bench/camera_<ngày>.json``
+     - ``experiments/runs/<run_id>/bench/camera_<ngày>.json``
 
 - ☐ Code pipeline camera, thêm target ``make bench-camera``
 - ☐ Chạy tới khi nhiệt độ ổn định (tăng không quá 1°C trong 10 phút liền), rồi chạy thêm 30 phút. Các ngưỡng 1°C, 10 phút, 30 phút là giá trị chọn, chốt trước khi đo
@@ -101,7 +101,7 @@ Lần chạy đầu theo bảng này (``camera_2026-11-08_rested.json``) trượ
 Kết quả lần chạy baseline ngày 2026-11-07
 -----------------------------------------
 
-Chạy từ 21:23:38 đến 22:08:40 (giờ board, 45 phút), lệnh ``camera.py --until-stable --max-minutes 120`` trong ``setsid nohup`` kèm ``lock_freq.sh`` (khóa rồi tự trả ``ondemand``), thoát mã 0. Model là baseline ``ppe5_yolov8n_baseline_100ep_s0`` INT8, chưa phải model đề xuất. Điều kiện đúng như quy tắc trên: khóa CPU 1800, 2256, 2304 MHz, NPU 1000 MHz, DDR 2112 MHz, ghim lõi 4 đến 7, không bật tracker hay lưu ảnh, nhiệt độ NPU đầu lần chạy 42.5°C, phòng trống (``n_det_mean`` 0.02). Tệp: ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/camera_2026-11-07.json`` và ``camera_2026-11-07.rows.jsonl`` (một dòng mỗi phút). Chạy bằng lệnh tương đương ``make bench-camera ... STABLE=1``, không qua ``make`` vì cần chạy tách khỏi phiên ssh [T3 board, ``camera.py``].
+Chạy từ 21:23:38 đến 22:08:40 (giờ board, 45 phút), lệnh ``camera.py --until-stable --max-minutes 120`` trong ``setsid nohup`` kèm ``lock_freq.sh`` (khóa rồi tự trả ``ondemand``), thoát mã 0. Model là baseline ``ppe5_yolov8n_baseline_100ep_s0`` INT8, chưa phải model đề xuất. Điều kiện đúng như quy tắc trên: khóa CPU 1800, 2256, 2304 MHz, NPU 1000 MHz, DDR 2112 MHz, ghim lõi 4 đến 7, không bật tracker hay lưu ảnh, nhiệt độ NPU đầu lần chạy 42.5°C, phòng trống (``n_det_mean`` 0.02). Tệp: ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/camera_2026-11-07.json`` và ``camera_2026-11-07.rows.jsonl`` (một dòng mỗi phút). Chạy bằng lệnh tương đương ``make bench-camera ... STABLE=1``, không qua ``make`` vì cần chạy tách khỏi phiên ssh [T3 board, ``camera.py``].
 
 .. list-table::
    :header-rows: 1
@@ -247,7 +247,7 @@ Cả năm lần đều thoát mã 0, ISP ``frameloss`` bằng 0, không khung n�
 - Bản ghi từng khung và thời điểm đến lưu theo cột ``array('d')`` (lớp ``Records``), 72 byte mỗi khung cho 9 cột.
 - Mẫu của ``ResourceMonitor`` cũng lưu bằng ``array('d')``. Bộ gom rác phải duyệt từng phần tử của ``list`` dài: 251256 phần tử mất 10.06 ms, tức 40 ns mỗi phần tử, từ đó dự đoán 4.40 ms cho 109856 phần tử của ``ResourceMonitor``, đo được trung bình 4.27 ms ở 10 phút cuối [T3 board, phép tính từ hai tệp JSON]. Sau khi đổi, ``_r2`` giữ dưới 1.5 ms suốt 45 phút.
 
-**Vì sao bỏ ``mallopt(M_MMAP_THRESHOLD)``.** So sánh 5 phút mỗi biến thể, khóa xung, chỉ đổi hai công tắc [T3 board, ``tmp/camera-pipeline/ab_runs/``]:
+**Vì sao bỏ ``mallopt(M_MMAP_THRESHOLD)``.** So sánh 5 phút mỗi biến thể, khóa xung, chỉ đổi hai công tắc [T3 board, ``experiments/camera/ab_runs/``]:
 
 .. list-table::
    :header-rows: 1

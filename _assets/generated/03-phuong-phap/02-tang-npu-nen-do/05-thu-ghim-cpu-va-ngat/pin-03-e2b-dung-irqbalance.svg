@@ -473,7 +473,7 @@ z
   <g id="text_17">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 340.853414)">Board RK3588, YOLOv8n INT8, CORE_0, irqbalance dừng, 8 khối x 1000 lần chạy sau 50 lần làm nóng, thứ tự ABBA rồi ABBA.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 348.830367)">Nửa 1 là bốn khối đầu, nửa 2 là bốn khối sau. Mỗi nửa có hai khối B kề nhau.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 356.466445)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2b)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 356.466445)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa e2b)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_29">

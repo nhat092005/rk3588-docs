@@ -16,8 +16,8 @@ NPU
    1. Một lõi gồm CNA (nạp weight và feature, giải nén, zero-skipping, buffer 384KB), mảng MAC với accumulator, DPU, PPU và sequence controller [T1 TRM1 tr.1985].
    2. Mỗi lõi làm 1024 MAC INT8 mỗi chu kỳ [T1 TRM1 tr.1984]. DPU cộng bias, nhân scale và làm activation. PPU làm pooling, có thể nối ống sau DPU [T1 TRM1 tr.2020, tr.2054, tr.2055].
    3. Ba lõi chạy độc lập hoặc cùng làm. Ở chế độ cùng làm, chỉ Conv, DepthwiseConv, Add, Concat, Relu và vài activation được chia theo khối lượng tính, op khác chạy trên Core 0. Hãng không công bố chiều chia [T1 TRM1 tr.1984] [T1 UG152 tr.27] [T1 UG232 tr.75] [T1 DRV ``include/rknpu_ioctl.h:241-279``]. Đo trên board: chia theo chiều cao (hàng), thành ba dải liên tiếp [T3 board, :doc:`../02-nen-tang-rk3588/01-phan-cung-npu/03-che-do-da-loi-va-system-sram` mục 1.2].
-   4. Đo của dự án: ba context độc lập đạt 141 FPS, còn một context chạy ba lõi chỉ hơn một lõi 2.6% [T3 board, ``results/thr_p3.json``].
-   5. YOLOv8n có bốn đường skip dài và các Concat, Add trong khối C2f. Concat, Split, Add, MaxPool nằm trong danh sách op NPU. Tensor skip (a) là 400 KB INT8, lớn hơn buffer 384 KB nên không giữ trong buffer được [SL]. Các op Concat, Split, Add đều đọc ghi bộ nhớ (RW KB khác 0), tổng 4111 us, 17.8% thời gian một khung [T3 board, ``results/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md``].
+   4. Đo của dự án: ba context độc lập đạt 141 FPS, còn một context chạy ba lõi chỉ hơn một lõi 2.6% [T3 board, ``results/npu/throughput/thr_p3.json``].
+   5. YOLOv8n có bốn đường skip dài và các Concat, Add trong khối C2f. Concat, Split, Add, MaxPool nằm trong danh sách op NPU. Tensor skip (a) là 400 KB INT8, lớn hơn buffer 384 KB nên không giữ trong buffer được [SL]. Các op Concat, Split, Add đều đọc ghi bộ nhớ (RW KB khác 0), tổng 4111 us, 17.8% thời gian một khung [T3 board, ``results/npu/latency/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md``].
    6. Driver là rknpu 0.9.8, xung 300 đến 1000 MHz, IOMMU bật [T3 board, ``dmesg``, ``/sys/class/devfreq/fdab0000.npu``]. GPU đọc ``0@300000000Hz`` ở cả 29 mẫu trong 220 vòng suy luận [T3 board, ``/sys/class/devfreq/fb000000.gpu/load``].
 
 .. contents:: Trong trang này
@@ -95,16 +95,16 @@ Chế độ đa lõi: ``core_mask`` nhận AUTO, CORE_0, CORE_1, CORE_2, CORE_0_
      - Nguồn
    * - 1 context, một lõi (``CORE_0``)
      - 54.66 FPS
-     - [T3 board, ``results/thr_p3.json``]
+     - [T3 board, ``results/npu/throughput/thr_p3.json``]
    * - 1 context, ba lõi
      - 56.1 FPS (hơn 2.6%)
-     - [T3 board, ``results/thr_p3.json``]
+     - [T3 board, ``results/npu/throughput/thr_p3.json``]
    * - 2 context độc lập
      - 102.0 FPS
-     - [T3 board, ``results/thr_p3.json``]
+     - [T3 board, ``results/npu/throughput/thr_p3.json``]
    * - 3 context độc lập
      - 141.18 FPS
-     - [T3 board, ``results/thr_p3.json``]
+     - [T3 board, ``results/npu/throughput/thr_p3.json``]
 
 Đo lại ngày 2026-11-07 khi khóa xung, ``NPU_CORE_0``, pipeline tuần tự: suy luận NPU trung vị 17.387 ms (p95 17.443 ms), khớp 17.161 ms của dự án. Vòng suy luận liên tục không ghim CPU cho 19.997 ms (12 s) và 17.043 ms (90 s), tức hai mức khoảng 17 và 20 ms [T3 board, ``board_pipeline_test2.py``, ``npu_loop.py``], xem :doc:`../03-phuong-phap/02-tang-npu-nen-do/04-cac-muc-do-tre`.
 
@@ -180,7 +180,7 @@ Nguồn: [Mã nguồn repo, ``.venv/lib/python3.12/site-packages/ultralytics/cfg
 
     Bottleneck: Conv -> Conv -> (+) Add với đầu vào, chỉ khi shortcut = True
 
-Khối C2f phân nhánh và gom luồng bằng Split, Concat và Add. Các op này có trong danh sách op NPU [T1 OPL tr.56, tr.58, tr.91]. SPPF dùng chuỗi ba MaxPool 5x5 stride 1 rồi nối [Mã nguồn repo, ``ultralytics/nn/modules/block.py`` lớp ``SPPF`` trong ``.venv``]. Op MaxPool có trong danh sách NPU [T1 OPL tr.79]. Mỗi Conv + BN + SiLU được gộp thành ``ConvExSwish``, có 57 op này trong đồ thị RKNN của model SiLU 5 lớp [T3 PC, ``results/q2e_pc.json``, phân tích log build]. Tensor skip phải giữ đến lớp Concat đích. Kích thước INT8 của bốn tensor skip (tính từ ``yolov8.yaml``, scale ``n`` có width 0.25):
+Khối C2f phân nhánh và gom luồng bằng Split, Concat và Add. Các op này có trong danh sách op NPU [T1 OPL tr.56, tr.58, tr.91]. SPPF dùng chuỗi ba MaxPool 5x5 stride 1 rồi nối [Mã nguồn repo, ``ultralytics/nn/modules/block.py`` lớp ``SPPF`` trong ``.venv``]. Op MaxPool có trong danh sách NPU [T1 OPL tr.79]. Mỗi Conv + BN + SiLU được gộp thành ``ConvExSwish``, có 57 op này trong đồ thị RKNN của model SiLU 5 lớp [T3 PC, ``results/npu/operator_support/q2e_pc.json``, phân tích log build]. Tensor skip phải giữ đến lớp Concat đích. Kích thước INT8 của bốn tensor skip (tính từ ``yolov8.yaml``, scale ``n`` có width 0.25):
 
 .. list-table::
    :header-rows: 1
@@ -207,7 +207,7 @@ Khối C2f phân nhánh và gom luồng bằng Split, Concat và Add. Các op n�
      - 102400 (100 KB)
      - nhỏ hơn
 
-Nguồn: [Mã nguồn repo, ``yolov8.yaml``] [SL, phép tính]. Từng lớp đo trên board (YOLOv8n INT8, ``CORE_0``, tổng 23106 us) [T3 board, ``results/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md`` mục 2]:
+Nguồn: [Mã nguồn repo, ``yolov8.yaml``] [SL, phép tính]. Từng lớp đo trên board (YOLOv8n INT8, ``CORE_0``, tổng 23106 us) [T3 board, ``results/npu/latency/layer_analysis_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md`` mục 2]:
 
 .. list-table::
    :header-rows: 1
@@ -249,9 +249,9 @@ Ba op Concat, Split, Add thời gian tỉ lệ với lượng dữ liệu đọc
 5. Op và nơi chạy
 =================
 
-- Conv + BN + SiLU: NPU, gộp thành ``ConvExSwish``. Khối nào trong lõi làm SiLU: unknown [T3 PC, ``results/q2e_pc.json``].
+- Conv + BN + SiLU: NPU, gộp thành ``ConvExSwish``. Khối nào trong lõi làm SiLU: unknown [T3 PC, ``results/npu/operator_support/q2e_pc.json``].
 - Concat, Split, Add, MaxPool 5x5 (SPPF): NPU, có trong danh sách op [T1 OPL tr.56, tr.58, tr.79, tr.91].
-- Resize (Upsample): UG232 ghi NPU không có nhân Resize riêng, toolkit đổi sang ConvTranspose. Đồ thị RKNN của model dự án có 2 op Resize và không có ConvTranspose. Resize chạy ở đâu: unknown [T1 UG232 tr.176] [T3 PC, ``results/q2e_pc.json``].
+- Resize (Upsample): UG232 ghi NPU không có nhân Resize riêng, toolkit đổi sang ConvTranspose. Đồ thị RKNN của model dự án có 2 op Resize và không có ConvTranspose. Resize chạy ở đâu: unknown [T1 UG232 tr.176] [T3 PC, ``results/npu/operator_support/q2e_pc.json``].
 - DFL, Transpose, NMS: :doc:`../02-nen-tang-rk3588/05-yolo-tren-rk3588/02-op-yolov8-tren-rknn`.
 
 Nối ống DPU, PPU là mô tả của TRM cho luồng tích chập. Từng op trên ánh xạ vào khối nào của lõi: unknown, chỉ riêng pooling trên PPU có nguồn [T1 TRM1 tr.2054].

@@ -389,7 +389,7 @@ z
   </g>
   <g id="text_16">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 291.394392)">Board RK3588, ba lần chạy mỗi điểm (xám nhỏ), median (ô vuông rỗng là INT8 mặc định, chấm đặc là int8h5). Mục tiêu 30 FPS (đổi từ 60 ngày 2026-11-08).</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 299.096845)">File: results/q2f_fps.json (khóa e1)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 299.096845)">File: results/npu/throughput/q2f_fps.json (khóa e1)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_24">

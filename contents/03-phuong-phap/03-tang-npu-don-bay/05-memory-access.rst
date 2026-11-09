@@ -60,7 +60,7 @@ Vendor chia bộ nhớ runtime của model thành bốn phần: "The RKNN model 
      - 16800
      - 5887.62
 
-Nguồn: [T3 board, ``bench/onboard_q2c/logs/build_..._base.log:752-753``, ``_h5.log:785-786``, ``_split_int8.log:658-659``, ``_split_fp16.log:638-639``] với thư mục ``bench`` là ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``. Hai bản ``c_all`` và ``h6`` cũng có dòng này (``_c_all.log:951-952``, ``_h6.log:821-822``), không đưa vào bảng.
+Nguồn: [T3 board, ``experiments/npu/operator_support/onboard_q2c/logs/build_..._base.log:752-753``, ``_h5.log:785-786``, ``_split_int8.log:658-659``, ``_split_fp16.log:638-639``] với thư mục ``bench`` là ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``. Hai bản ``c_all`` và ``h6`` cũng có dòng này (``_c_all.log:951-952``, ``_h6.log:821-822``), không đưa vào bảng.
 
 2.2 Theo runtime
 ----------------
@@ -111,11 +111,11 @@ Tổng trên một khung:
    * - INT8 mặc định ``CORE_0_1_2``
      - 16073
      - 39007.22
-     - ``bench/onboard_q2j/tier1_int8_CORE_0_1_2_sess1_layers.txt``
+     - ``experiments/npu/operator_support/onboard_q2j/tier1_int8_CORE_0_1_2_sess1_layers.txt``
    * - ``h5`` ``CORE_0_1_2``
      - 15967
      - 41443.39
-     - ``bench/onboard_q2j/tier1_int8h5_CORE_0_1_2_sess1_layers.txt``
+     - ``experiments/npu/operator_support/onboard_q2j/tier1_int8h5_CORE_0_1_2_sess1_layers.txt``
 
 Tất cả là [T3 board] với ``bench`` như ở mục 2.1. Cột thời gian toán tử là tổng thời gian của các toán tử, không so trực tiếp với thời gian NPU ở :doc:`04-datatype`.
 
@@ -126,7 +126,7 @@ Cách đọc đúng giới hạn. Quan sát này cho thấy theo cột cycles c�
 4. Điều kiện đo và tham chiếu từ bài báo
 ========================================
 
-Tần số khi chạy: DDR ``2112000000`` Hz trong bảng layer của ``eval_perf`` [T3 board, ``bench/tier1_int8_CORE_0_layers.txt:7-8``]. Sổ tay SDK có ví dụ cùng giá trị ở mục liệt kê "DDR Current Frequency List" [T1 UG232 tr.31]. Trong các phép đo P2 và P3, NPU khóa ở ``npu: userspace 1000000000 Hz`` và DDR ở ``ddr: userspace 2112000000 Hz`` [T3 board, ``results/q2j_split.json`` trường ``hold_progress`` cho P2 và ``results/q2f_fps.json`` trường ``hold_progress`` của E1 cho P3]. Các số ở trang này vì vậy là số khi DDR khóa tần số, không đại diện cho DVFS tự động.
+Tần số khi chạy: DDR ``2112000000`` Hz trong bảng layer của ``eval_perf`` [T3 board, ``bench/tier1_int8_CORE_0_layers.txt:7-8``]. Sổ tay SDK có ví dụ cùng giá trị ở mục liệt kê "DDR Current Frequency List" [T1 UG232 tr.31]. Trong các phép đo P2 và P3, NPU khóa ở ``npu: userspace 1000000000 Hz`` và DDR ở ``ddr: userspace 2112000000 Hz`` [T3 board, ``results/npu/operator_support/q2j_split.json`` trường ``hold_progress`` cho P2 và ``results/npu/throughput/q2f_fps.json`` trường ``hold_progress`` của E1 cho P3]. Các số ở trang này vì vậy là số khi DDR khóa tần số, không đại diện cho DVFS tự động.
 
 Các bài báo đã có trong kho chỉ để định vị, không thay số đo của dự án:
 
@@ -205,5 +205,5 @@ Bốn đòn bẩy này không đòn bẩy nào có số đo riêng về lợi í
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.31, 32, 106, 107, 144, 148).
 - T2: ``docs/_assets/pdf/papers/05_rk3588/edgesoc_benchmark_2026kong.pdf`` (EDGE tr.2, 3), ``tpu_datacenter_2017jouppi.pdf`` (Jouppi 2017 tr.2), ``fused_layer_multiworkload_2024lee.pdf`` (Lee 2024 tr.1).
-- T3: ``bench/tier1_int8_CORE_0.json``, ``bench/tier1_int8h5_CORE_0.json``, ``bench/tier1_int8_CORE_0_layers.txt``, ``bench/onboard_q2j/``, ``bench/onboard_q2c/logs/``, ``results/q2j_split.json`` (``bench`` là ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``).
+- T3: ``bench/tier1_int8_CORE_0.json``, ``bench/tier1_int8h5_CORE_0.json``, ``bench/tier1_int8_CORE_0_layers.txt``, ``experiments/npu/operator_support/onboard_q2j/``, ``experiments/npu/operator_support/onboard_q2c/logs/``, ``results/npu/operator_support/q2j_split.json`` (``bench`` là ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``).
 - Trang liên quan: :doc:`03-tensor-layout`, :doc:`04-datatype`, :doc:`06-memory-copy`, :doc:`07-compiler-optimization`, :doc:`08-npu-architecture`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

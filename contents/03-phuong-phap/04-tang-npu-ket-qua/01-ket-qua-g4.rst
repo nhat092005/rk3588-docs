@@ -47,7 +47,7 @@ Tiêu chuẩn của cổng ở :doc:`../03-tang-npu-don-bay/01-operator-support`
 
 ReLU huấn luyện 100 epoch trên ppe5 (``ai/automation/configs/ppe5_yolov8n_relu.yaml``, seed 0). So ``args.yaml`` của hai run, chỉ khác ``model`` (yaml ReLU thay ``yolov8n.pt``), ``pretrained`` (``yolov8n.pt`` nạp vào model yaml thay ``true``) và tên, đường dẫn run, mọi tham số huấn luyện khác giống nhau. Kiến trúc là ``ai/models/yolov8n_relu.yaml`` (``activation: nn.ReLU()``) khởi tạo từ trọng số ``yolov8n.pt`` của SiLU, nhật ký ghi ``Transferred 322/355 items from pretrained weights``. Baseline cũng khởi tạo từ ``yolov8n.pt``. Kết quả của cổng ghi nhãn "1 seed" (seed 0), ReLU seed 1 và 2 chỉ để mô tả nhiễu (mục 5).
 
-Đo latency chạy một lần xen kẽ 16 phiên dưới giao thức P2 (ghim ``rknn_server`` và ba ngắt NPU vào CPU4, dừng ``irqbalance``, tần số khóa), thứ tự SiLU, ReLU lần lượt ở ``CORE_0``, ``CORE_0_1``, ``CORE_0_1_2``, ``AUTO``, lặp lại hai vòng cùng thứ tự, nghỉ 45 giây. Mỗi phiên là 5 lần ``eval_perf`` không bật ``perf_debug`` (latency) rồi 5 lần với ``perf_debug=True`` (bảng từng lớp). Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước (``bench/onboard_g4b/rule.txt``). P2 đã được người dùng duyệt nguyên trạng ngày 2026-11-01. Các ngưỡng số mới của quy tắc này không được nêu riêng trong câu trả lời nên không coi là đã duyệt.
+Đo latency chạy một lần xen kẽ 16 phiên dưới giao thức P2 (ghim ``rknn_server`` và ba ngắt NPU vào CPU4, dừng ``irqbalance``, tần số khóa), thứ tự SiLU, ReLU lần lượt ở ``CORE_0``, ``CORE_0_1``, ``CORE_0_1_2``, ``AUTO``, lặp lại hai vòng cùng thứ tự, nghỉ 45 giây. Mỗi phiên là 5 lần ``eval_perf`` không bật ``perf_debug`` (latency) rồi 5 lần với ``perf_debug=True`` (bảng từng lớp). Cả 16 phiên thực hiện đúng P2 theo tiêu chí viết trước (``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/rule.txt``). P2 đã được người dùng duyệt nguyên trạng ngày 2026-11-01. Các ngưỡng số mới của quy tắc này không được nêu riêng trong câu trả lời nên không coi là đã duyệt.
 
 Hiệu chuẩn INT8: danh sách hiệu chuẩn của seed 0 (300 ảnh, mỗi class có mặt trong ít nhất 157 ảnh) được sao nguyên cho ReLU và cho baseline seed 1 và 2. Bằng chứng giống hệt là ``stems_md5`` ``11d6a5c69414a6eafd8b98f99724b0b2`` và ``png_md5`` ``6652576adb7608ddf8ff326c57851732`` (md5 của tên ảnh đã sắp và của sha256 các tệp PNG), cùng thứ tự tên ảnh trong ``dataset.txt`` khớp từng dòng. Không dùng md5 của ``dataset.txt`` vì tệp này chứa đường dẫn tuyệt đối có tên run.
 
@@ -626,7 +626,7 @@ Nhiễu giữa seed (chỉ mô tả, không phải cổng): baseline SiLU seed 0
 
 Trên ``css_test`` INT8 mức giảm của ReLU ở AP50-95 (3.51 điểm) và ở AP NoHelmet (4.94 điểm) lớn hơn khoảng trải giữa ba seed SiLU (1.35 và 1.85 điểm). Nhiễu của chính ReLU xem ở bảng ngay dưới. Cổng C đọc theo ngưỡng 1.0 điểm đã duyệt, không phụ thuộc phần mô tả nhiễu này. AP Vest của riêng một class dao động 2.40 điểm giữa ba seed SiLU, lớn hơn ngưỡng 1.0 điểm.
 
-Nhiễu seed của ReLU (thêm theo duyệt của người dùng ngày 2026-10-31, quy tắc viết trước ``bench/eval_g4/rule_relu_seeds.txt``). ReLU seed 1 và 2 huấn luyện cùng cấu hình, INT8 dùng cùng danh sách hiệu chuẩn của seed 0. Cột "Chênh trung bình" là trung bình ba seed ReLU trừ trung bình ba seed SiLU. Chênh "lớn hơn nhiễu seed" khi giá trị tuyệt đối lớn hơn khoảng trải lớn hơn trong hai nhóm. Ba seed không đủ để kiểm định, đây là mô tả.
+Nhiễu seed của ReLU (thêm theo duyệt của người dùng ngày 2026-10-31, quy tắc viết trước ``experiments/npu/operator_support/eval_g4/rule_relu_seeds.txt``). ReLU seed 1 và 2 huấn luyện cùng cấu hình, INT8 dùng cùng danh sách hiệu chuẩn của seed 0. Cột "Chênh trung bình" là trung bình ba seed ReLU trừ trung bình ba seed SiLU. Chênh "lớn hơn nhiễu seed" khi giá trị tuyệt đối lớn hơn khoảng trải lớn hơn trong hai nhóm. Ba seed không đủ để kiểm định, đây là mô tả.
 
 .. list-table::
    :header-rows: 1
@@ -829,7 +829,7 @@ Nhãn: **Loại** (ReLU, seed 0 theo chuẩn, trượt ở điều kiện C củ
 
 - T1: Operator List V2.3.2 (``docs/_assets/pdf/rknn/03_RKNN_Compiler_Support_Operator_List_V2.3.2.pdf``, tr.58 đến 63, 84, 86 đến 87, 98), SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, tr.75, 109 đến 110, 177), API guide V1.5.2 tr.27, ``3rdparty/rknn-toolkit2/rknn-toolkit2/doc/changelog-2.3.2.txt`` dòng 284.
 - T2: ``edgesoc_benchmark_2026kong.pdf``, ``docs/_assets/pdf/papers/08_npu_friendly_arch/actnas_yolo_2025sah.pdf`` (ActNAS).
-- T3 PC và board: ``results/g4_latency_workload.*``, ``results/eval_g4.*``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_g4b/``, ``bench/eval_g4/``, ``export_int8.json`` và ``export_fp16.json`` của các run, ``ai/automation/runs/ppe5_yolov8n_relu_100ep_s0/``.
-- Quy tắc viết trước dữ liệu: ``bench/onboard_g4b/rule.txt``, ``bench/eval_g4/rule.txt``.
-- Tổng hợp tìm nguồn: ``results/phase2_source_facts.md``.
+- T3 PC và board: ``results/npu/operator_support/g4_latency_workload.*``, ``results/npu/operator_support/eval_g4.*``, ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/``, ``experiments/npu/operator_support/eval_g4/``, ``export_int8.json`` và ``export_fp16.json`` của các run, ``experiments/runs/ppe5_yolov8n_relu_100ep_s0/``.
+- Quy tắc viết trước dữ liệu: ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/rule.txt``, ``experiments/npu/operator_support/eval_g4/rule.txt``.
+- Tổng hợp tìm nguồn: ``results/notes/phase2_source_facts.md``.
 

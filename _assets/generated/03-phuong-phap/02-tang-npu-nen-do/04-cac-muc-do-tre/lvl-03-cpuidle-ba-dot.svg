@@ -301,7 +301,7 @@ z
   </g>
   <g id="text_19">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 234.091167)">Board RK3588, YOLOv8n INT8, CORE_0, ba đợt 1000 lần chạy liên tiếp, bộ đếm cpuidle đọc trước và sau mỗi đợt.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 241.727245)">File: results/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa cpuidle, hot)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 241.727245)">File: results/npu/latency/onboard_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json (khóa cpuidle, hot)</text>
   </g>
  </g>
  <defs>

@@ -480,7 +480,7 @@ z
   </g>
   <g id="text_25">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.947167)">Board RK3588, YOLOv8n INT8 (SiLU và ReLU), P2. Trái: độ phủ của hai phiên đo (điều kiện A). Phải: hai dòng Resize mỗi model.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/g4_latency_workload.json (khóa gate_a, resize)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">File: results/npu/operator_support/g4_latency_workload.json (khóa gate_a, resize)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_35">

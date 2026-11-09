@@ -1,4 +1,4 @@
-"""Hình cho trang 02-ket-qua-latency-tung-khoi (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/*.json.
+"""Hình cho trang 02-ket-qua-latency-tung-khoi (nhóm Nền đo NPU), vẽ bằng matplotlib từ results/npu/*/*.json.
 
 Dùng: .venv/bin/python docs/tools/figure_gen/03-phuong-phap/02-ket-qua-latency-tung-khoi/gen.py [outdir] [tên_ảnh ...]
 Số trong hình lấy nguyên từ JSON, cùng file với Bảng 1 của trang.
@@ -24,7 +24,7 @@ plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "
 
 
 def load():
-    a = json.load(open(os.path.join(ROOT, "results", JSON_NAME), encoding="utf-8"))
+    a = json.load(open(os.path.join(ROOT, "results", "npu", "latency", JSON_NAME), encoding="utf-8"))
     blocks = a["blocks"]
     order = sorted([b for b in blocks if b.startswith("L")], key=lambda b: int(b[1:])) + ["io", "post_detect"]
     assert sorted(order) == sorted(blocks), "khối trong JSON khác danh sách vẽ"
@@ -57,7 +57,7 @@ def fig_block_time():
     ax.legend(loc="upper center", frameon=False, ncol=2, fontsize=9, bbox_to_anchor=(0.5, 1.12))
     note = (f"YOLOv8n INT8 (sha256 {sha}), CORE_0, eval_perf ở chế độ perf_debug, 3 phiên x 5 lần gọi. "
             f"Lệch thời gian (max trừ min, chia trung vị) giữa 3 phiên tối đa {blocks[widest]['spread']:.1%} ({widest}).\n"
-            f"Thời gian từng khối dùng để so sánh với nhau, không cộng thành latency. File: results/{JSON_NAME}")
+            f"Thời gian từng khối dùng để so sánh với nhau, không cộng thành latency. File: results/npu/latency/{JSON_NAME}")
     fig.text(0.01, 0.005, note, fontsize=7.2, style="italic", color="#444444", va="bottom", ha="left")
     fig.subplots_adjust(left=0.1, right=0.98, top=0.9, bottom=0.25)
     return fig
@@ -102,7 +102,7 @@ def fig_parts():
             f"Hiện {len(top)} trên {len(parts)} thành phần, đúng Bảng 2.\n"
             f"Lệch thời gian (max trừ min, chia trung vị) giữa 3 phiên tối đa {widest[1]['spread']:.1%} ({widest[0]}). "
             f"Thời gian dùng để so sánh với nhau, không cộng thành latency.\n"
-            f"File: results/{JSON_NAME}")
+            f"File: results/npu/latency/{JSON_NAME}")
     bottom = _footer(fig, note, h, 3)
     fig.subplots_adjust(left=0.2, right=0.97, top=0.98, bottom=bottom + 0.06)
     return fig
@@ -132,7 +132,7 @@ def fig_ops():
     note = (f"YOLOv8n INT8 (sha256 {sha}), CORE_0, eval_perf ở chế độ perf_debug, 3 phiên x 5 lần gọi, trung vị.\n"
             f"Lệch thời gian giữa 3 phiên (max trừ min, chia trung vị) tối đa {widest[1]['spread']:.1%} ({widest[0]}). "
             f"Thời gian dùng để so sánh với nhau, không cộng thành latency.\n"
-            f"File: results/{JSON_NAME}")
+            f"File: results/npu/latency/{JSON_NAME}")
     bottom = _footer(fig, note, h, 3)
     fig.subplots_adjust(left=0.25, right=0.97, top=0.98, bottom=bottom + 0.11)
     return fig

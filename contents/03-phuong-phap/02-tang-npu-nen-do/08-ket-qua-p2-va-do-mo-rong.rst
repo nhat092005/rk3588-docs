@@ -24,7 +24,7 @@ Kết quả vị trí E2 đến E2e nằm ở :doc:`05-thu-ghim-cpu-va-ngat`, c�
 1. Hai giao thức trên LAN
 =========================
 
-Mỗi phiên là lệnh ``benchmark_npu.py`` của kế hoạch (một phiên latency 5 lần ``eval_perf`` với ``perf_debug=False`` và một phiên từng lớp 5 lần với ``perf_debug=True``), chạy trên LAN trực tiếp. P1-LAN giữ điều kiện gốc (không ghim, ``irqbalance`` chạy). P2 là giao thức đã được người dùng duyệt ngày 2026-11-01, cách đặt ghim, helper và khôi phục ở :doc:`07-giao-thuc-p2-p3` (mục 2). Hai giao thức chạy xen kẽ từng phiên, nghỉ 45 giây giữa các phiên (số 45 giây là số mới của thí nghiệm này, chưa qua người dùng duyệt). Phiên 1 đến 3 của mỗi giao thức dùng cho cổng (mã và ngưỡng 5%, 10% của ``aggregate_layers.py`` không đổi), phiên 4 đến 10 dùng cho các câu hỏi khác. Quy tắc: ``bench/onboard_x4/rule.txt``, viết trước dữ liệu.
+Mỗi phiên là lệnh ``benchmark_npu.py`` của kế hoạch (một phiên latency 5 lần ``eval_perf`` với ``perf_debug=False`` và một phiên từng lớp 5 lần với ``perf_debug=True``), chạy trên LAN trực tiếp. P1-LAN giữ điều kiện gốc (không ghim, ``irqbalance`` chạy). P2 là giao thức đã được người dùng duyệt ngày 2026-11-01, cách đặt ghim, helper và khôi phục ở :doc:`07-giao-thuc-p2-p3` (mục 2). Hai giao thức chạy xen kẽ từng phiên, nghỉ 45 giây giữa các phiên (số 45 giây là số mới của thí nghiệm này, chưa qua người dùng duyệt). Phiên 1 đến 3 của mỗi giao thức dùng cho cổng (mã và ngưỡng 5%, 10% của ``aggregate_layers.py`` không đổi), phiên 4 đến 10 dùng cho các câu hỏi khác. Quy tắc: ``experiments/npu/latency/onboard_x4/rule.txt``, viết trước dữ liệu.
 
 
 2. Cổng A1 đến A8 của hai giao thức
@@ -143,12 +143,12 @@ Các phiên chỉ đo latency (5 lần ``eval_perf``), dưới P2, xen kẽ 4 v�
 
 - ``AUTO`` (U16): không phân biệt được. Mọi phiên ``AUTO`` chỉ dùng dòng ngắt 36 (một nhân), như ``CORE_0``.
 - ``CORE_0_1_2`` (U22): khác, hiệu -0.54 ms (-3.3%), đo dưới P2 với cả ba dòng ngắt ở CPU4. Đây là số đo latency, không phải kết luận về đa nhân (cổng G4 và chiến lược S1 đến S3 thuộc giai đoạn 2, :doc:`../03-tang-npu-don-bay/02-multi-core`).
-- Mức log (U19): chưa kết luận, vì một phiên tham chiếu ``verbose=False`` có một giây thấy một luồng ``rknn_server`` ngoài CPU4 (``bench/onboard_x4/analysis_note.txt``). Số đo mô tả: trung vị hai mức log gần như bằng nhau.
+- Mức log (U19): chưa kết luận, vì một phiên tham chiếu ``verbose=False`` có một giây thấy một luồng ``rknn_server`` ngoài CPU4 (``experiments/npu/latency/onboard_x4/analysis_note.txt``). Số đo mô tả: trung vị hai mức log gần như bằng nhau.
 
 5. Giá trị đầu vào và trọng số
 ==============================
 
-X5 chạy C API ở ô (4, 4) với bốn đầu vào (toàn 0, ngẫu nhiên với seed cố định, hai ảnh test ppe5 đã letterbox) và hai mô hình cùng kiến trúc (seed 0 và seed 1), mỗi điều kiện hai khối 300 lần chạy, thêm một khối tham chiếu thứ hai ở cuối mỗi nửa để kiểm độ trôi. Quy tắc ``bench/onboard_x5/rule.txt`` (ngưỡng 0.05 ms và 0.25 ms là số mới, chưa qua người dùng duyệt).
+X5 chạy C API ở ô (4, 4) với bốn đầu vào (toàn 0, ngẫu nhiên với seed cố định, hai ảnh test ppe5 đã letterbox) và hai mô hình cùng kiến trúc (seed 0 và seed 1), mỗi điều kiện hai khối 300 lần chạy, thêm một khối tham chiếu thứ hai ở cuối mỗi nửa để kiểm độ trôi. Quy tắc ``experiments/npu/latency/onboard_x5/rule.txt`` (ngưỡng 0.05 ms và 0.25 ms là số mới, chưa qua người dùng duyệt).
 
 - Độ trôi giữa hai khối tham chiếu: 0.019 và 0.008 ms, dưới 0.05 ms.
 - Đầu vào (U20): thời gian không phụ thuộc giá trị đầu vào trong các đầu vào đã thử (chênh lệch tối đa 0.007 ms).
@@ -158,7 +158,7 @@ X5 chạy C API ở ô (4, 4) với bốn đầu vào (toàn 0, ngẫu nhiên v�
 6. FP16 dưới P2
 ===============
 
-Theo kế hoạch, FP16 chỉ chạy khi A8 của INT8 đạt. Điều kiện đó chỉ đạt dưới P2 (mục 2), nên X8 chạy FP16 dưới P2, xen kẽ A B A B A B (A là phiên INT8, B là phiên FP16), nghỉ 45 giây, với file FP16 export ngày 2026-10-31 (``weights/rknn_fp16/``, sha256 ``bd4a8c8a``). Quy tắc ``bench/onboard_x8/rule.txt``. Cả 6 phiên thực hiện đúng. Cổng A1 đến A8 đạt ở cả hai độ chính xác.
+Theo kế hoạch, FP16 chỉ chạy khi A8 của INT8 đạt. Điều kiện đó chỉ đạt dưới P2 (mục 2), nên X8 chạy FP16 dưới P2, xen kẽ A B A B A B (A là phiên INT8, B là phiên FP16), nghỉ 45 giây, với file FP16 export ngày 2026-10-31 (``weights/rknn_fp16/``, sha256 ``bd4a8c8a``). Quy tắc ``experiments/npu/latency/onboard_x8/rule.txt``. Cả 6 phiên thực hiện đúng. Cổng A1 đến A8 đạt ở cả hai độ chính xác.
 
 .. list-table::
    :header-rows: 1
@@ -231,5 +231,5 @@ FP16 chậm hơn INT8 10.75 ms, gấp 1.65 lần, trong cùng một lần chạy
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.177).
-- T3 board và PC: ``results/onboard_x4_*``, ``results/latency_per_block_*_p1lan.*``, ``results/latency_per_block_*_p2.*``, ``results/onboard_x5_*``, ``results/onboard_x8_*``, ``results/latency_per_block_*_x8.*``, ``ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_x4/``, ``onboard_x5/``, ``onboard_x8/``. Mã: ``ai/automation/analyze_x4.py``, ``analyze_x5.py``, ``analyze_x8.py``, ``aggregate_layers.py`` (tham số ``--bench-subdir`` và ``--tag``), ``benchmark_npu.py`` (tham số ``--out-subdir``).
+- T3 board và PC: ``results/npu/latency/onboard_x4_*``, ``results/npu/latency/latency_per_block_*_p1lan.*``, ``results/npu/latency/latency_per_block_*_p2.*``, ``results/npu/latency/onboard_x5_*``, ``results/npu/latency/onboard_x8_*``, ``results/npu/latency/latency_per_block_*_x8.*``, ``experiments/npu/latency/onboard_x4/``, ``onboard_x5/``, ``onboard_x8/``. Mã: ``ai/npu/latency/analyze_x4.py``, ``analyze_x5.py``, ``analyze_x8.py``, ``aggregate_layers.py`` (tham số ``--bench-subdir`` và ``--tag``), ``benchmark_npu.py`` (tham số ``--out-subdir``).
 

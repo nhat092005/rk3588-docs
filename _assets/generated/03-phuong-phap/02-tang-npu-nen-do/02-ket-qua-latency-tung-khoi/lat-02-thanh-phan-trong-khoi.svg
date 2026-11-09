@@ -568,7 +568,7 @@ z
   <g id="text_36">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 455.72227)">YOLOv8n INT8 (sha256 a501f94e), CORE_0, eval_perf ở chế độ perf_debug, 3 phiên x 5 lần gọi. Hiện 22 trên 66 thành phần, đúng Bảng 2.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 463.573223)">Lệch thời gian (max trừ min, chia trung vị) giữa 3 phiên tối đa 17.0% (L18/bottleneck). Thời gian dùng để so sánh với nhau, không cộng thành latency.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 471.205645)">File: results/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 471.205645)">File: results/npu/latency/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.json</text>
   </g>
  </g>
  <defs>

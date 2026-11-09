@@ -17,7 +17,7 @@
    - E3 (giải mã bằng C hoặc NEON) không chạy: điều kiện kích hoạt viết trước (C dưới 60 FPS và giai đoạn post chậm hơn NPU) không xảy ra. Quy tắc này viết lúc mục tiêu còn là 60 FPS. Với mốc 30 FPS, kết quả vẫn là không chạy, vì C đạt 65.99 FPS.
    - Một seed, một board, ảnh cache, không camera, giao thức P3 (đã duyệt), các số ngưỡng mới của hai thí nghiệm chưa duyệt.
 
-Mốc 60 FPS ghi lúc đo, mục tiêu hiện hành là 30 FPS (đổi ngày 2026-11-08). Tiêu chí và hai cách đọc ở :doc:`03-ket-qua-da-nhan` mục 8. Quy tắc viết trước dữ liệu: ``bench/onboard_q2f_thr/rule.txt`` (E1) và ``bench/onboard_q2f_split/rule.txt`` (E2) trong thư mục run ``ppe5_yolov8n_baseline_100ep_s0``.
+Mốc 60 FPS ghi lúc đo, mục tiêu hiện hành là 30 FPS (đổi ngày 2026-11-08). Tiêu chí và hai cách đọc ở :doc:`03-ket-qua-da-nhan` mục 8. Quy tắc viết trước dữ liệu: ``experiments/npu/throughput/onboard_q2f_thr/rule.txt`` (E1) và ``experiments/npu/throughput/onboard_q2f_split/rule.txt`` (E2) trong thư mục run ``ppe5_yolov8n_baseline_100ep_s0``.
 
 .. contents:: Trong trang này
    :local:
@@ -28,7 +28,7 @@ Mốc 60 FPS ghi lúc đo, mục tiêu hiện hành là 30 FPS (đổi ngày 202
 
 Cả hai thí nghiệm chạy ``ai/board/bench_throughput_rep.py`` dưới taskset ``-c 4-7`` với helper P3 (``p3_hold.sh``, giao thức đã duyệt ngày 2026-11-01, hạn chế ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3` mục 6), 1238 khung, nghỉ 20 giây giữa các lần chạy, ba lần lặp theo cùng thứ tự, ảnh test ``ppe5`` đã decode sẵn trong bộ nhớ (không camera, không giải mã video, không vẽ hay lưu kết quả). FPS là số khung chia cho thời gian tường, đã tính tiền xử lý, NPU và hậu xử lý (kể cả giải mã box của model tách đầu). Mỗi con số là trung vị của ba lần chạy, chênh lệch tối đa là khoảng trải. Một lần chạy chỉ được tính khi thực hiện đúng P3 (ngắt NPU đúng lõi, tiến trình trong CPU4 đến CPU7, tần số khóa, ``irqbalance`` dừng). Cả hai thí nghiệm đều có mọi lần chạy thực hiện đúng.
 
-Quy tắc "khác" viết trước dữ liệu: chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn của hai điều kiện, nếu không thì "không phân biệt được". Đây là quy tắc của M12 (trường ``rule`` của ``results/thr_p3.json``, kết quả ở :doc:`03-ket-qua-da-nhan`), dùng lại cho các so sánh mới của trang này (các so sánh mới chưa duyệt).
+Quy tắc "khác" viết trước dữ liệu: chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn của hai điều kiện, nếu không thì "không phân biệt được". Đây là quy tắc của M12 (trường ``rule`` của ``results/npu/throughput/thr_p3.json``, kết quả ở :doc:`03-ket-qua-da-nhan`), dùng lại cho các so sánh mới của trang này (các so sánh mới chưa duyệt).
 
 2. E1: int8h5 so với int8
 ===========================
@@ -196,7 +196,7 @@ Mốc 60 FPS cũ làm một context ``int8h5`` (54.8 FPS) chưa đạt, nên mod
 
 **Đọc theo thông lượng** (mặc định của :doc:`03-ket-qua-da-nhan` mục 8): mọi điều kiện đạt 30 FPS, từ B (42.05, thấp nhất) đến E (68.21). Một context ``int8h5`` tuần tự (A, 54.79) đã dư 24.8 FPS. Model tách đầu và pipeline nâng thông lượng lên 65.99 FPS (C) nhưng không cần cho mục tiêu. Thứ tự đầu ra: ở C mỗi giai đoạn chỉ một luồng nối bằng hàng đợi FIFO nên thứ tự được giữ theo cách xây dựng, harness không kiểm điều này (chưa kiểm), còn D có hai luồng post nên có thể đảo thứ tự.
 
-**Đọc theo thời gian mỗi khung** (mỗi khung phải xong trong 33.33 ms): tổng ba giai đoạn của A là 18.08 ms (0.23 + 17.19 + 0.66), của B là 23.53 ms (0.29 + 14.30 + 8.94), của C là 27.55 ms (``stage_sum`` trong ``results/q2f_fps.json``), đều dưới 33.33 ms. Đây là tổng trung vị từng giai đoạn, không phải đo đầu cuối trực tiếp và không phải cực tiểu, và ở C các giai đoạn chạy dưới tranh chấp. Trường ``e2e_latency_ms`` của harness cho trung vị 132.6 ms ở C và 141.6 ms ở F. Theo mã, harness có hàng đợi 6 chỗ (``bench_throughput_rep.py``, ``--queue-size`` mặc định 6) và đẩy khung liên tục, nên hai số này có khả năng gồm thời gian chờ hàng đợi (mức đầy của hàng đợi không đo). Chúng không phải thời gian của một khung riêng lẻ. Thời gian mỗi khung khi cấp khung theo nhịp 30 FPS của camera: chưa đo trong harness này. C dư 5.78 ms so với 33.33 ms, ít hơn nhiều so với A (15.25 ms), nên đây là chỗ cần đo trước khi dùng pipeline.
+**Đọc theo thời gian mỗi khung** (mỗi khung phải xong trong 33.33 ms): tổng ba giai đoạn của A là 18.08 ms (0.23 + 17.19 + 0.66), của B là 23.53 ms (0.29 + 14.30 + 8.94), của C là 27.55 ms (``stage_sum`` trong ``results/npu/throughput/q2f_fps.json``), đều dưới 33.33 ms. Đây là tổng trung vị từng giai đoạn, không phải đo đầu cuối trực tiếp và không phải cực tiểu, và ở C các giai đoạn chạy dưới tranh chấp. Trường ``e2e_latency_ms`` của harness cho trung vị 132.6 ms ở C và 141.6 ms ở F. Theo mã, harness có hàng đợi 6 chỗ (``bench_throughput_rep.py``, ``--queue-size`` mặc định 6) và đẩy khung liên tục, nên hai số này có khả năng gồm thời gian chờ hàng đợi (mức đầy của hàng đợi không đo). Chúng không phải thời gian của một khung riêng lẻ. Thời gian mỗi khung khi cấp khung theo nhịp 30 FPS của camera: chưa đo trong harness này. C dư 5.78 ms so với 33.33 ms, ít hơn nhiều so với A (15.25 ms), nên đây là chỗ cần đo trước khi dùng pipeline.
 
 **Hệ quả với mục tiêu 30 FPS.** Pipeline, model tách đầu và nhiều context không cần cho thông lượng. Giá trị còn lại của chúng là phần dư thời gian (dùng cho model lớn hơn hay input lớn hơn), và độ chính xác của model tách đầu (49.84 so với 36.75 của ``int8`` mặc định, ``h5`` cũng đạt 49.66 mà không cần pipeline). Nếu mục tiêu chỉ là độ chính xác ở 30 FPS, ``int8h5`` một context là cấu hình đơn giản nhất đã đo.
 
@@ -221,10 +221,10 @@ Mốc 60 FPS cũ làm một context ``int8h5`` (54.8 FPS) chưa đạt, nên mod
 .. code-block:: bash
 
    # E1 và E2: board đã khóa tần số, p3_hold.sh chạy bằng sudo -n, model đã rsync lên board
-   .venv/bin/python ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2f_thr/q2f_thr_driver.py
+   .venv/bin/python experiments/npu/throughput/onboard_q2f_thr/q2f_thr_driver.py
    # cổng E2 (chạy trên board)
    .venv-board/bin/python -m ai.board.split_gate --standard <rknn_int8h5> --split <rknn_int8_split> --images data/ppe5/processed/images/test --out <json>
-   .venv/bin/python ai/automation/runs/ppe5_yolov8n_baseline_100ep_s0/bench/onboard_q2f_split/q2f_split_driver.py
-   .venv/bin/python -m ai.automation.analyze_q2f
+   .venv/bin/python experiments/npu/throughput/onboard_q2f_split/q2f_split_driver.py
+   .venv/bin/python -m ai.npu.throughput.analyze_q2f
 
-Số liệu: ``results/q2f_fps.json``. Mã: ``ai/board/bench_throughput_rep.py`` (hỗ trợ model tách đầu qua ``postprocess_raw`` của ``ai/board/common.py``), ``ai/board/split_gate.py``, ``tests/test_split_harness.py``.
+Số liệu: ``results/npu/throughput/q2f_fps.json``. Mã: ``ai/board/bench_throughput_rep.py`` (hỗ trợ model tách đầu qua ``postprocess_raw`` của ``ai/board/common.py``), ``ai/board/split_gate.py``, ``tests/test_split_harness.py``.

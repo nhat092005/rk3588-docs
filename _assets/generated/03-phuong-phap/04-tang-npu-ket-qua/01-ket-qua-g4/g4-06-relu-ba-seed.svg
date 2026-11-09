@@ -277,7 +277,7 @@ z
    </g>
   </g>
   <g id="text_12">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="256.609294" transform="rotate(-0 5.328 256.609294)">css_test, INT8, ba seed. Đường đứt -1.0 điểm là ngưỡng của cổng C. File: results/eval_g4.json (khóa relu_seed_gate_c)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; text-anchor: start; fill: #444444" x="5.328" y="256.609294" transform="rotate(-0 5.328 256.609294)">css_test, INT8, ba seed. Đường đứt -1.0 điểm là ngưỡng của cổng C. File: results/npu/operator_support/eval_g4.json (khóa relu_seed_gate_c)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_17">

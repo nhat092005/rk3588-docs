@@ -424,7 +424,7 @@ L 479.52 262.8
   </g>
   <g id="text_20">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 319.804692)">Board RK3588, YOLOv8n INT8 (SiLU), ảnh cache trong bộ nhớ, không gồm thu nhận camera. Mục tiêu 30 FPS (camera 30 khung/giây), người dùng đổi từ 60 ngày 2026-11-08.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 327.781645)">Hai cách đọc: thông lượng (trên) và thời gian mỗi khung (dưới). File: results/thr_p3.json (khóa configs)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 327.781645)">Hai cách đọc: thông lượng (trên) và thời gian mỗi khung (dưới). File: results/npu/throughput/thr_p3.json (khóa configs)</text>
   </g>
  </g>
  <defs>

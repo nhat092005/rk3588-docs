@@ -1,7 +1,7 @@
-"""Hình cho trang 04-cac-muc-do-tre (nhóm Nền đo NPU), vẽ bằng matplotlib từ bench/onboard/hot_*.csv.
+"""Hình cho trang 04-cac-muc-do-tre (nhóm Nền đo NPU), vẽ bằng matplotlib từ experiments/npu/latency/onboard/hot_*.csv.
 
 Dùng: .venv/bin/python docs/tools/figure_gen/03-phuong-phap/04-cac-muc-do-tre/gen.py [outdir] [tên_ảnh ...]
-Phân mức cùng ngưỡng với bảng của trang (dưới 17.0 ms nhanh, từ 20.0 ms chậm), và kiểm lại tỉ lệ khớp results/onboard_*.json.
+Phân mức cùng ngưỡng với bảng của trang (dưới 17.0 ms nhanh, từ 20.0 ms chậm), và kiểm lại tỉ lệ khớp results/npu/latency/onboard_*.json.
 """
 import csv
 import json
@@ -20,7 +20,7 @@ ROOT = os.path.normpath(os.path.join(HERE, "..", "..", "..", "..", ".."))
 DEFAULT_OUTDIR = os.path.join(ROOT, "docs", "_assets", "generated", "03-phuong-phap", "02-tang-npu-nen-do",
                               "04-cac-muc-do-tre")
 RUN = "ppe5_yolov8n_baseline_100ep_s0"
-HOT_DIR = os.path.join("ai", "automation", "runs", RUN, "bench", "onboard")
+HOT_DIR = os.path.join("experiments", "npu", "latency", "onboard")
 ONB_NAME = f"onboard_{RUN}_int8_CORE_0.json"
 FAST_MAX, SLOW_MIN = 17.0, 20.0
 FAST, MID, SLOW, GRAY, INK, BLUE = "#2E7D32", "#8A8A8A", "#C62828", "#555555", "#222222", "#1E5BB8"
@@ -30,7 +30,7 @@ plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "
 
 
 def load():
-    onb = json.load(open(os.path.join(ROOT, "results", ONB_NAME), encoding="utf-8"))
+    onb = json.load(open(os.path.join(ROOT, "results", "npu", "latency", ONB_NAME), encoding="utf-8"))
     hot = {}
     for n in (1, 2, 3):
         rows = list(csv.DictReader(open(os.path.join(ROOT, HOT_DIR, f"hot_{n}.csv"), encoding="utf-8")))
@@ -79,7 +79,7 @@ def fig_batches():
 
 
 def _res(name):
-    return json.load(open(os.path.join(ROOT, "results", name), encoding="utf-8"))
+    return json.load(open(os.path.join(ROOT, "results", "npu", "latency", name), encoding="utf-8"))
 
 
 LAYER_NAME = f"layer_analysis_{RUN}_int8_CORE_0.json"
@@ -130,7 +130,7 @@ def fig_gap():
     handles.append(Line2D([], [], marker="o", linestyle="", markerfacecolor="none", markeredgecolor=INK, markersize=8, label="lần chạy đầu"))
     fig.legend(handles=handles, loc="upper center", ncol=4, frameon=False, fontsize=8.5, bbox_to_anchor=(0.52, 0.995))
     _foot(fig, [f"Board RK3588, {MODEL_NOTE}, C API, 40 lần chạy cách 2 giây và 20 lần chạy cách 10 giây. Thời gian là đồng hồ CPU quanh rknn_run.",
-                f"File: results/{ONB_NAME} (khóa gap)"])
+                f"File: results/npu/latency/{ONB_NAME} (khóa gap)"])
     fig.subplots_adjust(left=0.1, right=0.955, top=0.9, bottom=0.2, hspace=0.18)
     return fig
 
@@ -153,7 +153,7 @@ def fig_cpuidle():
     ax.set_xlim(40000, 90000)
     ax.set_ylim(18.5, 21.5)
     _foot(fig, [f"Board RK3588, {MODEL_NOTE}, ba đợt 1000 lần chạy liên tiếp, bộ đếm cpuidle đọc trước và sau mỗi đợt.",
-                f"File: results/{ONB_NAME} (khóa cpuidle, hot)"])
+                f"File: results/npu/latency/{ONB_NAME} (khóa cpuidle, hot)"])
     fig.subplots_adjust(left=0.1, right=0.97, top=0.95, bottom=0.27)
     return fig
 
@@ -178,7 +178,7 @@ def fig_fit():
         ax.set_ylabel(ylabel)
         _clean(ax)
     _foot(fig, [f"Board RK3588, {MODEL_NOTE}, ba đợt detail, phép khớp time = a x est. + b trên các dòng Conv.",
-                f"File: results/{ONB_NAME} (khóa detail_conv_fit)"])
+                f"File: results/npu/latency/{ONB_NAME} (khóa detail_conv_fit)"])
     fig.subplots_adjust(left=0.1, right=0.97, top=0.92, bottom=0.27, wspace=0.28)
     return fig
 
@@ -207,7 +207,7 @@ def fig_e1():
                Line2D([], [], marker="o", linestyle="", markerfacecolor="none", markeredgecolor=INK, markersize=8, label="lần gọi đầu")]
     fig.legend(handles=handles, loc="upper center", ncol=2, frameon=False, fontsize=8.5, bbox_to_anchor=(0.52, 0.995))
     _foot(fig, [f"Board RK3588, {MODEL_NOTE}, hai phiên eval_perf (perf_debug=False), 20 lần gọi mỗi phiên, tần số in ra không đổi.",
-                f"Đường đứt 19.0 ms là mốc dùng trong lời văn của trang. File: results/{ONB_NAME} (khóa e1)"])
+                f"Đường đứt 19.0 ms là mốc dùng trong lời văn của trang. File: results/npu/latency/{ONB_NAME} (khóa e1)"])
     fig.subplots_adjust(left=0.1, right=0.955, top=0.9, bottom=0.2, hspace=0.18)
     return fig
 
@@ -239,7 +239,7 @@ def fig_first_call():
                Line2D([], [], marker="o", linestyle="", color=BLUE, markersize=5.5, label="trung vị các lần sau")]
     fig.legend(handles=handles, loc="upper center", ncol=2, frameon=False, fontsize=8.5, bbox_to_anchor=(0.52, 0.995))
     _foot(fig, [f"Board RK3588, {MODEL_NOTE}, ba phiên B3 (eval_perf), 5 lần gọi mỗi phiên. Trục y của hai panel không bắt đầu từ 0.",
-                f"File: results/{LAYER_NAME} (khóa first_vs_rest)"])
+                f"File: results/npu/latency/{LAYER_NAME} (khóa first_vs_rest)"])
     fig.subplots_adjust(left=0.1, right=0.97, top=0.88, bottom=0.25, wspace=0.28)
     return fig
 

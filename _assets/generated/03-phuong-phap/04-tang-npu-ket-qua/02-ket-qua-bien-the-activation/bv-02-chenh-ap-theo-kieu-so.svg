@@ -315,7 +315,7 @@ z
   </g>
   <g id="text_13">
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 269.732292)">css_test, ba kiểu số. Chênh so với SiLU seed 0, 100 epoch, riêng SiLU 200 epoch là chênh so với SiLU 100 epoch.</text>
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">Đường đứt -1.0 điểm là ngưỡng cổng C của INT8. File: results/eval_g4.json (khóa variants, gate_c, silu200_vs_silu100)</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 277.583245)">Đường đứt -1.0 điểm là ngưỡng cổng C của INT8. File: results/npu/operator_support/eval_g4.json (khóa variants, gate_c, silu200_vs_silu100)</text>
   </g>
   <g id="legend_1">
    <g id="line2d_17">

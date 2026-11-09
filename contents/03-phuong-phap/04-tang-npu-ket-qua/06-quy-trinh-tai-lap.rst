@@ -51,7 +51,7 @@ Các quyết định của người dùng trong giai đoạn 2 (ngày 2026-10-31
      - Không commit, không push. ``tmp/`` giữ nguyên (bị ``.gitignore``), trọng số ``weights/rknn_*`` cũng bị ``.gitignore`` và chỉ có sha256 trong ``export_*.json``
      - toàn bộ
 
-Nguồn của bảng: các quyết định này được ghi từ hội thoại với người dùng, không có tệp quyết định riêng ngoài các quy tắc ``rule*.txt`` viết trước dữ liệu (xác nhận từng phép đo, P2 và P3 viết khi chưa duyệt và được duyệt ngày 2026-11-01) và ``results/phase2b_variants_design.md``. Sổ theo dõi ở ``tmp/`` bị ``.gitignore``.
+Nguồn của bảng: các quyết định này được ghi từ hội thoại với người dùng, không có tệp quyết định riêng ngoài các quy tắc ``rule*.txt`` viết trước dữ liệu (xác nhận từng phép đo, P2 và P3 viết khi chưa duyệt và được duyệt ngày 2026-11-01) và ``results/notes/phase2b_variants_design.md``. Sổ theo dõi ở ``tmp/`` bị ``.gitignore``.
 
 2. Chuẩn int8h5
 ===============
@@ -75,7 +75,7 @@ Lệnh chuẩn (``CALIB_FROM`` mặc định là ``ppe5_yolov8n_baseline_100ep_s
    * - Đo trên board tầng 2
      - ``make bench-board RUN=<run> PREC=int8h5`` (chưa chạy thử)
 
-Kiểm chứng (quy tắc viết trước ``bench/onboard_q2c/rule_int8h5.txt``): V-1, bản xuất chuẩn có cùng 15 tensor FP16 với bản dựng thử và AP50-95 ``css_test`` chênh 0.00 điểm (giới hạn 0.5 điểm là số mới chưa duyệt), kết quả: export reproduces h5. V-2, sha256 của ``weights/rknn_int8`` seed 0 (so với hằng số viết trong quy tắc trước khi xuất, tệp có thời điểm sửa 2026-10-30) trước và sau khi xuất giống nhau. V-3 (mô tả, ``css_test``, điểm):
+Kiểm chứng (quy tắc viết trước ``experiments/npu/operator_support/onboard_q2c/rule_int8h5.txt``): V-1, bản xuất chuẩn có cùng 15 tensor FP16 với bản dựng thử và AP50-95 ``css_test`` chênh 0.00 điểm (giới hạn 0.5 điểm là số mới chưa duyệt), kết quả: export reproduces h5. V-2, sha256 của ``weights/rknn_int8`` seed 0 (so với hằng số viết trong quy tắc trước khi xuất, tệp có thời điểm sửa 2026-10-30) trước và sau khi xuất giống nhau. V-3 (mô tả, ``css_test``, điểm):
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/06-quy-trinh-tai-lap/r-01-ap-int8h5-theo-lan-chay.svg
@@ -135,7 +135,7 @@ Khoảng trải AP50-95 giữa ba seed SiLU: ``int8h5`` 1.13 điểm, ``int8`` 1
 3. Latency và đa nhân của int8h5
 ================================
 
-Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy tắc viết trước ``bench/onboard_q2i/rule.txt``): SiLU và ReLU seed 0, ``int8`` và ``int8h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2. Vì đo lại file xuất chuẩn nên số này thay cho số của bản dựng thử ở :doc:`05-ket-qua-luong-tu-hoa`, hai số cùng cỡ.
+Một lần chạy xen kẽ 16 phiên dưới P2 (``experiments/npu/operator_support/onboard_q2i/ppe5_yolov8n_baseline_100ep_s0``, quy tắc viết trước ``experiments/npu/operator_support/onboard_q2i/ppe5_yolov8n_baseline_100ep_s0/rule.txt``): SiLU và ReLU seed 0, ``int8`` và ``int8h5``, ``CORE_0`` và ``CORE_0_1_2``, hai vòng cùng thứ tự. Cả 16 phiên thực hiện đúng P2. Vì đo lại file xuất chuẩn nên số này thay cho số của bản dựng thử ở :doc:`05-ket-qua-luong-tu-hoa`, hai số cùng cỡ.
 
 
 .. figure:: ../../../_assets/generated/03-phuong-phap/04-tang-npu-ket-qua/06-quy-trinh-tai-lap/r-02-chi-phi-latency-int8h5.svg
@@ -206,57 +206,56 @@ Một lần chạy xen kẽ 16 phiên dưới P2 (``bench/onboard_q2i``, quy t�
      - Trang
    * - Nhiễu seed, cổng C
      - ``make evaluate RUN=<run> BACKEND=rknn PREC=int8`` (SiLU seed 0, 1, 2 và ReLU)
-     - ``bench/eval_g4/rule*.txt``, ``eval/``
+     - ``experiments/npu/operator_support/eval_g4/rule*.txt``, ``eval/``
      - ``analyze_g4c.py``
      - 10, 12
    * - Cổng A, B (G4), S1
-     - ``bench/onboard_g4b/g4b_driver.py`` (cần helper P2)
-     - ``bench/onboard_g4b/``
+     - ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/g4b_driver.py`` (cần helper P2)
+     - ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/``
      - ``analyze_g4.py``
      - 10, 11
    * - Latency biến thể
-     - ``bench/onboard_g4v*/g4v_driver.py`` (thí nghiệm 1, 2)
-     - ``bench/onboard_g4v/``, ``onboard_g4v2/``
+     - ``experiments/npu/operator_support/onboard_g4v*/ppe5_yolov8n_baseline_100ep_s0/g4v_driver.py`` (thí nghiệm 1, 2)
+     - ``experiments/npu/operator_support/onboard_g4v/``, ``onboard_g4v2/``
      - ``analyze_g4v.py [--sub onboard_g4v2]``
      - 12
    * - Throughput S2, S3
-     - ``bench/onboard_thr/thr_driver.py`` (cần helper P3)
-     - ``bench/onboard_thr/``
+     - ``experiments/npu/throughput/onboard_thr/thr_driver.py`` (cần helper P3)
+     - ``experiments/npu/throughput/onboard_thr/``
      - ``analyze_thr.py``
      - 11
    * - Chẩn đoán từng lớp
      - ``diagnose_quant.py <run> --images calib:<dir> test:<dir> --n 5 --out <dir>``
-     - ``bench/onboard_q2c/diag/``, ``rule_diag.txt``
+     - ``experiments/npu/operator_support/onboard_q2c/diag/``, ``rule_diag.txt``
      - ``analyze_q2c_diag.py``
      - 13
    * - Công thức lượng tử hóa
      - ``build_recipe.py <run> <recipe>``, rồi ``evaluate.py --variant <recipe>``
-     - ``bench/onboard_q2c/``, ``rule_recipes.txt``
+     - ``experiments/npu/operator_support/onboard_q2c/``, ``rule_recipes.txt``
      - ``analyze_q2c_recipes.py``
      - 13
    * - Chi phí ``h5``
-     - ``bench/onboard_q2h/q2h_driver.py``, ``bench/onboard_q2i/q2i_driver.py``
-     - ``bench/onboard_q2h/``, ``onboard_q2i/``
+     - ``experiments/npu/operator_support/onboard_q2h/ppe5_yolov8n_baseline_100ep_s0/q2h_driver.py``, ``experiments/npu/operator_support/onboard_q2i/ppe5_yolov8n_baseline_100ep_s0/q2i_driver.py``
+     - ``experiments/npu/operator_support/onboard_q2h/``, ``onboard_q2i/``
      - ``analyze_q2h.py``, ``analyze_q2i.py``
      - 13, 14
    * - Chuẩn ``int8h5``
      - ``make export-npu PREC=int8h5``, ``make evaluate PREC=int8h5``
-     - ``bench/onboard_q2c/rule_int8h5.txt``
+     - ``experiments/npu/operator_support/onboard_q2c/rule_int8h5.txt``
      - ``analyze_int8h5.py``
      - 14
-     - 10 đến 14
 
 5. Điều kiện thiết bị và công cụ
 ================================
 
-- **Helper trên board.** ``ai/board/lock_freq.sh`` (khóa tần số), ``bench/onboard_x4/x4_hold.sh`` (giao thức P2) và ``bench/onboard_thr/p3_hold.sh`` (giao thức P3) trong thư mục chạy của seed 0 được cài thành bản root-owned ở ``/usr/local/sbin`` kèm một tệp ``/etc/sudoers.d/rk3588-measure`` cho phép chạy đúng ba script này không cần mật khẩu. Bản trong repo là nguồn: sửa xong phải cài lại bằng ``sudo install -o root -g root -m 755 <file> /usr/local/sbin/`` trong một terminal có tty. Helper ghi trạng thái vào ``~/x4`` hoặc ``~/p3`` (script tự tạo thư mục, xóa sau khi đo là việc làm tay), và khôi phục affinity ngắt, ``irqbalance`` rồi đọc lại khi kết thúc.
+- **Helper trên board.** ``ai/board/lock_freq.sh`` (khóa tần số), ``experiments/npu/latency/onboard_x4/x4_hold.sh`` (giao thức P2) và ``experiments/npu/throughput/onboard_thr/p3_hold.sh`` (giao thức P3) trong thư mục chạy của seed 0 được cài thành bản root-owned ở ``/usr/local/sbin`` kèm một tệp ``/etc/sudoers.d/rk3588-measure`` cho phép chạy đúng ba script này không cần mật khẩu. Bản trong repo là nguồn: sửa xong phải cài lại bằng ``sudo install -o root -g root -m 755 <file> /usr/local/sbin/`` trong một terminal có tty. Helper ghi trạng thái vào ``~/x4`` hoặc ``~/p3`` (script tự tạo thư mục, xóa sau khi đo là việc làm tay), và khôi phục affinity ngắt, ``irqbalance`` rồi đọc lại khi kết thúc.
 - **Một việc board mỗi lần.** Chấm mAP trên board không chạy cùng lúc với phép đo thời gian.
 - **Bộ chấm.** ``ai/core/evaluator.py`` truyền ``max_time_img=60`` cho NMS. Giá trị cũ của Ultralytics (2 giây cộng 0.05 giây mỗi ảnh) cắt NMS khi hàng nghìn hộp qua ngưỡng 0.001. Kết quả cũ không đổi (chấm lại bốn dump).
 - **Hiệu chuẩn.** Mọi export INT8 của seed 1, 2, ReLU và các biến thể dùng ``--calib-from ppe5_yolov8n_baseline_100ep_s0`` (seed 0 là nguồn, tự lấy mẫu với ``seed`` 0 và 20 ảnh mỗi class, md5 danh sách tính lại cho cùng giá trị). ``make export-npu PREC=int8h5`` đặt ``--calib-from`` mặc định, ``PREC=int8`` không truyền cờ này. Sampler ``ai/core/rknn/calibration.py`` đã sửa (``sorted``), có ``tests/test_calibration.py``, nhưng export cũ của seed 0 không bị sửa. Export cũ của seed 1 giữ tên ``rknn_int8_ownlist``. Từ 2026-11-01 ``make export-npu PREC=int8 CALIB_FROM=<run>`` truyền ``--calib-from`` (không có ``CALIB_FROM`` thì lấy mẫu mới như trước) và ``pipeline.py`` truyền ``CALIB_FROM`` cho cả ``int8`` và ``int8h5``.
 - **Bộ nhớ.** ``mmse`` với 300 ảnh bị hệ điều hành dừng (máy 15.6 GB). Dựng thử ``kl`` chạy dưới ``systemd-run --user --scope -p MemoryMax=9G`` (``rule_recipes.txt``), các lần dựng công thức sau đó dưới ``MemoryMax=11G``.
 - **ONNX FP32 của run.** Mỗi lần chạy ``export_npu.py`` (kể cả ``int8h5``) xuất lại ``weights/best.onnx``. Xuất ONNX không tất định theo byte: hai lần xuất cùng trọng số seed 0 cho hai sha256 khác nhau, cùng 233 nút và cùng histogram op. Vì vậy ``onnx_sha256`` ghi trong ``export_int8.json`` cũ khác sha hiện tại của ``best.onnx`` ở cả bốn run, và khớp với ``export_int8h5.json`` mới. Không mã nào trong repo so ``onnx_sha256`` (``tables.py`` chỉ kiểm ``rknn_sha256``). Bảng H dùng ONNX này cho cột CPU của board, đồ thị không đổi.
 - **Kiểm sau khi chuyển mã.** Sau khi chuyển logic công thức sang ``hybrid.py`` và bật ``verbose``, ``build_hybrid`` được dựng thử trực tiếp (không ghi đè file đã đo) cho 15 tên tensor và in bảng layer. Các file ``int8h5`` và ``rknn_int8_h5`` đã đo được dựng trước thay đổi đó. Log xuất ``int8h5`` của seed 0 (chạy trực tiếp ``export_npu.py``) không được giữ, log của seed 1, 2 và ReLU nằm trong ``runs/<run>/logs/``.
-- **Bằng chứng ngoài git.** Trọng số ``.rknn`` và ``tmp/`` không vào git. Mỗi mô hình có ``export_*.json`` (sha256, danh sách hiệu chuẩn, tensor FP16). Cấu hình lượng tử hóa bước 1 ở ``bench/onboard_q2c/step1_silu.quantization.cfg`` và ``step1_relu.quantization.cfg``, log quét thử của các công thức ở ``bench/onboard_q2c/logs/``.
+- **Bằng chứng ngoài git.** Trọng số ``.rknn`` và ``tmp/`` không vào git. Mỗi mô hình có ``export_*.json`` (sha256, danh sách hiệu chuẩn, tensor FP16). Cấu hình lượng tử hóa bước 1 ở ``experiments/npu/operator_support/onboard_q2c/step1_silu.quantization.cfg`` và ``step1_relu.quantization.cfg``, log quét thử của các công thức ở ``experiments/npu/operator_support/onboard_q2c/logs/``.
 
 6. Điều chưa làm
 ================
