@@ -50,7 +50,7 @@ Phase 3. Quantization FP16 / INT8
 
 **Lệnh:** ``make phase3 DATASET=<ds>``
 
-Với mỗi run của dataset (2 run): export FP16, export INT8 (300 ảnh calibration), complexity, evaluate ONNX, evaluate RKNN FP16, evaluate RKNN INT8, rồi chạy ``make tables``. ``evaluate BACKEND=rknn`` tự chép model và ảnh lên board, chạy inference ở board (``ai/board/infer_dump.py``), chép output về và tính NMS, AP trên PC, mất khoảng 1–2 phút mỗi lần.
+Với mỗi run của dataset (2 run): export FP16, export INT8 (300 ảnh calibration), complexity, evaluate ONNX, evaluate RKNN FP16, evaluate RKNN INT8, rồi chạy ``make tables``. ``evaluate BACKEND=rknn`` tự chép model và ảnh lên board, chạy inference ở board (``ai/board/probe/infer_dump.py``), chép output về và tính NMS, AP trên PC, mất khoảng 1–2 phút mỗi lần.
 
 - ☐ ``phase3`` xong
 - ☐ ``eval/onnx_fp32_*.json`` lệch ``pt_fp32`` không quá 0.001 (ONNX export đúng)

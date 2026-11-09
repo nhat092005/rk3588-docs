@@ -31,7 +31,7 @@ Luồng camera đến phát hiện
      - Hậu xử lý, theo dõi và đầu ra (bước 6 đến 8).
    * - 07
      - :doc:`07-chay-lien-tuc-tren-board`
-     - Chương trình ``ai/board/camera.py`` chạy liên tục camera đến hậu xử lý: cách chạy, kết quả ba lần kiểm, phát hiện khi viết, điều kiện đã khóa.
+     - Chương trình ``ai/board/app/camera.py`` chạy liên tục camera đến hậu xử lý: cách chạy, kết quả ba lần kiểm, phát hiện khi viết, điều kiện đã khóa.
    * - 08
      - :doc:`08-phan-cung-tang-toc`
      - Mọi khối tăng tốc của RK3588S trên board: khối nào luồng hiện tại dùng, khối nào có sẵn mà chưa dùng, khối nào tắt, và số đo kèm theo.

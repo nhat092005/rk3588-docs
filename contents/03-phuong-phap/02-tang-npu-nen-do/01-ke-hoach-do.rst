@@ -12,7 +12,7 @@ Kế hoạch đo từng khối
 
    - Trang này là kế hoạch và quy trình đo. Kết quả đo nằm ở :doc:`02-ket-qua-latency-tung-khoi`, phân tích sâu ở :doc:`03-phan-tich-sau-latency-tung-khoi`, các mức độ trễ và giả thuyết đã kiểm ở :doc:`04-cac-muc-do-tre`, thí nghiệm ghim CPU và ngắt NPU ở :doc:`05-thu-ghim-cpu-va-ngat`, cơ chế các mức ở :doc:`06-co-che-cac-muc-do-tre`, giao thức P2 và đo mở rộng ở :doc:`08-ket-qua-p2-va-do-mo-rong`. Mục 9 có bảng trạng thái mọi việc chưa biết. Mục 3 ghi trạng thái từng bước.
    - Đối tượng: YOLOv8n ``nc=5`` của run ``ppe5_yolov8n_baseline_100ep_s0``, export INT8 (w8a8) mới, ``core_mask = CORE_0``, tần số khoá ở ``performance``. Mô hình và con số GFLOPs theo từng khối lấy ở trang kiến trúc.
-   - Nguồn số liệu chính là ``rknn.eval_perf()`` chạy từ PC qua adb, lấy thời gian từ phần cứng board [T1 API232 tr.18]. Hai phiên ``init_runtime`` riêng: ``perf_debug=False`` cho latency tổng, ``perf_debug=True`` cho thời gian từng lớp. Đường PC đến board chậm và latency dao động giữa các phiên, nên có thêm đo ngay trên board bằng C API (``ai/board/rknn_perf_bench.c``, bước B7) và thí nghiệm E2 về vị trí CPU, ngắt NPU và trạng thái ngủ của CPU (:doc:`05-thu-ghim-cpu-va-ngat`).
+   - Nguồn số liệu chính là ``rknn.eval_perf()`` chạy từ PC qua adb, lấy thời gian từ phần cứng board [T1 API232 tr.18]. Hai phiên ``init_runtime`` riêng: ``perf_debug=False`` cho latency tổng, ``perf_debug=True`` cho thời gian từng lớp. Đường PC đến board chậm và latency dao động giữa các phiên, nên có thêm đo ngay trên board bằng C API (``ai/board/bench/rknn_perf_bench.c``, bước B7) và thí nghiệm E2 về vị trí CPU, ngắt NPU và trạng thái ngủ của CPU (:doc:`05-thu-ghim-cpu-va-ngat`).
    - Hãng ghi ``perf_debug=True`` làm thời gian lớn hơn vì thêm mã debug và có thể tắt một số cơ chế song song [T1 UG232 tr.177]. Vì vậy thời gian từng khối chỉ báo dưới dạng tỉ lệ phần trăm kèm tổng debug, không cộng thành latency.
    - Tài liệu hãng không nói tổng thời gian từng lớp có bằng tổng thời gian khung hay không. Trang đo cả hai và báo tỉ số, không giả định.
    - Cột ``NPUCycles`` hiện chỉ tính cho Conv [T1 UG232 tr.140], nên tỉ lệ cycles của op khác Conv luôn bằng 0 và không dùng thay thời gian đo.
@@ -48,7 +48,7 @@ Kế hoạch đo từng khối
 Trang không trả lời các câu sau, mỗi câu có trang riêng:
 
 - So SiLU với ReLU và so ``CORE_0`` với ``CORE_0_1_2``: cổng G4 ở :doc:`../03-tang-npu-don-bay/01-operator-support` và chiến lược S1, S2, S3 ở :doc:`../03-tang-npu-don-bay/02-multi-core`.
-- Thời gian tiền xử lý, hậu xử lý và NMS ngoài NPU: tier 2 (``ai/board/bench_npu.py``), nằm ngoài phạm vi trang này.
+- Thời gian tiền xử lý, hậu xử lý và NMS ngoài NPU: tier 2 (``ai/board/bench/bench_npu.py``), nằm ngoài phạm vi trang này.
 - Độ chính xác (mAP) sau INT8.
 
 2. Đối tượng và điều kiện cố định
@@ -99,7 +99,7 @@ Mỗi bước có lệnh, file tạo ra và điều kiện đạt. Chưa qua đi
      - Điều kiện đạt
    * - B0
      - Chuẩn bị board
-     - Trên board: ``sudo bash ai/board/start_rknn_server.sh``, ``sudo bash ai/board/lock_freq.sh lock``. Trên PC: ``make board-check LOCK=1``
+     - Trên board: ``sudo bash ai/board/sh/start_rknn_server.sh``, ``sudo bash ai/board/sh/lock_freq.sh lock``. Trên PC: ``make board-check LOCK=1``
      - Ghi ``lock_freq.sh status``, nhiệt độ và tải lúc bắt đầu
      - ``board-check`` in ``frequencies locked: True``, ``adb`` và ``rknn_server`` ok
    * - B1
@@ -134,7 +134,7 @@ Mỗi bước có lệnh, file tạo ra và điều kiện đạt. Chưa qua đi
      - Mọi số trong trang truy ra được file
    * - B7
      - Đo trên board bằng C API (không qua PC)
-     - Biên dịch ``ai/board/rknn_perf_bench.c`` trên board, chạy ``onboard_run.sh``: 3 đợt 1000 lần liên tiếp (đợt 1 lấy mẫu ``rknpu/load`` và ``power``), thử nghỉ 2 và 10 giây giữa các lần chạy, 3 đợt 200 lần ở chế độ ``detail``, chụp ``cpuidle`` trước và sau mỗi đợt
+     - Biên dịch ``ai/board/bench/rknn_perf_bench.c`` trên board, chạy ``onboard_run.sh``: 3 đợt 1000 lần liên tiếp (đợt 1 lấy mẫu ``rknpu/load`` và ``power``), thử nghỉ 2 và 10 giây giữa các lần chạy, 3 đợt 200 lần ở chế độ ``detail``, chụp ``cpuidle`` trước và sau mỗi đợt
      - ``experiments/npu/latency/onboard/*``, ``results/npu/latency/onboard_*.md``
      - Tiêu chí ở :doc:`04-cac-muc-do-tre`
 
@@ -442,7 +442,7 @@ Không rút ra từ trang này: latency end-to-end của hệ thống, kết lu�
 9. Việc cần làm và điều chưa biết
 =================================
 
-Việc mã (đã làm, ngày 2026-10-30): ``measure_layers`` lặp 5 lần và lưu ``time_us_all``, tham số ``--session`` và ``--skip-memory`` cho ``benchmark_npu.py``, ``ai/core/rknn/blocks.py`` (gán lớp RKNN về khối), ``ai/npu/latency/aggregate_layers.py`` (gộp, cổng A1 đến A8), ``ai/npu/latency/analyze_layers.py`` (phân tích sâu), ``ai/npu/latency/analyze_onboard.py`` (số đo trên board và E1), ``ai/board/rknn_perf_bench.c`` (C API trên board), ``tests/test_layer_blocks.py`` (chạy trên đầu ra thật của board).
+Việc mã (đã làm, ngày 2026-10-30): ``measure_layers`` lặp 5 lần và lưu ``time_us_all``, tham số ``--session`` và ``--skip-memory`` cho ``benchmark_npu.py``, ``ai/core/rknn/blocks.py`` (gán lớp RKNN về khối), ``ai/npu/latency/aggregate_layers.py`` (gộp, cổng A1 đến A8), ``ai/npu/latency/analyze_layers.py`` (phân tích sâu), ``ai/npu/latency/analyze_onboard.py`` (số đo trên board và E1), ``ai/board/bench/rknn_perf_bench.c`` (C API trên board), ``tests/test_layer_blocks.py`` (chạy trên đầu ra thật của board).
 
 Điều đã được đo trả lời (T3 board, ngày 2026-10-30):
 

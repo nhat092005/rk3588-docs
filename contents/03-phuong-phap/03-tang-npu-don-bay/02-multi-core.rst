@@ -39,11 +39,11 @@ Chương xét việc dùng ba nhân NPU cho pipeline phát hiện PPE (YOLOv8n I
    * - S1
      - Một context chia một frame qua nhiều nhân: ``core_mask`` là ``CORE_0_1`` hoặc ``CORE_0_1_2``
      - Giảm latency một frame
-     - ``ai/automation/benchmark_npu.py`` (tầng 1), ``ai/board/bench_npu.py`` (tầng 2). Kết quả: :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`
+     - ``ai/automation/bench/benchmark_npu.py`` (tầng 1), ``ai/board/bench/bench_npu.py`` (tầng 2). Kết quả: :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4`
    * - S2
      - N context, mỗi context ghim một nhân (``CORE_0``, ``CORE_1``, ``CORE_2``), mỗi context một luồng
      - Tăng throughput
-     - ``ai/board/bench_throughput.py``, ``bench_throughput_rep.py`` (lặp 3 lần), ``ai/automation/pipeline.py``
+     - ``ai/board/bench/bench_throughput.py``, ``bench_throughput_rep.py`` (lặp 3 lần), ``ai/automation/pipeline/pipeline.py``
    * - S3
      - Chồng pre và post-process trên CPU với phần NPU bằng pipeline luồng ở tầng ứng dụng, có thể thêm ``async_mode``
      - Tăng throughput khi CPU là điểm nghẽn
@@ -213,7 +213,7 @@ Bài Kong không báo throughput và không chạy nhiều model đồng thời 
 3.3. Harness và giới hạn
 ------------------------
 
-``ai/board/bench_throughput.py`` (harness cũ): một luồng mỗi context, mỗi luồng chạy pre, NPU, post trên frame đã giải mã sẵn, 200 ảnh cache dùng vòng tròn, warmup 20 lần trên ``frames[0]``, vùng đo gồm pre, ``rknn.inference`` và post, một lượt, tần số không cố định [Mã nguồn repo bench_throughput.py:3, 27-28, 37-47, 57-72, 88-91]. Giới hạn: không có độ trải, DVFS lẫn vào, ảnh cache lặp lại không phản ánh camera, warmup một frame. ``RKNNLite.inference`` có nhả GIL không là chưa biết (``RKNNRuntime`` là ``.so``). Harness mới ``bench_throughput_rep.py`` (``results/npu/throughput/thr_p3.json``, 2026-10-31) lặp 3 lần độc lập và sửa các giới hạn trên trừ ảnh cache lặp lại và GIL (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`).
+``ai/board/bench/bench_throughput.py`` (harness cũ): một luồng mỗi context, mỗi luồng chạy pre, NPU, post trên frame đã giải mã sẵn, 200 ảnh cache dùng vòng tròn, warmup 20 lần trên ``frames[0]``, vùng đo gồm pre, ``rknn.inference`` và post, một lượt, tần số không cố định [Mã nguồn repo bench_throughput.py:3, 27-28, 37-47, 57-72, 88-91]. Giới hạn: không có độ trải, DVFS lẫn vào, ảnh cache lặp lại không phản ánh camera, warmup một frame. ``RKNNLite.inference`` có nhả GIL không là chưa biết (``RKNNRuntime`` là ``.so``). Harness mới ``bench_throughput_rep.py`` (``results/npu/throughput/thr_p3.json``, 2026-10-31) lặp 3 lần độc lập và sửa các giới hạn trên trừ ảnh cache lặp lại và GIL (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`).
 
 3.4. Kết luận cho S2
 --------------------
@@ -262,7 +262,7 @@ Bài Kong đo latency "tại NPU runtime", không nêu thống kê pre, post hay
 4.4. Kết luận cho S3
 --------------------
 
-Cần ba đại lượng theo từng frame (``T_pre``, ``T_npu``, ``T_post``), cùng FPS và phần trăm CPU, có và không có worker tách riêng. ``ai/board/bench_npu.py`` ghi riêng pre, NPU, post và e2e cho từng ảnh [Mã nguồn repo bench_npu.py:3-4].
+Cần ba đại lượng theo từng frame (``T_pre``, ``T_npu``, ``T_post``), cùng FPS và phần trăm CPU, có và không có worker tách riêng. ``ai/board/bench/bench_npu.py`` ghi riêng pre, NPU, post và e2e cho từng ảnh [Mã nguồn repo bench_npu.py:3-4].
 
 .. list-table::
    :header-rows: 1
@@ -275,7 +275,7 @@ Cần ba đại lượng theo từng frame (``T_pre``, ``T_npu``, ``T_post``), c
    * - Bằng chứng
      - Không có T1 (``async_mode`` chưa hỗ trợ) hay T2 cho riêng S3. T3 2026-10-31: 147.4 FPS so với 141.2 FPS của S2, tăng 4.4%, dưới ngưỡng 5% (:doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan` mục 4)
    * - Harness
-     - ``ai/board/bench_throughput_rep.py --mode pipeline``
+     - ``ai/board/bench/bench_throughput_rep.py --mode pipeline``
    * - Việc còn thiếu
      - Số worker pre và post khác công thức đã dùng chưa thử
 

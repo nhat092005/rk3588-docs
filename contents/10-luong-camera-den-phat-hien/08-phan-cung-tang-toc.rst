@@ -12,7 +12,7 @@ Phần cứng tăng tốc
 
 .. admonition:: Tóm tắt
 
-   1. ``ai/board/camera.py`` chỉ dùng bốn khối phần cứng: MIPI D-PHY với CSI-2, VICAP, ISP và một trong ba lõi NPU. Tiền xử lý, hậu xử lý, theo dõi, vẽ khung, mã hóa video và JPEG chạy trên CPU [Mã nguồn repo, ``ai/board/camera.py``, :doc:`07-chay-lien-tuc-tren-board`].
+   1. ``ai/board/app/camera.py`` chỉ dùng bốn khối phần cứng: MIPI D-PHY với CSI-2, VICAP, ISP và một trong ba lõi NPU. Tiền xử lý, hậu xử lý, theo dõi, vẽ khung, mã hóa video và JPEG chạy trên CPU [Mã nguồn repo, ``ai/board/app/camera.py``, :doc:`07-chay-lien-tuc-tren-board`].
    2. Trong lần chạy 20 giây ngày 2026-11-08, bộ đếm ngắt chỉ tăng ở NPU lõi 0, ISP và VICAP. RGA, VPU, JPEG, IEP giữ 0. GPU có 13 và 8 ngắt nhưng ``load`` đọc 0 [T3 board, ``/proc/interrupts``].
    3. Board có thêm các khối chạy được mà luồng không dùng: RGA (hai RGA3, một RGA2), ``rkvenc2``, bộ mã hóa JPEG, GPU Mali-G610. Bốn khối trong datasheet bị tắt trong device-tree, không khối nào liên quan đến ảnh phát hiện.
    4. CPU ngoài NPU tốn khoảng 0.945 ms trên độ trễ đầu cuối 18.97 ms (khóa xung). Không khối nào là nút thắt của 30 FPS, nên chuyển việc sang phần cứng là để giải phóng CPU, không phải tăng FPS [T3 board, ``camera.py``] [SL, phép cộng].

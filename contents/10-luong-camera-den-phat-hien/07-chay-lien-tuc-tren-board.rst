@@ -6,7 +6,7 @@ Chạy liên tục
 
 .. admonition:: Trang này trả lời
 
-   - Chương trình ``ai/board/camera.py`` chạy luồng camera, ISP, NPU, hậu xử lý liên tục ra sao, và đo những gì?
+   - Chương trình ``ai/board/app/camera.py`` chạy luồng camera, ISP, NPU, hậu xử lý liên tục ra sao, và đo những gì?
    - Luồng này có theo kịp camera 30 khung/giây không, mất khung hay không, độ trễ bao nhiêu?
    - Chương trình đã khóa những điều kiện đo nào, còn gì chưa làm?
 
@@ -29,7 +29,7 @@ Chạy trên board, ghim vào các lõi A76 vì khi không ghim ``preprocess`` c
 
 .. code:: text
 
-   taskset -c 4-7 .venv-board/bin/python -m ai.board.camera \
+   taskset -c 4-7 .venv-board/bin/python -m ai.board.app.camera \
        --model <thư mục rknn_<độ chính xác>> --core-mask CORE_0 --duration-s 60 \
        --out <json> --run-id <id> --git-commit <sha> --git-dirty true [--track]
 

@@ -277,5 +277,5 @@ Latency của lần gọi đầu thấp hơn trung vị các lần sau ở cả 
 6. Nguồn
 ========
 
-- T3 board và PC: ``results/npu/latency/onboard_*``, ``results/npu/latency/layer_analysis_*``, ``experiments/npu/latency/onboard/``, ``bench/tier1_int8_CORE_0*``, ``bench/extra_e1_*``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/npu/latency/analyze_onboard.py``, ``ai/npu/latency/analyze_layers.py``. Không có trích dẫn T1 trong trang này.
+- T3 board và PC: ``results/npu/latency/onboard_*``, ``results/npu/latency/layer_analysis_*``, ``experiments/npu/latency/onboard/``, ``bench/tier1_int8_CORE_0*``, ``bench/extra_e1_*``, ``bench/extra_link_facts.txt``. Mã: ``ai/board/bench/rknn_perf_bench.c``, ``ai/npu/latency/analyze_onboard.py``, ``ai/npu/latency/analyze_layers.py``. Không có trích dẫn T1 trong trang này.
 

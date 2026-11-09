@@ -46,7 +46,7 @@ Bảng sau là những gì dự án thực sự quan sát, theo vị trí trong 
      - Nguồn
    * - Đầu vào phía board (Python)
      - ``(1, 640, 640, 3)`` uint8 RGB. Lời gọi ``rknn.inference(inputs=[inp])`` không có ``data_format`` hay ``pass_through``
-     - [T3 board, ``ai/board/common.py:65``, ``ai/board/infer_dump.py:41``]
+     - [T3 board, ``ai/board/common.py:65``, ``ai/board/probe/infer_dump.py:41``]
    * - Quy ước của vendor cho đầu vào RKNNLite
      - Đầu vào 4 chiều: buffer phải theo NHWC. Toolkit-2 mặc định layout đầu vào là NHWC
      - [T1 UG232 tr.39], [T1 API232 tr.17]
@@ -132,7 +132,7 @@ Nhãn trạng thái: ĐO (có số đo T3), NGUỒN (chỉ có tài liệu hoặ
    * - L3
      - ``pass_through`` để đưa thẳng buffer đã ở layout gốc
      - ĐO một lần, bị từ chối
-     - Harness C ``ai/board/rknn_perf_bench.c`` đã thử. Ghi chú trong mã (dòng 77 đến 78) viết ``pass_through = 1 was rejected by rknn_inputs_set (expects 4915200 bytes for this 1228800 byte INT8 input)``, nên harness dùng uint8 NHWC với ``pass_through = 0`` ở dòng 95. Nguyên nhân kích thước kỳ vọng gấp 4 lần: chưa biết
+     - Harness C ``ai/board/bench/rknn_perf_bench.c`` đã thử. Ghi chú trong mã (dòng 77 đến 78) viết ``pass_through = 1 was rejected by rknn_inputs_set (expects 4915200 bytes for this 1228800 byte INT8 input)``, nên harness dùng uint8 NHWC với ``pass_through = 0`` ở dòng 95. Nguyên nhân kích thước kỳ vọng gấp 4 lần: chưa biết
 
 Về L3, vendor mô tả hai chế độ: "When pass_through is 0, the input data layout need to be arranged as NHWC. When pass_through is 1, the input data layout need to reshaped as RKNN_TENSOR_NC1HWC2." [T1 UG152 tr.53]. Với ``pass_through`` bằng 1 buffer được đưa thẳng vào nút đầu vào của model và không qua tiền xử lý [T1 RKNNRT tr.15]. Ghi chú của harness cho thấy khi phép chuyển nằm trong ``rknn_inputs_set`` thì nó nằm ngoài đoạn ``rknn_run`` được tính giờ. Nghĩa là số của harness C không gồm bước chuyển layout đầu vào. Với ``rknn.inference`` của harness Python, vendor xếp phép chuyển layout vào phần CPU của đường thường [T1 UG232 tr.8], dự án không tách riêng phần này (xem :doc:`06-memory-copy`).
 
@@ -174,5 +174,5 @@ Probe micro-op ``ai/npu/operator_support/micro_ops.py:64`` là nơi duy nhất t
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, tr.8, 11, 39, 61, 65), User Guide RKNN API V1.5.2 (tr.19, 53), API Reference RKNNRT V2.3.2 (tr.12, 15, 27), API Reference Toolkit2 V2.3.2 (tr.17, 18), ``rk3588_part1.pdf`` (TRM1 tr.1985).
-- T3: ``ai/board/common.py:65``, ``ai/board/infer_dump.py:41``, ``ai/board/rknn_perf_bench.c:77-98``, ``ai/npu/operator_support/micro_ops.py:64``, ``results/npu/operator_support/g4_latency_workload.json``, ``results/npu/operator_support/q2e_pc.json``, build log ``experiments/npu/operator_support/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log``.
+- T3: ``ai/board/common.py:65``, ``ai/board/probe/infer_dump.py:41``, ``ai/board/bench/rknn_perf_bench.c:77-98``, ``ai/npu/operator_support/micro_ops.py:64``, ``results/npu/operator_support/g4_latency_workload.json``, ``results/npu/operator_support/q2e_pc.json``, build log ``experiments/npu/operator_support/onboard_q2c/logs/build_ppe5_yolov8n_baseline_100ep_s0_h5.log``.
 - Trang liên quan: :doc:`04-datatype`, :doc:`06-memory-copy`, :doc:`07-compiler-optimization`, :doc:`../04-tang-npu-ket-qua/07-ket-qua-qat-kien-truc`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

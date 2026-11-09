@@ -9497,7 +9497,7 @@ z
    <text style="font-size: 9.5px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif" transform="translate(17.534594 321.175469) rotate(-90)">Thời gian một lần rknn_run, đồng hồ CPU (ms)</text>
   </g>
   <g id="text_27">
-   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 441.37987)">Board RK3588, YOLOv8n INT8, CORE_0, ai/board/rknn_perf_bench.c (C API), 50 lần khởi động rồi 1000 lần chạy mỗi đợt.</text>
+   <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 441.37987)">Board RK3588, YOLOv8n INT8, CORE_0, ai/board/bench/rknn_perf_bench.c (C API), 50 lần khởi động rồi 1000 lần chạy mỗi đợt.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 449.230823)">Thời gian là đồng hồ CPU quanh rknn_run, gồm cả phần driver. Đường đứt 17.0 và 20.0 ms đọc từ biểu đồ gộp 3000 lần chạy.</text>
    <text style="font-style: italic; font-size: 7.2px; font-family: 'Times New Roman', 'Liberation Serif', 'DejaVu Serif', serif; fill: #444444" transform="translate(5.328 456.863245)">File: experiments/npu/latency/onboard/hot_1.csv, hot_2.csv, hot_3.csv</text>
   </g>

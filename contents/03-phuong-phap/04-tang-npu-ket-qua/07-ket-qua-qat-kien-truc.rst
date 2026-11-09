@@ -109,7 +109,7 @@ Thời gian (một lần chạy xen kẽ dưới P2, SiLU seed 0, ``experiments/
      - 12.557
      - có
 
-Giải mã CPU bằng numpy: trung vị 8.02 ms, p95 8.246 ms trên 200 lần (``ai/board/bench_decode.py``, ghim CPU4, tần số khóa). Tổng ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.442 ms của ``int8h5``. Đây là tổng của hai trung vị đo riêng (NPU dưới P2, giải mã trên CPU), không phải phép đo từ đầu đến cuối. Nếu giải mã chồng lấp với suy luận ảnh kế tiếp thì thông lượng cao hơn: điều này đã đo sau đó ở :doc:`09-ket-qua-don-bay-fps` (một context đạt 65.99 FPS), còn thời gian mỗi khung thì không giảm. Bản giải mã C hay NEON có thể nhanh hơn numpy, cũng không được đo.
+Giải mã CPU bằng numpy: trung vị 8.02 ms, p95 8.246 ms trên 200 lần (``ai/board/bench/bench_decode.py``, ghim CPU4, tần số khóa). Tổng ở ``CORE_0`` là 13.07 + 8.02 = 21.09 ms so với 16.442 ms của ``int8h5``. Đây là tổng của hai trung vị đo riêng (NPU dưới P2, giải mã trên CPU), không phải phép đo từ đầu đến cuối. Nếu giải mã chồng lấp với suy luận ảnh kế tiếp thì thông lượng cao hơn: điều này đã đo sau đó ở :doc:`09-ket-qua-don-bay-fps` (một context đạt 65.99 FPS), còn thời gian mỗi khung thì không giảm. Bản giải mã C hay NEON có thể nhanh hơn numpy, cũng không được đo.
 
 3. B: QAT
 ===========
@@ -220,20 +220,20 @@ Mọi lệnh chạy từ gốc repo chính, board đã khóa tần số và có 
    # A1: xuất tách đầu (int8 và fp16), chấm mAP trên board (FP16 tách đầu là kiểm tra hợp lệ V-board, chấm trước số INT8)
    .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_baseline_100ep_s0 int8
    .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_baseline_100ep_s0 fp16
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision fp16 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision fp16 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
    # A1: thời gian. Phần NPU dưới P2 (benchmark_npu --variant split, xen kẽ với int8 và int8h5, theo quy tắc rule_split.txt mục S-3),
-   # giải mã CPU ghim CPU4 (ai/board/bench_decode.py chạy trên board), rồi phân tích
+   # giải mã CPU ghim CPU4 (ai/board/bench/bench_decode.py chạy trên board), rồi phân tích
    .venv/bin/python -m ai.npu.operator_support.analyze_q2j
    # B: QAT rồi chấm mAP
    RKNN_LOG_LEVEL=3 .venv/bin/python -m ai.npu.operator_support.qat_split ppe5_yolov8n_baseline_100ep_s0 --epochs 6 --batch 8
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant qat --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_baseline_100ep_s0 --backend rknn --precision int8 --variant qat --board minhnhat@192.168.137.49 --board-repo rk3588
    # A2: huấn luyện, xuất (INT8 dùng danh sách hiệu chuẩn của seed 0), chấm mAP
    make train CONFIG=ai/automation/configs/ppe5_yolov8n_nodfl.yaml
-   .venv/bin/python -m ai.automation.export_npu ppe5_yolov8n_nodfl_100ep_s0 --quantize 16
-   .venv/bin/python -m ai.automation.export_npu ppe5_yolov8n_nodfl_100ep_s0 --quantize 8 --calib-from ppe5_yolov8n_baseline_100ep_s0
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision fp16 --board minhnhat@192.168.137.49 --board-repo rk3588
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.export_npu ppe5_yolov8n_nodfl_100ep_s0 --quantize 16
+   .venv/bin/python -m ai.automation.pipeline.export_npu ppe5_yolov8n_nodfl_100ep_s0 --quantize 8 --calib-from ppe5_yolov8n_baseline_100ep_s0
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision fp16 --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --board minhnhat@192.168.137.49 --board-repo rk3588
    # QAT và A2: bảng số liệu (đọc các file eval và log xuất trong repo)
    .venv/bin/python -m ai.npu.operator_support.analyze_q2kl
 

@@ -55,7 +55,7 @@ Phép đo latency một context đọc thời gian của một lần chạy trê
      - ``trap`` khi thoát: trả affinity đã lưu, ``rknn_server`` về 0 đến 7, bật lại ``irqbalance``, đọc lại và ghi vào log
      - ``trap`` khi thoát: trả affinity đã lưu, bật lại ``irqbalance``, đọc lại và ghi vào log
    * - Tần số
-     - Khóa trước phiên bằng ``ai/board/lock_freq.sh lock``, ``make board-check LOCK=1`` kiểm tra đã khóa, helper chỉ ghi ``lock_freq.sh status``
+     - Khóa trước phiên bằng ``ai/board/sh/lock_freq.sh lock``, ``make board-check LOCK=1`` kiểm tra đã khóa, helper chỉ ghi ``lock_freq.sh status``
      - Như P2
 
 Hai script nằm trong repo (``experiments/npu/latency/onboard_x4/x4_hold.sh`` và ``experiments/npu/throughput/onboard_thr/p3_hold.sh``). Chúng chạy bằng quyền root qua ``sudo -n`` nhờ tệp ``/etc/sudoers.d/rk3588-measure`` trên board, chỉ cho phép ba bản sao root-owned ``lock_freq.sh``, ``x4_hold.sh`` và ``p3_hold.sh`` trong ``/usr/local/sbin``. Sửa script trong repo không có tác dụng trên board đến khi người dùng cài lại bản sao.

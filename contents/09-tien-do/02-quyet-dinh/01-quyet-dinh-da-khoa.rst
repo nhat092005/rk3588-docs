@@ -43,4 +43,4 @@ Quyết định đã khoá trong protocol v1
      - RKNPU2 User Guide trang PDF 72–73
    * - Seed
      - 0 cho mọi phase, mỗi model chỉ một seed nên kết luận ghi rõ "1 seed". Bảng phần cứng dùng run seed 0
-     - Quy tắc seed, mục 7, và ``ai/automation/tables.py``
+     - Quy tắc seed, mục 7, và ``ai/automation/report/tables.py``

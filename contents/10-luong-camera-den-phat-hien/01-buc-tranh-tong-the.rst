@@ -12,7 +12,7 @@ Tổng quan đường đi của ảnh
 
 .. admonition:: Tóm tắt
 
-   1. Luồng gồm chín bước, đánh số 0 đến 8: cảm biến, đường truyền MIPI, VICAP, ISP, tiền xử lý, NPU, hậu xử lý, theo dõi, đầu ra. Bước 0 đến 3 đã đo khi chạy camera. Bước 4 đến 6 đã đo trên khung NV12 thật (mục 5) và chạy liên tục bằng ``ai/board/camera.py`` ở :doc:`07-chay-lien-tuc-tren-board`: 29.95 khung/giây, không mất khung, độ trễ phần mềm đầu cuối 19.0 ms khi khóa xung [T3 board, ``camera.py``]. Bước 7 đo riêng bằng hộp giả, bước 8 chưa đo.
+   1. Luồng gồm chín bước, đánh số 0 đến 8: cảm biến, đường truyền MIPI, VICAP, ISP, tiền xử lý, NPU, hậu xử lý, theo dõi, đầu ra. Bước 0 đến 3 đã đo khi chạy camera. Bước 4 đến 6 đã đo trên khung NV12 thật (mục 5) và chạy liên tục bằng ``ai/board/app/camera.py`` ở :doc:`07-chay-lien-tuc-tren-board`: 29.95 khung/giây, không mất khung, độ trễ phần mềm đầu cuối 19.0 ms khi khóa xung [T3 board, ``camera.py``]. Bước 7 đo riêng bằng hộp giả, bước 8 chưa đo.
    2. Raw của cảm biến là Bayer RAW10 (``SBGGR10_1X10``) 4224x3136, một chế độ duy nhất ở 30 khung/giây [T3 board, ``media-ctl -p``, ``v4l2-ctl --list-subdev-framesizes``]. Mục tiêu 30 FPS của dự án khớp với tốc độ camera, nên FPS cao hơn của NPU không tạo thêm khung.
    3. VICAP đưa RAW thẳng vào ISP (``rdbk_mode: online``) và chưa cấp bộ đệm DDR (``dma enable: 0x0``), suy ra không ghi DDR [SL] [T3 board, ``/proc/rkcif-mipi-lvds1``]. Từ ISP trở đi mọi khối trao đổi qua bộ đệm trong DDR.
    4. Có hai mặt phẳng: dữ liệu (hình 1) và điều khiển (hình 3). Điều khiển gồm vòng 3A trên CPU và I2C tới cảm biến, VCM.

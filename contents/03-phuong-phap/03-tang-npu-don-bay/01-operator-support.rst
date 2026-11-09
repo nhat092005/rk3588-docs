@@ -93,7 +93,7 @@ Cổng áp dụng cho mọi op hoặc thay đổi kiến trúc ứng viên, theo
      - Build model ở INT8 (dtype triển khai), FP16 làm tham chiếu, đọc bảng từng layer (cột ``OpType``, ``Target``)
      - Không có op mới có ``Target`` CPU so với baseline
      - Có op mới có ``Target`` CPU
-     - Pipeline ``ai/automation/export_npu.py`` (INT8, calibration theo bảng tham số bên dưới), ép ``RKNN(verbose=True)`` để in bảng layer. FP16: 5 lệnh ở mục 5.1
+     - Pipeline ``ai/automation/pipeline/export_npu.py`` (INT8, calibration theo bảng tham số bên dưới), ép ``RKNN(verbose=True)`` để in bảng layer. FP16: 5 lệnh ở mục 5.1
    * - G4
      - T3 board
      - Chạy ``rknn.init_runtime(target='rk3588', device_id=..., perf_debug=True)`` rồi ``rknn.eval_perf()`` ở ``CORE_0`` và ``CORE_0_1_2``, đọc cột ``WorkLoad(0/1/2)-ImproveTherical``, đo latency và mAP

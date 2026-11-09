@@ -6,7 +6,7 @@ Phase 5-8: tối ưu
 
 .. admonition:: Tóm tắt
 
-   - Phase 5 thêm YOLO11n/s bằng model, config và sửa `MODELS` trong `ai/automation/pipeline.py`. Tiêu chí xong là có dòng YOLO11 ở D–L hoặc ghi rõ lý do loại.
+   - Phase 5 thêm YOLO11n/s bằng model, config và sửa `MODELS` trong `ai/automation/pipeline/pipeline.py`. Tiêu chí xong là có dòng YOLO11 ở D–L hoặc ghi rõ lý do loại.
    - Phase 6 tìm bottleneck bằng số đo từ `table_K_layers.md`. Hiện tượng `Transpose` chạy CPU (590 µs / 20,663 µs) chỉ thấy trên model nháp, cần kiểm lại trên model thật.
    - Phase 7 có các candidate: structured pruning, SiLU sang ReLU / LeakyReLU, `op_target`, mixed precision, lighter head và input resolution. Mục `op_target` hiện là `NotImplementedError`.
    - Phase 7 train 1 seed (0) và kết luận ghi rõ "1 seed".
@@ -35,7 +35,7 @@ Phase 5. Multi-model YOLO11n/s
    * - Thêm config
      - ``ai/automation/configs/<ds>_yolo11{n,s}_baseline.yaml`` (chép config YOLOv8 tương ứng)
    * - Cho phase chạy cả YOLO11
-     - ``ai/automation/pipeline.py``: thêm 2 model vào ``MODELS``
+     - ``ai/automation/pipeline/pipeline.py``: thêm 2 model vào ``MODELS``
 
 Sau đó chạy lại ``make phase2/3/4 DATASET=<ds>`` (các bước YOLOv8 đã có sẽ được bỏ qua).
 

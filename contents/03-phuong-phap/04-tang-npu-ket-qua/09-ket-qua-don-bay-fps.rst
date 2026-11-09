@@ -26,7 +26,7 @@ Mốc 60 FPS ghi lúc đo, mục tiêu hiện hành là 30 FPS (đổi ngày 202
 1. Câu hỏi, giao thức và nguồn
 ================================
 
-Cả hai thí nghiệm chạy ``ai/board/bench_throughput_rep.py`` dưới taskset ``-c 4-7`` với helper P3 (``p3_hold.sh``, giao thức đã duyệt ngày 2026-11-01, hạn chế ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3` mục 6), 1238 khung, nghỉ 20 giây giữa các lần chạy, ba lần lặp theo cùng thứ tự, ảnh test ``ppe5`` đã decode sẵn trong bộ nhớ (không camera, không giải mã video, không vẽ hay lưu kết quả). FPS là số khung chia cho thời gian tường, đã tính tiền xử lý, NPU và hậu xử lý (kể cả giải mã box của model tách đầu). Mỗi con số là trung vị của ba lần chạy, chênh lệch tối đa là khoảng trải. Một lần chạy chỉ được tính khi thực hiện đúng P3 (ngắt NPU đúng lõi, tiến trình trong CPU4 đến CPU7, tần số khóa, ``irqbalance`` dừng). Cả hai thí nghiệm đều có mọi lần chạy thực hiện đúng.
+Cả hai thí nghiệm chạy ``ai/board/bench/bench_throughput_rep.py`` dưới taskset ``-c 4-7`` với helper P3 (``p3_hold.sh``, giao thức đã duyệt ngày 2026-11-01, hạn chế ở :doc:`../02-tang-npu-nen-do/07-giao-thuc-p2-p3` mục 6), 1238 khung, nghỉ 20 giây giữa các lần chạy, ba lần lặp theo cùng thứ tự, ảnh test ``ppe5`` đã decode sẵn trong bộ nhớ (không camera, không giải mã video, không vẽ hay lưu kết quả). FPS là số khung chia cho thời gian tường, đã tính tiền xử lý, NPU và hậu xử lý (kể cả giải mã box của model tách đầu). Mỗi con số là trung vị của ba lần chạy, chênh lệch tối đa là khoảng trải. Một lần chạy chỉ được tính khi thực hiện đúng P3 (ngắt NPU đúng lõi, tiến trình trong CPU4 đến CPU7, tần số khóa, ``irqbalance`` dừng). Cả hai thí nghiệm đều có mọi lần chạy thực hiện đúng.
 
 Quy tắc "khác" viết trước dữ liệu: chênh ít nhất 5% và lớn hơn khoảng trải lớn hơn của hai điều kiện, nếu không thì "không phân biệt được". Đây là quy tắc của M12 (trường ``rule`` của ``results/npu/throughput/thr_p3.json``, kết quả ở :doc:`03-ket-qua-da-nhan`), dùng lại cho các so sánh mới của trang này (các so sánh mới chưa duyệt).
 
@@ -84,7 +84,7 @@ Ghi chú về mã đo: E1 chạy với harness trước khi thêm hỗ trợ mod
 3. Cổng đúng đắn của E2
 =========================
 
-Model tách đầu trả hai đầu ra thô, CPU giải mã bằng numpy rồi mới chạy hậu xử lý chung. Trước khi đọc thời gian, ``ai/board/split_gate.py`` so các phát hiện (ngưỡng 0.25) của hai model trên 20 ảnh test qua cùng đường harness: 136 phát hiện của ``int8h5``, 140 của model tách đầu, 135 cặp khớp (cùng lớp, IoU ít nhất 0.5), F1 bằng 0.978. Ngưỡng viết trước là 0.85 (số mới, chưa duyệt), nên cổng qua.
+Model tách đầu trả hai đầu ra thô, CPU giải mã bằng numpy rồi mới chạy hậu xử lý chung. Trước khi đọc thời gian, ``ai/board/probe/split_gate.py`` so các phát hiện (ngưỡng 0.25) của hai model trên 20 ảnh test qua cùng đường harness: 136 phát hiện của ``int8h5``, 140 của model tách đầu, 135 cặp khớp (cùng lớp, IoU ít nhất 0.5), F1 bằng 0.978. Ngưỡng viết trước là 0.85 (số mới, chưa duyệt), nên cổng qua.
 
 4. E2: giải mã chồng lấp với NPU
 ==================================
@@ -223,8 +223,8 @@ Mốc 60 FPS cũ làm một context ``int8h5`` (54.8 FPS) chưa đạt, nên mod
    # E1 và E2: board đã khóa tần số, p3_hold.sh chạy bằng sudo -n, model đã rsync lên board
    .venv/bin/python experiments/npu/throughput/onboard_q2f_thr/q2f_thr_driver.py
    # cổng E2 (chạy trên board)
-   .venv-board/bin/python -m ai.board.split_gate --standard <rknn_int8h5> --split <rknn_int8_split> --images data/ppe5/processed/images/test --out <json>
+   .venv-board/bin/python -m ai.board.probe.split_gate --standard <rknn_int8h5> --split <rknn_int8_split> --images data/ppe5/processed/images/test --out <json>
    .venv/bin/python experiments/npu/throughput/onboard_q2f_split/q2f_split_driver.py
    .venv/bin/python -m ai.npu.throughput.analyze_q2f
 
-Số liệu: ``results/npu/throughput/q2f_fps.json``. Mã: ``ai/board/bench_throughput_rep.py`` (hỗ trợ model tách đầu qua ``postprocess_raw`` của ``ai/board/common.py``), ``ai/board/split_gate.py``, ``tests/test_split_harness.py``.
+Số liệu: ``results/npu/throughput/q2f_fps.json``. Mã: ``ai/board/bench/bench_throughput_rep.py`` (hỗ trợ model tách đầu qua ``postprocess_raw`` của ``ai/board/common.py``), ``ai/board/probe/split_gate.py``, ``tests/test_split_harness.py``.

@@ -188,7 +188,7 @@ Quan sát: ở model SiLU không dòng ``ConvExSwish`` nào chia (0 trên 57) c�
 7. M4, M6, M7, M16: thăm dò RKNNLite
 ======================================
 
-Chạy trên board bằng ``ai/board/probe_runtime.py``, model INT8 chuẩn của seed 0, 8 ảnh nhiễu cố định, so đầu ra với tham chiếu tuần tự một context (``rule_probe.txt``). Không dưới P2 hay P3, thời gian chỉ mô tả.
+Chạy trên board bằng ``ai/board/probe/probe_runtime.py``, model INT8 chuẩn của seed 0, 8 ảnh nhiễu cố định, so đầu ra với tham chiếu tuần tự một context (``rule_probe.txt``). Không dưới P2 hay P3, thời gian chỉ mô tả.
 
 - **M4** (một context cho ba luồng, mỗi luồng 100 lần gọi): 300 lần gọi, 0 exception, 300 đầu ra khác tham chiếu (lệch tối đa 1.04). Phép đối chiếu M4c (cùng mã, một luồng, 300 lần): 0 khác biệt, 0 exception. Vì M4c khớp hoàn toàn, phép so sánh hợp lệ và khác biệt của M4 đến từ việc ba luồng dùng chung một context. Runtime không báo lỗi khi sai, nên dùng chung một context giữa các luồng cho đầu ra sai âm thầm trong phép thử này. Điều này phù hợp với việc S2 dùng một context mỗi luồng. Nguyên nhân vì sao sai chưa biết.
 - **M6** (``async_mode=True``): ``init_runtime`` thành công, tám lần ``inference`` tuần tự đều trả đầu ra khớp tham chiếu của chính ảnh vừa gửi (lệch 0) và khác đầu ra của ảnh trước. Hành vi khi gửi nhiều ảnh không đợi kết quả: chưa thử, thời gian không đo.
@@ -254,9 +254,9 @@ QAT khác A1 ở ``CORE_0`` 0.820 ms (6.3%, lớn hơn chênh hai phiên 0.016 m
    .venv/bin/python -m ai.npu.operator_support.analyze_q2e_pc            # G7a, G10, M1, vết QAT (PC)
    .venv/bin/python -m ai.npu.operator_support.micro_ops 192.168.137.49:5555   # G7b, G11 (board, rknn_server)
    .venv/bin/python -m ai.npu.operator_support.build_batch_probe          # M7 dựng batch 1 và 4 (PC)
-   # board: .venv-board/bin/python -m ai.board.probe_runtime m4|m4c|m6|m7|m16 --model <rknn_int8 dir> --out <json>  (M7 thêm --b1 --b4)
+   # board: .venv-board/bin/python -m ai.board.probe.probe_runtime m4|m4c|m6|m7|m16 --model <rknn_int8 dir> --out <json>  (M7 thêm --b1 --b4)
    .venv/bin/python -m ai.npu.operator_support.build_split ppe5_yolov8n_nodfl_100ep_s0 int8   # A2 tách đầu (cũng fp16)
-   .venv/bin/python -m ai.automation.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
+   .venv/bin/python -m ai.automation.pipeline.evaluate ppe5_yolov8n_nodfl_100ep_s0 --backend rknn --precision int8 --variant split --board minhnhat@192.168.137.49 --board-repo rk3588
    .venv/bin/python experiments/npu/operator_support/onboard_q2e_qat/q2e_qat_driver.py   # thời gian QAT dưới P2 (helper x4_hold.sh đang chạy)
    .venv/bin/python -m ai.npu.operator_support.probe_core_all 192.168.137.49:5555   # M2 (board, rknn_server)
    .venv/bin/python -m ai.npu.operator_support.analyze_q2e_board

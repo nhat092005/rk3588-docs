@@ -107,7 +107,7 @@ Chạy từ trên xuống. Cột "Kết quả đúng" là thứ cần thấy tr�
      - 1 lần
      - In ``RKNNLite OK``
    * - 4
-     - [board, sudo] ``sudo bash ai/board/start_rknn_server.sh``
+     - [board, sudo] ``sudo bash ai/board/sh/start_rknn_server.sh``
      - Sau mỗi lần khởi động lại board, trước Phase 4 (tầng 1 cần)
      - In ``adbd listening on 5555`` và pid ``rknn_server``
    * - 5
@@ -127,7 +127,7 @@ Chạy từ trên xuống. Cột "Kết quả đúng" là thứ cần thấy tr�
      - Sau bước 7 (chỉ cần ssh tới board)
      - ``phase3 complete``, đồng thời Table E, F không còn ``[TBD]``
    * - 9
-     - [board, sudo] ``sudo bash ai/board/lock_freq.sh lock``
+     - [board, sudo] ``sudo bash ai/board/sh/lock_freq.sh lock``
      - Trước bước 10
      - Mọi dòng in ``performance``
    * - 10
@@ -135,7 +135,7 @@ Chạy từ trên xuống. Cột "Kết quả đúng" là thứ cần thấy tr�
      - Sau bước 4 và 9 (tầng 1 FP16 mất khoảng 30 phút/model)
      - ``phase4 complete``, đồng thời Table G, H, I, K, L không còn ``[TBD]``
    * - 11
-     - [board, sudo] ``sudo bash ai/board/lock_freq.sh unlock``
+     - [board, sudo] ``sudo bash ai/board/sh/lock_freq.sh unlock``
      - Sau bước 10
      - Governor về ``ondemand``
    * - 12

@@ -227,7 +227,7 @@ Kết luận cho quyết định 16: chọn H.265, tiết kiệm khoảng một 
    * - Điều chưa biết
      - Cần để xác minh
    * - ByteTrack với hộp thật từ model, và khi NPU, RGA chạy cùng lúc
-     - Đo bằng hộp giả khi chạy riêng. ``ai/board/camera.py --track`` đã chạy cùng pipeline với 0 hộp (ByteTrack 0.190 ms) và với người đứng trong khung tối (trung bình 0.59 hộp mỗi khung, ByteTrack 0.727 ms trung vị, :doc:`07-chay-lien-tuc-tren-board`). Chưa đo với nhiều người trong phòng đủ sáng
+     - Đo bằng hộp giả khi chạy riêng. ``ai/board/app/camera.py --track`` đã chạy cùng pipeline với 0 hộp (ByteTrack 0.190 ms) và với người đứng trong khung tối (trung bình 0.59 hộp mỗi khung, ByteTrack 0.727 ms trung vị, :doc:`07-chay-lien-tuc-tren-board`). Chưa đo với nhiều người trong phòng đủ sáng
    * - Trần mã hóa của VPU (nguồn tệp ở 4K chỉ đạt 55 khung/giây không mã hóa, che trần), so với libx264 ở cùng chất lượng, và H.265 so với H.264 ở nhiều cảnh (chuyển động, thiếu sáng)
      - Nạp khung vào bộ đệm dma-buf dựng sẵn thay cho ``fdsrc``, đặt bitrate tương đương, thêm cảnh
    * - ``postprocess`` với khung camera thật có người

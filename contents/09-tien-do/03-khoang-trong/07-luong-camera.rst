@@ -41,7 +41,7 @@
    * - 5
      - Trần mã hóa VPU, thời gian RGA và ByteTrack khi NPU và CPU cùng chạy, ByteTrack với hộp thật
      - ``videotestsrc`` che chi phí VPU. ``rga_bench`` và ``track_bench.py`` chạy riêng, hộp tracker là hộp giả
-     - Nguồn NV12 từ tệp cho VPU. ``ai/board/camera.py`` đã có (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`), cần thêm RGA vào luồng và người trước camera
+     - Nguồn NV12 từ tệp cho VPU. ``ai/board/app/camera.py`` đã có (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`), cần thêm RGA vào luồng và người trước camera
    * - 6
      - Ảnh méo tỉ lệ làm giảm độ chính xác bao nhiêu trên khung camera thật, và màu viền RGA có đúng 114
      - Trên ảnh tĩnh ppe2286 (FP32, PC), letterbox và ép vuông chưa phân biệt được: khoảng tin cậy 95% chứa 0 ở cả hai tập (:doc:`../../10-luong-camera-den-phat-hien/04-tien-xu-ly`). Màu viền RGA chưa đo

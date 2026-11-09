@@ -6,7 +6,7 @@ Phase 9: camera
 
 .. admonition:: Tóm tắt
 
-   - Phase 9 kiểm tra model đề xuất trên camera OV13855 qua pipeline NV12, RGB, LetterBox, RKNN (NPU), NMS. Tệp ``ai/board/camera.py`` và target ``make bench-camera`` đã viết ngày 2026-11-07, kiểm bằng ba lần chạy 60 đến 120 giây trên board (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`). Target mới chạy khô bằng ``make -n``, chưa chạy thật qua ``make``. Lần chạy nghiệm thu chưa làm.
+   - Phase 9 kiểm tra model đề xuất trên camera OV13855 qua pipeline NV12, RGB, LetterBox, RKNN (NPU), NMS. Tệp ``ai/board/app/camera.py`` và target ``make bench-camera`` đã viết ngày 2026-11-07, kiểm bằng ba lần chạy 60 đến 120 giây trên board (:doc:`../../10-luong-camera-den-phat-hien/07-chay-lien-tuc-tren-board`). Target mới chạy khô bằng ``make -n``, chưa chạy thật qua ``make``. Lần chạy nghiệm thu chưa làm.
    - Phase 9 chạy tới khi nhiệt độ ổn định (tăng không quá 1°C trong 10 phút liền) rồi thêm 30 phút. Các ngưỡng này chốt trước khi đo.
 
 .. _phase-9-camera--real-world-evaluation:
@@ -26,7 +26,7 @@ Phase 9. Camera / real-world evaluation
    * - Việc
      - File
    * - Pipeline camera trên board, dùng lại ``preprocess``, ``postprocess``, ``ResourceMonitor``
-     - ``ai/board/camera.py`` (đã có, chưa nghiệm thu), ``ai/board/common.py``
+     - ``ai/board/app/camera.py`` (đã có, chưa nghiệm thu), ``ai/board/common.py``
    * - Ghi FPS, nhiệt độ NPU mỗi phút
      - ``experiments/runs/<run_id>/bench/camera_<ngày>.json``
 
@@ -40,7 +40,7 @@ Phase 9. Camera / real-world evaluation
 Quy tắc nghiệm thu (chốt ngày 2026-11-07, trước lần chạy)
 ---------------------------------------------------------
 
-Ba ngưỡng ở trên giữ nguyên (1°C, 10 phút, 30 phút). Phần dưới chốt cách đo, ghi trước khi có số liệu của lần chạy dài. Chương trình là ``ai/board/camera.py --until-stable`` [Mã nguồn repo ``ai/board/camera.py``].
+Ba ngưỡng ở trên giữ nguyên (1°C, 10 phút, 30 phút). Phần dưới chốt cách đo, ghi trước khi có số liệu của lần chạy dài. Chương trình là ``ai/board/app/camera.py --until-stable`` [Mã nguồn repo ``ai/board/app/camera.py``].
 
 .. list-table::
    :header-rows: 1
@@ -241,7 +241,7 @@ Cả năm lần đều thoát mã 0, ISP ``frameloss`` bằng 0, không khung n�
 
 **Vì sao RSS tăng.** Probe từng tầng (khung xám tĩnh, 6000 khung) cho thấy capture, đổi màu, tiền xử lý, NPU, hậu xử lý đều tăng dưới 0.015 KiB mỗi khung [T3 board, ``rss_probe.py``]. Trong tiến trình thật, ``gc.collect()`` ép chạy làm RSS giảm từ 100.1 xuống 82.1, từ 127.9 xuống 83.1, từ 184.9 xuống 86.6 MiB. Rác là cấu trúc ctypes của ``rknnlite`` (``RKNNInputOutputNum``, ``RKNNRtTensorAttr``, bộ đệm 1228800 byte) nằm trong vòng tham chiếu [T3 board, ``live_smaps.py``, lần chạy có ``mallopt``]. ``tracemalloc`` ghi bản ghi từng khung của chương trình đo khoảng 0.5 KiB mỗi khung [T3 board]. Việc gán 0.68 MiB mỗi phút cho rác và 1.03 MiB mỗi phút cho bản ghi chỉ là phép trừ giữa các lần chạy khác điều kiện [SL].
 
-**Cách sửa đang dùng** (``ai/board/camera.py``, ``ai/board/common.py``):
+**Cách sửa đang dùng** (``ai/board/app/camera.py``, ``ai/board/common.py``):
 
 - ``gc.freeze()`` trước khi mở camera và ``gc.collect()`` mỗi phút sau khi xử lý xong khung. Chưa có ``gc.freeze()`` thì mỗi lần dọn 26 đến 29 ms và 11 khung bị ghi đè trong 10 phút [T3 board, không khóa xung].
 - Bản ghi từng khung và thời điểm đến lưu theo cột ``array('d')`` (lớp ``Records``), 72 byte mỗi khung cho 9 cột.

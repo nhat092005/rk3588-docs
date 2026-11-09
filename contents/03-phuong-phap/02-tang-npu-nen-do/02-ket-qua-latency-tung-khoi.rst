@@ -49,7 +49,7 @@ Model: ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/weights/rknn_int8/best-
      - 2 x 20
      - ``bench/extra_e1_*``
    * - Trên board, đợt liên tiếp
-     - ``ai/board/rknn_perf_bench.c`` (C API, không qua PC), 3 tiến trình, 50 lần khởi động rồi 1000 lần chạy
+     - ``ai/board/bench/rknn_perf_bench.c`` (C API, không qua PC), 3 tiến trình, 50 lần khởi động rồi 1000 lần chạy
      - 3 x 1000
      - ``experiments/npu/latency/onboard/hot_*.csv``
    * - Trên board, ``detail``
@@ -743,5 +743,5 @@ Cách đọc. A5 và A8 không đạt, kể cả khi chỉ xét ba phiên B3. C�
 ========
 
 - T1: ``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf`` (UG232 tr.177), ``docs/_assets/pdf/rknn/01_Rockchip_RKNPU_API_Reference_RKNN_Toolkit2_V2.3.2_EN.pdf`` (API232 tr.18), ``3rdparty/rknn-toolkit2/rknpu2/runtime/Linux/librknn_api/include/rknn_api.h`` (``RKNN_FLAG_COLLECT_PERF_MASK``, ``RKNN_QUERY_PERF_DETAIL``, ``RKNN_QUERY_PERF_RUN``).
-- T3 board và PC: ``results/npu/latency/latency_per_block_*``, ``results/npu/latency/layer_analysis_*``, ``results/npu/latency/onboard_*``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/export_int8.json``. Mã: ``ai/board/rknn_perf_bench.c``, ``ai/npu/latency/aggregate_layers.py``, ``analyze_layers.py``, ``analyze_onboard.py``, ``ai/core/rknn/blocks.py``, ``tests/test_layer_blocks.py``.
+- T3 board và PC: ``results/npu/latency/latency_per_block_*``, ``results/npu/latency/layer_analysis_*``, ``results/npu/latency/onboard_*``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/bench/``, ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/export_int8.json``. Mã: ``ai/board/bench/rknn_perf_bench.c``, ``ai/npu/latency/aggregate_layers.py``, ``analyze_layers.py``, ``analyze_onboard.py``, ``ai/core/rknn/blocks.py``, ``tests/test_layer_blocks.py``.
 

@@ -10,7 +10,7 @@ Memory copy
 
 .. admonition:: Tóm tắt
 
-   1. Trong harness, ``T_npu`` bao toàn bộ lời gọi ``rknn.inference(...)`` nên gồm copy vào, chạy và lấy ra. Dự án không tách riêng thời gian copy, nên thời gian copy là chưa biết [T3 board, ``ai/board/bench_throughput_rep.py:71-75``].
+   1. Trong harness, ``T_npu`` bao toàn bộ lời gọi ``rknn.inference(...)`` nên gồm copy vào, chạy và lấy ra. Dự án không tách riêng thời gian copy, nên thời gian copy là chưa biết [T3 board, ``ai/board/bench/bench_throughput_rep.py:71-75``].
    2. Ở một context ``CORE_0``, ``T_pre``, ``T_npu``, ``T_post`` là 0.216, 17.161, 0.662 ms (trung vị, P3) [T3 board, ``results/npu/throughput/thr_p3.json``].
    3. Zero-copy chỉ có ở C API. RKNNLite 2.3.2 không có hàm cấp bộ nhớ hay ``rknn_set_io_mem``, repo không dùng zero-copy [T3 board, wheel ``rknn_lite.py``, grep ``ai/``].
    4. ``pass_through = 1`` trong harness C bị ``rknn_inputs_set`` từ chối (kỳ vọng 4915200 byte cho đầu vào 1228800 byte), nguyên nhân chưa biết.
@@ -53,7 +53,7 @@ Harness đo thời gian bằng ``time.perf_counter()`` quanh từng khâu. Mỗi
      - CPU
      - Hậu xử lý (chi tiết ở :doc:`09-pre-post-processing`)
 
-Nguồn: [T3 board, ``ai/board/bench_throughput_rep.py:71-75``] (mốc ``t0`` ở dòng 71, ``inference`` ở dòng 74) và ``rknn_lite.py:209`` (lời gọi ``set_inputs`` trong wrapper). Harness Python gọi ``inference(inputs=[inp])`` và không gọi ``create_mem`` hay ``set_io_mem`` [Mã nguồn repo, grep ``create_mem\|io_mem\|zero.copy`` trong ``ai/``, không có kết quả].
+Nguồn: [T3 board, ``ai/board/bench/bench_throughput_rep.py:71-75``] (mốc ``t0`` ở dòng 71, ``inference`` ở dòng 74) và ``rknn_lite.py:209`` (lời gọi ``set_inputs`` trong wrapper). Harness Python gọi ``inference(inputs=[inp])`` và không gọi ``create_mem`` hay ``set_io_mem`` [Mã nguồn repo, grep ``create_mem\|io_mem\|zero.copy`` trong ``ai/``, không có kết quả].
 
 Số đo ba khâu (trung vị, P3, ms) [T3 board, ``results/npu/throughput/thr_p3.json``]:
 
@@ -106,7 +106,7 @@ Vendor mô tả chi phí của API thường: "each time the general interface u
    * - RKNNLite (Python)
      - Wheel ``rknn_toolkit_lite2-2.3.2`` có các hàm ``load_rknn``, ``list_devices``, ``init_runtime``, ``inference``, ``get_sdk_version``, ``list_support_target_platform``, ``release``. Không có ``create_mem``, ``set_io_mem`` hay zero-copy. ``inference`` nhận ``inputs_pass_through`` [T3 board, ``rknnlite/api/rknn_lite.py`` dòng 57, 81, 115, 193, 237, 255, 266]
    * - Harness C
-     - ``ai/board/rknn_perf_bench.c`` đặt ``pass_through=0``, ``type=UINT8``, ``fmt=NHWC`` (dòng 95 đến 97) [Mã nguồn repo]
+     - ``ai/board/bench/rknn_perf_bench.c`` đặt ``pass_through=0``, ``type=UINT8``, ``fmt=NHWC`` (dòng 95 đến 97) [Mã nguồn repo]
    * - Repo
      - Không dùng zero-copy, không thấy ``create_mem`` hay ``set_io_mem`` trong ``ai/`` [Mã nguồn repo, grep]
 
@@ -115,7 +115,7 @@ Hệ quả: với RKNNLite, đòn bẩy zero-copy chỉ có thể thực hiện 
 3.3 ``pass_through``
 --------------------
 
-Toolkit có tham số ``inputs_pass_through`` bỏ phép trừ mean và chia phương sai trước khi dữ liệu vào driver [T1 API232 tr.18]. Dự án đã thử ``pass_through = 1`` trong harness C một lần. Ghi chú trong mã (dòng 77 đến 78) viết: "pass_through = 1 was rejected by rknn_inputs_set (expects 4915200 bytes for this 1228800 byte INT8 input)" [Mã nguồn repo ``ai/board/rknn_perf_bench.c:77-78``]. Harness vì vậy quay về ``pass_through = 0``. Nguyên nhân kỳ vọng gấp 4 lần: chưa biết (cùng mục L3 ở :doc:`03-tensor-layout` mục 4).
+Toolkit có tham số ``inputs_pass_through`` bỏ phép trừ mean và chia phương sai trước khi dữ liệu vào driver [T1 API232 tr.18]. Dự án đã thử ``pass_through = 1`` trong harness C một lần. Ghi chú trong mã (dòng 77 đến 78) viết: "pass_through = 1 was rejected by rknn_inputs_set (expects 4915200 bytes for this 1228800 byte INT8 input)" [Mã nguồn repo ``ai/board/bench/rknn_perf_bench.c:77-78``]. Harness vì vậy quay về ``pass_through = 0``. Nguyên nhân kỳ vọng gấp 4 lần: chưa biết (cùng mục L3 ở :doc:`03-tensor-layout` mục 4).
 
 4. Bộ nhớ mỗi context
 =====================
@@ -216,5 +216,5 @@ FPS của các đòn bẩy phối hợp (ví dụ nhiều context cộng chồng
 ========
 
 - T1: SDK User Guide V2.3.2 (``3rdparty/rknn-toolkit2/doc/02_Rockchip_RKNPU_User_Guide_RKNN_SDK_V2.3.2_EN.pdf``, UG232 tr.64, 65), API Reference Toolkit2 V2.3.2 (API232 tr.18), driver ``3rdparty/rknpu-driver-0.9.8/`` (``rknpu_gem.c:1353, 1684-1685``).
-- T3: ``ai/board/bench_throughput_rep.py:71-75``, ``ai/board/rknn_perf_bench.c:77-78, 95-97``, wheel ``rknn_lite.py``, ``results/npu/throughput/thr_p3.json``, ``results/npu/operator_support/q2e_board.json``.
+- T3: ``ai/board/bench/bench_throughput_rep.py:71-75``, ``ai/board/bench/rknn_perf_bench.c:77-78, 95-97``, wheel ``rknn_lite.py``, ``results/npu/throughput/thr_p3.json``, ``results/npu/operator_support/q2e_board.json``.
 - Trang liên quan: :doc:`03-tensor-layout`, :doc:`04-datatype`, :doc:`05-memory-access`, :doc:`09-pre-post-processing`, :doc:`../04-tang-npu-ket-qua/03-ket-qua-da-nhan`, :doc:`../04-tang-npu-ket-qua/08-so-muc-chua-biet`, :doc:`../04-tang-npu-ket-qua/09-ket-qua-don-bay-fps`.

@@ -495,7 +495,7 @@ Một lần chạy xen kẽ 16 phiên dưới P2 (``experiments/npu/operator_sup
    * - Latency ``h5`` ngoài P2
      - chưa biết
      - P2 đã được người dùng duyệt ngày 2026-11-01, số ngoài P2 chỉ có một phiên
-   * - Triển khai ``h5`` trong ``ai/automation/export_npu.py``
+   * - Triển khai ``h5`` trong ``ai/automation/pipeline/export_npu.py``
      - đã làm (cập nhật sau trang này)
      - Nhãn ``int8h5`` song song với ``int8`` mặc định, xem :doc:`06-quy-trinh-tai-lap`. ``pipeline.py`` chưa nối
 

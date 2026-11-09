@@ -379,5 +379,5 @@ Nhãn S1, S2, S3 không đổi (cổng tương đối 5%, mục 7). Giới hạn
 - T2: ``edgesoc_benchmark_2026kong.pdf`` (Table 4 tr.7, Data availability tr.11).
 - T3 board: ``results/npu/throughput/thr_p3.*``, ``results/npu/operator_support/g4_latency_workload.*``, ``results/npu/latency/onboard_x4_*``, ``experiments/npu/throughput/onboard_thr/`` và ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/``.
 - Quy tắc viết trước dữ liệu: ``experiments/npu/throughput/onboard_thr/rule.txt``, ``experiments/npu/operator_support/onboard_g4b/ppe5_yolov8n_baseline_100ep_s0/rule.txt``.
-- Mã đo: ``ai/board/bench_throughput_rep.py``, ``ai/npu/throughput/analyze_thr.py``, ``ai/npu/operator_support/analyze_g4.py``.
+- Mã đo: ``ai/board/bench/bench_throughput_rep.py``, ``ai/npu/throughput/analyze_thr.py``, ``ai/npu/operator_support/analyze_g4.py``.
 

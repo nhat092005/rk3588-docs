@@ -70,7 +70,7 @@ def fig_batches():
                for c, t in ((FAST, f"mức nhanh (dưới {FAST_MAX:.1f} ms)"), (MID, "mức giữa"),
                             (SLOW, f"mức chậm (từ {SLOW_MIN:.1f} ms)"))]
     fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, fontsize=9, bbox_to_anchor=(0.52, 0.995))
-    note = (f"Board RK3588, YOLOv8n INT8, CORE_0, ai/board/rknn_perf_bench.c (C API), 50 lần khởi động rồi 1000 lần chạy mỗi đợt.\n"
+    note = (f"Board RK3588, YOLOv8n INT8, CORE_0, ai/board/bench/rknn_perf_bench.c (C API), 50 lần khởi động rồi 1000 lần chạy mỗi đợt.\n"
             f"Thời gian là đồng hồ CPU quanh rknn_run, gồm cả phần driver. Đường đứt 17.0 và 20.0 ms đọc từ biểu đồ gộp 3000 lần chạy.\n"
             f"File: {HOT_DIR}/hot_1.csv, hot_2.csv, hot_3.csv")
     fig.text(0.01, 0.004, note, fontsize=7.2, style="italic", color="#444444", va="bottom", ha="left")
