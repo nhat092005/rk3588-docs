@@ -2,7 +2,7 @@
 Kiến thức nền
 *************
 
-Lý thuyết chung, không gắn với một chip: nền tảng AI, nguyên lý NPU, lượng tử hóa, compiler, bộ nhớ, thiết kế model và kiến trúc YOLO. Phần riêng của RK3588 nằm ở mục Nền tảng RK3588.
+Lý thuyết chung, không gắn với một chip: nền tảng AI, nguyên lý NPU, lượng tử hóa, compiler, bộ nhớ, các khối cấu thành mạng, kiến trúc YOLO và thiết kế model. Phần riêng của RK3588 nằm ở mục Nền tảng RK3588.
 
 .. list-table::
    :header-rows: 1
@@ -20,10 +20,12 @@ Lý thuyết chung, không gắn với một chip: nền tảng AI, nguyên lý 
      - Từ đồ thị mạng đến lệnh phần cứng: các tầng biểu diễn, fusion và tiling.
    * - :doc:`Bộ nhớ và hiệu năng <05-bo-nho-hieu-nang/index>`
      - Đo hiệu năng cho đúng và thiết kế mạng nhận biết bộ nhớ.
-   * - :doc:`Thiết kế model <06-thiet-ke-model/index>`
-     - Chọn cấu trúc model hợp với NPU: re-parameterization, activation, NAS.
+   * - :doc:`Khối cấu thành mạng <06-khoi-cau-thanh-mang/index>`
+     - Từng khối xây dựng của mạng phát hiện (residual, CSP, depthwise, ...): sinh ra để làm gì, đánh đổi gì.
    * - :doc:`YOLO <07-yolo/index>`
      - Kiến trúc YOLOv8n và YOLO26n, và huấn luyện đổi đồ thị suy luận ra sao.
+   * - :doc:`Thiết kế model <08-thiet-ke-model/index>`
+     - Chọn cấu trúc model hợp với NPU: re-parameterization, activation, NAS.
 
 .. toctree::
    :maxdepth: 1
@@ -34,5 +36,6 @@ Lý thuyết chung, không gắn với một chip: nền tảng AI, nguyên lý 
    03-luong-tu-hoa/index
    04-compiler/index
    05-bo-nho-hieu-nang/index
-   06-thiet-ke-model/index
+   06-khoi-cau-thanh-mang/index
    07-yolo/index
+   08-thiet-ke-model/index

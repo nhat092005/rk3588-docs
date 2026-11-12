@@ -78,7 +78,19 @@ Quy ước về số tham số và FLOPs:
 2. Khối C2f và C3k2
 ===================
 
-Cấu trúc Cross Stage Partial (CSP) là nền tảng giúp mạng phân tách dòng truyền đặc trưng thành hai nhánh: một nhánh đi qua các khối biến đổi phi tuyến sâu, nhánh còn lại đi tắt và hội tụ ở cuối module nhằm duy trì gradient ổn định.
+Cấu trúc Cross Stage Partial (CSP) là nền tảng của các khối C2f và C3k2. Bài gốc mô tả cách làm là chia bản đồ đặc trưng làm hai phần rồi gộp lại:
+
+   "partitioning feature map of the base layer into two parts and then merging them through a proposed cross-stage hierarchy" [T2 CSPNET tr.2]
+
+Mục đích bài nêu là giàu tổ hợp gradient hơn và ít tính toán hơn:
+
+   "to achieve a richer gradient combination while reducing the amount of computation" [T2 CSPNET tr.2]
+
+Cơ chế là cắt dòng gradient để các lớp không học thông tin gradient trùng lặp. Câu này nói về CSPDenseNet, biến thể áp dụng cho DenseNet:
+
+   "prevents an excessively amount of duplicate gradient information by truncating the gradient flow" [T2 CSPNET tr.5]
+
+Bài gốc không nói CSP "giữ gradient ổn định". Cấu trúc hai nhánh trong C2f của YOLO là biến thể, và nguồn trong repo không đo hay khẳng định lợi ích gradient riêng cho C2f. Phân tích đầy đủ nằm ở :doc:`../06-khoi-cau-thanh-mang/02-csp-va-c2f`.
 
 .. figure:: ../../../_assets/generated/01-kien-thuc-nen/07-yolo/yolo-01-c2f-vs-c3k2.svg
    :align: center
@@ -115,7 +127,8 @@ Khối Spatial Pyramid Pooling - Fast (SPPF) có nhiệm vụ tổng hợp thôn
 - Khác biệt giữa YOLOv8n và YOLO26n trong SPPF:
   - Trong YOLOv8n: cấu hình là ``SPPF([1024, 5])`` không kích hoạt đường kết nối tắt residual [T1 yolov8.yaml:29].
   - Trong YOLO26n: cấu hình là ``SPPF([1024, 5, 3, True])`` với cờ ``shortcut=True`` [T1 yolo26.yaml:31]. Khi số kênh đầu vào bằng số kênh đầu ra (:math:`c_1 == c_2`), khối tự động cộng thêm tensor đầu vào vào tensor sau tích chập: :math:`x = x + \text{cv2}(\text{cat}(\dots))`.
-  - Phép cộng shortcut này giúp bảo tồn chi tiết biên không gian và cải thiện dòng truyền đạo hàm ngược qua tầng sâu nhất của backbone, hạn chế hiện tượng suy giảm tín hiệu gradient khi truyền qua các toán tử pooling liên tiếp.
+  - Mã nguồn Ultralytics đặt ``self.add = shortcut and c1 == c2`` và trả về ``y + x`` khi cờ bật [T1 block.py:233,240]. Lý do thiết kế của cờ này ở SPPF không có trong tài liệu repo, nên tác động của nó lên gradient hay độ chính xác là chưa biết.
+  - Nguồn gốc của đường tắt residual và cách bài gốc giải thích lợi ích của nó: :doc:`../06-khoi-cau-thanh-mang/01-khoi-residual-resnet`.
 
 4. Khối chú ý C2PSA
 ===================
