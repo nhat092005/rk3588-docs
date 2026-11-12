@@ -1,189 +1,297 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 908" width="1040" height="908" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1040" height="908" fill="white"/>
-<text x="14" y="20" font-size="15" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">YOLOv8n (scale n, nc=5): 23 lớp, ảnh vào 1×3×640×640, kích thước tensor là C×H×W</text>
-<rect x="20" y="48" width="210" height="22" rx="3" fill="#1E5BB8" stroke="#1E5BB8" stroke-width="1"/>
-<text x="125.0" y="59" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">BACKBONE · L0 đến L9</text>
-<rect x="300" y="48" width="210" height="22" rx="3" fill="#E65100" stroke="#E65100" stroke-width="1"/>
-<text x="405.0" y="59" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">NECK top-down · L10 đến L15</text>
-<rect x="600" y="48" width="210" height="22" rx="3" fill="#E65100" stroke="#E65100" stroke-width="1"/>
-<text x="705.0" y="59" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">NECK bottom-up · L16 đến L21</text>
-<rect x="900" y="48" width="130" height="22" rx="3" fill="#C62828" stroke="#C62828" stroke-width="1"/>
-<text x="965.0" y="59" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">HEAD · L22</text>
-<rect x="20" y="84" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="125.0" y="96" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L0  Conv 3×3, s2</text>
-<text x="125.0" y="111" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">3→16 · out 16×320×320</text>
-<text x="125.0" y="125" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">464 tham số · 0.088 GFLOPs</text>
-<rect x="20" y="152" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="125.0" y="164" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L1  Conv 3×3, s2</text>
-<text x="125.0" y="179" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">16→32 · out 32×160×160</text>
-<text x="125.0" y="193" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">4 672 tham số · 0.236 GFLOPs</text>
-<path d="M125 134 L125 152" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="220" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="125.0" y="232" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L2  C2f ×1  (shortcut)</text>
-<text x="125.0" y="247" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">32→32 · out 32×160×160</text>
-<text x="125.0" y="261" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">7 360 tham số · 0.367 GFLOPs</text>
-<path d="M125 202 L125 220" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="288" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="125.0" y="300" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L3  Conv 3×3, s2</text>
-<text x="125.0" y="315" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">32→64 · out 64×80×80</text>
-<text x="125.0" y="329" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">18 560 tham số · 0.236 GFLOPs</text>
-<path d="M125 270 L125 288" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="356" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="125.0" y="368" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L4  C2f ×2  (shortcut)</text>
-<text x="125.0" y="383" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64→64 · out 64×80×80</text>
-<text x="125.0" y="397" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">49 664 tham số · 0.629 GFLOPs</text>
-<path d="M125 338 L125 356" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="424" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="125.0" y="436" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L5  Conv 3×3, s2</text>
-<text x="125.0" y="451" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64→128 · out 128×40×40</text>
-<text x="125.0" y="465" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">73 984 tham số · 0.236 GFLOPs</text>
-<path d="M125 406 L125 424" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="492" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="125.0" y="504" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L6  C2f ×2  (shortcut)</text>
-<text x="125.0" y="519" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128→128 · out 128×40×40</text>
-<text x="125.0" y="533" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">197 632 tham số · 0.629 GFLOPs</text>
-<path d="M125 474 L125 492" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="560" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="125.0" y="572" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L7  Conv 3×3, s2</text>
-<text x="125.0" y="587" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128→256 · out 256×20×20</text>
-<text x="125.0" y="601" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">295 424 tham số · 0.236 GFLOPs</text>
-<path d="M125 542 L125 560" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="628" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="125.0" y="640" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L8  C2f ×1  (shortcut)</text>
-<text x="125.0" y="655" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256→256 · out 256×20×20</text>
-<text x="125.0" y="669" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">460 288 tham số · 0.367 GFLOPs</text>
-<path d="M125 610 L125 628" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="20" y="696" width="210" height="50" rx="4" fill="#FAF5FF" stroke="#7B1FA2" stroke-width="1.3"/>
-<text x="125.0" y="708" font-size="12.5" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">L9  SPPF k=5</text>
-<text x="125.0" y="723" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">256→256 · out 256×20×20</text>
-<text x="125.0" y="737" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">164 608 tham số · 0.131 GFLOPs</text>
-<path d="M125 678 L125 696" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="300" y="696" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="405.0" y="708" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L10  Upsample ×2 nearest</text>
-<text x="405.0" y="723" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 256×40×40</text>
-<text x="405.0" y="737" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="300" y="492" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="405.0" y="504" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L11  Concat (L10, L6)</text>
-<text x="405.0" y="519" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 384×40×40</text>
-<text x="405.0" y="533" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="300" y="424" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="405.0" y="436" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L12  C2f ×1  (không shortcut)</text>
-<text x="405.0" y="451" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384→128 · out 128×40×40</text>
-<text x="405.0" y="465" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">148 224 tham số · 0.472 GFLOPs</text>
-<rect x="300" y="356" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="405.0" y="368" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L13  Upsample ×2 nearest</text>
-<text x="405.0" y="383" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 128×80×80</text>
-<text x="405.0" y="397" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="300" y="288" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="405.0" y="300" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L14  Concat (L13, L4)</text>
-<text x="405.0" y="315" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 192×80×80</text>
-<text x="405.0" y="329" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="300" y="220" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="405.0" y="232" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L15  C2f ×1  (không shortcut)</text>
-<text x="405.0" y="247" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">192→64 · out 64×80×80</text>
-<text x="405.0" y="261" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">37 248 tham số · 0.472 GFLOPs</text>
-<path d="M230 721 L300 721" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M405 696 L405 542" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M405 492 L405 474" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M405 424 L405 406" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M405 356 L405 338" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M405 288 L405 270" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<rect x="600" y="220" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="705.0" y="232" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L16  Conv 3×3, s2</text>
-<text x="705.0" y="247" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">64→64 · out 64×40×40</text>
-<text x="705.0" y="261" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">36 992 tham số · 0.118 GFLOPs</text>
-<rect x="600" y="288" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="705.0" y="300" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L17  Concat (L16, L12)</text>
-<text x="705.0" y="315" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 192×40×40</text>
-<text x="705.0" y="329" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="600" y="356" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="705.0" y="368" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L18  C2f ×1  (không shortcut)</text>
-<text x="705.0" y="383" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">192→128 · out 128×40×40</text>
-<text x="705.0" y="397" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">123 648 tham số · 0.393 GFLOPs</text>
-<rect x="600" y="424" width="210" height="50" rx="4" fill="#EFF6FF" stroke="#1E5BB8" stroke-width="1.3"/>
-<text x="705.0" y="436" font-size="12.5" font-weight="700" fill="#1E5BB8" text-anchor="middle" dominant-baseline="central">L19  Conv 3×3, s2</text>
-<text x="705.0" y="451" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">128→128 · out 128×20×20</text>
-<text x="705.0" y="465" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">147 712 tham số · 0.118 GFLOPs</text>
-<rect x="600" y="492" width="210" height="50" rx="4" fill="#FFF7ED" stroke="#E65100" stroke-width="1.3"/>
-<text x="705.0" y="504" font-size="12.5" font-weight="700" fill="#E65100" text-anchor="middle" dominant-baseline="central">L20  Concat (L19, L9)</text>
-<text x="705.0" y="519" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">out 384×20×20</text>
-<text x="705.0" y="533" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">0 tham số</text>
-<rect x="600" y="560" width="210" height="50" rx="4" fill="#F0FDF4" stroke="#2E7D32" stroke-width="1.3"/>
-<text x="705.0" y="572" font-size="12.5" font-weight="700" fill="#1B5E20" text-anchor="middle" dominant-baseline="central">L21  C2f ×1  (không shortcut)</text>
-<text x="705.0" y="587" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">384→256 · out 256×20×20</text>
-<text x="705.0" y="601" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">493 056 tham số · 0.393 GFLOPs</text>
-<path d="M705 270 L705 288" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M705 338 L705 356" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M705 406 L705 424" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M705 474 L705 492" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M705 542 L705 560" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M510 245 L600 245" fill="none" stroke="#1E5BB8" stroke-width="1.6" marker-end="url(#m1E5BB8n)"/>
-<path d="M230 517 L300 517" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M230 381 L265 381 L265 313 L300 313" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M510 449 L555 449 L555 313 L600 313" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<path d="M125 746 L125 774 L575 774 L575 517 L600 517" fill="none" stroke="#2E7D32" stroke-width="1.6" marker-end="url(#m2E7D32n)"/>
-<rect x="900" y="172" width="130" height="468" rx="4" fill="#FEF2F2" stroke="#C62828" stroke-width="1.5"/>
-<text x="965" y="186" font-size="13" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">L22  Detect</text>
-<text x="965" y="212" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">3 nhánh box</text>
-<text x="965" y="228" font-size="11" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">3 nhánh cls</text>
-<text x="965" y="262" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">box: 64 kênh</text>
-<text x="965" y="278" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(4 cạnh × 16 bin)</text>
-<text x="965" y="294" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">cls: 5 kênh</text>
-<text x="965" y="310" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(5 lớp)</text>
-<text x="965" y="326" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">8400 anchor</text>
-<text x="965" y="342" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">(6400+1600+400)</text>
-<text x="965" y="562" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">out sau decode</text>
-<text x="965" y="580" font-size="12" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">1×9×8400</text>
-<text x="965" y="600" font-size="10.5" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">752 287</text>
-<text x="965" y="616" font-size="10" font-weight="400" fill="#444444" text-anchor="middle" dominant-baseline="central">tham số · 2.965 GFLOPs</text>
-<path d="M405 220 L405 196 L900 196" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
-<text x="640" y="186" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">P3/8 · 64×80×80</text>
-<path d="M810 381 L900 381" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
-<text x="850" y="372.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">P4/16</text>
-<text x="850" y="393.0" font-size="10" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">128×40×40</text>
-<path d="M810 585 L900 585" fill="none" stroke="#C62828" stroke-width="1.6" marker-end="url(#mC62828n)"/>
-<text x="850" y="576.0" font-size="10.5" font-weight="700" fill="#C62828" text-anchor="middle" dominant-baseline="central">P5/32</text>
-<text x="850" y="597.0" font-size="10" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central">256×20×20</text>
-<text x="600" y="668" font-size="12.5" font-weight="700" fill="#444444" text-anchor="start" dominant-baseline="central">Đường nối</text>
-<path d="M600 688 L634 688" fill="none" stroke="#1E5BB8" stroke-width="1.6"/>
-<text x="644" y="688" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">luồng chính</text>
-<path d="M600 706 L634 706" fill="none" stroke="#2E7D32" stroke-width="1.6"/>
-<text x="644" y="706" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nối tắt vào Concat</text>
-<path d="M600 724 L634 724" fill="none" stroke="#C62828" stroke-width="1.6"/>
-<text x="644" y="724" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đặc trưng P3, P4, P5 vào Detect</text>
-<rect x="600" y="756" width="330" height="28" fill="#E8E8E8"/>
-<text x="608" y="770.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giai đoạn</text>
-<text x="720" y="770.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tham số</text>
-<text x="794" y="770.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">%</text>
-<text x="838" y="770.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">GFLOPs</text>
-<text x="894" y="770.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">%</text>
-<path d="M600 784 L930 784" stroke="#BBBBBB" stroke-width="0.8"/>
-<text x="608" y="796.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Backbone L0-L9</tspan></text>
-<text x="720" y="796.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 272 656</tspan></text>
-<text x="794" y="796.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>42.3%</tspan></text>
-<text x="838" y="796.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.156</tspan></text>
-<text x="894" y="796.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>39.0%</tspan></text>
-<path d="M600 809 L930 809" stroke="#BBBBBB" stroke-width="0.8"/>
-<text x="608" y="821.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Neck L10-L21</tspan></text>
-<text x="720" y="821.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>986 880</tspan></text>
-<text x="794" y="821.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32.8%</tspan></text>
-<text x="838" y="821.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.966</tspan></text>
-<text x="894" y="821.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>24.3%</tspan></text>
-<path d="M600 834 L930 834" stroke="#BBBBBB" stroke-width="0.8"/>
-<text x="608" y="846.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Head L22</tspan></text>
-<text x="720" y="846.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>752 287</tspan></text>
-<text x="794" y="846.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>25.0%</tspan></text>
-<text x="838" y="846.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2.965</tspan></text>
-<text x="894" y="846.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>36.7%</tspan></text>
-<path d="M600 859 L930 859" stroke="#BBBBBB" stroke-width="0.8"/>
-<text x="608" y="871.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tổng</tspan></text>
-<text x="720" y="871.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3 011 823</tspan></text>
-<text x="794" y="871.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100%</tspan></text>
-<text x="838" y="871.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8.087</tspan></text>
-<text x="894" y="871.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100%</tspan></text>
-<rect x="600" y="756" width="330" height="128" fill="none" stroke="#999999" stroke-width="1"/>
-<path d="M712 756 L712 884" stroke="#CCCCCC" stroke-width="0.8"/>
-<path d="M786 756 L786 884" stroke="#CCCCCC" stroke-width="0.8"/>
-<path d="M830 756 L830 884" stroke="#CCCCCC" stroke-width="0.8"/>
-<path d="M886 756 L886 884" stroke="#CCCCCC" stroke-width="0.8"/>
-<text x="10" y="894" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: ultralytics 8.4.154 yolov8.yaml (scale n, nc=5) và best.pt run ppe5_yolov8n_baseline_100ep_s0. GFLOPs = 2 × MACs của Conv2d ở 640×640.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1175 1132.0" width="1175" height="1132.0" font-family="'Times New Roman', Times, serif"><defs><marker id="m1E5BB8n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m1E5BB8t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#1E5BB8"/></marker><marker id="m2E7D32n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="m2E7D32t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#2E7D32"/></marker><marker id="mC62828n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="mC62828t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#C62828"/></marker><marker id="m777777n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m777777t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#777777"/></marker><marker id="m222222n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker><marker id="m222222t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0.5L10 5L0 9.5z" fill="#222222"/></marker></defs><rect width="1175" height="1132.0" fill="white"/>
+<rect x="40" y="118" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="140.0" y="129" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="140.0" y="142" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="140.0" y="155" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">3→16 kênh</text>
+<text x="140.0" y="167" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">464 tham số · 0.088 GFLOPs</text>
+<text x="247" y="126" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L0</text>
+<text x="247" y="138" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P1</text>
+<rect x="40" y="208" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="140.0" y="219" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="140.0" y="232" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="140.0" y="245" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">16→32 kênh</text>
+<text x="140.0" y="257" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">4 672 tham số · 0.236 GFLOPs</text>
+<text x="247" y="216" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L1</text>
+<text x="247" y="228" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P2</text>
+<rect x="40" y="298" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="140.0" y="309" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="140.0" y="322" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=True, n=3×d=1</text>
+<text x="140.0" y="335" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">32→32 kênh</text>
+<text x="140.0" y="347" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">7 360 tham số · 0.367 GFLOPs</text>
+<text x="247" y="306" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L2</text>
+<rect x="40" y="388" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="140.0" y="399" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="140.0" y="412" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="140.0" y="425" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">32→64 kênh</text>
+<text x="140.0" y="437" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">18 560 tham số · 0.236 GFLOPs</text>
+<text x="247" y="396" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L3</text>
+<text x="247" y="408" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P3</text>
+<rect x="40" y="478" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="140.0" y="489" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="140.0" y="502" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=True, n=6×d=2</text>
+<text x="140.0" y="515" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">64→64 kênh</text>
+<text x="140.0" y="527" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">49 664 tham số · 0.629 GFLOPs</text>
+<text x="247" y="486" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L4</text>
+<rect x="40" y="568" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="140.0" y="579" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="140.0" y="592" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="140.0" y="605" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">64→128 kênh</text>
+<text x="140.0" y="617" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">73 984 tham số · 0.236 GFLOPs</text>
+<text x="247" y="576" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L5</text>
+<text x="247" y="588" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P4</text>
+<rect x="40" y="658" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="140.0" y="669" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="140.0" y="682" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=True, n=6×d=2</text>
+<text x="140.0" y="695" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">128→128 kênh</text>
+<text x="140.0" y="707" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">197 632 tham số · 0.629 GFLOPs</text>
+<text x="247" y="666" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L6</text>
+<rect x="40" y="748" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="140.0" y="759" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="140.0" y="772" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="140.0" y="785" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">128→256 kênh</text>
+<text x="140.0" y="797" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">295 424 tham số · 0.236 GFLOPs</text>
+<text x="247" y="756" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L7</text>
+<text x="247" y="768" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P5</text>
+<rect x="40" y="838" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="140.0" y="849" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="140.0" y="862" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=True, n=3×d=1</text>
+<text x="140.0" y="875" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">256→256 kênh</text>
+<text x="140.0" y="887" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">460 288 tham số · 0.367 GFLOPs</text>
+<text x="247" y="846" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L8</text>
+<rect x="40" y="928" width="200" height="56" rx="3" fill="#B8C4CC" stroke="#6B7A85" stroke-width="1.2"/>
+<text x="140.0" y="939" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">SPPF</text>
+<text x="140.0" y="952" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=5</text>
+<text x="140.0" y="965" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">256→256 kênh</text>
+<text x="140.0" y="977" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">164 608 tham số · 0.131 GFLOPs</text>
+<text x="247" y="936" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L9</text>
+<rect x="400" y="738.0" width="200" height="32" rx="3" fill="#00695C" stroke="#004D40" stroke-width="1.2"/>
+<text x="500.0" y="748.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Upsample</text>
+<text x="500.0" y="761.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">scale=2, nearest</text>
+<text x="607" y="746.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L10</text>
+<rect x="400" y="670.0" width="200" height="32" rx="3" fill="#0D47E0" stroke="#0A35A8" stroke-width="1.2"/>
+<text x="500.0" y="680.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Concat</text>
+<text x="500.0" y="693.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">L10 + L6</text>
+<text x="607" y="678.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L11</text>
+<rect x="400" y="594.0" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="500.0" y="605.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="500.0" y="618.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=False, n=3×d=1</text>
+<text x="500.0" y="631.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">384→128 kênh</text>
+<text x="500.0" y="643.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">148 224 tham số · 0.472 GFLOPs</text>
+<text x="607" y="602.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L12</text>
+<rect x="400" y="542.0" width="200" height="32" rx="3" fill="#00695C" stroke="#004D40" stroke-width="1.2"/>
+<text x="500.0" y="552.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Upsample</text>
+<text x="500.0" y="565.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">scale=2, nearest</text>
+<text x="607" y="550.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L13</text>
+<rect x="400" y="490.0" width="200" height="32" rx="3" fill="#0D47E0" stroke="#0A35A8" stroke-width="1.2"/>
+<text x="500.0" y="500.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Concat</text>
+<text x="500.0" y="513.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">L13 + L4</text>
+<text x="607" y="498.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L14</text>
+<rect x="400" y="394.0" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="500.0" y="405.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="500.0" y="418.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=False, n=3×d=1</text>
+<text x="500.0" y="431.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">192→64 kênh</text>
+<text x="500.0" y="443.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">37 248 tham số · 0.472 GFLOPs</text>
+<text x="607" y="402.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L15</text>
+<text x="607" y="414.0" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P3</text>
+<rect x="690" y="510.0" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="790.0" y="521.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="790.0" y="534.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="790.0" y="547.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">64→64 kênh</text>
+<text x="790.0" y="559.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">36 992 tham số · 0.118 GFLOPs</text>
+<text x="897" y="518.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L16</text>
+<rect x="690" y="606.0" width="200" height="32" rx="3" fill="#0D47E0" stroke="#0A35A8" stroke-width="1.2"/>
+<text x="790.0" y="616.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Concat</text>
+<text x="790.0" y="629.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">L16 + L12</text>
+<text x="897" y="614.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L17</text>
+<rect x="690" y="674.0" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="790.0" y="685.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="790.0" y="698.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=False, n=3×d=1</text>
+<text x="790.0" y="711.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">192→128 kênh</text>
+<text x="790.0" y="723.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">123 648 tham số · 0.393 GFLOPs</text>
+<text x="897" y="682.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L18</text>
+<text x="897" y="694.0" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P4</text>
+<rect x="690" y="766.0" width="200" height="56" rx="3" fill="#DCE8F8" stroke="#3F5F8F" stroke-width="1.2"/>
+<text x="790.0" y="777.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">Conv</text>
+<text x="790.0" y="790.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">k=3, s=2, p=1</text>
+<text x="790.0" y="803.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">128→128 kênh</text>
+<text x="790.0" y="815.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">147 712 tham số · 0.118 GFLOPs</text>
+<text x="897" y="774.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L19</text>
+<rect x="690" y="940.0" width="200" height="32" rx="3" fill="#0D47E0" stroke="#0A35A8" stroke-width="1.2"/>
+<text x="790.0" y="950.0" font-size="12" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">Concat</text>
+<text x="790.0" y="963.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">L19 + L9</text>
+<text x="897" y="948.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L20</text>
+<rect x="690" y="1008.0" width="200" height="56" rx="3" fill="#B2E3E3" stroke="#2E8B8B" stroke-width="1.2"/>
+<text x="790.0" y="1019.0" font-size="12.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">C2f</text>
+<text x="790.0" y="1032.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" font-family="Consolas, 'DejaVu Sans Mono', monospace">shortcut=False, n=3×d=1</text>
+<text x="790.0" y="1045.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">384→256 kênh</text>
+<text x="790.0" y="1057.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">493 056 tham số · 0.393 GFLOPs</text>
+<text x="897" y="1016.0" font-size="11" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">L21</text>
+<text x="897" y="1028.0" font-size="10" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">P5</text>
+<text x="146.0" y="92" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">3×640×640</text>
+<path d="M140 102 L140 118" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<path d="M140 174 L140 208" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="191.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">16×320×320</text>
+<path d="M140 264 L140 298" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="281.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">32×160×160</text>
+<path d="M140 354 L140 388" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="371.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">32×160×160</text>
+<path d="M140 444 L140 478" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="461.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×80×80</text>
+<path d="M140 534 L140 568" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="551.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×80×80</text>
+<path d="M140 624 L140 658" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="641.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M140 714 L140 748" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="731.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M140 804 L140 838" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="821.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×20×20</text>
+<path d="M140 894 L140 928" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="146.0" y="911.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×20×20</text>
+<path d="M500 738 L500 702" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="506.0" y="720.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×40×40</text>
+<path d="M500 670 L500 650" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="506.0" y="660.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">384×40×40</text>
+<path d="M500 594 L500 574" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="506.0" y="584.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M500 542 L500 522" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="506.0" y="532.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×80×80</text>
+<path d="M500 490 L500 450" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="506.0" y="470.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">192×80×80</text>
+<path d="M790 566 L790 606" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="586.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×40×40</text>
+<path d="M790 638 L790 674" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="656.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">192×40×40</text>
+<path d="M790 730 L790 766" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="748.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M790 822 L790 940" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="881.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×20×20</text>
+<path d="M790 972 L790 1008" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="990.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">384×20×20</text>
+<path d="M240 947 L500 947 L500 770" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="315" y="937.0" font-size="10" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×20×20</text>
+<path d="M240 956 L690 956" fill="none" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#m2E7D32n)"/>
+<text x="315" y="966.0" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×20×20</text>
+<path d="M240 506 L400 506" fill="none" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#m2E7D32n)"/>
+<text x="315" y="497.0" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×80×80</text>
+<path d="M240 686 L400 686" fill="none" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#m2E7D32n)"/>
+<text x="315" y="677.0" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M600 622 L690 622" fill="none" stroke="#2E7D32" stroke-width="1.5" marker-end="url(#m2E7D32n)"/>
+<text x="645" y="613.0" font-size="10" font-weight="400" fill="#2E7D32" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M600 422 L1000 422" fill="none" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
+<text x="800" y="413.0" font-size="10" font-weight="400" fill="#C62828" text-anchor="middle" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×80×80</text>
+<circle cx="790" cy="422" r="3" fill="#C62828"/>
+<path d="M790 422 L790 510" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m222222n)"/>
+<text x="796.0" y="466.0" font-size="10" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">64×80×80</text>
+<path d="M890 702 L1000 702" fill="none" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
+<text x="898" y="713.0" font-size="10" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">128×40×40</text>
+<path d="M890 1036 L1000 1036" fill="none" stroke="#C62828" stroke-width="1.5" marker-end="url(#mC62828n)"/>
+<text x="898" y="1047.0" font-size="10" font-weight="400" fill="#C62828" text-anchor="start" dominant-baseline="central" stroke="white" stroke-width="4" stroke-linejoin="round" paint-order="stroke">256×20×20</text>
+<rect x="25" y="74" width="260" height="928" rx="2" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="155.0" y="58" font-size="19" font-weight="700" fill="#2E7D32" text-anchor="middle" dominant-baseline="central">Backbone</text>
+<rect x="345" y="360.0" width="620" height="722.0" rx="2" fill="none" stroke="#D81B60" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="655.0" y="344.0" font-size="19" font-weight="700" fill="#D81B60" text-anchor="middle" dominant-baseline="central">Neck</text>
+<rect x="985" y="360.0" width="170" height="722.0" rx="2" fill="none" stroke="#7B1FA2" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="1070.0" y="344.0" font-size="19" font-weight="700" fill="#7B1FA2" text-anchor="middle" dominant-baseline="central">Head</text>
+<rect x="1000" y="384.0" width="140" height="76" rx="3" fill="#1E9BE8" stroke="#0F6FB5" stroke-width="1.2"/>
+<text x="1070.0" y="395.0" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">L22  Detect</text>
+<text x="1070.0" y="409.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">nhánh P3: box 64 + cls 5</text>
+<text x="1070.0" y="424.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">152 453 tham số</text>
+<text x="1070.0" y="438.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">1.944 GFLOPs</text>
+<rect x="1000" y="664.0" width="140" height="76" rx="3" fill="#1E9BE8" stroke="#0F6FB5" stroke-width="1.2"/>
+<text x="1070.0" y="675.0" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">L22  Detect</text>
+<text x="1070.0" y="689.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">nhánh P4: box 64 + cls 5</text>
+<text x="1070.0" y="704.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">226 181 tham số</text>
+<text x="1070.0" y="718.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">0.722 GFLOPs</text>
+<rect x="1000" y="998.0" width="140" height="76" rx="3" fill="#1E9BE8" stroke="#0F6FB5" stroke-width="1.2"/>
+<text x="1070.0" y="1009.0" font-size="12.5" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central">L22  Detect</text>
+<text x="1070.0" y="1023.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">nhánh P5: box 64 + cls 5</text>
+<text x="1070.0" y="1038.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">373 637 tham số</text>
+<text x="1070.0" y="1052.0" font-size="10" font-weight="400" fill="white" text-anchor="middle" dominant-baseline="central">0.298 GFLOPs</text>
+<text x="1070" y="517.0" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">L22 là một module</text>
+<text x="1070" y="534.0" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">ba nhánh dùng chung DFL</text>
+<text x="1070" y="551.0" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">(16 tham số, 0.001 GFLOPs)</text>
+<text x="1070" y="568.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">tổng L22: 752 287 tham số</text>
+<text x="1070" y="585.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="middle" dominant-baseline="central">2.965 GFLOPs</text>
+<text x="1070" y="602.0" font-size="10.5" font-weight="400" fill="#222222" text-anchor="middle" dominant-baseline="central">8400 anchor, out 1×9×8400</text>
+<rect x="330" y="45" width="432" height="28" fill="#E8E8E8"/>
+<text x="338" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Model variant</text>
+<text x="434" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">d (depth_multiple)</text>
+<text x="546" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">w (width_multiple)</text>
+<text x="658" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">mc (max_channels)</text>
+<rect x="330" y="73" width="432" height="25" fill="#FFF3C4"/>
+<path d="M330 73 L762 73" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="338" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>n</tspan></text>
+<text x="434" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.33</tspan></text>
+<text x="546" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.25</tspan></text>
+<text x="658" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1024</tspan></text>
+<path d="M330 98 L762 98" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="338" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>s</tspan></text>
+<text x="434" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.33</tspan></text>
+<text x="546" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.50</tspan></text>
+<text x="658" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1024</tspan></text>
+<path d="M330 123 L762 123" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="338" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>m</tspan></text>
+<text x="434" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.67</tspan></text>
+<text x="546" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>0.75</tspan></text>
+<text x="658" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>768</tspan></text>
+<path d="M330 148 L762 148" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="338" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>l</tspan></text>
+<text x="434" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.00</tspan></text>
+<text x="546" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.00</tspan></text>
+<text x="658" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512</tspan></text>
+<path d="M330 173 L762 173" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="338" y="185.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>x</tspan></text>
+<text x="434" y="185.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.00</tspan></text>
+<text x="546" y="185.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.25</tspan></text>
+<text x="658" y="185.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>512</tspan></text>
+<rect x="330" y="45" width="432" height="153" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M426 45 L426 198" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M538 45 L538 198" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M650 45 L650 198" stroke="#CCCCCC" stroke-width="0.8"/>
+<text x="330" y="213" font-size="10.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Dòng n (nền vàng) là mô hình trong tài liệu này. Mọi số kênh = min(kênh gốc, mc) × w.</text>
+<rect x="830" y="45" width="330" height="28" fill="#E8E8E8"/>
+<text x="838" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Giai đoạn</text>
+<text x="950" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">Tham số</text>
+<text x="1024" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">%</text>
+<text x="1068" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">GFLOPs</text>
+<text x="1124" y="59.0" font-size="10.5" font-weight="700" fill="#222222" text-anchor="start" dominant-baseline="central">%</text>
+<path d="M830 73 L1160 73" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="838" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Backbone L0-L9</tspan></text>
+<text x="950" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1 272 656</tspan></text>
+<text x="1024" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>42.3%</tspan></text>
+<text x="1068" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3.156</tspan></text>
+<text x="1124" y="85.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>39.0%</tspan></text>
+<path d="M830 98 L1160 98" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="838" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Neck L10-L21</tspan></text>
+<text x="950" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>986 880</tspan></text>
+<text x="1024" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>32.8%</tspan></text>
+<text x="1068" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>1.966</tspan></text>
+<text x="1124" y="110.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>24.3%</tspan></text>
+<path d="M830 123 L1160 123" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="838" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Head L22</tspan></text>
+<text x="950" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>752 287</tspan></text>
+<text x="1024" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>25.0%</tspan></text>
+<text x="1068" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>2.965</tspan></text>
+<text x="1124" y="135.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>36.7%</tspan></text>
+<path d="M830 148 L1160 148" stroke="#BBBBBB" stroke-width="0.8"/>
+<text x="838" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>Tổng</tspan></text>
+<text x="950" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>3 011 823</tspan></text>
+<text x="1024" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100%</tspan></text>
+<text x="1068" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>8.087</tspan></text>
+<text x="1124" y="160.5" font-size="10.5" fill="#222222" text-anchor="start" dominant-baseline="central" xml:space="preserve"><tspan>100%</tspan></text>
+<rect x="830" y="45" width="330" height="128" fill="none" stroke="#999999" stroke-width="1"/>
+<path d="M942 45 L942 173" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M1016 45 L1016 173" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M1060 45 L1060 173" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M1116 45 L1116 173" stroke="#CCCCCC" stroke-width="0.8"/>
+<path d="M330 245 L364 245" fill="none" stroke="#222222" stroke-width="1.5"/>
+<text x="372" y="245" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">luồng chính</text>
+<path d="M470 245 L504 245" fill="none" stroke="#2E7D32" stroke-width="1.5"/>
+<text x="512" y="245" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">nối tắt vào Concat</text>
+<path d="M638 245 L672 245" fill="none" stroke="#C62828" stroke-width="1.5"/>
+<text x="680" y="245" font-size="11" font-weight="400" fill="#222222" text-anchor="start" dominant-baseline="central">đặc trưng P3, P4, P5 vào Detect</text>
+<text x="330" y="265" font-size="10.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">Kích thước C×H×W ghi trên mũi tên là đầu ra của khối nằm trước mũi tên.</text>
+<text x="330" y="283" font-size="10.5" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central">L22 chia theo nhánh P3/P4/P5 chỉ để vẽ. Tham số và GFLOPs chia từng mức cộng với DFL ra đúng tổng L22.</text>
+<text x="10" y="1100.0" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Nguồn: ultralytics 8.4.154 yolov8.yaml (scale n, nc=5) và best.pt run ppe5_yolov8n_baseline_100ep_s0. GFLOPs = 2 × MACs của Conv2d ở 640×640.</text>
+<text x="10" y="1118.0" font-size="12" font-weight="400" fill="#444444" text-anchor="start" dominant-baseline="central" font-style="italic">Bố cục theo Figure 1 của arXiv 2501.13400 (YOLOv8 to YOLO11: A Comprehensive Architecture In-depth Comparative Review).</text>
 </svg>

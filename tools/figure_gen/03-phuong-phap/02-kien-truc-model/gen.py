@@ -150,16 +150,6 @@ def gf(macs):
 
 
 # ---------------------------------------------------------------- drawing helpers
-STYLE = {  # fill, stroke
-    "Conv": ("#EFF6FF", BLUE),
-    "C2f": ("#F0FDF4", GREEN),
-    "SPPF": ("#FAF5FF", PURPLE),
-    "Upsample": ("#FFF7ED", ORANGE),
-    "Concat": ("#FFF7ED", ORANGE),
-    "Detect": ("#FEF2F2", RED),
-}
-
-
 def rect(f, x, y, w, h, fill="white", stroke=BOX_STROKE, sw=1.2, dashed=False, rx=4):
     dash = ' stroke-dasharray="5 3"' if dashed else ""
     f.a(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="{fill}" stroke="{stroke}" '
@@ -175,124 +165,199 @@ def chip(f, x, y, w, label, color):
     f.text(x + w / 2, y + 11, label, size=12, weight=700, fill="white", anchor="middle")
 
 
-def node(f, x, y, w, h, kind, l1, l2, l3=None, mono2=True):
-    fill, stroke = STYLE[kind]
-    rect(f, x, y, w, h, fill=fill, stroke=stroke, sw=1.3)
-    f.text(x + w / 2, y + 12, l1, size=12.5, weight=700, fill=stroke if stroke != GREEN else "#1B5E20",
-           anchor="middle")
-    f.text(x + w / 2, y + 27, l2, size=11, fill=INK, anchor="middle", mono=mono2)
-    if l3:
-        f.text(x + w / 2, y + 41, l3, size=10.5, fill=DARK, anchor="middle")
+# ================================================================ 1. TONG QUAN 23 LOP
+# Bố cục theo Figure 1 của arXiv 2501.13400 (YOLOv8 to YOLO11): ba khung nét đứt, kích thước tensor trên mũi tên,
+# chỉ số lớp bên phải khối, bảng d/w/mc, ba khối Detect. Số liệu là của mô hình thật (xem MEASURED_PARAMS ở trên).
+OV = {  # fill, stroke, text
+    "Conv": ("#DCE8F8", "#3F5F8F", INK),
+    "C2f": ("#B2E3E3", "#2E8B8B", INK),
+    "SPPF": ("#B8C4CC", "#6B7A85", INK),
+    "Upsample": ("#00695C", "#004D40", "white"),
+    "Concat": ("#0D47E0", "#0A35A8", "white"),
+    "Detect": ("#1E9BE8", "#0F6FB5", "white"),
+}
+FRAME_BB, FRAME_NECK, FRAME_HEAD = "#2E7D32", "#D81B60", "#7B1FA2"
+VARIANTS = [("n", "0.33", "0.25", "1024"), ("s", "0.33", "0.50", "1024"), ("m", "0.67", "0.75", "768"),
+            ("l", "1.00", "1.00", "512"), ("x", "1.00", "1.25", "512")]  # yolov8.yaml dòng 10-15
+BASE_REPEATS = {2: 3, 4: 6, 6: 6, 8: 3, 12: 3, 15: 3, 18: 3, 21: 3}  # yolov8.yaml: số lặp trước khi nhân d = 0.33
+P_LEVEL = {0: "P1", 1: "P2", 3: "P3", 5: "P4", 7: "P5", 15: "P3", 18: "P4", 21: "P5"}  # chú thích -P trong yolov8.yaml
 
 
-def layer_node(f, x, y, w, h, i):
+def head_level_p(k):
+    return head_branch_p(HEAD_CH[k], 64) + head_branch_p(HEAD_CH[k], NC)
+
+
+def head_level_macs(k):
+    c, hw = HEAD_CH[k], HEAD_HW[k]
+    return hw * (c * 64 * 9 + 64 * 64 * 9 + 64 * 64) + hw * (c * 64 * 9 + 64 * 64 * 9 + 64 * NC)
+
+
+assert sum(head_level_p(k) for k in range(3)) + 16 == HD_P
+assert sum(head_level_macs(k) for k in range(3)) + 16 * 4 * 8400 == HD_M
+for _i, _b in BASE_REPEATS.items():
+    assert max(round(_b * 0.33), 1) == LAYERS[_i]["n"], _i
+
+
+def size_of(i):
+    l = LAYERS[i]
+    return f'{l["cout"]}×{l["side"]}×{l["side"]}'
+
+
+def ov_node(f, x, y, w, h, i):
     l = LAYERS[i]
     m = l["m"]
-    out = f'{l["cout"]}×{l["side"]}×{l["side"]}'
-    if m == "Conv":
-        l1 = f'L{i}  Conv {l["note"]}'
-        l2 = f'{l["cin"]}→{l["cout"]} · out {out}'
-    elif m == "C2f":
-        l1 = f'L{i}  C2f ×{l["n"]}' + ("  (shortcut)" if l["sc"] else "  (không shortcut)")
-        l2 = f'{l["cin"]}→{l["cout"]} · out {out}'
-    elif m == "SPPF":
-        l1 = f"L{i}  SPPF k=5"
-        l2 = f'{l["cin"]}→{l["cout"]} · out {out}'
-    elif m == "Upsample":
-        l1 = f"L{i}  Upsample ×2 nearest"
-        l2 = f"out {out}"
-    elif m == "Concat":
-        a, b = l["f"].split(", ")
-        l1 = f"L{i}  Concat (L{a}, L{b})"
-        l2 = f"out {out}"
+    fill, stroke, tc = OV[m]
+    rect(f, x, y, w, h, fill=fill, stroke=stroke, sw=1.2, rx=3)
+    cx = x + w / 2
+    if m in ("Upsample", "Concat"):
+        f.text(cx, y + 10, m, size=12, weight=700, fill=tc, anchor="middle")
+        if m == "Upsample":
+            f.text(cx, y + 23, "scale=2, nearest", size=10, fill=tc, anchor="middle", mono=True)
+        else:
+            a, b = l["f"].split(", ")
+            f.text(cx, y + 23, f"L{a} + L{b}", size=10, fill=tc, anchor="middle", mono=True)
     else:
-        raise ValueError(m)
-    l3 = f'{fmt(l["p"])} tham số · {gf(l["macs"])} GFLOPs' if l["p"] else "0 tham số"
-    node(f, x, y, w, h, m, l1, l2, l3)
+        if m == "Conv":
+            cfg = "k=3, s=2, p=1"
+        elif m == "C2f":
+            cfg = f'shortcut={l["sc"]}, n={BASE_REPEATS[i]}×d={l["n"]}'
+        else:
+            cfg = "k=5"
+        f.text(cx, y + 11, m, size=12.5, weight=700, fill=tc, anchor="middle")
+        f.text(cx, y + 24, cfg, size=10, fill=tc, anchor="middle", mono=True)
+        f.text(cx, y + 37, f'{l["cin"]}→{l["cout"]} kênh', size=10, fill=tc, anchor="middle")
+        f.text(cx, y + 49, f'{fmt(l["p"])} tham số · {gf(l["macs"])} GFLOPs', size=10, fill=tc, anchor="middle")
+    f.text(x + w + 7, y + 8, f"L{i}", size=11, weight=700, fill=INK)
+    if i in P_LEVEL:
+        f.text(x + w + 7, y + 20, P_LEVEL[i], size=10, weight=700, fill=INK)
 
 
-# ================================================================ 1. TONG QUAN 23 LOP
 def fig_overview():
-    W = 1040
-    f = Fig(W, 915)
-    f.text(14, 20, "YOLOv8n (scale n, nc=5): 23 lớp, ảnh vào 1×3×640×640, kích thước tensor là C×H×W", size=15,
-           weight=700, fill=DARK)
-    bw, bh, pitch, y0 = 210, 50, 68, 84
-    xb, xt, xu, xh = 20, 300, 600, 900
-    R = lambda k: y0 + pitch * k  # noqa: E731
+    W = 1175
+    f = Fig(W, 1180)
+    P, NH, SH, y0 = 90, 56, 32, 118
+    xb, xt, xu, bw = 40, 400, 690, 200
+    cxb, cxt, cxu = xb + bw / 2, xt + bw / 2, xu + bw / 2
+    xd, dw, dh = 1000, 140, 76
+    R = lambda k: y0 + P * k  # noqa: E731
+    top = {i: R(i) for i in range(10)}
+    c14, c11 = R(4) + NH / 2, R(6) + NH / 2
+    g = ((c11 - c14) - (SH / 2 + SH + NH + SH / 2)) / 3
+    top[14] = c14 - SH / 2
+    top[13] = top[14] + SH + g
+    top[12] = top[13] + SH + g
+    top[11] = top[12] + NH + g
+    assert abs(top[11] - (c11 - SH / 2)) < 1e-6
+    top[10] = top[11] + SH + 36
+    top[15] = top[14] - 40 - NH
+    top[17] = top[12] + NH / 2 - SH / 2
+    top[16] = top[17] - 40 - NH
+    top[18] = top[17] + SH + 36
+    top[19] = top[18] + NH + 36
+    top[20] = R(9) + NH / 2 - SH / 2
+    top[21] = top[20] + SH + 36
+    hh = lambda i: SH if LAYERS[i]["m"] in ("Upsample", "Concat") else NH  # noqa: E731
+    ctr = lambda i: top[i] + hh(i) / 2  # noqa: E731
+    colx = {**{i: xb for i in range(10)}, **{i: xt for i in range(10, 16)}, **{i: xu for i in range(16, 22)}}
+    for i in range(22):
+        ov_node(f, colx[i], top[i], bw, hh(i), i)
 
-    chip(f, xb, 48, bw, "BACKBONE · L0 đến L9", BLUE)
-    chip(f, xt, 48, bw, "NECK top-down · L10 đến L15", ORANGE)
-    chip(f, xu, 48, bw, "NECK bottom-up · L16 đến L21", ORANGE)
-    chip(f, xh, 48, 130, "HEAD · L22", RED)
+    INKL = INK
 
-    # backbone L0..L9 (top to bottom)
-    for i in range(10):
-        layer_node(f, xb, R(i), bw, bh, i)
-        if i:
-            arrow(f, [(xb + bw / 2, R(i - 1) + bh), (xb + bw / 2, R(i))])
-    # top-down: y of each node
-    ty = {10: R(9), 11: R(6), 12: R(5), 13: R(4), 14: R(3), 15: R(2)}
-    for i, y in ty.items():
-        layer_node(f, xt, y, bw, bh, i)
-    arrow(f, [(xb + bw, R(9) + bh / 2), (xt, R(9) + bh / 2)])                       # L9 -> L10
-    arrow(f, [(xt + bw / 2, ty[10]), (xt + bw / 2, ty[11] + bh)])                   # L10 -> L11
-    for a, b in ((11, 12), (12, 13), (13, 14), (14, 15)):
-        arrow(f, [(xt + bw / 2, ty[a]), (xt + bw / 2, ty[b] + bh)])
-    # bottom-up: aligned with L15 at the top, then downward
-    uy = {16: R(2), 17: R(3), 18: R(4), 19: R(5), 20: R(6), 21: R(7)}
-    for i, y in uy.items():
-        layer_node(f, xu, y, bw, bh, i)
-    for a, b in ((16, 17), (17, 18), (18, 19), (19, 20), (20, 21)):
-        arrow(f, [(xu + bw / 2, uy[a] + bh), (xu + bw / 2, uy[b])])
-    arrow(f, [(xt + bw, ty[15] + bh / 2), (xu, uy[16] + bh / 2)])                   # L15 -> L16
+    def lab(x, y, s, color=INK, anchor="start"):
+        f.text(x, y, s, size=10, fill=color, anchor=anchor, halo="white")
 
-    # lateral skips (green): backbone -> top-down concat, top-down -> bottom-up concat
-    arrow(f, [(xb + bw, R(6) + bh / 2), (xt, ty[11] + bh / 2)], GREEN)              # L6 -> L11
-    arrow(f, [(xb + bw, R(4) + bh / 2), (265, R(4) + bh / 2), (265, ty[14] + bh / 2), (xt, ty[14] + bh / 2)], GREEN)  # L4 -> L14
-    arrow(f, [(xt + bw, ty[12] + bh / 2), (555, ty[12] + bh / 2), (555, uy[17] + bh / 2), (xu, uy[17] + bh / 2)], GREEN)  # L12 -> L17
-    bot = R(9) + bh + 28
-    arrow(f, [(xb + bw / 2, R(9) + bh), (xb + bw / 2, bot), (575, bot), (575, uy[20] + bh / 2), (xu, uy[20] + bh / 2)], GREEN)  # L9 -> L20
+    def seg(pts, color=INKL):
+        f.line(pts, color, width=1.5, head=True)
 
-    # head: Detect box with three inputs
-    hy0, hy1 = 172, 640
-    rect(f, xh, hy0, 130, hy1 - hy0, fill="#FEF2F2", stroke=RED, sw=1.5)
-    f.text(xh + 65, hy0 + 14, "L22  Detect", size=13, weight=700, fill=RED, anchor="middle")
-    for k, (yy, t) in enumerate(((hy0 + 40, "3 nhánh box"), (hy0 + 56, "3 nhánh cls"))):
-        f.text(xh + 65, yy, t, size=11, fill=INK, anchor="middle")
-    for k, t in enumerate(("box: 64 kênh", "(4 cạnh × 16 bin)", "cls: 5 kênh", "(5 lớp)", "8400 anchor", "(6400+1600+400)")):
-        f.text(xh + 65, hy0 + 90 + 16 * k, t, size=10.5, fill=DARK, anchor="middle")
-    f.text(xh + 65, hy1 - 78, "out sau decode", size=10.5, fill=DARK, anchor="middle")
-    f.text(xh + 65, hy1 - 60, "1×9×8400", size=12, weight=700, fill=INK, anchor="middle", mono=True)
-    f.text(xh + 65, hy1 - 40, f"{fmt(HD_P)}", size=10.5, fill=DARK, anchor="middle")
-    f.text(xh + 65, hy1 - 24, f"tham số · {gf(HD_M)} GFLOPs", size=10, fill=DARK, anchor="middle")
-    # P3 feed (over the top), P4 and P5 feeds (direct)
-    p3y = hy0 + 24 + 232
-    arrow(f, [(xt + bw / 2, ty[15]), (xt + bw / 2, 196), (xh, 196)], RED)
-    f.text(640, 186, "P3/8 · 64×80×80", size=10.5, weight=700, fill=RED, anchor="middle")
-    arrow(f, [(xu + bw, uy[18] + bh / 2), (xh, uy[18] + bh / 2)], RED)
-    f.text(850, uy[18] + bh / 2 - 9, "P4/16", size=10.5, weight=700, fill=RED, anchor="middle")
-    f.text(850, uy[18] + bh / 2 + 12, "128×40×40", size=10, fill=RED, anchor="middle")
-    arrow(f, [(xu + bw, uy[21] + bh / 2), (xh, uy[21] + bh / 2)], RED)
-    f.text(850, uy[21] + bh / 2 - 9, "P5/32", size=10.5, weight=700, fill=RED, anchor="middle")
-    f.text(850, uy[21] + bh / 2 + 12, "256×20×20", size=10, fill=RED, anchor="middle")
+    def dot(x, y, color):
+        f.a(f'<circle cx="{x:g}" cy="{y:g}" r="3" fill="{color}"/>')
 
-    # legend + stage summary (bottom right)
-    lx, ly = 600, 668
-    f.text(lx, ly, "Đường nối", size=12.5, weight=700, fill=DARK)
-    for k, (c, t) in enumerate(((BLUE, "luồng chính"), (GREEN, "nối tắt vào Concat"), (RED, "đặc trưng P3, P4, P5 vào Detect"))):
-        f.line([(lx, ly + 20 + 18 * k), (lx + 34, ly + 20 + 18 * k)], c, THIN, False, head=False)
-        f.text(lx + 44, ly + 20 + 18 * k, t, size=11, fill=INK)
+    # vertical main flow
+    f.text(cxb + 6, R(0) - 26, "3×640×640", size=10, fill=INK, halo="white")
+    seg([(cxb, R(0) - 16), (cxb, R(0))])
+    for i in range(1, 10):
+        seg([(cxb, top[i - 1] + NH), (cxb, top[i])])
+        lab(cxb + 6, (top[i - 1] + NH + top[i]) / 2, size_of(i - 1))
+    for a, b in ((10, 11), (11, 12), (12, 13), (13, 14), (14, 15)):          # top-down, upward
+        seg([(cxt, top[a]), (cxt, top[b] + hh(b))])
+        lab(cxt + 6, (top[a] + top[b] + hh(b)) / 2, size_of(a))
+    for a, b in ((16, 17), (17, 18), (18, 19), (19, 20), (20, 21)):          # bottom-up, downward
+        seg([(cxu, top[a] + hh(a)), (cxu, top[b])])
+        lab(cxu + 6, (top[a] + hh(a) + top[b]) / 2, size_of(a))
+    # L9 -> L10 (main) and L9 -> L20 (skip)
+    y9 = ctr(9)
+    seg([(xb + bw, y9 - 9), (cxt, y9 - 9), (cxt, top[10] + SH)])
+    lab(315, y9 - 19, size_of(9), anchor="middle")
+    seg([(xb + bw, y9), (xu, y9)], GREEN)
+    lab(315, y9 + 10, size_of(9), GREEN, anchor="middle")
+    # skips into Concat (green)
+    seg([(xb + bw, ctr(14)), (xt, ctr(14))], GREEN)
+    lab(315, ctr(14) - 9, size_of(4), GREEN, anchor="middle")
+    seg([(xb + bw, ctr(11)), (xt, ctr(11))], GREEN)
+    lab(315, ctr(11) - 9, size_of(6), GREEN, anchor="middle")
+    seg([(xt + bw, ctr(17)), (xu, ctr(17))], GREEN)
+    lab(645, ctr(17) - 9, size_of(12), GREEN, anchor="middle")
+    # L15 -> Detect P3 (red) and L15 -> L16 (main)
+    c15 = ctr(15)
+    seg([(xt + bw, c15), (xd, c15)], RED)
+    lab(800, c15 - 9, size_of(15), RED, anchor="middle")
+    dot(cxu, c15, RED)
+    seg([(cxu, c15), (cxu, top[16])])
+    lab(cxu + 6, (c15 + top[16]) / 2, size_of(15))
+    for i in (18, 21):
+        seg([(xu + bw, ctr(i)), (xd, ctr(i))], RED)
+        lab(xu + bw + 8, ctr(i) + 11, size_of(i), RED)
+
+    # frames and titles
+    bot = top[21] + NH + 18
+    for (fx, fy, fw, fh, col, title) in (
+            (25, y0 - 44, 260, R(9) + NH + 18 - (y0 - 44), FRAME_BB, "Backbone"),
+            (345, top[15] - 34, 620, bot - (top[15] - 34), FRAME_NECK, "Neck"),
+            (985, top[15] - 34, 170, bot - (top[15] - 34), FRAME_HEAD, "Head")):
+        f.a(f'<rect x="{fx}" y="{fy}" width="{fw}" height="{fh}" rx="2" fill="none" stroke="{col}" '
+            f'stroke-width="2" stroke-dasharray="7 4"/>')
+        f.text(fx + fw / 2, fy - 16, title, size=19, weight=700, fill=col, anchor="middle")
+
+    # three Detect blocks (L22: one module, three levels)
+    for k, i in enumerate((15, 18, 21)):
+        cy = ctr(i)
+        fill, stroke, tc = OV["Detect"]
+        rect(f, xd, cy - dh / 2, dw, dh, fill=fill, stroke=stroke, sw=1.2, rx=3)
+        f.text(xd + dw / 2, cy - dh / 2 + 11, "L22  Detect", size=12.5, weight=700, fill=tc, anchor="middle")
+        f.text(xd + dw / 2, cy - dh / 2 + 25, f'nhánh {("P3", "P4", "P5")[k]}: box 64 + cls {NC}', size=10, fill=tc,
+               anchor="middle")
+        f.text(xd + dw / 2, cy - dh / 2 + 40, f"{fmt(head_level_p(k))} tham số", size=10, fill=tc, anchor="middle")
+        f.text(xd + dw / 2, cy - dh / 2 + 54, f"{gf(head_level_macs(k))} GFLOPs", size=10, fill=tc, anchor="middle")
+    mid = (ctr(15) + ctr(18)) / 2
+    for j, (t, w_) in enumerate((("L22 là một module", 400), ("ba nhánh dùng chung DFL", 400),
+                                 (f"(16 tham số, {gf(16 * 4 * 8400)} GFLOPs)", 400), (f"tổng L22: {fmt(HD_P)} tham số", 700),
+                                 (f"{gf(HD_M)} GFLOPs", 700), ("8400 anchor, out 1×9×8400", 400))):
+        f.text(1070, mid - 45 + j * 17, t, size=10.5, weight=w_, fill=INK, anchor="middle")
+
+    # tables and legend (top band)
+    f.table(330, 45, [96, 112, 112, 112], ["Model variant", "d (depth_multiple)", "w (width_multiple)", "mc (max_channels)"],
+            [[v, d, w_, mc] for v, d, w_, mc in VARIANTS], size=10.5, line_h=16, fills={0: "#FFF3C4"})
+    f.text(330, 213, "Dòng n (nền vàng) là mô hình trong tài liệu này. Mọi số kênh = min(kênh gốc, mc) × w.", size=10.5, fill=DARK)
     rows = [
         ["Backbone L0-L9", fmt(BB_P), f"{BB_P / TOTAL_P * 100:.1f}%", gf(BB_M), f"{BB_M / TOTAL_MACS * 100:.1f}%"],
         ["Neck L10-L21", fmt(NK_P), f"{NK_P / TOTAL_P * 100:.1f}%", gf(NK_M), f"{NK_M / TOTAL_MACS * 100:.1f}%"],
         ["Head L22", fmt(HD_P), f"{HD_P / TOTAL_P * 100:.1f}%", gf(HD_M), f"{HD_M / TOTAL_MACS * 100:.1f}%"],
         ["Tổng", fmt(TOTAL_P), "100%", gf(TOTAL_MACS), "100%"],
     ]
-    f.table(lx, ly + 88, [112, 74, 44, 56, 44], ["Giai đoạn", "Tham số", "%", "GFLOPs", "%"], rows, size=10.5,
-            line_h=16)
-    source(f, 876, "Nguồn: ultralytics 8.4.154 yolov8.yaml (scale n, nc=5) và best.pt run ppe5_yolov8n_baseline_100ep_s0. "
-                   "GFLOPs = 2 × MACs của Conv2d ở 640×640.")
+    f.table(830, 45, [112, 74, 44, 56, 44], ["Giai đoạn", "Tham số", "%", "GFLOPs", "%"], rows, size=10.5, line_h=16)
+    lx, ly = 330, 245
+    for k, (c, t) in enumerate(((INKL, "luồng chính"), (GREEN, "nối tắt vào Concat"), (RED, "đặc trưng P3, P4, P5 vào Detect"))):
+        x = lx + (0, 140, 308)[k]  # chữ rộng 52 và 80 px ở size 11, khoảng trống giữa các mục 45 px
+        f.line([(x, ly), (x + 34, ly)], c, 1.5, False, head=False)
+        f.text(x + 42, ly, t, size=11, fill=INK)
+    f.text(lx, ly + 20, "Kích thước C×H×W ghi trên mũi tên là đầu ra của khối nằm trước mũi tên.", size=10.5, fill=DARK)
+    f.text(lx, ly + 38, "L22 chia theo nhánh P3/P4/P5 chỉ để vẽ. Tham số và GFLOPs chia từng mức cộng với DFL ra đúng tổng L22.",
+           size=10.5, fill=DARK)
+
+    f.text(10, bot + 18, "Nguồn: ultralytics 8.4.154 yolov8.yaml (scale n, nc=5) và best.pt run ppe5_yolov8n_baseline_100ep_s0. "
+                         "GFLOPs = 2 × MACs của Conv2d ở 640×640.", size=12, fill=DARK, italic=True)
+    source(f, bot + 18, "Bố cục theo Figure 1 của arXiv 2501.13400 (YOLOv8 to YOLO11: A Comprehensive Architecture In-depth Comparative Review).")
     return f
 
 
