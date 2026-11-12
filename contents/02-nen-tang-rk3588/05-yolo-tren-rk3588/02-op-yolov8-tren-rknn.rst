@@ -366,8 +366,8 @@ Do đó, việc duy trì cấu hình chuẩn (xuất tensor thô không có NMS 
      - Tài liệu UG232 xác nhận NPU chưa hỗ trợ Resize ở cấp độ phần cứng, và toolkit phải chuyển đổi Resize thành ConvTranspose để chạy trên NPU.
      - [T1 UG232 tr.176]
    * - Các toán tử trong khối C2f như Split và Add không thể thực thi song song trên phần cứng đa lõi.
-     - Toán tử Add trong nhánh residual được OPL đánh dấu hỗ trợ đa lõi đầy đủ (cột đa lõi ghi "支持").
-     - [T1 OPL tr.56]
+     - Toán tử Add trong nhánh residual được OPL đánh dấu hỗ trợ đa lõi đầy đủ (cột đa lõi ghi "支持"). Mục Split của OPL (tr.91) không có thông tin đa lõi. Phép đo trên board với YOLOv8n INT8 chạy ``CORE_0_1_2`` cho thấy cột WorkLoad của mọi dòng Add chia ra nhiều lõi, Concat chia ra nhiều lõi ở 3000 trên 3400 lượt ghi nhận, còn mọi dòng Split chạy một lõi. Vậy vế Add sai, vế Split đúng cho đồ thị này (một export, một phiên đo).
+     - [T1 OPL tr.56, tr.91] [T3 board, ``results/npu/operator_support/c3_vs_c2f.md``]
 
 Nguồn
 =====

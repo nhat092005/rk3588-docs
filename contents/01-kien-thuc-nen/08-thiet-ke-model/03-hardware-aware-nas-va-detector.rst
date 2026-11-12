@@ -61,7 +61,7 @@ Số liệu từ Bảng 1 của S3NAS [T2 S3NAS tr.5] chứng minh rằng trên 
 
    "the NPU assumed in this paper can execute depth-wise separable convolution (DWConv), squeeze-and-excitation (SE), and h-swish activation function efficiently" [T2 S3NAS tr.2]
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/s3nas-fig8-mixconv-implementations.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/hardware-aware-nas-va-detector/s3nas-fig8-mixconv-implementations.png
    :align: center
    :alt: Hai cách cài đặt cùng một khối MixConv
 
@@ -97,7 +97,7 @@ Mô hình phát hiện đối tượng YOLOv6 được thiết kế với mục 
 
 Nhóm tác giả nhận định các lớp tích chập chuẩn kích thước :math:`3 \times 3` sở hữu mật độ tính toán cao và được hỗ trợ tối đa bởi các thư viện vi mã trên phần cứng [T2 Y6 tr.3]:
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/hardware-aware-nas-va-detector/yolov6-fig3-repblock-repconv-cspstackrep.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/hardware-aware-nas-va-detector/yolov6-fig3-repblock-repconv-cspstackrep.png
    :align: center
    :alt: YOLOv6 RepBlock lúc train, RepConv lúc suy luận và CSPStackRep Block
 

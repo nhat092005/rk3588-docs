@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chuyên đề: Thiết kế mô hình thân thiện NPU (06-thiet-ke-model).
+"""Chuyên đề: Thiết kế mô hình thân thiện NPU (08-thiet-ke-model).
 
 Sinh các hình vector SVG minh họa:
   1. rep-01-repvgg-fusion-flow:
@@ -12,13 +12,13 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-# docs/tools/figure_gen/01-kien-thuc-nen/06-thiet-ke-model -> ../.. = docs/tools/figure_gen
+# docs/tools/figure_gen/01-kien-thuc-nen/08-thiet-ke-model -> ../.. = docs/tools/figure_gen
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 from figlib import BLUE, DARK, GRAY, GREEN, INK, RED, THICK, THIN, Fig, run, source  # noqa: E402
 
 DEFAULT_OUTDIR = os.path.abspath(
     os.path.join(
-        HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "06-thiet-ke-model"
+        HERE, "..", "..", "..", "..", "_assets", "generated", "01-kien-thuc-nen", "08-thiet-ke-model"
     )
 )
 

@@ -79,13 +79,13 @@ Khối xây dựng cơ bản của mạng RepVGG ở giai đoạn huấn luyện
 
 Để đảm bảo tính tương đương toán học khi gộp, RepVGG đòi hỏi các nhánh tích chập phải có cùng bước trượt (stride), đồng thời cấu hình đệm (padding) của nhánh 1x1 phải nhỏ hơn nhánh 3x3 đúng một pixel [T2 REPVGG tr.5]:
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/tai-tham-so-hoa-cau-truc/repvgg-fig4-structural-reparameterization.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/tai-tham-so-hoa-cau-truc/repvgg-fig4-structural-reparameterization.png
    :align: center
    :alt: Structural re-parameterization của một khối RepVGG
 
    Hình 8.1a. Structural re-parameterization của một khối RepVGG: ba nhánh (3x3 + BN, 1x1 + BN, identity + BN) được cộng lại thành một Conv 3x3 (A: cấu trúc, B: tham số). Nguồn: [T2 REPVGG tr.5, Figure 4]
 
-.. figure:: ../../../_assets/generated/01-kien-thuc-nen/06-thiet-ke-model/rep-01-repvgg-fusion-flow.svg
+.. figure:: ../../../_assets/generated/01-kien-thuc-nen/08-thiet-ke-model/rep-01-repvgg-fusion-flow.svg
    :align: center
    :width: 95%
    :alt: Quy trình tái tham số hóa RepVGG từ huấn luyện đa nhánh sang suy luận đơn nhánh
@@ -192,7 +192,7 @@ Tham số :math:`k` được gọi là hệ số over-parameterization (trivial 
 
    "For skip connection the batchnorm is folded to a convolutional layer with identity 1x1 kernel" [T2 MOBONE tr.4]
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/tai-tham-so-hoa-cau-truc/mobileone-fig3-train-vs-inference-block.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/tai-tham-so-hoa-cau-truc/mobileone-fig3-train-vs-inference-block.png
    :align: center
    :alt: Khối MobileOne lúc train và lúc suy luận
 
@@ -242,7 +242,7 @@ Nguyên nhân gốc rễ bắt nguồn từ sự vi phạm hai điều kiện c�
 1. **Điều kiện C1 (Phân phối trọng số thân thiện lượng tử)**: Trọng số gộp của các tầng trung gian có phương sai cực lớn và xuất hiện nhiều giá trị ngoại lai (outliers), đặc biệt tại các tầng 5 và tầng 6 [T2 QAREP tr.5].
 2. **Điều kiện C2 (Phân phối activation thân thiện lượng tử)**: Trong khối RepVGG, mỗi nhánh trong ba nhánh đều sở hữu một lớp Batch Normalization độc lập đặt trước phép cộng. Khi cộng ba phân phối chuẩn hóa có kỳ vọng khác nhau, phương sai của tensor activation bị khuếch đại mạnh mẽ ở đầu ra [T2 QAREP tr.5].
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/tai-tham-so-hoa-cau-truc/qarep-fig4-repvgg-a0-activation-variance.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/tai-tham-so-hoa-cau-truc/qarep-fig4-repvgg-a0-activation-variance.png
    :align: center
    :alt: Phương sai activation lớn của RepVGG-A0
 
@@ -260,7 +260,7 @@ Nguyên nhân gốc rễ bắt nguồn từ sự vi phạm hai điều kiện c�
 
 Việc bổ sung Post-BN đóng vai trò chuẩn hóa toàn bộ tensor đầu ra sau phép cộng, triệt tiêu hiện tượng dịch chuyển hiệp biến (covariate shift) và giữ cho phương sai activation luôn nằm trong dải phân bố hẹp, thân thiện với các thang chia lượng tử hóa INT8 đối xứng [T2 QAREP tr.5, 6].
 
-.. figure:: ../../../_assets/img/01-kien-thuc-nen/06-thiet-ke-model/tai-tham-so-hoa-cau-truc/qarep-fig1-repvgg-vs-qarepvgg-block.png
+.. figure:: ../../../_assets/img/01-kien-thuc-nen/08-thiet-ke-model/tai-tham-so-hoa-cau-truc/qarep-fig1-repvgg-vs-qarepvgg-block.png
    :align: center
    :alt: Reparameterization của khối RepVGG và QARepVGG
 

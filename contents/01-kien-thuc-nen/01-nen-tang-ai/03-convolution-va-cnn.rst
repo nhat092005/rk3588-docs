@@ -300,7 +300,7 @@ Liên hệ RK3588: Pooling và Resize trên RKNN xem :doc:`Op của YOLOv8 trên
 9. Phép Add và khối residual
 ============================
 
-Khi mạng nơ-ron trở nên rất sâu, việc huấn luyện gặp khó khăn do vấn đề tiêu biến gradient. Kiến trúc ResNet giải quyết vấn đề này bằng khối residual [T2 D2L tr.304].
+Thêm lớp vào mạng chỉ chắc chắn không làm mô hình kém đi nếu lớp mới có thể học thành hàm đồng nhất :math:`f(\mathbf{x}) = \mathbf{x}` [T2 D2L tr.303]. Kiến trúc ResNet xuất phát từ ý này: mỗi lớp thêm vào nên dễ chứa hàm đồng nhất hơn, và khối residual là lời giải [T2 D2L tr.303]. Bài toán gốc (degradation) và giới hạn của cách giải thích bằng tiêu biến gradient nằm ở :doc:`../06-khoi-cau-thanh-mang/01-khoi-residual-resnet`.
 
 .. _fig-d2l-residual-block:
 
@@ -329,6 +329,8 @@ Nhánh tắt (shortcut connection) dẫn trực tiếp đầu vào :math:`\mathb
 Identity shortcut dùng khi :math:`c_{in} = c_{out}` và stride 1, không thêm tham số. Projection shortcut (Conv :math:`1 \times 1`, :math:`c_{out} \cdot c_{in} + c_{out}` tham số) dùng khi đổi số kênh hoặc stride 2.
 
 Liên hệ RK3588: rule fusion của RKNN cho Add xem :doc:`Layout NC1HWC2 và fusion </contents/02-nen-tang-rk3588/03-toolchain-runtime/05-fusion-va-layout-nc1hwc2>`.
+
+Động cơ gốc của khối residual (degradation), bottleneck, đánh đổi và vai trò trong backbone: xem :doc:`Khối residual (ResNet) </contents/01-kien-thuc-nen/06-khoi-cau-thanh-mang/01-khoi-residual-resnet>`.
 
 10. Ghép khối thành CNN
 =======================

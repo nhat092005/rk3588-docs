@@ -153,7 +153,7 @@ Mọi op hoặc thay đổi kiến trúc ứng viên phải qua bốn cổng G1 
    * - Huấn luyện lâu hơn
      - SiLU 200 epoch hơn 100 epoch 1.21 điểm, nhỏ hơn khoảng trải giữa seed 1.35. Cần thêm seed
    * - Cắt vùng quan tâm, tái tham số hóa (RepVGG, QARepVGG, DBB)
-     - Đo trên camera. Tái tham số hóa có rủi ro khi INT8 (:doc:`../01-kien-thuc-nen/06-thiet-ke-model/01-tai-tham-so-hoa-cau-truc`)
+     - Đo trên camera. Tái tham số hóa có rủi ro khi INT8 (:doc:`../01-kien-thuc-nen/08-thiet-ke-model/01-tai-tham-so-hoa-cau-truc`)
    * - ``single_core_mode``, ``optimization_level`` thấp hơn, ``compress_weight``, ``model_pruning``
      - Build, đo latency và AP
    * - GPU Mali, VOP2

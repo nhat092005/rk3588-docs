@@ -292,6 +292,8 @@ Bottleneck gồm hai Conv 3×3 stride 1, trong C2f giữ nguyên số kênh (``e
 - Backbone: ``C2f [128, True]``, ``[256, True]``, ``[512, True]``, ``[1024, True]`` nên có cộng tắt (L2, L4, L6, L8).
 - Neck: ``C2f [512]``, ``[256]``, ``[512]``, ``[1024]`` dùng mặc định ``shortcut=False`` nên không cộng tắt (L12, L15, L18, L21) [T1 block.py:294, yolov8.yaml:31-47].
 
+Ý tưởng cộng tắt này đến từ khối residual của ResNet, xem :doc:`/contents/01-kien-thuc-nen/06-khoi-cau-thanh-mang/01-khoi-residual-resnet`.
+
 4.3. C2f
 --------
 
@@ -403,7 +405,7 @@ Chạy ``measure.py`` nạp ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/we
 
 Trọng số khởi tạo là ``yolov8n.pt`` (COCO), không phải kiến trúc khác: log huấn luyện ghi "Transferred 322/355 items from pretrained weights" [T3 ``experiments/runs/ppe5_yolov8n_baseline_100ep_s0/logs/train_20261026-004322.log``:38]. Kiểm trên model dựng từ yaml, các tensor không nạp được đều thuộc nhánh cls của head (``cv3``), vì checkpoint COCO có ``c3 = 80`` nên shape khác ``c3 = 64`` ở ``nc=5``. Log chỉ ghi tổng 322/355, nên danh sách chính xác của 33 tensor còn lại chưa đối chiếu từng cái.
 
-Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu.yaml``) thay SiLU bằng ReLU và giữ nguyên mọi shape. Tệp ghi rõ chỉ thêm ``scale`` và ``activation`` so với ``yolov8.yaml`` bản 8.4.154 [T1 ``ai/models/yolov8n_relu.yaml``]. Mọi số tham số và GFLOPs trong trang áp dụng cho cả hai. Kết quả so sánh độ chính xác và độ trễ nằm ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` và :doc:`../04-tang-npu-ket-qua/02-ket-qua-bien-the-activation`.
+Biến thể ``yolov8n_relu`` (``ai/models/yolov8n_relu/yolov8n_relu.yaml``) thay SiLU bằng ReLU và giữ nguyên mọi shape. Tệp ghi rõ chỉ thêm ``scale`` và ``activation`` so với ``yolov8.yaml`` bản 8.4.154 [T1 ``ai/models/yolov8n_relu/yolov8n_relu.yaml``]. Mọi số tham số và GFLOPs trong trang áp dụng cho cả hai. Kết quả so sánh độ chính xác và độ trễ nằm ở :doc:`../04-tang-npu-ket-qua/01-ket-qua-g4` và :doc:`../04-tang-npu-ket-qua/02-ket-qua-bien-the-activation`.
 
 9. Liên kết sang tầng NPU và tái lập
 ====================================

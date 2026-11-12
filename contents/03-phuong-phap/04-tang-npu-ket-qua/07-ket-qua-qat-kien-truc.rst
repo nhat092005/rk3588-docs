@@ -125,7 +125,7 @@ Câu hỏi của quy tắc gồm hai vế: đạt FP16 và đồ thị INT8 thu�
 4. A2: bỏ DFL (reg_max 1)
 ===========================
 
-A2 huấn luyện lại ``ai/models/yolov8n_nodfl.yaml`` (yaml gốc ``yolov8.yaml`` thêm ``scale: n`` và ``reg_max: 1``) từ ``yolov8n.pt``, cùng cấu hình với baseline (``ppe5``, 100 epoch, seed 0, SiLU), xuất mặc định của Ultralytics (giải mã trong đồ thị, không công thức lai, vì ``h5`` cần 4 tensor DFL không còn) với danh sách hiệu chuẩn seed 0 (``stems_md5`` ``11d6a5c69414a6eafd8b98f99724b0b2``, ``png_md5`` ``6652576adb7608ddf8ff326c57851732``). Kiểm tra trước trên model chưa huấn luyện: đầu ra 1x9x8400, 116 hàng toàn INT8, không op CPU.
+A2 huấn luyện lại ``ai/models/yolov8n_nodfl/yolov8n_nodfl.yaml`` (yaml gốc ``yolov8.yaml`` thêm ``scale: n`` và ``reg_max: 1``) từ ``yolov8n.pt``, cùng cấu hình với baseline (``ppe5``, 100 epoch, seed 0, SiLU), xuất mặc định của Ultralytics (giải mã trong đồ thị, không công thức lai, vì ``h5`` cần 4 tensor DFL không còn) với danh sách hiệu chuẩn seed 0 (``stems_md5`` ``11d6a5c69414a6eafd8b98f99724b0b2``, ``png_md5`` ``6652576adb7608ddf8ff326c57851732``). Kiểm tra trước trên model chưa huấn luyện: đầu ra 1x9x8400, 116 hàng toàn INT8, không op CPU.
 
 Yếu tố gây nhiễu cần biết: với ``reg_max`` 1, cả nhánh box ``cv2`` thu từ 64 xuống 16 kênh (``head.py:122``), nên toàn bộ nhánh box khởi tạo ngẫu nhiên, chỉ 285/354 items (nc 5 training log) chuyển từ ``yolov8n.pt``. A2 là một model khác chứ không chỉ khác ở phép giải mã. Số liệu: FP16 của A2 là 49.33, thấp hơn FP16 SiLU seed 0 0.43 điểm, trong khi khoảng trải seed của FP16 SiLU là 1.25 điểm. mAP50-95 trên tập validation ở epoch cuối là 0.5240 (A2) và 0.5223 (SiLU).
 

@@ -130,7 +130,7 @@ Nhóm hàm này có đường cong liên tục và đạo hàm trơn trên toàn
 1.3 Chi phí phần cứng
 ---------------------
 
-Chi phí thực thi của từng activation trên GPU, CPU di động và NPU nằm ở :doc:`../06-thiet-ke-model/02-ham-kich-hoat-va-chi-phi-phan-cung`.
+Chi phí thực thi của từng activation trên GPU, CPU di động và NPU nằm ở :doc:`../08-thiet-ke-model/02-ham-kich-hoat-va-chi-phi-phan-cung`.
 
 Liên hệ RK3588: TRM ghi khối DPU của NPU xử lý các activation như relu, leaky_relu, sigmoid, tanh [T1 TRM1 tr.1985]. Hỗ trợ đa lõi của từng toán tử gộp Conv và activation nằm ở :doc:`Tiêu chí thân thiện NPU </contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/03-tieu-chi-than-thien-npu>`.
 

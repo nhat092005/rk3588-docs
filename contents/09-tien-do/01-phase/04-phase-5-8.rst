@@ -31,7 +31,7 @@ Phase 5. Multi-model YOLO11n/s
    * - Việc
      - File cần tạo / sửa
    * - Thêm model
-     - ``ai/models/yolo11n_baseline.py``, ``yolo11s_baseline.py`` (``WEIGHTS = "yolo11n.pt"``, ``"yolo11s.pt"``)
+     - ``ai/models/yolo11n_baseline/yolo11n_baseline.py``, ``ai/models/yolo11s_baseline/yolo11s_baseline.py`` (``WEIGHTS = "yolo11n.pt"``, ``"yolo11s.pt"``)
    * - Thêm config
      - ``ai/automation/configs/<ds>_yolo11{n,s}_baseline.yaml`` (chép config YOLOv8 tương ứng)
    * - Cho phase chạy cả YOLO11
@@ -84,7 +84,7 @@ Phase 7. Proposed optimization
      - Chưa có
      - Có
    * - Activation SiLU → ReLU / LeakyReLU
-     - Model mới trong ``ai/models/``, config mới
+     - Thư mục model mới trong ``ai/models/``, config mới
      - Có
    * - ``op_target`` cho op không hỗ trợ đa nhân
      - ``ai/core/rknn/deploy.py`` (hiện ``NotImplementedError``)
