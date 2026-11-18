@@ -271,7 +271,7 @@ Sơ đồ thể hiện các quyết định ở mục 3.1. Số trong ngoặc l�
 3.2.2. Sơ đồ đã triển khai
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nguồn: mã ``deploy/library/pipeline/`` và ``deploy/app/main.cpp``, các lần đo trên board với xung nhịp khóa, ghim lõi A76 (``probe_threads``, ``rk3588_deploy``). Số trong bảng là trung vị đo được. Màn hình (VOP2, GPU) chưa làm.
+Nguồn: mã ``deploy/library/runtime/pipeline/`` và ``deploy/app/main.cpp``, các lần đo trên board với xung nhịp khóa, ghim lõi A76 (``probe_threads``, ``rk3588_deploy``). Số trong bảng là trung vị đo được. Màn hình (VOP2, GPU) chưa làm.
 
 .. code:: text
 
