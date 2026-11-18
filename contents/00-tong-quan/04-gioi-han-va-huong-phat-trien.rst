@@ -192,7 +192,7 @@ Quyết định đã chốt (người dùng), chia theo nhóm. Mọi trang khác
 3.1.4. CPU và phần mềm
 ~~~~~~~~~~~~~~~~~~~~~~
 
-9. CPU làm: hậu xử lý (giải mã hộp, NMS), ByteTrack, dựng chữ nhãn, điều phối và logic ứng dụng. Hậu xử lý, ByteTrack và dựng chữ nhãn dùng NEON.
+9. CPU làm: hậu xử lý (giải mã hộp, NMS), ByteTrack, dựng chữ nhãn, điều phối và logic ứng dụng, viết bằng C++ ``-O3``, chưa dùng NEON viết tay. ByteTrack mất 0.05 ms cho 34 người [T3 board, ``probe_tracker``].
 10. Chương trình chính viết bằng C hoặc C++.
 11. Ghim vòng chính và ngắt NPU vào lõi lớn A76.
 
@@ -206,12 +206,17 @@ Quyết định đã chốt (người dùng), chia theo nhóm. Mọi trang khác
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 14. Giữ khung 4K lại một đến hai khung, chờ kết quả AI để vẽ khớp.
-15. Vi phạm: có NoHelmet hoặc NoVest gắn với một Person, kéo dài 3 giây liên tục thì lưu ảnh vi phạm.
+15. Vi phạm: chỉ lớp Person đi vào ByteTrack. Hộp NoHelmet hoặc NoVest (độ tin cậy từ 0.25) gắn với một Person khi tâm hộp nằm trong hộp Person. Nếu tâm nằm trong nhiều Person thì chọn Person chứa phần lớn hộp nhất, sau đó Person có hộp nhỏ hơn, sau đó Person đứng trước trong danh sách của tracker. Khi vi phạm kéo dài 1 giây liên tục thì lưu ảnh vi phạm, mỗi vi phạm lưu một lần. "Liên tục" cho phép ngắt quãng tối đa 0.5 giây vì mô hình có lúc bỏ sót hộp. 0.5 giây là giá trị tạm: mô hình do bên khác huấn luyện, chưa đo tần suất bỏ sót trên board.
 16. Lưu ảnh vi phạm từ luồng 4K qua bộ JPEG, lưu video bằng H.265 qua bộ VPU: cùng chất lượng ở khoảng nửa bitrate của H.264, đủ 30 khung/giây ở 4K (:doc:`../10-luong-camera-den-phat-hien/06-sau-npu` mục 3.1). Trình duyệt chỉ hỗ trợ H.265 một phần, xem bằng player.
 17. Vẽ khung và chèn nhãn bằng job của RGA2, tối đa 12 hộp mỗi job: 34 hộp mất khoảng 2 ms thay vì 12 ms (:doc:`../10-luong-camera-den-phat-hien/08-phan-cung-tang-toc` mục 3.2). RGA2 chỉ map được bộ nhớ dưới 4 GB: vẽ trên bộ đệm camera (V4L2) được, không vẽ trên bộ đệm do MPP cấp.
 
 3.2. Sơ đồ luồng theo quyết định
 ---------------------------------
+
+Hai sơ đồ: 3.2.1 là thiết kế đề xuất ban đầu theo các quyết định ở mục 3.1, 3.2.2 là pipeline đã triển khai trong ``deploy/`` (ngày 2026-11-19). Hai sơ đồ khác nhau ở số luồng camera, bộ đệm, nơi vẽ và số thread, lý do ở cuối mục 3.2.2.
+
+3.2.1. Sơ đồ đề xuất ban đầu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sơ đồ thể hiện các quyết định ở mục 3.1. Số trong ngoặc là số mục quyết định. Đây là sơ đồ ý định: dma-buf và zero-copy chưa kiểm trên board. RGA2 mới kiểm vẽ trên bộ đệm camera chưa stream, chưa vẽ trên khung đang chạy (:doc:`../10-luong-camera-den-phat-hien/08-phan-cung-tang-toc`).
 
@@ -243,7 +248,7 @@ Sơ đồ thể hiện các quyết định ở mục 3.1. Số trong ngoặc l�
                 v                                       v
       hàng đợi: giữ 1 đến 2 khung 4K              CPU, ghim lõi A76   (mục 9, 11)
       (bộ đệm camera) chờ kết quả AI (mục 14)     hậu xử lý (giải mã hộp, NMS) -> ByteTrack
-                |                                 -> hộp và mã số, dựng chữ nhãn (dùng NEON)
+                |                                 -> hộp và mã số, dựng chữ nhãn
                 |                                 quy tắc vi phạm   (mục 15)
                 |                                       |  x4K = x640 * 6, y4K = (y384 - 12) * 6
                 |                                       |
@@ -262,6 +267,96 @@ Sơ đồ thể hiện các quyết định ở mục 3.1. Số trong ngoặc l�
 
     Khung đi giữa các khối bằng dma-buf (mục 13). Chương trình chính viết bằng C hoặc C++ (mục 10).
     IEP, FBC không dùng (mục 12).
+
+3.2.2. Sơ đồ đã triển khai
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Nguồn: mã ``deploy/library/pipeline/`` và ``deploy/app/main.cpp``, các lần đo trên board với xung nhịp khóa, ghim lõi A76 (``probe_threads``, ``rk3588_deploy``). Số trong bảng là trung vị đo được. Màn hình (VOP2, GPU) chưa làm.
+
+.. code:: text
+
+      Camera 4K NV12, 30 FPS
+            |
+            v
+      +--------------+   ảnh 640x640    +------------+   hộp, mã số,   +-------------+
+      |  1. CAMERA   | ---------------> |   2. NPU   | --------------> |  3. GHI     |
+      |   (CPU 6)    |   (hộp thư)      |  (CPU 5)   |   vi phạm       |   (CPU 4)   |
+      +--------------+                  +------------+   (hộp thư)     +-------------+
+            |                                                                |
+            |  khung 4K (giữ đến khi thread 3 copy xong)                     |
+            +----------------------------------------------------------------+
+                                                                             |
+                                          +-----------------+----------------+
+                                          |                 |                |
+                                    vi phạm: ảnh        clip trước/sau      mọi gói H.265
+                                          |                 |                |
+                                          v                 v                v
+                                   +---------------------------+     +---------------+
+                                   |   4. BẰNG CHỨNG (CPU 7)   |     | 5. GHI LIÊN   |
+                                   |   /data/violations        |     | TỤC (CPU 3)   |
+                                   +---------------------------+     | --record      |
+                                                                     | /data/records |
+                                                                     +---------------+
+
+    Hộp thư không chặn thread gửi: đầy thì bỏ khung và đếm. Mỗi thread ghim một lõi A76.
+    Ghi đĩa chỉ ở thread 4 và 5, vì ``write`` có lúc chặn hơn 2 s trên thẻ SD.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 16 54 30
+
+   * - Thread
+     - Việc
+     - Thời gian
+   * - 1. Camera
+     - Lấy khung V4L2 và ghi timestamp. RGA3 xoay, thu nhỏ, đổi NV12 sang RGB, thêm viền 114 trong một lần gọi
+     - Letterbox 10.9 ms
+   * - 2. NPU
+     - Model INT8 640x640, vào bằng zero-copy (DMA-BUF). Giải mã hộp, NMS, ByteTrack (chỉ Person), quy tắc vi phạm (giữ 1.0 s, ngắt tối đa 0.5 s, giờ là timestamp V4L2)
+     - NPU 18 đến 21 ms, giải mã 0.05 đến 0.2 ms
+   * - 3. Ghi
+     - RGA copy khung thẳng đứng vào ``lowHeap`` (dưới 4 GB) rồi trả bộ đệm camera. RGA2 vẽ khung và nhãn (12 hộp mỗi job). Khi có vi phạm: hai bản copy (gốc, đã vẽ). VPU H.265 CBR 20 Mbps, GOP 30, mọi IDR có VPS/SPS/PPS. ClipRecorder giữ 5 s trước và 5 s sau vi phạm
+     - 22.3 ms mỗi khung
+   * - 4. Bằng chứng
+     - Bộ JPEG (MPP): ``original.jpg``, ``marked.jpg``. Ghi ``event.json`` và ``clip.h265``. Dọn theo tuổi, dung lượng, chỗ trống
+     - Giới hạn: 30 ngày, 4 GB, trống 2 GB
+   * - 5. Ghi liên tục
+     - Chỉ khi có ``--record``. Hàng đợi gói 16 MB, đoạn ``.h265`` mỗi 60 s
+     - Giới hạn: 7 ngày, 5 GB, trống 3 GB
+
+So với 3.2.1, phần triển khai khác ở các điểm sau.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 24 38 38
+
+   * - Mục
+     - Đề xuất ban đầu (3.2.1)
+     - Đã triển khai (3.2.2)
+   * - Luồng camera (mục 4)
+     - ISP tách hai luồng: 4K và 640x360 cho AI
+     - Một luồng 4K từ mainpath. RGA3 thu nhỏ từ khung 4K sang ảnh cho AI (10.9 ms). Luồng 640x360 chưa làm. Lợi của một luồng: AI và video dùng cùng một khung, không ghép khung. Chưa đo hai luồng trong pipeline đầy đủ
+   * - Input model (mục 6)
+     - 384x640, viền 12 hàng trên và dưới
+     - 640x640 theo model hiện có trên board (model do bên khác huấn luyện)
+   * - Giữ khung chờ AI (mục 14)
+     - Giữ một đến hai khung 4K trong hàng đợi camera
+     - 6 bộ đệm V4L2. Thread ghi copy khung sang bộ đệm riêng rồi trả bộ đệm camera
+   * - Nơi vẽ (mục 17)
+     - Vẽ trên bộ đệm camera
+     - Vẽ trên bản copy trong ``lowHeap`` (``reserved``, dưới 4 GB)
+   * - Luồng xử lý
+     - Một vòng chính, ghim A76
+     - 4 thread (5 khi ``--record``), mỗi thread một lõi A76. Chia như vậy vì một thread chỉ đạt 18 FPS khi làm hết, hai thread còn dư 1.3 ms
+   * - Ảnh và video vi phạm (mục 15, 16)
+     - JPEG từ khung 4K
+     - Hai JPEG (gốc và đã vẽ) cùng clip H.265 trước và sau vi phạm, dọn theo tuổi, dung lượng, chỗ trống
+   * - Ghi liên tục
+     - Không có
+     - Cờ ``--record`` (mặc định tắt): đoạn H.265 60 s trong ``/data/records``
+   * - Màn hình (mục 12)
+     - VOP2 và GPU
+     - Chưa làm
 
 3.3. Hướng phát triển
 ---------------------
