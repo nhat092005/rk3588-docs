@@ -271,7 +271,7 @@ Sơ đồ thể hiện các quyết định ở mục 3.1. Số trong ngoặc l�
 3.2.2. Sơ đồ đã triển khai
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nguồn: mã ``deploy/library/pipeline/`` và ``deploy/app/main.cpp``, các lần đo trên board với xung nhịp khóa, ghim lõi A76 (``probe_threads``, ``rk3588_deploy``). Số trong bảng là trung vị đo được. Màn hình (VOP2, GPU) chưa làm.
+Nguồn: mã ``deploy/library/runtime/pipeline/`` và ``deploy/app/main.cpp``, các lần đo trên board với xung nhịp khóa, ghim lõi A76 (``probe_threads``, ``rk3588_deploy``). Số trong bảng là trung vị đo được. Màn hình (VOP2, GPU) chưa làm.
 
 .. code:: text
 
@@ -294,7 +294,7 @@ Nguồn: mã ``deploy/library/pipeline/`` và ``deploy/app/main.cpp``, các lầ
                                    +---------------------------+     +---------------+
                                    |   4. BẰNG CHỨNG (CPU 7)   |     | 5. GHI LIÊN   |
                                    |   /data/violations        |     | TỤC (CPU 3)   |
-                                   +---------------------------+     | --record      |
+                                   +---------------------------+     | --record true |
                                                                      | /data/records |
                                                                      +---------------+
 
@@ -321,7 +321,7 @@ Nguồn: mã ``deploy/library/pipeline/`` và ``deploy/app/main.cpp``, các lầ
      - Bộ JPEG (MPP): ``original.jpg``, ``marked.jpg``. Ghi ``event.json`` và ``clip.h265``. Dọn theo tuổi, dung lượng, chỗ trống
      - Giới hạn: 30 ngày, 4 GB, trống 2 GB
    * - 5. Ghi liên tục
-     - Chỉ khi có ``--record``. Hàng đợi gói 16 MB, đoạn ``.h265`` mỗi 60 s
+     - Chỉ khi bật ``--record true`` (``record.enabled`` trong file cấu hình). Hàng đợi gói 16 MB, đoạn ``.h265`` mỗi 60 s
      - Giới hạn: 7 ngày, 5 GB, trống 3 GB
 
 So với 3.2.1, phần triển khai khác ở các điểm sau.
@@ -347,13 +347,13 @@ So với 3.2.1, phần triển khai khác ở các điểm sau.
      - Vẽ trên bản copy trong ``lowHeap`` (``reserved``, dưới 4 GB)
    * - Luồng xử lý
      - Một vòng chính, ghim A76
-     - 4 thread (5 khi ``--record``), mỗi thread một lõi A76. Chia như vậy vì một thread chỉ đạt 18 FPS khi làm hết, hai thread còn dư 1.3 ms
+     - 4 thread (5 khi ``--record true``), mỗi thread một lõi A76. Chia như vậy vì một thread chỉ đạt 18 FPS khi làm hết, hai thread còn dư 1.3 ms
    * - Ảnh và video vi phạm (mục 15, 16)
      - JPEG từ khung 4K
      - Hai JPEG (gốc và đã vẽ) cùng clip H.265 trước và sau vi phạm, dọn theo tuổi, dung lượng, chỗ trống
    * - Ghi liên tục
      - Không có
-     - Cờ ``--record`` (mặc định tắt): đoạn H.265 60 s trong ``/data/records``
+     - Cờ ``--record true`` (mặc định tắt): đoạn H.265 60 s trong ``/data/records``
    * - Màn hình (mục 12)
      - VOP2 và GPU
      - Chưa làm
