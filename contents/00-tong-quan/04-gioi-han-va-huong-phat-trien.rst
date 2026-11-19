@@ -300,6 +300,7 @@ Nguồn: mã ``deploy/library/runtime/pipeline/`` và ``deploy/app/main.cpp``, c
 
     Hộp thư không chặn thread gửi: đầy thì bỏ khung và đếm. Mỗi thread ghim một lõi A76.
     Ghi đĩa chỉ ở thread 4 và 5, vì ``write`` có lúc chặn hơn 2 s trên thẻ SD.
+    Cờ ``--session true`` thêm thread 6 (lõi nhỏ CPU 1), nhận cùng các gói H.265 như thread 5.
 
 .. list-table::
    :header-rows: 1
@@ -318,11 +319,14 @@ Nguồn: mã ``deploy/library/runtime/pipeline/`` và ``deploy/app/main.cpp``, c
      - RGA copy khung thẳng đứng vào ``lowHeap`` (dưới 4 GB) rồi trả bộ đệm camera. RGA2 vẽ khung và nhãn (12 hộp mỗi job). Khi có vi phạm: hai bản copy (gốc, đã vẽ). VPU H.265 CBR 20 Mbps, GOP 30, mọi IDR có VPS/SPS/PPS. ClipRecorder giữ 5 s trước và 5 s sau vi phạm
      - 22.3 ms mỗi khung
    * - 4. Bằng chứng
-     - Bộ JPEG (MPP): ``original.jpg``, ``marked.jpg``. Ghi ``event.json`` và ``clip.h265``. Dọn theo tuổi, dung lượng, chỗ trống
+     - Bộ JPEG (MPP): ``original.jpg``, ``marked.jpg``. Ghi ``event.json`` và clip (``clip.h265``, hoặc ``clip.mp4`` khi ``--file-format mp4``). Công tắc ``--violation``, ``--violation-image``, ``--violation-clip`` tắt cả nhóm, riêng ảnh hoặc riêng clip. Dọn theo tuổi, dung lượng, chỗ trống
      - Giới hạn: 30 ngày, 4 GB, trống 2 GB
    * - 5. Ghi liên tục
-     - Chỉ khi bật ``--archive true`` (``archive.enabled`` trong file cấu hình). Hàng đợi gói 16 MB, đoạn ``.h265`` mỗi 60 s
+     - Chỉ khi bật ``--archive true`` (``archive.enabled`` trong file cấu hình). Hàng đợi gói 16 MB, đoạn mỗi 60 s (``.h265`` hoặc ``.mp4``)
      - Giới hạn: 7 ngày, 5 GB, trống 3 GB
+   * - 6. Phiên
+     - Chỉ khi bật ``--session true`` (``session.enabled``). Một file cho cả lần chạy, từ lúc chạy đến lúc dừng, trong ``/data/sessions/<ngày>/``
+     - Không giới hạn dung lượng. Dưới trống 3 GB thì đóng file và dừng ghi
 
 So với 3.2.1, phần triển khai khác ở các điểm sau.
 
@@ -347,13 +351,19 @@ So với 3.2.1, phần triển khai khác ở các điểm sau.
      - Vẽ trên bản copy trong ``lowHeap`` (``reserved``, dưới 4 GB)
    * - Luồng xử lý
      - Một vòng chính, ghim A76
-     - 4 thread (5 khi ``--archive true``), mỗi thread một lõi A76. Chia như vậy vì một thread chỉ đạt 18 FPS khi làm hết, hai thread còn dư 1.3 ms
+     - 4 thread, thêm một thread cho mỗi cờ ``--archive true`` và ``--session true``. Bốn thread đầu mỗi thread một lõi A76. Chia như vậy vì một thread chỉ đạt 18 FPS khi làm hết, hai thread còn dư 1.3 ms
    * - Ảnh và video vi phạm (mục 15, 16)
      - JPEG từ khung 4K
-     - Hai JPEG (gốc và đã vẽ) cùng clip H.265 trước và sau vi phạm, dọn theo tuổi, dung lượng, chỗ trống
+     - Hai JPEG (gốc và đã vẽ) cùng clip trước và sau vi phạm, dọn theo tuổi, dung lượng, chỗ trống. Ba công tắc ``--violation``, ``--violation-image``, ``--violation-clip`` chọn phần nào được lưu
    * - Ghi liên tục
      - Không có
-     - Cờ ``--archive true`` (mặc định tắt): đoạn H.265 60 s trong ``/data/archive``
+     - Cờ ``--archive true`` (mặc định tắt): đoạn 60 s trong ``/data/archive``. Cờ ``--session true`` (mặc định tắt): một file cho cả lần chạy trong ``/data/sessions``
+   * - Định dạng file video
+     - Không có
+     - Cờ ``--file-format`` (``encode.file_format``): ``h265`` (mặc định, byte của bộ mã hóa) hoặc ``mp4`` (MP4 phân mảnh, mỗi khung hình chính một mảnh, có thời gian từng khung, cắt điện vẫn phát được tới mảnh đầy đủ cuối). Áp dụng cho clip vi phạm, archive và session. Ghi MP4 bằng libavformat. Chưa thử phát trên QuickTime và Safari
+   * - Video nhỏ hơn
+     - Không có
+     - Mục ``downscale`` (``enabled``, ``height`` mặc định 1080, riêng ảnh vi phạm 720) riêng cho ảnh vi phạm, clip, archive và session, ví dụ ``--archive-downscale true``. Bitrate theo số điểm ảnh, luồng 1080 nhắm một phần tư luồng 4K. Heap thấp của board (khoảng 75 MB dùng được) gần đầy với ảnh vi phạm cỡ camera, nên video thu nhỏ cần thêm ``--violation-image-downscale true`` hoặc ``--violation-image false``
    * - Màn hình (mục 12)
      - VOP2 và GPU
      - Chưa làm
