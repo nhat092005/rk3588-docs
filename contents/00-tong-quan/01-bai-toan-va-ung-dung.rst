@@ -12,7 +12,7 @@ Bài toán và ứng dụng
 
 .. admonition:: Tóm tắt
 
-   - Bài toán hiện tại là Industrial PPE Detection với 5 class: `Helmet`, `NoHelmet`, `NoVest`, `Vest`, `Person`, mục tiêu thời gian thực là **30 FPS** (camera chỉ có 30 khung/giây).
+   - Bài toán hiện tại là Industrial PPE Detection với 6 class: `Helmet`, `NoHelmet`, `NoVest`, `Vest`, `RegularHat`, `Person`, mục tiêu thời gian thực là **30 FPS** (camera chỉ có 30 khung/giây).
    - Chỉ dùng YOLO để phát hiện PPE trên Orange Pi 5 là application / implementation, chưa phải một research problem đủ rõ.
    - Hướng nghiên cứu mạnh hơn là hardware-aware optimization của lightweight PPE detector trên RK3588S NPU, trong đó B (Edge AI) là trọng tâm hơn một chút.
    - DAHD-YOLO trên RK3588 báo thời gian một ảnh INT8 là 79.1 ms trong Table 6 (văn bản cùng tr.18 ghi đơn luồng 0.1162 s nhưng trùng với số 116.2 ms của dòng FP16 trong bảng), không đủ thời gian thực nếu chạy tuần tự một luồng và phải dùng thread pool đa luồng để đạt 50.2 FPS ở 720P.
@@ -33,7 +33,7 @@ Bài toán và ứng dụng
    * - **Bài toán**
      - Industrial PPE Detection
    * - **Class hiện tại**
-     - ``Helmet``, ``NoHelmet``, ``NoVest``, ``Vest``, ``Person``
+     - ``Helmet``, ``NoHelmet``, ``NoVest``, ``Vest``, ``RegularHat``, ``Person``
    * - **Yêu cầu thời gian thực**
      - **30 FPS** (tương đương ngân sách :math:`\le 33.33\text{ ms}` mỗi khung hình, một luồng camera)
 
@@ -55,7 +55,7 @@ Có thể hiểu đề tài nằm ở giao của hai phía:
 .. code:: text
 
    A. Computer Vision / PPE Detection
-      - Helmet / NoHelmet / NoVest / Vest / Person
+      - Helmet / NoHelmet / NoVest / Vest / RegularHat / Person
       - small objects
       - multi-scale
       - lighting and noise (low-light)

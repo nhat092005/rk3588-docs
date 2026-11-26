@@ -27,7 +27,7 @@ Hậu xử lý và đầu ra
 
 .. code:: text
 
-    tensor thô (1, 4 + nc, 8400)       nc = 5 lớp, 8400 = 80x80 + 40x40 + 20x20
+    tensor thô (1, 4 + nc, 8400)       nc = 5 lớp, 8400 = 80x80 + 40x40 + 20x20 (mô hình 5 lớp 640 đã đo)
        |
        v
     chuyển vị, lấy lớp có điểm cao nhất (argmax) của từng anchor

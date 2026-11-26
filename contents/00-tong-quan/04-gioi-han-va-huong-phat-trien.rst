@@ -172,7 +172,7 @@ Quyết định đã chốt (người dùng), chia theo nhóm. Mọi trang khác
 3.1.1. Phạm vi và mục tiêu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Phạm vi 5 lớp: Helmet, NoHelmet, NoVest, Vest, Person.
+1. Phạm vi 6 lớp: Helmet, NoHelmet, NoVest, Vest, RegularHat, Person. RegularHat là mũ thường, không phải mũ bảo hộ và không phải lớp vi phạm. Các số đo ở các chương sau lấy trên mô hình 5 lớp 640 (không có RegularHat), nếu trang không ghi khác.
 2. Mục tiêu 30 FPS, vì camera chỉ có 30 khung/giây.
 3. Tận dụng đầy đủ các phần cứng tăng tốc trong pipeline phát triển.
 
@@ -206,7 +206,7 @@ Quyết định đã chốt (người dùng), chia theo nhóm. Mọi trang khác
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 14. Giữ khung 4K lại một đến hai khung, chờ kết quả AI để vẽ khớp.
-15. Vi phạm: chỉ lớp Person đi vào ByteTrack. Hộp NoHelmet hoặc NoVest (độ tin cậy từ 0.25) gắn với một Person khi tâm hộp nằm trong hộp Person. Nếu tâm nằm trong nhiều Person thì chọn Person chứa phần lớn hộp nhất, sau đó Person có hộp nhỏ hơn, sau đó Person đứng trước trong danh sách của tracker. Khi vi phạm kéo dài 1 giây liên tục thì lưu ảnh vi phạm, mỗi vi phạm lưu một lần. "Liên tục" cho phép ngắt quãng tối đa 0.5 giây vì mô hình có lúc bỏ sót hộp. 0.5 giây là giá trị tạm: mô hình do bên khác huấn luyện, chưa đo tần suất bỏ sót trên board.
+15. Vi phạm: danh sách lớp nằm trong khóa ``classes`` của file cấu hình, ba lớp có vai trò (Person, NoHelmet, NoVest) được khai báo bằng ``role``, các lớp còn lại (Helmet, Vest, RegularHat) chỉ được vẽ. Số lớp trong cấu hình phải bằng số lớp của mô hình, khác thì chương trình dừng trước khi mở camera. Chỉ lớp Person đi vào ByteTrack. Hộp NoHelmet hoặc NoVest (độ tin cậy từ 0.25) gắn với một Person khi tâm hộp nằm trong hộp Person. Nếu tâm nằm trong nhiều Person thì chọn Person chứa phần lớn hộp nhất, sau đó Person có hộp nhỏ hơn, sau đó Person đứng trước trong danh sách của tracker. Khi vi phạm kéo dài 1 giây liên tục thì lưu ảnh vi phạm, mỗi vi phạm lưu một lần. "Liên tục" cho phép ngắt quãng tối đa 0.5 giây vì mô hình có lúc bỏ sót hộp. 0.5 giây là giá trị tạm: mô hình do bên khác huấn luyện, chưa đo tần suất bỏ sót trên board.
 16. Lưu ảnh vi phạm từ luồng 4K qua bộ JPEG, lưu video bằng H.265 qua bộ VPU: cùng chất lượng ở khoảng nửa bitrate của H.264, đủ 30 khung/giây ở 4K (:doc:`../10-luong-camera-den-phat-hien/06-sau-npu` mục 3.1). Trình duyệt chỉ hỗ trợ H.265 một phần, xem bằng player.
 17. Vẽ khung và chèn nhãn bằng job của RGA2, tối đa 12 hộp mỗi job: 34 hộp mất khoảng 2 ms thay vì 12 ms (:doc:`../10-luong-camera-den-phat-hien/08-phan-cung-tang-toc` mục 3.2). RGA2 chỉ map được bộ nhớ dưới 4 GB: vẽ trên bộ đệm camera (V4L2) được, không vẽ trên bộ đệm do MPP cấp.
 
