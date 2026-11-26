@@ -24,7 +24,7 @@ Kiến trúc model
 1. Phạm vi và nguồn số liệu
 ===========================
 
-Trang mô tả đúng một kiến trúc, và đó là **mô hình gốc để mọi biến thể về sau đối chiếu**: YOLOv8n chuẩn của Ultralytics, dựng từ ``yolov8.yaml`` scale ``n`` mà không sửa module nào. So với bản COCO chỉ ``nc`` đổi từ 80 thành 5, nên chỉ head thay đổi (mục 7). Biến thể nào sửa kiến trúc (như ``yolov8n_relu``, mục 8) phải nêu rõ phần khác so với gốc này. Kiến trúc là YOLOv8n với đầu ra 5 lớp (Helmet, NoHelmet, NoVest, Vest, Person) như trong ``data/ppe5/classes.txt``. So sánh YOLOv8n với YOLO26n và phân tích riêng từng thành phần của hai thế hệ nằm ở :doc:`../../01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`. Trang này không lặp lại phần so sánh đó.
+Trang mô tả đúng một kiến trúc, và đó là **mô hình gốc để mọi biến thể về sau đối chiếu**: YOLOv8n chuẩn của Ultralytics, dựng từ ``yolov8.yaml`` scale ``n`` mà không sửa module nào. So với bản COCO chỉ ``nc`` đổi từ 80 thành 5, nên chỉ head thay đổi (mục 7). Biến thể nào sửa kiến trúc (như ``yolov8n_relu``, mục 8) phải nêu rõ phần khác so với gốc này. Kiến trúc là YOLOv8n với đầu ra 5 lớp (Helmet, NoHelmet, NoVest, Vest, Person) như trong ``data/ppe5/classes.txt``. Dự án nay dùng 6 lớp (thêm RegularHat), chỉ ``nc`` đổi từ 5 thành 6 nên chỉ lớp 1×1 cuối của nhánh lớp đổi; mọi số tham số, MAC và kích thước tensor trong trang này đo trên mô hình 5 lớp 640 và không đổi. So sánh YOLOv8n với YOLO26n và phân tích riêng từng thành phần của hai thế hệ nằm ở :doc:`../../01-kien-thuc-nen/07-yolo/01-kien-truc-va-khoi-cau-thanh-yolo`. Trang này không lặp lại phần so sánh đó.
 
 .. list-table::
    :header-rows: 1

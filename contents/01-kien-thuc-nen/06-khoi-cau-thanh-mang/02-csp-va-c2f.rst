@@ -185,7 +185,7 @@ Ví dụ ở L2 của YOLOv8n (``C_out = 32``, ``c = 16``, ``n = 1``, bản đ�
 
 YOLOv8n có tám khối C2f (L2, L4, L6, L8, L12, L15, L18, L21) [T1 yolov8.yaml:22-47]. Mỗi khối có một ``chunk`` và một ``cat`` theo mã, tương ứng toán tử Split và Concat của RKNN, xem :doc:`/contents/02-nen-tang-rk3588/05-yolo-tren-rk3588/02-op-yolov8-tren-rknn`.
 
-Số đo trên board, model YOLOv8n INT8 5 lớp, ``eval_perf`` ở chế độ debug, trung vị ba phiên: toàn mạng có 17 dòng Concat (2341 µs, 10.03%) và 9 dòng Split (1052 µs, 4.58%) [T3 board, ``results/npu/latency/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md`` Bảng 3]. Bảng thành phần trong khối của cùng tệp (Bảng 2) tách được phần thuộc tám khối C2f:
+Số đo trên board, model YOLOv8n INT8 5 lớp 640, ``eval_perf`` ở chế độ debug, trung vị ba phiên: toàn mạng có 17 dòng Concat (2341 µs, 10.03%) và 9 dòng Split (1052 µs, 4.58%) [T3 board, ``results/npu/latency/latency_per_block_ppe5_yolov8n_baseline_100ep_s0_int8_CORE_0.md`` Bảng 3]. Bảng thành phần trong khối của cùng tệp (Bảng 2) tách được phần thuộc tám khối C2f:
 
 .. list-table::
    :header-rows: 1
