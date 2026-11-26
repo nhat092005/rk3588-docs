@@ -11,6 +11,7 @@ Quyết định đã khóa
    - NPU latency tầng 1 là median 5 lần `eval_perf(fix_freq=True)` trong phiên riêng, vì dao động 18.5–22.4 ms giữa các lần.
    - Post-processing tầng 2 dùng mặc định predict (conf 0.25, IoU 0.7, max_det 300). E2E tầng 2 là Pre + NPU + post, không gồm giải mã file.
    - Seed 0 (mặc định Ultralytics) cho mọi phase, mỗi model chỉ một seed nên kết luận ghi rõ "1 seed".
+   - Từ 2026-11-26 evaluator là protocol v2: kích thước input ``imgsz`` thành tham số (mặc định 640). Các số đo cũ vẫn là v1 và v2 ở 640 cho cùng số (golden lệch 0.0). Model 6 lớp đo ở ``imgsz`` 960.
 
 .. _8a2-quyết-định-đã-khoá-trong-protocol-v1:
 

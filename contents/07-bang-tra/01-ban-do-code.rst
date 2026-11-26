@@ -7,7 +7,7 @@ Bản đồ code
 .. admonition:: Tóm tắt
 
    - Bảng liệt kê từng file code của pipeline, việc nó làm và lệnh make gọi nó, ví dụ ai/automation/pipeline/pipeline.py chạy cả phase qua make phase2/3/4.
-   - ai/core/evaluator.py thực hiện protocol v1 gồm LetterBox, NMS, AP và dấu vân tay dataset, được evaluate, run và check dùng.
+   - ai/core/evaluator.py thực hiện protocol v2 gồm LetterBox, NMS, AP và dấu vân tay dataset, được evaluate, run và check dùng. Protocol v2 thêm tham số ``imgsz`` (mặc định 640, ghi vào ``protocol.imgsz`` của mọi kết quả) và cho cùng số với v1 ở 640.
    - Với .rknn, ai/automation/pipeline/evaluate.py điều phối chạy trên board qua ssh, còn ai/board/probe/infer_dump.py lưu output thô và md5 input.
    - Đo hiệu năng chia hai tầng: tầng 1 là benchmark_npu.py với 3 phiên eval_perf, tầng 2 là các script trong ai/board/ chạy trên board.
    - start_rknn_server.sh và lock_freq.sh là lệnh sudo trên board, chạy tay.
@@ -28,10 +28,10 @@ Bản đồ code
      - Chạy cả phase, bỏ qua bước đã xong
      - ``make phase2/3/4``
    * - ``ai/automation/pipeline/run.py``, ``ai/core/trainer.py``
-     - Train, evaluator v1 trên ``best.pt``, ghi leaderboard
+     - Train, evaluator v2 trên ``best.pt``, ghi leaderboard
      - ``make train``
    * - ``ai/core/evaluator.py``
-     - Protocol v1: LetterBox, NMS, AP, dấu vân tay dataset
+     - Protocol v2: LetterBox theo ``imgsz``, NMS, AP, dấu vân tay dataset
      - evaluate, run, check
    * - ``ai/core/backends.py``
      - PyTorch/ONNX trên PC. Với ``.rknn``: đọc output board, kiểm md5 input
